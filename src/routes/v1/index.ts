@@ -16,6 +16,7 @@ const router = Router();
  */
 router.get('/', (req, res) => {
   res.status(HTTPSTATUS.OK).json({
+    code: 'OK',
     message: 'API is live',
     status: 'ok',
     version: '1.0.0',

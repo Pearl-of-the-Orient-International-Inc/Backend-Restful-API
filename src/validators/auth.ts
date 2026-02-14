@@ -1,3 +1,4 @@
+import { UserType } from '@/generated/prisma/enums';
 import z from 'zod';
 
 export const emailSchema = z
@@ -27,7 +28,7 @@ export const registerSchema = z.object({
     .max(100, { error: 'Name must not exceed 100 characters' }),
   email: emailSchema,
   password: passwordSchema,
-  role: z.enum(['MEMBER', 'ADMIN', 'SUPERADMIN'], {
+  role: z.enum(UserType, {
     message: 'Role must be either MEMBER, ADMIN, or SUPERADMIN',
   }),
 });
