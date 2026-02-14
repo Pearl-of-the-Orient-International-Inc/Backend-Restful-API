@@ -20,6 +20,7 @@ model User {
 
   userTokens UserToken[]
   sessions   Session[]
+  verificationCodes VerificationCode[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -62,4 +63,23 @@ model Session {
   userToken UserToken?
 
   @@index([userId])
+}
+
+model VerificationCode {
+  id        String           @id @default(uuid())
+  code      String?          @unique
+  type      VerificationType
+  expiresAt DateTime
+  createdAt DateTime         @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@index([userId])
+}
+
+enum VerificationType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+  TWO_FACTOR
 }

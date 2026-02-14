@@ -46,7 +46,7 @@ router.get(
 );
 router.post(
   '/forgot-password',
-  expressRateLimit('passwordReset'),
+  expressRateLimit('basic'),
   validate(forgotPasswordSchema),
   forgotPassword,
 );
