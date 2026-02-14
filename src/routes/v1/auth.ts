@@ -7,12 +7,13 @@ import { Router } from 'express';
  * Controllers
  */
 import { register } from '@/controllers/v1/auth/register';
+import { login } from '@/controllers/v1/auth/login';
 
 /**
  * Helpers, Validators and Middlewares
  */
 import { validate } from '@/common/sanitation';
-import { registerSchema } from '@/validators/auth';
+import { loginSchema, registerSchema } from '@/validators/auth';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 
 const router = Router();
@@ -22,9 +23,11 @@ const router = Router();
  */
 router.post(
   '/register',
-  expressRateLimit('passwordReset'),
+  expressRateLimit('auth'),
   validate(registerSchema),
   register,
 );
+router.post('/login', expressRateLimit('auth'), validate(loginSchema), login);
+router.delete('/logout', expressRateLimit('basic'), login);
 
 export default router;

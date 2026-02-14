@@ -2,7 +2,6 @@
  * Custom modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
-import { User } from '@/generated/prisma/client';
 import { generateAccessToken, generateRefreshToken } from '@/lib/jwt';
 import { hashValue } from '@/lib/password-hash';
 import { prisma } from '@/lib/prisma';
@@ -15,12 +14,13 @@ import {
 import config from '@/config';
 
 /**
- * Types
+ * Types & Validators
  */
 import type { Request, Response } from 'express';
+import { RegisterSchema } from '@/validators/auth';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, password, avatar, role } = req.body as User;
+  const { name, email, password, role } = req.body as RegisterSchema;
 
   const hashedPassword = await hashValue(password);
 
