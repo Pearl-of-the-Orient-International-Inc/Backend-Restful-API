@@ -7,12 +7,9 @@ import { Router } from 'express';
  * Custom Modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
+import authRoutes from '@/routes/v1/auth';
 
 const router = Router();
-
-/**
- * Routes
- */
 
 /**
  * Root route
@@ -27,5 +24,10 @@ router.get('/', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+/**
+ * Routes
+ */
+router.use('/auth', authRoutes);
 
 export default router;

@@ -11,7 +11,6 @@ import helmet from 'helmet';
  * Custom Modules
  */
 import config from '@/config';
-import limiter from '@/lib/express-rate-limiter';
 import { logger, logtail } from '@/lib/winston';
 
 /**
@@ -70,9 +69,6 @@ app.use(
 
 // Use helmet to enhance security by setting various HTTP headers
 app.use(helmet());
-
-// Apply rate limiting middleware to prevent excessive requests and enhance security
-app.use(limiter);
 
 /**
  * Immediately Invoked Async Function Expression (IIEF) to start the server.
