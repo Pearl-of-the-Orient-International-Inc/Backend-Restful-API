@@ -15,6 +15,7 @@ const config = {
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   LOGTAIL_SOURCE_TOKEN: process.env.LOGTAIL_SOURCE_TOKEN!,
   LOGTAIL_INGESTING_HOST: process.env.LOGTAIL_INGESTING_HOST!,
+  DATABASE_URL: process.env.DATABASE_URL,
 };
 
 export default config;

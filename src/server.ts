@@ -12,6 +12,7 @@ import helmet from 'helmet';
  */
 import config from '@/config';
 import { logger, logtail } from '@/lib/winston';
+import { prisma } from '@/lib/prisma';
 
 /**
  * Router
@@ -83,7 +84,7 @@ app.use('/api/v1', v1Routes);
 
 (async (): Promise<void> => {
   try {
-    // await prisma.$connect();
+    await prisma.$connect();
     app.listen(config.PORT, () => {
       logger.info(
         `The server will start at http://localhost:${config.PORT} with hot-reloading enabled`,
@@ -108,7 +109,7 @@ app.use('/api/v1', v1Routes);
  */
 const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
   try {
-    // await prisma.$disconnect();
+    await prisma.$disconnect();
     logger.info('Server SHUTDOWN', signal);
 
     // flush any remaining logs to logtail before exiting

@@ -1,0 +1,18 @@
+/**
+ * Node Modules
+ */
+import 'dotenv/config';
+import { PrismaPg } from '@prisma/adapter-pg';
+
+/**
+ * Custom Modules
+ */
+import config from '@/config';
+import { PrismaClient } from '@/generated/prisma/client';
+
+const connectionString = config.DATABASE_URL;
+
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
+
+export { prisma };
