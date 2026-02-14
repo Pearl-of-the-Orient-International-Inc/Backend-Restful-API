@@ -66,7 +66,7 @@ export const forgotPassword = async (
 
     // Sending forgot password email link
     const baseUrl = config.APP_URL || 'http://localhost:3000';
-    const verificationUrl = `${baseUrl}/confirm-account/${verificationCode.code}`;
+    const verificationUrl = `${baseUrl}/reset-password?token=${verificationCode.code}`;
 
     await sendMail({
       sendTo: user.email,

@@ -11,6 +11,7 @@ import { login } from '@/controllers/v1/auth/login';
 import { logout } from '@/controllers/v1/auth/logout';
 import { refreshToken } from '@/controllers/v1/auth/refresh-token';
 import { forgotPassword } from '@/controllers/v1/auth/forgot-password';
+import { resetPassword } from '@/controllers/v1/auth/reset-password';
 
 /**
  * Helpers, Validators and Middlewares
@@ -20,6 +21,7 @@ import {
   forgotPasswordSchema,
   loginSchema,
   registerSchema,
+  resetPasswordSchema,
 } from '@/validators/auth';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { authenticate } from '@/middlewares/authentication';
@@ -49,6 +51,12 @@ router.post(
   expressRateLimit('basic'),
   validate(forgotPasswordSchema),
   forgotPassword,
+);
+router.post(
+  '/reset-password',
+  expressRateLimit('passwordReset'),
+  validate(resetPasswordSchema),
+  resetPassword,
 );
 
 export default router;
