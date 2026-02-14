@@ -32,3 +32,12 @@ export const registerSchema = z.object({
     message: 'Role must be either MEMBER, ADMIN, or SUPERADMIN',
   }),
 });
+
+export const loginSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+  userAgent: z.string().optional(),
+});
+
+export type RegisterSchema = z.infer<typeof registerSchema>;
+export type LoginSchema = z.infer<typeof loginSchema>;
