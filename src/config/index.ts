@@ -19,11 +19,12 @@ const config = {
   DATABASE_URL: process.env.DATABASE_URL,
   JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET!,
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET!,
-  JWT_PASSWORD_RESET_SECRET: process.env.JWT_PASSWORD_RESET_SECRET!,
   JWT_ACCESS_EXPIRES_IN: process.env.JWT_ACCESS_EXPIRES_IN as ms.StringValue,
   JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN as ms.StringValue,
-  JWT_PASSWORD_RESET_EXPIRES_IN: process.env
-    .JWT_PASSWORD_RESET_EXPIRES_IN as ms.StringValue,
+  SMTP_EMAIL: process.env.SMTP_EMAIL,
+  SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+
+  APP_URL: 'http://localhost:3000',
 };
 
 export default config;

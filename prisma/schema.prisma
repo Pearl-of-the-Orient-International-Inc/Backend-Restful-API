@@ -29,7 +29,6 @@ model User {
 enum UserType {
   MEMBER
   ADMIN
-  SUPERADMIN
 }
 
 model UserToken {
