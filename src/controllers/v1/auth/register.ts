@@ -13,6 +13,8 @@ import {
   parseUserAgent,
 } from '@/lib/helpers';
 import config from '@/config';
+import { sendMail } from '@/mailers';
+import { verifyEmailTemplate } from '@/mailers/templates/verify-email';
 
 /**
  * Types & Validators
@@ -63,6 +65,23 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         code: uniqueCode,
       },
     });
+
+    // Sending verification email link
+    const baseUrl = config.APP_URL || 'http://localhost:3000';
+    const verificationUrl = `${baseUrl}/confirm-account/${verificationCode.code}`;
+
+    const emailResult = await sendMail({
+      sendTo: user.email,
+      ...verifyEmailTemplate(verificationUrl, user.name),
+    });
+
+    if (!emailResult.success) {
+      logger.warn('Verification email failed to send, but user was created', {
+        userId: user.id,
+        email: user.email,
+      });
+      // User is still registered, they can request a resend later
+    }
 
     // Create session so refresh token cookie can be used for GET /session
     const ipAddress = getClientIp(req);
