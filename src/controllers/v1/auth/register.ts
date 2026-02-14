@@ -68,7 +68,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     // Sending verification email link
     const baseUrl = config.APP_URL || 'http://localhost:3000';
-    const verificationUrl = `${baseUrl}/confirm-account/${verificationCode.code}`;
+    const verificationUrl = `${baseUrl}/confirm-account?token=${verificationCode.code}`;
 
     const emailResult = await sendMail({
       sendTo: user.email,
