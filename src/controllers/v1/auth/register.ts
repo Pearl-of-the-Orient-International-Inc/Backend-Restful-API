@@ -8,6 +8,7 @@ import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import {
   calculateExpirationDate,
+  generateUniqueCode,
   getClientIp,
   parseUserAgent,
 } from '@/lib/helpers';
@@ -18,6 +19,7 @@ import config from '@/config';
  */
 import type { Request, Response } from 'express';
 import { RegisterSchema } from '@/validators/auth';
+import { VerificationType } from '@/generated/prisma/enums';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { name, email, password, role } = req.body as RegisterSchema;
@@ -47,6 +49,18 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         email: email.trim().toLowerCase(),
         password: hashedPassword,
         role,
+      },
+    });
+
+    // Generate unique code for email verification
+    const uniqueCode = generateUniqueCode();
+
+    const verificationCode = await prisma.verificationCode.create({
+      data: {
+        userId: user.id,
+        type: VerificationType.EMAIL_VERIFICATION,
+        expiresAt: calculateExpirationDate('1h'),
+        code: uniqueCode,
       },
     });
 
