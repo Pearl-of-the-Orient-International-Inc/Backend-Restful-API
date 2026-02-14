@@ -2,32 +2,44 @@
  * Node Modules
  */
 import winston from 'winston';
+import { Logtail } from '@logtail/node';
+import { LogtailTransport } from '@logtail/winston';
 
 /**
  * Custom Modules
  */
 import config from '@/config';
 
-const { combine, timestamp, json, errors, align, printf, colorize } =
-  winston.format;
-
 // Define the transport array to hold different logging transports
 const transports: winston.transport[] = [];
 
-// If the application is not running in production, add a console transport
-if (config.NODE_ENV !== 'production') {
+// Throw error when source token or ingesting host is missing
+if (!config.LOGTAIL_SOURCE_TOKEN || !config.LOGTAIL_INGESTING_HOST) {
+  throw new Error('Logtail source token or ingesting host is missing');
+}
+
+// Create a logtail instance for sending structured logs to a remote logging service
+const logtail = new Logtail(config.LOGTAIL_SOURCE_TOKEN, {
+  endpoint: config.LOGTAIL_INGESTING_HOST,
+});
+
+// In production environment, push LogtailTransport to winston transport
+if (config.NODE_ENV === 'production') {
+  transports.push(new LogtailTransport(logtail));
+}
+
+// Destructure logging format utilities for winston
+const { combine, timestamp, printf, colorize } = winston.format;
+
+// In development environment, add a console transport for real-time feedback
+if (config.NODE_ENV === 'development') {
   transports.push(
     new winston.transports.Console({
       format: combine(
         colorize({ all: true }), // Add colors to log levels
-        timestamp({ format: 'YYYY-MM-DD hh:mm:ss A' }), // Add timestamp to logs
-        align(), // Align log levels
-        printf(({ timestamp, level, message, ...meta }) => {
-          const metaStr = Object.keys(meta).length
-            ? `\n${JSON.stringify(meta)}`
-            : '';
-
-          return `${timestamp} [${level.toUpperCase()}]: ${message}${metaStr}`;
+        timestamp({ format: 'DD MMMM hh:mm:ss A' }), // Add timestamp to logs
+        printf(({ timestamp, level, message }) => {
+          return `${timestamp} [${level}]: ${message}`;
         }),
       ),
     }),
@@ -36,10 +48,7 @@ if (config.NODE_ENV !== 'production') {
 
 // Create a logger instance using Winston
 const logger = winston.createLogger({
-  level: config.LOG_LEVEL || 'info', // Set the default logging level to 'info'
-  format: combine(timestamp(), errors({ stack: true }), json()), // Use JSON format for log messages
   transports,
-  silent: config.NODE_ENV === 'test', // Disable logging in test environment
 });
 
-export { logger };
+export { logger, logtail };

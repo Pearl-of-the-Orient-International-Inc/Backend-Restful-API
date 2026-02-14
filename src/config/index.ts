@@ -13,6 +13,8 @@ const config = {
   NODE_ENV: process.env.NODE_ENV,
   WHITELIST_ORIGINS: ['https://pearl-chaplaincy.com', 'http://localhost:3000'],
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
+  LOGTAIL_SOURCE_TOKEN: process.env.LOGTAIL_SOURCE_TOKEN!,
+  LOGTAIL_INGESTING_HOST: process.env.LOGTAIL_INGESTING_HOST!,
 };
 
 export default config;

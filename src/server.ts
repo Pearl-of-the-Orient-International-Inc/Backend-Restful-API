@@ -12,7 +12,7 @@ import helmet from 'helmet';
  */
 import config from '@/config';
 import limiter from '@/lib/express-rate-limiter';
-import { logger } from '@/lib/winston';
+import { logger, logtail } from '@/lib/winston';
 
 /**
  * Router
@@ -85,7 +85,7 @@ app.use(limiter);
 
 app.use('/api/v1', v1Routes);
 
-(async () => {
+(async (): Promise<void> => {
   try {
     // await prisma.$connect();
     app.listen(config.PORT, () => {
@@ -101,3 +101,36 @@ app.use('/api/v1', v1Routes);
     }
   }
 })();
+
+/**
+ * Handles server shutdown gracefully by disconnecting from the database.
+ *
+ * - Attempts to disconnect from the database before shutting down the server.
+ * - Logs a success message if the disconnection is successful.
+ * - If an error occurs during disconnection, it is logged to the console.
+ * - Exits the process with status code `0` (indicating a successful shutdown).
+ */
+const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
+  try {
+    // await prisma.$disconnect();
+    logger.info('Server SHUTDOWN', signal);
+
+    // flush any remaining logs to logtail before exiting
+    logtail.flush();
+
+    // exit the process cleanly
+    process.exit(0);
+  } catch (err) {
+    logger.error('Error during server shutdown', err);
+  }
+};
+
+/**
+ * Listens for termination signals (`SIGTERM` and `SIGINT`).
+ *
+ * - `SIGTERM` is typically sent when stopping a process (e.g., `kill` command or container shutdown).
+ * - `SIGINT` is triggered when the user interrupts the process (e.g., pressing `Ctrl + C`).
+ * - When either signal is received, `serverTermination` is executed to ensure proper cleanup.
+ */
+process.on('SIGTERM', serverTermination);
+process.on('SIGINT', serverTermination);
