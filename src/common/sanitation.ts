@@ -15,7 +15,7 @@ export const validate = (schema: z.ZodSchema) => {
         }));
 
         res.status(HTTPSTATUS.BAD_REQUEST).json({
-          code: 'VALIDATION_ERROR',
+          code: 'BAD_REQUEST',
           errors: formattedErrors,
         });
       }
