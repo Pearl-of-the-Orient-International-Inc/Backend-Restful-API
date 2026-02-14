@@ -8,6 +8,7 @@ import { Router } from 'express';
  */
 import { register } from '@/controllers/v1/auth/register';
 import { login } from '@/controllers/v1/auth/login';
+import { logout } from '@/controllers/v1/auth/logout';
 
 /**
  * Helpers, Validators and Middlewares
@@ -15,6 +16,7 @@ import { login } from '@/controllers/v1/auth/login';
 import { validate } from '@/common/sanitation';
 import { loginSchema, registerSchema } from '@/validators/auth';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
+import { authenticate } from '@/middlewares/authentication';
 
 const router = Router();
 
@@ -28,6 +30,6 @@ router.post(
   register,
 );
 router.post('/login', expressRateLimit('auth'), validate(loginSchema), login);
-router.delete('/logout', expressRateLimit('basic'), login);
+router.delete('/logout', expressRateLimit('basic'), authenticate, logout);
 
 export default router;
