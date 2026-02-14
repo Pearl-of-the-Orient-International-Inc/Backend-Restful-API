@@ -14,6 +14,8 @@ import {
   parseUserAgent,
 } from '@/lib/helpers';
 import config from '@/config';
+import { sendMail } from '@/mailers';
+import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
 
 /**
  * Types & Validators
@@ -149,6 +151,34 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const timestamp = formatLocalTimestamp(now);
     const deviceInfo = parseUserAgent(finalUserAgent);
     const location = await getLocationFromIP(ipAddress);
+
+    // Send login notification email only for new sessions
+    if (isNewSession) {
+      // Send login notification email
+      const emailResult = await sendMail({
+        sendTo: user.email,
+        ...loginNotificationTemplate(
+          user.name,
+          timestamp,
+          deviceInfo,
+          ipAddress || 'Unknown',
+          location,
+        ),
+      });
+
+      if (!emailResult.success) {
+        logger.warn('Login notification email failed to send', {
+          userId: user.id,
+          email: user.email,
+        });
+        // Continue with login process even if email fails
+      } else {
+        logger.info('Login notification email sent successfully', {
+          userId: user.id,
+          email: user.email,
+        });
+      }
+    }
 
     // Set refresh token cookie
     res.cookie('refreshToken', refreshToken, {
