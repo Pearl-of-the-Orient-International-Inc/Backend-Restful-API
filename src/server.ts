@@ -8,6 +8,13 @@ import compression from 'compression';
 import helmet from 'helmet';
 
 /**
+ * Custom Modules
+ */
+import config from '@/config';
+import limiter from '@/lib/express-rate-limiter';
+import { logger } from '@/lib/winston';
+
+/**
  * Router
  */
 import v1Routes from '@/routes/v1';
@@ -16,6 +23,34 @@ import v1Routes from '@/routes/v1';
  * App Initial
  */
 const app = express();
+
+// Apply CORS middleware
+const corsOptions: CorsOptions = {
+  origin(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    // Allow all origins in development
+    if (config.NODE_ENV === 'development') {
+      return callback(null, true);
+    }
+
+    // Check if origin is in whitelist
+    if (config.WHITELIST_ORIGINS.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Reject non-whitelisted origins
+    logger.warn(`CORS error: ${origin} is not allowed by CORS`);
+    callback(new Error(`CORS error: ${origin} is not allowed by CORS`), false);
+  },
+  credentials: true, // Add this to allow cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions));
 
 // Enable JSON request body parsing
 app.use(express.json());
@@ -36,6 +71,9 @@ app.use(
 // Use helmet to enhance security by setting various HTTP headers
 app.use(helmet());
 
+// Apply rate limiting middleware to prevent excessive requests and enhance security
+app.use(limiter);
+
 /**
  * Immediately Invoked Async Function Expression (IIEF) to start the server.
  *
@@ -47,12 +85,19 @@ app.use(helmet());
 
 app.use('/api/v1', v1Routes);
 
-/**
- * Start Server
- */
-const PORT = process.env.PORT || 5000;
+(async () => {
+  try {
+    // await prisma.$connect();
+    app.listen(config.PORT, () => {
+      logger.info(
+        `The server will start at http://localhost:${config.PORT} with hot-reloading enabled`,
+      );
+    });
+  } catch (err) {
+    logger.error('Failed to start server', err);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
-});
+    if (config.NODE_ENV === 'production') {
+      process.exit(1);
+    }
+  }
+})();
