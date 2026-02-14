@@ -12,6 +12,9 @@ import { calculateExpirationDate, generateUniqueCode } from '@/lib/helpers';
 import type { Request, Response } from 'express';
 import { ForgotPasswordSchema } from '@/validators/auth';
 import { VerificationType } from '@/generated/prisma/enums';
+import config from '@/config';
+import { sendMail } from '@/mailers';
+import { forgotPasswordTemplate } from '@/mailers/templates/forgot-password';
 
 export const forgotPassword = async (
   req: Request,
@@ -59,6 +62,15 @@ export const forgotPassword = async (
         expiresAt: calculateExpirationDate('1h'),
         code: uniqueCode,
       },
+    });
+
+    // Sending forgot password email link
+    const baseUrl = config.APP_URL || 'http://localhost:3000';
+    const verificationUrl = `${baseUrl}/confirm-account/${verificationCode.code}`;
+
+    await sendMail({
+      sendTo: user.email,
+      ...forgotPasswordTemplate(verificationUrl, user.name),
     });
 
     res.sendStatus(HTTPSTATUS.NO_CONTENT);
