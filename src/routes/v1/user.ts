@@ -9,6 +9,7 @@ import { Router } from 'express';
 import { getCurrentUser } from '@/controllers/v1/user/get-current-user';
 import { updateCurrentUser } from '@/controllers/v1/user/update-current-user';
 import { deleteCurrentUser } from '@/controllers/v1/user/delete-current-user';
+import { getAllUsers } from '@/controllers/v1/user/get-all-users';
 
 /**
  * Helpers, Validators and Middlewares
@@ -45,6 +46,14 @@ router.delete(
   authenticate,
   authorize([UserType.MEMBER, UserType.ADMIN]),
   deleteCurrentUser,
+);
+
+router.get(
+  '/',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  getAllUsers,
 );
 
 export default router;
