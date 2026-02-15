@@ -7,6 +7,7 @@ import { Router } from 'express';
  * Controllers
  */
 import { getCurrentUser } from '@/controllers/v1/user/get-current-user';
+import { updateCurrentUser } from '@/controllers/v1/user/update-current-user';
 
 /**
  * Helpers, Validators and Middlewares
@@ -27,6 +28,14 @@ router.get(
   authenticate,
   authorize([UserType.MEMBER, UserType.ADMIN]),
   getCurrentUser,
+);
+
+router.put(
+  '/current',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.ADMIN]),
+  updateCurrentUser,
 );
 
 export default router;
