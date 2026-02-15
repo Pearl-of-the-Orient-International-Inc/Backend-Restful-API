@@ -13,6 +13,7 @@ import { HTTPSTATUS } from '@/common/http-codes';
  */
 import authRoutes from '@/routes/v1/auth';
 import userRoutes from '@/routes/v1/user';
+import orgChartRoutes from '@/routes/v1/organization-chart';
 
 const router = Router();
 
@@ -33,5 +34,6 @@ router.get('/', (req, res) => {
 
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
+router.use('/org', orgChartRoutes);
 
 export default router;
