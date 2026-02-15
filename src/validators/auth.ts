@@ -53,7 +53,17 @@ export const resetPasswordSchema = z
     path: ['confirmPassword'],
   });
 
+export const resendVerificationSchema = z.object({
+  email: emailSchema,
+});
+
+export const verificationEmailSchema = z.object({
+  code: z.string().min(1, { error: 'Verification code is required' }),
+});
+
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordSchema = z.infer<typeof resetPasswordSchema>;
+export type ResendVerificationSchema = z.infer<typeof resendVerificationSchema>;
+export type VerificationEmailSchema = z.infer<typeof verificationEmailSchema>;
