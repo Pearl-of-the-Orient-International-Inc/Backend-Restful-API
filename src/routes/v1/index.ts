@@ -7,7 +7,12 @@ import { Router } from 'express';
  * Custom Modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
+
+/**
+ * Routes
+ */
 import authRoutes from '@/routes/v1/auth';
+import userRoutes from '@/routes/v1/user';
 
 const router = Router();
 
@@ -26,9 +31,7 @@ router.get('/', (req, res) => {
   });
 });
 
-/**
- * Routes
- */
 router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
 
 export default router;
