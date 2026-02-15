@@ -10,6 +10,8 @@ import { getCurrentUser } from '@/controllers/v1/user/get-current-user';
 import { updateCurrentUser } from '@/controllers/v1/user/update-current-user';
 import { deleteCurrentUser } from '@/controllers/v1/user/delete-current-user';
 import { getAllUsers } from '@/controllers/v1/user/get-all-users';
+import { getUserById } from '@/controllers/v1/user/get-user-by-id';
+import { deleteUserById } from '@/controllers/v1/user/delete-user-by-id';
 
 /**
  * Helpers, Validators and Middlewares
@@ -54,6 +56,22 @@ router.get(
   authenticate,
   authorize([UserType.ADMIN]),
   getAllUsers,
+);
+
+router.get(
+  '/:userId',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  getUserById,
+);
+
+router.delete(
+  '/:userId',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  deleteUserById,
 );
 
 export default router;
