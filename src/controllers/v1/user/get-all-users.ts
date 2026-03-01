@@ -10,11 +10,15 @@ import { logger } from '@/lib/winston';
  */
 import type { Request, Response } from 'express';
 
+
+
 export const getAllUsers = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   try {
+
+
     // Parse limit and offset - undefined if not provided
     const limit = req.query.limit
       ? parseInt(req.query.limit as string)
@@ -22,6 +26,8 @@ export const getAllUsers = async (
     const offset = req.query.offset
       ? parseInt(req.query.offset as string)
       : undefined;
+
+
 
     const total = await prisma.user.count();
 

@@ -5,7 +5,10 @@ import { z } from 'zod';
 export const validate = (schema: z.ZodSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse(req.body);
+      schema.parse({
+        ...req.body,
+        ...req.query // i added this sir to make sure po na magamit ang generic validation.
+      });
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
