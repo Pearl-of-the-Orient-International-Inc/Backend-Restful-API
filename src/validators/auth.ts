@@ -7,6 +7,7 @@ export const emailSchema = z
   .min(1, { error: 'Email is required' })
   .max(255, { error: 'Email must not exceed 255 characters' });
 
+
 export const passwordSchema = z
   .string()
   .trim()
@@ -19,6 +20,9 @@ export const passwordSchema = z
   .regex(/[^A-Za-z0-9]/, {
     error: 'Password must contain at least 1 special character',
   });
+
+
+
 
 export const registerSchema = z.object({
   name: z

@@ -21,6 +21,11 @@ import { authenticate } from '@/middlewares/authentication';
 import { UserType } from '@/generated/prisma/enums';
 import authorize from '@/middlewares/authorization';
 
+
+import { validate } from '@/common/sanitation';
+import { updateCurrentUserSchema } from '@/validators/user';
+
+
 const router = Router();
 
 /**
@@ -34,13 +39,17 @@ router.get(
   getCurrentUser,
 );
 
+
+
 router.put(
   '/current',
   expressRateLimit('basic'),
   authenticate,
   authorize([UserType.MEMBER, UserType.ADMIN]),
+  validate(updateCurrentUserSchema), 
   updateCurrentUser,
 );
+
 
 router.delete(
   '/current',

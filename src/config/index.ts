@@ -12,7 +12,7 @@ dotenv.config({
 const config = {
   PORT: process.env.PORT || 5000,
   NODE_ENV: process.env.NODE_ENV,
-  WHITELIST_ORIGINS: ['https://pearl-chaplaincy.com', 'http://localhost:3000'],
+  WHITELIST_ORIGINS: ['https://pearl-chaplaincy.com', 'http://localhost:3000', 'http://localhost:5173/'],
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   LOGTAIL_SOURCE_TOKEN: process.env.LOGTAIL_SOURCE_TOKEN!,
   LOGTAIL_INGESTING_HOST: process.env.LOGTAIL_INGESTING_HOST!,
