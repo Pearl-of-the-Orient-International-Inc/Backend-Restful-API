@@ -89,10 +89,10 @@ export const updateCurrentUser = async (
     });
   } catch (err) {
     // Response with 500 status code for unexpected server errors
+    logger.error('Error while getting current user', err);
     res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
       code: 'INTERNAL_SERVER_ERROR',
       message: 'Internal server error',
     });
-    logger.error('Error while getting current user', err);
   }
 };
