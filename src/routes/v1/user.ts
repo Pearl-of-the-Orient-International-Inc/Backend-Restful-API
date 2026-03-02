@@ -20,6 +20,8 @@ import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { authenticate } from '@/middlewares/authentication';
 import { UserType } from '@/generated/prisma/enums';
 import authorize from '@/middlewares/authorization';
+import { validate } from '@/common/sanitation';
+import { userIdSchema } from '@/validators/user';
 
 const router = Router();
 
@@ -63,6 +65,7 @@ router.get(
   expressRateLimit('basic'),
   authenticate,
   authorize([UserType.ADMIN]),
+  validate(userIdSchema),  
   getUserById,
 );
 
@@ -71,6 +74,7 @@ router.delete(
   expressRateLimit('basic'),
   authenticate,
   authorize([UserType.ADMIN]),
+  validate(userIdSchema),   
   deleteUserById,
 );
 
