@@ -46,7 +46,7 @@ export const createOfficeSchema = z.object({
     .array(sectionSchema)
     .min(1, { message: 'At least one section is required' })
     .max(20, { message: 'Cannot exceed 20 sections' }),
-  level: z.nativeEnum(OfficeTitleLevel).optional(),
+  level: z.enum(OfficeTitleLevel).optional(),
   maxSlots: z
     .number()
     .int({ message: 'maxSlots must be an integer' })

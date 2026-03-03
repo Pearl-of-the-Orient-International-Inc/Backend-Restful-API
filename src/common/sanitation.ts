@@ -5,7 +5,12 @@ import { z } from 'zod';
 export const validate = (schema: z.ZodSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse(req.body);
+      const payload =
+        req.method === 'GET'
+          ? { query: req.query, params: req.params }
+          : req.body;
+
+      schema.parse(payload);
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
