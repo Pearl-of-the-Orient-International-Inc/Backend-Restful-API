@@ -6,33 +6,34 @@ import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 
 /**
- * Types & Validators
+ * Types
  */
 import type { Request, Response } from 'express';
 
-export const getAllOffices = async (
+export const getAllOfficeTitles = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   try {
-    // Optional query parameters for pagination and filtering
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const search = req.query.search as string | undefined;
     const sortBy = (req.query.sortBy as string) || 'createdAt';
     const sortOrder = (req.query.sortOrder as 'asc' | 'desc') || 'desc';
-    const orderByFieldMap: Record<string, 'createdAt' | 'updatedAt' | 'name'> =
-      {
-        createdAt: 'createdAt',
-        updatedAt: 'updatedAt',
-        title: 'name',
-      };
-    const orderByField = orderByFieldMap[sortBy] || 'createdAt';
 
-    // Calculate skip for pagination
+    const orderByFieldMap: Record<
+      string,
+      'createdAt' | 'updatedAt' | 'name' | 'level'
+    > = {
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
+      name: 'name',
+      title: 'name',
+      level: 'level',
+    };
+    const orderByField = orderByFieldMap[sortBy] || 'createdAt';
     const skip = (page - 1) * limit;
 
-    // Build where clause for search
     const where = search
       ? {
           OR: [
@@ -52,11 +53,8 @@ export const getAllOffices = async (
         }
       : {};
 
-    // Get total count for pagination
     const totalCount = await prisma.officeTitle.count({ where });
-
-    // Fetch offices with pagination
-    const offices = await prisma.officeTitle.findMany({
+    const officeTitles = await prisma.officeTitle.findMany({
       where,
       skip,
       take: limit,
@@ -65,29 +63,20 @@ export const getAllOffices = async (
       },
     });
 
-    const officePayload = offices.map((office) => {
-      const { name, ...rest } = office;
-      return {
-        ...rest,
-        title: name,
-      };
-    });
-
-    // Calculate pagination metadata
     const totalPages = Math.ceil(totalCount / limit);
     const hasNextPage = page < totalPages;
     const hasPreviousPage = page > 1;
 
-    logger.info('Offices retrieved successfully', {
-      count: offices.length,
+    logger.info('Office titles retrieved successfully', {
+      count: officeTitles.length,
       page,
       totalCount,
     });
 
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
-      message: 'Offices retrieved successfully',
-      data: officePayload,
+      message: 'Office titles retrieved successfully',
+      data: officeTitles,
       pagination: {
         currentPage: page,
         totalPages,
@@ -102,6 +91,6 @@ export const getAllOffices = async (
       code: 'INTERNAL_SERVER_ERROR',
       message: 'Internal server error',
     });
-    logger.error('Error during retrieval of offices', err);
+    logger.error('Error during retrieval of office titles', err);
   }
 };

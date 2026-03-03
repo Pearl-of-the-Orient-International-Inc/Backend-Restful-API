@@ -11,23 +11,16 @@ import { JSDOM } from 'jsdom';
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { OfficeTitleLevel } from '@/generated/prisma/enums';
 
 /**
- * Types & Validators
+ * Types
  */
 import type { Request, Response } from 'express';
-import { CreateOfficeSchema } from '@/validators/organization-chart';
+import type { CreateOfficeTitleSchema } from '@/validators/office-title';
 
-/**
- * Initialize DOMPurify for sanitization
- */
 const window = new JSDOM('').window;
 const DOMPurify = createDOMPurify(window);
 
-/**
- * Configure DOMPurify to allow only safe HTML tags
- */
 const purifyConfig = {
   ALLOWED_TAGS: [
     'p',
@@ -54,41 +47,40 @@ const purifyConfig = {
   KEEP_CONTENT: true,
 };
 
-/**
- * Sanitize rich text content
- */
 const sanitizeRichText = (content: string): string => {
   return DOMPurify.sanitize(content, purifyConfig);
 };
 
-/**
- * Sanitize plain text content (for list items)
- */
 const sanitizeText = (text: string): string => {
   return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
 };
 
-export const createOffice = async (
+export const createOfficeTitle = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const { title, description, sections, level, maxSlots } = req.body as
-    CreateOfficeSchema & {
-      level?: OfficeTitleLevel;
-      maxSlots?: number | null;
-    };
+  const {
+    name,
+    title,
+    level,
+    description,
+    maxSlots,
+    sections,
+  } = req.body as CreateOfficeTitleSchema;
 
-  // Sanitize title and description
-  const sanitizedTitle = sanitizeText(title);
-  const sanitizedDescription = sanitizeText(description);
+  const rawName = name ?? title;
+  const sanitizedName = sanitizeText(rawName as string);
+  const sanitizedDescription =
+    description === null || description === undefined
+      ? null
+      : sanitizeText(description);
 
   try {
-    // Check if office with the same title already exists
     const existingOffice = await prisma.officeTitle.findFirst({
       where: {
         name: {
-          equals: sanitizedTitle,
-          mode: 'insensitive', // Case-insensitive comparison
+          equals: sanitizedName,
+          mode: 'insensitive',
         },
       },
     });
@@ -96,16 +88,14 @@ export const createOffice = async (
     if (existingOffice) {
       res.status(HTTPSTATUS.CONFLICT).json({
         code: 'CONFLICT',
-        message: `Office with title "${sanitizedTitle}" already exists`,
+        message: `Office title "${sanitizedName}" already exists`,
       });
       return;
     }
 
-    // Sanitize and generate IDs for sections and items
-    const sectionsWithIds = sections.map((section) => {
+    const sanitizedSections = (sections ?? []).map((section) => {
       const sanitizedSectionTitle = sanitizeText(section.title);
 
-      // Handle richtext type
       if (section.type === 'richtext') {
         return {
           id: section.id || randomUUID(),
@@ -115,7 +105,6 @@ export const createOffice = async (
         };
       }
 
-      // Handle list type - sanitize each item
       return {
         id: section.id || randomUUID(),
         title: sanitizedSectionTitle,
@@ -123,43 +112,37 @@ export const createOffice = async (
         items:
           section.items?.map((item) => ({
             id: item.id || randomUUID(),
-            content: sanitizeText(item.content), // Sanitize list item content
+            content: sanitizeText(item.content),
           })) || [],
       };
     });
 
-    // Create the office
-    const newOffice = await prisma.officeTitle.create({
+    const officeTitle = await prisma.officeTitle.create({
       data: {
-        name: sanitizedTitle,
+        name: sanitizedName,
+        level,
         description: sanitizedDescription,
-        sections: sectionsWithIds,
-        level: level ?? OfficeTitleLevel.CITY_CHAPLAIN,
         maxSlots: maxSlots ?? null,
+        sections: sanitizedSections,
       },
     });
 
-    logger.info('Office created successfully', {
-      officeId: newOffice.id,
-      title: newOffice.name,
+    logger.info('Office title created successfully', {
+      officeTitleId: officeTitle.id,
+      name: officeTitle.name,
+      level: officeTitle.level,
     });
-
-    const { name, ...officePayload } = newOffice;
 
     res.status(HTTPSTATUS.CREATED).json({
       code: 'CREATED',
-      message: 'Office created successfully',
-      data: {
-        ...officePayload,
-        title: name,
-      },
+      message: 'Office title created successfully',
+      data: officeTitle,
     });
   } catch (err) {
-    // Response with 500 status code for unexpected server errors
     res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
       code: 'INTERNAL_SERVER_ERROR',
       message: 'Internal server error',
     });
-    logger.error('Error during creation of offices', err);
+    logger.error('Error during creation of office title', err);
   }
 };

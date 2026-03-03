@@ -543,7 +543,7 @@ const openApiDocument = {
       post: {
         tags: ['Offices'],
         summary: 'Create office title (admin only)',
-        operationId: 'createOffice',
+        operationId: 'createOfficeTitle',
         security: [{ BearerAuth: [] }],
         requestBody: {
           required: true,
@@ -555,7 +555,7 @@ const openApiDocument = {
         },
         responses: {
           '201': {
-            description: 'Office created',
+            description: 'Office title created',
             content: {
               'application/json': {
                 schema: { $ref: '#/components/schemas/OfficeWriteResponse' },
@@ -571,19 +571,19 @@ const openApiDocument = {
       },
       get: {
         tags: ['Offices'],
-        summary: 'Get all offices',
-        operationId: 'getAllOffices',
+        summary: 'Get all office titles',
+        operationId: 'getAllOfficeTitles',
         security: [{ BearerAuth: [] }],
         parameters: [
           { $ref: '#/components/parameters/PageQuery' },
           { $ref: '#/components/parameters/LimitQuery' },
           { $ref: '#/components/parameters/SearchQuery' },
-          { $ref: '#/components/parameters/SortByTitleCreatedUpdatedQuery' },
+          { $ref: '#/components/parameters/SortByOfficeCreatedUpdatedQuery' },
           { $ref: '#/components/parameters/SortOrderQuery' },
         ],
         responses: {
           '200': {
-            description: 'Office list',
+            description: 'Office title list',
             content: {
               'application/json': {
                 schema: { $ref: '#/components/schemas/OfficeListResponse' },
@@ -598,13 +598,13 @@ const openApiDocument = {
     '/offices/{id}': {
       get: {
         tags: ['Offices'],
-        summary: 'Get office by ID',
-        operationId: 'getOfficeById',
+        summary: 'Get office title by ID',
+        operationId: 'getOfficeTitleById',
         security: [{ BearerAuth: [] }],
         parameters: [{ $ref: '#/components/parameters/IdPath' }],
         responses: {
           '200': {
-            description: 'Office details',
+            description: 'Office title details',
             content: {
               'application/json': {
                 schema: { $ref: '#/components/schemas/OfficeReadResponse' },
@@ -619,8 +619,8 @@ const openApiDocument = {
       },
       put: {
         tags: ['Offices'],
-        summary: 'Update office (admin only)',
-        operationId: 'updateOffice',
+        summary: 'Update office title (admin only)',
+        operationId: 'updateOfficeTitle',
         security: [{ BearerAuth: [] }],
         parameters: [{ $ref: '#/components/parameters/IdPath' }],
         requestBody: {
@@ -633,7 +633,7 @@ const openApiDocument = {
         },
         responses: {
           '200': {
-            description: 'Office updated',
+            description: 'Office title updated',
             content: {
               'application/json': {
                 schema: { $ref: '#/components/schemas/OfficeWriteResponse' },
@@ -650,12 +650,12 @@ const openApiDocument = {
       },
       delete: {
         tags: ['Offices'],
-        summary: 'Delete office (admin only)',
-        operationId: 'deleteOffice',
+        summary: 'Delete office title (admin only)',
+        operationId: 'deleteOfficeTitle',
         security: [{ BearerAuth: [] }],
         parameters: [{ $ref: '#/components/parameters/IdPath' }],
         responses: {
-          '204': { description: 'Office deleted' },
+          '204': { description: 'Office title deleted' },
           '400': { $ref: '#/components/responses/BadRequestError' },
           '401': { $ref: '#/components/responses/UnauthorizedError' },
           '403': { $ref: '#/components/responses/ForbiddenError' },
@@ -709,6 +709,15 @@ const openApiDocument = {
         in: 'query',
         required: false,
         schema: { type: 'string', enum: ['createdAt', 'updatedAt', 'title'] },
+      },
+      SortByOfficeCreatedUpdatedQuery: {
+        name: 'sortBy',
+        in: 'query',
+        required: false,
+        schema: {
+          type: 'string',
+          enum: ['createdAt', 'updatedAt', 'name', 'title', 'level'],
+        },
       },
       SortOrderQuery: {
         name: 'sortOrder',
@@ -1051,10 +1060,10 @@ const openApiDocument = {
       },
       OfficeResource: {
         type: 'object',
-        required: ['id', 'title', 'level', 'sections', 'createdAt', 'updatedAt'],
+        required: ['id', 'name', 'level', 'sections', 'createdAt', 'updatedAt'],
         properties: {
           id: { type: 'string', format: 'uuid' },
-          title: { type: 'string' },
+          name: { type: 'string' },
           level: { $ref: '#/components/schemas/OfficeTitleLevel' },
           description: { type: ['string', 'null'] },
           maxSlots: { type: ['integer', 'null'] },
@@ -1065,11 +1074,18 @@ const openApiDocument = {
       },
       CreateOfficeRequest: {
         type: 'object',
-        required: ['title', 'description', 'sections'],
+        required: ['level'],
+        additionalProperties: false,
+        anyOf: [{ required: ['name'] }, { required: ['title'] }],
         properties: {
+          name: { type: 'string', minLength: 1, maxLength: 100 },
           title: { type: 'string', minLength: 1, maxLength: 100 },
-          description: { type: 'string', minLength: 1, maxLength: 1000 },
-          sections: { type: 'array', minItems: 1, maxItems: 20, items: { $ref: '#/components/schemas/Section' } },
+          description: { type: ['string', 'null'], minLength: 1, maxLength: 1000 },
+          sections: {
+            type: 'array',
+            maxItems: 20,
+            items: { $ref: '#/components/schemas/Section' },
+          },
           level: { $ref: '#/components/schemas/OfficeTitleLevel' },
           maxSlots: { type: ['integer', 'null'], minimum: 1 },
         },
@@ -1078,9 +1094,14 @@ const openApiDocument = {
         type: 'object',
         additionalProperties: false,
         properties: {
+          name: { type: 'string', minLength: 1, maxLength: 100 },
           title: { type: 'string', minLength: 1, maxLength: 100 },
-          description: { type: 'string', minLength: 1, maxLength: 1000 },
-          sections: { type: 'array', minItems: 1, maxItems: 20, items: { $ref: '#/components/schemas/Section' } },
+          description: { type: ['string', 'null'], minLength: 1, maxLength: 1000 },
+          sections: {
+            type: 'array',
+            maxItems: 20,
+            items: { $ref: '#/components/schemas/Section' },
+          },
           level: { $ref: '#/components/schemas/OfficeTitleLevel' },
           maxSlots: { type: ['integer', 'null'], minimum: 1 },
         },

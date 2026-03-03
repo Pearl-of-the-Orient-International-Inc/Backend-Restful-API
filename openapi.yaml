@@ -881,7 +881,7 @@
           "Offices"
         ],
         "summary": "Create office title (admin only)",
-        "operationId": "createOffice",
+        "operationId": "createOfficeTitle",
         "security": [
           {
             "BearerAuth": []
@@ -899,7 +899,7 @@
         },
         "responses": {
           "201": {
-            "description": "Office created",
+            "description": "Office title created",
             "content": {
               "application/json": {
                 "schema": {
@@ -929,8 +929,8 @@
         "tags": [
           "Offices"
         ],
-        "summary": "Get all offices",
-        "operationId": "getAllOffices",
+        "summary": "Get all office titles",
+        "operationId": "getAllOfficeTitles",
         "security": [
           {
             "BearerAuth": []
@@ -947,7 +947,7 @@
             "$ref": "#/components/parameters/SearchQuery"
           },
           {
-            "$ref": "#/components/parameters/SortByTitleCreatedUpdatedQuery"
+            "$ref": "#/components/parameters/SortByOfficeCreatedUpdatedQuery"
           },
           {
             "$ref": "#/components/parameters/SortOrderQuery"
@@ -955,7 +955,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Office list",
+            "description": "Office title list",
             "content": {
               "application/json": {
                 "schema": {
@@ -978,8 +978,8 @@
         "tags": [
           "Offices"
         ],
-        "summary": "Get office by ID",
-        "operationId": "getOfficeById",
+        "summary": "Get office title by ID",
+        "operationId": "getOfficeTitleById",
         "security": [
           {
             "BearerAuth": []
@@ -992,7 +992,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Office details",
+            "description": "Office title details",
             "content": {
               "application/json": {
                 "schema": {
@@ -1019,8 +1019,8 @@
         "tags": [
           "Offices"
         ],
-        "summary": "Update office (admin only)",
-        "operationId": "updateOffice",
+        "summary": "Update office title (admin only)",
+        "operationId": "updateOfficeTitle",
         "security": [
           {
             "BearerAuth": []
@@ -1043,7 +1043,7 @@
         },
         "responses": {
           "200": {
-            "description": "Office updated",
+            "description": "Office title updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -1076,8 +1076,8 @@
         "tags": [
           "Offices"
         ],
-        "summary": "Delete office (admin only)",
-        "operationId": "deleteOffice",
+        "summary": "Delete office title (admin only)",
+        "operationId": "deleteOfficeTitle",
         "security": [
           {
             "BearerAuth": []
@@ -1090,7 +1090,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Office deleted"
+            "description": "Office title deleted"
           },
           "400": {
             "$ref": "#/components/responses/BadRequestError"
@@ -1176,6 +1176,21 @@
             "createdAt",
             "updatedAt",
             "title"
+          ]
+        }
+      },
+      "SortByOfficeCreatedUpdatedQuery": {
+        "name": "sortBy",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "createdAt",
+            "updatedAt",
+            "name",
+            "title",
+            "level"
           ]
         }
       },
@@ -1918,7 +1933,7 @@
         "type": "object",
         "required": [
           "id",
-          "title",
+          "name",
           "level",
           "sections",
           "createdAt",
@@ -1929,7 +1944,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "title": {
+          "name": {
             "type": "string"
           },
           "level": {
@@ -1966,24 +1981,42 @@
       "CreateOfficeRequest": {
         "type": "object",
         "required": [
-          "title",
-          "description",
-          "sections"
+          "level"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "name"
+            ]
+          },
+          {
+            "required": [
+              "title"
+            ]
+          }
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
           "title": {
             "type": "string",
             "minLength": 1,
             "maxLength": 100
           },
           "description": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "minLength": 1,
             "maxLength": 1000
           },
           "sections": {
             "type": "array",
-            "minItems": 1,
             "maxItems": 20,
             "items": {
               "$ref": "#/components/schemas/Section"
@@ -2005,19 +2038,26 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
           "title": {
             "type": "string",
             "minLength": 1,
             "maxLength": 100
           },
           "description": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "minLength": 1,
             "maxLength": 1000
           },
           "sections": {
             "type": "array",
-            "minItems": 1,
             "maxItems": 20,
             "items": {
               "$ref": "#/components/schemas/Section"
