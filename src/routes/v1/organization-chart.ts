@@ -23,6 +23,7 @@ import { validate } from '@/common/sanitation';
 import {
   createOfficeSchema,
   updateOfficeSchema,
+  getAllOfficesSchema,
 } from '@/validators/organization-chart';
 
 const router = Router();
@@ -39,7 +40,13 @@ router.post(
   createOffice,
 );
 
-router.get('/office', expressRateLimit('basic'), authenticate, getAllOffices);
+router.get(
+  '/office', 
+  expressRateLimit('basic'), 
+  authenticate,
+  validate(getAllOfficesSchema), 
+  getAllOffices
+);
 
 router.get(
   '/office/:id',
