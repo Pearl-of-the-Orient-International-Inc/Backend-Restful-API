@@ -52,19 +52,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Check if user is an admin
-    if (user.role !== 'ADMIN') {
-      logger.warn('Non-admin user attempted admin login', {
-        userId: user.id,
-        role: user.role,
-      });
-      res.status(HTTPSTATUS.FORBIDDEN).json({
-        code: 'FORBIDDEN',
-        message: 'Access denied. Admin privileges required.',
-      });
-      return;
-    }
-
     const isPasswordValid = await compareValue(password, user.password);
 
     if (!isPasswordValid) {

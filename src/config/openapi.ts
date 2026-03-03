@@ -5,7 +5,7 @@ const openApiDocument = {
     title: 'Pearl of the Orient API Docs',
     version: '1.0.0',
     description:
-      '## Quick Overview\n\n- API Version: `1.0.0`\n- Developer: `Kyle Andre Lim`\n- Base Path: `/api/v1`\n\nComprehensive API documentation for authentication, users, branch services, and offices endpoints.',
+      '## Quick Overview\n\n- API Version: `1.0.0`\n- Developer: `Kyle Andre Lim`\n- Base Path: `/api/v1`\n\nComprehensive API documentation for authentication, users, members, branch services, and offices endpoints.',
     contact: {
       name: 'Kyle Andre Lim',
       url: 'https://docs-api.pearl-chaplaincy.com',
@@ -20,6 +20,7 @@ const openApiDocument = {
     { name: 'System', description: 'Health and root metadata endpoints' },
     { name: 'Auth', description: 'Authentication and account recovery' },
     { name: 'Users', description: 'User profile and admin user management' },
+    { name: 'Members', description: 'Member application and management' },
     { name: 'Branch Service', description: 'Branch of service management' },
     { name: 'Offices', description: 'Office title management' },
   ],
@@ -404,6 +405,174 @@ const openApiDocument = {
         },
       },
     },
+    '/members/apply': {
+      post: {
+        tags: ['Members'],
+        summary: 'Apply as member',
+        operationId: 'applyMember',
+        security: [{ BearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/ApplyMemberRequest' },
+            },
+          },
+        },
+        responses: {
+          '201': {
+            description: 'Member application submitted',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/MemberWriteResponse' },
+              },
+            },
+          },
+          '400': { $ref: '#/components/responses/ValidationError' },
+          '401': { $ref: '#/components/responses/UnauthorizedError' },
+          '403': { $ref: '#/components/responses/ForbiddenError' },
+          '409': { $ref: '#/components/responses/ConflictError' },
+          '500': { $ref: '#/components/responses/InternalServerError' },
+        },
+      },
+    },
+    '/members/{id}/status': {
+      patch: {
+        tags: ['Members'],
+        summary: 'Approve or reject member application (admin only)',
+        operationId: 'updateMemberStatus',
+        security: [{ BearerAuth: [] }],
+        parameters: [{ $ref: '#/components/parameters/IdPath' }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/UpdateMemberStatusRequest' },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'Member status updated',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/MemberWriteResponse' },
+              },
+            },
+          },
+          '400': { $ref: '#/components/responses/ValidationError' },
+          '401': { $ref: '#/components/responses/UnauthorizedError' },
+          '403': { $ref: '#/components/responses/ForbiddenError' },
+          '404': { $ref: '#/components/responses/NotFoundError' },
+          '500': { $ref: '#/components/responses/InternalServerError' },
+        },
+      },
+    },
+    '/members/pending': {
+      get: {
+        tags: ['Members'],
+        summary: 'Get pending member applications (admin only)',
+        operationId: 'getPendingMembers',
+        security: [{ BearerAuth: [] }],
+        parameters: [
+          { $ref: '#/components/parameters/PageQuery' },
+          { $ref: '#/components/parameters/LimitQuery' },
+          { $ref: '#/components/parameters/SearchQuery' },
+          { $ref: '#/components/parameters/IncludeArchivedQuery' },
+        ],
+        responses: {
+          '200': {
+            description: 'Pending member list',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/MemberListResponse' },
+              },
+            },
+          },
+          '401': { $ref: '#/components/responses/UnauthorizedError' },
+          '403': { $ref: '#/components/responses/ForbiddenError' },
+          '500': { $ref: '#/components/responses/InternalServerError' },
+        },
+      },
+    },
+    '/members': {
+      get: {
+        tags: ['Members'],
+        summary: 'Get all members (admin only)',
+        operationId: 'getAllMembers',
+        security: [{ BearerAuth: [] }],
+        parameters: [
+          { $ref: '#/components/parameters/PageQuery' },
+          { $ref: '#/components/parameters/LimitQuery' },
+          { $ref: '#/components/parameters/SearchQuery' },
+          { $ref: '#/components/parameters/MemberStatusQuery' },
+          { $ref: '#/components/parameters/IncludeArchivedQuery' },
+        ],
+        responses: {
+          '200': {
+            description: 'Member list',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/MemberListResponse' },
+              },
+            },
+          },
+          '401': { $ref: '#/components/responses/UnauthorizedError' },
+          '403': { $ref: '#/components/responses/ForbiddenError' },
+          '500': { $ref: '#/components/responses/InternalServerError' },
+        },
+      },
+    },
+    '/members/{id}/archive': {
+      patch: {
+        tags: ['Members'],
+        summary: 'Archive member (admin only)',
+        operationId: 'archiveMember',
+        security: [{ BearerAuth: [] }],
+        parameters: [{ $ref: '#/components/parameters/IdPath' }],
+        responses: {
+          '200': {
+            description: 'Member archived',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/MemberWriteResponse' },
+              },
+            },
+          },
+          '400': { $ref: '#/components/responses/BadRequestError' },
+          '401': { $ref: '#/components/responses/UnauthorizedError' },
+          '403': { $ref: '#/components/responses/ForbiddenError' },
+          '404': { $ref: '#/components/responses/NotFoundError' },
+          '409': { $ref: '#/components/responses/ConflictError' },
+          '500': { $ref: '#/components/responses/InternalServerError' },
+        },
+      },
+    },
+    '/members/{id}/retrieve': {
+      patch: {
+        tags: ['Members'],
+        summary: 'Retrieve archived member (admin only)',
+        operationId: 'retrieveMember',
+        security: [{ BearerAuth: [] }],
+        parameters: [{ $ref: '#/components/parameters/IdPath' }],
+        responses: {
+          '200': {
+            description: 'Member retrieved',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/MemberWriteResponse' },
+              },
+            },
+          },
+          '400': { $ref: '#/components/responses/BadRequestError' },
+          '401': { $ref: '#/components/responses/UnauthorizedError' },
+          '403': { $ref: '#/components/responses/ForbiddenError' },
+          '404': { $ref: '#/components/responses/NotFoundError' },
+          '409': { $ref: '#/components/responses/ConflictError' },
+          '500': { $ref: '#/components/responses/InternalServerError' },
+        },
+      },
+    },
     '/branch-service/create': {
       post: {
         tags: ['Branch Service'],
@@ -539,7 +708,7 @@ const openApiDocument = {
         },
       },
     },
-    '/offices': {
+    '/offices/create': {
       post: {
         tags: ['Offices'],
         summary: 'Create office title (admin only)',
@@ -569,6 +738,8 @@ const openApiDocument = {
           '500': { $ref: '#/components/responses/InternalServerError' },
         },
       },
+    },
+    '/offices': {
       get: {
         tags: ['Offices'],
         summary: 'Get all office titles',
@@ -703,6 +874,18 @@ const openApiDocument = {
         in: 'query',
         required: false,
         schema: { type: 'string', minLength: 1, maxLength: 100 },
+      },
+      MemberStatusQuery: {
+        name: 'status',
+        in: 'query',
+        required: false,
+        schema: { $ref: '#/components/schemas/MemberStatus' },
+      },
+      IncludeArchivedQuery: {
+        name: 'includeArchived',
+        in: 'query',
+        required: false,
+        schema: { type: 'boolean', default: false },
       },
       SortByTitleCreatedUpdatedQuery: {
         name: 'sortBy',
@@ -846,6 +1029,22 @@ const openApiDocument = {
           'BARANGAY_DEPUTY_CHAPLAIN',
         ],
       },
+      MemberStatus: {
+        type: 'string',
+        enum: ['PENDING', 'APPROVED', 'REJECTED'],
+      },
+      CivilStatus: {
+        type: 'string',
+        enum: ['SINGLE', 'MARRIED', 'WIDOWED', 'SEPARATED', 'ANNULLED'],
+      },
+      Gender: {
+        type: 'string',
+        enum: ['MALE', 'FEMALE', 'PREFER_NOT_TO_SAY'],
+      },
+      SignatureType: {
+        type: 'string',
+        enum: ['DRAWN', 'UPLOADED'],
+      },
       UserPublic: {
         type: 'object',
         required: ['id', 'name', 'email', 'role', 'createdAt'],
@@ -960,6 +1159,285 @@ const openApiDocument = {
           name: { type: 'string' },
           email: { type: 'string', format: 'email' },
           avatar: { type: ['string', 'null'] },
+        },
+      },
+      MinisterialExperienceResource: {
+        type: 'object',
+        required: ['id', 'roleDescription', 'yearsApprox', 'order', 'memberId', 'createdAt', 'updatedAt'],
+        properties: {
+          id: { type: 'string', format: 'uuid' },
+          roleDescription: { type: 'string' },
+          yearsApprox: { type: 'string' },
+          order: { type: 'integer' },
+          memberId: { type: 'string', format: 'uuid' },
+          createdAt: { type: 'string', format: 'date-time' },
+          updatedAt: { type: 'string', format: 'date-time' },
+        },
+      },
+      CharacterReferenceResource: {
+        type: 'object',
+        required: ['id', 'name', 'positionRelationship', 'contactNumber', 'order', 'memberId', 'createdAt', 'updatedAt'],
+        properties: {
+          id: { type: 'string', format: 'uuid' },
+          name: { type: 'string' },
+          positionRelationship: { type: 'string' },
+          contactNumber: { type: 'string' },
+          order: { type: 'integer' },
+          memberId: { type: 'string', format: 'uuid' },
+          createdAt: { type: 'string', format: 'date-time' },
+          updatedAt: { type: 'string', format: 'date-time' },
+        },
+      },
+      ApplicantSignatureResource: {
+        type: 'object',
+        required: ['id', 'type', 'signatureData', 'memberId', 'createdAt', 'updatedAt'],
+        properties: {
+          id: { type: 'string', format: 'uuid' },
+          type: { $ref: '#/components/schemas/SignatureType' },
+          signatureData: { type: 'string' },
+          memberId: { type: 'string', format: 'uuid' },
+          createdAt: { type: 'string', format: 'date-time' },
+          updatedAt: { type: 'string', format: 'date-time' },
+        },
+      },
+      PreferredBranchResource: {
+        type: 'object',
+        required: ['id', 'title'],
+        properties: {
+          id: { type: 'string', format: 'uuid' },
+          title: { type: 'string' },
+        },
+      },
+      MemberUserResource: {
+        type: 'object',
+        required: ['id', 'name', 'email', 'role'],
+        properties: {
+          id: { type: 'string', format: 'uuid' },
+          name: { type: 'string' },
+          email: { type: 'string', format: 'email' },
+          role: { $ref: '#/components/schemas/UserType' },
+        },
+      },
+      MemberResource: {
+        type: 'object',
+        required: [
+          'id',
+          'userId',
+          'status',
+          'firstName',
+          'lastName',
+          'mobilePhoneNumber',
+          'homeAddress',
+          'civilStatus',
+          'gender',
+          'nationality',
+          'dateOfBirth',
+          'region',
+          'province',
+          'municipalityCity',
+          'barangay',
+          'emergencyContactName',
+          'emergencyContactMobile',
+          'churchAffiliation',
+          'churchAddress',
+          'currentPositionRole',
+          'isActive',
+          'createdAt',
+          'updatedAt',
+        ],
+        properties: {
+          id: { type: 'string', format: 'uuid' },
+          userId: { type: 'string', format: 'uuid' },
+          status: { $ref: '#/components/schemas/MemberStatus' },
+          firstName: { type: 'string' },
+          lastName: { type: 'string' },
+          mobilePhoneNumber: { type: 'string' },
+          homeAddress: { type: 'string' },
+          civilStatus: { $ref: '#/components/schemas/CivilStatus' },
+          gender: { $ref: '#/components/schemas/Gender' },
+          nationality: { type: 'string' },
+          dateOfBirth: { type: 'string', format: 'date-time' },
+          region: { type: 'string' },
+          province: { type: 'string' },
+          municipalityCity: { type: 'string' },
+          barangay: { type: 'string' },
+          emergencyContactName: { type: 'string' },
+          emergencyContactMobile: { type: 'string' },
+          recentIdPhotoUrl: { type: ['string', 'null'], format: 'uri' },
+          churchAffiliation: { type: 'string' },
+          churchAddress: { type: 'string' },
+          currentPositionRole: { type: 'string' },
+          currentPositionRoleOther: { type: ['string', 'null'] },
+          height: { type: ['string', 'null'] },
+          weight: { type: ['string', 'null'] },
+          bloodType: { type: ['string', 'null'] },
+          colorOfEyes: { type: ['string', 'null'] },
+          colorOfSkin: { type: ['string', 'null'] },
+          sssNumber: { type: ['string', 'null'] },
+          tinNumber: { type: ['string', 'null'] },
+          skillsTalents: { type: ['string', 'null'] },
+          preferredBranchOther: { type: ['string', 'null'] },
+          elementarySchool: { type: ['string', 'null'] },
+          secondarySchool: { type: ['string', 'null'] },
+          tertiaryCollege: { type: ['string', 'null'] },
+          postGraduateStudies: { type: ['string', 'null'] },
+          isActive: { type: 'boolean' },
+          createdAt: { type: 'string', format: 'date-time' },
+          updatedAt: { type: 'string', format: 'date-time' },
+          user: { $ref: '#/components/schemas/MemberUserResource' },
+          preferredBranches: {
+            type: 'array',
+            items: { $ref: '#/components/schemas/PreferredBranchResource' },
+          },
+          ministerialExperiences: {
+            type: 'array',
+            items: { $ref: '#/components/schemas/MinisterialExperienceResource' },
+          },
+          characterReferences: {
+            type: 'array',
+            items: { $ref: '#/components/schemas/CharacterReferenceResource' },
+          },
+          signature: {
+            anyOf: [
+              { $ref: '#/components/schemas/ApplicantSignatureResource' },
+              { type: 'null' },
+            ],
+          },
+        },
+      },
+      ApplyMemberMinisterialExperienceItem: {
+        type: 'object',
+        required: ['roleDescription', 'yearsApprox'],
+        properties: {
+          roleDescription: { type: 'string', minLength: 1, maxLength: 255 },
+          yearsApprox: { type: 'string', minLength: 1, maxLength: 100 },
+        },
+      },
+      ApplyMemberCharacterReferenceItem: {
+        type: 'object',
+        required: ['name', 'positionRelationship', 'contactNumber'],
+        properties: {
+          name: { type: 'string', minLength: 1, maxLength: 100 },
+          positionRelationship: { type: 'string', minLength: 1, maxLength: 255 },
+          contactNumber: { type: 'string', minLength: 1, maxLength: 50 },
+        },
+      },
+      ApplyMemberSignature: {
+        type: 'object',
+        required: ['type', 'signatureData'],
+        properties: {
+          type: { $ref: '#/components/schemas/SignatureType' },
+          signatureData: { type: 'string', minLength: 1 },
+        },
+      },
+      ApplyMemberRequest: {
+        type: 'object',
+        required: [
+          'firstName',
+          'lastName',
+          'mobilePhoneNumber',
+          'homeAddress',
+          'civilStatus',
+          'gender',
+          'nationality',
+          'dateOfBirth',
+          'region',
+          'province',
+          'municipalityCity',
+          'barangay',
+          'emergencyContactName',
+          'emergencyContactMobile',
+          'churchAffiliation',
+          'churchAddress',
+          'currentPositionRole',
+        ],
+        properties: {
+          firstName: { type: 'string', minLength: 1, maxLength: 100 },
+          lastName: { type: 'string', minLength: 1, maxLength: 100 },
+          mobilePhoneNumber: { type: 'string', minLength: 1, maxLength: 30 },
+          homeAddress: { type: 'string', minLength: 1, maxLength: 255 },
+          civilStatus: { $ref: '#/components/schemas/CivilStatus' },
+          gender: { $ref: '#/components/schemas/Gender' },
+          nationality: { type: 'string', minLength: 1, maxLength: 100 },
+          dateOfBirth: { type: 'string', format: 'date-time' },
+          region: { type: 'string', minLength: 1, maxLength: 100 },
+          province: { type: 'string', minLength: 1, maxLength: 100 },
+          municipalityCity: { type: 'string', minLength: 1, maxLength: 100 },
+          barangay: { type: 'string', minLength: 1, maxLength: 100 },
+          emergencyContactName: { type: 'string', minLength: 1, maxLength: 100 },
+          emergencyContactMobile: { type: 'string', minLength: 1, maxLength: 30 },
+          recentIdPhotoUrl: { type: ['string', 'null'], format: 'uri' },
+          churchAffiliation: { type: 'string', minLength: 1, maxLength: 150 },
+          churchAddress: { type: 'string', minLength: 1, maxLength: 255 },
+          currentPositionRole: { type: 'string', minLength: 1, maxLength: 150 },
+          currentPositionRoleOther: { type: 'string', maxLength: 150 },
+          height: { type: 'string', maxLength: 30 },
+          weight: { type: 'string', maxLength: 30 },
+          bloodType: { type: 'string', maxLength: 10 },
+          colorOfEyes: { type: 'string', maxLength: 50 },
+          colorOfSkin: { type: 'string', maxLength: 50 },
+          sssNumber: { type: 'string', maxLength: 50 },
+          tinNumber: { type: 'string', maxLength: 50 },
+          skillsTalents: { type: 'string', maxLength: 500 },
+          preferredBranchIds: {
+            type: 'array',
+            maxItems: 20,
+            items: { type: 'string', format: 'uuid' },
+          },
+          preferredBranchOther: { type: 'string', maxLength: 255 },
+          elementarySchool: { type: 'string', maxLength: 150 },
+          secondarySchool: { type: 'string', maxLength: 150 },
+          tertiaryCollege: { type: 'string', maxLength: 150 },
+          postGraduateStudies: { type: 'string', maxLength: 150 },
+          ministerialExperiences: {
+            type: 'array',
+            maxItems: 20,
+            items: { $ref: '#/components/schemas/ApplyMemberMinisterialExperienceItem' },
+          },
+          characterReferences: {
+            type: 'array',
+            maxItems: 20,
+            items: { $ref: '#/components/schemas/ApplyMemberCharacterReferenceItem' },
+          },
+          signature: { $ref: '#/components/schemas/ApplyMemberSignature' },
+        },
+      },
+      UpdateMemberStatusRequest: {
+        type: 'object',
+        required: ['status'],
+        properties: {
+          status: {
+            type: 'string',
+            enum: ['APPROVED', 'REJECTED'],
+          },
+        },
+      },
+      MemberReadResponse: {
+        type: 'object',
+        required: ['code', 'message', 'data'],
+        properties: {
+          code: { type: 'string', example: 'OK' },
+          message: { type: 'string' },
+          data: { $ref: '#/components/schemas/MemberResource' },
+        },
+      },
+      MemberWriteResponse: {
+        type: 'object',
+        required: ['code', 'message', 'data'],
+        properties: {
+          code: { type: 'string' },
+          message: { type: 'string' },
+          data: { $ref: '#/components/schemas/MemberResource' },
+        },
+      },
+      MemberListResponse: {
+        type: 'object',
+        required: ['code', 'message', 'data', 'pagination'],
+        properties: {
+          code: { type: 'string', example: 'OK' },
+          message: { type: 'string' },
+          data: { type: 'array', items: { $ref: '#/components/schemas/MemberResource' } },
+          pagination: { $ref: '#/components/schemas/Pagination' },
         },
       },
       SectionItem: {

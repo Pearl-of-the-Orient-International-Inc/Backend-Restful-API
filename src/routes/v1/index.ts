@@ -13,6 +13,7 @@ import { HTTPSTATUS } from '@/common/http-codes';
  */
 import authRoutes from '@/routes/v1/auth';
 import userRoutes from '@/routes/v1/user';
+import memberRoutes from '@/routes/v1/member';
 import branchServiceRoutes from '@/routes/v1/branch-service';
 import officeTitleRoutes from '@/routes/v1/office-title';
 
@@ -35,6 +36,7 @@ router.get('/', (req, res) => {
 
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
+router.use('/members', memberRoutes);
 router.use('/branch-service', branchServiceRoutes);
 router.use('/offices', officeTitleRoutes);
 
