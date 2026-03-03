@@ -11,6 +11,7 @@ import { JSDOM } from 'jsdom';
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { OfficeTitleLevel } from '@/generated/prisma/enums';
 
 /**
  * Types & Validators
@@ -71,7 +72,11 @@ export const createOffice = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const { title, description, sections } = req.body as CreateOfficeSchema;
+  const { title, description, sections, level, maxSlots } = req.body as
+    CreateOfficeSchema & {
+      level?: OfficeTitleLevel;
+      maxSlots?: number | null;
+    };
 
   // Sanitize title and description
   const sanitizedTitle = sanitizeText(title);
@@ -79,9 +84,9 @@ export const createOffice = async (
 
   try {
     // Check if office with the same title already exists
-    const existingOffice = await prisma.office.findFirst({
+    const existingOffice = await prisma.officeTitle.findFirst({
       where: {
-        title: {
+        name: {
           equals: sanitizedTitle,
           mode: 'insensitive', // Case-insensitive comparison
         },
@@ -124,23 +129,30 @@ export const createOffice = async (
     });
 
     // Create the office
-    const newOffice = await prisma.office.create({
+    const newOffice = await prisma.officeTitle.create({
       data: {
-        title: sanitizedTitle,
+        name: sanitizedTitle,
         description: sanitizedDescription,
         sections: sectionsWithIds,
+        level: level ?? OfficeTitleLevel.CITY_CHAPLAIN,
+        maxSlots: maxSlots ?? null,
       },
     });
 
     logger.info('Office created successfully', {
       officeId: newOffice.id,
-      title: newOffice.title,
+      title: newOffice.name,
     });
+
+    const { name, ...officePayload } = newOffice;
 
     res.status(HTTPSTATUS.CREATED).json({
       code: 'CREATED',
       message: 'Office created successfully',
-      data: newOffice,
+      data: {
+        ...officePayload,
+        title: name,
+      },
     });
   } catch (err) {
     // Response with 500 status code for unexpected server errors

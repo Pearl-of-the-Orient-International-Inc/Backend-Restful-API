@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { OfficeTitleLevel } from '@/generated/prisma/enums';
 
 // Schema for individual items within a section (can be rich text HTML)
 const sectionItemSchema = z.object({
@@ -45,6 +46,13 @@ export const createOfficeSchema = z.object({
     .array(sectionSchema)
     .min(1, { message: 'At least one section is required' })
     .max(20, { message: 'Cannot exceed 20 sections' }),
+  level: z.nativeEnum(OfficeTitleLevel).optional(),
+  maxSlots: z
+    .number()
+    .int({ message: 'maxSlots must be an integer' })
+    .positive({ message: 'maxSlots must be greater than 0' })
+    .nullable()
+    .optional(),
 });
 
 export const getAllOfficesSchema = z.object({

@@ -7,6 +7,10 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─────────────────────────────────────────────
+// ACCOUNTS SCHEMA
+// ─────────────────────────────────────────────
+
 model User {
   id    String @id @default(uuid())
   name  String
@@ -16,19 +20,15 @@ model User {
   avatar   String?
 
   isEmailVerified Boolean  @default(false)
-  role            UserType
+  role            UserType @default(MEMBER)
 
   userTokens        UserToken[]
   sessions          Session[]
   verificationCodes VerificationCode[]
+  memberProfile     Member?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-enum UserType {
-  MEMBER
-  ADMIN
 }
 
 model UserToken {
@@ -77,18 +77,224 @@ model VerificationCode {
   @@index([userId])
 }
 
+// ─────────────────────────────────────────────
+// MEMBER PROFILE SCHEMA
+// ─────────────────────────────────────────────
+
+model Member {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  status MemberStatus @default(PENDING)
+
+  // Contact Information
+  firstName         String
+  lastName          String
+  mobilePhoneNumber String
+  homeAddress       String
+  civilStatus       CivilStatus
+  gender            Gender
+  nationality       String
+  dateOfBirth       DateTime
+  // age is derived from dateOfBirth in backend — not stored
+
+  // Location
+  region           String
+  province         String
+  municipalityCity String
+  barangay         String
+
+  emergencyContactName   String
+  emergencyContactMobile String
+  recentIdPhotoUrl       String?
+
+  // Church Background
+  churchAffiliation        String
+  churchAddress            String
+  currentPositionRole      String
+  currentPositionRoleOther String?
+
+  // Optional personal details
+  height        String?
+  weight        String?
+  bloodType     String?
+  colorOfEyes   String?
+  colorOfSkin   String?
+  sssNumber     String?
+  tinNumber     String?
+  skillsTalents String?
+
+  preferredBranches    BranchOfService[]
+  preferredBranchOther String?
+
+  // Education
+  elementarySchool    String?
+  secondarySchool     String?
+  tertiaryCollege     String?
+  postGraduateStudies String?
+
+  // Relations
+  ministerialExperiences MinisterialExperience[]
+  characterReferences    CharacterReference[]
+  signature              ApplicantSignature?
+  officerAssignments     OfficerAssignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MinisterialExperience {
+  id              String @id @default(uuid())
+  roleDescription String
+  yearsApprox     String
+  order           Int
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CharacterReference {
+  id                   String @id @default(uuid())
+  name                 String
+  positionRelationship String
+  contactNumber        String
+  order                Int
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ApplicantSignature {
+  id            String        @id @default(uuid())
+  type          SignatureType
+  signatureData String
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─────────────────────────────────────────────
+// ORGANIZATIONAL STRUCTURE SCHEMA
+// ─────────────────────────────────────────────
+
+model BranchOfService {
+  id          String @id @default(uuid())
+  title       String // Prison, Humanitarian
+  description String
+
+  sections Json
+
+  member   Member? @relation(fields: [memberId], references: [id])
+  memberId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OfficeTitle {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  level       OfficeTitleLevel
+  description String?
+  maxSlots    Int? // null = unlimited, 1 = Chief Chaplain only
+
+  sections Json
+
+  assignments OfficerAssignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OfficerAssignment {
+  id String @id @default(uuid())
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  officeTitleId String
+  officeTitle   OfficeTitle @relation(fields: [officeTitleId], references: [id], onDelete: Cascade)
+
+  // Jurisdiction — only the relevant field is set based on level
+  department       String? // National level  e.g. "Humanitarian", "Education"
+  region           String? // Regional level  e.g. "Region 1", "NCR"
+  province         String? // Provincial level e.g. "Bulacan", "Tarlac"
+  cityMunicipality String? // City/Municipal level e.g. "Dasmarinas Cavite"
+  barangay         String? // Barangay level
+
+  isActive  Boolean   @default(true)
+  startDate DateTime  @default(now())
+  endDate   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([memberId, officeTitleId, department, region, province, cityMunicipality, barangay])
+  @@index([memberId])
+  @@index([officeTitleId])
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum UserType {
+  MEMBER
+  OFFICER
+  ADMIN
+}
+
+enum MemberStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 enum VerificationType {
   EMAIL_VERIFICATION
   PASSWORD_RESET
   TWO_FACTOR
 }
 
-model Office {
-  id          String @id @default(uuid())
-  title       String
-  description String
-  sections    Json
+enum CivilStatus {
+  SINGLE
+  MARRIED
+  WIDOWED
+  SEPARATED
+  ANNULLED
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum Gender {
+  MALE
+  FEMALE
+  PREFER_NOT_TO_SAY
+}
+
+enum SignatureType {
+  DRAWN
+  UPLOADED
+}
+
+enum OfficeTitleLevel {
+  CHIEF_CHAPLAIN
+  NATIONAL_CHAPLAIN_DIRECTOR
+  REGIONAL_CHAPLAIN_DIRECTOR
+  REGIONAL_DEPUTY_CHAPLAIN_DIRECTOR
+  PROVINCIAL_CHAPLAIN_DIRECTOR
+  PROVINCIAL_DEPUTY_CHAPLAIN_DIRECTOR
+  CITY_CHAPLAIN
+  MUNICIPAL_CHAPLAIN
+  CITY_MUNICIPAL_DEPUTY_CHAPLAIN
+  BARANGAY_CHAPLAIN
+  BARANGAY_DEPUTY_CHAPLAIN
 }

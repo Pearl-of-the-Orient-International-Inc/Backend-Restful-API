@@ -11,16 +11,15 @@ import { JSDOM } from 'jsdom';
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { OfficeTitleLevel } from '@/generated/prisma/enums';
 
 /**
  * Types & Validators
  */
 import type { Request, Response } from 'express';
 import {
-  updateOfficeSchema,
   type UpdateOfficeSchema,
 } from '@/validators/organization-chart';
-import { ZodError } from 'zod';
 
 /**
  * Initialize DOMPurify for sanitization
@@ -87,10 +86,14 @@ export const updateOffice = async (
       return;
     }
 
-    const { title, description, sections } = req.body as UpdateOfficeSchema;
+    const { title, description, sections, level, maxSlots } = req.body as
+      UpdateOfficeSchema & {
+        level?: OfficeTitleLevel;
+        maxSlots?: number | null;
+      };
 
     // Check if office exists
-    const existingOffice = await prisma.office.findUnique({
+    const existingOffice = await prisma.officeTitle.findUnique({
       where: { id },
     });
 
@@ -106,9 +109,9 @@ export const updateOffice = async (
     if (title) {
       const sanitizedTitle = sanitizeText(title);
 
-      const duplicateOffice = await prisma.office.findFirst({
+      const duplicateOffice = await prisma.officeTitle.findFirst({
         where: {
-          title: {
+          name: {
             equals: sanitizedTitle,
             mode: 'insensitive',
           },
@@ -129,14 +132,16 @@ export const updateOffice = async (
 
     // Build update data object
     const updateData: {
-      title?: string;
+      name?: string;
       description?: string;
       sections?: any;
+      level?: OfficeTitleLevel;
+      maxSlots?: number | null;
     } = {};
 
     // Sanitize and add title if provided
     if (title) {
-      updateData.title = sanitizeText(title);
+      updateData.name = sanitizeText(title);
     }
 
     // Sanitize and add description if provided
@@ -175,21 +180,34 @@ export const updateOffice = async (
       updateData.sections = sectionsWithIds;
     }
 
+    if (level) {
+      updateData.level = level;
+    }
+
+    if (maxSlots !== undefined) {
+      updateData.maxSlots = maxSlots;
+    }
+
     // Update the office
-    const updatedOffice = await prisma.office.update({
+    const updatedOffice = await prisma.officeTitle.update({
       where: { id },
       data: updateData,
     });
 
+    const { name, ...officePayload } = updatedOffice;
+
     logger.info('Office updated successfully', {
       officeId: updatedOffice.id,
-      title: updatedOffice.title,
+      title: updatedOffice.name,
     });
 
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
       message: 'Office updated successfully',
-      data: updatedOffice,
+      data: {
+        ...officePayload,
+        title: name,
+      },
     });
   } catch (err) {
     // Response with 500 status code for unexpected server errors

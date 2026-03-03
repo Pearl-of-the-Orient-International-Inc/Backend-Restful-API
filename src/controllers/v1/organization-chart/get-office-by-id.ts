@@ -28,7 +28,7 @@ export const getOfficeById = async (
     }
 
     // Fetch the office by ID
-    const office = await prisma.office.findUnique({
+    const office = await prisma.officeTitle.findUnique({
       where: { id },
     });
 
@@ -40,15 +40,20 @@ export const getOfficeById = async (
       return;
     }
 
+    const { name, ...officePayload } = office;
+
     logger.info('Office retrieved successfully', {
       officeId: office.id,
-      title: office.title,
+      title: office.name,
     });
 
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
       message: 'Office retrieved successfully',
-      data: office,
+      data: {
+        ...officePayload,
+        title: name,
+      },
     });
   } catch (err) {
     res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({

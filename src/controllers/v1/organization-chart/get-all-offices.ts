@@ -21,6 +21,13 @@ export const getAllOffices = async (
     const search = req.query.search as string | undefined;
     const sortBy = (req.query.sortBy as string) || 'createdAt';
     const sortOrder = (req.query.sortOrder as 'asc' | 'desc') || 'desc';
+    const orderByFieldMap: Record<string, 'createdAt' | 'updatedAt' | 'name'> =
+      {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt',
+        title: 'name',
+      };
+    const orderByField = orderByFieldMap[sortBy] || 'createdAt';
 
     // Calculate skip for pagination
     const skip = (page - 1) * limit;
@@ -30,7 +37,7 @@ export const getAllOffices = async (
       ? {
           OR: [
             {
-              title: {
+              name: {
                 contains: search,
                 mode: 'insensitive' as const,
               },
@@ -46,16 +53,24 @@ export const getAllOffices = async (
       : {};
 
     // Get total count for pagination
-    const totalCount = await prisma.office.count({ where });
+    const totalCount = await prisma.officeTitle.count({ where });
 
     // Fetch offices with pagination
-    const offices = await prisma.office.findMany({
+    const offices = await prisma.officeTitle.findMany({
       where,
       skip,
       take: limit,
       orderBy: {
-        [sortBy]: sortOrder,
+        [orderByField]: sortOrder,
       },
+    });
+
+    const officePayload = offices.map((office) => {
+      const { name, ...rest } = office;
+      return {
+        ...rest,
+        title: name,
+      };
     });
 
     // Calculate pagination metadata
@@ -72,7 +87,7 @@ export const getAllOffices = async (
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
       message: 'Offices retrieved successfully',
-      data: offices,
+      data: officePayload,
       pagination: {
         currentPage: page,
         totalPages,

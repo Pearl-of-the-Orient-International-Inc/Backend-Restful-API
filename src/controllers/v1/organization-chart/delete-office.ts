@@ -28,7 +28,7 @@ export const deleteOffice = async (
     }
 
     // Check if office exists before deleting
-    const existingOffice = await prisma.office.findUnique({
+    const existingOffice = await prisma.officeTitle.findUnique({
       where: { id },
     });
 
@@ -41,13 +41,13 @@ export const deleteOffice = async (
     }
 
     // Delete the office
-    await prisma.office.delete({
+    await prisma.officeTitle.delete({
       where: { id },
     });
 
     logger.info('Office deleted successfully', {
       officeId: id,
-      title: existingOffice.title,
+      title: existingOffice.name,
     });
 
     res.sendStatus(204);
