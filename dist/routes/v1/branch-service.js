@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const create_branch_service_1 = require("../../controllers/v1/branch-service/create-branch-service");
+const get_all_branch_services_1 = require("../../controllers/v1/branch-service/get-all-branch-services");
+const get_branch_service_by_id_1 = require("../../controllers/v1/branch-service/get-branch-service-by-id");
+const update_branch_service_1 = require("../../controllers/v1/branch-service/update-branch-service");
+const delete_branch_service_1 = require("../../controllers/v1/branch-service/delete-branch-service");
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const authentication_1 = require("../../middlewares/authentication");
+const enums_1 = require("../../generated/prisma/enums");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const sanitation_1 = require("../../common/sanitation");
+const branch_service_1 = require("../../validators/branch-service");
+const router = (0, express_1.Router)();
+router.post('/create', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(branch_service_1.createBranchServiceSchema), create_branch_service_1.createBranchService);
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, sanitation_1.validate)(branch_service_1.getAllBranchServicesSchema), get_all_branch_services_1.getAllBranchServices);
+router.get('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, get_branch_service_by_id_1.getBranchServiceById);
+router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(branch_service_1.updateBranchServiceSchema), update_branch_service_1.updateBranchService);
+router.delete('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), delete_branch_service_1.deleteBranchService);
+exports.default = router;

@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const create_office_title_1 = require("../../controllers/v1/office-title/create-office-title");
+const get_all_office_titles_1 = require("../../controllers/v1/office-title/get-all-office-titles");
+const get_office_title_by_id_1 = require("../../controllers/v1/office-title/get-office-title-by-id");
+const update_office_title_1 = require("../../controllers/v1/office-title/update-office-title");
+const delete_office_title_1 = require("../../controllers/v1/office-title/delete-office-title");
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const authentication_1 = require("../../middlewares/authentication");
+const enums_1 = require("../../generated/prisma/enums");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const sanitation_1 = require("../../common/sanitation");
+const office_title_1 = require("../../validators/office-title");
+const router = (0, express_1.Router)();
+router.post('/create', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(office_title_1.createOfficeTitleSchema), create_office_title_1.createOfficeTitle);
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, sanitation_1.validate)(office_title_1.getAllOfficeTitlesSchema), get_all_office_titles_1.getAllOfficeTitles);
+router.get('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, get_office_title_by_id_1.getOfficeTitleById);
+router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(office_title_1.updateOfficeTitleSchema), update_office_title_1.updateOfficeTitle);
+router.delete('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), delete_office_title_1.deleteOfficeTitle);
+exports.default = router;

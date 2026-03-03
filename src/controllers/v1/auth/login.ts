@@ -16,6 +16,7 @@ import {
 import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
+import { UserType } from '@/generated/prisma/enums';
 
 /**
  * Types & Validators
@@ -74,6 +75,20 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         message:
           'Please verify your email address before logging in. Check your inbox for the verification link.',
         requiresVerification: true,
+      });
+      return;
+    }
+
+    // Admin portal auth policy: member accounts cannot login here.
+    if (user.role === UserType.MEMBER) {
+      logger.warn('Forbidden member login attempt', {
+        userId: user.id,
+        email: user.email,
+        role: user.role,
+      });
+      res.status(HTTPSTATUS.FORBIDDEN).json({
+        code: 'FORBIDDEN',
+        message: 'This account is not allowed to access the admin portal.',
       });
       return;
     }

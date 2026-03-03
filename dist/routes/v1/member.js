@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const apply_member_1 = require("../../controllers/v1/member/apply-member");
+const update_member_status_1 = require("../../controllers/v1/member/update-member-status");
+const get_pending_members_1 = require("../../controllers/v1/member/get-pending-members");
+const get_all_members_1 = require("../../controllers/v1/member/get-all-members");
+const archive_member_1 = require("../../controllers/v1/member/archive-member");
+const retrieve_member_1 = require("../../controllers/v1/member/retrieve-member");
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const enums_1 = require("../../generated/prisma/enums");
+const sanitation_1 = require("../../common/sanitation");
+const member_1 = require("../../validators/member");
+const router = (0, express_1.Router)();
+router.post('/apply', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.applyMemberSchema), apply_member_1.applyMember);
+router.patch('/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateMemberStatusSchema), update_member_status_1.updateMemberStatus);
+router.get('/pending', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getAllMembersSchema), get_pending_members_1.getPendingMembers);
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getAllMembersSchema), get_all_members_1.getAllMembers);
+router.patch('/:id/archive', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), archive_member_1.archiveMember);
+router.patch('/:id/retrieve', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), retrieve_member_1.retrieveMember);
+exports.default = router;

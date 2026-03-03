@@ -48,7 +48,21 @@ const corsOptions: CorsOptions = {
   },
   credentials: true, // Add this to allow cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'traceparent',
+    'tracestate',
+    'b3',
+    'baggage',
+    'sentry-trace',
+    'x-uploadthing-package',
+    'x-uploadthing-version',
+    'x-uploadthing-fe-package',
+    'x-uploadthing-be-adapter',
+    'x-uploadthing-signature',
+    'x-uploadthing-api-key',
+  ],
 };
 app.use(cors(corsOptions));
 

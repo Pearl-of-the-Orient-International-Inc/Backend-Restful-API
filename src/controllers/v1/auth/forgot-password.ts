@@ -55,8 +55,16 @@ export const forgotPassword = async (
     // Generate unique code for forgot password
     const uniqueCode = generateUniqueCode();
 
-    const verificationCode = await prisma.verificationCode.create({
-      data: {
+    const verificationCode = await prisma.verificationCode.upsert({
+      where: {
+        userId: user.id,
+      },
+      update: {
+        type: VerificationType.PASSWORD_RESET,
+        expiresAt: calculateExpirationDate('1h'),
+        code: uniqueCode,
+      },
+      create: {
         userId: user.id,
         type: VerificationType.PASSWORD_RESET,
         expiresAt: calculateExpirationDate('1h'),
@@ -68,10 +76,22 @@ export const forgotPassword = async (
     const baseUrl = config.APP_URL || 'http://localhost:3000';
     const verificationUrl = `${baseUrl}/reset-password?token=${verificationCode.code}`;
 
-    await sendMail({
+    const emailResult = await sendMail({
       sendTo: user.email,
       ...forgotPasswordTemplate(verificationUrl, user.name),
     });
+
+    if (!emailResult.success) {
+      logger.error('Forgot password email failed to send', {
+        userId: user.id,
+        email: user.email,
+      });
+      res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to send reset email',
+      });
+      return;
+    }
 
     res.sendStatus(HTTPSTATUS.NO_CONTENT);
   } catch (err) {

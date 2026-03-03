@@ -20,6 +20,7 @@ import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { authenticate } from '@/middlewares/authentication';
 import { UserType } from '@/generated/prisma/enums';
 import authorize from '@/middlewares/authorization';
+import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 
 const router = Router();
 
@@ -48,6 +49,15 @@ router.delete(
   authenticate,
   authorize([UserType.MEMBER, UserType.ADMIN]),
   deleteCurrentUser,
+);
+
+router.use(
+  '/avatar/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '4MB',
+    maxFileCount: 1,
+  }),
 );
 
 router.get(

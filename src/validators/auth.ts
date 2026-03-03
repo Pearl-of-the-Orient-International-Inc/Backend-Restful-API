@@ -61,9 +61,38 @@ export const verificationEmailSchema = z.object({
   code: z.string().min(1, { error: 'Verification code is required' }),
 });
 
+export const verifyPasswordSchema = z.object({
+  oldPassword: z
+    .string()
+    .trim()
+    .min(1, { error: 'Current password is required' })
+    .max(255, { error: 'Current password must not exceed 255 characters' }),
+});
+
+export const changePasswordSchema = z
+  .object({
+    oldPassword: z
+      .string()
+      .trim()
+      .min(1, { error: 'Current password is required' })
+      .max(255, { error: 'Current password must not exceed 255 characters' }),
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
+  })
+  .refine((val) => val.password === val.confirmPassword, {
+    message: 'Password does not match',
+    path: ['confirmPassword'],
+  })
+  .refine((val) => val.oldPassword !== val.password, {
+    message: 'New password must be different from current password',
+    path: ['password'],
+  });
+
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordSchema = z.infer<typeof resetPasswordSchema>;
 export type ResendVerificationSchema = z.infer<typeof resendVerificationSchema>;
 export type VerificationEmailSchema = z.infer<typeof verificationEmailSchema>;
+export type VerifyPasswordSchema = z.infer<typeof verifyPasswordSchema>;
+export type ChangePasswordSchema = z.infer<typeof changePasswordSchema>;
