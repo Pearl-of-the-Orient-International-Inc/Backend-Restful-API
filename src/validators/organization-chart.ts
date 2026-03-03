@@ -47,6 +47,40 @@ export const createOfficeSchema = z.object({
     .max(20, { message: 'Cannot exceed 20 sections' }),
 });
 
+export const getAllOfficesSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\d+$/.test(val), {
+        message: 'page must be a positive integer',
+      })
+      .refine((val) => !val || parseInt(val) >= 1, {
+        message: 'page must be at least 1',
+      }),
+
+    limit: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\d+$/.test(val), {
+        message: 'limit must be a positive integer',
+      })
+      .refine((val) => !val || (parseInt(val) >= 1 && parseInt(val) <= 100), {
+        message: 'limit must be between 1 and 100',
+      }),
+
+    search: z.string().min(1).max(100).optional(),
+
+    sortBy: z
+      .enum(['createdAt', 'updatedAt', 'title'])
+      .optional(),
+
+    sortOrder: z
+      .enum(['asc', 'desc'])
+      .optional(),
+  }),
+});
+
 export const updateOfficeSchema = createOfficeSchema.partial();
 
 export type CreateOfficeSchema = z.infer<typeof createOfficeSchema>;
