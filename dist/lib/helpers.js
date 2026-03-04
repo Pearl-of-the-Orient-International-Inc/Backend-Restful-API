@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseUserAgent = exports.getLocationFromIP = exports.formatTimestamp24Hour = exports.formatLocalTimestamp = exports.calculateExpirationDate = exports.getOneWeekFromNow = exports.getClientIp = void 0;
+exports.parseUserAgent = exports.getLocationDetailsFromIP = exports.getLocationFromIP = exports.formatTimestamp24Hour = exports.formatLocalTimestamp = exports.calculateExpirationDate = exports.getOneWeekFromNow = exports.getClientIp = void 0;
 exports.generateUniqueCode = generateUniqueCode;
 const date_fns_1 = require("date-fns");
 const uuid_1 = require("uuid");
@@ -121,6 +121,53 @@ const getLocationFromIP = (ipAddress) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.getLocationFromIP = getLocationFromIP;
+const getLocationDetailsFromIP = (ipAddress) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c;
+    if (!ipAddress || ipAddress === '::1' || ipAddress === '127.0.0.1') {
+        return {
+            city: null,
+            region: null,
+            country: null,
+            lat: null,
+            lon: null,
+            label: 'Local Network',
+        };
+    }
+    try {
+        const response = yield fetch(`http://ip-api.com/json/${ipAddress}`);
+        const data = yield response.json();
+        if (data.status === 'success') {
+            const parts = [data.city, data.regionName, data.country].filter(Boolean);
+            return {
+                city: (_a = data.city) !== null && _a !== void 0 ? _a : null,
+                region: (_b = data.regionName) !== null && _b !== void 0 ? _b : null,
+                country: (_c = data.country) !== null && _c !== void 0 ? _c : null,
+                lat: typeof data.lat === 'number' ? data.lat : null,
+                lon: typeof data.lon === 'number' ? data.lon : null,
+                label: parts.join(', ') || 'Unknown Location',
+            };
+        }
+        return {
+            city: null,
+            region: null,
+            country: null,
+            lat: null,
+            lon: null,
+            label: 'Unknown Location',
+        };
+    }
+    catch (_d) {
+        return {
+            city: null,
+            region: null,
+            country: null,
+            lat: null,
+            lon: null,
+            label: 'Unknown Location',
+        };
+    }
+});
+exports.getLocationDetailsFromIP = getLocationDetailsFromIP;
 const parseUserAgent = (userAgent) => {
     if (!userAgent) {
         return 'Unknown Device';

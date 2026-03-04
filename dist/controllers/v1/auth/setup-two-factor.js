@@ -40,8 +40,8 @@ const setupTwoFactor = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return;
         }
         const generated = speakeasy_1.default.generateSecret({
-            name: `Pearl of the Orient (${user.email})`,
-            issuer: 'Pearl of the Orient',
+            name: user.email,
+            issuer: 'Pearl of the Orient 2FA',
             length: 20,
         });
         if (!generated.base32 || !generated.otpauth_url) {

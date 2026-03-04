@@ -41,7 +41,13 @@ import type {
   PasskeyRegistrationVerifySchema,
 } from '@/validators/auth';
 
+const normalizeOrigin = (origin: string): string => origin.replace(/\/+$/, '');
+
 const getRpID = (): string => {
+  if (config.PASSKEY_RP_ID) {
+    return config.PASSKEY_RP_ID;
+  }
+
   try {
     const fromAppUrl = new URL(config.APP_URL).hostname;
     if (fromAppUrl) return fromAppUrl;
@@ -52,12 +58,19 @@ const getRpID = (): string => {
 };
 
 const getExpectedOrigins = (): string[] => {
-  const origins = new Set<string>([
-    config.APP_URL,
-    ...config.WHITELIST_ORIGINS,
-    'http://localhost:3000',
-  ]);
-  return [...origins].filter(Boolean);
+  const origins = new Set<string>();
+
+  const addOrigin = (origin?: string): void => {
+    if (!origin) return;
+    origins.add(normalizeOrigin(origin));
+  };
+
+  addOrigin(config.APP_URL);
+  for (const origin of config.WHITELIST_ORIGINS) addOrigin(origin);
+  for (const origin of config.PASSKEY_EXPECTED_ORIGINS) addOrigin(origin);
+  addOrigin('http://localhost:3000');
+
+  return [...origins];
 };
 
 export const getPasskeyStatus = async (
@@ -128,7 +141,7 @@ export const getPasskeyRegistrationOptions = async (
     }
 
     const options = await generateRegistrationOptions({
-      rpName: 'Pearl of the Orient',
+      rpName: config.PASSKEY_RP_NAME,
       rpID: getRpID(),
       userName: user.email,
       userDisplayName: user.name,
@@ -284,9 +297,17 @@ export const verifyPasskeyRegistration = async (
       message: 'Passkey registered successfully',
     });
   } catch (err) {
-    res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'Internal server error',
+    const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+    const isConfigMismatch =
+      /expectedOrigin|origin|expectedRPID|rpid|challenge|webauthn/i.test(errorMessage);
+
+    res.status(
+      isConfigMismatch ? HTTPSTATUS.BAD_REQUEST : HTTPSTATUS.INTERNAL_SERVER_ERROR,
+    ).json({
+      code: isConfigMismatch ? 'BAD_REQUEST' : 'INTERNAL_SERVER_ERROR',
+      message: isConfigMismatch
+        ? `Passkey registration verification failed: ${errorMessage}`
+        : 'Internal server error',
     });
     logger.error('Error while verifying passkey registration', err);
   }
@@ -590,9 +611,17 @@ export const verifyPasskeyAuthentication = async (
       mfaRequired: false,
     });
   } catch (err) {
-    res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'Internal server error',
+    const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+    const isConfigMismatch =
+      /expectedOrigin|origin|expectedRPID|rpid|challenge|webauthn/i.test(errorMessage);
+
+    res.status(
+      isConfigMismatch ? HTTPSTATUS.BAD_REQUEST : HTTPSTATUS.INTERNAL_SERVER_ERROR,
+    ).json({
+      code: isConfigMismatch ? 'BAD_REQUEST' : 'INTERNAL_SERVER_ERROR',
+      message: isConfigMismatch
+        ? `Passkey authentication failed: ${errorMessage}`
+        : 'Internal server error',
     });
     logger.error('Error while verifying passkey authentication', err);
   }

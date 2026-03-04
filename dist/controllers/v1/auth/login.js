@@ -78,6 +78,36 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             return;
         }
+        if (user.isTwoFactorEnabled) {
+            if (!user.twoFactorSecret) {
+                winston_1.logger.warn('User has 2FA enabled but no secret is configured', {
+                    userId: user.id,
+                    email: user.email,
+                });
+                res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
+                    code: 'FORBIDDEN',
+                    message: 'Two-factor authentication is not configured correctly.',
+                });
+                return;
+            }
+            const mfaToken = (0, jwt_1.generateMfaToken)(user.id);
+            res.status(http_codes_1.HTTPSTATUS.OK).json({
+                code: 'OK',
+                message: 'Two-factor authentication required',
+                user: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar,
+                    role: user.role,
+                    isEmailVerified: user.isEmailVerified,
+                    isTwoFactorEnabled: user.isTwoFactorEnabled,
+                },
+                mfaRequired: true,
+                mfaToken,
+            });
+            return;
+        }
         const now = new Date();
         const existingSession = yield prisma_1.prisma.session.findFirst({
             where: {

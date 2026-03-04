@@ -14,6 +14,8 @@ const change_password_1 = require("../../controllers/v1/auth/change-password");
 const setup_two_factor_1 = require("../../controllers/v1/auth/setup-two-factor");
 const enable_two_factor_1 = require("../../controllers/v1/auth/enable-two-factor");
 const disable_two_factor_1 = require("../../controllers/v1/auth/disable-two-factor");
+const verify_two_factor_1 = require("../../controllers/v1/auth/verify-two-factor");
+const passkey_1 = require("../../controllers/v1/auth/passkey");
 const sanitation_1 = require("../../common/sanitation");
 const auth_1 = require("../../validators/auth");
 const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
@@ -22,6 +24,7 @@ const get_session_from_cookie_1 = require("../../middlewares/get-session-from-co
 const router = (0, express_1.Router)();
 router.post('/register', (0, express_rate_limiter_1.expressRateLimit)('auth'), (0, sanitation_1.validate)(auth_1.registerSchema), register_1.register);
 router.post('/login', (0, express_rate_limiter_1.expressRateLimit)('auth'), (0, sanitation_1.validate)(auth_1.loginSchema), login_1.login);
+router.post('/verify-two-factor', (0, express_rate_limiter_1.expressRateLimit)('auth'), (0, sanitation_1.validate)(auth_1.verifyTwoFactorSchema), verify_two_factor_1.verifyTwoFactor);
 router.delete('/logout', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, logout_1.logout);
 router.get('/refresh-token', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_session_from_cookie_1.getSessionFromCookie, refresh_token_1.refreshToken);
 router.post('/forgot-password', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(auth_1.forgotPasswordSchema), forgot_password_1.forgotPassword);
@@ -33,4 +36,9 @@ router.post('/change-password', (0, express_rate_limiter_1.expressRateLimit)('pa
 router.post('/two-factor/setup', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, setup_two_factor_1.setupTwoFactor);
 router.post('/two-factor/enable', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, sanitation_1.validate)(auth_1.twoFactorEnableSchema), enable_two_factor_1.enableTwoFactor);
 router.post('/two-factor/disable', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, disable_two_factor_1.disableTwoFactor);
+router.get('/passkey/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, passkey_1.getPasskeyStatus);
+router.post('/passkey/register/options', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, sanitation_1.validate)(auth_1.passkeyRegistrationOptionsSchema), passkey_1.getPasskeyRegistrationOptions);
+router.post('/passkey/register/verify', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, sanitation_1.validate)(auth_1.passkeyRegistrationVerifySchema), passkey_1.verifyPasskeyRegistration);
+router.post('/passkey/authenticate/options', (0, express_rate_limiter_1.expressRateLimit)('auth'), (0, sanitation_1.validate)(auth_1.passkeyAuthenticationOptionsSchema), passkey_1.getPasskeyAuthenticationOptions);
+router.post('/passkey/authenticate/verify', (0, express_rate_limiter_1.expressRateLimit)('auth'), (0, sanitation_1.validate)(auth_1.passkeyAuthenticationVerifySchema), passkey_1.verifyPasskeyAuthentication);
 exports.default = router;

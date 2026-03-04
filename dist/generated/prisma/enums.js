@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OfficeTitleLevel = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.VerificationType = exports.MemberStatus = exports.UserType = void 0;
+exports.OfficeTitleLevel = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberStatus = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -15,6 +15,10 @@ exports.VerificationType = {
     EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
     PASSWORD_RESET: 'PASSWORD_RESET',
     TWO_FACTOR: 'TWO_FACTOR'
+};
+exports.PasskeyChallengeType = {
+    REGISTRATION: 'REGISTRATION',
+    AUTHENTICATION: 'AUTHENTICATION'
 };
 exports.CivilStatus = {
     SINGLE: 'SINGLE',

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.twoFactorEnableSchema = exports.changePasswordSchema = exports.verifyPasswordSchema = exports.verificationEmailSchema = exports.resendVerificationSchema = exports.resetPasswordSchema = exports.forgotPasswordSchema = exports.loginSchema = exports.registerSchema = exports.passwordSchema = exports.emailSchema = void 0;
+exports.passkeyAuthenticationVerifySchema = exports.passkeyAuthenticationOptionsSchema = exports.passkeyRegistrationVerifySchema = exports.passkeyRegistrationOptionsSchema = exports.verifyTwoFactorSchema = exports.twoFactorEnableSchema = exports.changePasswordSchema = exports.verifyPasswordSchema = exports.verificationEmailSchema = exports.resendVerificationSchema = exports.resetPasswordSchema = exports.forgotPasswordSchema = exports.loginSchema = exports.registerSchema = exports.passwordSchema = exports.emailSchema = void 0;
 const enums_1 = require("../generated/prisma/enums");
 const zod_1 = __importDefault(require("zod"));
 exports.emailSchema = zod_1.default
@@ -88,4 +88,31 @@ exports.twoFactorEnableSchema = zod_1.default.object({
         .string()
         .trim()
         .regex(/^\d{6}$/, { error: 'Token must be a 6-digit code' }),
+});
+exports.verifyTwoFactorSchema = zod_1.default.object({
+    mfaToken: zod_1.default.string().trim().min(1, { error: 'MFA token is required' }),
+    token: zod_1.default
+        .string()
+        .trim()
+        .regex(/^\d{6}$/, { error: 'Token must be a 6-digit code' }),
+    userAgent: zod_1.default.string().optional(),
+});
+exports.passkeyRegistrationOptionsSchema = zod_1.default.object({
+    label: zod_1.default
+        .string()
+        .trim()
+        .min(1, { error: 'Passkey label must not be empty' })
+        .max(100, { error: 'Passkey label must not exceed 100 characters' })
+        .optional(),
+});
+exports.passkeyRegistrationVerifySchema = zod_1.default.object({
+    response: zod_1.default.object({}).passthrough(),
+});
+exports.passkeyAuthenticationOptionsSchema = zod_1.default.object({
+    email: exports.emailSchema,
+});
+exports.passkeyAuthenticationVerifySchema = zod_1.default.object({
+    email: exports.emailSchema,
+    response: zod_1.default.object({}).passthrough(),
+    userAgent: zod_1.default.string().optional(),
 });

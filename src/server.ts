@@ -24,6 +24,11 @@ import v1Routes from '@/routes/v1';
  */
 const app = express();
 
+// Required behind Nginx/Cloudflare so req.ip and rate-limit work with X-Forwarded-For
+if (config.TRUST_PROXY !== false) {
+  app.set('trust proxy', config.TRUST_PROXY);
+}
+
 // Apply CORS middleware
 const corsOptions: CorsOptions = {
   origin(origin, callback) {
