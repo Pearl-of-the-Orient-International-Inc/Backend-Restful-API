@@ -145,6 +145,7 @@ const resendVerification = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 avatar: user.avatar,
                 role: user.role,
                 isEmailVerified: user.isEmailVerified,
+                isTwoFactorEnabled: user.isTwoFactorEnabled,
             },
             accessToken,
             mfaRequired: false,

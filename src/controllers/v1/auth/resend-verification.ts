@@ -173,6 +173,7 @@ export const resendVerification = async (
         avatar: user.avatar,
         role: user.role,
         isEmailVerified: user.isEmailVerified,
+        isTwoFactorEnabled: user.isTwoFactorEnabled,
       },
       accessToken,
       mfaRequired: false,

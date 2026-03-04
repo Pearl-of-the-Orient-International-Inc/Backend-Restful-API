@@ -35,6 +35,7 @@ export const getCurrentUser = async (
         email: true,
         avatar: true,
         isEmailVerified: true,
+        isTwoFactorEnabled: true,
         role: true,
         createdAt: true,
       },

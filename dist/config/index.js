@@ -20,8 +20,8 @@ const config = {
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
     JWT_ACCESS_EXPIRES_IN: process.env.JWT_ACCESS_EXPIRES_IN,
     JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN,
-    SMTP_EMAIL: process.env.SMTP_EMAIL,
-    SMTP_PASSWORD: process.env.SMTP_PASSWORD,
-    APP_URL: 'http://localhost:3000',
+    SMTP_EMAIL: process.env.SMTP_EMAIL || process.env.SMTP_USER,
+    SMTP_PASSWORD: process.env.SMTP_PASSWORD || process.env.SMTP_PASS,
+    APP_URL: process.env.APP_URL || 'http://localhost:3000',
 };
 exports.default = config;

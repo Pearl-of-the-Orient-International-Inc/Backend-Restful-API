@@ -20,11 +20,15 @@ model User {
   avatar   String?
 
   isEmailVerified Boolean  @default(false)
+  isTwoFactorEnabled Boolean @default(false)
+  twoFactorSecret   String?
   role            UserType @default(MEMBER)
 
   userTokens        UserToken[]
   sessions          Session[]
   verificationCodes VerificationCode[]
+  passkeyCredentials PasskeyCredential[]
+  passkeyChallenge  PasskeyChallenge?
   memberProfile     Member?
 
   createdAt DateTime @default(now())
@@ -75,6 +79,40 @@ model VerificationCode {
   userId String @unique
 
   @@index([userId])
+}
+
+model PasskeyCredential {
+  id String @id @default(uuid())
+
+  credentialID String @unique
+  publicKey    Bytes
+  counter      Int    @default(0)
+  deviceType   String
+  backedUp     Boolean @default(false)
+  transports   String[]
+  label        String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model PasskeyChallenge {
+  id String @id @default(uuid())
+
+  type      PasskeyChallengeType
+  challenge String
+  expiresAt DateTime
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // ─────────────────────────────────────────────
@@ -266,6 +304,11 @@ enum VerificationType {
   EMAIL_VERIFICATION
   PASSWORD_RESET
   TWO_FACTOR
+}
+
+enum PasskeyChallengeType {
+  REGISTRATION
+  AUTHENTICATION
 }
 
 enum CivilStatus {

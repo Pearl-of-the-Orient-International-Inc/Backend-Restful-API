@@ -165,6 +165,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 avatar: user.avatar,
                 role: user.role,
                 isEmailVerified: user.isEmailVerified,
+                isTwoFactorEnabled: user.isTwoFactorEnabled,
             },
             accessToken,
             mfaRequired: false,

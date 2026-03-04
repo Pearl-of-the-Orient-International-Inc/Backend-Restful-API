@@ -70,6 +70,8 @@ exports.UserScalarFieldEnum = {
     password: 'password',
     avatar: 'avatar',
     isEmailVerified: 'isEmailVerified',
+    isTwoFactorEnabled: 'isTwoFactorEnabled',
+    twoFactorSecret: 'twoFactorSecret',
     role: 'role',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'

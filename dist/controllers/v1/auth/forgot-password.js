@@ -49,8 +49,16 @@ const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return;
         }
         const uniqueCode = (0, helpers_1.generateUniqueCode)();
-        const verificationCode = yield prisma_1.prisma.verificationCode.create({
-            data: {
+        const verificationCode = yield prisma_1.prisma.verificationCode.upsert({
+            where: {
+                userId: user.id,
+            },
+            update: {
+                type: enums_1.VerificationType.PASSWORD_RESET,
+                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                code: uniqueCode,
+            },
+            create: {
                 userId: user.id,
                 type: enums_1.VerificationType.PASSWORD_RESET,
                 expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
@@ -59,7 +67,18 @@ const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
         const baseUrl = config_1.default.APP_URL || 'http://localhost:3000';
         const verificationUrl = `${baseUrl}/reset-password?token=${verificationCode.code}`;
-        yield (0, mailers_1.sendMail)(Object.assign({ sendTo: user.email }, (0, forgot_password_1.forgotPasswordTemplate)(verificationUrl, user.name)));
+        const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: user.email }, (0, forgot_password_1.forgotPasswordTemplate)(verificationUrl, user.name)));
+        if (!emailResult.success) {
+            winston_1.logger.error('Forgot password email failed to send', {
+                userId: user.id,
+                email: user.email,
+            });
+            res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
+                code: 'INTERNAL_SERVER_ERROR',
+                message: 'Failed to send reset email',
+            });
+            return;
+        }
         res.sendStatus(http_codes_1.HTTPSTATUS.NO_CONTENT);
     }
     catch (err) {

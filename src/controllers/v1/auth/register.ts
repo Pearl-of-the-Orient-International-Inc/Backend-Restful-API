@@ -134,8 +134,10 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         id: user.id,
         name: user.name,
         email: user.email,
+        avatar: user.avatar,
         role: user.role,
         isEmailVerified: user.isEmailVerified,
+        isTwoFactorEnabled: user.isTwoFactorEnabled,
       },
       accessToken,
     });

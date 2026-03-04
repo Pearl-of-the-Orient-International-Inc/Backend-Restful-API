@@ -88,6 +88,45 @@ export const changePasswordSchema = z
     path: ['password'],
   });
 
+export const twoFactorEnableSchema = z.object({
+  token: z
+    .string()
+    .trim()
+    .regex(/^\d{6}$/, { error: 'Token must be a 6-digit code' }),
+});
+
+export const verifyTwoFactorSchema = z.object({
+  mfaToken: z.string().trim().min(1, { error: 'MFA token is required' }),
+  token: z
+    .string()
+    .trim()
+    .regex(/^\d{6}$/, { error: 'Token must be a 6-digit code' }),
+  userAgent: z.string().optional(),
+});
+
+export const passkeyRegistrationOptionsSchema = z.object({
+  label: z
+    .string()
+    .trim()
+    .min(1, { error: 'Passkey label must not be empty' })
+    .max(100, { error: 'Passkey label must not exceed 100 characters' })
+    .optional(),
+});
+
+export const passkeyRegistrationVerifySchema = z.object({
+  response: z.object({}).passthrough(),
+});
+
+export const passkeyAuthenticationOptionsSchema = z.object({
+  email: emailSchema,
+});
+
+export const passkeyAuthenticationVerifySchema = z.object({
+  email: emailSchema,
+  response: z.object({}).passthrough(),
+  userAgent: z.string().optional(),
+});
+
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
@@ -96,3 +135,17 @@ export type ResendVerificationSchema = z.infer<typeof resendVerificationSchema>;
 export type VerificationEmailSchema = z.infer<typeof verificationEmailSchema>;
 export type VerifyPasswordSchema = z.infer<typeof verifyPasswordSchema>;
 export type ChangePasswordSchema = z.infer<typeof changePasswordSchema>;
+export type TwoFactorEnableSchema = z.infer<typeof twoFactorEnableSchema>;
+export type VerifyTwoFactorSchema = z.infer<typeof verifyTwoFactorSchema>;
+export type PasskeyRegistrationOptionsSchema = z.infer<
+  typeof passkeyRegistrationOptionsSchema
+>;
+export type PasskeyRegistrationVerifySchema = z.infer<
+  typeof passkeyRegistrationVerifySchema
+>;
+export type PasskeyAuthenticationOptionsSchema = z.infer<
+  typeof passkeyAuthenticationOptionsSchema
+>;
+export type PasskeyAuthenticationVerifySchema = z.infer<
+  typeof passkeyAuthenticationVerifySchema
+>;

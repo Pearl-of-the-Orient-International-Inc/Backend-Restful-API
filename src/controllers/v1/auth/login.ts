@@ -2,7 +2,7 @@
  * Custom modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
-import { generateAccessToken, generateRefreshToken } from '@/lib/jwt';
+import { generateAccessToken, generateMfaToken, generateRefreshToken } from '@/lib/jwt';
 import { compareValue } from '@/lib/password-hash';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
@@ -89,6 +89,41 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       res.status(HTTPSTATUS.FORBIDDEN).json({
         code: 'FORBIDDEN',
         message: 'This account is not allowed to access the admin portal.',
+      });
+      return;
+    }
+
+    // If 2FA is enabled, require OTP verification before issuing access/refresh tokens.
+    if (user.isTwoFactorEnabled) {
+      if (!user.twoFactorSecret) {
+        logger.warn('User has 2FA enabled but no secret is configured', {
+          userId: user.id,
+          email: user.email,
+        });
+
+        res.status(HTTPSTATUS.FORBIDDEN).json({
+          code: 'FORBIDDEN',
+          message: 'Two-factor authentication is not configured correctly.',
+        });
+        return;
+      }
+
+      const mfaToken = generateMfaToken(user.id);
+
+      res.status(HTTPSTATUS.OK).json({
+        code: 'OK',
+        message: 'Two-factor authentication required',
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+          role: user.role,
+          isEmailVerified: user.isEmailVerified,
+          isTwoFactorEnabled: user.isTwoFactorEnabled,
+        },
+        mfaRequired: true,
+        mfaToken,
       });
       return;
     }
@@ -209,6 +244,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         avatar: user.avatar,
         role: user.role,
         isEmailVerified: user.isEmailVerified,
+        isTwoFactorEnabled: user.isTwoFactorEnabled,
       },
       accessToken,
       mfaRequired: false,

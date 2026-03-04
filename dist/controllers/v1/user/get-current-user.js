@@ -32,6 +32,8 @@ const getCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 name: true,
                 email: true,
                 avatar: true,
+                isEmailVerified: true,
+                isTwoFactorEnabled: true,
                 role: true,
                 createdAt: true,
             },

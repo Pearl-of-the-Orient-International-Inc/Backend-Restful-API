@@ -16,6 +16,17 @@ import { verifyEmail } from '@/controllers/v1/auth/verify-email';
 import { resendVerification } from '@/controllers/v1/auth/resend-verification';
 import { verifyPassword } from '@/controllers/v1/auth/verify-password';
 import { changePassword } from '@/controllers/v1/auth/change-password';
+import { setupTwoFactor } from '@/controllers/v1/auth/setup-two-factor';
+import { enableTwoFactor } from '@/controllers/v1/auth/enable-two-factor';
+import { disableTwoFactor } from '@/controllers/v1/auth/disable-two-factor';
+import { verifyTwoFactor } from '@/controllers/v1/auth/verify-two-factor';
+import {
+  getPasskeyAuthenticationOptions,
+  getPasskeyRegistrationOptions,
+  getPasskeyStatus,
+  verifyPasskeyAuthentication,
+  verifyPasskeyRegistration,
+} from '@/controllers/v1/auth/passkey';
 
 /**
  * Helpers, Validators and Middlewares
@@ -30,6 +41,12 @@ import {
   resetPasswordSchema,
   verifyPasswordSchema,
   verificationEmailSchema,
+  twoFactorEnableSchema,
+  verifyTwoFactorSchema,
+  passkeyRegistrationOptionsSchema,
+  passkeyRegistrationVerifySchema,
+  passkeyAuthenticationOptionsSchema,
+  passkeyAuthenticationVerifySchema,
 } from '@/validators/auth';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { authenticate } from '@/middlewares/authentication';
@@ -47,6 +64,12 @@ router.post(
   register,
 );
 router.post('/login', expressRateLimit('auth'), validate(loginSchema), login);
+router.post(
+  '/verify-two-factor',
+  expressRateLimit('auth'),
+  validate(verifyTwoFactorSchema),
+  verifyTwoFactor,
+);
 router.delete('/logout', expressRateLimit('basic'), authenticate, logout);
 router.get(
   '/refresh-token',
@@ -95,6 +118,65 @@ router.post(
   authenticate,
   validate(changePasswordSchema),
   changePassword,
+);
+
+router.post(
+  '/two-factor/setup',
+  expressRateLimit('basic'),
+  authenticate,
+  setupTwoFactor,
+);
+
+router.post(
+  '/two-factor/enable',
+  expressRateLimit('basic'),
+  authenticate,
+  validate(twoFactorEnableSchema),
+  enableTwoFactor,
+);
+
+router.post(
+  '/two-factor/disable',
+  expressRateLimit('basic'),
+  authenticate,
+  disableTwoFactor,
+);
+
+router.get(
+  '/passkey/status',
+  expressRateLimit('basic'),
+  authenticate,
+  getPasskeyStatus,
+);
+
+router.post(
+  '/passkey/register/options',
+  expressRateLimit('basic'),
+  authenticate,
+  validate(passkeyRegistrationOptionsSchema),
+  getPasskeyRegistrationOptions,
+);
+
+router.post(
+  '/passkey/register/verify',
+  expressRateLimit('basic'),
+  authenticate,
+  validate(passkeyRegistrationVerifySchema),
+  verifyPasskeyRegistration,
+);
+
+router.post(
+  '/passkey/authenticate/options',
+  expressRateLimit('auth'),
+  validate(passkeyAuthenticationOptionsSchema),
+  getPasskeyAuthenticationOptions,
+);
+
+router.post(
+  '/passkey/authenticate/verify',
+  expressRateLimit('auth'),
+  validate(passkeyAuthenticationVerifySchema),
+  verifyPasskeyAuthentication,
 );
 
 export default router;

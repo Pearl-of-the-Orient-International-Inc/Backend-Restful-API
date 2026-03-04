@@ -14,6 +14,10 @@ export interface RefreshTokenPayload {
   sessionId: string;
 }
 
+export interface MfaTokenPayload {
+  userId: string;
+}
+
 /**
  * Generates a JWT access token with a 1-hour expiration.
  *
@@ -58,6 +62,27 @@ export const verifyRefreshToken = (
     if (decoded?.userId && decoded?.sessionId) {
       return { userId: decoded.userId, sessionId: decoded.sessionId };
     }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+export const generateMfaToken = (userId: string): string => {
+  return jwt.sign({ userId }, config.JWT_ACCESS_SECRET, {
+    expiresIn: '5m',
+  });
+};
+
+export const verifyMfaToken = (token: string): MfaTokenPayload | null => {
+  try {
+    const decoded = jwt.verify(token, config.JWT_ACCESS_SECRET) as JwtPayload &
+      MfaTokenPayload;
+
+    if (decoded?.userId) {
+      return { userId: decoded.userId };
+    }
+
     return null;
   } catch {
     return null;

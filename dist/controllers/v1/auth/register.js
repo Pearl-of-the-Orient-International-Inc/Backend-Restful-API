@@ -105,8 +105,10 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 id: user.id,
                 name: user.name,
                 email: user.email,
+                avatar: user.avatar,
                 role: user.role,
                 isEmailVerified: user.isEmailVerified,
+                isTwoFactorEnabled: user.isTwoFactorEnabled,
             },
             accessToken,
         });
