@@ -214,6 +214,70 @@ export const getLocationFromIP = async (
   }
 };
 
+export interface IpLocationDetails {
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  lat: number | null;
+  lon: number | null;
+  label: string;
+}
+
+/**
+ * Gets structured location details from IP address using ip-api.com
+ * @param {string | null} ipAddress - The IP address to lookup
+ * @returns {Promise<IpLocationDetails>} Structured location object
+ */
+export const getLocationDetailsFromIP = async (
+  ipAddress: string | null,
+): Promise<IpLocationDetails> => {
+  if (!ipAddress || ipAddress === '::1' || ipAddress === '127.0.0.1') {
+    return {
+      city: null,
+      region: null,
+      country: null,
+      lat: null,
+      lon: null,
+      label: 'Local Network',
+    };
+  }
+
+  try {
+    const response = await fetch(`http://ip-api.com/json/${ipAddress}`);
+    const data = await response.json();
+
+    if (data.status === 'success') {
+      const parts = [data.city, data.regionName, data.country].filter(Boolean);
+      return {
+        city: data.city ?? null,
+        region: data.regionName ?? null,
+        country: data.country ?? null,
+        lat: typeof data.lat === 'number' ? data.lat : null,
+        lon: typeof data.lon === 'number' ? data.lon : null,
+        label: parts.join(', ') || 'Unknown Location',
+      };
+    }
+
+    return {
+      city: null,
+      region: null,
+      country: null,
+      lat: null,
+      lon: null,
+      label: 'Unknown Location',
+    };
+  } catch {
+    return {
+      city: null,
+      region: null,
+      country: null,
+      lat: null,
+      lon: null,
+      label: 'Unknown Location',
+    };
+  }
+};
+
 /**
  * Parses user agent string to extract readable device and browser information
  * @param {string | null} userAgent - The user agent string from request headers

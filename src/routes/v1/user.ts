@@ -12,6 +12,9 @@ import { deleteCurrentUser } from '@/controllers/v1/user/delete-current-user';
 import { getAllUsers } from '@/controllers/v1/user/get-all-users';
 import { getUserById } from '@/controllers/v1/user/get-user-by-id';
 import { deleteUserById } from '@/controllers/v1/user/delete-user-by-id';
+import { getUserSessions } from '@/controllers/v1/user/get-user-sessions';
+import { revokeUserSession } from '@/controllers/v1/user/revoke-user-session';
+import { revokeOtherUserSessions } from '@/controllers/v1/user/revoke-other-user-sessions';
 
 /**
  * Helpers, Validators and Middlewares
@@ -21,6 +24,9 @@ import { authenticate } from '@/middlewares/authentication';
 import { UserType } from '@/generated/prisma/enums';
 import authorize from '@/middlewares/authorization';
 import { createUploadthingExpressHandler } from '@/lib/uploadthing';
+import { getSessionFromCookie } from '@/middlewares/get-session-from-cookie';
+import { validate } from '@/common/sanitation';
+import { sessionIdPathSchema } from '@/validators/session';
 
 const router = Router();
 
@@ -58,6 +64,34 @@ router.use(
     maxFileSize: '4MB',
     maxFileCount: 1,
   }),
+);
+
+router.get(
+  '/sessions',
+  expressRateLimit('basic'),
+  authenticate,
+  getSessionFromCookie,
+  authorize([UserType.MEMBER, UserType.ADMIN]),
+  getUserSessions,
+);
+
+router.delete(
+  '/sessions/others',
+  expressRateLimit('basic'),
+  authenticate,
+  getSessionFromCookie,
+  authorize([UserType.MEMBER, UserType.ADMIN]),
+  revokeOtherUserSessions,
+);
+
+router.delete(
+  '/sessions/:sessionId',
+  expressRateLimit('basic'),
+  authenticate,
+  getSessionFromCookie,
+  authorize([UserType.MEMBER, UserType.ADMIN]),
+  validate(sessionIdPathSchema),
+  revokeUserSession,
 );
 
 router.get(
