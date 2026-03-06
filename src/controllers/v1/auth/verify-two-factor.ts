@@ -20,6 +20,7 @@ import {
 import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
+import { UserAccountStatus } from '@/generated/prisma/enums';
 
 /**
  * Types & Validators
@@ -69,6 +70,14 @@ export const verifyTwoFactor = async (
       res.status(HTTPSTATUS.BAD_REQUEST).json({
         code: 'BAD_REQUEST',
         message: 'Two-factor authentication is not enabled for this account',
+      });
+      return;
+    }
+
+    if (user.accountStatus !== UserAccountStatus.ACTIVE) {
+      res.status(HTTPSTATUS.FORBIDDEN).json({
+        code: 'FORBIDDEN',
+        message: 'Your account is not active. Please contact an administrator.',
       });
       return;
     }
@@ -201,6 +210,8 @@ export const verifyTwoFactor = async (
         email: user.email,
         avatar: user.avatar,
         role: user.role,
+        position: user.position,
+        accountStatus: user.accountStatus,
         isEmailVerified: user.isEmailVerified,
         isTwoFactorEnabled: user.isTwoFactorEnabled,
       },

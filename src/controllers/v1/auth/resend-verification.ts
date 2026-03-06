@@ -12,6 +12,7 @@ import { prisma } from '@/lib/prisma';
 import { generateAccessToken, generateRefreshToken } from '@/lib/jwt';
 import { HTTPSTATUS } from '@/common/http-codes';
 import config from '@/config';
+import { buildVerificationUrl } from '@/lib/verification-redirect';
 import { sendMail } from '@/mailers';
 import { verifyEmailTemplate } from '@/mailers/templates/verify-email';
 
@@ -41,19 +42,6 @@ export const resendVerification = async (
       res.status(HTTPSTATUS.CONFLICT).json({
         code: 'CONFLICT',
         message: 'No user found with this email',
-      });
-      return;
-    }
-
-    // Check if user is an admin
-    if (user.role !== 'ADMIN') {
-      logger.warn('Non-admin user attempted resending email verification', {
-        userId: user.id,
-        role: user.role,
-      });
-      res.status(HTTPSTATUS.FORBIDDEN).json({
-        code: 'FORBIDDEN',
-        message: 'Access denied. Admin privileges required.',
       });
       return;
     }
@@ -89,8 +77,7 @@ export const resendVerification = async (
     });
 
     // Sending verification email link
-    const baseUrl = config.APP_URL || 'http://localhost:3000';
-    const verificationUrl = `${baseUrl}/confirm-account?token=${verificationCode.code}`;
+    const verificationUrl = buildVerificationUrl(user.role, verificationCode.code);
 
     const emailResult = await sendMail({
       sendTo: user.email,
@@ -172,6 +159,8 @@ export const resendVerification = async (
         email: user.email,
         avatar: user.avatar,
         role: user.role,
+        position: user.position,
+        accountStatus: user.accountStatus,
         isEmailVerified: user.isEmailVerified,
         isTwoFactorEnabled: user.isTwoFactorEnabled,
       },

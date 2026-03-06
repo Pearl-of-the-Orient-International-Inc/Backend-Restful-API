@@ -35,7 +35,10 @@ const getCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 isEmailVerified: true,
                 isTwoFactorEnabled: true,
                 role: true,
+                position: true,
+                accountStatus: true,
                 createdAt: true,
+                updatedAt: true,
             },
         });
         if (!user) {

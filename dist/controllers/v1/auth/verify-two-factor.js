@@ -22,6 +22,7 @@ const helpers_1 = require("../../../lib/helpers");
 const config_1 = __importDefault(require("../../../config"));
 const mailers_1 = require("../../../mailers");
 const login_notification_1 = require("../../../mailers/templates/login-notification");
+const enums_1 = require("../../../generated/prisma/enums");
 const verifyTwoFactor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { mfaToken, token, userAgent } = req.body;
     const ipAddress = (0, helpers_1.getClientIp)(req);
@@ -53,6 +54,13 @@ const verifyTwoFactor = (req, res) => __awaiter(void 0, void 0, void 0, function
             res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
                 code: 'BAD_REQUEST',
                 message: 'Two-factor authentication is not enabled for this account',
+            });
+            return;
+        }
+        if (user.accountStatus !== enums_1.UserAccountStatus.ACTIVE) {
+            res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
+                code: 'FORBIDDEN',
+                message: 'Your account is not active. Please contact an administrator.',
             });
             return;
         }
@@ -155,6 +163,8 @@ const verifyTwoFactor = (req, res) => __awaiter(void 0, void 0, void 0, function
                 email: user.email,
                 avatar: user.avatar,
                 role: user.role,
+                position: user.position,
+                accountStatus: user.accountStatus,
                 isEmailVerified: user.isEmailVerified,
                 isTwoFactorEnabled: user.isTwoFactorEnabled,
             },

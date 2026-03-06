@@ -12,6 +12,19 @@ import { getPendingMembers } from '@/controllers/v1/member/get-pending-members';
 import { getAllMembers } from '@/controllers/v1/member/get-all-members';
 import { archiveMember } from '@/controllers/v1/member/archive-member';
 import { retrieveMember } from '@/controllers/v1/member/retrieve-member';
+import { getCurrentMemberRequirements } from '@/controllers/v1/member/get-current-member-requirements';
+import { upsertMemberRequirements } from '@/controllers/v1/member/upsert-member-requirements';
+import { getCurrentOnboardingProgress } from '@/controllers/v1/member/get-current-onboarding-progress';
+import { updatePreOrientationProgress } from '@/controllers/v1/member/update-preorientation-progress';
+import { updateOnboardingStep } from '@/controllers/v1/member/update-onboarding-step';
+import { getCurrentPaymentCheckout } from '@/controllers/v1/member/get-current-payment-checkout';
+import { upsertPaymentCheckout } from '@/controllers/v1/member/upsert-payment-checkout';
+import { getCurrentOnlineInterview } from '@/controllers/v1/member/get-current-online-interview';
+import { upsertOnlineInterview } from '@/controllers/v1/member/upsert-online-interview';
+import { getCurrentIdGenerationAsset } from '@/controllers/v1/member/get-current-id-generation-asset';
+import { upsertIdGenerationAsset } from '@/controllers/v1/member/upsert-id-generation-asset';
+import { getCurrentChaplaincyTrainingProgress } from '@/controllers/v1/member/get-current-chaplaincy-training-progress';
+import { upsertChaplaincyTrainingProgress } from '@/controllers/v1/member/upsert-chaplaincy-training-progress';
 
 /**
  * Helpers, Validators and Middlewares
@@ -21,9 +34,17 @@ import { authenticate } from '@/middlewares/authentication';
 import authorize from '@/middlewares/authorization';
 import { UserType } from '@/generated/prisma/enums';
 import { validate } from '@/common/sanitation';
+import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 import {
   applyMemberSchema,
   getAllMembersSchema,
+  updateOnboardingStepSchema,
+  updatePreOrientationProgressSchema,
+  upsertChaplaincyTrainingProgressSchema,
+  upsertMemberIdGenerationAssetSchema,
+  upsertOnlineInterviewAppointmentSchema,
+  upsertPaymentCheckoutSchema,
+  upsertMemberRequirementsSchema,
   updateMemberStatusSchema,
 } from '@/validators/member';
 
@@ -36,6 +57,126 @@ router.post(
   authorize([UserType.MEMBER]),
   validate(applyMemberSchema),
   applyMember,
+);
+
+router.get(
+  '/current/requirements',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentMemberRequirements,
+);
+
+router.put(
+  '/current/requirements',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(upsertMemberRequirementsSchema),
+  upsertMemberRequirements,
+);
+
+router.get(
+  '/current/onboarding-progress',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentOnboardingProgress,
+);
+
+router.put(
+  '/current/onboarding-progress/step',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(updateOnboardingStepSchema),
+  updateOnboardingStep,
+);
+
+router.put(
+  '/current/onboarding-progress/pre-orientation',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(updatePreOrientationProgressSchema),
+  updatePreOrientationProgress,
+);
+
+router.get(
+  '/current/payment-checkout',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentPaymentCheckout,
+);
+
+router.put(
+  '/current/payment-checkout',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(upsertPaymentCheckoutSchema),
+  upsertPaymentCheckout,
+);
+
+router.get(
+  '/current/online-interview',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentOnlineInterview,
+);
+
+router.put(
+  '/current/online-interview',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(upsertOnlineInterviewAppointmentSchema),
+  upsertOnlineInterview,
+);
+
+router.get(
+  '/current/id-generation',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentIdGenerationAsset,
+);
+
+router.put(
+  '/current/id-generation',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(upsertMemberIdGenerationAssetSchema),
+  upsertIdGenerationAsset,
+);
+
+router.get(
+  '/current/chaplaincy-training',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentChaplaincyTrainingProgress,
+);
+
+router.put(
+  '/current/chaplaincy-training',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(upsertChaplaincyTrainingProgressSchema),
+  upsertChaplaincyTrainingProgress,
+);
+
+router.use(
+  '/requirements/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '4MB',
+    maxFileCount: 1,
+  }),
 );
 
 router.patch(

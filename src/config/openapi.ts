@@ -2765,13 +2765,6 @@ const openApiDocument = {
           "emergencyContactMobile": {
             "type": "string"
           },
-          "recentIdPhotoUrl": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "uri"
-          },
           "churchAffiliation": {
             "type": "string"
           },
@@ -3055,13 +3048,6 @@ const openApiDocument = {
             "type": "string",
             "minLength": 1,
             "maxLength": 30
-          },
-          "recentIdPhotoUrl": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "uri"
           },
           "churchAffiliation": {
             "type": "string",

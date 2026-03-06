@@ -16,7 +16,7 @@ import {
 import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
-import { UserType } from '@/generated/prisma/enums';
+import { UserAccountStatus } from '@/generated/prisma/enums';
 
 /**
  * Types & Validators
@@ -79,16 +79,15 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Admin portal auth policy: member accounts cannot login here.
-    if (user.role === UserType.MEMBER) {
-      logger.warn('Forbidden member login attempt', {
+    if (user.accountStatus !== UserAccountStatus.ACTIVE) {
+      logger.warn('Login attempt with inactive account status', {
         userId: user.id,
         email: user.email,
-        role: user.role,
+        accountStatus: user.accountStatus,
       });
       res.status(HTTPSTATUS.FORBIDDEN).json({
         code: 'FORBIDDEN',
-        message: 'This account is not allowed to access the admin portal.',
+        message: 'Your account is not active. Please contact an administrator.',
       });
       return;
     }
@@ -119,6 +118,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
           email: user.email,
           avatar: user.avatar,
           role: user.role,
+          position: user.position,
+          accountStatus: user.accountStatus,
           isEmailVerified: user.isEmailVerified,
           isTwoFactorEnabled: user.isTwoFactorEnabled,
         },
@@ -243,6 +244,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         email: user.email,
         avatar: user.avatar,
         role: user.role,
+        position: user.position,
+        accountStatus: user.accountStatus,
         isEmailVerified: user.isEmailVerified,
         isTwoFactorEnabled: user.isTwoFactorEnabled,
       },

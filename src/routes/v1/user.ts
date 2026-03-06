@@ -12,6 +12,8 @@ import { deleteCurrentUser } from '@/controllers/v1/user/delete-current-user';
 import { getAllUsers } from '@/controllers/v1/user/get-all-users';
 import { getUserById } from '@/controllers/v1/user/get-user-by-id';
 import { deleteUserById } from '@/controllers/v1/user/delete-user-by-id';
+import { createUserAccount } from '@/controllers/v1/user/create-user-account';
+import { updateUserById } from '@/controllers/v1/user/update-user-by-id';
 import { getUserSessions } from '@/controllers/v1/user/get-user-sessions';
 import { revokeUserSession } from '@/controllers/v1/user/revoke-user-session';
 import { revokeOtherUserSessions } from '@/controllers/v1/user/revoke-other-user-sessions';
@@ -27,6 +29,7 @@ import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 import { getSessionFromCookie } from '@/middlewares/get-session-from-cookie';
 import { validate } from '@/common/sanitation';
 import { sessionIdPathSchema } from '@/validators/session';
+import { createUserAccountSchema, updateUserByIdSchema } from '@/validators/user';
 
 const router = Router();
 
@@ -102,12 +105,30 @@ router.get(
   getAllUsers,
 );
 
+router.post(
+  '/',
+  expressRateLimit('auth'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(createUserAccountSchema),
+  createUserAccount,
+);
+
 router.get(
   '/:userId',
   expressRateLimit('basic'),
   authenticate,
   authorize([UserType.ADMIN]),
   getUserById,
+);
+
+router.put(
+  '/:userId',
+  expressRateLimit('auth'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateUserByIdSchema),
+  updateUserById,
 );
 
 router.delete(

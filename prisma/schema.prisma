@@ -19,6 +19,9 @@ model User {
   password String
   avatar   String?
 
+  position UserPosition?
+  accountStatus UserAccountStatus @default(ACTIVE)
+
   isEmailVerified Boolean  @default(false)
   isTwoFactorEnabled Boolean @default(false)
   twoFactorSecret   String?
@@ -121,6 +124,7 @@ model PasskeyChallenge {
 
 model Member {
   id     String @id @default(uuid())
+  uniqueId String? @unique
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -145,7 +149,6 @@ model Member {
 
   emergencyContactName   String
   emergencyContactMobile String
-  recentIdPhotoUrl       String?
 
   // Church Background
   churchAffiliation        String
@@ -175,6 +178,12 @@ model Member {
   // Relations
   ministerialExperiences MinisterialExperience[]
   characterReferences    CharacterReference[]
+  applicantRequirements  ApplicantRequirement[]
+  onboardingProgress     MemberOnboardingProgress?
+  paymentCheckout        MemberPaymentCheckout?
+  onlineInterviewAppointment MemberOnlineInterviewAppointment?
+  idGenerationAsset      MemberIdGenerationAsset?
+  chaplaincyTrainingProgress MemberChaplaincyTrainingProgress?
   signature              ApplicantSignature?
   officerAssignments     OfficerAssignment[]
 
@@ -215,6 +224,102 @@ model ApplicantSignature {
   id            String        @id @default(uuid())
   type          SignatureType
   signatureData String
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ApplicantRequirement {
+  id         String @id @default(uuid())
+  type       ApplicantRequirementType
+  reviewStatus RequirementReviewStatus @default(PENDING)
+  fileUrl    String
+  fileName   String?
+  mimeType   String?
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([memberId, type])
+  @@index([memberId])
+}
+
+model MemberOnboardingProgress {
+  id String @id @default(uuid())
+
+  currentStep                    MemberOnboardingStep @default(REQUIREMENTS)
+  preOrientationCompletedLessonIds Int[] @default([])
+  preOrientationCompletedAt      DateTime?
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MemberPaymentCheckout {
+  id String @id @default(uuid())
+
+  paymentMethod      MemberPaymentMethod
+  proofOfPaymentUrl  String?
+  isPromissoryNote   Boolean @default(false)
+  promissoryNoteUrl  String?
+  submittedAt        DateTime @default(now())
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MemberOnlineInterviewAppointment {
+  id String @id @default(uuid())
+
+  interviewerId   String
+  interviewerName String
+  day             InterviewDay
+  timeSlot        String
+  zoomLink        String
+  meetingId       String?
+  passcode        String?
+  confirmedAt     DateTime @default(now())
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MemberIdGenerationAsset {
+  id String @id @default(uuid())
+
+  profileUrl      String
+  qrCodeUrl       String
+  certificateUrl  String
+  generatedAt     DateTime @default(now())
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MemberChaplaincyTrainingProgress {
+  id String @id @default(uuid())
+
+  completedLessonIds Int[] @default([])
+  essayAnswers       Json  @default("{}")
+  completedAt        DateTime?
 
   memberId String @unique
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -294,6 +399,21 @@ enum UserType {
   ADMIN
 }
 
+enum UserPosition {
+  CLERK
+  HR
+  IT
+  ACCOUNTING_FINANCE
+  OPERATIONS
+  SECRETARIAT
+}
+
+enum UserAccountStatus {
+  ACTIVE
+  PENDING
+  SUSPENDED
+}
+
 enum MemberStatus {
   PENDING
   APPROVED
@@ -328,6 +448,50 @@ enum Gender {
 enum SignatureType {
   DRAWN
   UPLOADED
+}
+
+enum ApplicantRequirementType {
+  PHOTO_2X2
+  HS_BACCALAUREATE_DIPLOMA
+  TWO_THREE_YEAR_PROGRAM_DIPLOMA
+  MASTERS_DEGREE_DIPLOMA
+  DOCTORAL_DEGREE_DIPLOMA
+  ORDINATION_CERTIFICATE
+  PASTORS_RECOMMENDATION_LETTER
+  LETTER_OF_INTENT
+  ENDORSEMENT_LETTERS
+  MARRIAGE_CONTRACT
+  CLEARANCE_BARANGAY
+  CLEARANCE_POLICE
+  CLEARANCE_NBI
+}
+
+enum RequirementReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum MemberOnboardingStep {
+  REQUIREMENTS
+  PRE_ORIENTATION
+  PAYMENT_CHECKOUT
+  ONLINE_INTERVIEW
+  ID_GENERATION
+  CHAPLAINCY_101
+  OATH_TAKING
+}
+
+enum MemberPaymentMethod {
+  E_WALLET
+  DIRECT_DEBIT
+  OVER_THE_COUNTER
+  CASH
+}
+
+enum InterviewDay {
+  SATURDAY
+  SUNDAY
 }
 
 enum OfficeTitleLevel {

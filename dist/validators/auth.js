@@ -32,7 +32,7 @@ exports.registerSchema = zod_1.default.object({
     email: exports.emailSchema,
     password: exports.passwordSchema,
     role: zod_1.default.enum(enums_1.UserType, {
-        message: 'Role must be either MEMBER or ADMIN',
+        message: 'Role must be one of MEMBER, OFFICER, or ADMIN',
     }),
 });
 exports.loginSchema = zod_1.default.object({

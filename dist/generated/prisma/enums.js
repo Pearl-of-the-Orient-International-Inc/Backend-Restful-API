@@ -1,10 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OfficeTitleLevel = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberStatus = exports.UserType = void 0;
+exports.OfficeTitleLevel = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberStatus = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
     ADMIN: 'ADMIN'
+};
+exports.UserPosition = {
+    CLERK: 'CLERK',
+    HR: 'HR',
+    IT: 'IT',
+    ACCOUNTING_FINANCE: 'ACCOUNTING_FINANCE',
+    OPERATIONS: 'OPERATIONS',
+    SECRETARIAT: 'SECRETARIAT'
+};
+exports.UserAccountStatus = {
+    ACTIVE: 'ACTIVE',
+    PENDING: 'PENDING',
+    SUSPENDED: 'SUSPENDED'
 };
 exports.MemberStatus = {
     PENDING: 'PENDING',

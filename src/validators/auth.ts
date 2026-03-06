@@ -29,7 +29,7 @@ export const registerSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   role: z.enum(UserType, {
-    message: 'Role must be either MEMBER or ADMIN',
+    message: 'Role must be one of MEMBER, OFFICER, or ADMIN',
   }),
 });
 

@@ -4,6 +4,8 @@
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { generateNextMemberUniqueId } from '@/lib/member-unique-id';
+import { MemberStatus } from '@/generated/prisma/enums';
 
 /**
  * Types
@@ -30,7 +32,17 @@ export const updateMemberStatus = async (
 
     const existingMember = await prisma.member.findUnique({
       where: { id: memberId },
-      select: { id: true, status: true, isActive: true },
+      select: {
+        id: true,
+        status: true,
+        isActive: true,
+        uniqueId: true,
+        user: {
+          select: {
+            role: true,
+          },
+        },
+      },
     });
 
     if (!existingMember) {
@@ -41,9 +53,17 @@ export const updateMemberStatus = async (
       return;
     }
 
+    let nextUniqueId = existingMember.uniqueId;
+    if (status === MemberStatus.APPROVED && !existingMember.uniqueId) {
+      nextUniqueId = await generateNextMemberUniqueId(existingMember.user.role);
+    }
+
     const updatedMember = await prisma.member.update({
       where: { id: memberId },
-      data: { status },
+      data: {
+        status,
+        uniqueId: nextUniqueId,
+      },
       include: {
         user: {
           select: { id: true, name: true, email: true, role: true },

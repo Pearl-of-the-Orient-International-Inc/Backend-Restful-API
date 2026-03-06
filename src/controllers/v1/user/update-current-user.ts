@@ -36,8 +36,12 @@ export const updateCurrentUser = async (
         email: true,
         avatar: true,
         isEmailVerified: true,
+        accountStatus: true,
         role: true,
+        position: true,
+        isTwoFactorEnabled: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
 
@@ -81,8 +85,12 @@ export const updateCurrentUser = async (
         email: true,
         avatar: true,
         isEmailVerified: true,
+        accountStatus: true,
         role: true,
+        position: true,
+        isTwoFactorEnabled: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
 

@@ -13,6 +13,7 @@ import {
   parseUserAgent,
 } from '@/lib/helpers';
 import config from '@/config';
+import { buildVerificationUrl } from '@/lib/verification-redirect';
 import { sendMail } from '@/mailers';
 import { verifyEmailTemplate } from '@/mailers/templates/verify-email';
 
@@ -67,8 +68,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     });
 
     // Sending verification email link
-    const baseUrl = config.APP_URL || 'http://localhost:3000';
-    const verificationUrl = `${baseUrl}/confirm-account?token=${verificationCode.code}`;
+    const verificationUrl = buildVerificationUrl(user.role, verificationCode.code);
 
     const emailResult = await sendMail({
       sendTo: user.email,
@@ -136,6 +136,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         email: user.email,
         avatar: user.avatar,
         role: user.role,
+        position: user.position,
+        accountStatus: user.accountStatus,
         isEmailVerified: user.isEmailVerified,
         isTwoFactorEnabled: user.isTwoFactorEnabled,
       },

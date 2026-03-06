@@ -12,6 +12,19 @@ const parseCsv = (value) => (value !== null && value !== void 0 ? value : '')
     .split(',')
     .map((item) => item.trim())
     .filter(Boolean);
+const parseTrustProxy = (value) => {
+    if (!value)
+        return false;
+    const normalized = value.trim().toLowerCase();
+    if (normalized === 'true')
+        return true;
+    if (normalized === 'false')
+        return false;
+    const numeric = Number(normalized);
+    if (!Number.isNaN(numeric))
+        return numeric;
+    return value.trim();
+};
 const config = {
     PORT: process.env.PORT || 5000,
     NODE_ENV: process.env.NODE_ENV,
@@ -38,5 +51,6 @@ const config = {
     PASSKEY_RP_NAME: process.env.PASSKEY_RP_NAME || 'Pearl of the Orient',
     PASSKEY_RP_ID: process.env.PASSKEY_RP_ID,
     PASSKEY_EXPECTED_ORIGINS: parseCsv(process.env.PASSKEY_EXPECTED_ORIGINS),
+    TRUST_PROXY: parseTrustProxy(process.env.TRUST_PROXY),
 };
 exports.default = config;

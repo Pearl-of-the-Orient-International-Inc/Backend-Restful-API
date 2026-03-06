@@ -36,7 +36,10 @@ const config = {
       'https://pearl-chaplaincy.com',
       'https://pearlchaplaincy.org',
       'https://admin.pearlchaplaincy.org',
+      'https://officer.pearlchaplaincy.org',
       'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:30002',
     ]),
   ],
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
@@ -51,6 +54,20 @@ const config = {
   SMTP_PASSWORD: process.env.SMTP_PASSWORD || process.env.SMTP_PASS,
 
   APP_URL: process.env.APP_URL || 'http://localhost:3000',
+  VERIFY_REDIRECT_MEMBER_PROD:
+    process.env.VERIFY_REDIRECT_MEMBER_PROD || 'https://pearlchaplaincy.org',
+  VERIFY_REDIRECT_ADMIN_PROD:
+    process.env.VERIFY_REDIRECT_ADMIN_PROD ||
+    'https://admin.pearlchaplaincy.org',
+  VERIFY_REDIRECT_OFFICER_PROD:
+    process.env.VERIFY_REDIRECT_OFFICER_PROD ||
+    'https://officer.pearlchaplaincy.org',
+  VERIFY_REDIRECT_MEMBER_DEV:
+    process.env.VERIFY_REDIRECT_MEMBER_DEV || 'http://localhost:3000',
+  VERIFY_REDIRECT_ADMIN_DEV:
+    process.env.VERIFY_REDIRECT_ADMIN_DEV || 'http://localhost:3000',
+  VERIFY_REDIRECT_OFFICER_DEV:
+    process.env.VERIFY_REDIRECT_OFFICER_DEV || 'http://localhost:3000',
   PASSKEY_RP_NAME: process.env.PASSKEY_RP_NAME || 'Pearl of the Orient',
   PASSKEY_RP_ID: process.env.PASSKEY_RP_ID,
   PASSKEY_EXPECTED_ORIGINS: parseCsv(process.env.PASSKEY_EXPECTED_ORIGINS),

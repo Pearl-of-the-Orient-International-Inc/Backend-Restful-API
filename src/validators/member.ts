@@ -1,7 +1,11 @@
 import { z } from 'zod';
 import {
+  ApplicantRequirementType,
   CivilStatus,
   Gender,
+  InterviewDay,
+  MemberOnboardingStep,
+  MemberPaymentMethod,
   MemberStatus,
   SignatureType,
   UserType,
@@ -61,7 +65,6 @@ export const applyMemberSchema = z.object({
   barangay: z.string().trim().min(1).max(100),
   emergencyContactName: z.string().trim().min(1).max(100),
   emergencyContactMobile: z.string().trim().min(1).max(30),
-  recentIdPhotoUrl: z.url().nullable().optional(),
   churchAffiliation: z.string().trim().min(1).max(150),
   churchAddress: z.string().trim().min(1).max(255),
   currentPositionRole: z.string().trim().min(1).max(150),
@@ -83,6 +86,77 @@ export const applyMemberSchema = z.object({
   ministerialExperiences: z.array(ministerialExperienceSchema).max(20).optional(),
   characterReferences: z.array(characterReferenceSchema).max(20).optional(),
   signature: signatureSchema.optional(),
+});
+
+const requirementAttachmentSchema = z.object({
+  type: z.enum(ApplicantRequirementType),
+  fileUrl: z.url(),
+  fileName: z.string().trim().max(255).optional(),
+  mimeType: z.string().trim().max(100).optional(),
+});
+
+export const upsertMemberRequirementsSchema = z.object({
+  attachments: z.array(requirementAttachmentSchema).min(1).max(13),
+});
+
+export const updatePreOrientationProgressSchema = z.object({
+  completedLessonIds: z.array(z.int().min(1).max(1000)).max(100),
+  isCompleted: z.boolean().optional(),
+});
+
+export const updateOnboardingStepSchema = z.object({
+  currentStep: z.enum(MemberOnboardingStep),
+});
+
+export const upsertPaymentCheckoutSchema = z
+  .object({
+    paymentMethod: z.enum(MemberPaymentMethod),
+    proofOfPaymentUrl: z.url().optional(),
+    isPromissoryNote: z.boolean().optional(),
+    promissoryNoteUrl: z.url().optional(),
+  })
+  .superRefine((value, ctx) => {
+    const isPromissory = value.isPromissoryNote === true;
+    const hasProof = Boolean(value.proofOfPaymentUrl?.trim());
+    const hasPromissoryFile = Boolean(value.promissoryNoteUrl?.trim());
+
+    if (isPromissory && !hasPromissoryFile) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['promissoryNoteUrl'],
+        message: 'Signed promissory note is required when promissory note is checked',
+      });
+    }
+
+    if (value.paymentMethod !== MemberPaymentMethod.CASH && !isPromissory && !hasProof) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['proofOfPaymentUrl'],
+        message: 'Proof of payment is required for non-cash payment method',
+      });
+    }
+  });
+
+export const upsertOnlineInterviewAppointmentSchema = z.object({
+  interviewerId: z.string().trim().min(1).max(100),
+  interviewerName: z.string().trim().min(1).max(150),
+  day: z.enum(InterviewDay),
+  timeSlot: z.string().trim().min(1).max(50),
+  zoomLink: z.url(),
+  meetingId: z.string().trim().max(50).optional(),
+  passcode: z.string().trim().max(50).optional(),
+});
+
+export const upsertMemberIdGenerationAssetSchema = z.object({
+  profileUrl: z.url(),
+  qrCodeUrl: z.url(),
+  certificateUrl: z.url(),
+});
+
+export const upsertChaplaincyTrainingProgressSchema = z.object({
+  completedLessonIds: z.array(z.int().min(1).max(1000)).max(100),
+  essayAnswers: z.record(z.string(), z.string()).optional(),
+  isCompleted: z.boolean().optional(),
 });
 
 export const updateMemberStatusSchema = z.object({

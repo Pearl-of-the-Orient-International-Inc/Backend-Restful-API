@@ -30,6 +30,10 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 createdAt: true,
                 updatedAt: true,
                 role: true,
+                position: true,
+                accountStatus: true,
+                isEmailVerified: true,
+                isTwoFactorEnabled: true,
             }, orderBy: {
                 createdAt: 'desc',
             } }));

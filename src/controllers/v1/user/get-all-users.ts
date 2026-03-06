@@ -36,6 +36,10 @@ export const getAllUsers = async (
         createdAt: true,
         updatedAt: true,
         role: true,
+        position: true,
+        accountStatus: true,
+        isEmailVerified: true,
+        isTwoFactorEnabled: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -43,7 +47,7 @@ export const getAllUsers = async (
     });
 
     // Build response based on whether pagination is used
-    const response: any = {
+    const response: Record<string, unknown> = {
       total,
       users,
     };

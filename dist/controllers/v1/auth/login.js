@@ -66,15 +66,15 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             return;
         }
-        if (user.role === enums_1.UserType.MEMBER) {
-            winston_1.logger.warn('Forbidden member login attempt', {
+        if (user.accountStatus !== enums_1.UserAccountStatus.ACTIVE) {
+            winston_1.logger.warn('Login attempt with inactive account status', {
                 userId: user.id,
                 email: user.email,
-                role: user.role,
+                accountStatus: user.accountStatus,
             });
             res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
                 code: 'FORBIDDEN',
-                message: 'This account is not allowed to access the admin portal.',
+                message: 'Your account is not active. Please contact an administrator.',
             });
             return;
         }
@@ -100,6 +100,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     email: user.email,
                     avatar: user.avatar,
                     role: user.role,
+                    position: user.position,
+                    accountStatus: user.accountStatus,
                     isEmailVerified: user.isEmailVerified,
                     isTwoFactorEnabled: user.isTwoFactorEnabled,
                 },
@@ -194,6 +196,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 email: user.email,
                 avatar: user.avatar,
                 role: user.role,
+                position: user.position,
+                accountStatus: user.accountStatus,
                 isEmailVerified: user.isEmailVerified,
                 isTwoFactorEnabled: user.isTwoFactorEnabled,
             },

@@ -1,6 +1,7 @@
 import { createRouteHandler, createUploadthing, type FileRouter } from 'uploadthing/express';
 import { prisma } from '@/lib/prisma';
 import { verifyAccessToken } from '@/lib/jwt';
+import { UserType } from '@/generated/prisma/enums';
 
 type ImageFileSize = '512KB' | '1MB' | '2MB' | '4MB' | '8MB' | '16MB' | '32MB' | '64MB';
 
@@ -74,9 +75,58 @@ const createAvatarUploaderRoute = (options: UploadLimitOptions = {}) => {
     });
 };
 
+const createMemberRequirementUploaderRoute = () =>
+  f({
+    image: {
+      maxFileSize: '8MB',
+      maxFileCount: 1,
+    },
+    pdf: {
+      maxFileSize: '16MB',
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+      }
+
+      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) {
+        throw new Error('Invalid or expired access token');
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true, memberProfile: { select: { id: true } } },
+      });
+
+      if (!user || user.role !== UserType.MEMBER || !user.memberProfile) {
+        throw new Error('Member profile not found');
+      }
+
+      return { userId, memberId: user.memberProfile.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      memberId: metadata.memberId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+
 export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
+    requirementUploader: createMemberRequirementUploaderRoute(),
   }) satisfies FileRouter;
 
 export const uploadRouter = createUploadRouter();

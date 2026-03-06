@@ -34,8 +34,12 @@ const updateCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 email: true,
                 avatar: true,
                 isEmailVerified: true,
+                accountStatus: true,
                 role: true,
+                position: true,
+                isTwoFactorEnabled: true,
                 createdAt: true,
+                updatedAt: true,
             },
         });
         if (!user) {
@@ -74,8 +78,12 @@ const updateCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 email: true,
                 avatar: true,
                 isEmailVerified: true,
+                accountStatus: true,
                 role: true,
+                position: true,
+                isTwoFactorEnabled: true,
                 createdAt: true,
+                updatedAt: true,
             },
         });
         res.status(http_codes_1.HTTPSTATUS.OK).json({

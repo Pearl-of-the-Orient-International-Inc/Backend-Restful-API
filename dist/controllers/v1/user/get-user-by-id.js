@@ -33,7 +33,12 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 email: true,
                 avatar: true,
                 role: true,
+                position: true,
+                accountStatus: true,
+                isEmailVerified: true,
+                isTwoFactorEnabled: true,
                 createdAt: true,
+                updatedAt: true,
             },
         });
         if (!user) {

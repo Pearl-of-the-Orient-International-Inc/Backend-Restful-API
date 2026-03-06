@@ -42,7 +42,12 @@ export const getUserById = async (
         email: true,
         avatar: true,
         role: true,
+        position: true,
+        accountStatus: true,
+        isEmailVerified: true,
+        isTwoFactorEnabled: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
 

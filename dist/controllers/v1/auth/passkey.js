@@ -274,6 +274,13 @@ const getPasskeyAuthenticationOptions = (req, res) => __awaiter(void 0, void 0, 
             });
             return;
         }
+        if (user.accountStatus !== enums_1.UserAccountStatus.ACTIVE) {
+            res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
+                code: 'FORBIDDEN',
+                message: 'Your account is not active. Please contact an administrator.',
+            });
+            return;
+        }
         if (user.role === enums_1.UserType.MEMBER) {
             res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
                 code: 'FORBIDDEN',
@@ -346,6 +353,13 @@ const verifyPasskeyAuthentication = (req, res) => __awaiter(void 0, void 0, void
             res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({
                 code: 'CONFLICT',
                 message: 'No user found with this email',
+            });
+            return;
+        }
+        if (user.accountStatus !== enums_1.UserAccountStatus.ACTIVE) {
+            res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
+                code: 'FORBIDDEN',
+                message: 'Your account is not active. Please contact an administrator.',
             });
             return;
         }
@@ -484,6 +498,8 @@ const verifyPasskeyAuthentication = (req, res) => __awaiter(void 0, void 0, void
                 email: user.email,
                 avatar: user.avatar,
                 role: user.role,
+                position: user.position,
+                accountStatus: user.accountStatus,
                 isEmailVerified: user.isEmailVerified,
                 isTwoFactorEnabled: user.isTwoFactorEnabled,
             },

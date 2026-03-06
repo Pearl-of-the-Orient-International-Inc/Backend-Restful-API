@@ -87,7 +87,6 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       barangay: body.barangay,
       emergencyContactName: body.emergencyContactName,
       emergencyContactMobile: body.emergencyContactMobile,
-      recentIdPhotoUrl: body.recentIdPhotoUrl ?? null,
       churchAffiliation: body.churchAffiliation,
       churchAddress: body.churchAddress,
       currentPositionRole: body.currentPositionRole,

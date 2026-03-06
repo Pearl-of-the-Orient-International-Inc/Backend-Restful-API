@@ -14,6 +14,7 @@ import {
 import { HTTPSTATUS } from '@/common/http-codes';
 import {
   PasskeyChallengeType,
+  UserAccountStatus,
   UserType,
 } from '@/generated/prisma/enums';
 import {
@@ -343,6 +344,14 @@ export const getPasskeyAuthenticationOptions = async (
       return;
     }
 
+    if (user.accountStatus !== UserAccountStatus.ACTIVE) {
+      res.status(HTTPSTATUS.FORBIDDEN).json({
+        code: 'FORBIDDEN',
+        message: 'Your account is not active. Please contact an administrator.',
+      });
+      return;
+    }
+
     if (user.role === UserType.MEMBER) {
       res.status(HTTPSTATUS.FORBIDDEN).json({
         code: 'FORBIDDEN',
@@ -425,6 +434,14 @@ export const verifyPasskeyAuthentication = async (
       res.status(HTTPSTATUS.CONFLICT).json({
         code: 'CONFLICT',
         message: 'No user found with this email',
+      });
+      return;
+    }
+
+    if (user.accountStatus !== UserAccountStatus.ACTIVE) {
+      res.status(HTTPSTATUS.FORBIDDEN).json({
+        code: 'FORBIDDEN',
+        message: 'Your account is not active. Please contact an administrator.',
       });
       return;
     }
@@ -604,6 +621,8 @@ export const verifyPasskeyAuthentication = async (
         email: user.email,
         avatar: user.avatar,
         role: user.role,
+        position: user.position,
+        accountStatus: user.accountStatus,
         isEmailVerified: user.isEmailVerified,
         isTwoFactorEnabled: user.isTwoFactorEnabled,
       },

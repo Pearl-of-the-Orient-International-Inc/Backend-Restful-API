@@ -22,6 +22,9 @@ const winston_1 = require("./lib/winston");
 const prisma_1 = require("./lib/prisma");
 const v1_1 = __importDefault(require("./routes/v1"));
 const app = (0, express_1.default)();
+if (config_1.default.TRUST_PROXY !== false) {
+    app.set('trust proxy', config_1.default.TRUST_PROXY);
+}
 const corsOptions = {
     origin(origin, callback) {
         if (!origin) {
