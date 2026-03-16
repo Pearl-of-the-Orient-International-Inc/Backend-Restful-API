@@ -20,6 +20,7 @@ export const passwordSchema = z
     error: 'Password must contain at least 1 special character',
   });
 
+  
 export const registerSchema = z.object({
   name: z
     .string()

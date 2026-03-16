@@ -28,13 +28,18 @@ export const resendVerification = async (
 ): Promise<void> => {
   try {
     const { email } = req.body as ResendVerificationSchema;
+    const normalizedEmail = email.toLowerCase(); // normalized email via lowercase function
+
+
 
     // Check if the email is existing in the database
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email: normalizedEmail,
       },
     });
+
+
 
     if (!user) {
       logger.warn('No user found with this email');
