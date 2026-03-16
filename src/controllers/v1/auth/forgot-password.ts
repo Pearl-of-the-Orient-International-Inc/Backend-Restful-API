@@ -21,12 +21,14 @@ export const forgotPassword = async (
   res: Response,
 ): Promise<void> => {
   const { email } = req.body as ForgotPasswordSchema;
-
+  const normalizedEmail = email.trim().toLocaleLowerCase();
+  
+  
   try {
     // Check existing user
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email: normalizedEmail,
       },
     });
 
