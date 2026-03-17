@@ -21,6 +21,11 @@ import { authenticate } from '@/middlewares/authentication';
 import { UserType } from '@/generated/prisma/enums';
 import authorize from '@/middlewares/authorization';
 
+
+import { validate } from '@/common/sanitation';
+import { usersQuerySchema } from '@/validators/user';
+
+
 const router = Router();
 
 /**
@@ -53,10 +58,13 @@ router.delete(
 router.get(
   '/',
   expressRateLimit('basic'),
-  authenticate,
-  authorize([UserType.ADMIN]),
+  // authenticate,
+  // authorize([UserType.ADMIN]),
+  validate(usersQuerySchema),
   getAllUsers,
 );
+
+
 
 router.get(
   '/:userId',
@@ -70,7 +78,7 @@ router.delete(
   '/:userId',
   expressRateLimit('basic'),
   authenticate,
-  authorize([UserType.ADMIN]),
+  authorize([UserType.ADMIN]),  
   deleteUserById,
 );
 
