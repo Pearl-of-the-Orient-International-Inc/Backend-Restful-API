@@ -89,7 +89,6 @@ const authorize = (roles: UserType[]) => {
       res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
         code: 'INTERNAL_SERVER_ERROR',
         message: 'Internal server error',
-        error: err,
       });
     }
   };

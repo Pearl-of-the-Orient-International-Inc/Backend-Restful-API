@@ -62,7 +62,6 @@ export const getUserById = async (
     res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
       code: 'INTERNAL_SERVER_ERROR',
       message: 'Internal server error',
-      error: err,
     });
   }
 };
