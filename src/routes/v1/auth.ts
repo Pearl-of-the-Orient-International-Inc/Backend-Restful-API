@@ -18,7 +18,7 @@ import { resendVerification } from '@/controllers/v1/auth/resend-verification';
 /**
  * Helpers, Validators and Middlewares
  */
-import { validate } from '@/common/sanitation';
+import { validate, validateQuery } from '@/common/sanitation';
 import {
   forgotPasswordSchema,
   loginSchema,
@@ -26,6 +26,7 @@ import {
   resendVerificationSchema,
   resetPasswordSchema,
   verificationEmailSchema,
+  resetPasswordQuerySchema,
 } from '@/validators/auth';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { authenticate } from '@/middlewares/authentication';
@@ -59,6 +60,7 @@ router.post(
 router.post(
   '/reset-password',
   expressRateLimit('passwordReset'),
+  validateQuery(resetPasswordQuerySchema),
   validate(resetPasswordSchema),
   resetPassword,
 );

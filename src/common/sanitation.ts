@@ -22,3 +22,24 @@ export const validate = (schema: z.ZodSchema) => {
     }
   };
 };
+
+export const validateQuery = (schema: z.ZodSchema) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    try {
+      schema.parse(req.query);
+      next();
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const formattedErrors = error.issues.map((issue) => ({
+          path: issue.path.join('.'),
+          message: issue.message,
+        }));
+
+        res.status(HTTPSTATUS.BAD_REQUEST).json({
+          code: 'BAD_REQUEST',
+          errors: formattedErrors,
+        });
+      }
+    }
+  };
+};

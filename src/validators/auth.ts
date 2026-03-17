@@ -61,6 +61,14 @@ export const verificationEmailSchema = z.object({
   code: z.string().min(1, { error: 'Verification code is required' }),
 });
 
+export const resetPasswordQuerySchema = z.object({
+  token: z
+    .string()
+    .min(1, { error: 'Token is required' })
+    .max(255, { error: 'Token must not exceed 255 characters' }),
+});
+
+export type ResetPasswordQuerySchema = z.infer<typeof resetPasswordQuerySchema>;
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
