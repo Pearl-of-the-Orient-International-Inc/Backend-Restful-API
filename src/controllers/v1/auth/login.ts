@@ -27,6 +27,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password, userAgent } = req.body as LoginSchema;
   const ipAddress = getClientIp(req);
 
+
+  const normalizedEmail = email.toLowerCase().trim();
+  
+
   // Handle the user-agent header properly
   const headerUserAgent = req.headers['user-agent'];
   const userAgentString = Array.isArray(headerUserAgent)
@@ -39,7 +43,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     // Check existing user
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email: normalizedEmail,
       },
     });
 
