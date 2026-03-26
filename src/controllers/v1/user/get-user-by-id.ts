@@ -8,6 +8,7 @@
  * Custom Modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
+import { UserType } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 
@@ -35,6 +36,7 @@ export const getUserById = async (
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
+        role: UserType.ADMIN,
       },
       select: {
         id: true,
@@ -54,7 +56,7 @@ export const getUserById = async (
     if (!user) {
       res.status(HTTPSTATUS.NOT_FOUND).json({
         code: 'NOT_FOUND',
-        message: 'User not found',
+        message: 'Admin account not found',
       });
       return;
     }

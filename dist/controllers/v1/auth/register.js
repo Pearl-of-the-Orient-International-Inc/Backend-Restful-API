@@ -20,6 +20,7 @@ const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const helpers_1 = require("../../../lib/helpers");
 const config_1 = __importDefault(require("../../../config"));
+const verification_redirect_1 = require("../../../lib/verification-redirect");
 const mailers_1 = require("../../../mailers");
 const verify_email_1 = require("../../../mailers/templates/verify-email");
 const enums_1 = require("../../../generated/prisma/enums");
@@ -58,8 +59,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 code: uniqueCode,
             },
         });
-        const baseUrl = config_1.default.APP_URL || 'http://localhost:3000';
-        const verificationUrl = `${baseUrl}/confirm-account?token=${verificationCode.code}`;
+        const verificationUrl = (0, verification_redirect_1.buildVerificationUrl)(user.role, verificationCode.code);
         const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: user.email }, (0, verify_email_1.verifyEmailTemplate)(verificationUrl, user.name)));
         if (!emailResult.success) {
             winston_1.logger.warn('Verification email failed to send, but user was created', {

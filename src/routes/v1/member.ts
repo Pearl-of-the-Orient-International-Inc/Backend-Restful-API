@@ -7,7 +7,10 @@ import { Router } from 'express';
  * Controllers
  */
 import { applyMember } from '@/controllers/v1/member/apply-member';
+import { createMemberByAdmin } from '@/controllers/v1/member/create-member-by-admin';
+import { getMemberById } from '@/controllers/v1/member/get-member-by-id';
 import { updateMemberStatus } from '@/controllers/v1/member/update-member-status';
+import { updateMemberByAdmin } from '@/controllers/v1/member/update-member-by-admin';
 import { getPendingMembers } from '@/controllers/v1/member/get-pending-members';
 import { getAllMembers } from '@/controllers/v1/member/get-all-members';
 import { archiveMember } from '@/controllers/v1/member/archive-member';
@@ -25,6 +28,11 @@ import { getCurrentIdGenerationAsset } from '@/controllers/v1/member/get-current
 import { upsertIdGenerationAsset } from '@/controllers/v1/member/upsert-id-generation-asset';
 import { getCurrentChaplaincyTrainingProgress } from '@/controllers/v1/member/get-current-chaplaincy-training-progress';
 import { upsertChaplaincyTrainingProgress } from '@/controllers/v1/member/upsert-chaplaincy-training-progress';
+import { createOfficerAssignmentByAdmin } from '@/controllers/v1/member/create-officer-assignment-by-admin';
+import { getAllOfficerAssignments } from '@/controllers/v1/member/get-all-officer-assignments';
+import { getMemberOfficerAssignments } from '@/controllers/v1/member/get-member-officer-assignments';
+import { deactivateOfficerAssignmentByAdmin } from '@/controllers/v1/member/deactivate-officer-assignment-by-admin';
+import { replaceOfficerAssignmentByAdmin } from '@/controllers/v1/member/replace-officer-assignment-by-admin';
 
 /**
  * Helpers, Validators and Middlewares
@@ -37,7 +45,9 @@ import { validate } from '@/common/sanitation';
 import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 import {
   applyMemberSchema,
+  createMemberByAdminSchema,
   getAllMembersSchema,
+  getMemberByIdSchema,
   updateOnboardingStepSchema,
   updatePreOrientationProgressSchema,
   upsertChaplaincyTrainingProgressSchema,
@@ -45,7 +55,13 @@ import {
   upsertOnlineInterviewAppointmentSchema,
   upsertPaymentCheckoutSchema,
   upsertMemberRequirementsSchema,
+  updateMemberByAdminSchema,
   updateMemberStatusSchema,
+  createOfficerAssignmentByAdminSchema,
+  getAllOfficerAssignmentsSchema,
+  getMemberOfficerAssignmentsSchema,
+  deactivateOfficerAssignmentByAdminSchema,
+  replaceOfficerAssignmentByAdminSchema,
 } from '@/validators/member';
 
 const router = Router();
@@ -57,6 +73,15 @@ router.post(
   authorize([UserType.MEMBER]),
   validate(applyMemberSchema),
   applyMember,
+);
+
+router.post(
+  '/',
+  expressRateLimit('auth'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(createMemberByAdminSchema),
+  createMemberByAdmin,
 );
 
 router.get(
@@ -198,12 +223,75 @@ router.get(
 );
 
 router.get(
+  '/officer-assignments',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(getAllOfficerAssignmentsSchema),
+  getAllOfficerAssignments,
+);
+
+router.get(
+  '/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(getMemberByIdSchema),
+  getMemberById,
+);
+
+router.get(
   '/',
   expressRateLimit('basic'),
   authenticate,
   authorize([UserType.ADMIN]),
   validate(getAllMembersSchema),
   getAllMembers,
+);
+
+router.put(
+  '/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateMemberByAdminSchema),
+  updateMemberByAdmin,
+);
+
+router.post(
+  '/:id/officer-assignments',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(createOfficerAssignmentByAdminSchema),
+  createOfficerAssignmentByAdmin,
+);
+
+router.get(
+  '/:id/officer-assignments',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(getMemberOfficerAssignmentsSchema),
+  getMemberOfficerAssignments,
+);
+
+router.patch(
+  '/:id/officer-assignments/:assignmentId/deactivate',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(deactivateOfficerAssignmentByAdminSchema),
+  deactivateOfficerAssignmentByAdmin,
+);
+
+router.post(
+  '/:id/officer-assignments/:assignmentId/replace',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(replaceOfficerAssignmentByAdminSchema),
+  replaceOfficerAssignmentByAdmin,
 );
 
 router.patch(

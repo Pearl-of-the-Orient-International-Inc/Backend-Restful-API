@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OfficeTitleLevel = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberStatus = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.OfficeTitleLevel = exports.InterviewDay = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberStatus = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -48,6 +48,45 @@ exports.Gender = {
 exports.SignatureType = {
     DRAWN: 'DRAWN',
     UPLOADED: 'UPLOADED'
+};
+exports.ApplicantRequirementType = {
+    PHOTO_2X2: 'PHOTO_2X2',
+    HS_BACCALAUREATE_DIPLOMA: 'HS_BACCALAUREATE_DIPLOMA',
+    TWO_THREE_YEAR_PROGRAM_DIPLOMA: 'TWO_THREE_YEAR_PROGRAM_DIPLOMA',
+    MASTERS_DEGREE_DIPLOMA: 'MASTERS_DEGREE_DIPLOMA',
+    DOCTORAL_DEGREE_DIPLOMA: 'DOCTORAL_DEGREE_DIPLOMA',
+    ORDINATION_CERTIFICATE: 'ORDINATION_CERTIFICATE',
+    PASTORS_RECOMMENDATION_LETTER: 'PASTORS_RECOMMENDATION_LETTER',
+    LETTER_OF_INTENT: 'LETTER_OF_INTENT',
+    ENDORSEMENT_LETTERS: 'ENDORSEMENT_LETTERS',
+    MARRIAGE_CONTRACT: 'MARRIAGE_CONTRACT',
+    CLEARANCE_BARANGAY: 'CLEARANCE_BARANGAY',
+    CLEARANCE_POLICE: 'CLEARANCE_POLICE',
+    CLEARANCE_NBI: 'CLEARANCE_NBI'
+};
+exports.RequirementReviewStatus = {
+    PENDING: 'PENDING',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED'
+};
+exports.MemberOnboardingStep = {
+    REQUIREMENTS: 'REQUIREMENTS',
+    PRE_ORIENTATION: 'PRE_ORIENTATION',
+    PAYMENT_CHECKOUT: 'PAYMENT_CHECKOUT',
+    ONLINE_INTERVIEW: 'ONLINE_INTERVIEW',
+    ID_GENERATION: 'ID_GENERATION',
+    CHAPLAINCY_101: 'CHAPLAINCY_101',
+    OATH_TAKING: 'OATH_TAKING'
+};
+exports.MemberPaymentMethod = {
+    E_WALLET: 'E_WALLET',
+    DIRECT_DEBIT: 'DIRECT_DEBIT',
+    OVER_THE_COUNTER: 'OVER_THE_COUNTER',
+    CASH: 'CASH'
+};
+exports.InterviewDay = {
+    SATURDAY: 'SATURDAY',
+    SUNDAY: 'SUNDAY'
 };
 exports.OfficeTitleLevel = {
     CHIEF_CHAPLAIN: 'CHIEF_CHAPLAIN',

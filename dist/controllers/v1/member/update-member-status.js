@@ -13,6 +13,8 @@ exports.updateMemberStatus = void 0;
 const http_codes_1 = require("../../../common/http-codes");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
+const member_unique_id_1 = require("../../../lib/member-unique-id");
+const enums_1 = require("../../../generated/prisma/enums");
 const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const memberId = req.params.id;
@@ -26,7 +28,17 @@ const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { status } = req.body;
         const existingMember = yield prisma_1.prisma.member.findUnique({
             where: { id: memberId },
-            select: { id: true, status: true, isActive: true },
+            select: {
+                id: true,
+                status: true,
+                isActive: true,
+                uniqueId: true,
+                user: {
+                    select: {
+                        role: true,
+                    },
+                },
+            },
         });
         if (!existingMember) {
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
@@ -35,9 +47,16 @@ const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, funct
             });
             return;
         }
+        let nextUniqueId = existingMember.uniqueId;
+        if (status === enums_1.MemberStatus.APPROVED && !existingMember.uniqueId) {
+            nextUniqueId = yield (0, member_unique_id_1.generateNextMemberUniqueId)(existingMember.user.role);
+        }
         const updatedMember = yield prisma_1.prisma.member.update({
             where: { id: memberId },
-            data: { status },
+            data: {
+                status,
+                uniqueId: nextUniqueId,
+            },
             include: {
                 user: {
                     select: { id: true, name: true, email: true, role: true },

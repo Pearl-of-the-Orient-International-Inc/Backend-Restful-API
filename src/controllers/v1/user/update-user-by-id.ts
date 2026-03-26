@@ -1,4 +1,5 @@
 import { HTTPSTATUS } from '@/common/http-codes';
+import { UserType } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 
@@ -22,14 +23,14 @@ export const updateUserById = async (
     }
 
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id: userId, role: UserType.ADMIN },
       select: { id: true, email: true },
     });
 
     if (!user) {
       res.status(HTTPSTATUS.NOT_FOUND).json({
         code: 'NOT_FOUND',
-        message: 'User not found',
+        message: 'Admin account not found',
       });
       return;
     }
@@ -54,7 +55,7 @@ export const updateUserById = async (
       data: {
         name: payload.name,
         email: payload.email?.trim().toLowerCase(),
-        role: payload.role,
+        role: payload.role ?? UserType.ADMIN,
         position: payload.position,
         accountStatus: payload.accountStatus,
         avatar: payload.avatar === '' ? null : payload.avatar,
@@ -88,4 +89,3 @@ export const updateUserById = async (
     });
   }
 };
-

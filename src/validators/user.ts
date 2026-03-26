@@ -14,8 +14,8 @@ export const createUserAccountSchema = z.object({
     .enum(UserType)
     .optional()
     .default(UserType.ADMIN)
-    .refine((value) => value !== UserType.MEMBER, {
-      message: 'Account role must be ADMIN or OFFICER',
+    .refine((value) => value === UserType.ADMIN, {
+      message: 'Account role must be ADMIN',
     }),
   position: z.enum(UserPosition, {
     message: 'Position is required',
@@ -37,8 +37,8 @@ export const updateUserByIdSchema = z
     email: emailSchema.optional(),
     role: z
       .enum(UserType)
-      .refine((value) => value !== UserType.MEMBER, {
-        message: 'Account role must be ADMIN or OFFICER',
+      .refine((value) => value === UserType.ADMIN, {
+        message: 'Account role must be ADMIN',
       })
       .optional(),
     position: z.enum(UserPosition).optional(),
@@ -53,4 +53,3 @@ export const updateUserByIdSchema = z
 
 export type CreateUserAccountSchema = z.infer<typeof createUserAccountSchema>;
 export type UpdateUserByIdSchema = z.infer<typeof updateUserByIdSchema>;
-

@@ -1,4 +1,5 @@
 import { createRouteHandler, createUploadthing, type FileRouter } from 'uploadthing/express';
+import { UTApi } from 'uploadthing/server';
 import { prisma } from '@/lib/prisma';
 import { verifyAccessToken } from '@/lib/jwt';
 import { UserType } from '@/generated/prisma/enums';
@@ -11,6 +12,7 @@ export interface UploadLimitOptions {
 }
 
 const f = createUploadthing();
+const utapi = new UTApi();
 
 const defaultUploadLimits: Required<UploadLimitOptions> = {
   maxFileSize: '4MB',
@@ -123,10 +125,58 @@ const createMemberRequirementUploaderRoute = () =>
       fileSize: file.size,
     }));
 
+const createEventThumbnailUploaderRoute = (options: UploadLimitOptions = {}) => {
+  const maxFileSize = options.maxFileSize ?? defaultUploadLimits.maxFileSize;
+  const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
+
+  return f({
+    image: {
+      maxFileSize,
+      maxFileCount,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+      }
+
+      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) {
+        throw new Error('Invalid or expired access token');
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true },
+      });
+
+      if (!user || user.role !== UserType.ADMIN) {
+        throw new Error('Only admins can upload event thumbnails');
+      }
+
+      return { userId };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+};
+
 export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
     requirementUploader: createMemberRequirementUploaderRoute(),
+    eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
   }) satisfies FileRouter;
 
 export const uploadRouter = createUploadRouter();
@@ -136,3 +186,4 @@ export const createUploadthingExpressHandler = (
 ) => createRouteHandler({ router: createUploadRouter(options) });
 
 export type OurFileRouter = typeof uploadRouter;
+export { utapi };

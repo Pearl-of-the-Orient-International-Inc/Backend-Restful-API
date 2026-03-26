@@ -13,6 +13,7 @@ exports.createUploadthingExpressHandler = exports.uploadRouter = exports.createU
 const express_1 = require("uploadthing/express");
 const prisma_1 = require("../lib/prisma");
 const jwt_1 = require("../lib/jwt");
+const enums_1 = require("../generated/prisma/enums");
 const f = (0, express_1.createUploadthing)();
 const defaultUploadLimits = {
     maxFileSize: '4MB',
@@ -68,8 +69,51 @@ const createAvatarUploaderRoute = (options = {}) => {
         };
     }));
 };
+const createMemberRequirementUploaderRoute = () => f({
+    image: {
+        maxFileSize: '8MB',
+        maxFileCount: 1,
+    },
+    pdf: {
+        maxFileSize: '16MB',
+        maxFileCount: 1,
+    },
+})
+    .middleware((_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
+    const authHeader = req.headers.authorization;
+    const bearerToken = (authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer '))
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+    if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+    }
+    const decoded = (0, jwt_1.verifyAccessToken)(bearerToken);
+    const userId = decoded === null || decoded === void 0 ? void 0 : decoded.userId;
+    if (!userId) {
+        throw new Error('Invalid or expired access token');
+    }
+    const user = yield prisma_1.prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true, memberProfile: { select: { id: true } } },
+    });
+    if (!user || user.role !== enums_1.UserType.MEMBER || !user.memberProfile) {
+        throw new Error('Member profile not found');
+    }
+    return { userId, memberId: user.memberProfile.id };
+}))
+    .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) {
+    return ({
+        userId: metadata.userId,
+        memberId: metadata.memberId,
+        fileUrl: file.ufsUrl,
+        fileName: file.name,
+        mimeType: file.type,
+        fileSize: file.size,
+    });
+}));
 const createUploadRouter = (options = {}) => ({
     avatarUploader: createAvatarUploaderRoute(options),
+    requirementUploader: createMemberRequirementUploaderRoute(),
 });
 exports.createUploadRouter = createUploadRouter;
 exports.uploadRouter = (0, exports.createUploadRouter)();

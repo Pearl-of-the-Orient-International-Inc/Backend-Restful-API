@@ -15,7 +15,7 @@ const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const enums_1 = require("../../../generated/prisma/enums");
 const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
     try {
         const userId = req.userId;
         if (!userId) {
@@ -80,38 +80,37 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             barangay: body.barangay,
             emergencyContactName: body.emergencyContactName,
             emergencyContactMobile: body.emergencyContactMobile,
-            recentIdPhotoUrl: (_b = body.recentIdPhotoUrl) !== null && _b !== void 0 ? _b : null,
             churchAffiliation: body.churchAffiliation,
             churchAddress: body.churchAddress,
             currentPositionRole: body.currentPositionRole,
-            currentPositionRoleOther: (_c = body.currentPositionRoleOther) !== null && _c !== void 0 ? _c : null,
-            height: (_d = body.height) !== null && _d !== void 0 ? _d : null,
-            weight: (_e = body.weight) !== null && _e !== void 0 ? _e : null,
-            bloodType: (_f = body.bloodType) !== null && _f !== void 0 ? _f : null,
-            colorOfEyes: (_g = body.colorOfEyes) !== null && _g !== void 0 ? _g : null,
-            colorOfSkin: (_h = body.colorOfSkin) !== null && _h !== void 0 ? _h : null,
-            sssNumber: (_j = body.sssNumber) !== null && _j !== void 0 ? _j : null,
-            tinNumber: (_k = body.tinNumber) !== null && _k !== void 0 ? _k : null,
-            skillsTalents: (_l = body.skillsTalents) !== null && _l !== void 0 ? _l : null,
-            preferredBranchOther: (_m = body.preferredBranchOther) !== null && _m !== void 0 ? _m : null,
-            elementarySchool: (_o = body.elementarySchool) !== null && _o !== void 0 ? _o : null,
-            secondarySchool: (_p = body.secondarySchool) !== null && _p !== void 0 ? _p : null,
-            tertiaryCollege: (_q = body.tertiaryCollege) !== null && _q !== void 0 ? _q : null,
-            postGraduateStudies: (_r = body.postGraduateStudies) !== null && _r !== void 0 ? _r : null,
+            currentPositionRoleOther: (_b = body.currentPositionRoleOther) !== null && _b !== void 0 ? _b : null,
+            height: (_c = body.height) !== null && _c !== void 0 ? _c : null,
+            weight: (_d = body.weight) !== null && _d !== void 0 ? _d : null,
+            bloodType: (_e = body.bloodType) !== null && _e !== void 0 ? _e : null,
+            colorOfEyes: (_f = body.colorOfEyes) !== null && _f !== void 0 ? _f : null,
+            colorOfSkin: (_g = body.colorOfSkin) !== null && _g !== void 0 ? _g : null,
+            sssNumber: (_h = body.sssNumber) !== null && _h !== void 0 ? _h : null,
+            tinNumber: (_j = body.tinNumber) !== null && _j !== void 0 ? _j : null,
+            skillsTalents: (_k = body.skillsTalents) !== null && _k !== void 0 ? _k : null,
+            preferredBranchOther: (_l = body.preferredBranchOther) !== null && _l !== void 0 ? _l : null,
+            elementarySchool: (_m = body.elementarySchool) !== null && _m !== void 0 ? _m : null,
+            secondarySchool: (_o = body.secondarySchool) !== null && _o !== void 0 ? _o : null,
+            tertiaryCollege: (_p = body.tertiaryCollege) !== null && _p !== void 0 ? _p : null,
+            postGraduateStudies: (_q = body.postGraduateStudies) !== null && _q !== void 0 ? _q : null,
             ministerialExperiences: {
-                create: (_t = (_s = body.ministerialExperiences) === null || _s === void 0 ? void 0 : _s.map((item, index) => ({
+                create: (_s = (_r = body.ministerialExperiences) === null || _r === void 0 ? void 0 : _r.map((item, index) => ({
                     roleDescription: item.roleDescription,
                     yearsApprox: item.yearsApprox,
                     order: index + 1,
-                }))) !== null && _t !== void 0 ? _t : [],
+                }))) !== null && _s !== void 0 ? _s : [],
             },
             characterReferences: {
-                create: (_v = (_u = body.characterReferences) === null || _u === void 0 ? void 0 : _u.map((item, index) => ({
+                create: (_u = (_t = body.characterReferences) === null || _t === void 0 ? void 0 : _t.map((item, index) => ({
                     name: item.name,
                     positionRelationship: item.positionRelationship,
                     contactNumber: item.contactNumber,
                     order: index + 1,
-                }))) !== null && _v !== void 0 ? _v : [],
+                }))) !== null && _u !== void 0 ? _u : [],
             },
         };
         if (preferredBranchIds.length > 0) {

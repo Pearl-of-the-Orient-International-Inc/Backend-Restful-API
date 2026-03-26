@@ -21,6 +21,11 @@ import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
 import { UserAccountStatus } from '@/generated/prisma/enums';
+import {
+  ActivityLogActionType,
+  ActivityLogResult,
+} from '@/generated/prisma/client';
+import { createActivityLog } from '@/lib/activity-log';
 
 /**
  * Types & Validators
@@ -199,6 +204,22 @@ export const verifyTwoFactor = async (
       ipAddress,
       location,
       device: deviceInfo,
+    });
+
+    await createActivityLog({
+      userId: user.id,
+      actorName: user.name,
+      actorEmail: user.email,
+      actorAvatar: user.avatar,
+      actionType: ActivityLogActionType.AUTH,
+      actionLabel: 'Logged in with two-factor authentication',
+      moduleLabel: 'Authentication',
+      targetLabel: 'Admin portal',
+      description: `${user.name} logged in using two-factor authentication.`,
+      result: ActivityLogResult.SUCCESS,
+      ipAddress: ipAddress ?? null,
+      deviceLabel: deviceInfo ?? null,
+      metadata: ['Login', 'Two-factor authentication'],
     });
 
     res.status(HTTPSTATUS.OK).json({

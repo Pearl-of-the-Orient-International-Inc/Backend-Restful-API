@@ -2,6 +2,7 @@
  * Custom Modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
+import { UserType } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 
@@ -23,9 +24,14 @@ export const getAllUsers = async (
       ? parseInt(req.query.offset as string)
       : undefined;
 
-    const total = await prisma.user.count();
+    const where = {
+      role: UserType.ADMIN,
+    };
+
+    const total = await prisma.user.count({ where });
 
     const users = await prisma.user.findMany({
+      where,
       ...(limit && { take: limit }),
       ...(offset && { skip: offset }),
       select: {

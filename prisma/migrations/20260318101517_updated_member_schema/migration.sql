@@ -1,0 +1,17 @@
+-- AlterTable
+ALTER TABLE "Member" ADD COLUMN     "badgeNumber" TEXT,
+ADD COLUMN     "extensionName" TEXT,
+ADD COLUMN     "middleInitial" TEXT,
+ALTER COLUMN "mobilePhoneNumber" DROP NOT NULL,
+ALTER COLUMN "homeAddress" DROP NOT NULL,
+ALTER COLUMN "civilStatus" DROP NOT NULL,
+ALTER COLUMN "nationality" DROP NOT NULL,
+ALTER COLUMN "region" DROP NOT NULL,
+ALTER COLUMN "province" DROP NOT NULL,
+ALTER COLUMN "municipalityCity" DROP NOT NULL,
+ALTER COLUMN "barangay" DROP NOT NULL,
+ALTER COLUMN "emergencyContactName" DROP NOT NULL,
+ALTER COLUMN "emergencyContactMobile" DROP NOT NULL,
+ALTER COLUMN "churchAffiliation" DROP NOT NULL,
+ALTER COLUMN "churchAddress" DROP NOT NULL,
+ALTER COLUMN "currentPositionRole" DROP NOT NULL;

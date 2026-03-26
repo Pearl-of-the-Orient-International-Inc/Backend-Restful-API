@@ -13,6 +13,11 @@ import helmet from 'helmet';
 import config from '@/config';
 import { logger, logtail } from '@/lib/winston';
 import { prisma } from '@/lib/prisma';
+import {
+  startBackupDatabaseScheduler,
+  stopBackupDatabaseScheduler,
+} from '@/lib/backup-database-scheduler';
+import { activityLogMiddleware } from '@/middlewares/activity-log';
 
 /**
  * Router
@@ -99,11 +104,12 @@ app.use(helmet());
  * - If an error occurs during startup, it is logged, and the process exits with status 1.
  */
 
-app.use('/api/v1', v1Routes);
+app.use('/api/v1', activityLogMiddleware, v1Routes);
 
 (async (): Promise<void> => {
   try {
     await prisma.$connect();
+    startBackupDatabaseScheduler();
     app.listen(config.PORT, () => {
       logger.info(
         `The server will start at http://localhost:${config.PORT} with hot-reloading enabled`,
@@ -128,6 +134,7 @@ app.use('/api/v1', v1Routes);
  */
 const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
   try {
+    stopBackupDatabaseScheduler();
     await prisma.$disconnect();
     logger.info('Server SHUTDOWN', signal);
 

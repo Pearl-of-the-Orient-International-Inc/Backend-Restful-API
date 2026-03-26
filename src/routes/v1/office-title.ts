@@ -11,6 +11,8 @@ import { getAllOfficeTitles } from '@/controllers/v1/office-title/get-all-office
 import { getOfficeTitleById } from '@/controllers/v1/office-title/get-office-title-by-id';
 import { updateOfficeTitle } from '@/controllers/v1/office-title/update-office-title';
 import { deleteOfficeTitle } from '@/controllers/v1/office-title/delete-office-title';
+import { archiveOfficeTitle } from '@/controllers/v1/office-title/archive-office-title';
+import { retrieveOfficeTitle } from '@/controllers/v1/office-title/retrieve-office-title';
 
 /**
  * Helpers, Validators and Middlewares
@@ -41,11 +43,18 @@ router.get(
   '/',
   expressRateLimit('basic'),
   authenticate,
+  authorize([UserType.ADMIN]),
   validate(getAllOfficeTitlesSchema),
   getAllOfficeTitles,
 );
 
-router.get('/:id', expressRateLimit('basic'), authenticate, getOfficeTitleById);
+router.get(
+  '/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  getOfficeTitleById,
+);
 
 router.put(
   '/:id',
@@ -62,6 +71,22 @@ router.delete(
   authenticate,
   authorize([UserType.ADMIN]),
   deleteOfficeTitle,
+);
+
+router.patch(
+  '/:id/archive',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  archiveOfficeTitle,
+);
+
+router.patch(
+  '/:id/retrieve',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  retrieveOfficeTitle,
 );
 
 export default router;

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.SortOrder = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.SortOrder = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -70,6 +70,12 @@ exports.ModelName = {
     MinisterialExperience: 'MinisterialExperience',
     CharacterReference: 'CharacterReference',
     ApplicantSignature: 'ApplicantSignature',
+    ApplicantRequirement: 'ApplicantRequirement',
+    MemberOnboardingProgress: 'MemberOnboardingProgress',
+    MemberPaymentCheckout: 'MemberPaymentCheckout',
+    MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
+    MemberIdGenerationAsset: 'MemberIdGenerationAsset',
+    MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
     BranchOfService: 'BranchOfService',
     OfficeTitle: 'OfficeTitle',
     OfficerAssignment: 'OfficerAssignment'
@@ -144,10 +150,14 @@ exports.PasskeyChallengeScalarFieldEnum = {
 };
 exports.MemberScalarFieldEnum = {
     id: 'id',
+    uniqueId: 'uniqueId',
     userId: 'userId',
     status: 'status',
+    badgeNumber: 'badgeNumber',
     firstName: 'firstName',
+    middleInitial: 'middleInitial',
     lastName: 'lastName',
+    extensionName: 'extensionName',
     mobilePhoneNumber: 'mobilePhoneNumber',
     homeAddress: 'homeAddress',
     civilStatus: 'civilStatus',
@@ -160,7 +170,6 @@ exports.MemberScalarFieldEnum = {
     barangay: 'barangay',
     emergencyContactName: 'emergencyContactName',
     emergencyContactMobile: 'emergencyContactMobile',
-    recentIdPhotoUrl: 'recentIdPhotoUrl',
     churchAffiliation: 'churchAffiliation',
     churchAddress: 'churchAddress',
     currentPositionRole: 'currentPositionRole',
@@ -205,6 +214,70 @@ exports.ApplicantSignatureScalarFieldEnum = {
     id: 'id',
     type: 'type',
     signatureData: 'signatureData',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.ApplicantRequirementScalarFieldEnum = {
+    id: 'id',
+    type: 'type',
+    reviewStatus: 'reviewStatus',
+    fileUrl: 'fileUrl',
+    fileName: 'fileName',
+    mimeType: 'mimeType',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberOnboardingProgressScalarFieldEnum = {
+    id: 'id',
+    currentStep: 'currentStep',
+    preOrientationCompletedLessonIds: 'preOrientationCompletedLessonIds',
+    preOrientationCompletedAt: 'preOrientationCompletedAt',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberPaymentCheckoutScalarFieldEnum = {
+    id: 'id',
+    paymentMethod: 'paymentMethod',
+    proofOfPaymentUrl: 'proofOfPaymentUrl',
+    isPromissoryNote: 'isPromissoryNote',
+    promissoryNoteUrl: 'promissoryNoteUrl',
+    submittedAt: 'submittedAt',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberOnlineInterviewAppointmentScalarFieldEnum = {
+    id: 'id',
+    interviewerId: 'interviewerId',
+    interviewerName: 'interviewerName',
+    day: 'day',
+    timeSlot: 'timeSlot',
+    zoomLink: 'zoomLink',
+    meetingId: 'meetingId',
+    passcode: 'passcode',
+    confirmedAt: 'confirmedAt',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberIdGenerationAssetScalarFieldEnum = {
+    id: 'id',
+    profileUrl: 'profileUrl',
+    qrCodeUrl: 'qrCodeUrl',
+    certificateUrl: 'certificateUrl',
+    generatedAt: 'generatedAt',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberChaplaincyTrainingProgressScalarFieldEnum = {
+    id: 'id',
+    completedLessonIds: 'completedLessonIds',
+    essayAnswers: 'essayAnswers',
+    completedAt: 'completedAt',
     memberId: 'memberId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'

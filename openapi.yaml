@@ -948,6 +948,581 @@
         }
       }
     },
+    "/members/current/requirements": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get current member requirement attachments",
+        "operationId": "getCurrentMemberRequirements",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current member requirement attachments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberRequirementsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Upsert current member requirement attachments",
+        "operationId": "upsertCurrentMemberRequirements",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertMemberRequirementsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Requirement attachments saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberRequirementsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/onboarding-progress": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get current member onboarding progress",
+        "operationId": "getCurrentMemberOnboardingProgress",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Onboarding progress",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberOnboardingProgressResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/onboarding-progress/step": {
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Update current member onboarding step",
+        "operationId": "updateCurrentMemberOnboardingStep",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOnboardingStepRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Onboarding step updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberOnboardingProgressResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/onboarding-progress/pre-orientation": {
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Update pre-orientation progress",
+        "operationId": "updateCurrentMemberPreOrientationProgress",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePreOrientationProgressRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pre-orientation progress updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberOnboardingProgressResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/payment-checkout": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get current member payment checkout",
+        "operationId": "getCurrentMemberPaymentCheckout",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment checkout data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberPaymentCheckoutResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Upsert current member payment checkout",
+        "operationId": "upsertCurrentMemberPaymentCheckout",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPaymentCheckoutRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment checkout saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberPaymentCheckoutResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/online-interview": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get current member online interview appointment",
+        "operationId": "getCurrentMemberOnlineInterview",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Online interview appointment data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberOnlineInterviewResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Upsert current member online interview appointment",
+        "operationId": "upsertCurrentMemberOnlineInterview",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertOnlineInterviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Online interview appointment saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberOnlineInterviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/id-generation": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get current member ID generation asset",
+        "operationId": "getCurrentMemberIdGenerationAsset",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ID generation asset data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberIdGenerationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Upsert current member ID generation asset",
+        "operationId": "upsertCurrentMemberIdGenerationAsset",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertMemberIdGenerationAssetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ID generation asset saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberIdGenerationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/members/current/chaplaincy-training": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get current member chaplaincy training progress",
+        "operationId": "getCurrentMemberChaplaincyTrainingProgress",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chaplaincy training progress data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberChaplaincyTrainingProgressResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Upsert current member chaplaincy training progress",
+        "operationId": "upsertCurrentMemberChaplaincyTrainingProgress",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertChaplaincyTrainingProgressRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chaplaincy training progress saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberChaplaincyTrainingProgressResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/branch-service/create": {
       "post": {
         "tags": [
@@ -2250,6 +2825,52 @@
           "UPLOADED"
         ]
       },
+      "ApplicantRequirementType": {
+        "type": "string",
+        "enum": [
+          "PHOTO_2X2",
+          "HS_BACCALAUREATE_DIPLOMA",
+          "TWO_THREE_YEAR_PROGRAM_DIPLOMA",
+          "MASTERS_DEGREE_DIPLOMA",
+          "DOCTORAL_DEGREE_DIPLOMA",
+          "ORDINATION_CERTIFICATE",
+          "PASTORS_RECOMMENDATION_LETTER",
+          "LETTER_OF_INTENT",
+          "ENDORSEMENT_LETTERS",
+          "MARRIAGE_CONTRACT",
+          "CLEARANCE_BARANGAY",
+          "CLEARANCE_POLICE",
+          "CLEARANCE_NBI"
+        ]
+      },
+      "MemberOnboardingStep": {
+        "type": "string",
+        "enum": [
+          "REQUIREMENTS",
+          "PRE_ORIENTATION",
+          "PAYMENT_CHECKOUT",
+          "ONLINE_INTERVIEW",
+          "ID_GENERATION",
+          "CHAPLAINCY_101",
+          "OATH_TAKING"
+        ]
+      },
+      "MemberPaymentMethod": {
+        "type": "string",
+        "enum": [
+          "E_WALLET",
+          "DIRECT_DEBIT",
+          "OVER_THE_COUNTER",
+          "CASH"
+        ]
+      },
+      "InterviewDay": {
+        "type": "string",
+        "enum": [
+          "SATURDAY",
+          "SUNDAY"
+        ]
+      },
       "UserPublic": {
         "type": "object",
         "required": [
@@ -2765,13 +3386,6 @@
           "emergencyContactMobile": {
             "type": "string"
           },
-          "recentIdPhotoUrl": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "uri"
-          },
           "churchAffiliation": {
             "type": "string"
           },
@@ -3056,13 +3670,6 @@
             "minLength": 1,
             "maxLength": 30
           },
-          "recentIdPhotoUrl": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "uri"
-          },
           "churchAffiliation": {
             "type": "string",
             "minLength": 1,
@@ -3239,6 +3846,491 @@
           },
           "pagination": {
             "$ref": "#/components/schemas/Pagination"
+          }
+        }
+      },
+      "UpsertMemberRequirementsRequest": {
+        "type": "object",
+        "required": [
+          "attachments"
+        ],
+        "properties": {
+          "attachments": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 13,
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "fileUrl"
+              ],
+              "properties": {
+                "type": {
+                  "$ref": "#/components/schemas/ApplicantRequirementType"
+                },
+                "fileUrl": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "fileName": {
+                  "type": "string"
+                },
+                "mimeType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MemberRequirementsResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "memberId",
+              "attachments"
+            ],
+            "properties": {
+              "memberId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "uniqueId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "attachments": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateOnboardingStepRequest": {
+        "type": "object",
+        "required": [
+          "currentStep"
+        ],
+        "properties": {
+          "currentStep": {
+            "$ref": "#/components/schemas/MemberOnboardingStep"
+          }
+        }
+      },
+      "UpdatePreOrientationProgressRequest": {
+        "type": "object",
+        "required": [
+          "completedLessonIds"
+        ],
+        "properties": {
+          "completedLessonIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "isCompleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MemberOnboardingProgressResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "currentStep",
+              "preOrientationCompletedLessonIds"
+            ],
+            "properties": {
+              "currentStep": {
+                "$ref": "#/components/schemas/MemberOnboardingStep"
+              },
+              "preOrientationCompletedLessonIds": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "preOrientationCompletedAt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      },
+      "UpsertPaymentCheckoutRequest": {
+        "type": "object",
+        "required": [
+          "paymentMethod"
+        ],
+        "properties": {
+          "paymentMethod": {
+            "$ref": "#/components/schemas/MemberPaymentMethod"
+          },
+          "proofOfPaymentUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "isPromissoryNote": {
+            "type": "boolean"
+          },
+          "promissoryNoteUrl": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "MemberPaymentCheckoutResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "paymentMethod",
+                  "isPromissoryNote",
+                  "submittedAt"
+                ],
+                "properties": {
+                  "paymentMethod": {
+                    "$ref": "#/components/schemas/MemberPaymentMethod"
+                  },
+                  "proofOfPaymentUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "isPromissoryNote": {
+                    "type": "boolean"
+                  },
+                  "promissoryNoteUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "submittedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "UpsertOnlineInterviewRequest": {
+        "type": "object",
+        "required": [
+          "interviewerId",
+          "interviewerName",
+          "day",
+          "timeSlot",
+          "zoomLink"
+        ],
+        "properties": {
+          "interviewerId": {
+            "type": "string"
+          },
+          "interviewerName": {
+            "type": "string"
+          },
+          "day": {
+            "$ref": "#/components/schemas/InterviewDay"
+          },
+          "timeSlot": {
+            "type": "string"
+          },
+          "zoomLink": {
+            "type": "string",
+            "format": "uri"
+          },
+          "meetingId": {
+            "type": "string"
+          },
+          "passcode": {
+            "type": "string"
+          }
+        }
+      },
+      "MemberOnlineInterviewResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "interviewerId",
+                  "interviewerName",
+                  "day",
+                  "timeSlot",
+                  "zoomLink",
+                  "confirmedAt"
+                ],
+                "properties": {
+                  "interviewerId": {
+                    "type": "string"
+                  },
+                  "interviewerName": {
+                    "type": "string"
+                  },
+                  "day": {
+                    "$ref": "#/components/schemas/InterviewDay"
+                  },
+                  "timeSlot": {
+                    "type": "string"
+                  },
+                  "zoomLink": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "meetingId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "passcode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confirmedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "UpsertMemberIdGenerationAssetRequest": {
+        "type": "object",
+        "required": [
+          "profileUrl",
+          "qrCodeUrl",
+          "certificateUrl"
+        ],
+        "properties": {
+          "profileUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "qrCodeUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "certificateUrl": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "MemberIdGenerationResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "uniqueId",
+              "asset"
+            ],
+            "properties": {
+              "uniqueId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "asset": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "profileUrl",
+                      "qrCodeUrl",
+                      "certificateUrl",
+                      "generatedAt"
+                    ],
+                    "properties": {
+                      "profileUrl": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "qrCodeUrl": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "certificateUrl": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "generatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "UpsertChaplaincyTrainingProgressRequest": {
+        "type": "object",
+        "required": [
+          "completedLessonIds"
+        ],
+        "properties": {
+          "completedLessonIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "essayAnswers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "isCompleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MemberChaplaincyTrainingProgressResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "completedLessonIds",
+                  "essayAnswers"
+                ],
+                "properties": {
+                  "completedLessonIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "essayAnswers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "completedAt": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         }
       },

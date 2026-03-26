@@ -1,4 +1,5 @@
 import { HTTPSTATUS } from '@/common/http-codes';
+import { UserType } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import { hashValue } from '@/lib/password-hash';
@@ -46,7 +47,7 @@ export const createUserAccount = async (
         name,
         email: normalizedEmail,
         password: hashedPassword,
-        role,
+        role: role ?? UserType.ADMIN,
         position,
         accountStatus,
         avatar: avatar || null,
@@ -92,4 +93,3 @@ export const createUserAccount = async (
     });
   }
 };
-

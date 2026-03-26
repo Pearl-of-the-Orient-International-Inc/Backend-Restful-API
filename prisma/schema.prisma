@@ -19,20 +19,24 @@ model User {
   password String
   avatar   String?
 
-  position UserPosition?
+  position      UserPosition?
   accountStatus UserAccountStatus @default(ACTIVE)
 
-  isEmailVerified Boolean  @default(false)
-  isTwoFactorEnabled Boolean @default(false)
-  twoFactorSecret   String?
-  role            UserType @default(MEMBER)
+  isEmailVerified    Boolean  @default(false)
+  isTwoFactorEnabled Boolean  @default(false)
+  twoFactorSecret    String?
+  role               UserType @default(MEMBER)
 
-  userTokens        UserToken[]
-  sessions          Session[]
-  verificationCodes VerificationCode[]
+  userTokens         UserToken[]
+  sessions           Session[]
+  activityLogs       ActivityLog[]
+  verificationCodes  VerificationCode[]
   passkeyCredentials PasskeyCredential[]
-  passkeyChallenge  PasskeyChallenge?
-  memberProfile     Member?
+  passkeyChallenge   PasskeyChallenge?
+  memberProfile      Member?
+  createdBackups     DatabaseBackupSnapshot[] @relation("CreatedDatabaseBackups")
+  restoredBackups    DatabaseBackupSnapshot[] @relation("RestoredDatabaseBackups")
+  backupSettingUpdates DatabaseBackupSettings[] @relation("BackupSettingsUpdatedBy")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -71,6 +75,36 @@ model Session {
   @@index([userId])
 }
 
+model ActivityLog {
+  id String @id @default(uuid())
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  actorName   String
+  actorEmail  String
+  actorAvatar String?
+
+  actionType  ActivityLogActionType
+  actionLabel String
+  moduleLabel String
+  targetLabel String
+  description String
+  result      ActivityLogResult
+
+  ipAddress   String?
+  deviceLabel String?
+  metadata    Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([actionType])
+  @@index([moduleLabel])
+  @@index([result])
+  @@index([createdAt])
+}
+
 model VerificationCode {
   id        String           @id @default(uuid())
   code      String?          @unique
@@ -87,11 +121,11 @@ model VerificationCode {
 model PasskeyCredential {
   id String @id @default(uuid())
 
-  credentialID String @unique
+  credentialID String   @unique
   publicKey    Bytes
-  counter      Int    @default(0)
+  counter      Int      @default(0)
   deviceType   String
-  backedUp     Boolean @default(false)
+  backedUp     Boolean  @default(false)
   transports   String[]
   label        String?
 
@@ -123,37 +157,42 @@ model PasskeyChallenge {
 // ─────────────────────────────────────────────
 
 model Member {
-  id     String @id @default(uuid())
-  uniqueId String? @unique
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id       String  @id @default(uuid())
+  uniqueId String? @unique // FORMAT: 262-00037 (Recent) = [YR][CODE if officer (1), if member (2)]-[SERIES (incremental)]
+  userId   String  @unique
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  status MemberStatus @default(PENDING)
+  status     MemberStatus @default(PENDING)
+  memberType MemberType   @default(ASSOCIATE_CHAPLAIN)
+
+  badgeNumber String?
 
   // Contact Information
   firstName         String
+  middleInitial     String?
   lastName          String
-  mobilePhoneNumber String
-  homeAddress       String
-  civilStatus       CivilStatus
+  extensionName     String?
+  mobilePhoneNumber String?
+  homeAddress       String?
+  civilStatus       CivilStatus?
   gender            Gender
-  nationality       String
+  nationality       String?
   dateOfBirth       DateTime
   // age is derived from dateOfBirth in backend — not stored
 
   // Location
-  region           String
-  province         String
-  municipalityCity String
-  barangay         String
+  region           String?
+  province         String?
+  municipalityCity String?
+  barangay         String?
 
-  emergencyContactName   String
-  emergencyContactMobile String
+  emergencyContactName   String?
+  emergencyContactMobile String?
 
   // Church Background
-  churchAffiliation        String
-  churchAddress            String
-  currentPositionRole      String
+  churchAffiliation        String?
+  churchAddress            String?
+  currentPositionRole      String?
   currentPositionRoleOther String?
 
   // Optional personal details
@@ -176,16 +215,17 @@ model Member {
   postGraduateStudies String?
 
   // Relations
-  ministerialExperiences MinisterialExperience[]
-  characterReferences    CharacterReference[]
-  applicantRequirements  ApplicantRequirement[]
-  onboardingProgress     MemberOnboardingProgress?
-  paymentCheckout        MemberPaymentCheckout?
+  ministerialExperiences     MinisterialExperience[]
+  characterReferences        CharacterReference[]
+  applicantRequirements      ApplicantRequirement[]
+  onboardingProgress         MemberOnboardingProgress?
+  paymentCheckout            MemberPaymentCheckout?
   onlineInterviewAppointment MemberOnlineInterviewAppointment?
-  idGenerationAsset      MemberIdGenerationAsset?
+  idGenerationAsset          MemberIdGenerationAsset?
   chaplaincyTrainingProgress MemberChaplaincyTrainingProgress?
-  signature              ApplicantSignature?
-  officerAssignments     OfficerAssignment[]
+  signature                  ApplicantSignature?
+  officerAssignments         OfficerAssignment[]
+  eventAttendances           EventAttendee[]
 
   isActive Boolean @default(true)
 
@@ -233,12 +273,12 @@ model ApplicantSignature {
 }
 
 model ApplicantRequirement {
-  id         String @id @default(uuid())
-  type       ApplicantRequirementType
-  reviewStatus RequirementReviewStatus @default(PENDING)
-  fileUrl    String
-  fileName   String?
-  mimeType   String?
+  id           String                   @id @default(uuid())
+  type         ApplicantRequirementType
+  reviewStatus RequirementReviewStatus  @default(PENDING)
+  fileUrl      String
+  fileName     String?
+  mimeType     String?
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -253,9 +293,9 @@ model ApplicantRequirement {
 model MemberOnboardingProgress {
   id String @id @default(uuid())
 
-  currentStep                    MemberOnboardingStep @default(REQUIREMENTS)
-  preOrientationCompletedLessonIds Int[] @default([])
-  preOrientationCompletedAt      DateTime?
+  currentStep                      MemberOnboardingStep @default(REQUIREMENTS)
+  preOrientationCompletedLessonIds Int[]                @default([])
+  preOrientationCompletedAt        DateTime?
 
   memberId String @unique
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -267,11 +307,11 @@ model MemberOnboardingProgress {
 model MemberPaymentCheckout {
   id String @id @default(uuid())
 
-  paymentMethod      MemberPaymentMethod
-  proofOfPaymentUrl  String?
-  isPromissoryNote   Boolean @default(false)
-  promissoryNoteUrl  String?
-  submittedAt        DateTime @default(now())
+  paymentMethod     MemberPaymentMethod
+  proofOfPaymentUrl String?
+  isPromissoryNote  Boolean             @default(false)
+  promissoryNoteUrl String?
+  submittedAt       DateTime            @default(now())
 
   memberId String @unique
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -290,7 +330,7 @@ model MemberOnlineInterviewAppointment {
   zoomLink        String
   meetingId       String?
   passcode        String?
-  confirmedAt     DateTime @default(now())
+  confirmedAt     DateTime     @default(now())
 
   memberId String @unique
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -302,10 +342,10 @@ model MemberOnlineInterviewAppointment {
 model MemberIdGenerationAsset {
   id String @id @default(uuid())
 
-  profileUrl      String
-  qrCodeUrl       String
-  certificateUrl  String
-  generatedAt     DateTime @default(now())
+  profileUrl     String
+  qrCodeUrl      String
+  certificateUrl String
+  generatedAt    DateTime @default(now())
 
   memberId String @unique
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -317,8 +357,8 @@ model MemberIdGenerationAsset {
 model MemberChaplaincyTrainingProgress {
   id String @id @default(uuid())
 
-  completedLessonIds Int[] @default([])
-  essayAnswers       Json  @default("{}")
+  completedLessonIds Int[]     @default([])
+  essayAnswers       Json      @default("{}")
   completedAt        DateTime?
 
   memberId String @unique
@@ -354,6 +394,7 @@ model OfficeTitle {
   maxSlots    Int? // null = unlimited, 1 = Chief Chaplain only
 
   sections Json
+  isActive Boolean @default(true)
 
   assignments OfficerAssignment[]
 
@@ -389,6 +430,103 @@ model OfficerAssignment {
   @@index([officeTitleId])
 }
 
+model Event {
+  id String @id @default(uuid())
+
+  name     String
+  category EventCategory
+  type     EventType
+
+  location        String?
+  onlineLink      String?
+  meetingPlatform EventMeetingPlatform?
+  meetingId       String?
+  meetingPassword String?
+
+  description  String
+  thumbnailUrl String
+  organizer    String
+
+  startsAt DateTime
+  endsAt   DateTime
+
+  status     EventStatus     @default(SCHEDULED)
+  visibility EventVisibility @default(PUBLIC)
+  attendees  EventAttendee[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([type])
+  @@index([status])
+  @@index([startsAt])
+}
+
+model EventAttendee {
+  id String @id @default(uuid())
+
+  eventId String
+  event   Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  accessLevel EventAttendeeAccessLevel   @default(FULL_ACCESS)
+  inviteStatus EventAttendeeInviteStatus @default(INVITED)
+
+  invitedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eventId, memberId])
+  @@index([eventId])
+  @@index([memberId])
+}
+
+model DatabaseBackupSettings {
+  id String @id @default(uuid())
+
+  automaticBackupEnabled Boolean         @default(true)
+  frequency              BackupFrequency @default(DAILY)
+  retentionDays          Int             @default(30)
+  nextRunAt              DateTime?
+
+  lastUpdatedByUserId String?
+  lastUpdatedByUser   User?   @relation("BackupSettingsUpdatedBy", fields: [lastUpdatedByUserId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DatabaseBackupSnapshot {
+  id String @id @default(uuid())
+
+  fileKey  String?
+  fileUrl  String
+  fileName String
+
+  source       BackupSnapshotSource @default(MANUAL)
+  status       BackupSnapshotStatus @default(READY)
+  sizeBytes    Int
+  tableCount   Int
+  retentionDays Int
+  metadata     Json?
+
+  createdByUserId String?
+  createdByUser   User?   @relation("CreatedDatabaseBackups", fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  restoredAt       DateTime?
+  restoredByUserId String?
+  restoredByUser   User?   @relation("RestoredDatabaseBackups", fields: [restoredByUserId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([source])
+  @@index([status])
+  @@index([createdAt])
+}
+
 // ─────────────────────────────────────────────
 // ENUMS
 // ─────────────────────────────────────────────
@@ -414,10 +552,35 @@ enum UserAccountStatus {
   SUSPENDED
 }
 
+enum ActivityLogActionType {
+  AUTH
+  CREATE
+  UPDATE
+  DELETE
+  EXPORT
+  INVITE
+  ASSIGN
+  REVIEW
+  SECURITY
+}
+
+enum ActivityLogResult {
+  SUCCESS
+  WARNING
+  FAILED
+}
+
 enum MemberStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+enum MemberType {
+  ASSOCIATE_CHAPLAIN
+  PROFESSIONAL_CHAPLAIN
+  ORDAINED_AND_COMMISSIONED_PRACTITIONER
+  CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR
 }
 
 enum VerificationType {
@@ -506,4 +669,66 @@ enum OfficeTitleLevel {
   CITY_MUNICIPAL_DEPUTY_CHAPLAIN
   BARANGAY_CHAPLAIN
   BARANGAY_DEPUTY_CHAPLAIN
+}
+
+enum EventCategory {
+  CONFERENCE
+  OUTREACH
+  TRAINING
+  WORSHIP
+  ORIENTATION
+  SEMINAR
+  FELLOWSHIP
+  PRAYER
+  OTHER
+}
+
+enum EventType {
+  ONSITE
+  ONLINE
+}
+
+enum EventStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum EventVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum EventMeetingPlatform {
+  ZOOM
+  GOOGLE_MEET
+  MICROSOFT_TEAMS
+  OTHER
+}
+
+enum EventAttendeeAccessLevel {
+  FULL_ACCESS
+}
+
+enum EventAttendeeInviteStatus {
+  INVITED
+  ACCEPTED
+}
+
+enum BackupFrequency {
+  HOURLY
+  DAILY
+  WEEKLY
+}
+
+enum BackupSnapshotSource {
+  MANUAL
+  AUTOMATIC
+}
+
+enum BackupSnapshotStatus {
+  READY
+  IN_PROGRESS
+  FAILED
 }

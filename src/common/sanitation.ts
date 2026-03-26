@@ -5,10 +5,20 @@ import { z } from 'zod';
 export const validate = (schema: z.ZodSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
+      const body =
+        req.body && typeof req.body === 'object' && !Array.isArray(req.body)
+          ? req.body
+          : {};
+
       const payload =
         req.method === 'GET'
           ? { query: req.query, params: req.params }
-          : req.body;
+          : {
+              ...body,
+              body: req.body,
+              query: req.query,
+              params: req.params,
+            };
 
       schema.parse(payload);
       next();

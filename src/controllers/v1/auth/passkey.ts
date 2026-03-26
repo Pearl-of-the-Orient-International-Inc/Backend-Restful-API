@@ -30,6 +30,11 @@ import { logger } from '@/lib/winston';
 import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
+import {
+  ActivityLogActionType,
+  ActivityLogResult,
+} from '@/generated/prisma/client';
+import { createActivityLog } from '@/lib/activity-log';
 
 /**
  * Types
@@ -610,6 +615,22 @@ export const verifyPasskeyAuthentication = async (
       ipAddress,
       location,
       device: deviceInfo,
+    });
+
+    await createActivityLog({
+      userId: user.id,
+      actorName: user.name,
+      actorEmail: user.email,
+      actorAvatar: user.avatar,
+      actionType: ActivityLogActionType.AUTH,
+      actionLabel: 'Logged in with passkey',
+      moduleLabel: 'Authentication',
+      targetLabel: 'Admin portal',
+      description: `${user.name} logged in using passkey authentication.`,
+      result: ActivityLogResult.SUCCESS,
+      ipAddress: ipAddress ?? null,
+      deviceLabel: deviceInfo ?? null,
+      metadata: ['Login', 'Passkey authentication'],
     });
 
     res.status(HTTPSTATUS.OK).json({

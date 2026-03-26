@@ -74,6 +74,7 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
     const createData: Prisma.MemberCreateInput = {
       user: { connect: { id: userId } },
       firstName: body.firstName,
+      middleInitial: body.middleInitial ?? null,
       lastName: body.lastName,
       mobilePhoneNumber: body.mobilePhoneNumber,
       homeAddress: body.homeAddress,

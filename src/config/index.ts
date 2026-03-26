@@ -30,6 +30,9 @@ const parseTrustProxy = (value?: string): boolean | number | string => {
 const config = {
   PORT: process.env.PORT || 5000,
   NODE_ENV: process.env.NODE_ENV,
+  BACKUP_SCHEDULER_INTERVAL_MS: Number(
+    process.env.BACKUP_SCHEDULER_INTERVAL_MS ?? 60_000,
+  ),
   WHITELIST_ORIGINS: [
     ...new Set([
       ...parseCsv(process.env.WHITELIST_ORIGINS),

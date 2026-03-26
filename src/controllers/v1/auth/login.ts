@@ -17,6 +17,11 @@ import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
 import { UserAccountStatus } from '@/generated/prisma/enums';
+import {
+  ActivityLogActionType,
+  ActivityLogResult,
+} from '@/generated/prisma/client';
+import { createActivityLog } from '@/lib/activity-log';
 
 /**
  * Types & Validators
@@ -45,6 +50,20 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     });
 
     if (!user) {
+      await createActivityLog({
+        actorName: email,
+        actorEmail: email,
+        actionType: ActivityLogActionType.AUTH,
+        actionLabel: 'Login attempt',
+        moduleLabel: 'Authentication',
+        targetLabel: 'Admin portal',
+        description: `Login attempt failed because no account exists for ${email}.`,
+        result: ActivityLogResult.FAILED,
+        ipAddress: ipAddress ?? null,
+        deviceLabel: finalUserAgent ?? null,
+        metadata: ['Login', 'Unknown account'],
+      });
+
       logger.warn('No user found with this email');
       res.status(HTTPSTATUS.CONFLICT).json({
         code: 'CONFLICT',
@@ -56,6 +75,22 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const isPasswordValid = await compareValue(password, user.password);
 
     if (!isPasswordValid) {
+      await createActivityLog({
+        userId: user.id,
+        actorName: user.name,
+        actorEmail: user.email,
+        actorAvatar: user.avatar,
+        actionType: ActivityLogActionType.AUTH,
+        actionLabel: 'Login attempt',
+        moduleLabel: 'Authentication',
+        targetLabel: 'Admin portal',
+        description: `Login attempt failed for ${user.email} due to an invalid password.`,
+        result: ActivityLogResult.FAILED,
+        ipAddress: ipAddress ?? null,
+        deviceLabel: finalUserAgent ?? null,
+        metadata: ['Login', 'Invalid password'],
+      });
+
       logger.warn('Invalid password attempt', { userId: user.id });
       res.status(HTTPSTATUS.UNAUTHORIZED).json({
         code: 'UNAUTHORIZED',
@@ -66,6 +101,22 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     // Check if email is verified
     if (!user.isEmailVerified) {
+      await createActivityLog({
+        userId: user.id,
+        actorName: user.name,
+        actorEmail: user.email,
+        actorAvatar: user.avatar,
+        actionType: ActivityLogActionType.AUTH,
+        actionLabel: 'Login attempt',
+        moduleLabel: 'Authentication',
+        targetLabel: 'Admin portal',
+        description: `Login attempt was blocked because ${user.email} has not verified their email.`,
+        result: ActivityLogResult.FAILED,
+        ipAddress: ipAddress ?? null,
+        deviceLabel: finalUserAgent ?? null,
+        metadata: ['Login', 'Email verification required'],
+      });
+
       logger.warn('Login attempt with unverified email', {
         userId: user.id,
         email: user.email,
@@ -80,6 +131,22 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     if (user.accountStatus !== UserAccountStatus.ACTIVE) {
+      await createActivityLog({
+        userId: user.id,
+        actorName: user.name,
+        actorEmail: user.email,
+        actorAvatar: user.avatar,
+        actionType: ActivityLogActionType.AUTH,
+        actionLabel: 'Login attempt',
+        moduleLabel: 'Authentication',
+        targetLabel: 'Admin portal',
+        description: `Login attempt was blocked because ${user.email} is not active.`,
+        result: ActivityLogResult.FAILED,
+        ipAddress: ipAddress ?? null,
+        deviceLabel: finalUserAgent ?? null,
+        metadata: ['Login', 'Inactive account'],
+      });
+
       logger.warn('Login attempt with inactive account status', {
         userId: user.id,
         email: user.email,
@@ -233,6 +300,22 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       ipAddress,
       location,
       device: deviceInfo,
+    });
+
+    await createActivityLog({
+      userId: user.id,
+      actorName: user.name,
+      actorEmail: user.email,
+      actorAvatar: user.avatar,
+      actionType: ActivityLogActionType.AUTH,
+      actionLabel: 'Logged in',
+      moduleLabel: 'Authentication',
+      targetLabel: 'Admin portal',
+      description: `${user.name} logged in to the admin portal.`,
+      result: ActivityLogResult.SUCCESS,
+      ipAddress: ipAddress ?? null,
+      deviceLabel: deviceInfo ?? null,
+      metadata: ['Login', isNewSession ? 'New session' : 'Existing session'],
     });
 
     res.status(HTTPSTATUS.OK).json({

@@ -16,6 +16,9 @@ import userRoutes from '@/routes/v1/user';
 import memberRoutes from '@/routes/v1/member';
 import branchServiceRoutes from '@/routes/v1/branch-service';
 import officeTitleRoutes from '@/routes/v1/office-title';
+import eventRoutes from '@/routes/v1/event';
+import activityLogRoutes from '@/routes/v1/activity-log';
+import backupDatabaseRoutes from '@/routes/v1/backup-database';
 
 const router = Router();
 
@@ -39,5 +42,8 @@ router.use('/users', userRoutes);
 router.use('/members', memberRoutes);
 router.use('/branch-service', branchServiceRoutes);
 router.use('/offices', officeTitleRoutes);
+router.use('/events', eventRoutes);
+router.use('/activity-logs', activityLogRoutes);
+router.use('/backups', backupDatabaseRoutes);
 
 export default router;

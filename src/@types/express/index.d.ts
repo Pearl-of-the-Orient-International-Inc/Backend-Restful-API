@@ -1,5 +1,6 @@
 import type { User as PrismaUser } from '../../generated/prisma';
 import * as express from 'express';
+import type { ActivityLogContext } from '@/lib/activity-log';
 
 declare global {
   namespace Express {
@@ -8,6 +9,7 @@ declare global {
     interface Request {
       sessionId?: string;
       userId?: string;
+      activityLogContext?: ActivityLogContext;
     }
   }
 }
