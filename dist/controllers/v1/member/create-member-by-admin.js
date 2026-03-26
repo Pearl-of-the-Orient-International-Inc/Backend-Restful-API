@@ -15,8 +15,9 @@ const http_codes_1 = require("../../../common/http-codes");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const password_hash_1 = require("../../../lib/password-hash");
+const member_unique_id_1 = require("../../../lib/member-unique-id");
 const mailers_1 = require("../../../mailers");
-const welcome_user_1 = require("../../../mailers/templates/welcome-user");
+const welcome_member_1 = require("../../../mailers/templates/welcome-member");
 const enums_1 = require("../../../generated/prisma/enums");
 const getOptional = (value) => {
     const normalized = value === null || value === void 0 ? void 0 : value.trim();
@@ -24,6 +25,18 @@ const getOptional = (value) => {
 };
 const buildFullName = (firstName, lastName) => [firstName.trim(), lastName.trim()].filter(Boolean).join(' ');
 const generateTemporaryPassword = () => `Pearl!${(0, crypto_1.randomBytes)(5).toString('hex').toUpperCase()}9`;
+const isUniqueIdConflict = (error) => {
+    var _a;
+    if (!error || typeof error !== 'object' || !('code' in error)) {
+        return false;
+    }
+    const code = error.code;
+    const target = (_a = error.meta) === null || _a === void 0 ? void 0 : _a.target;
+    const normalizedTarget = Array.isArray(target)
+        ? target.join(',').toLowerCase()
+        : String(target !== null && target !== void 0 ? target : '').toLowerCase();
+    return code === 'P2002' && normalizedTarget.includes('uniqueid');
+};
 const userSelect = {
     id: true,
     name: true,
@@ -37,6 +50,7 @@ const userSelect = {
     createdAt: true,
     updatedAt: true,
 };
+const MAX_MEMBER_CREATE_ATTEMPTS = 5;
 const createMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
@@ -82,108 +96,139 @@ const createMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
         const temporaryPassword = existingUser ? null : generateTemporaryPassword();
         const hashedPassword = temporaryPassword ? yield (0, password_hash_1.hashValue)(temporaryPassword) : null;
         const displayName = buildFullName(body.firstName, body.lastName);
-        const result = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
-            var _a, _b, _c, _d, _e;
-            const user = existingUser
-                ? yield tx.user.findUniqueOrThrow({
-                    where: { id: existingUser.id },
-                    select: userSelect,
-                })
-                : yield tx.user.create({
-                    data: {
-                        name: displayName,
+        let result = null;
+        for (let attempt = 1; attempt <= MAX_MEMBER_CREATE_ATTEMPTS; attempt += 1) {
+            try {
+                result = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+                    var _a, _b, _c, _d, _e, _f;
+                    const user = existingUser
+                        ? yield tx.user.findUniqueOrThrow({
+                            where: { id: existingUser.id },
+                            select: userSelect,
+                        })
+                        : yield tx.user.create({
+                            data: {
+                                name: displayName,
+                                email: normalizedEmail,
+                                password: hashedPassword,
+                                role: enums_1.UserType.MEMBER,
+                                accountStatus: enums_1.UserAccountStatus.ACTIVE,
+                                isEmailVerified: true,
+                            },
+                            select: userSelect,
+                        });
+                    const uniqueId = yield (0, member_unique_id_1.generateNextMemberUniqueId)(user.role);
+                    const createData = {
+                        user: { connect: { id: user.id } },
+                        status: enums_1.MemberStatus.APPROVED,
+                        memberType: (_a = body.memberType) !== null && _a !== void 0 ? _a : enums_1.MemberType.ASSOCIATE_CHAPLAIN,
+                        uniqueId,
+                        badgeNumber: getOptional(body.badgeNumber),
+                        firstName: body.firstName.trim(),
+                        middleInitial: getOptional(body.middleInitial),
+                        lastName: body.lastName.trim(),
+                        extensionName: getOptional(body.extensionName),
+                        mobilePhoneNumber: getOptional(body.mobilePhoneNumber),
+                        homeAddress: getOptional(body.homeAddress),
+                        civilStatus: (_b = body.civilStatus) !== null && _b !== void 0 ? _b : null,
+                        gender: body.gender,
+                        nationality: getOptional(body.nationality),
+                        dateOfBirth: new Date(body.dateOfBirth),
+                        region: getOptional(body.region),
+                        province: getOptional(body.province),
+                        municipalityCity: getOptional(body.municipalityCity),
+                        barangay: getOptional(body.barangay),
+                        emergencyContactName: getOptional(body.emergencyContactName),
+                        emergencyContactMobile: getOptional(body.emergencyContactMobile),
+                        churchAffiliation: getOptional(body.churchAffiliation),
+                        churchAddress: getOptional(body.churchAddress),
+                        currentPositionRole: getOptional(body.currentPositionRole),
+                        currentPositionRoleOther: getOptional(body.currentPositionRoleOther),
+                        height: getOptional(body.height),
+                        weight: getOptional(body.weight),
+                        bloodType: getOptional(body.bloodType),
+                        colorOfEyes: getOptional(body.colorOfEyes),
+                        colorOfSkin: getOptional(body.colorOfSkin),
+                        sssNumber: getOptional(body.sssNumber),
+                        tinNumber: getOptional(body.tinNumber),
+                        skillsTalents: getOptional(body.skillsTalents),
+                        preferredBranchOther: getOptional(body.preferredBranchOther),
+                        elementarySchool: getOptional(body.elementarySchool),
+                        secondarySchool: getOptional(body.secondarySchool),
+                        tertiaryCollege: getOptional(body.tertiaryCollege),
+                        postGraduateStudies: getOptional(body.postGraduateStudies),
+                        ministerialExperiences: {
+                            create: (_d = (_c = body.ministerialExperiences) === null || _c === void 0 ? void 0 : _c.map((item, index) => ({
+                                roleDescription: item.roleDescription,
+                                yearsApprox: item.yearsApprox,
+                                order: index + 1,
+                            }))) !== null && _d !== void 0 ? _d : [],
+                        },
+                        characterReferences: {
+                            create: (_f = (_e = body.characterReferences) === null || _e === void 0 ? void 0 : _e.map((item, index) => ({
+                                name: item.name,
+                                positionRelationship: item.positionRelationship,
+                                contactNumber: item.contactNumber,
+                                order: index + 1,
+                            }))) !== null && _f !== void 0 ? _f : [],
+                        },
+                    };
+                    if (body.createdAt) {
+                        createData.createdAt = new Date(body.createdAt);
+                    }
+                    if (preferredBranchIds.length > 0) {
+                        createData.preferredBranches = {
+                            connect: preferredBranchIds.map((id) => ({ id })),
+                        };
+                    }
+                    if (body.signature) {
+                        createData.signature = {
+                            create: {
+                                type: body.signature.type,
+                                signatureData: body.signature.signatureData,
+                            },
+                        };
+                    }
+                    const member = yield tx.member.create({
+                        data: createData,
+                        include: {
+                            signature: true,
+                            ministerialExperiences: true,
+                            characterReferences: true,
+                            preferredBranches: {
+                                select: { id: true, title: true },
+                            },
+                            user: {
+                                select: userSelect,
+                            },
+                        },
+                    });
+                    return {
+                        user,
+                        member,
+                        createdUser: !existingUser,
+                    };
+                }));
+                break;
+            }
+            catch (error) {
+                if (attempt < MAX_MEMBER_CREATE_ATTEMPTS && isUniqueIdConflict(error)) {
+                    winston_1.logger.warn('Unique member ID conflict while creating member by admin, retrying', {
                         email: normalizedEmail,
-                        password: hashedPassword,
-                        role: enums_1.UserType.MEMBER,
-                        accountStatus: enums_1.UserAccountStatus.ACTIVE,
-                        isEmailVerified: true,
-                    },
-                    select: userSelect,
-                });
-            const createData = {
-                user: { connect: { id: user.id } },
-                firstName: body.firstName.trim(),
-                lastName: body.lastName.trim(),
-                mobilePhoneNumber: getOptional(body.mobilePhoneNumber),
-                homeAddress: getOptional(body.homeAddress),
-                civilStatus: (_a = body.civilStatus) !== null && _a !== void 0 ? _a : null,
-                gender: body.gender,
-                nationality: getOptional(body.nationality),
-                dateOfBirth: new Date(body.dateOfBirth),
-                region: getOptional(body.region),
-                province: getOptional(body.province),
-                municipalityCity: getOptional(body.municipalityCity),
-                barangay: getOptional(body.barangay),
-                emergencyContactName: getOptional(body.emergencyContactName),
-                emergencyContactMobile: getOptional(body.emergencyContactMobile),
-                churchAffiliation: getOptional(body.churchAffiliation),
-                churchAddress: getOptional(body.churchAddress),
-                currentPositionRole: getOptional(body.currentPositionRole),
-                currentPositionRoleOther: getOptional(body.currentPositionRoleOther),
-                height: getOptional(body.height),
-                weight: getOptional(body.weight),
-                bloodType: getOptional(body.bloodType),
-                colorOfEyes: getOptional(body.colorOfEyes),
-                colorOfSkin: getOptional(body.colorOfSkin),
-                sssNumber: getOptional(body.sssNumber),
-                tinNumber: getOptional(body.tinNumber),
-                skillsTalents: getOptional(body.skillsTalents),
-                preferredBranchOther: getOptional(body.preferredBranchOther),
-                elementarySchool: getOptional(body.elementarySchool),
-                secondarySchool: getOptional(body.secondarySchool),
-                tertiaryCollege: getOptional(body.tertiaryCollege),
-                postGraduateStudies: getOptional(body.postGraduateStudies),
-                ministerialExperiences: {
-                    create: (_c = (_b = body.ministerialExperiences) === null || _b === void 0 ? void 0 : _b.map((item, index) => ({
-                        roleDescription: item.roleDescription,
-                        yearsApprox: item.yearsApprox,
-                        order: index + 1,
-                    }))) !== null && _c !== void 0 ? _c : [],
-                },
-                characterReferences: {
-                    create: (_e = (_d = body.characterReferences) === null || _d === void 0 ? void 0 : _d.map((item, index) => ({
-                        name: item.name,
-                        positionRelationship: item.positionRelationship,
-                        contactNumber: item.contactNumber,
-                        order: index + 1,
-                    }))) !== null && _e !== void 0 ? _e : [],
-                },
-            };
-            if (preferredBranchIds.length > 0) {
-                createData.preferredBranches = {
-                    connect: preferredBranchIds.map((id) => ({ id })),
-                };
+                        attempt,
+                    });
+                    continue;
+                }
+                throw error;
             }
-            if (body.signature) {
-                createData.signature = {
-                    create: {
-                        type: body.signature.type,
-                        signatureData: body.signature.signatureData,
-                    },
-                };
-            }
-            const member = yield tx.member.create({
-                data: createData,
-                include: {
-                    signature: true,
-                    ministerialExperiences: true,
-                    characterReferences: true,
-                    preferredBranches: {
-                        select: { id: true, title: true },
-                    },
-                    user: {
-                        select: userSelect,
-                    },
-                },
-            });
-            return {
-                user,
-                member,
-                createdUser: !existingUser,
-            };
-        }));
+        }
+        if (!result) {
+            throw new Error('Unable to create member after retrying unique ID generation');
+        }
+        let emailSent = false;
         if (temporaryPassword) {
-            const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, welcome_user_1.welcomeUserTemplate)(displayName, normalizedEmail, temporaryPassword)));
+            const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, welcome_member_1.welcomeMemberTemplate)(displayName, normalizedEmail, temporaryPassword)));
+            emailSent = emailResult.success;
             if (!emailResult.success) {
                 winston_1.logger.warn('Member account created but welcome email failed to send', {
                     email: normalizedEmail,
@@ -200,7 +245,7 @@ const createMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(http_codes_1.HTTPSTATUS.CREATED).json({
             code: 'CREATED',
             message: 'Member profile created successfully',
-            data: result,
+            data: Object.assign(Object.assign({}, result), { emailSent }),
         });
     }
     catch (err) {

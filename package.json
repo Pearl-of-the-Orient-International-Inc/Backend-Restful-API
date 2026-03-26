@@ -4,7 +4,7 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon",
-    "build": "tsc && tsc-alias -p tsconfig.json --verbose && cp -r src/generated dist/ && sed -i 's|@/generated/prisma|./generated/prisma|g' dist/lib/prisma.js",
+    "build": "tsc && tsc-alias -p tsconfig.json --verbose && node scripts/postbuild.cjs",
     "start": "node dist/server.js",
     "start:prod": "pm2 start dist/server.js --name api"
   },

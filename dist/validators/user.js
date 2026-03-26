@@ -19,8 +19,8 @@ exports.createUserAccountSchema = zod_1.default.object({
         .enum(enums_1.UserType)
         .optional()
         .default(enums_1.UserType.ADMIN)
-        .refine((value) => value !== enums_1.UserType.MEMBER, {
-        message: 'Account role must be ADMIN or OFFICER',
+        .refine((value) => value === enums_1.UserType.ADMIN, {
+        message: 'Account role must be ADMIN',
     }),
     position: zod_1.default.enum(enums_1.UserPosition, {
         message: 'Position is required',
@@ -41,8 +41,8 @@ exports.updateUserByIdSchema = zod_1.default
     email: auth_1.emailSchema.optional(),
     role: zod_1.default
         .enum(enums_1.UserType)
-        .refine((value) => value !== enums_1.UserType.MEMBER, {
-        message: 'Account role must be ADMIN or OFFICER',
+        .refine((value) => value === enums_1.UserType.ADMIN, {
+        message: 'Account role must be ADMIN',
     })
         .optional(),
     position: zod_1.default.enum(enums_1.UserPosition).optional(),

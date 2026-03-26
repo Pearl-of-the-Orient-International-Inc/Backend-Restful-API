@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserById = void 0;
 const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,6 +27,7 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const user = yield prisma_1.prisma.user.findUnique({
             where: {
                 id: userId,
+                role: enums_1.UserType.ADMIN,
             },
             select: {
                 id: true,
@@ -44,7 +46,7 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (!user) {
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
                 code: 'NOT_FOUND',
-                message: 'User not found',
+                message: 'Admin account not found',
             });
             return;
         }

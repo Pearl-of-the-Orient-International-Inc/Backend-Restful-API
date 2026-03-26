@@ -6,9 +6,12 @@ const zod_1 = require("zod");
 const validate = (schema) => {
     return (req, res, next) => {
         try {
+            const body = req.body && typeof req.body === 'object' && !Array.isArray(req.body)
+                ? req.body
+                : {};
             const payload = req.method === 'GET'
                 ? { query: req.query, params: req.params }
-                : req.body;
+                : Object.assign(Object.assign({}, body), { body: req.body, query: req.query, params: req.params });
             schema.parse(payload);
             next();
         }

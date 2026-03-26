@@ -9,12 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUploadthingExpressHandler = exports.uploadRouter = exports.createUploadRouter = void 0;
+exports.utapi = exports.createUploadthingExpressHandler = exports.uploadRouter = exports.createUploadRouter = void 0;
 const express_1 = require("uploadthing/express");
+const server_1 = require("uploadthing/server");
 const prisma_1 = require("../lib/prisma");
 const jwt_1 = require("../lib/jwt");
 const enums_1 = require("../generated/prisma/enums");
 const f = (0, express_1.createUploadthing)();
+const utapi = new server_1.UTApi();
+exports.utapi = utapi;
 const defaultUploadLimits = {
     maxFileSize: '4MB',
     maxFileCount: 1,
@@ -111,9 +114,52 @@ const createMemberRequirementUploaderRoute = () => f({
         fileSize: file.size,
     });
 }));
+const createEventThumbnailUploaderRoute = (options = {}) => {
+    var _a;
+    const maxFileSize = (_a = options.maxFileSize) !== null && _a !== void 0 ? _a : defaultUploadLimits.maxFileSize;
+    const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
+    return f({
+        image: {
+            maxFileSize,
+            maxFileCount,
+        },
+    })
+        .middleware((_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
+        const authHeader = req.headers.authorization;
+        const bearerToken = (authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer '))
+            ? authHeader.slice('Bearer '.length).trim()
+            : undefined;
+        if (!bearerToken) {
+            throw new Error('Unauthorized upload attempt');
+        }
+        const decoded = (0, jwt_1.verifyAccessToken)(bearerToken);
+        const userId = decoded === null || decoded === void 0 ? void 0 : decoded.userId;
+        if (!userId) {
+            throw new Error('Invalid or expired access token');
+        }
+        const user = yield prisma_1.prisma.user.findUnique({
+            where: { id: userId },
+            select: { id: true, role: true },
+        });
+        if (!user || user.role !== enums_1.UserType.ADMIN) {
+            throw new Error('Only admins can upload event thumbnails');
+        }
+        return { userId };
+    }))
+        .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) {
+        return ({
+            userId: metadata.userId,
+            fileUrl: file.ufsUrl,
+            fileName: file.name,
+            mimeType: file.type,
+            fileSize: file.size,
+        });
+    }));
+};
 const createUploadRouter = (options = {}) => ({
     avatarUploader: createAvatarUploaderRoute(options),
     requirementUploader: createMemberRequirementUploaderRoute(),
+    eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
 });
 exports.createUploadRouter = createUploadRouter;
 exports.uploadRouter = (0, exports.createUploadRouter)();

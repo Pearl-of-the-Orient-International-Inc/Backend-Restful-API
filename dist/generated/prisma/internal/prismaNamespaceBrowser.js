@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.SortOrder = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -48,6 +48,7 @@ exports.ModelName = {
     User: 'User',
     UserToken: 'UserToken',
     Session: 'Session',
+    ActivityLog: 'ActivityLog',
     VerificationCode: 'VerificationCode',
     PasskeyCredential: 'PasskeyCredential',
     PasskeyChallenge: 'PasskeyChallenge',
@@ -63,7 +64,11 @@ exports.ModelName = {
     MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
     BranchOfService: 'BranchOfService',
     OfficeTitle: 'OfficeTitle',
-    OfficerAssignment: 'OfficerAssignment'
+    OfficerAssignment: 'OfficerAssignment',
+    Event: 'Event',
+    EventAttendee: 'EventAttendee',
+    DatabaseBackupSettings: 'DatabaseBackupSettings',
+    DatabaseBackupSnapshot: 'DatabaseBackupSnapshot'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -103,6 +108,23 @@ exports.SessionScalarFieldEnum = {
     createdAt: 'createdAt',
     userId: 'userId'
 };
+exports.ActivityLogScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    actorName: 'actorName',
+    actorEmail: 'actorEmail',
+    actorAvatar: 'actorAvatar',
+    actionType: 'actionType',
+    actionLabel: 'actionLabel',
+    moduleLabel: 'moduleLabel',
+    targetLabel: 'targetLabel',
+    description: 'description',
+    result: 'result',
+    ipAddress: 'ipAddress',
+    deviceLabel: 'deviceLabel',
+    metadata: 'metadata',
+    createdAt: 'createdAt'
+};
 exports.VerificationCodeScalarFieldEnum = {
     id: 'id',
     code: 'code',
@@ -138,6 +160,7 @@ exports.MemberScalarFieldEnum = {
     uniqueId: 'uniqueId',
     userId: 'userId',
     status: 'status',
+    memberType: 'memberType',
     badgeNumber: 'badgeNumber',
     firstName: 'firstName',
     middleInitial: 'middleInitial',
@@ -283,6 +306,7 @@ exports.OfficeTitleScalarFieldEnum = {
     description: 'description',
     maxSlots: 'maxSlots',
     sections: 'sections',
+    isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
@@ -301,9 +325,69 @@ exports.OfficerAssignmentScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.EventScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    category: 'category',
+    type: 'type',
+    location: 'location',
+    onlineLink: 'onlineLink',
+    meetingPlatform: 'meetingPlatform',
+    meetingId: 'meetingId',
+    meetingPassword: 'meetingPassword',
+    description: 'description',
+    thumbnailUrl: 'thumbnailUrl',
+    organizer: 'organizer',
+    startsAt: 'startsAt',
+    endsAt: 'endsAt',
+    status: 'status',
+    visibility: 'visibility',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.EventAttendeeScalarFieldEnum = {
+    id: 'id',
+    eventId: 'eventId',
+    memberId: 'memberId',
+    accessLevel: 'accessLevel',
+    inviteStatus: 'inviteStatus',
+    invitedAt: 'invitedAt',
+    updatedAt: 'updatedAt'
+};
+exports.DatabaseBackupSettingsScalarFieldEnum = {
+    id: 'id',
+    automaticBackupEnabled: 'automaticBackupEnabled',
+    frequency: 'frequency',
+    retentionDays: 'retentionDays',
+    nextRunAt: 'nextRunAt',
+    lastUpdatedByUserId: 'lastUpdatedByUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.DatabaseBackupSnapshotScalarFieldEnum = {
+    id: 'id',
+    fileKey: 'fileKey',
+    fileUrl: 'fileUrl',
+    fileName: 'fileName',
+    source: 'source',
+    status: 'status',
+    sizeBytes: 'sizeBytes',
+    tableCount: 'tableCount',
+    retentionDays: 'retentionDays',
+    metadata: 'metadata',
+    createdByUserId: 'createdByUserId',
+    restoredAt: 'restoredAt',
+    restoredByUserId: 'restoredByUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
 exports.SortOrder = {
     asc: 'asc',
     desc: 'desc'
+};
+exports.NullableJsonNullValueInput = {
+    DbNull: exports.DbNull,
+    JsonNull: exports.JsonNull
 };
 exports.JsonNullValueInput = {
     JsonNull: exports.JsonNull

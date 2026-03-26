@@ -23,6 +23,8 @@ const config_1 = __importDefault(require("../../../config"));
 const mailers_1 = require("../../../mailers");
 const login_notification_1 = require("../../../mailers/templates/login-notification");
 const enums_1 = require("../../../generated/prisma/enums");
+const client_1 = require("../../../generated/prisma/client");
+const activity_log_1 = require("../../../lib/activity-log");
 const verifyTwoFactor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { mfaToken, token, userAgent } = req.body;
     const ipAddress = (0, helpers_1.getClientIp)(req);
@@ -153,6 +155,21 @@ const verifyTwoFactor = (req, res) => __awaiter(void 0, void 0, void 0, function
             ipAddress,
             location,
             device: deviceInfo,
+        });
+        yield (0, activity_log_1.createActivityLog)({
+            userId: user.id,
+            actorName: user.name,
+            actorEmail: user.email,
+            actorAvatar: user.avatar,
+            actionType: client_1.ActivityLogActionType.AUTH,
+            actionLabel: 'Logged in with two-factor authentication',
+            moduleLabel: 'Authentication',
+            targetLabel: 'Admin portal',
+            description: `${user.name} logged in using two-factor authentication.`,
+            result: client_1.ActivityLogResult.SUCCESS,
+            ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+            deviceLabel: deviceInfo !== null && deviceInfo !== void 0 ? deviceInfo : null,
+            metadata: ['Login', 'Two-factor authentication'],
         });
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

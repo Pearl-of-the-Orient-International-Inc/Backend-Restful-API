@@ -23,6 +23,8 @@ const config_1 = __importDefault(require("../../../config"));
 const mailers_1 = require("../../../mailers");
 const login_notification_1 = require("../../../mailers/templates/login-notification");
 const enums_1 = require("../../../generated/prisma/enums");
+const client_1 = require("../../../generated/prisma/client");
+const activity_log_1 = require("../../../lib/activity-log");
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password, userAgent } = req.body;
     const ipAddress = (0, helpers_1.getClientIp)(req);
@@ -38,6 +40,19 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             },
         });
         if (!user) {
+            yield (0, activity_log_1.createActivityLog)({
+                actorName: email,
+                actorEmail: email,
+                actionType: client_1.ActivityLogActionType.AUTH,
+                actionLabel: 'Login attempt',
+                moduleLabel: 'Authentication',
+                targetLabel: 'Admin portal',
+                description: `Login attempt failed because no account exists for ${email}.`,
+                result: client_1.ActivityLogResult.FAILED,
+                ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+                deviceLabel: finalUserAgent !== null && finalUserAgent !== void 0 ? finalUserAgent : null,
+                metadata: ['Login', 'Unknown account'],
+            });
             winston_1.logger.warn('No user found with this email');
             res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({
                 code: 'CONFLICT',
@@ -47,6 +62,21 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const isPasswordValid = yield (0, password_hash_1.compareValue)(password, user.password);
         if (!isPasswordValid) {
+            yield (0, activity_log_1.createActivityLog)({
+                userId: user.id,
+                actorName: user.name,
+                actorEmail: user.email,
+                actorAvatar: user.avatar,
+                actionType: client_1.ActivityLogActionType.AUTH,
+                actionLabel: 'Login attempt',
+                moduleLabel: 'Authentication',
+                targetLabel: 'Admin portal',
+                description: `Login attempt failed for ${user.email} due to an invalid password.`,
+                result: client_1.ActivityLogResult.FAILED,
+                ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+                deviceLabel: finalUserAgent !== null && finalUserAgent !== void 0 ? finalUserAgent : null,
+                metadata: ['Login', 'Invalid password'],
+            });
             winston_1.logger.warn('Invalid password attempt', { userId: user.id });
             res.status(http_codes_1.HTTPSTATUS.UNAUTHORIZED).json({
                 code: 'UNAUTHORIZED',
@@ -55,6 +85,21 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return;
         }
         if (!user.isEmailVerified) {
+            yield (0, activity_log_1.createActivityLog)({
+                userId: user.id,
+                actorName: user.name,
+                actorEmail: user.email,
+                actorAvatar: user.avatar,
+                actionType: client_1.ActivityLogActionType.AUTH,
+                actionLabel: 'Login attempt',
+                moduleLabel: 'Authentication',
+                targetLabel: 'Admin portal',
+                description: `Login attempt was blocked because ${user.email} has not verified their email.`,
+                result: client_1.ActivityLogResult.FAILED,
+                ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+                deviceLabel: finalUserAgent !== null && finalUserAgent !== void 0 ? finalUserAgent : null,
+                metadata: ['Login', 'Email verification required'],
+            });
             winston_1.logger.warn('Login attempt with unverified email', {
                 userId: user.id,
                 email: user.email,
@@ -67,6 +112,21 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return;
         }
         if (user.accountStatus !== enums_1.UserAccountStatus.ACTIVE) {
+            yield (0, activity_log_1.createActivityLog)({
+                userId: user.id,
+                actorName: user.name,
+                actorEmail: user.email,
+                actorAvatar: user.avatar,
+                actionType: client_1.ActivityLogActionType.AUTH,
+                actionLabel: 'Login attempt',
+                moduleLabel: 'Authentication',
+                targetLabel: 'Admin portal',
+                description: `Login attempt was blocked because ${user.email} is not active.`,
+                result: client_1.ActivityLogResult.FAILED,
+                ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+                deviceLabel: finalUserAgent !== null && finalUserAgent !== void 0 ? finalUserAgent : null,
+                metadata: ['Login', 'Inactive account'],
+            });
             winston_1.logger.warn('Login attempt with inactive account status', {
                 userId: user.id,
                 email: user.email,
@@ -186,6 +246,21 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             ipAddress,
             location,
             device: deviceInfo,
+        });
+        yield (0, activity_log_1.createActivityLog)({
+            userId: user.id,
+            actorName: user.name,
+            actorEmail: user.email,
+            actorAvatar: user.avatar,
+            actionType: client_1.ActivityLogActionType.AUTH,
+            actionLabel: 'Logged in',
+            moduleLabel: 'Authentication',
+            targetLabel: 'Admin portal',
+            description: `${user.name} logged in to the admin portal.`,
+            result: client_1.ActivityLogResult.SUCCESS,
+            ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+            deviceLabel: deviceInfo !== null && deviceInfo !== void 0 ? deviceInfo : null,
+            metadata: ['Login', isNewSession ? 'New session' : 'Existing session'],
         });
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

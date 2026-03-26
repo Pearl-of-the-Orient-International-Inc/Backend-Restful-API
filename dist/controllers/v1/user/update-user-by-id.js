@@ -11,10 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUserById = void 0;
 const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const updateUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     try {
         const userId = req.params.userId;
         const payload = req.body;
@@ -26,13 +27,13 @@ const updateUserById = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return;
         }
         const user = yield prisma_1.prisma.user.findUnique({
-            where: { id: userId },
+            where: { id: userId, role: enums_1.UserType.ADMIN },
             select: { id: true, email: true },
         });
         if (!user) {
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
                 code: 'NOT_FOUND',
-                message: 'User not found',
+                message: 'Admin account not found',
             });
             return;
         }
@@ -54,7 +55,7 @@ const updateUserById = (req, res) => __awaiter(void 0, void 0, void 0, function*
             data: {
                 name: payload.name,
                 email: (_a = payload.email) === null || _a === void 0 ? void 0 : _a.trim().toLowerCase(),
-                role: payload.role,
+                role: (_b = payload.role) !== null && _b !== void 0 ? _b : enums_1.UserType.ADMIN,
                 position: payload.position,
                 accountStatus: payload.accountStatus,
                 avatar: payload.avatar === '' ? null : payload.avatar,

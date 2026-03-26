@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllUsers = void 0;
 const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,8 +22,11 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const offset = req.query.offset
             ? parseInt(req.query.offset)
             : undefined;
-        const total = yield prisma_1.prisma.user.count();
-        const users = yield prisma_1.prisma.user.findMany(Object.assign(Object.assign(Object.assign({}, (limit && { take: limit })), (offset && { skip: offset })), { select: {
+        const where = {
+            role: enums_1.UserType.ADMIN,
+        };
+        const total = yield prisma_1.prisma.user.count({ where });
+        const users = yield prisma_1.prisma.user.findMany(Object.assign(Object.assign(Object.assign({ where }, (limit && { take: limit })), (offset && { skip: offset })), { select: {
                 id: true,
                 name: true,
                 email: true,

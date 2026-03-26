@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUserAccount = void 0;
 const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const password_hash_1 = require("../../../lib/password-hash");
@@ -37,7 +38,7 @@ const createUserAccount = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 name,
                 email: normalizedEmail,
                 password: hashedPassword,
-                role,
+                role: role !== null && role !== void 0 ? role : enums_1.UserType.ADMIN,
                 position,
                 accountStatus,
                 avatar: avatar || null,

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
+exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
@@ -42,6 +42,7 @@ const signatureSchema = zod_1.z.object({
 });
 exports.applyMemberSchema = zod_1.z.object({
     firstName: zod_1.z.string().trim().min(1).max(100),
+    middleInitial: zod_1.z.string().trim().max(1).optional(),
     lastName: zod_1.z.string().trim().min(1).max(100),
     mobilePhoneNumber: zod_1.z.string().trim().min(1).max(30),
     homeAddress: zod_1.z.string().trim().min(1).max(255),
@@ -178,7 +179,59 @@ exports.applyMemberAllowedRoles = [enums_1.UserType.MEMBER];
 exports.createMemberByAdminSchema = zod_1.z.object({
     email: auth_1.emailSchema,
     firstName: zod_1.z.string().trim().min(1).max(100),
+    middleInitial: zod_1.z.string().trim().max(1).optional(),
     lastName: zod_1.z.string().trim().min(1).max(100),
+    extensionName: zod_1.z.string().trim().max(30).optional(),
+    memberType: zod_1.z.enum(enums_1.MemberType).optional(),
+    badgeNumber: zod_1.z.string().trim().max(50).optional(),
+    mobilePhoneNumber: zod_1.z.string().trim().max(30).optional(),
+    homeAddress: zod_1.z.string().trim().max(255).optional(),
+    civilStatus: zod_1.z.enum(enums_1.CivilStatus).optional(),
+    gender: zod_1.z.enum(enums_1.Gender),
+    nationality: zod_1.z.string().trim().max(100).optional(),
+    dateOfBirth: zod_1.z.iso.datetime(),
+    createdAt: zod_1.z.iso.datetime().optional(),
+    region: zod_1.z.string().trim().max(100).optional(),
+    province: zod_1.z.string().trim().max(100).optional(),
+    municipalityCity: zod_1.z.string().trim().max(100).optional(),
+    barangay: zod_1.z.string().trim().max(100).optional(),
+    emergencyContactName: zod_1.z.string().trim().max(100).optional(),
+    emergencyContactMobile: zod_1.z.string().trim().max(30).optional(),
+    churchAffiliation: zod_1.z.string().trim().max(150).optional(),
+    churchAddress: zod_1.z.string().trim().max(255).optional(),
+    currentPositionRole: zod_1.z.string().trim().max(150).optional(),
+    currentPositionRoleOther: zod_1.z.string().trim().max(150).optional(),
+    height: zod_1.z.string().trim().max(30).optional(),
+    weight: zod_1.z.string().trim().max(30).optional(),
+    bloodType: zod_1.z.string().trim().max(10).optional(),
+    colorOfEyes: zod_1.z.string().trim().max(50).optional(),
+    colorOfSkin: zod_1.z.string().trim().max(50).optional(),
+    sssNumber: zod_1.z.string().trim().max(50).optional(),
+    tinNumber: zod_1.z.string().trim().max(50).optional(),
+    skillsTalents: zod_1.z.string().trim().max(500).optional(),
+    preferredBranchIds: zod_1.z.array(zod_1.z.uuid()).max(20).optional(),
+    preferredBranchOther: zod_1.z.string().trim().max(255).optional(),
+    elementarySchool: zod_1.z.string().trim().max(150).optional(),
+    secondarySchool: zod_1.z.string().trim().max(150).optional(),
+    tertiaryCollege: zod_1.z.string().trim().max(150).optional(),
+    postGraduateStudies: zod_1.z.string().trim().max(150).optional(),
+    ministerialExperiences: zod_1.z.array(ministerialExperienceSchema).max(20).optional(),
+    characterReferences: zod_1.z.array(characterReferenceSchema).max(20).optional(),
+    signature: signatureSchema.optional(),
+});
+exports.getMemberByIdSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+});
+exports.updateMemberByAdminSchema = zod_1.z.object({
+    email: auth_1.emailSchema,
+    firstName: zod_1.z.string().trim().min(1).max(100),
+    middleInitial: zod_1.z.string().trim().max(1).optional(),
+    lastName: zod_1.z.string().trim().min(1).max(100),
+    extensionName: zod_1.z.string().trim().max(30).optional(),
+    memberType: zod_1.z.enum(enums_1.MemberType).optional(),
+    badgeNumber: zod_1.z.string().trim().max(50).optional(),
     mobilePhoneNumber: zod_1.z.string().trim().max(30).optional(),
     homeAddress: zod_1.z.string().trim().max(255).optional(),
     civilStatus: zod_1.z.enum(enums_1.CivilStatus).optional(),
@@ -212,4 +265,42 @@ exports.createMemberByAdminSchema = zod_1.z.object({
     ministerialExperiences: zod_1.z.array(ministerialExperienceSchema).max(20).optional(),
     characterReferences: zod_1.z.array(characterReferenceSchema).max(20).optional(),
     signature: signatureSchema.optional(),
+});
+exports.createOfficerAssignmentByAdminSchema = zod_1.z.object({
+    officeTitleId: zod_1.z.uuid(),
+    department: zod_1.z.string().trim().max(150).optional(),
+    region: zod_1.z.string().trim().max(100).optional(),
+    province: zod_1.z.string().trim().max(100).optional(),
+    cityMunicipality: zod_1.z.string().trim().max(150).optional(),
+    barangay: zod_1.z.string().trim().max(150).optional(),
+    startDate: zod_1.z.iso.datetime().optional(),
+});
+exports.getAllOfficerAssignmentsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        activeOnly: zod_1.z
+            .enum(["true", "false"])
+            .optional()
+            .transform((value) => value === "true"),
+    }),
+});
+exports.getMemberOfficerAssignmentsSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+});
+exports.deactivateOfficerAssignmentByAdminSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+        assignmentId: zod_1.z.uuid(),
+    }),
+});
+exports.replaceOfficerAssignmentByAdminSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+        assignmentId: zod_1.z.uuid(),
+    }),
+    body: zod_1.z.object({
+        replacementMemberId: zod_1.z.uuid(),
+        startDate: zod_1.z.iso.datetime().optional(),
+    }),
 });

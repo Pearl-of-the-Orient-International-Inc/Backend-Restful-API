@@ -23,6 +23,8 @@ const winston_1 = require("../../../lib/winston");
 const config_1 = __importDefault(require("../../../config"));
 const mailers_1 = require("../../../mailers");
 const login_notification_1 = require("../../../mailers/templates/login-notification");
+const client_1 = require("../../../generated/prisma/client");
+const activity_log_1 = require("../../../lib/activity-log");
 const normalizeOrigin = (origin) => origin.replace(/\/+$/, '');
 const getRpID = () => {
     if (config_1.default.PASSKEY_RP_ID) {
@@ -488,6 +490,21 @@ const verifyPasskeyAuthentication = (req, res) => __awaiter(void 0, void 0, void
             ipAddress,
             location,
             device: deviceInfo,
+        });
+        yield (0, activity_log_1.createActivityLog)({
+            userId: user.id,
+            actorName: user.name,
+            actorEmail: user.email,
+            actorAvatar: user.avatar,
+            actionType: client_1.ActivityLogActionType.AUTH,
+            actionLabel: 'Logged in with passkey',
+            moduleLabel: 'Authentication',
+            targetLabel: 'Admin portal',
+            description: `${user.name} logged in using passkey authentication.`,
+            result: client_1.ActivityLogResult.SUCCESS,
+            ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
+            deviceLabel: deviceInfo !== null && deviceInfo !== void 0 ? deviceInfo : null,
+            metadata: ['Login', 'Passkey authentication'],
         });
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

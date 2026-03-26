@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const create_backup_1 = require("../../controllers/v1/backup-database/create-backup");
+const download_backup_1 = require("../../controllers/v1/backup-database/download-backup");
+const get_backup_overview_1 = require("../../controllers/v1/backup-database/get-backup-overview");
+const restore_backup_1 = require("../../controllers/v1/backup-database/restore-backup");
+const update_backup_settings_1 = require("../../controllers/v1/backup-database/update-backup-settings");
+const sanitation_1 = require("../../common/sanitation");
+const enums_1 = require("../../generated/prisma/enums");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const backup_database_1 = require("../../validators/backup-database");
+const router = (0, express_1.Router)();
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), get_backup_overview_1.getBackupOverview);
+router.post('/create', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), create_backup_1.createBackup);
+router.patch('/settings', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(backup_database_1.updateBackupSettingsSchema), update_backup_settings_1.updateBackupSettings);
+router.post('/:id/restore', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(backup_database_1.backupIdParamSchema), restore_backup_1.restoreBackup);
+router.get('/:id/download', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(backup_database_1.backupIdParamSchema), download_backup_1.downloadBackup);
+exports.default = router;

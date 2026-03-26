@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OfficeTitleLevel = exports.InterviewDay = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberStatus = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -19,10 +19,32 @@ exports.UserAccountStatus = {
     PENDING: 'PENDING',
     SUSPENDED: 'SUSPENDED'
 };
+exports.ActivityLogActionType = {
+    AUTH: 'AUTH',
+    CREATE: 'CREATE',
+    UPDATE: 'UPDATE',
+    DELETE: 'DELETE',
+    EXPORT: 'EXPORT',
+    INVITE: 'INVITE',
+    ASSIGN: 'ASSIGN',
+    REVIEW: 'REVIEW',
+    SECURITY: 'SECURITY'
+};
+exports.ActivityLogResult = {
+    SUCCESS: 'SUCCESS',
+    WARNING: 'WARNING',
+    FAILED: 'FAILED'
+};
 exports.MemberStatus = {
     PENDING: 'PENDING',
     APPROVED: 'APPROVED',
     REJECTED: 'REJECTED'
+};
+exports.MemberType = {
+    ASSOCIATE_CHAPLAIN: 'ASSOCIATE_CHAPLAIN',
+    PROFESSIONAL_CHAPLAIN: 'PROFESSIONAL_CHAPLAIN',
+    ORDAINED_AND_COMMISSIONED_PRACTITIONER: 'ORDAINED_AND_COMMISSIONED_PRACTITIONER',
+    CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR: 'CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR'
 };
 exports.VerificationType = {
     EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
@@ -100,4 +122,56 @@ exports.OfficeTitleLevel = {
     CITY_MUNICIPAL_DEPUTY_CHAPLAIN: 'CITY_MUNICIPAL_DEPUTY_CHAPLAIN',
     BARANGAY_CHAPLAIN: 'BARANGAY_CHAPLAIN',
     BARANGAY_DEPUTY_CHAPLAIN: 'BARANGAY_DEPUTY_CHAPLAIN'
+};
+exports.EventCategory = {
+    CONFERENCE: 'CONFERENCE',
+    OUTREACH: 'OUTREACH',
+    TRAINING: 'TRAINING',
+    WORSHIP: 'WORSHIP',
+    ORIENTATION: 'ORIENTATION',
+    SEMINAR: 'SEMINAR',
+    FELLOWSHIP: 'FELLOWSHIP',
+    PRAYER: 'PRAYER',
+    OTHER: 'OTHER'
+};
+exports.EventType = {
+    ONSITE: 'ONSITE',
+    ONLINE: 'ONLINE'
+};
+exports.EventStatus = {
+    SCHEDULED: 'SCHEDULED',
+    ONGOING: 'ONGOING',
+    COMPLETED: 'COMPLETED',
+    CANCELLED: 'CANCELLED'
+};
+exports.EventVisibility = {
+    PUBLIC: 'PUBLIC',
+    PRIVATE: 'PRIVATE'
+};
+exports.EventMeetingPlatform = {
+    ZOOM: 'ZOOM',
+    GOOGLE_MEET: 'GOOGLE_MEET',
+    MICROSOFT_TEAMS: 'MICROSOFT_TEAMS',
+    OTHER: 'OTHER'
+};
+exports.EventAttendeeAccessLevel = {
+    FULL_ACCESS: 'FULL_ACCESS'
+};
+exports.EventAttendeeInviteStatus = {
+    INVITED: 'INVITED',
+    ACCEPTED: 'ACCEPTED'
+};
+exports.BackupFrequency = {
+    HOURLY: 'HOURLY',
+    DAILY: 'DAILY',
+    WEEKLY: 'WEEKLY'
+};
+exports.BackupSnapshotSource = {
+    MANUAL: 'MANUAL',
+    AUTOMATIC: 'AUTOMATIC'
+};
+exports.BackupSnapshotStatus = {
+    READY: 'READY',
+    IN_PROGRESS: 'IN_PROGRESS',
+    FAILED: 'FAILED'
 };
