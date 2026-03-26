@@ -1,10 +1,12 @@
+import { randomBytes } from 'crypto';
 /**
  * Custom modules
  */
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
+import { hashValue } from '@/lib/password-hash';
 import { logger } from '@/lib/winston';
-import { UserType } from '@/generated/prisma/enums';
+import { UserAccountStatus, UserType } from '@/generated/prisma/enums';
 
 /**
  * Types
@@ -13,48 +15,56 @@ import type { Request, Response } from 'express';
 import type { Prisma } from '@/generated/prisma/client';
 import type { ApplyMemberBody } from './types';
 
+const getOptional = (value?: string | null): string | null => {
+  const normalized = value?.trim();
+  return normalized ? normalized : null;
+};
+
+const buildFullName = (firstName: string, lastName: string): string =>
+  [firstName.trim(), lastName.trim()].filter(Boolean).join(' ');
+
+const generateTemporaryPassword = (): string =>
+  `Pearl!${randomBytes(5).toString('hex').toUpperCase()}9`;
+
 export const applyMember = async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId = req.userId;
+    const body = req.body as ApplyMemberBody;
+    const normalizedEmail = body.email?.trim().toLowerCase();
 
-    if (!userId) {
-      res.status(HTTPSTATUS.UNAUTHORIZED).json({
-        code: 'UNAUTHORIZED',
-        message: 'Unauthorized',
+    if (!normalizedEmail) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({
+        code: 'BAD_REQUEST',
+        message: 'Email is required',
       });
       return;
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { id: true, role: true, memberProfile: { select: { id: true } } },
+    const existingUser = await prisma.user.findUnique({
+      where: { email: normalizedEmail },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        memberProfile: { select: { id: true } },
+      },
     });
 
-    if (!user) {
-      res.status(HTTPSTATUS.NOT_FOUND).json({
-        code: 'NOT_FOUND',
-        message: 'User not found',
-      });
-      return;
-    }
-
-    if (user.role !== UserType.MEMBER) {
-      res.status(HTTPSTATUS.FORBIDDEN).json({
-        code: 'FORBIDDEN',
-        message: 'Only MEMBER accounts can apply',
-      });
-      return;
-    }
-
-    if (user.memberProfile) {
+    if (existingUser?.memberProfile) {
       res.status(HTTPSTATUS.CONFLICT).json({
         code: 'CONFLICT',
-        message: 'Member application already exists for this user',
+        message: 'A member application already exists for this email address',
       });
       return;
     }
 
-    const body = req.body as ApplyMemberBody;
+    if (existingUser && existingUser.role !== UserType.MEMBER) {
+      res.status(HTTPSTATUS.CONFLICT).json({
+        code: 'CONFLICT',
+        message: 'This email is already assigned to a non-member account',
+      });
+      return;
+    }
+
     const preferredBranchIds = body.preferredBranchIds ?? [];
 
     if (preferredBranchIds.length > 0) {
@@ -71,27 +81,44 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       }
     }
 
+    const userId = existingUser
+      ? existingUser.id
+      : (
+          await prisma.user.create({
+            data: {
+              name: buildFullName(body.firstName, body.lastName),
+              email: normalizedEmail,
+              password: await hashValue(generateTemporaryPassword()),
+              role: UserType.MEMBER,
+              accountStatus: UserAccountStatus.PENDING,
+              isEmailVerified: false,
+            },
+            select: { id: true },
+          })
+        ).id;
+
     const createData: Prisma.MemberCreateInput = {
       user: { connect: { id: userId } },
       firstName: body.firstName,
+      extensionName: getOptional(body.extensionName),
       middleInitial: body.middleInitial ?? null,
       lastName: body.lastName,
-      mobilePhoneNumber: body.mobilePhoneNumber,
-      homeAddress: body.homeAddress,
-      civilStatus: body.civilStatus,
+      mobilePhoneNumber: getOptional(body.mobilePhoneNumber),
+      homeAddress: getOptional(body.homeAddress),
+      civilStatus: body.civilStatus ?? null,
       gender: body.gender,
-      nationality: body.nationality,
+      nationality: getOptional(body.nationality),
       dateOfBirth: new Date(body.dateOfBirth),
-      region: body.region,
-      province: body.province,
-      municipalityCity: body.municipalityCity,
-      barangay: body.barangay,
-      emergencyContactName: body.emergencyContactName,
-      emergencyContactMobile: body.emergencyContactMobile,
-      churchAffiliation: body.churchAffiliation,
-      churchAddress: body.churchAddress,
-      currentPositionRole: body.currentPositionRole,
-      currentPositionRoleOther: body.currentPositionRoleOther ?? null,
+      region: getOptional(body.region),
+      province: getOptional(body.province),
+      municipalityCity: getOptional(body.municipalityCity),
+      barangay: getOptional(body.barangay),
+      emergencyContactName: getOptional(body.emergencyContactName),
+      emergencyContactMobile: getOptional(body.emergencyContactMobile),
+      churchAffiliation: getOptional(body.churchAffiliation),
+      churchAddress: getOptional(body.churchAddress),
+      currentPositionRole: getOptional(body.currentPositionRole),
+      currentPositionRoleOther: getOptional(body.currentPositionRoleOther),
       height: body.height ?? null,
       weight: body.weight ?? null,
       bloodType: body.bloodType ?? null,
@@ -154,6 +181,7 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
     logger.info('Member application submitted', {
       memberId: createdMember.id,
       userId,
+      email: normalizedEmail,
     });
 
     res.status(HTTPSTATUS.CREATED).json({
