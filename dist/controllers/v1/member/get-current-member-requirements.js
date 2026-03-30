@@ -28,6 +28,7 @@ const getCurrentMemberRequirements = (req, res) => __awaiter(void 0, void 0, voi
             where: { userId },
             select: {
                 id: true,
+                status: true,
                 uniqueId: true,
                 applicantRequirements: {
                     select: {
@@ -58,6 +59,7 @@ const getCurrentMemberRequirements = (req, res) => __awaiter(void 0, void 0, voi
             message: 'Member requirements retrieved successfully',
             data: {
                 memberId: member.id,
+                status: member.status,
                 uniqueId: member.uniqueId,
                 attachments,
                 requirements: member.applicantRequirements,

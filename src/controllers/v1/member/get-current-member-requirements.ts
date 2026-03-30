@@ -24,6 +24,7 @@ export const getCurrentMemberRequirements = async (
       where: { userId },
       select: {
         id: true,
+        status: true,
         uniqueId: true,
         applicantRequirements: {
           select: {
@@ -60,6 +61,7 @@ export const getCurrentMemberRequirements = async (
       message: 'Member requirements retrieved successfully',
       data: {
         memberId: member.id,
+        status: member.status,
         uniqueId: member.uniqueId,
         attachments,
         requirements: member.applicantRequirements,
