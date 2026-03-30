@@ -68,6 +68,11 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       where: { email: normalizedEmail },
       select: {
         id: true,
+        name: true,
+        email: true,
+        role: true,
+        accountStatus: true,
+        isEmailVerified: true,
         memberProfile: { select: { id: true } },
       },
     });
@@ -80,16 +85,8 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       return;
     }
 
-    if (existingUser) {
-      res.status(HTTPSTATUS.CONFLICT).json({
-        code: 'CONFLICT',
-        message: 'An account with this email already exists',
-      });
-      return;
-    }
-
-    const temporaryPassword = generateTemporaryPassword();
-    const hashedPassword = await hashValue(temporaryPassword);
+    const temporaryPassword = existingUser ? null : generateTemporaryPassword();
+    const hashedPassword = temporaryPassword ? await hashValue(temporaryPassword) : null;
     const displayName = buildFullName(
       body.firstName,
       body.middleInitial,
@@ -118,7 +115,8 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
               };
             };
           }>;
-          verificationUrl: string;
+          verificationUrl: string | null;
+          createdUser: boolean;
         }
       | null = null;
 
@@ -126,35 +124,62 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       try {
         result = await prisma.$transaction(
           async (tx) => {
-            const user = await tx.user.create({
-              data: {
-                name: displayName,
-                email: normalizedEmail,
-                password: hashedPassword,
-                role: 'MEMBER',
-                accountStatus: 'PENDING',
-                isEmailVerified: false,
-              },
-              select: {
-                id: true,
-                name: true,
-                email: true,
-                role: true,
-                accountStatus: true,
-                isEmailVerified: true,
-              },
-            });
+            const user = existingUser
+              ? await tx.user.update({
+                  where: { id: existingUser.id },
+                  data: {
+                    name: displayName,
+                    email: normalizedEmail,
+                    accountStatus: 'PENDING',
+                  },
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    accountStatus: true,
+                    isEmailVerified: true,
+                  },
+                })
+              : await tx.user.create({
+                  data: {
+                    name: displayName,
+                    email: normalizedEmail,
+                    password: hashedPassword!,
+                    role: 'MEMBER',
+                    accountStatus: 'PENDING',
+                    isEmailVerified: false,
+                  },
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    accountStatus: true,
+                    isEmailVerified: true,
+                  },
+                });
 
             const uniqueId = await generateNextMemberUniqueId(user.role, tx);
 
-            const verificationCode = await tx.verificationCode.create({
-              data: {
-                userId: user.id,
-                type: VerificationType.EMAIL_VERIFICATION,
-                expiresAt: calculateExpirationDate('1h'),
-                code: randomBytes(16).toString('hex'),
-              },
-            });
+            const verificationCode = user.isEmailVerified
+              ? null
+              : await tx.verificationCode.upsert({
+                  where: {
+                    userId: user.id,
+                  },
+                  update: {
+                    type: VerificationType.EMAIL_VERIFICATION,
+                    expiresAt: calculateExpirationDate('1h'),
+                    code: randomBytes(16).toString('hex'),
+                  },
+                  create: {
+                    userId: user.id,
+                    type: VerificationType.EMAIL_VERIFICATION,
+                    expiresAt: calculateExpirationDate('1h'),
+                    code: randomBytes(16).toString('hex'),
+                  },
+                });
 
             const createData: Prisma.MemberCreateInput = {
               user: { connect: { id: user.id } },
@@ -249,7 +274,10 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
 
             return {
               member,
-              verificationUrl: buildVerificationUrl(user.role, verificationCode.code),
+              verificationUrl: verificationCode
+                ? buildVerificationUrl(user.role, verificationCode.code)
+                : null,
+              createdUser: !existingUser,
             };
           },
           {
@@ -275,27 +303,35 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       throw new Error('Unable to create member application after retrying');
     }
 
-    const emailResult = await sendMail({
-      sendTo: normalizedEmail,
-      ...welcomeMemberTemplate(
-        displayName,
-        normalizedEmail,
-        temporaryPassword,
-        result.verificationUrl,
-      ),
-    });
+    if (result.createdUser && temporaryPassword) {
+      const emailResult = await sendMail({
+        sendTo: normalizedEmail,
+        ...welcomeMemberTemplate(
+          displayName,
+          normalizedEmail,
+          temporaryPassword,
+          result.verificationUrl ?? undefined,
+        ),
+      });
 
-    if (!emailResult.success) {
+      if (!emailResult.success && result.verificationUrl) {
+        await sendMail({
+          sendTo: normalizedEmail,
+          ...verifyEmailTemplate(result.verificationUrl, displayName),
+        });
+      }
+    } else if (result.verificationUrl) {
       await sendMail({
         sendTo: normalizedEmail,
         ...verifyEmailTemplate(result.verificationUrl, displayName),
       });
     }
 
-    logger.info('Member application submitted with pending user account', {
+    logger.info('Member application submitted', {
       memberId: result.member.id,
       userId: result.member.user.id,
       email: normalizedEmail,
+      createdUser: result.createdUser,
     });
 
     res.status(HTTPSTATUS.CREATED).json({

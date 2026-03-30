@@ -40,7 +40,7 @@ const isRetryableCreateConflict = (error) => {
     return code === 'P2002' || code === 'P2034';
 };
 const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     try {
         const body = req.body;
         const normalizedEmail = body.email.trim().toLowerCase();
@@ -61,6 +61,11 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             where: { email: normalizedEmail },
             select: {
                 id: true,
+                name: true,
+                email: true,
+                role: true,
+                accountStatus: true,
+                isEmailVerified: true,
                 memberProfile: { select: { id: true } },
             },
         });
@@ -71,48 +76,68 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             });
             return;
         }
-        if (existingUser) {
-            res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({
-                code: 'CONFLICT',
-                message: 'An account with this email already exists',
-            });
-            return;
-        }
-        const temporaryPassword = generateTemporaryPassword();
-        const hashedPassword = yield (0, password_hash_1.hashValue)(temporaryPassword);
+        const temporaryPassword = existingUser ? null : generateTemporaryPassword();
+        const hashedPassword = temporaryPassword ? yield (0, password_hash_1.hashValue)(temporaryPassword) : null;
         const displayName = buildFullName(body.firstName, body.middleInitial, body.lastName, body.extensionName);
         let result = null;
         for (let attempt = 1; attempt <= MAX_MEMBER_CREATE_ATTEMPTS; attempt += 1) {
             try {
                 result = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
                     var _a, _b, _c, _d, _e;
-                    const user = yield tx.user.create({
-                        data: {
-                            name: displayName,
-                            email: normalizedEmail,
-                            password: hashedPassword,
-                            role: 'MEMBER',
-                            accountStatus: 'PENDING',
-                            isEmailVerified: false,
-                        },
-                        select: {
-                            id: true,
-                            name: true,
-                            email: true,
-                            role: true,
-                            accountStatus: true,
-                            isEmailVerified: true,
-                        },
-                    });
+                    const user = existingUser
+                        ? yield tx.user.update({
+                            where: { id: existingUser.id },
+                            data: {
+                                name: displayName,
+                                email: normalizedEmail,
+                                accountStatus: 'PENDING',
+                            },
+                            select: {
+                                id: true,
+                                name: true,
+                                email: true,
+                                role: true,
+                                accountStatus: true,
+                                isEmailVerified: true,
+                            },
+                        })
+                        : yield tx.user.create({
+                            data: {
+                                name: displayName,
+                                email: normalizedEmail,
+                                password: hashedPassword,
+                                role: 'MEMBER',
+                                accountStatus: 'PENDING',
+                                isEmailVerified: false,
+                            },
+                            select: {
+                                id: true,
+                                name: true,
+                                email: true,
+                                role: true,
+                                accountStatus: true,
+                                isEmailVerified: true,
+                            },
+                        });
                     const uniqueId = yield (0, member_unique_id_1.generateNextMemberUniqueId)(user.role, tx);
-                    const verificationCode = yield tx.verificationCode.create({
-                        data: {
-                            userId: user.id,
-                            type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                            expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
-                            code: (0, crypto_1.randomBytes)(16).toString('hex'),
-                        },
-                    });
+                    const verificationCode = user.isEmailVerified
+                        ? null
+                        : yield tx.verificationCode.upsert({
+                            where: {
+                                userId: user.id,
+                            },
+                            update: {
+                                type: enums_1.VerificationType.EMAIL_VERIFICATION,
+                                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                                code: (0, crypto_1.randomBytes)(16).toString('hex'),
+                            },
+                            create: {
+                                userId: user.id,
+                                type: enums_1.VerificationType.EMAIL_VERIFICATION,
+                                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                                code: (0, crypto_1.randomBytes)(16).toString('hex'),
+                            },
+                        });
                     const createData = {
                         user: { connect: { id: user.id } },
                         uniqueId,
@@ -200,7 +225,10 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                     });
                     return {
                         member,
-                        verificationUrl: (0, verification_redirect_1.buildVerificationUrl)(user.role, verificationCode.code),
+                        verificationUrl: verificationCode
+                            ? (0, verification_redirect_1.buildVerificationUrl)(user.role, verificationCode.code)
+                            : null,
+                        createdUser: !existingUser,
                     };
                 }), {
                     isolationLevel: client_1.Prisma.TransactionIsolationLevel.Serializable,
@@ -221,14 +249,20 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (!result) {
             throw new Error('Unable to create member application after retrying');
         }
-        const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, welcome_member_1.welcomeMemberTemplate)(displayName, normalizedEmail, temporaryPassword, result.verificationUrl)));
-        if (!emailResult.success) {
+        if (result.createdUser && temporaryPassword) {
+            const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, welcome_member_1.welcomeMemberTemplate)(displayName, normalizedEmail, temporaryPassword, (_b = result.verificationUrl) !== null && _b !== void 0 ? _b : undefined)));
+            if (!emailResult.success && result.verificationUrl) {
+                yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, verify_email_1.verifyEmailTemplate)(result.verificationUrl, displayName)));
+            }
+        }
+        else if (result.verificationUrl) {
             yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, verify_email_1.verifyEmailTemplate)(result.verificationUrl, displayName)));
         }
-        winston_1.logger.info('Member application submitted with pending user account', {
+        winston_1.logger.info('Member application submitted', {
             memberId: result.member.id,
             userId: result.member.user.id,
             email: normalizedEmail,
+            createdUser: result.createdUser,
         });
         res.status(http_codes_1.HTTPSTATUS.CREATED).json({
             code: 'CREATED',
