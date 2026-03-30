@@ -69,6 +69,8 @@ const router = Router();
 router.post(
   '/apply',
   expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
   validate(applyMemberSchema),
   applyMember,
 );
