@@ -15,6 +15,7 @@ const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const member_unique_id_1 = require("../../../lib/member-unique-id");
 const enums_1 = require("../../../generated/prisma/enums");
+const client_1 = require("../../../generated/prisma/client");
 const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const memberId = req.params.id;
@@ -47,21 +48,36 @@ const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, funct
             });
             return;
         }
-        let nextUniqueId = existingMember.uniqueId;
-        if (status === enums_1.MemberStatus.APPROVED && !existingMember.uniqueId) {
-            nextUniqueId = yield (0, member_unique_id_1.generateNextMemberUniqueId)(existingMember.user.role);
-        }
-        const updatedMember = yield prisma_1.prisma.member.update({
-            where: { id: memberId },
-            data: {
-                status,
-                uniqueId: nextUniqueId,
-            },
-            include: {
-                user: {
-                    select: { id: true, name: true, email: true, role: true },
+        const updatedMember = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            let nextUniqueId = existingMember.uniqueId;
+            if (status === enums_1.MemberStatus.APPROVED && !existingMember.uniqueId) {
+                nextUniqueId = yield (0, member_unique_id_1.generateNextMemberUniqueId)(existingMember.user.role, tx);
+            }
+            return tx.member.update({
+                where: { id: memberId },
+                data: {
+                    status,
+                    uniqueId: nextUniqueId,
+                    user: {
+                        update: status === enums_1.MemberStatus.APPROVED
+                            ? { accountStatus: enums_1.UserAccountStatus.ACTIVE }
+                            : {},
+                    },
                 },
-            },
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            name: true,
+                            email: true,
+                            role: true,
+                            accountStatus: true,
+                        },
+                    },
+                },
+            });
+        }), {
+            isolationLevel: client_1.Prisma.TransactionIsolationLevel.Serializable,
         });
         winston_1.logger.info('Member status updated', {
             memberId,

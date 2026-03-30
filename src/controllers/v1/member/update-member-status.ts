@@ -5,12 +5,13 @@ import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import { generateNextMemberUniqueId } from '@/lib/member-unique-id';
-import { MemberStatus } from '@/generated/prisma/enums';
+import { MemberStatus, UserAccountStatus } from '@/generated/prisma/enums';
 
 /**
  * Types
  */
 import type { Request, Response } from 'express';
+import { Prisma } from '@/generated/prisma/client';
 import type { UpdateMemberStatusBody } from './types';
 
 export const updateMemberStatus = async (
@@ -53,23 +54,42 @@ export const updateMemberStatus = async (
       return;
     }
 
-    let nextUniqueId = existingMember.uniqueId;
-    if (status === MemberStatus.APPROVED && !existingMember.uniqueId) {
-      nextUniqueId = await generateNextMemberUniqueId(existingMember.user.role);
-    }
+    const updatedMember = await prisma.$transaction(
+      async (tx) => {
+        let nextUniqueId = existingMember.uniqueId;
+        if (status === MemberStatus.APPROVED && !existingMember.uniqueId) {
+          nextUniqueId = await generateNextMemberUniqueId(existingMember.user.role, tx);
+        }
 
-    const updatedMember = await prisma.member.update({
-      where: { id: memberId },
-      data: {
-        status,
-        uniqueId: nextUniqueId,
+        return tx.member.update({
+          where: { id: memberId },
+          data: {
+            status,
+            uniqueId: nextUniqueId,
+            user: {
+              update:
+                status === MemberStatus.APPROVED
+                  ? { accountStatus: UserAccountStatus.ACTIVE }
+                  : {},
+            },
+          },
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                accountStatus: true,
+              },
+            },
+          },
+        });
       },
-      include: {
-        user: {
-          select: { id: true, name: true, email: true, role: true },
-        },
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
       },
-    });
+    );
 
     logger.info('Member status updated', {
       memberId,

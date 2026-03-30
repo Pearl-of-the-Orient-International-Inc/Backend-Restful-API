@@ -1,4 +1,5 @@
 import { UserType } from '@/generated/prisma/enums';
+import type { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 
 const MEMBER_ROLE_DIGIT = '2';
@@ -30,26 +31,26 @@ const getBaselineSeries = (prefix: string): number => {
 
 export const generateNextMemberUniqueId = async (
   role: UserType,
+  db: Prisma.TransactionClient | typeof prisma = prisma,
   now: Date = new Date(),
 ): Promise<string> => {
   const prefix = `${getYearTwoDigits(now)}${getRoleDigit(role)}`;
-  const existing = await prisma.member.findMany({
+  const existing = await db.member.findFirst({
     where: {
       uniqueId: {
         startsWith: `${prefix}-`,
       },
+    },
+    orderBy: {
+      uniqueId: 'desc',
     },
     select: {
       uniqueId: true,
     },
   });
 
-  const maxExistingSeries = existing.reduce((max, record) => {
-    if (!record.uniqueId) return max;
-    return Math.max(max, parseSeries(record.uniqueId));
-  }, 0);
-
   const baselineSeries = getBaselineSeries(prefix);
+  const maxExistingSeries = existing?.uniqueId ? parseSeries(existing.uniqueId) : 0;
   const nextSeries = Math.max(maxExistingSeries, baselineSeries) + 1;
   const paddedSeries = String(nextSeries).padStart(5, '0');
 

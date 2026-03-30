@@ -30,24 +30,23 @@ const getBaselineSeries = (prefix) => {
     }
     return 0;
 };
-const generateNextMemberUniqueId = (role_1, ...args_1) => __awaiter(void 0, [role_1, ...args_1], void 0, function* (role, now = new Date()) {
+const generateNextMemberUniqueId = (role_1, ...args_1) => __awaiter(void 0, [role_1, ...args_1], void 0, function* (role, db = prisma_1.prisma, now = new Date()) {
     const prefix = `${getYearTwoDigits(now)}${getRoleDigit(role)}`;
-    const existing = yield prisma_1.prisma.member.findMany({
+    const existing = yield db.member.findFirst({
         where: {
             uniqueId: {
                 startsWith: `${prefix}-`,
             },
         },
+        orderBy: {
+            uniqueId: 'desc',
+        },
         select: {
             uniqueId: true,
         },
     });
-    const maxExistingSeries = existing.reduce((max, record) => {
-        if (!record.uniqueId)
-            return max;
-        return Math.max(max, parseSeries(record.uniqueId));
-    }, 0);
     const baselineSeries = getBaselineSeries(prefix);
+    const maxExistingSeries = (existing === null || existing === void 0 ? void 0 : existing.uniqueId) ? parseSeries(existing.uniqueId) : 0;
     const nextSeries = Math.max(maxExistingSeries, baselineSeries) + 1;
     const paddedSeries = String(nextSeries).padStart(5, '0');
     return `${prefix}-${paddedSeries}`;
