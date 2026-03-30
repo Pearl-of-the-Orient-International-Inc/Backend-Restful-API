@@ -13,7 +13,6 @@ exports.applyMember = void 0;
 const http_codes_1 = require("../../../common/http-codes");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
-const enums_1 = require("../../../generated/prisma/enums");
 const member_unique_id_1 = require("../../../lib/member-unique-id");
 const getOptional = (value) => {
     const normalized = value === null || value === void 0 ? void 0 : value.trim();
@@ -51,13 +50,6 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
                 code: 'NOT_FOUND',
                 message: 'User not found',
-            });
-            return;
-        }
-        if (user.role !== enums_1.UserType.MEMBER) {
-            res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
-                code: 'FORBIDDEN',
-                message: 'Only MEMBER accounts can apply',
             });
             return;
         }

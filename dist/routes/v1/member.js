@@ -39,7 +39,7 @@ const sanitation_1 = require("../../common/sanitation");
 const uploadthing_1 = require("../../lib/uploadthing");
 const member_1 = require("../../validators/member");
 const router = (0, express_1.Router)();
-router.post('/apply', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.applyMemberSchema), apply_member_1.applyMember);
+router.post('/apply', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, sanitation_1.validate)(member_1.applyMemberSchema), apply_member_1.applyMember);
 router.post('/', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createMemberByAdminSchema), create_member_by_admin_1.createMemberByAdmin);
 router.get('/current/requirements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_member_requirements_1.getCurrentMemberRequirements);
 router.put('/current/requirements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.upsertMemberRequirementsSchema), upsert_member_requirements_1.upsertMemberRequirements);

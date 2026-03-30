@@ -4,7 +4,6 @@
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { UserType } from '@/generated/prisma/enums';
 import { generateNextMemberUniqueId } from '@/lib/member-unique-id';
 
 /**
@@ -56,14 +55,6 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       res.status(HTTPSTATUS.NOT_FOUND).json({
         code: 'NOT_FOUND',
         message: 'User not found',
-      });
-      return;
-    }
-
-    if (user.role !== UserType.MEMBER) {
-      res.status(HTTPSTATUS.FORBIDDEN).json({
-        code: 'FORBIDDEN',
-        message: 'Only MEMBER accounts can apply',
       });
       return;
     }
