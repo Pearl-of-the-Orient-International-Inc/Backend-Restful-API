@@ -31,6 +31,7 @@ const get_all_officer_assignments_1 = require("../../controllers/v1/member/get-a
 const get_member_officer_assignments_1 = require("../../controllers/v1/member/get-member-officer-assignments");
 const deactivate_officer_assignment_by_admin_1 = require("../../controllers/v1/member/deactivate-officer-assignment-by-admin");
 const replace_officer_assignment_by_admin_1 = require("../../controllers/v1/member/replace-officer-assignment-by-admin");
+const get_public_member_profile_1 = require("../../controllers/v1/member/get-public-member-profile");
 const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
 const authentication_1 = require("../../middlewares/authentication");
 const authorization_1 = __importDefault(require("../../middlewares/authorization"));
@@ -40,6 +41,7 @@ const uploadthing_1 = require("../../lib/uploadthing");
 const member_1 = require("../../validators/member");
 const router = (0, express_1.Router)();
 router.post('/apply', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(member_1.applyMemberSchema), apply_member_1.applyMember);
+router.get('/public/:memberId', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(member_1.getPublicMemberProfileSchema), get_public_member_profile_1.getPublicMemberProfile);
 router.post('/', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createMemberByAdminSchema), create_member_by_admin_1.createMemberByAdmin);
 router.get('/current/requirements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_member_requirements_1.getCurrentMemberRequirements);
 router.put('/current/requirements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.upsertMemberRequirementsSchema), upsert_member_requirements_1.upsertMemberRequirements);

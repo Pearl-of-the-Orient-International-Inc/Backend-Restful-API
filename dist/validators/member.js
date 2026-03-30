@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
+exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
@@ -224,6 +224,11 @@ exports.createMemberByAdminSchema = zod_1.z.object({
 exports.getMemberByIdSchema = zod_1.z.object({
     params: zod_1.z.object({
         id: zod_1.z.uuid(),
+    }),
+});
+exports.getPublicMemberProfileSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        memberId: zod_1.z.string().trim().min(3).max(50),
     }),
 });
 exports.updateMemberByAdminSchema = zod_1.z.object({

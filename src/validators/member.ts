@@ -255,6 +255,12 @@ export const getMemberByIdSchema = z.object({
   }),
 });
 
+export const getPublicMemberProfileSchema = z.object({
+  params: z.object({
+    memberId: z.string().trim().min(3).max(50),
+  }),
+});
+
 export const updateMemberByAdminSchema = z.object({
   email: emailSchema,
   firstName: z.string().trim().min(1).max(100),

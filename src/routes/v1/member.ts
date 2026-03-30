@@ -33,6 +33,7 @@ import { getAllOfficerAssignments } from '@/controllers/v1/member/get-all-office
 import { getMemberOfficerAssignments } from '@/controllers/v1/member/get-member-officer-assignments';
 import { deactivateOfficerAssignmentByAdmin } from '@/controllers/v1/member/deactivate-officer-assignment-by-admin';
 import { replaceOfficerAssignmentByAdmin } from '@/controllers/v1/member/replace-officer-assignment-by-admin';
+import { getPublicMemberProfile } from '@/controllers/v1/member/get-public-member-profile';
 
 /**
  * Helpers, Validators and Middlewares
@@ -60,6 +61,7 @@ import {
   createOfficerAssignmentByAdminSchema,
   getAllOfficerAssignmentsSchema,
   getMemberOfficerAssignmentsSchema,
+  getPublicMemberProfileSchema,
   deactivateOfficerAssignmentByAdminSchema,
   replaceOfficerAssignmentByAdminSchema,
 } from '@/validators/member';
@@ -71,6 +73,13 @@ router.post(
   expressRateLimit('basic'),
   validate(applyMemberSchema),
   applyMember,
+);
+
+router.get(
+  '/public/:memberId',
+  expressRateLimit('basic'),
+  validate(getPublicMemberProfileSchema),
+  getPublicMemberProfile,
 );
 
 router.post(
