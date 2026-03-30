@@ -268,6 +268,10 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             code: 'CREATED',
             message: 'Member application submitted successfully. Please check your email to verify your account credentials.',
             data: result.member,
+            meta: {
+                createdUser: result.createdUser,
+                isEmailVerified: result.member.user.isEmailVerified,
+            },
         });
     }
     catch (err) {

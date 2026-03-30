@@ -339,6 +339,10 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
       message:
         'Member application submitted successfully. Please check your email to verify your account credentials.',
       data: result.member,
+      meta: {
+        createdUser: result.createdUser,
+        isEmailVerified: result.member.user.isEmailVerified,
+      },
     });
   } catch (err) {
     logger.error('Error while applying as member', { err });
