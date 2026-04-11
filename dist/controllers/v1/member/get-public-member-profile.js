@@ -48,6 +48,8 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                 barangay: true,
                 preferredBranchOther: true,
                 skillsTalents: true,
+                elementarySchool: true,
+                secondarySchool: true,
                 tertiaryCollege: true,
                 postGraduateStudies: true,
                 createdAt: true,
@@ -87,7 +89,12 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                     },
                 },
                 applicantRequirements: {
-                    where: { reviewStatus: 'APPROVED' },
+                    where: {
+                        OR: [
+                            { reviewStatus: 'APPROVED' },
+                            { type: 'PHOTO_2X2' },
+                        ],
+                    },
                     orderBy: { updatedAt: 'desc' },
                     select: {
                         id: true,

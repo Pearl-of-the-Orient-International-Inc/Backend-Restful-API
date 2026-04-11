@@ -35,6 +35,7 @@ export const getPublicMemberProfile = async (
         lastName: true,
         extensionName: true,
         churchAffiliation: true,
+        churchAddress: true,
         currentPositionRole: true,
         currentPositionRoleOther: true,
         nationality: true,
@@ -44,6 +45,8 @@ export const getPublicMemberProfile = async (
         barangay: true,
         preferredBranchOther: true,
         skillsTalents: true,
+        elementarySchool: true,
+        secondarySchool: true,
         tertiaryCollege: true,
         postGraduateStudies: true,
         createdAt: true,
@@ -83,7 +86,12 @@ export const getPublicMemberProfile = async (
           },
         },
         applicantRequirements: {
-          where: { reviewStatus: 'APPROVED' },
+          where: {
+            OR: [
+              { reviewStatus: 'APPROVED' },
+              { type: 'PHOTO_2X2' },
+            ],
+          },
           orderBy: { updatedAt: 'desc' },
           select: {
             id: true,

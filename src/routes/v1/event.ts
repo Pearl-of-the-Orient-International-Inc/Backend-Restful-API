@@ -5,6 +5,7 @@ import { deleteEvent } from '@/controllers/v1/event/delete-event';
 import { getEventAttendees } from '@/controllers/v1/event/get-event-attendees';
 import { getAllEvents } from '@/controllers/v1/event/get-all-events';
 import { getEventById } from '@/controllers/v1/event/get-event-by-id';
+import { getPublicEvents } from '@/controllers/v1/event/get-public-events';
 import { inviteEventAttendees } from '@/controllers/v1/event/invite-event-attendees';
 import { updateEvent } from '@/controllers/v1/event/update-event';
 import { validate } from '@/common/sanitation';
@@ -21,6 +22,13 @@ import {
 } from '@/validators/event';
 
 const router = Router();
+
+router.get(
+  '/public',
+  expressRateLimit('basic'),
+  validate(getAllEventsSchema),
+  getPublicEvents,
+);
 
 router.post(
   '/create',
