@@ -9,7 +9,7 @@ import {
 import type { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { serializeEvent } from './event-shared';
+import { eventTaggedMemberInclude, serializeEvent } from './event-shared';
 
 export const getPublicEvents = async (
   req: Request,
@@ -64,6 +64,7 @@ export const getPublicEvents = async (
         orderBy: {
           [orderByField]: sortOrder,
         },
+        include: eventTaggedMemberInclude,
       }),
     ]);
 

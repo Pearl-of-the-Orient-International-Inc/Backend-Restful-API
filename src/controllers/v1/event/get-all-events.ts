@@ -8,7 +8,7 @@ import {
 import type { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { serializeEvent } from './event-shared';
+import { eventTaggedMemberInclude, serializeEvent } from './event-shared';
 
 export const getAllEvents = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -55,6 +55,7 @@ export const getAllEvents = async (req: Request, res: Response): Promise<void> =
         orderBy: {
           [orderByField]: sortOrder,
         },
+        include: eventTaggedMemberInclude,
       }),
     ]);
 

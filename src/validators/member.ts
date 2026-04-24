@@ -201,6 +201,20 @@ export const getAllMembersSchema = z.object({
   }),
 });
 
+export const getMembershipReportSchema = z.object({
+  query: z.object({
+    months: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\d+$/.test(val), {
+        message: 'months must be a positive integer',
+      })
+      .refine((val) => !val || (parseInt(val, 10) >= 1 && parseInt(val, 10) <= 24), {
+        message: 'months must be between 1 and 24',
+      }),
+  }),
+});
+
 export const applyMemberAllowedRoles = [UserType.MEMBER] as const;
 
 export const createMemberByAdminSchema = z.object({

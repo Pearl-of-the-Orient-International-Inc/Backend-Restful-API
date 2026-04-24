@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { serializeEvent } from './event-shared';
+import { eventTaggedMemberInclude, serializeEvent } from './event-shared';
 
 export const getEventById = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -18,6 +18,7 @@ export const getEventById = async (req: Request, res: Response): Promise<void> =
 
     const event = await prisma.event.findUnique({
       where: { id },
+      include: eventTaggedMemberInclude,
     });
 
     if (!event) {

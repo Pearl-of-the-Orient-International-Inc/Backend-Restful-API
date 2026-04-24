@@ -18,6 +18,7 @@ import {
   stopBackupDatabaseScheduler,
 } from '@/lib/backup-database-scheduler';
 import { activityLogMiddleware } from '@/middlewares/activity-log';
+import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 
 /**
  * Router
@@ -94,6 +95,14 @@ app.use(
 
 // Use helmet to enhance security by setting various HTTP headers
 app.use(helmet());
+
+app.use(
+  '/api/uploadthing',
+  createUploadthingExpressHandler({
+    maxFileSize: '8MB',
+    maxFileCount: 10,
+  }),
+);
 
 /**
  * Immediately Invoked Async Function Expression (IIEF) to start the server.

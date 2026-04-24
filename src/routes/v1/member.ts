@@ -13,6 +13,7 @@ import { updateMemberStatus } from '@/controllers/v1/member/update-member-status
 import { updateMemberByAdmin } from '@/controllers/v1/member/update-member-by-admin';
 import { getPendingMembers } from '@/controllers/v1/member/get-pending-members';
 import { getAllMembers } from '@/controllers/v1/member/get-all-members';
+import { getMembershipReport } from '@/controllers/v1/member/get-membership-report';
 import { archiveMember } from '@/controllers/v1/member/archive-member';
 import { retrieveMember } from '@/controllers/v1/member/retrieve-member';
 import { getCurrentMemberRequirements } from '@/controllers/v1/member/get-current-member-requirements';
@@ -48,6 +49,7 @@ import {
   applyMemberSchema,
   createMemberByAdminSchema,
   getAllMembersSchema,
+  getMembershipReportSchema,
   getMemberByIdSchema,
   updateOnboardingStepSchema,
   updatePreOrientationProgressSchema,
@@ -227,6 +229,15 @@ router.get(
   authorize([UserType.ADMIN]),
   validate(getAllMembersSchema),
   getPendingMembers,
+);
+
+router.get(
+  '/reports/membership',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(getMembershipReportSchema),
+  getMembershipReport,
 );
 
 router.get(

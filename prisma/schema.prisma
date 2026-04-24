@@ -226,6 +226,8 @@ model Member {
   signature                  ApplicantSignature?
   officerAssignments         OfficerAssignment[]
   eventAttendances           EventAttendee[]
+  taggedEvents               EventTaggedMember[]
+  taggedNewsBlogs            NewsBlogTaggedMember[]
 
   isActive Boolean @default(true)
 
@@ -453,6 +455,7 @@ model Event {
   status     EventStatus     @default(SCHEDULED)
   visibility EventVisibility @default(PUBLIC)
   attendees  EventAttendee[]
+  taggedMembers EventTaggedMember[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -480,6 +483,82 @@ model EventAttendee {
 
   @@unique([eventId, memberId])
   @@index([eventId])
+  @@index([memberId])
+}
+
+model EventTaggedMember {
+  id String @id @default(uuid())
+
+  eventId String
+  event   Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  taggedAt DateTime @default(now())
+
+  @@unique([eventId, memberId])
+  @@index([eventId])
+  @@index([memberId])
+}
+
+model NewsBlog {
+  id String @id @default(uuid())
+
+  title    String
+  caption  String
+  isActive Boolean          @default(true)
+  status   NewsBlogStatus   @default(DRAFT)
+  platform NewsBlogPlatform @default(FACEBOOK)
+
+  hashtags    String[] @default([])
+  scheduledAt DateTime?
+  publishedAt DateTime?
+
+  media         NewsBlogMedia[]
+  taggedMembers NewsBlogTaggedMember[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([isActive])
+  @@index([platform])
+  @@index([scheduledAt])
+  @@index([createdAt])
+  @@index([updatedAt])
+}
+
+model NewsBlogMedia {
+  id String @id @default(uuid())
+
+  newsBlogId String
+  newsBlog   NewsBlog @relation(fields: [newsBlogId], references: [id], onDelete: Cascade)
+
+  kind      NewsBlogMediaKind
+  fileUrl   String
+  fileName  String
+  sortOrder Int
+
+  createdAt DateTime @default(now())
+
+  @@index([newsBlogId])
+  @@index([sortOrder])
+}
+
+model NewsBlogTaggedMember {
+  id String @id @default(uuid())
+
+  newsBlogId String
+  newsBlog   NewsBlog @relation(fields: [newsBlogId], references: [id], onDelete: Cascade)
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  taggedAt DateTime @default(now())
+
+  @@unique([newsBlogId, memberId])
+  @@index([newsBlogId])
   @@index([memberId])
 }
 
@@ -714,6 +793,21 @@ enum EventAttendeeAccessLevel {
 enum EventAttendeeInviteStatus {
   INVITED
   ACCEPTED
+}
+
+enum NewsBlogStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+}
+
+enum NewsBlogPlatform {
+  FACEBOOK
+}
+
+enum NewsBlogMediaKind {
+  IMAGE
+  VIDEO
 }
 
 enum BackupFrequency {

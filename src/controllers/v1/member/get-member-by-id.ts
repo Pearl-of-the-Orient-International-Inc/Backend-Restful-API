@@ -101,6 +101,28 @@ export const getMemberById = async (
         preferredBranches: {
           select: { id: true, title: true },
         },
+        taggedEvents: {
+          orderBy: { taggedAt: 'desc' },
+          select: {
+            id: true,
+            taggedAt: true,
+            event: {
+              select: {
+                id: true,
+                name: true,
+                category: true,
+                type: true,
+                location: true,
+                onlineLink: true,
+                startsAt: true,
+                endsAt: true,
+                visibility: true,
+                organizer: true,
+                thumbnailUrl: true,
+              },
+            },
+          },
+        },
         signature: true,
         user: {
           select: {

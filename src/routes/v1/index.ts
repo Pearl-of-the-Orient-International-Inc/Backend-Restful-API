@@ -17,6 +17,8 @@ import memberRoutes from '@/routes/v1/member';
 import branchServiceRoutes from '@/routes/v1/branch-service';
 import officeTitleRoutes from '@/routes/v1/office-title';
 import eventRoutes from '@/routes/v1/event';
+import newsBlogRoutes from '@/routes/v1/news-blog';
+import reportRoutes from '@/routes/v1/report';
 import activityLogRoutes from '@/routes/v1/activity-log';
 import backupDatabaseRoutes from '@/routes/v1/backup-database';
 
@@ -43,6 +45,8 @@ router.use('/members', memberRoutes);
 router.use('/branch-service', branchServiceRoutes);
 router.use('/offices', officeTitleRoutes);
 router.use('/events', eventRoutes);
+router.use('/news-blogs', newsBlogRoutes);
+router.use('/reports', reportRoutes);
 router.use('/activity-logs', activityLogRoutes);
 router.use('/backups', backupDatabaseRoutes);
 

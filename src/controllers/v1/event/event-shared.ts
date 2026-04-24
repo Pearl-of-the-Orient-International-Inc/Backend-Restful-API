@@ -5,6 +5,7 @@ import {
   EventStatus,
   EventType,
   type Event,
+  type Prisma,
 } from '@/generated/prisma/client';
 
 const window = new JSDOM('').window;
@@ -58,9 +59,71 @@ export const resolveEventStatus = (
   return EventStatus.SCHEDULED;
 };
 
-export const serializeEvent = (event: Event) => ({
+export const eventTaggedMemberInclude = {
+  taggedMembers: {
+    orderBy: { taggedAt: 'asc' },
+    include: {
+      member: {
+        select: {
+          id: true,
+          firstName: true,
+          middleInitial: true,
+          lastName: true,
+          extensionName: true,
+          memberType: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              avatar: true,
+            },
+          },
+        },
+      },
+    },
+  },
+} as const;
+
+type EventWithTaggedMembers = Prisma.EventGetPayload<{
+  include: typeof eventTaggedMemberInclude;
+}>;
+
+export const serializeTaggedMember = (
+  taggedMember: EventWithTaggedMembers['taggedMembers'][number],
+) => ({
+  id: taggedMember.id,
+  memberId: taggedMember.memberId,
+  taggedAt: taggedMember.taggedAt,
+  member: {
+    id: taggedMember.member.id,
+    firstName: taggedMember.member.firstName,
+    middleInitial: taggedMember.member.middleInitial,
+    lastName: taggedMember.member.lastName,
+    extensionName: taggedMember.member.extensionName,
+    fullName:
+      [
+        taggedMember.member.firstName,
+        taggedMember.member.middleInitial
+          ? `${taggedMember.member.middleInitial.replace(/\.$/, '')}.`
+          : null,
+        taggedMember.member.lastName,
+        taggedMember.member.extensionName,
+      ]
+        .filter(Boolean)
+        .join(' ') || taggedMember.member.user.name,
+    memberType: taggedMember.member.memberType,
+    user: taggedMember.member.user,
+  },
+});
+
+export const serializeEvent = (event: Event | EventWithTaggedMembers) => ({
   ...event,
   status: resolveEventStatus(event),
+  taggedMembers:
+    'taggedMembers' in event && Array.isArray(event.taggedMembers)
+      ? event.taggedMembers.map(serializeTaggedMember)
+      : [],
 });
 
 type BuildEventWriteInputArgs = {
