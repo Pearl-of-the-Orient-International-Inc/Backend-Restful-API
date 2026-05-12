@@ -148,6 +148,26 @@ export type Event = Prisma.EventModel
  */
 export type EventAttendee = Prisma.EventAttendeeModel
 /**
+ * Model EventTaggedMember
+ * 
+ */
+export type EventTaggedMember = Prisma.EventTaggedMemberModel
+/**
+ * Model NewsBlog
+ * 
+ */
+export type NewsBlog = Prisma.NewsBlogModel
+/**
+ * Model NewsBlogMedia
+ * 
+ */
+export type NewsBlogMedia = Prisma.NewsBlogMediaModel
+/**
+ * Model NewsBlogTaggedMember
+ * 
+ */
+export type NewsBlogTaggedMember = Prisma.NewsBlogTaggedMemberModel
+/**
  * Model DatabaseBackupSettings
  * 
  */

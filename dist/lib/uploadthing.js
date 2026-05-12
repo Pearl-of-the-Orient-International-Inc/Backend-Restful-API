@@ -156,10 +156,57 @@ const createEventThumbnailUploaderRoute = (options = {}) => {
         });
     }));
 };
+const createNewsBlogMediaUploaderRoute = (options = {}) => {
+    var _a;
+    const maxFileSize = (_a = options.maxFileSize) !== null && _a !== void 0 ? _a : defaultUploadLimits.maxFileSize;
+    const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
+    return f({
+        image: {
+            maxFileSize,
+            maxFileCount,
+        },
+        video: {
+            maxFileSize: '32MB',
+            maxFileCount,
+        },
+    })
+        .middleware((_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
+        const authHeader = req.headers.authorization;
+        const bearerToken = (authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer '))
+            ? authHeader.slice('Bearer '.length).trim()
+            : undefined;
+        if (!bearerToken) {
+            throw new Error('Unauthorized upload attempt');
+        }
+        const decoded = (0, jwt_1.verifyAccessToken)(bearerToken);
+        const userId = decoded === null || decoded === void 0 ? void 0 : decoded.userId;
+        if (!userId) {
+            throw new Error('Invalid or expired access token');
+        }
+        const user = yield prisma_1.prisma.user.findUnique({
+            where: { id: userId },
+            select: { id: true, role: true },
+        });
+        if (!user || user.role !== enums_1.UserType.ADMIN) {
+            throw new Error('Only admins can upload news blog media');
+        }
+        return { userId };
+    }))
+        .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) {
+        return ({
+            userId: metadata.userId,
+            fileUrl: file.ufsUrl,
+            fileName: file.name,
+            mimeType: file.type,
+            fileSize: file.size,
+        });
+    }));
+};
 const createUploadRouter = (options = {}) => ({
     avatarUploader: createAvatarUploaderRoute(options),
     requirementUploader: createMemberRequirementUploaderRoute(),
     eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
+    newsBlogMediaUploader: createNewsBlogMediaUploaderRoute(options),
 });
 exports.createUploadRouter = createUploadRouter;
 exports.uploadRouter = (0, exports.createUploadRouter)();

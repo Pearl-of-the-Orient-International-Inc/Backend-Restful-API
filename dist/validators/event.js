@@ -32,6 +32,7 @@ const eventBodySchema = zod_1.z
         .trim()
         .min(1, { message: 'Organizer is required' })
         .max(150, { message: 'Organizer must not exceed 150 characters' }),
+    taggedMemberIds: zod_1.z.array(zod_1.z.uuid()).max(100).optional(),
     startsAt: zod_1.z.iso.datetime(),
     endsAt: zod_1.z.iso.datetime(),
     visibility: zod_1.z.enum(enums_1.EventVisibility),

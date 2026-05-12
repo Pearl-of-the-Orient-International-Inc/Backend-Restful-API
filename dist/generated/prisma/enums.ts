@@ -269,6 +269,30 @@ export const EventAttendeeInviteStatus = {
 export type EventAttendeeInviteStatus = (typeof EventAttendeeInviteStatus)[keyof typeof EventAttendeeInviteStatus]
 
 
+export const NewsBlogStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type NewsBlogStatus = (typeof NewsBlogStatus)[keyof typeof NewsBlogStatus]
+
+
+export const NewsBlogPlatform = {
+  FACEBOOK: 'FACEBOOK'
+} as const
+
+export type NewsBlogPlatform = (typeof NewsBlogPlatform)[keyof typeof NewsBlogPlatform]
+
+
+export const NewsBlogMediaKind = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type NewsBlogMediaKind = (typeof NewsBlogMediaKind)[keyof typeof NewsBlogMediaKind]
+
+
 export const BackupFrequency = {
   HOURLY: 'HOURLY',
   DAILY: 'DAILY',

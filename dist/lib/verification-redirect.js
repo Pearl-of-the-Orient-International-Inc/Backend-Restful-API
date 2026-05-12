@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildVerificationUrl = exports.getVerificationBaseUrlByRole = void 0;
+exports.buildPasswordResetUrl = exports.buildVerificationUrl = exports.getVerificationBaseUrlByRole = void 0;
 const config_1 = __importDefault(require("../config"));
 const enums_1 = require("../generated/prisma/enums");
 const removeTrailingSlash = (url) => url.replace(/\/+$/, '');
@@ -34,3 +34,10 @@ const buildVerificationUrl = (role, code) => {
     return `${(0, exports.getVerificationBaseUrlByRole)(role)}/confirm-account?token=${code}`;
 };
 exports.buildVerificationUrl = buildVerificationUrl;
+const buildPasswordResetUrl = (role, code) => {
+    if (!code) {
+        throw new Error('Password reset code is missing.');
+    }
+    return `${(0, exports.getVerificationBaseUrlByRole)(role)}/reset-password?token=${code}`;
+};
+exports.buildPasswordResetUrl = buildPasswordResetUrl;

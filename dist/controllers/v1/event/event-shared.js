@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildEventWriteInput = exports.serializeEvent = exports.resolveEventStatus = exports.inferMeetingPlatform = exports.normalizeOptionalText = exports.sanitizeText = void 0;
+exports.buildEventWriteInput = exports.serializeEvent = exports.serializeTaggedMember = exports.eventTaggedMemberInclude = exports.resolveEventStatus = exports.inferMeetingPlatform = exports.normalizeOptionalText = exports.sanitizeText = void 0;
 const dompurify_1 = __importDefault(require("dompurify"));
 const jsdom_1 = require("jsdom");
 const client_1 = require("../../../generated/prisma/client");
@@ -47,7 +47,59 @@ const resolveEventStatus = (event) => {
     return client_1.EventStatus.SCHEDULED;
 };
 exports.resolveEventStatus = resolveEventStatus;
-const serializeEvent = (event) => (Object.assign(Object.assign({}, event), { status: (0, exports.resolveEventStatus)(event) }));
+exports.eventTaggedMemberInclude = {
+    taggedMembers: {
+        orderBy: { taggedAt: 'asc' },
+        include: {
+            member: {
+                select: {
+                    id: true,
+                    firstName: true,
+                    middleInitial: true,
+                    lastName: true,
+                    extensionName: true,
+                    memberType: true,
+                    user: {
+                        select: {
+                            id: true,
+                            name: true,
+                            email: true,
+                            avatar: true,
+                        },
+                    },
+                },
+            },
+        },
+    },
+};
+const serializeTaggedMember = (taggedMember) => ({
+    id: taggedMember.id,
+    memberId: taggedMember.memberId,
+    taggedAt: taggedMember.taggedAt,
+    member: {
+        id: taggedMember.member.id,
+        firstName: taggedMember.member.firstName,
+        middleInitial: taggedMember.member.middleInitial,
+        lastName: taggedMember.member.lastName,
+        extensionName: taggedMember.member.extensionName,
+        fullName: [
+            taggedMember.member.firstName,
+            taggedMember.member.middleInitial
+                ? `${taggedMember.member.middleInitial.replace(/\.$/, '')}.`
+                : null,
+            taggedMember.member.lastName,
+            taggedMember.member.extensionName,
+        ]
+            .filter(Boolean)
+            .join(' ') || taggedMember.member.user.name,
+        memberType: taggedMember.member.memberType,
+        user: taggedMember.member.user,
+    },
+});
+exports.serializeTaggedMember = serializeTaggedMember;
+const serializeEvent = (event) => (Object.assign(Object.assign({}, event), { status: (0, exports.resolveEventStatus)(event), taggedMembers: 'taggedMembers' in event && Array.isArray(event.taggedMembers)
+        ? event.taggedMembers.map(exports.serializeTaggedMember)
+        : [] }));
 exports.serializeEvent = serializeEvent;
 const buildEventWriteInput = ({ name, category, type, location, onlineLink, meetingId, meetingPassword, description, thumbnailUrl, organizer, startsAt, endsAt, visibility, }) => {
     const normalizedType = type;

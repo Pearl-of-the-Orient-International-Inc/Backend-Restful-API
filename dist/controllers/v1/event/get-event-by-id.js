@@ -26,6 +26,7 @@ const getEventById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         }
         const event = yield prisma_1.prisma.event.findUnique({
             where: { id },
+            include: event_shared_1.eventTaggedMemberInclude,
         });
         if (!event) {
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({

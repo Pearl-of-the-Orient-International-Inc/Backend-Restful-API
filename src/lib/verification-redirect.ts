@@ -47,3 +47,14 @@ export const buildVerificationUrl = (
 
   return `${getVerificationBaseUrlByRole(role)}/confirm-account?token=${code}`;
 };
+
+export const buildPasswordResetUrl = (
+  role: UserType,
+  code: string | null,
+): string => {
+  if (!code) {
+    throw new Error('Password reset code is missing.');
+  }
+
+  return `${getVerificationBaseUrlByRole(role)}/reset-password?token=${code}`;
+};

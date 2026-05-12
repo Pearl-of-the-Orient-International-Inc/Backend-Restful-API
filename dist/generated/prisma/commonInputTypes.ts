@@ -746,6 +746,57 @@ export type EnumEventAttendeeInviteStatusWithAggregatesFilter<$PrismaModel = nev
   _max?: Prisma.NestedEnumEventAttendeeInviteStatusFilter<$PrismaModel>
 }
 
+export type EnumNewsBlogStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogStatus | Prisma.EnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogStatusFilter<$PrismaModel> | $Enums.NewsBlogStatus
+}
+
+export type EnumNewsBlogPlatformFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogPlatform | Prisma.EnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogPlatformFilter<$PrismaModel> | $Enums.NewsBlogPlatform
+}
+
+export type EnumNewsBlogStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogStatus | Prisma.EnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogStatusWithAggregatesFilter<$PrismaModel> | $Enums.NewsBlogStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNewsBlogStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNewsBlogStatusFilter<$PrismaModel>
+}
+
+export type EnumNewsBlogPlatformWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogPlatform | Prisma.EnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogPlatformWithAggregatesFilter<$PrismaModel> | $Enums.NewsBlogPlatform
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNewsBlogPlatformFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNewsBlogPlatformFilter<$PrismaModel>
+}
+
+export type EnumNewsBlogMediaKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogMediaKind | Prisma.EnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel> | $Enums.NewsBlogMediaKind
+}
+
+export type EnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogMediaKind | Prisma.EnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel> | $Enums.NewsBlogMediaKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
+}
+
 export type EnumBackupFrequencyFilter<$PrismaModel = never> = {
   equals?: $Enums.BackupFrequency | Prisma.EnumBackupFrequencyFieldRefInput<$PrismaModel>
   in?: $Enums.BackupFrequency[] | Prisma.ListEnumBackupFrequencyFieldRefInput<$PrismaModel>
@@ -1486,6 +1537,57 @@ export type NestedEnumEventAttendeeInviteStatusWithAggregatesFilter<$PrismaModel
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumEventAttendeeInviteStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumEventAttendeeInviteStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumNewsBlogStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogStatus | Prisma.EnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogStatusFilter<$PrismaModel> | $Enums.NewsBlogStatus
+}
+
+export type NestedEnumNewsBlogPlatformFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogPlatform | Prisma.EnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogPlatformFilter<$PrismaModel> | $Enums.NewsBlogPlatform
+}
+
+export type NestedEnumNewsBlogStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogStatus | Prisma.EnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogStatus[] | Prisma.ListEnumNewsBlogStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogStatusWithAggregatesFilter<$PrismaModel> | $Enums.NewsBlogStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNewsBlogStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNewsBlogStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumNewsBlogPlatformWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogPlatform | Prisma.EnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogPlatform[] | Prisma.ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogPlatformWithAggregatesFilter<$PrismaModel> | $Enums.NewsBlogPlatform
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNewsBlogPlatformFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNewsBlogPlatformFilter<$PrismaModel>
+}
+
+export type NestedEnumNewsBlogMediaKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogMediaKind | Prisma.EnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel> | $Enums.NewsBlogMediaKind
+}
+
+export type NestedEnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NewsBlogMediaKind | Prisma.EnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  in?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NewsBlogMediaKind[] | Prisma.ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel> | $Enums.NewsBlogMediaKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
 }
 
 export type NestedEnumBackupFrequencyFilter<$PrismaModel = never> = {

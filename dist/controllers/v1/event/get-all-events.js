@@ -52,6 +52,7 @@ const getAllEvents = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 orderBy: {
                     [orderByField]: sortOrder,
                 },
+                include: event_shared_1.eventTaggedMemberInclude,
             }),
         ]);
         const totalPages = Math.ceil(totalCount / limit);

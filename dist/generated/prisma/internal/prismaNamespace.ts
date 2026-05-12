@@ -406,6 +406,10 @@ export const ModelName = {
   OfficerAssignment: 'OfficerAssignment',
   Event: 'Event',
   EventAttendee: 'EventAttendee',
+  EventTaggedMember: 'EventTaggedMember',
+  NewsBlog: 'NewsBlog',
+  NewsBlogMedia: 'NewsBlogMedia',
+  NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   DatabaseBackupSettings: 'DatabaseBackupSettings',
   DatabaseBackupSnapshot: 'DatabaseBackupSnapshot'
 } as const
@@ -423,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberChaplaincyTrainingProgress" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberChaplaincyTrainingProgress" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2055,6 +2059,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EventTaggedMember: {
+      payload: Prisma.$EventTaggedMemberPayload<ExtArgs>
+      fields: Prisma.EventTaggedMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventTaggedMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventTaggedMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.EventTaggedMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventTaggedMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>
+        }
+        findMany: {
+          args: Prisma.EventTaggedMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>[]
+        }
+        create: {
+          args: Prisma.EventTaggedMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>
+        }
+        createMany: {
+          args: Prisma.EventTaggedMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventTaggedMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.EventTaggedMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>
+        }
+        update: {
+          args: Prisma.EventTaggedMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.EventTaggedMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventTaggedMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventTaggedMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.EventTaggedMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventTaggedMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.EventTaggedMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventTaggedMember>
+        }
+        groupBy: {
+          args: Prisma.EventTaggedMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventTaggedMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventTaggedMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventTaggedMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    NewsBlog: {
+      payload: Prisma.$NewsBlogPayload<ExtArgs>
+      fields: Prisma.NewsBlogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NewsBlogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NewsBlogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>
+        }
+        findFirst: {
+          args: Prisma.NewsBlogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NewsBlogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>
+        }
+        findMany: {
+          args: Prisma.NewsBlogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>[]
+        }
+        create: {
+          args: Prisma.NewsBlogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>
+        }
+        createMany: {
+          args: Prisma.NewsBlogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NewsBlogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>[]
+        }
+        delete: {
+          args: Prisma.NewsBlogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>
+        }
+        update: {
+          args: Prisma.NewsBlogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>
+        }
+        deleteMany: {
+          args: Prisma.NewsBlogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NewsBlogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NewsBlogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>[]
+        }
+        upsert: {
+          args: Prisma.NewsBlogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogPayload>
+        }
+        aggregate: {
+          args: Prisma.NewsBlogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNewsBlog>
+        }
+        groupBy: {
+          args: Prisma.NewsBlogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NewsBlogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NewsBlogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NewsBlogCountAggregateOutputType> | number
+        }
+      }
+    }
+    NewsBlogMedia: {
+      payload: Prisma.$NewsBlogMediaPayload<ExtArgs>
+      fields: Prisma.NewsBlogMediaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NewsBlogMediaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NewsBlogMediaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>
+        }
+        findFirst: {
+          args: Prisma.NewsBlogMediaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NewsBlogMediaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>
+        }
+        findMany: {
+          args: Prisma.NewsBlogMediaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>[]
+        }
+        create: {
+          args: Prisma.NewsBlogMediaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>
+        }
+        createMany: {
+          args: Prisma.NewsBlogMediaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NewsBlogMediaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>[]
+        }
+        delete: {
+          args: Prisma.NewsBlogMediaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>
+        }
+        update: {
+          args: Prisma.NewsBlogMediaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>
+        }
+        deleteMany: {
+          args: Prisma.NewsBlogMediaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NewsBlogMediaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NewsBlogMediaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>[]
+        }
+        upsert: {
+          args: Prisma.NewsBlogMediaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogMediaPayload>
+        }
+        aggregate: {
+          args: Prisma.NewsBlogMediaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNewsBlogMedia>
+        }
+        groupBy: {
+          args: Prisma.NewsBlogMediaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NewsBlogMediaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NewsBlogMediaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NewsBlogMediaCountAggregateOutputType> | number
+        }
+      }
+    }
+    NewsBlogTaggedMember: {
+      payload: Prisma.$NewsBlogTaggedMemberPayload<ExtArgs>
+      fields: Prisma.NewsBlogTaggedMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NewsBlogTaggedMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NewsBlogTaggedMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.NewsBlogTaggedMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NewsBlogTaggedMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>
+        }
+        findMany: {
+          args: Prisma.NewsBlogTaggedMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>[]
+        }
+        create: {
+          args: Prisma.NewsBlogTaggedMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>
+        }
+        createMany: {
+          args: Prisma.NewsBlogTaggedMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NewsBlogTaggedMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.NewsBlogTaggedMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>
+        }
+        update: {
+          args: Prisma.NewsBlogTaggedMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.NewsBlogTaggedMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NewsBlogTaggedMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NewsBlogTaggedMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.NewsBlogTaggedMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NewsBlogTaggedMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.NewsBlogTaggedMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNewsBlogTaggedMember>
+        }
+        groupBy: {
+          args: Prisma.NewsBlogTaggedMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NewsBlogTaggedMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NewsBlogTaggedMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NewsBlogTaggedMemberCountAggregateOutputType> | number
+        }
+      }
+    }
     DatabaseBackupSettings: {
       payload: Prisma.$DatabaseBackupSettingsPayload<ExtArgs>
       fields: Prisma.DatabaseBackupSettingsFieldRefs
@@ -2608,6 +2908,56 @@ export const EventAttendeeScalarFieldEnum = {
 export type EventAttendeeScalarFieldEnum = (typeof EventAttendeeScalarFieldEnum)[keyof typeof EventAttendeeScalarFieldEnum]
 
 
+export const EventTaggedMemberScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  memberId: 'memberId',
+  taggedAt: 'taggedAt'
+} as const
+
+export type EventTaggedMemberScalarFieldEnum = (typeof EventTaggedMemberScalarFieldEnum)[keyof typeof EventTaggedMemberScalarFieldEnum]
+
+
+export const NewsBlogScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  caption: 'caption',
+  isActive: 'isActive',
+  status: 'status',
+  platform: 'platform',
+  hashtags: 'hashtags',
+  scheduledAt: 'scheduledAt',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NewsBlogScalarFieldEnum = (typeof NewsBlogScalarFieldEnum)[keyof typeof NewsBlogScalarFieldEnum]
+
+
+export const NewsBlogMediaScalarFieldEnum = {
+  id: 'id',
+  newsBlogId: 'newsBlogId',
+  kind: 'kind',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type NewsBlogMediaScalarFieldEnum = (typeof NewsBlogMediaScalarFieldEnum)[keyof typeof NewsBlogMediaScalarFieldEnum]
+
+
+export const NewsBlogTaggedMemberScalarFieldEnum = {
+  id: 'id',
+  newsBlogId: 'newsBlogId',
+  memberId: 'memberId',
+  taggedAt: 'taggedAt'
+} as const
+
+export type NewsBlogTaggedMemberScalarFieldEnum = (typeof NewsBlogTaggedMemberScalarFieldEnum)[keyof typeof NewsBlogTaggedMemberScalarFieldEnum]
+
+
 export const DatabaseBackupSettingsScalarFieldEnum = {
   id: 'id',
   automaticBackupEnabled: 'automaticBackupEnabled',
@@ -3125,6 +3475,48 @@ export type ListEnumEventAttendeeInviteStatusFieldRefInput<$PrismaModel> = Field
 
 
 /**
+ * Reference to a field of type 'NewsBlogStatus'
+ */
+export type EnumNewsBlogStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsBlogStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'NewsBlogStatus[]'
+ */
+export type ListEnumNewsBlogStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsBlogStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NewsBlogPlatform'
+ */
+export type EnumNewsBlogPlatformFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsBlogPlatform'>
+    
+
+
+/**
+ * Reference to a field of type 'NewsBlogPlatform[]'
+ */
+export type ListEnumNewsBlogPlatformFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsBlogPlatform[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NewsBlogMediaKind'
+ */
+export type EnumNewsBlogMediaKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsBlogMediaKind'>
+    
+
+
+/**
+ * Reference to a field of type 'NewsBlogMediaKind[]'
+ */
+export type ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsBlogMediaKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'BackupFrequency'
  */
 export type EnumBackupFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BackupFrequency'>
@@ -3296,6 +3688,10 @@ export type GlobalOmitConfig = {
   officerAssignment?: Prisma.OfficerAssignmentOmit
   event?: Prisma.EventOmit
   eventAttendee?: Prisma.EventAttendeeOmit
+  eventTaggedMember?: Prisma.EventTaggedMemberOmit
+  newsBlog?: Prisma.NewsBlogOmit
+  newsBlogMedia?: Prisma.NewsBlogMediaOmit
+  newsBlogTaggedMember?: Prisma.NewsBlogTaggedMemberOmit
   databaseBackupSettings?: Prisma.DatabaseBackupSettingsOmit
   databaseBackupSnapshot?: Prisma.DatabaseBackupSnapshotOmit
 }

@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const get_dashboard_report_1 = require("../../controllers/v1/report/get-dashboard-report");
+const get_member_location_report_1 = require("../../controllers/v1/report/get-member-location-report");
+const get_ministry_report_1 = require("../../controllers/v1/report/get-ministry-report");
+const sanitation_1 = require("../../common/sanitation");
+const enums_1 = require("../../generated/prisma/enums");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const report_1 = require("../../validators/report");
+const router = (0, express_1.Router)();
+router.get('/dashboard', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(report_1.getDashboardReportSchema), get_dashboard_report_1.getDashboardReport);
+router.get('/dashboard/member-locations', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(report_1.getMemberLocationReportSchema), get_member_location_report_1.getMemberLocationReport);
+router.get('/ministry', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(report_1.getMinistryReportSchema), get_ministry_report_1.getMinistryReport);
+exports.default = router;

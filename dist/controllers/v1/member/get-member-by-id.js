@@ -32,8 +32,100 @@ const getMemberById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 characterReferences: {
                     orderBy: { order: 'asc' },
                 },
+                applicantRequirements: {
+                    orderBy: { updatedAt: 'desc' },
+                    select: {
+                        id: true,
+                        type: true,
+                        reviewStatus: true,
+                        fileUrl: true,
+                        fileName: true,
+                        mimeType: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
+                onboardingProgress: {
+                    select: {
+                        currentStep: true,
+                        preOrientationCompletedLessonIds: true,
+                        preOrientationCompletedAt: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
+                paymentCheckout: {
+                    select: {
+                        id: true,
+                        paymentMethod: true,
+                        proofOfPaymentUrl: true,
+                        isPromissoryNote: true,
+                        promissoryNoteUrl: true,
+                        submittedAt: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
+                onlineInterviewAppointment: {
+                    select: {
+                        id: true,
+                        interviewerId: true,
+                        interviewerName: true,
+                        day: true,
+                        timeSlot: true,
+                        zoomLink: true,
+                        meetingId: true,
+                        passcode: true,
+                        confirmedAt: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
+                idGenerationAsset: {
+                    select: {
+                        id: true,
+                        profileUrl: true,
+                        qrCodeUrl: true,
+                        certificateUrl: true,
+                        generatedAt: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
+                chaplaincyTrainingProgress: {
+                    select: {
+                        id: true,
+                        completedLessonIds: true,
+                        essayAnswers: true,
+                        completedAt: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
                 preferredBranches: {
                     select: { id: true, title: true },
+                },
+                taggedEvents: {
+                    orderBy: { taggedAt: 'desc' },
+                    select: {
+                        id: true,
+                        taggedAt: true,
+                        event: {
+                            select: {
+                                id: true,
+                                name: true,
+                                category: true,
+                                type: true,
+                                location: true,
+                                onlineLink: true,
+                                startsAt: true,
+                                endsAt: true,
+                                visibility: true,
+                                organizer: true,
+                                thumbnailUrl: true,
+                            },
+                        },
+                    },
                 },
                 signature: true,
                 user: {
@@ -41,6 +133,7 @@ const getMemberById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                         id: true,
                         name: true,
                         email: true,
+                        avatar: true,
                         role: true,
                     },
                 },

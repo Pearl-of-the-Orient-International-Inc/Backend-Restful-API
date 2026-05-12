@@ -22,6 +22,7 @@ const winston_1 = require("./lib/winston");
 const prisma_1 = require("./lib/prisma");
 const backup_database_scheduler_1 = require("./lib/backup-database-scheduler");
 const activity_log_1 = require("./middlewares/activity-log");
+const uploadthing_1 = require("./lib/uploadthing");
 const v1_1 = __importDefault(require("./routes/v1"));
 const app = (0, express_1.default)();
 if (config_1.default.TRUST_PROXY !== false) {
@@ -67,6 +68,10 @@ app.use((0, compression_1.default)({
     threshold: 1024,
 }));
 app.use((0, helmet_1.default)());
+app.use('/api/uploadthing', (0, uploadthing_1.createUploadthingExpressHandler)({
+    maxFileSize: '8MB',
+    maxFileCount: 10,
+}));
 app.use('/api/v1', activity_log_1.activityLogMiddleware, v1_1.default);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {

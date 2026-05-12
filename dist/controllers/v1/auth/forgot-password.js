@@ -8,9 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.forgotPassword = void 0;
 const http_codes_1 = require("../../../common/http-codes");
@@ -18,9 +15,9 @@ const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const helpers_1 = require("../../../lib/helpers");
 const enums_1 = require("../../../generated/prisma/enums");
-const config_1 = __importDefault(require("../../../config"));
 const mailers_1 = require("../../../mailers");
 const forgot_password_1 = require("../../../mailers/templates/forgot-password");
+const verification_redirect_1 = require("../../../lib/verification-redirect");
 const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.body;
     try {
@@ -65,8 +62,7 @@ const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 code: uniqueCode,
             },
         });
-        const baseUrl = config_1.default.APP_URL || 'http://localhost:3000';
-        const verificationUrl = `${baseUrl}/reset-password?token=${verificationCode.code}`;
+        const verificationUrl = (0, verification_redirect_1.buildPasswordResetUrl)(user.role, verificationCode.code);
         const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: user.email }, (0, forgot_password_1.forgotPasswordTemplate)(verificationUrl, user.name)));
         if (!emailResult.success) {
             winston_1.logger.error('Forgot password email failed to send', {

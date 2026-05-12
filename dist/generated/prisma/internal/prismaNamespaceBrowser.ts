@@ -73,6 +73,10 @@ export const ModelName = {
   OfficerAssignment: 'OfficerAssignment',
   Event: 'Event',
   EventAttendee: 'EventAttendee',
+  EventTaggedMember: 'EventTaggedMember',
+  NewsBlog: 'NewsBlog',
+  NewsBlogMedia: 'NewsBlogMedia',
+  NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   DatabaseBackupSettings: 'DatabaseBackupSettings',
   DatabaseBackupSnapshot: 'DatabaseBackupSnapshot'
 } as const
@@ -457,6 +461,56 @@ export const EventAttendeeScalarFieldEnum = {
 } as const
 
 export type EventAttendeeScalarFieldEnum = (typeof EventAttendeeScalarFieldEnum)[keyof typeof EventAttendeeScalarFieldEnum]
+
+
+export const EventTaggedMemberScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  memberId: 'memberId',
+  taggedAt: 'taggedAt'
+} as const
+
+export type EventTaggedMemberScalarFieldEnum = (typeof EventTaggedMemberScalarFieldEnum)[keyof typeof EventTaggedMemberScalarFieldEnum]
+
+
+export const NewsBlogScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  caption: 'caption',
+  isActive: 'isActive',
+  status: 'status',
+  platform: 'platform',
+  hashtags: 'hashtags',
+  scheduledAt: 'scheduledAt',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NewsBlogScalarFieldEnum = (typeof NewsBlogScalarFieldEnum)[keyof typeof NewsBlogScalarFieldEnum]
+
+
+export const NewsBlogMediaScalarFieldEnum = {
+  id: 'id',
+  newsBlogId: 'newsBlogId',
+  kind: 'kind',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type NewsBlogMediaScalarFieldEnum = (typeof NewsBlogMediaScalarFieldEnum)[keyof typeof NewsBlogMediaScalarFieldEnum]
+
+
+export const NewsBlogTaggedMemberScalarFieldEnum = {
+  id: 'id',
+  newsBlogId: 'newsBlogId',
+  memberId: 'memberId',
+  taggedAt: 'taggedAt'
+} as const
+
+export type NewsBlogTaggedMemberScalarFieldEnum = (typeof NewsBlogTaggedMemberScalarFieldEnum)[keyof typeof NewsBlogTaggedMemberScalarFieldEnum]
 
 
 export const DatabaseBackupSettingsScalarFieldEnum = {
