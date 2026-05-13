@@ -77,12 +77,12 @@ const corsOptions: CorsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Enable JSON request body parsing
-app.use(express.json());
+// Allow base64-encoded signature payloads from membership forms.
+app.use(express.json({ limit: '8mb' }));
 
 // Enable URL-encoded request body parsing with extended mode
 // `extended: true` allows rich objects and arrays via querystring library
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '8mb' }));
 
 app.use(cookieParser());
 

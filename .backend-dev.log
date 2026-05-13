@@ -171,3 +171,169 @@ timestamp=2026-05-09T01:21:00.720Z level=WARN fiber=#13 message="Executing an Ef
 [09:21:04.184] WARN (#6) uploadFile=3170ms uploadFiles=3172ms utapi.#executeAsync=3174ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
 [09:21:04.185] WARN (#6) uploadFile=3171ms uploadFiles=3173ms utapi.#executeAsync=3175ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
 [09:21:04.187] WARN (#6) uploadFile=3173ms uploadFiles=3175ms utapi.#executeAsync=3177ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node -r tsconfig-paths/register src/server.ts`[39m
+12 May 07:47:39 PM [[32minfo[39m]: [32mBackup scheduler started with 60000ms interval[39m
+12 May 07:47:39 PM [[32minfo[39m]: [32mThe server will start at http://localhost:5001 with hot-reloading enabled[39m
+12 May 07:58:04 PM [[32minfo[39m]: [32mPublic directory locations retrieved[39m
+12 May 07:58:06 PM [[31merror[39m]: [31mAccess denied, no token provided[39m
+🔍 Checking for refresh token: {
+  hasCookie: false,
+  cookies: [
+    '__clerk_db_jwt_W3P8be_4',
+    '__client_uat_W3P8be_4',
+    '__clerk_db_jwt_mOkTE6Dm',
+    '__clerk_db_jwt_eu5h4_cD',
+    '__session_eu5h4_cD',
+    '__client_uat_eu5h4_cD',
+    '__clerk_db_jwt_aM8ouegD',
+    '__refresh_aM8ouegD',
+    '__session_aM8ouegD',
+    '__client_uat_aM8ouegD',
+    'guest_conversation_id',
+    '__refresh_mOkTE6Dm',
+    '__clerk_db_jwt_w2h4yuuv',
+    '__client_uat_w2h4yuuv',
+    '__clerk_db_jwt_DtrqU3nX',
+    '__refresh_DtrqU3nX',
+    '__client_uat_mOkTE6Dm',
+    '__clerk_db_jwt',
+    'clerk_active_context',
+    'sidebar_state',
+    '__session',
+    '__session_DtrqU3nX',
+    '__client_uat_DtrqU3nX',
+    '__client_uat',
+    '__next_hmr_refresh_hash__'
+  ]
+}
+⚠️ No refresh token found in cookies
+timestamp=2026-05-13T00:14:29.011Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.028Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.030Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.042Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.051Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.053Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.056Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+timestamp=2026-05-13T00:14:29.062Z level=WARN fiber=#13 message="Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service"
+[08:14:29.414] WARN (#6) uploadFile=198ms uploadFiles=203ms utapi.#executeAsync=203ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.440] WARN (#6) uploadFile=224ms uploadFiles=229ms utapi.#executeAsync=229ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.441] WARN (#6) uploadFile=225ms uploadFiles=230ms utapi.#executeAsync=230ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.442] WARN (#6) uploadFile=226ms uploadFiles=231ms utapi.#executeAsync=231ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.443] WARN (#6) uploadFile=227ms uploadFiles=232ms utapi.#executeAsync=232ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.446] WARN (#6) uploadFile=230ms uploadFiles=235ms utapi.#executeAsync=235ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.448] WARN (#6) uploadFile=232ms uploadFiles=237ms utapi.#executeAsync=237ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.452] WARN (#6) uploadFile=236ms uploadFiles=241ms utapi.#executeAsync=241ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.453] WARN (#6) uploadFile=237ms uploadFiles=242ms utapi.#executeAsync=242ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.456] WARN (#6) uploadFile=240ms uploadFiles=245ms utapi.#executeAsync=245ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.457] WARN (#6) uploadFile=241ms uploadFiles=246ms utapi.#executeAsync=246ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.458] WARN (#6) uploadFile=242ms uploadFiles=247ms utapi.#executeAsync=247ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.460] WARN (#6) uploadFile=244ms uploadFiles=249ms utapi.#executeAsync=249ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.465] WARN (#6) uploadFile=249ms uploadFiles=254ms utapi.#executeAsync=254ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.470] WARN (#6) uploadFile=254ms uploadFiles=259ms utapi.#executeAsync=259ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.472] WARN (#6) uploadFile=256ms uploadFiles=261ms utapi.#executeAsync=261ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.472] WARN (#6) uploadFile=256ms uploadFiles=261ms utapi.#executeAsync=261ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.473] WARN (#6) uploadFile=257ms uploadFiles=262ms utapi.#executeAsync=262ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.474] WARN (#6) uploadFile=258ms uploadFiles=263ms utapi.#executeAsync=263ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.475] WARN (#6) uploadFile=259ms uploadFiles=264ms utapi.#executeAsync=264ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.475] WARN (#6) uploadFile=259ms uploadFiles=264ms utapi.#executeAsync=264ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.476] WARN (#6) uploadFile=260ms uploadFiles=265ms utapi.#executeAsync=265ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.482] WARN (#6) uploadFile=266ms uploadFiles=271ms utapi.#executeAsync=271ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.495] WARN (#6) uploadFile=279ms uploadFiles=284ms utapi.#executeAsync=284ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.497] WARN (#6) uploadFile=281ms uploadFiles=286ms utapi.#executeAsync=286ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.497] WARN (#6) uploadFile=281ms uploadFiles=286ms utapi.#executeAsync=286ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.498] WARN (#6) uploadFile=282ms uploadFiles=287ms utapi.#executeAsync=287ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.498] WARN (#6) uploadFile=282ms uploadFiles=287ms utapi.#executeAsync=287ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.499] WARN (#6) uploadFile=283ms uploadFiles=288ms utapi.#executeAsync=288ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.502] WARN (#6) uploadFile=286ms uploadFiles=291ms utapi.#executeAsync=291ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.503] WARN (#6) uploadFile=287ms uploadFiles=292ms utapi.#executeAsync=292ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.504] WARN (#6) uploadFile=288ms uploadFiles=293ms utapi.#executeAsync=293ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.504] WARN (#6) uploadFile=288ms uploadFiles=293ms utapi.#executeAsync=293ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.506] WARN (#6) uploadFile=290ms uploadFiles=295ms utapi.#executeAsync=295ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.506] WARN (#6) uploadFile=290ms uploadFiles=295ms utapi.#executeAsync=295ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.507] WARN (#6) uploadFile=291ms uploadFiles=296ms utapi.#executeAsync=296ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.508] WARN (#6) uploadFile=292ms uploadFiles=297ms utapi.#executeAsync=297ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.508] WARN (#6) uploadFile=292ms uploadFiles=297ms utapi.#executeAsync=297ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.509] WARN (#6) uploadFile=293ms uploadFiles=298ms utapi.#executeAsync=298ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.510] WARN (#6) uploadFile=294ms uploadFiles=299ms utapi.#executeAsync=299ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.510] WARN (#6) uploadFile=294ms uploadFiles=299ms utapi.#executeAsync=299ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.512] WARN (#6) uploadFile=296ms uploadFiles=301ms utapi.#executeAsync=301ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.513] WARN (#6) uploadFile=297ms uploadFiles=302ms utapi.#executeAsync=302ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.513] WARN (#6) uploadFile=297ms uploadFiles=302ms utapi.#executeAsync=302ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.514] WARN (#6) uploadFile=298ms uploadFiles=303ms utapi.#executeAsync=303ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.515] WARN (#6) uploadFile=299ms uploadFiles=304ms utapi.#executeAsync=304ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.515] WARN (#6) uploadFile=299ms uploadFiles=304ms utapi.#executeAsync=304ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.516] WARN (#6) uploadFile=300ms uploadFiles=305ms utapi.#executeAsync=305ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.518] WARN (#6) uploadFile=302ms uploadFiles=307ms utapi.#executeAsync=307ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.518] WARN (#6) uploadFile=302ms uploadFiles=307ms utapi.#executeAsync=307ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:29.597] WARN (#6) uploadFile=381ms uploadFiles=386ms utapi.#executeAsync=386ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.310] WARN (#6) uploadFile=11094ms uploadFiles=11099ms utapi.#executeAsync=11099ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.311] WARN (#6) uploadFile=11095ms uploadFiles=11100ms utapi.#executeAsync=11100ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.316] WARN (#6) uploadFile=11100ms uploadFiles=11105ms utapi.#executeAsync=11105ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.319] WARN (#6) uploadFile=11103ms uploadFiles=11108ms utapi.#executeAsync=11108ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.320] WARN (#6) uploadFile=11104ms uploadFiles=11109ms utapi.#executeAsync=11109ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.322] WARN (#6) uploadFile=11106ms uploadFiles=11111ms utapi.#executeAsync=11111ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.323] WARN (#6) uploadFile=11107ms uploadFiles=11112ms utapi.#executeAsync=11112ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.324] WARN (#6) uploadFile=11108ms uploadFiles=11113ms utapi.#executeAsync=11113ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.326] WARN (#6) uploadFile=11110ms uploadFiles=11115ms utapi.#executeAsync=11115ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.327] WARN (#6) uploadFile=11111ms uploadFiles=11116ms utapi.#executeAsync=11116ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.330] WARN (#6) uploadFile=11114ms uploadFiles=11119ms utapi.#executeAsync=11119ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.333] WARN (#6) uploadFile=11117ms uploadFiles=11122ms utapi.#executeAsync=11122ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.334] WARN (#6) uploadFile=11118ms uploadFiles=11123ms utapi.#executeAsync=11123ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.335] WARN (#6) uploadFile=11119ms uploadFiles=11124ms utapi.#executeAsync=11124ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.337] WARN (#6) uploadFile=11121ms uploadFiles=11126ms utapi.#executeAsync=11126ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.338] WARN (#6) uploadFile=11122ms uploadFiles=11127ms utapi.#executeAsync=11127ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.340] WARN (#6) uploadFile=11124ms uploadFiles=11129ms utapi.#executeAsync=11129ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.341] WARN (#6) uploadFile=11125ms uploadFiles=11130ms utapi.#executeAsync=11130ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.342] WARN (#6) uploadFile=11126ms uploadFiles=11131ms utapi.#executeAsync=11131ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.343] WARN (#6) uploadFile=11127ms uploadFiles=11132ms utapi.#executeAsync=11132ms: Executing an Effect versioned 3.18.4 with a Runtime of version 3.17.7, you may want to dedupe the effect dependencies, you can use the language service plugin to detect this at compile time: https://github.com/Effect-TS/language-service
+[08:14:40.347] ERROR (#6) uploadFile=11131ms uploadFiles=11136ms utapi.#executeAsync=11136ms: Failed to upload file
+  error: RequestError: Transport error (PUT https://sea1.ingest.uploadthing.com/BxBfZYEHOronF88DbmSQqeuyGRYVTrfwS41nZdgJ0hp5H7tz?expires=1778634869347&x-ut-identifier=cjeckc0z09&x-ut-file-name=pearl-backup-auto-2026-05-13-0814.json&x-ut-file-size=268780&x-ut-file-type=application%252Fjson&x-ut-content-disposition=inline&signature=hmac-sha256%3D93a885ef4f1286122a00a2b39e37482f7f5d473d884c1864fe8f89f5d3d73147)
+      at catcher (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\@effect\platform\src\internal\fetchHttpClient.ts:33:11)
+      at EffectPrimitive.effect_instruction_i0 (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\effect\src\internal\core-effect.ts:1683:29)
+      at body (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\fiberRuntime.ts:1147:41)
+      at effect_internal_function (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\Utils.ts:779:12)
+      at FiberRuntime.Sync (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\fiberRuntime.ts:1147:31)
+      at f (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\fiberRuntime.ts:1384:53)
+      at Object.context (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\tracer.ts:101:19)
+      at FiberRuntime.runLoop (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\fiberRuntime.ts:1370:34)
+      at FiberRuntime.evaluateEffect (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\fiberRuntime.ts:936:27)
+      at FiberRuntime.evaluateMessageWhileSuspended (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\uploadthing\node_modules\effect\src\internal\fiberRuntime.ts:904:14) {
+    request: {
+      _id: '@effect/platform/HttpClientRequest',
+      method: 'PUT',
+      url: 'https://sea1.ingest.uploadthing.com/BxBfZYEHOronF88DbmSQqeuyGRYVTrfwS41nZdgJ0hp5H7tz?expires=1778634869347&x-ut-identifier=cjeckc0z09&x-ut-file-name=pearl-backup-auto-2026-05-13-0814.json&x-ut-file-size=268780&x-ut-file-type=application%252Fjson&x-ut-content-disposition=inline&signature=hmac-sha256%3D93a885ef4f1286122a00a2b39e37482f7f5d473d884c1864fe8f89f5d3d73147',
+      urlParams: [],
+      hash: { _id: 'Option', _tag: 'None' },
+      headers: {
+        range: 'bytes=0-',
+        'x-uploadthing-version': '7.7.4',
+        b3: 'b4c92e7f9f7e2ec083212abbb5017869-a3a149f4ef028b29-1',
+        traceparent: '00-b4c92e7f9f7e2ec083212abbb5017869-a3a149f4ef028b29-01'
+      },
+      body: {
+        _id: '@effect/platform/HttpBody',
+        _tag: 'FormData',
+        formData: FormData {
+          file: File {
+            size: 268780,
+            type: 'application/json',
+            name: 'pearl-backup-auto-2026-05-13-0814.json',
+            lastModified: 1778631268636
+          }
+        }
+      }
+    },
+    reason: 'Transport',
+    _tag: 'RequestError',
+    [cause]: [TypeError: fetch failed] {
+      [cause]: ConnectTimeoutError: Connect Timeout Error (attempted addresses: 44.226.222.220:443, 52.13.55.234:443, timeout: 10000ms)
+          at onConnectTimeout (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\undici\lib\core\util.js:857:19)
+          at Immediate._onImmediate (C:\Users\kylea\Desktop\Pearl of the Orient\backend\node_modules\undici\lib\core\util.js:808:35)
+          at processImmediate (node:internal/timers:504:21) {
+        code: 'UND_ERR_CONNECT_TIMEOUT'
+      }
+    }
+  }
+13 May 08:14:40 AM [[31merror[39m]: [31mAutomatic database backup failed[39m
