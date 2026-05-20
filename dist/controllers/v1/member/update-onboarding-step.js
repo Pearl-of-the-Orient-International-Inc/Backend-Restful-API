@@ -17,7 +17,7 @@ const winston_1 = require("../../../lib/winston");
 const updateOnboardingStep = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {
-        const PRE_ORIENTATION_REQUIRED_LESSON_COUNT = 5;
+        const PRE_ORIENTATION_REQUIRED_LESSON_COUNT = 3;
         const userId = req.userId;
         if (!userId) {
             res.status(http_codes_1.HTTPSTATUS.UNAUTHORIZED).json({
@@ -60,7 +60,7 @@ const updateOnboardingStep = (req, res) => __awaiter(void 0, void 0, void 0, fun
                 !hasCompletedAt) {
                 res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
                     code: 'BAD_REQUEST',
-                    message: 'Pre-orientation is not completed. Please finish all lessons first.',
+                    message: 'Pre-orientation is not completed. Please finish all required videos first.',
                 });
                 return;
             }

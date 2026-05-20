@@ -337,3 +337,8 @@ timestamp=2026-05-13T00:14:29.062Z level=WARN fiber=#13 message="Executing an Ef
     }
   }
 13 May 08:14:40 AM [[31merror[39m]: [31mAutomatic database backup failed[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node -r tsconfig-paths/register src/server.ts`[39m
+13 May 04:01:25 PM [[32minfo[39m]: [32mBackup scheduler started with 60000ms interval[39m
+13 May 04:01:25 PM [[32minfo[39m]: [32mThe server will start at http://localhost:5001 with hot-reloading enabled[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m

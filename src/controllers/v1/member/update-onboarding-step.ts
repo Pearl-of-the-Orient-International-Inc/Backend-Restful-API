@@ -11,7 +11,7 @@ export const updateOnboardingStep = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const PRE_ORIENTATION_REQUIRED_LESSON_COUNT = 5;
+    const PRE_ORIENTATION_REQUIRED_LESSON_COUNT = 3;
     const userId = req.userId;
 
     if (!userId) {
@@ -67,7 +67,7 @@ export const updateOnboardingStep = async (
         res.status(HTTPSTATUS.BAD_REQUEST).json({
           code: 'BAD_REQUEST',
           message:
-            'Pre-orientation is not completed. Please finish all lessons first.',
+            'Pre-orientation is not completed. Please finish all required videos first.',
         });
         return;
       }
