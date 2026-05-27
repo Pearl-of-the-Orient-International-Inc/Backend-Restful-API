@@ -33,6 +33,7 @@ import { getCurrentProfileBanner } from '@/controllers/v1/member/get-current-pro
 import { updateCurrentProfileBanner } from '@/controllers/v1/member/update-current-profile-banner';
 import { updateCurrentChurchAffiliation } from '@/controllers/v1/member/update-current-church-affiliation';
 import { updateCurrentEducation } from '@/controllers/v1/member/update-current-education';
+import { updateCurrentBranchServices } from '@/controllers/v1/member/update-current-branch-services';
 import { createCurrentMemberCertificate } from '@/controllers/v1/member/create-current-member-certificate';
 import { createCurrentMemberPublicRecord } from '@/controllers/v1/member/create-current-member-public-record';
 import { createOfficerAssignmentByAdmin } from '@/controllers/v1/member/create-officer-assignment-by-admin';
@@ -64,6 +65,7 @@ import {
   updateCurrentProfileBannerSchema,
   updateCurrentChurchAffiliationSchema,
   updateCurrentEducationSchema,
+  updateCurrentBranchServicesSchema,
   createCurrentMemberCertificateSchema,
   createCurrentMemberPublicRecordSchema,
   upsertMemberIdGenerationAssetSchema,
@@ -145,6 +147,15 @@ router.put(
   authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
   validate(updateCurrentEducationSchema),
   updateCurrentEducation,
+);
+
+router.put(
+  '/current/branch-services',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(updateCurrentBranchServicesSchema),
+  updateCurrentBranchServices,
 );
 
 router.post(

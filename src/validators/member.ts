@@ -193,6 +193,10 @@ export const updateCurrentEducationSchema = z.object({
     .optional(),
 });
 
+export const updateCurrentBranchServicesSchema = z.object({
+  preferredBranchOther: z.string().trim().max(255).optional(),
+});
+
 export const createCurrentMemberCertificateSchema = z.object({
   title: z.string().trim().min(1).max(150),
   certificateUrl: z.url(),

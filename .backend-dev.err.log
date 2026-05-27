@@ -1,2 +1,0 @@
-⚠️ [uploadthing][deprecated] `file.url` is deprecated and will be removed in uploadthing v9. Use `file.ufsUrl` instead.
-⚠️ [uploadthing][deprecated] `file.appUrl` is deprecated and will be removed in uploadthing v9. Use `file.ufsUrl` instead.
