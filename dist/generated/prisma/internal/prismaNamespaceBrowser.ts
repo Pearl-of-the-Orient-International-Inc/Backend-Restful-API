@@ -67,6 +67,9 @@ export const ModelName = {
   MemberPaymentCheckout: 'MemberPaymentCheckout',
   MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
   MemberIdGenerationAsset: 'MemberIdGenerationAsset',
+  MemberCertificate: 'MemberCertificate',
+  MemberPublicRecord: 'MemberPublicRecord',
+  MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
@@ -211,6 +214,8 @@ export const MemberScalarFieldEnum = {
   status: 'status',
   memberType: 'memberType',
   badgeNumber: 'badgeNumber',
+  profileBannerUrl: 'profileBannerUrl',
+  profileBannerPositionY: 'profileBannerPositionY',
   firstName: 'firstName',
   middleInitial: 'middleInitial',
   lastName: 'lastName',
@@ -356,7 +361,6 @@ export const MemberIdGenerationAssetScalarFieldEnum = {
   id: 'id',
   profileUrl: 'profileUrl',
   qrCodeUrl: 'qrCodeUrl',
-  certificateUrl: 'certificateUrl',
   generatedAt: 'generatedAt',
   memberId: 'memberId',
   createdAt: 'createdAt',
@@ -364,6 +368,49 @@ export const MemberIdGenerationAssetScalarFieldEnum = {
 } as const
 
 export type MemberIdGenerationAssetScalarFieldEnum = (typeof MemberIdGenerationAssetScalarFieldEnum)[keyof typeof MemberIdGenerationAssetScalarFieldEnum]
+
+
+export const MemberCertificateScalarFieldEnum = {
+  id: 'id',
+  credentialId: 'credentialId',
+  title: 'title',
+  certificateUrl: 'certificateUrl',
+  dateReceived: 'dateReceived',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemberCertificateScalarFieldEnum = (typeof MemberCertificateScalarFieldEnum)[keyof typeof MemberCertificateScalarFieldEnum]
+
+
+export const MemberPublicRecordScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  shortDescription: 'shortDescription',
+  type: 'type',
+  eventAt: 'eventAt',
+  location: 'location',
+  status: 'status',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemberPublicRecordScalarFieldEnum = (typeof MemberPublicRecordScalarFieldEnum)[keyof typeof MemberPublicRecordScalarFieldEnum]
+
+
+export const MemberPublicRecordAttachmentScalarFieldEnum = {
+  id: 'id',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sortOrder: 'sortOrder',
+  publicRecordId: 'publicRecordId',
+  createdAt: 'createdAt'
+} as const
+
+export type MemberPublicRecordAttachmentScalarFieldEnum = (typeof MemberPublicRecordAttachmentScalarFieldEnum)[keyof typeof MemberPublicRecordAttachmentScalarFieldEnum]
 
 
 export const MemberChaplaincyTrainingProgressScalarFieldEnum = {

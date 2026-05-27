@@ -175,15 +175,13 @@ export const updateOnboardingStep = async (
         where: { memberId: member.id },
         select: {
           qrCodeUrl: true,
-          certificateUrl: true,
         },
       });
 
-      if (!idGenerationAsset?.qrCodeUrl || !idGenerationAsset?.certificateUrl) {
+      if (!idGenerationAsset?.qrCodeUrl) {
         res.status(HTTPSTATUS.BAD_REQUEST).json({
           code: 'BAD_REQUEST',
-          message:
-            'Member ID generation is incomplete. Please save QR code and certificate first.',
+          message: 'Member ID generation is incomplete. Please save the QR code first.',
         });
         return;
       }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
+exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
@@ -135,12 +135,54 @@ exports.upsertOnlineInterviewAppointmentSchema = zod_1.z.object({
 exports.upsertMemberIdGenerationAssetSchema = zod_1.z.object({
     profileUrl: zod_1.z.url(),
     qrCodeUrl: zod_1.z.url(),
-    certificateUrl: zod_1.z.url(),
 });
 exports.upsertChaplaincyTrainingProgressSchema = zod_1.z.object({
     completedLessonIds: zod_1.z.array(zod_1.z.int().min(1).max(1000)).max(100),
     essayAnswers: zod_1.z.record(zod_1.z.string(), zod_1.z.string()).optional(),
     isCompleted: zod_1.z.boolean().optional(),
+});
+exports.updateCurrentProfileBannerSchema = zod_1.z.object({
+    profileBannerUrl: zod_1.z.url().optional(),
+    profileBannerPositionY: zod_1.z.int().min(0).max(100).optional(),
+}).refine((value) => typeof value.profileBannerUrl === 'string' || typeof value.profileBannerPositionY === 'number', {
+    message: 'profileBannerUrl or profileBannerPositionY is required',
+    path: ['profileBannerUrl'],
+});
+exports.updateCurrentChurchAffiliationSchema = zod_1.z.object({
+    churchAffiliation: zod_1.z.string().trim().max(150).optional(),
+    churchAddress: zod_1.z.string().trim().max(255).optional(),
+    currentPositionRole: zod_1.z.string().trim().max(150).optional(),
+    currentPositionRoleOther: zod_1.z.string().trim().max(150).optional(),
+});
+exports.updateCurrentEducationSchema = zod_1.z.object({
+    elementarySchool: zod_1.z.string().trim().max(255).optional(),
+    secondarySchool: zod_1.z.string().trim().max(255).optional(),
+    tertiaryCollegeEntries: zod_1.z.array(zod_1.z.string().trim().max(255)).max(20).optional(),
+    postGraduateStudiesEntries: zod_1.z
+        .array(zod_1.z.string().trim().max(255))
+        .max(20)
+        .optional(),
+});
+exports.createCurrentMemberCertificateSchema = zod_1.z.object({
+    title: zod_1.z.string().trim().min(1).max(150),
+    certificateUrl: zod_1.z.url(),
+    issuedAt: zod_1.z.iso.datetime(),
+});
+exports.createCurrentMemberPublicRecordSchema = zod_1.z.object({
+    title: zod_1.z.string().trim().min(1).max(150),
+    shortDescription: zod_1.z.string().trim().min(1).max(500),
+    type: zod_1.z.enum(enums_1.MemberPublicRecordType),
+    eventAt: zod_1.z.iso.datetime(),
+    location: zod_1.z.string().trim().min(1).max(255),
+    status: zod_1.z.enum(enums_1.MemberPublicRecordStatus),
+    attachments: zod_1.z
+        .array(zod_1.z.object({
+        fileUrl: zod_1.z.url(),
+        fileName: zod_1.z.string().trim().max(255).optional(),
+        mimeType: zod_1.z.string().trim().max(100).optional(),
+    }))
+        .max(6)
+        .optional(),
 });
 exports.updateMemberStatusSchema = zod_1.z.object({
     status: zod_1.z.enum(enums_1.MemberStatus).refine((value) => value !== enums_1.MemberStatus.PENDING, {
@@ -199,6 +241,8 @@ exports.createMemberByAdminSchema = zod_1.z.object({
     extensionName: zod_1.z.string().trim().max(30).optional(),
     memberType: zod_1.z.enum(enums_1.MemberType).optional(),
     badgeNumber: zod_1.z.string().trim().max(50).optional(),
+    profileBannerUrl: zod_1.z.url().optional(),
+    profileBannerPositionY: zod_1.z.int().min(0).max(100).optional(),
     mobilePhoneNumber: zod_1.z.string().trim().max(30).optional(),
     homeAddress: zod_1.z.string().trim().max(255).optional(),
     civilStatus: zod_1.z.enum(enums_1.CivilStatus).optional(),
@@ -252,6 +296,8 @@ exports.updateMemberByAdminSchema = zod_1.z.object({
     extensionName: zod_1.z.string().trim().max(30).optional(),
     memberType: zod_1.z.enum(enums_1.MemberType).optional(),
     badgeNumber: zod_1.z.string().trim().max(50).optional(),
+    profileBannerUrl: zod_1.z.url().optional(),
+    profileBannerPositionY: zod_1.z.int().min(0).max(100).optional(),
     mobilePhoneNumber: zod_1.z.string().trim().max(30).optional(),
     homeAddress: zod_1.z.string().trim().max(255).optional(),
     civilStatus: zod_1.z.enum(enums_1.CivilStatus).optional(),

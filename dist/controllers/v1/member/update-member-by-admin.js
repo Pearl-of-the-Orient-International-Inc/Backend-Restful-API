@@ -161,6 +161,12 @@ const updateMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
                     set: preferredBranchIds.map((id) => ({ id })),
                 },
             };
+            if ('profileBannerUrl' in body) {
+                updateData.profileBannerUrl = getOptional(body.profileBannerUrl);
+            }
+            if (typeof body.profileBannerPositionY === 'number') {
+                updateData.profileBannerPositionY = body.profileBannerPositionY;
+            }
             if (body.signature) {
                 updateData.signature = {
                     upsert: {

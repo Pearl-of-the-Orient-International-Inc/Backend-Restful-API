@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -45,6 +45,17 @@ exports.MemberType = {
     PROFESSIONAL_CHAPLAIN: 'PROFESSIONAL_CHAPLAIN',
     ORDAINED_AND_COMMISSIONED_PRACTITIONER: 'ORDAINED_AND_COMMISSIONED_PRACTITIONER',
     CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR: 'CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR'
+};
+exports.MemberPublicRecordType = {
+    REPORT_ACTIVITY: 'REPORT_ACTIVITY',
+    COMMUNITY_SERVICE: 'COMMUNITY_SERVICE',
+    TRAINING_CONDUCTED: 'TRAINING_CONDUCTED',
+    PARTICIPATION: 'PARTICIPATION',
+    RECOGNITION: 'RECOGNITION'
+};
+exports.MemberPublicRecordStatus = {
+    PUBLISHED: 'PUBLISHED',
+    DRAFT: 'DRAFT'
 };
 exports.VerificationType = {
     EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',

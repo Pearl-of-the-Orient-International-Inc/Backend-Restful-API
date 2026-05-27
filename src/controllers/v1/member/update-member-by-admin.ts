@@ -174,6 +174,14 @@ export const updateMemberByAdmin = async (
         },
       };
 
+      if ('profileBannerUrl' in body) {
+        updateData.profileBannerUrl = getOptional(body.profileBannerUrl);
+      }
+
+      if (typeof body.profileBannerPositionY === 'number') {
+        updateData.profileBannerPositionY = body.profileBannerPositionY;
+      }
+
       if (body.signature) {
         updateData.signature = {
           upsert: {

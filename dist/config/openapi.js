@@ -4179,8 +4179,7 @@ const openApiDocument = {
                 "type": "object",
                 "required": [
                     "profileUrl",
-                    "qrCodeUrl",
-                    "certificateUrl"
+                    "qrCodeUrl"
                 ],
                 "properties": {
                     "profileUrl": {
@@ -4188,10 +4187,6 @@ const openApiDocument = {
                         "format": "uri"
                     },
                     "qrCodeUrl": {
-                        "type": "string",
-                        "format": "uri"
-                    },
-                    "certificateUrl": {
                         "type": "string",
                         "format": "uri"
                     }
@@ -4231,7 +4226,6 @@ const openApiDocument = {
                                         "required": [
                                             "profileUrl",
                                             "qrCodeUrl",
-                                            "certificateUrl",
                                             "generatedAt"
                                         ],
                                         "properties": {
@@ -4240,10 +4234,6 @@ const openApiDocument = {
                                                 "format": "uri"
                                             },
                                             "qrCodeUrl": {
-                                                "type": "string",
-                                                "format": "uri"
-                                            },
-                                            "certificateUrl": {
                                                 "type": "string",
                                                 "format": "uri"
                                             },

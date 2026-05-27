@@ -38,7 +38,6 @@ const getCurrentIdGenerationAsset = (req, res) => __awaiter(void 0, void 0, void
                     select: {
                         profileUrl: true,
                         qrCodeUrl: true,
-                        certificateUrl: true,
                         generatedAt: true,
                     },
                 },

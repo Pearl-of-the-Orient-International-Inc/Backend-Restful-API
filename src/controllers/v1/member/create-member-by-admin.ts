@@ -158,6 +158,8 @@ export const createMemberByAdmin = async (
             memberType: body.memberType ?? MemberType.ASSOCIATE_CHAPLAIN,
             uniqueId,
             badgeNumber: getOptional(body.badgeNumber),
+            profileBannerUrl: getOptional(body.profileBannerUrl),
+            profileBannerPositionY: body.profileBannerPositionY ?? 50,
             firstName: body.firstName.trim(),
             middleInitial: getOptional(body.middleInitial),
             lastName: body.lastName.trim(),

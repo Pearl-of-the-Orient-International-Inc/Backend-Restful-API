@@ -29,6 +29,12 @@ import { getCurrentIdGenerationAsset } from '@/controllers/v1/member/get-current
 import { upsertIdGenerationAsset } from '@/controllers/v1/member/upsert-id-generation-asset';
 import { getCurrentChaplaincyTrainingProgress } from '@/controllers/v1/member/get-current-chaplaincy-training-progress';
 import { upsertChaplaincyTrainingProgress } from '@/controllers/v1/member/upsert-chaplaincy-training-progress';
+import { getCurrentProfileBanner } from '@/controllers/v1/member/get-current-profile-banner';
+import { updateCurrentProfileBanner } from '@/controllers/v1/member/update-current-profile-banner';
+import { updateCurrentChurchAffiliation } from '@/controllers/v1/member/update-current-church-affiliation';
+import { updateCurrentEducation } from '@/controllers/v1/member/update-current-education';
+import { createCurrentMemberCertificate } from '@/controllers/v1/member/create-current-member-certificate';
+import { createCurrentMemberPublicRecord } from '@/controllers/v1/member/create-current-member-public-record';
 import { createOfficerAssignmentByAdmin } from '@/controllers/v1/member/create-officer-assignment-by-admin';
 import { getAllOfficerAssignments } from '@/controllers/v1/member/get-all-officer-assignments';
 import { getMemberOfficerAssignments } from '@/controllers/v1/member/get-member-officer-assignments';
@@ -55,6 +61,11 @@ import {
   updateOnboardingStepSchema,
   updatePreOrientationProgressSchema,
   upsertChaplaincyTrainingProgressSchema,
+  updateCurrentProfileBannerSchema,
+  updateCurrentChurchAffiliationSchema,
+  updateCurrentEducationSchema,
+  createCurrentMemberCertificateSchema,
+  createCurrentMemberPublicRecordSchema,
   upsertMemberIdGenerationAssetSchema,
   upsertOnlineInterviewAppointmentSchema,
   upsertPaymentCheckoutSchema,
@@ -98,6 +109,60 @@ router.post(
   authorize([UserType.ADMIN]),
   validate(createMemberByAdminSchema),
   createMemberByAdmin,
+);
+
+// Current-member cover photo management for the public profile page.
+router.get(
+  '/current/profile-banner',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  getCurrentProfileBanner,
+);
+
+router.put(
+  '/current/profile-banner',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(updateCurrentProfileBannerSchema),
+  updateCurrentProfileBanner,
+);
+
+router.put(
+  '/current/church-affiliation',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(updateCurrentChurchAffiliationSchema),
+  updateCurrentChurchAffiliation,
+);
+
+router.put(
+  '/current/education',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(updateCurrentEducationSchema),
+  updateCurrentEducation,
+);
+
+router.post(
+  '/current/certificates',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(createCurrentMemberCertificateSchema),
+  createCurrentMemberCertificate,
+);
+
+router.post(
+  '/current/public-records',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(createCurrentMemberPublicRecordSchema),
+  createCurrentMemberPublicRecord,
 );
 
 router.get(
@@ -209,6 +274,33 @@ router.put(
   authorize([UserType.MEMBER]),
   validate(upsertChaplaincyTrainingProgressSchema),
   upsertChaplaincyTrainingProgress,
+);
+
+router.use(
+  '/profile-banner/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '8MB',
+    maxFileCount: 1,
+  }),
+);
+
+router.use(
+  '/certificates/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '16MB',
+    maxFileCount: 1,
+  }),
+);
+
+router.use(
+  '/public-records/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '8MB',
+    maxFileCount: 6,
+  }),
 );
 
 router.use(

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -61,6 +61,9 @@ exports.ModelName = {
     MemberPaymentCheckout: 'MemberPaymentCheckout',
     MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
     MemberIdGenerationAsset: 'MemberIdGenerationAsset',
+    MemberCertificate: 'MemberCertificate',
+    MemberPublicRecord: 'MemberPublicRecord',
+    MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
     MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
     BranchOfService: 'BranchOfService',
     OfficeTitle: 'OfficeTitle',
@@ -166,6 +169,8 @@ exports.MemberScalarFieldEnum = {
     status: 'status',
     memberType: 'memberType',
     badgeNumber: 'badgeNumber',
+    profileBannerUrl: 'profileBannerUrl',
+    profileBannerPositionY: 'profileBannerPositionY',
     firstName: 'firstName',
     middleInitial: 'middleInitial',
     lastName: 'lastName',
@@ -279,11 +284,41 @@ exports.MemberIdGenerationAssetScalarFieldEnum = {
     id: 'id',
     profileUrl: 'profileUrl',
     qrCodeUrl: 'qrCodeUrl',
-    certificateUrl: 'certificateUrl',
     generatedAt: 'generatedAt',
     memberId: 'memberId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+exports.MemberCertificateScalarFieldEnum = {
+    id: 'id',
+    credentialId: 'credentialId',
+    title: 'title',
+    certificateUrl: 'certificateUrl',
+    dateReceived: 'dateReceived',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberPublicRecordScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    shortDescription: 'shortDescription',
+    type: 'type',
+    eventAt: 'eventAt',
+    location: 'location',
+    status: 'status',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemberPublicRecordAttachmentScalarFieldEnum = {
+    id: 'id',
+    fileUrl: 'fileUrl',
+    fileName: 'fileName',
+    mimeType: 'mimeType',
+    sortOrder: 'sortOrder',
+    publicRecordId: 'publicRecordId',
+    createdAt: 'createdAt'
 };
 exports.MemberChaplaincyTrainingProgressScalarFieldEnum = {
     id: 'id',

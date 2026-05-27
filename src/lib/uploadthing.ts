@@ -110,7 +110,7 @@ const createMemberRequirementUploaderRoute = () =>
         select: { id: true, role: true, memberProfile: { select: { id: true } } },
       });
 
-      if (!user || user.role !== UserType.MEMBER || !user.memberProfile) {
+      if (!user || !user.memberProfile) {
         throw new Error('Member profile not found');
       }
 
@@ -124,6 +124,152 @@ const createMemberRequirementUploaderRoute = () =>
       mimeType: file.type,
       fileSize: file.size,
     }));
+
+const createMemberProfileBannerUploaderRoute = (options: UploadLimitOptions = {}) => {
+  const maxFileSize = options.maxFileSize ?? defaultUploadLimits.maxFileSize;
+  const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
+
+  return f({
+    image: {
+      maxFileSize,
+      maxFileCount,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+      }
+
+      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) {
+        throw new Error('Invalid or expired access token');
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true, memberProfile: { select: { id: true } } },
+      });
+
+      if (!user || !user.memberProfile) {
+        throw new Error('Member profile not found');
+      }
+
+      return { userId, memberId: user.memberProfile.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      memberId: metadata.memberId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+};
+
+const createMemberCertificateUploaderRoute = () =>
+  f({
+    image: {
+      maxFileSize: '8MB',
+      maxFileCount: 1,
+    },
+    pdf: {
+      maxFileSize: '16MB',
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+      }
+
+      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) {
+        throw new Error('Invalid or expired access token');
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, memberProfile: { select: { id: true } } },
+      });
+
+      if (!user || !user.memberProfile) {
+        throw new Error('Member profile not found');
+      }
+
+      return { userId, memberId: user.memberProfile.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      memberId: metadata.memberId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+
+const createMemberPublicRecordAttachmentUploaderRoute = (
+  options: UploadLimitOptions = {},
+) => {
+  const maxFileSize = options.maxFileSize ?? defaultUploadLimits.maxFileSize;
+  const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
+
+  return f({
+    image: {
+      maxFileSize,
+      maxFileCount,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+      }
+
+      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) {
+        throw new Error('Invalid or expired access token');
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, memberProfile: { select: { id: true } } },
+      });
+
+      if (!user || !user.memberProfile) {
+        throw new Error('Member profile not found');
+      }
+
+      return { userId, memberId: user.memberProfile.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      memberId: metadata.memberId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+};
 
 const createEventThumbnailUploaderRoute = (options: UploadLimitOptions = {}) => {
   const maxFileSize = options.maxFileSize ?? defaultUploadLimits.maxFileSize;
@@ -227,6 +373,13 @@ export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
     requirementUploader: createMemberRequirementUploaderRoute(),
+    memberProfileBannerUploader: createMemberProfileBannerUploaderRoute(options),
+    memberCertificateUploader: createMemberCertificateUploaderRoute(),
+    memberPublicRecordAttachmentUploader:
+      createMemberPublicRecordAttachmentUploaderRoute({
+        maxFileSize: options.maxFileSize ?? '8MB',
+        maxFileCount: options.maxFileCount ?? 6,
+      }),
     eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
     newsBlogMediaUploader: createNewsBlogMediaUploaderRoute(options),
   }) satisfies FileRouter;

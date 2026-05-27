@@ -27,6 +27,12 @@ const get_current_id_generation_asset_1 = require("../../controllers/v1/member/g
 const upsert_id_generation_asset_1 = require("../../controllers/v1/member/upsert-id-generation-asset");
 const get_current_chaplaincy_training_progress_1 = require("../../controllers/v1/member/get-current-chaplaincy-training-progress");
 const upsert_chaplaincy_training_progress_1 = require("../../controllers/v1/member/upsert-chaplaincy-training-progress");
+const get_current_profile_banner_1 = require("../../controllers/v1/member/get-current-profile-banner");
+const update_current_profile_banner_1 = require("../../controllers/v1/member/update-current-profile-banner");
+const update_current_church_affiliation_1 = require("../../controllers/v1/member/update-current-church-affiliation");
+const update_current_education_1 = require("../../controllers/v1/member/update-current-education");
+const create_current_member_certificate_1 = require("../../controllers/v1/member/create-current-member-certificate");
+const create_current_member_public_record_1 = require("../../controllers/v1/member/create-current-member-public-record");
 const create_officer_assignment_by_admin_1 = require("../../controllers/v1/member/create-officer-assignment-by-admin");
 const get_all_officer_assignments_1 = require("../../controllers/v1/member/get-all-officer-assignments");
 const get_member_officer_assignments_1 = require("../../controllers/v1/member/get-member-officer-assignments");
@@ -46,6 +52,12 @@ router.post('/apply', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0,
 router.get('/public/directory-locations', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_directory_locations_1.getPublicDirectoryLocations);
 router.get('/public/:memberId', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(member_1.getPublicMemberProfileSchema), get_public_member_profile_1.getPublicMemberProfile);
 router.post('/', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createMemberByAdminSchema), create_member_by_admin_1.createMemberByAdmin);
+router.get('/current/profile-banner', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), get_current_profile_banner_1.getCurrentProfileBanner);
+router.put('/current/profile-banner', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateCurrentProfileBannerSchema), update_current_profile_banner_1.updateCurrentProfileBanner);
+router.put('/current/church-affiliation', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateCurrentChurchAffiliationSchema), update_current_church_affiliation_1.updateCurrentChurchAffiliation);
+router.put('/current/education', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateCurrentEducationSchema), update_current_education_1.updateCurrentEducation);
+router.post('/current/certificates', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createCurrentMemberCertificateSchema), create_current_member_certificate_1.createCurrentMemberCertificate);
+router.post('/current/public-records', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createCurrentMemberPublicRecordSchema), create_current_member_public_record_1.createCurrentMemberPublicRecord);
 router.get('/current/requirements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_member_requirements_1.getCurrentMemberRequirements);
 router.put('/current/requirements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.upsertMemberRequirementsSchema), upsert_member_requirements_1.upsertMemberRequirements);
 router.get('/current/onboarding-progress', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_onboarding_progress_1.getCurrentOnboardingProgress);
@@ -59,6 +71,18 @@ router.get('/current/id-generation', (0, express_rate_limiter_1.expressRateLimit
 router.put('/current/id-generation', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.upsertMemberIdGenerationAssetSchema), upsert_id_generation_asset_1.upsertIdGenerationAsset);
 router.get('/current/chaplaincy-training', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_chaplaincy_training_progress_1.getCurrentChaplaincyTrainingProgress);
 router.put('/current/chaplaincy-training', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(member_1.upsertChaplaincyTrainingProgressSchema), upsert_chaplaincy_training_progress_1.upsertChaplaincyTrainingProgress);
+router.use('/profile-banner/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({
+    maxFileSize: '8MB',
+    maxFileCount: 1,
+}));
+router.use('/certificates/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({
+    maxFileSize: '16MB',
+    maxFileCount: 1,
+}));
+router.use('/public-records/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({
+    maxFileSize: '8MB',
+    maxFileCount: 6,
+}));
 router.use('/requirements/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({
     maxFileSize: '4MB',
     maxFileCount: 1,

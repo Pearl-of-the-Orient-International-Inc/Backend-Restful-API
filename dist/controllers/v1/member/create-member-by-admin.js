@@ -100,7 +100,7 @@ const createMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
         for (let attempt = 1; attempt <= MAX_MEMBER_CREATE_ATTEMPTS; attempt += 1) {
             try {
                 result = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
-                    var _a, _b, _c, _d, _e, _f;
+                    var _a, _b, _c, _d, _e, _f, _g;
                     const user = existingUser
                         ? yield tx.user.findUniqueOrThrow({
                             where: { id: existingUser.id },
@@ -124,13 +124,15 @@ const createMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
                         memberType: (_a = body.memberType) !== null && _a !== void 0 ? _a : enums_1.MemberType.ASSOCIATE_CHAPLAIN,
                         uniqueId,
                         badgeNumber: getOptional(body.badgeNumber),
+                        profileBannerUrl: getOptional(body.profileBannerUrl),
+                        profileBannerPositionY: (_b = body.profileBannerPositionY) !== null && _b !== void 0 ? _b : 50,
                         firstName: body.firstName.trim(),
                         middleInitial: getOptional(body.middleInitial),
                         lastName: body.lastName.trim(),
                         extensionName: getOptional(body.extensionName),
                         mobilePhoneNumber: getOptional(body.mobilePhoneNumber),
                         homeAddress: getOptional(body.homeAddress),
-                        civilStatus: (_b = body.civilStatus) !== null && _b !== void 0 ? _b : null,
+                        civilStatus: (_c = body.civilStatus) !== null && _c !== void 0 ? _c : null,
                         gender: body.gender,
                         nationality: getOptional(body.nationality),
                         dateOfBirth: new Date(body.dateOfBirth),
@@ -158,19 +160,19 @@ const createMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
                         tertiaryCollege: getOptional(body.tertiaryCollege),
                         postGraduateStudies: getOptional(body.postGraduateStudies),
                         ministerialExperiences: {
-                            create: (_d = (_c = body.ministerialExperiences) === null || _c === void 0 ? void 0 : _c.map((item, index) => ({
+                            create: (_e = (_d = body.ministerialExperiences) === null || _d === void 0 ? void 0 : _d.map((item, index) => ({
                                 roleDescription: item.roleDescription,
                                 yearsApprox: item.yearsApprox,
                                 order: index + 1,
-                            }))) !== null && _d !== void 0 ? _d : [],
+                            }))) !== null && _e !== void 0 ? _e : [],
                         },
                         characterReferences: {
-                            create: (_f = (_e = body.characterReferences) === null || _e === void 0 ? void 0 : _e.map((item, index) => ({
+                            create: (_g = (_f = body.characterReferences) === null || _f === void 0 ? void 0 : _f.map((item, index) => ({
                                 name: item.name,
                                 positionRelationship: item.positionRelationship,
                                 contactNumber: item.contactNumber,
                                 order: index + 1,
-                            }))) !== null && _f !== void 0 ? _f : [],
+                            }))) !== null && _g !== void 0 ? _g : [],
                         },
                     };
                     if (body.createdAt) {

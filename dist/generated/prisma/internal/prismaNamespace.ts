@@ -400,6 +400,9 @@ export const ModelName = {
   MemberPaymentCheckout: 'MemberPaymentCheckout',
   MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
   MemberIdGenerationAsset: 'MemberIdGenerationAsset',
+  MemberCertificate: 'MemberCertificate',
+  MemberPublicRecord: 'MemberPublicRecord',
+  MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
@@ -427,7 +430,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberChaplaincyTrainingProgress" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1615,6 +1618,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MemberCertificate: {
+      payload: Prisma.$MemberCertificatePayload<ExtArgs>
+      fields: Prisma.MemberCertificateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemberCertificateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemberCertificateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>
+        }
+        findFirst: {
+          args: Prisma.MemberCertificateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemberCertificateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>
+        }
+        findMany: {
+          args: Prisma.MemberCertificateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>[]
+        }
+        create: {
+          args: Prisma.MemberCertificateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>
+        }
+        createMany: {
+          args: Prisma.MemberCertificateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemberCertificateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>[]
+        }
+        delete: {
+          args: Prisma.MemberCertificateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>
+        }
+        update: {
+          args: Prisma.MemberCertificateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>
+        }
+        deleteMany: {
+          args: Prisma.MemberCertificateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemberCertificateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemberCertificateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>[]
+        }
+        upsert: {
+          args: Prisma.MemberCertificateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCertificatePayload>
+        }
+        aggregate: {
+          args: Prisma.MemberCertificateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemberCertificate>
+        }
+        groupBy: {
+          args: Prisma.MemberCertificateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberCertificateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemberCertificateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberCertificateCountAggregateOutputType> | number
+        }
+      }
+    }
+    MemberPublicRecord: {
+      payload: Prisma.$MemberPublicRecordPayload<ExtArgs>
+      fields: Prisma.MemberPublicRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemberPublicRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemberPublicRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.MemberPublicRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemberPublicRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>
+        }
+        findMany: {
+          args: Prisma.MemberPublicRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>[]
+        }
+        create: {
+          args: Prisma.MemberPublicRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>
+        }
+        createMany: {
+          args: Prisma.MemberPublicRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemberPublicRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.MemberPublicRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>
+        }
+        update: {
+          args: Prisma.MemberPublicRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemberPublicRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemberPublicRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemberPublicRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemberPublicRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.MemberPublicRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemberPublicRecord>
+        }
+        groupBy: {
+          args: Prisma.MemberPublicRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberPublicRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemberPublicRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberPublicRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    MemberPublicRecordAttachment: {
+      payload: Prisma.$MemberPublicRecordAttachmentPayload<ExtArgs>
+      fields: Prisma.MemberPublicRecordAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemberPublicRecordAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemberPublicRecordAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.MemberPublicRecordAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemberPublicRecordAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.MemberPublicRecordAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.MemberPublicRecordAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.MemberPublicRecordAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemberPublicRecordAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.MemberPublicRecordAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>
+        }
+        update: {
+          args: Prisma.MemberPublicRecordAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemberPublicRecordAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemberPublicRecordAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemberPublicRecordAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemberPublicRecordAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPublicRecordAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.MemberPublicRecordAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemberPublicRecordAttachment>
+        }
+        groupBy: {
+          args: Prisma.MemberPublicRecordAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberPublicRecordAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemberPublicRecordAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberPublicRecordAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
     MemberChaplaincyTrainingProgress: {
       payload: Prisma.$MemberChaplaincyTrainingProgressPayload<ExtArgs>
       fields: Prisma.MemberChaplaincyTrainingProgressFieldRefs
@@ -2656,6 +2881,8 @@ export const MemberScalarFieldEnum = {
   status: 'status',
   memberType: 'memberType',
   badgeNumber: 'badgeNumber',
+  profileBannerUrl: 'profileBannerUrl',
+  profileBannerPositionY: 'profileBannerPositionY',
   firstName: 'firstName',
   middleInitial: 'middleInitial',
   lastName: 'lastName',
@@ -2801,7 +3028,6 @@ export const MemberIdGenerationAssetScalarFieldEnum = {
   id: 'id',
   profileUrl: 'profileUrl',
   qrCodeUrl: 'qrCodeUrl',
-  certificateUrl: 'certificateUrl',
   generatedAt: 'generatedAt',
   memberId: 'memberId',
   createdAt: 'createdAt',
@@ -2809,6 +3035,49 @@ export const MemberIdGenerationAssetScalarFieldEnum = {
 } as const
 
 export type MemberIdGenerationAssetScalarFieldEnum = (typeof MemberIdGenerationAssetScalarFieldEnum)[keyof typeof MemberIdGenerationAssetScalarFieldEnum]
+
+
+export const MemberCertificateScalarFieldEnum = {
+  id: 'id',
+  credentialId: 'credentialId',
+  title: 'title',
+  certificateUrl: 'certificateUrl',
+  dateReceived: 'dateReceived',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemberCertificateScalarFieldEnum = (typeof MemberCertificateScalarFieldEnum)[keyof typeof MemberCertificateScalarFieldEnum]
+
+
+export const MemberPublicRecordScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  shortDescription: 'shortDescription',
+  type: 'type',
+  eventAt: 'eventAt',
+  location: 'location',
+  status: 'status',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemberPublicRecordScalarFieldEnum = (typeof MemberPublicRecordScalarFieldEnum)[keyof typeof MemberPublicRecordScalarFieldEnum]
+
+
+export const MemberPublicRecordAttachmentScalarFieldEnum = {
+  id: 'id',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sortOrder: 'sortOrder',
+  publicRecordId: 'publicRecordId',
+  createdAt: 'createdAt'
+} as const
+
+export type MemberPublicRecordAttachmentScalarFieldEnum = (typeof MemberPublicRecordAttachmentScalarFieldEnum)[keyof typeof MemberPublicRecordAttachmentScalarFieldEnum]
 
 
 export const MemberChaplaincyTrainingProgressScalarFieldEnum = {
@@ -3363,6 +3632,34 @@ export type ListEnumInterviewDayFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'MemberPublicRecordType'
+ */
+export type EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberPublicRecordType'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberPublicRecordType[]'
+ */
+export type ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberPublicRecordType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberPublicRecordStatus'
+ */
+export type EnumMemberPublicRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberPublicRecordStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberPublicRecordStatus[]'
+ */
+export type ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberPublicRecordStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'OfficeTitleLevel'
  */
 export type EnumOfficeTitleLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OfficeTitleLevel'>
@@ -3682,6 +3979,9 @@ export type GlobalOmitConfig = {
   memberPaymentCheckout?: Prisma.MemberPaymentCheckoutOmit
   memberOnlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentOmit
   memberIdGenerationAsset?: Prisma.MemberIdGenerationAssetOmit
+  memberCertificate?: Prisma.MemberCertificateOmit
+  memberPublicRecord?: Prisma.MemberPublicRecordOmit
+  memberPublicRecordAttachment?: Prisma.MemberPublicRecordAttachmentOmit
   memberChaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOmit
   branchOfService?: Prisma.BranchOfServiceOmit
   officeTitle?: Prisma.OfficeTitleOmit

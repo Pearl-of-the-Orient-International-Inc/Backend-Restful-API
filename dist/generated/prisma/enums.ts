@@ -82,6 +82,25 @@ export const MemberType = {
 export type MemberType = (typeof MemberType)[keyof typeof MemberType]
 
 
+export const MemberPublicRecordType = {
+  REPORT_ACTIVITY: 'REPORT_ACTIVITY',
+  COMMUNITY_SERVICE: 'COMMUNITY_SERVICE',
+  TRAINING_CONDUCTED: 'TRAINING_CONDUCTED',
+  PARTICIPATION: 'PARTICIPATION',
+  RECOGNITION: 'RECOGNITION'
+} as const
+
+export type MemberPublicRecordType = (typeof MemberPublicRecordType)[keyof typeof MemberPublicRecordType]
+
+
+export const MemberPublicRecordStatus = {
+  PUBLISHED: 'PUBLISHED',
+  DRAFT: 'DRAFT'
+} as const
+
+export type MemberPublicRecordStatus = (typeof MemberPublicRecordStatus)[keyof typeof MemberPublicRecordStatus]
+
+
 export const VerificationType = {
   EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
   PASSWORD_RESET: 'PASSWORD_RESET',

@@ -61,8 +61,8 @@ const corsOptions = {
     ],
 };
 app.use((0, cors_1.default)(corsOptions));
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
+app.use(express_1.default.json({ limit: '8mb' }));
+app.use(express_1.default.urlencoded({ extended: true, limit: '8mb' }));
 app.use((0, cookie_parser_1.default)());
 app.use((0, compression_1.default)({
     threshold: 1024,

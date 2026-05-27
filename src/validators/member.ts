@@ -6,6 +6,8 @@ import {
   InterviewDay,
   MemberOnboardingStep,
   MemberPaymentMethod,
+  MemberPublicRecordStatus,
+  MemberPublicRecordType,
   MemberStatus,
   MemberType,
   SignatureType,
@@ -155,13 +157,65 @@ export const upsertOnlineInterviewAppointmentSchema = z.object({
 export const upsertMemberIdGenerationAssetSchema = z.object({
   profileUrl: z.url(),
   qrCodeUrl: z.url(),
-  certificateUrl: z.url(),
 });
 
 export const upsertChaplaincyTrainingProgressSchema = z.object({
   completedLessonIds: z.array(z.int().min(1).max(1000)).max(100),
   essayAnswers: z.record(z.string(), z.string()).optional(),
   isCompleted: z.boolean().optional(),
+});
+
+export const updateCurrentProfileBannerSchema = z.object({
+  profileBannerUrl: z.url().optional(),
+  profileBannerPositionY: z.int().min(0).max(100).optional(),
+}).refine(
+  (value) => typeof value.profileBannerUrl === 'string' || typeof value.profileBannerPositionY === 'number',
+  {
+    message: 'profileBannerUrl or profileBannerPositionY is required',
+    path: ['profileBannerUrl'],
+  },
+);
+
+export const updateCurrentChurchAffiliationSchema = z.object({
+  churchAffiliation: z.string().trim().max(150).optional(),
+  churchAddress: z.string().trim().max(255).optional(),
+  currentPositionRole: z.string().trim().max(150).optional(),
+  currentPositionRoleOther: z.string().trim().max(150).optional(),
+});
+
+export const updateCurrentEducationSchema = z.object({
+  elementarySchool: z.string().trim().max(255).optional(),
+  secondarySchool: z.string().trim().max(255).optional(),
+  tertiaryCollegeEntries: z.array(z.string().trim().max(255)).max(20).optional(),
+  postGraduateStudiesEntries: z
+    .array(z.string().trim().max(255))
+    .max(20)
+    .optional(),
+});
+
+export const createCurrentMemberCertificateSchema = z.object({
+  title: z.string().trim().min(1).max(150),
+  certificateUrl: z.url(),
+  issuedAt: z.iso.datetime(),
+});
+
+export const createCurrentMemberPublicRecordSchema = z.object({
+  title: z.string().trim().min(1).max(150),
+  shortDescription: z.string().trim().min(1).max(500),
+  type: z.enum(MemberPublicRecordType),
+  eventAt: z.iso.datetime(),
+  location: z.string().trim().min(1).max(255),
+  status: z.enum(MemberPublicRecordStatus),
+  attachments: z
+    .array(
+      z.object({
+        fileUrl: z.url(),
+        fileName: z.string().trim().max(255).optional(),
+        mimeType: z.string().trim().max(100).optional(),
+      }),
+    )
+    .max(6)
+    .optional(),
 });
 
 export const updateMemberStatusSchema = z.object({
@@ -225,6 +279,8 @@ export const createMemberByAdminSchema = z.object({
   extensionName: z.string().trim().max(30).optional(),
   memberType: z.enum(MemberType).optional(),
   badgeNumber: z.string().trim().max(50).optional(),
+  profileBannerUrl: z.url().optional(),
+  profileBannerPositionY: z.int().min(0).max(100).optional(),
   mobilePhoneNumber: z.string().trim().max(30).optional(),
   homeAddress: z.string().trim().max(255).optional(),
   civilStatus: z.enum(CivilStatus).optional(),
@@ -283,6 +339,8 @@ export const updateMemberByAdminSchema = z.object({
   extensionName: z.string().trim().max(30).optional(),
   memberType: z.enum(MemberType).optional(),
   badgeNumber: z.string().trim().max(50).optional(),
+  profileBannerUrl: z.url().optional(),
+  profileBannerPositionY: z.int().min(0).max(100).optional(),
   mobilePhoneNumber: z.string().trim().max(30).optional(),
   homeAddress: z.string().trim().max(255).optional(),
   civilStatus: z.enum(CivilStatus).optional(),

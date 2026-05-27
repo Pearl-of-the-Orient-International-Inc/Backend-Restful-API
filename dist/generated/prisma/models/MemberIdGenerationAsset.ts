@@ -28,7 +28,6 @@ export type MemberIdGenerationAssetMinAggregateOutputType = {
   id: string | null
   profileUrl: string | null
   qrCodeUrl: string | null
-  certificateUrl: string | null
   generatedAt: Date | null
   memberId: string | null
   createdAt: Date | null
@@ -39,7 +38,6 @@ export type MemberIdGenerationAssetMaxAggregateOutputType = {
   id: string | null
   profileUrl: string | null
   qrCodeUrl: string | null
-  certificateUrl: string | null
   generatedAt: Date | null
   memberId: string | null
   createdAt: Date | null
@@ -50,7 +48,6 @@ export type MemberIdGenerationAssetCountAggregateOutputType = {
   id: number
   profileUrl: number
   qrCodeUrl: number
-  certificateUrl: number
   generatedAt: number
   memberId: number
   createdAt: number
@@ -63,7 +60,6 @@ export type MemberIdGenerationAssetMinAggregateInputType = {
   id?: true
   profileUrl?: true
   qrCodeUrl?: true
-  certificateUrl?: true
   generatedAt?: true
   memberId?: true
   createdAt?: true
@@ -74,7 +70,6 @@ export type MemberIdGenerationAssetMaxAggregateInputType = {
   id?: true
   profileUrl?: true
   qrCodeUrl?: true
-  certificateUrl?: true
   generatedAt?: true
   memberId?: true
   createdAt?: true
@@ -85,7 +80,6 @@ export type MemberIdGenerationAssetCountAggregateInputType = {
   id?: true
   profileUrl?: true
   qrCodeUrl?: true
-  certificateUrl?: true
   generatedAt?: true
   memberId?: true
   createdAt?: true
@@ -169,7 +163,6 @@ export type MemberIdGenerationAssetGroupByOutputType = {
   id: string
   profileUrl: string
   qrCodeUrl: string
-  certificateUrl: string
   generatedAt: Date
   memberId: string
   createdAt: Date
@@ -201,7 +194,6 @@ export type MemberIdGenerationAssetWhereInput = {
   id?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
   profileUrl?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
   qrCodeUrl?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
-  certificateUrl?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
   generatedAt?: Prisma.DateTimeFilter<"MemberIdGenerationAsset"> | Date | string
   memberId?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
   createdAt?: Prisma.DateTimeFilter<"MemberIdGenerationAsset"> | Date | string
@@ -213,7 +205,6 @@ export type MemberIdGenerationAssetOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   profileUrl?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
-  certificateUrl?: Prisma.SortOrder
   generatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -229,7 +220,6 @@ export type MemberIdGenerationAssetWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MemberIdGenerationAssetWhereInput | Prisma.MemberIdGenerationAssetWhereInput[]
   profileUrl?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
   qrCodeUrl?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
-  certificateUrl?: Prisma.StringFilter<"MemberIdGenerationAsset"> | string
   generatedAt?: Prisma.DateTimeFilter<"MemberIdGenerationAsset"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"MemberIdGenerationAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemberIdGenerationAsset"> | Date | string
@@ -240,7 +230,6 @@ export type MemberIdGenerationAssetOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   profileUrl?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
-  certificateUrl?: Prisma.SortOrder
   generatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -257,7 +246,6 @@ export type MemberIdGenerationAssetScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"MemberIdGenerationAsset"> | string
   profileUrl?: Prisma.StringWithAggregatesFilter<"MemberIdGenerationAsset"> | string
   qrCodeUrl?: Prisma.StringWithAggregatesFilter<"MemberIdGenerationAsset"> | string
-  certificateUrl?: Prisma.StringWithAggregatesFilter<"MemberIdGenerationAsset"> | string
   generatedAt?: Prisma.DateTimeWithAggregatesFilter<"MemberIdGenerationAsset"> | Date | string
   memberId?: Prisma.StringWithAggregatesFilter<"MemberIdGenerationAsset"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MemberIdGenerationAsset"> | Date | string
@@ -268,7 +256,6 @@ export type MemberIdGenerationAssetCreateInput = {
   id?: string
   profileUrl: string
   qrCodeUrl: string
-  certificateUrl: string
   generatedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -279,7 +266,6 @@ export type MemberIdGenerationAssetUncheckedCreateInput = {
   id?: string
   profileUrl: string
   qrCodeUrl: string
-  certificateUrl: string
   generatedAt?: Date | string
   memberId: string
   createdAt?: Date | string
@@ -290,7 +276,6 @@ export type MemberIdGenerationAssetUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   generatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -301,7 +286,6 @@ export type MemberIdGenerationAssetUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   generatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -312,7 +296,6 @@ export type MemberIdGenerationAssetCreateManyInput = {
   id?: string
   profileUrl: string
   qrCodeUrl: string
-  certificateUrl: string
   generatedAt?: Date | string
   memberId: string
   createdAt?: Date | string
@@ -323,7 +306,6 @@ export type MemberIdGenerationAssetUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   generatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -333,7 +315,6 @@ export type MemberIdGenerationAssetUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   generatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,7 +330,6 @@ export type MemberIdGenerationAssetCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileUrl?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
-  certificateUrl?: Prisma.SortOrder
   generatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -360,7 +340,6 @@ export type MemberIdGenerationAssetMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileUrl?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
-  certificateUrl?: Prisma.SortOrder
   generatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -371,7 +350,6 @@ export type MemberIdGenerationAssetMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileUrl?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
-  certificateUrl?: Prisma.SortOrder
   generatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -414,7 +392,6 @@ export type MemberIdGenerationAssetCreateWithoutMemberInput = {
   id?: string
   profileUrl: string
   qrCodeUrl: string
-  certificateUrl: string
   generatedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -424,7 +401,6 @@ export type MemberIdGenerationAssetUncheckedCreateWithoutMemberInput = {
   id?: string
   profileUrl: string
   qrCodeUrl: string
-  certificateUrl: string
   generatedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -450,7 +426,6 @@ export type MemberIdGenerationAssetUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   generatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,7 +435,6 @@ export type MemberIdGenerationAssetUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   generatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -472,7 +446,6 @@ export type MemberIdGenerationAssetSelect<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   profileUrl?: boolean
   qrCodeUrl?: boolean
-  certificateUrl?: boolean
   generatedAt?: boolean
   memberId?: boolean
   createdAt?: boolean
@@ -484,7 +457,6 @@ export type MemberIdGenerationAssetSelectCreateManyAndReturn<ExtArgs extends run
   id?: boolean
   profileUrl?: boolean
   qrCodeUrl?: boolean
-  certificateUrl?: boolean
   generatedAt?: boolean
   memberId?: boolean
   createdAt?: boolean
@@ -496,7 +468,6 @@ export type MemberIdGenerationAssetSelectUpdateManyAndReturn<ExtArgs extends run
   id?: boolean
   profileUrl?: boolean
   qrCodeUrl?: boolean
-  certificateUrl?: boolean
   generatedAt?: boolean
   memberId?: boolean
   createdAt?: boolean
@@ -508,14 +479,13 @@ export type MemberIdGenerationAssetSelectScalar = {
   id?: boolean
   profileUrl?: boolean
   qrCodeUrl?: boolean
-  certificateUrl?: boolean
   generatedAt?: boolean
   memberId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MemberIdGenerationAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileUrl" | "qrCodeUrl" | "certificateUrl" | "generatedAt" | "memberId" | "createdAt" | "updatedAt", ExtArgs["result"]["memberIdGenerationAsset"]>
+export type MemberIdGenerationAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileUrl" | "qrCodeUrl" | "generatedAt" | "memberId" | "createdAt" | "updatedAt", ExtArgs["result"]["memberIdGenerationAsset"]>
 export type MemberIdGenerationAssetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
@@ -535,7 +505,6 @@ export type $MemberIdGenerationAssetPayload<ExtArgs extends runtime.Types.Extens
     id: string
     profileUrl: string
     qrCodeUrl: string
-    certificateUrl: string
     generatedAt: Date
     memberId: string
     createdAt: Date
@@ -967,7 +936,6 @@ export interface MemberIdGenerationAssetFieldRefs {
   readonly id: Prisma.FieldRef<"MemberIdGenerationAsset", 'String'>
   readonly profileUrl: Prisma.FieldRef<"MemberIdGenerationAsset", 'String'>
   readonly qrCodeUrl: Prisma.FieldRef<"MemberIdGenerationAsset", 'String'>
-  readonly certificateUrl: Prisma.FieldRef<"MemberIdGenerationAsset", 'String'>
   readonly generatedAt: Prisma.FieldRef<"MemberIdGenerationAsset", 'DateTime'>
   readonly memberId: Prisma.FieldRef<"MemberIdGenerationAsset", 'String'>
   readonly createdAt: Prisma.FieldRef<"MemberIdGenerationAsset", 'DateTime'>

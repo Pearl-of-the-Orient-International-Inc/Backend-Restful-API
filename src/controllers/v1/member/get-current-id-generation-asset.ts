@@ -34,7 +34,6 @@ export const getCurrentIdGenerationAsset = async (
           select: {
             profileUrl: true,
             qrCodeUrl: true,
-            certificateUrl: true,
             generatedAt: true,
           },
         },

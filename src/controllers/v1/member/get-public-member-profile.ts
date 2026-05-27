@@ -27,6 +27,8 @@ export const getPublicMemberProfile = async (
         id: true,
         uniqueId: true,
         badgeNumber: true,
+        profileBannerUrl: true,
+        profileBannerPositionY: true,
         status: true,
         memberType: true,
         isActive: true,
@@ -134,8 +136,41 @@ export const getPublicMemberProfile = async (
           select: {
             profileUrl: true,
             qrCodeUrl: true,
-            certificateUrl: true,
             generatedAt: true,
+          },
+        },
+        certificates: {
+          orderBy: [{ dateReceived: 'desc' }, { createdAt: 'desc' }],
+          select: {
+            credentialId: true,
+            title: true,
+            certificateUrl: true,
+            dateReceived: true,
+          },
+        },
+        publicRecords: {
+          orderBy: [{ eventAt: 'desc' }, { createdAt: 'desc' }],
+          select: {
+            id: true,
+            title: true,
+            shortDescription: true,
+            type: true,
+            eventAt: true,
+            location: true,
+            status: true,
+            createdAt: true,
+            updatedAt: true,
+            attachments: {
+              orderBy: { sortOrder: 'asc' },
+              select: {
+                id: true,
+                fileUrl: true,
+                fileName: true,
+                mimeType: true,
+                sortOrder: true,
+                createdAt: true,
+              },
+            },
           },
         },
         chaplaincyTrainingProgress: {

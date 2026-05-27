@@ -98,6 +98,21 @@ export type MemberOnlineInterviewAppointment = Prisma.MemberOnlineInterviewAppoi
  */
 export type MemberIdGenerationAsset = Prisma.MemberIdGenerationAssetModel
 /**
+ * Model MemberCertificate
+ * 
+ */
+export type MemberCertificate = Prisma.MemberCertificateModel
+/**
+ * Model MemberPublicRecord
+ * 
+ */
+export type MemberPublicRecord = Prisma.MemberPublicRecordModel
+/**
+ * Model MemberPublicRecordAttachment
+ * 
+ */
+export type MemberPublicRecordAttachment = Prisma.MemberPublicRecordAttachmentModel
+/**
  * Model MemberChaplaincyTrainingProgress
  * 
  */

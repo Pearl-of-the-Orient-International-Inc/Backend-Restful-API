@@ -20,8 +20,18 @@ export type MemberModel = runtime.Types.Result.DefaultSelection<Prisma.$MemberPa
 
 export type AggregateMember = {
   _count: MemberCountAggregateOutputType | null
+  _avg: MemberAvgAggregateOutputType | null
+  _sum: MemberSumAggregateOutputType | null
   _min: MemberMinAggregateOutputType | null
   _max: MemberMaxAggregateOutputType | null
+}
+
+export type MemberAvgAggregateOutputType = {
+  profileBannerPositionY: number | null
+}
+
+export type MemberSumAggregateOutputType = {
+  profileBannerPositionY: number | null
 }
 
 export type MemberMinAggregateOutputType = {
@@ -31,6 +41,8 @@ export type MemberMinAggregateOutputType = {
   status: $Enums.MemberStatus | null
   memberType: $Enums.MemberType | null
   badgeNumber: string | null
+  profileBannerUrl: string | null
+  profileBannerPositionY: number | null
   firstName: string | null
   middleInitial: string | null
   lastName: string | null
@@ -76,6 +88,8 @@ export type MemberMaxAggregateOutputType = {
   status: $Enums.MemberStatus | null
   memberType: $Enums.MemberType | null
   badgeNumber: string | null
+  profileBannerUrl: string | null
+  profileBannerPositionY: number | null
   firstName: string | null
   middleInitial: string | null
   lastName: string | null
@@ -121,6 +135,8 @@ export type MemberCountAggregateOutputType = {
   status: number
   memberType: number
   badgeNumber: number
+  profileBannerUrl: number
+  profileBannerPositionY: number
   firstName: number
   middleInitial: number
   lastName: number
@@ -161,6 +177,14 @@ export type MemberCountAggregateOutputType = {
 }
 
 
+export type MemberAvgAggregateInputType = {
+  profileBannerPositionY?: true
+}
+
+export type MemberSumAggregateInputType = {
+  profileBannerPositionY?: true
+}
+
 export type MemberMinAggregateInputType = {
   id?: true
   uniqueId?: true
@@ -168,6 +192,8 @@ export type MemberMinAggregateInputType = {
   status?: true
   memberType?: true
   badgeNumber?: true
+  profileBannerUrl?: true
+  profileBannerPositionY?: true
   firstName?: true
   middleInitial?: true
   lastName?: true
@@ -213,6 +239,8 @@ export type MemberMaxAggregateInputType = {
   status?: true
   memberType?: true
   badgeNumber?: true
+  profileBannerUrl?: true
+  profileBannerPositionY?: true
   firstName?: true
   middleInitial?: true
   lastName?: true
@@ -258,6 +286,8 @@ export type MemberCountAggregateInputType = {
   status?: true
   memberType?: true
   badgeNumber?: true
+  profileBannerUrl?: true
+  profileBannerPositionY?: true
   firstName?: true
   middleInitial?: true
   lastName?: true
@@ -335,6 +365,18 @@ export type MemberAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: MemberAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: MemberSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: MemberMinAggregateInputType
@@ -365,6 +407,8 @@ export type MemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: MemberCountAggregateInputType | true
+  _avg?: MemberAvgAggregateInputType
+  _sum?: MemberSumAggregateInputType
   _min?: MemberMinAggregateInputType
   _max?: MemberMaxAggregateInputType
 }
@@ -376,6 +420,8 @@ export type MemberGroupByOutputType = {
   status: $Enums.MemberStatus
   memberType: $Enums.MemberType
   badgeNumber: string | null
+  profileBannerUrl: string | null
+  profileBannerPositionY: number
   firstName: string
   middleInitial: string | null
   lastName: string
@@ -413,6 +459,8 @@ export type MemberGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: MemberCountAggregateOutputType | null
+  _avg: MemberAvgAggregateOutputType | null
+  _sum: MemberSumAggregateOutputType | null
   _min: MemberMinAggregateOutputType | null
   _max: MemberMaxAggregateOutputType | null
 }
@@ -442,6 +490,8 @@ export type MemberWhereInput = {
   status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFilter<"Member"> | $Enums.MemberType
   badgeNumber?: Prisma.StringNullableFilter<"Member"> | string | null
+  profileBannerUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  profileBannerPositionY?: Prisma.IntFilter<"Member"> | number
   firstName?: Prisma.StringFilter<"Member"> | string
   middleInitial?: Prisma.StringNullableFilter<"Member"> | string | null
   lastName?: Prisma.StringFilter<"Member"> | string
@@ -487,6 +537,8 @@ export type MemberWhereInput = {
   paymentCheckout?: Prisma.XOR<Prisma.MemberPaymentCheckoutNullableScalarRelationFilter, Prisma.MemberPaymentCheckoutWhereInput> | null
   onlineInterviewAppointment?: Prisma.XOR<Prisma.MemberOnlineInterviewAppointmentNullableScalarRelationFilter, Prisma.MemberOnlineInterviewAppointmentWhereInput> | null
   idGenerationAsset?: Prisma.XOR<Prisma.MemberIdGenerationAssetNullableScalarRelationFilter, Prisma.MemberIdGenerationAssetWhereInput> | null
+  certificates?: Prisma.MemberCertificateListRelationFilter
+  publicRecords?: Prisma.MemberPublicRecordListRelationFilter
   chaplaincyTrainingProgress?: Prisma.XOR<Prisma.MemberChaplaincyTrainingProgressNullableScalarRelationFilter, Prisma.MemberChaplaincyTrainingProgressWhereInput> | null
   signature?: Prisma.XOR<Prisma.ApplicantSignatureNullableScalarRelationFilter, Prisma.ApplicantSignatureWhereInput> | null
   officerAssignments?: Prisma.OfficerAssignmentListRelationFilter
@@ -502,6 +554,8 @@ export type MemberOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
   badgeNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileBannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileBannerPositionY?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -547,6 +601,8 @@ export type MemberOrderByWithRelationInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutOrderByWithRelationInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentOrderByWithRelationInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetOrderByWithRelationInput
+  certificates?: Prisma.MemberCertificateOrderByRelationAggregateInput
+  publicRecords?: Prisma.MemberPublicRecordOrderByRelationAggregateInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOrderByWithRelationInput
   signature?: Prisma.ApplicantSignatureOrderByWithRelationInput
   officerAssignments?: Prisma.OfficerAssignmentOrderByRelationAggregateInput
@@ -565,6 +621,8 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFilter<"Member"> | $Enums.MemberType
   badgeNumber?: Prisma.StringNullableFilter<"Member"> | string | null
+  profileBannerUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  profileBannerPositionY?: Prisma.IntFilter<"Member"> | number
   firstName?: Prisma.StringFilter<"Member"> | string
   middleInitial?: Prisma.StringNullableFilter<"Member"> | string | null
   lastName?: Prisma.StringFilter<"Member"> | string
@@ -610,6 +668,8 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   paymentCheckout?: Prisma.XOR<Prisma.MemberPaymentCheckoutNullableScalarRelationFilter, Prisma.MemberPaymentCheckoutWhereInput> | null
   onlineInterviewAppointment?: Prisma.XOR<Prisma.MemberOnlineInterviewAppointmentNullableScalarRelationFilter, Prisma.MemberOnlineInterviewAppointmentWhereInput> | null
   idGenerationAsset?: Prisma.XOR<Prisma.MemberIdGenerationAssetNullableScalarRelationFilter, Prisma.MemberIdGenerationAssetWhereInput> | null
+  certificates?: Prisma.MemberCertificateListRelationFilter
+  publicRecords?: Prisma.MemberPublicRecordListRelationFilter
   chaplaincyTrainingProgress?: Prisma.XOR<Prisma.MemberChaplaincyTrainingProgressNullableScalarRelationFilter, Prisma.MemberChaplaincyTrainingProgressWhereInput> | null
   signature?: Prisma.XOR<Prisma.ApplicantSignatureNullableScalarRelationFilter, Prisma.ApplicantSignatureWhereInput> | null
   officerAssignments?: Prisma.OfficerAssignmentListRelationFilter
@@ -625,6 +685,8 @@ export type MemberOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
   badgeNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileBannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileBannerPositionY?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -662,8 +724,10 @@ export type MemberOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MemberCountOrderByAggregateInput
+  _avg?: Prisma.MemberAvgOrderByAggregateInput
   _max?: Prisma.MemberMaxOrderByAggregateInput
   _min?: Prisma.MemberMinOrderByAggregateInput
+  _sum?: Prisma.MemberSumOrderByAggregateInput
 }
 
 export type MemberScalarWhereWithAggregatesInput = {
@@ -676,6 +740,8 @@ export type MemberScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumMemberStatusWithAggregatesFilter<"Member"> | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeWithAggregatesFilter<"Member"> | $Enums.MemberType
   badgeNumber?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  profileBannerUrl?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  profileBannerPositionY?: Prisma.IntWithAggregatesFilter<"Member"> | number
   firstName?: Prisma.StringWithAggregatesFilter<"Member"> | string
   middleInitial?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   lastName?: Prisma.StringWithAggregatesFilter<"Member"> | string
@@ -720,6 +786,8 @@ export type MemberCreateInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -765,6 +833,8 @@ export type MemberCreateInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -780,6 +850,8 @@ export type MemberUncheckedCreateInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -824,6 +896,8 @@ export type MemberUncheckedCreateInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -838,6 +912,8 @@ export type MemberUpdateInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -883,6 +959,8 @@ export type MemberUpdateInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -898,6 +976,8 @@ export type MemberUncheckedUpdateInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -942,6 +1022,8 @@ export type MemberUncheckedUpdateInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -957,6 +1039,8 @@ export type MemberCreateManyInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1001,6 +1085,8 @@ export type MemberUpdateManyMutationInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1046,6 +1132,8 @@ export type MemberUncheckedUpdateManyInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1096,6 +1184,8 @@ export type MemberCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
   badgeNumber?: Prisma.SortOrder
+  profileBannerUrl?: Prisma.SortOrder
+  profileBannerPositionY?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -1134,6 +1224,10 @@ export type MemberCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type MemberAvgOrderByAggregateInput = {
+  profileBannerPositionY?: Prisma.SortOrder
+}
+
 export type MemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   uniqueId?: Prisma.SortOrder
@@ -1141,6 +1235,8 @@ export type MemberMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
   badgeNumber?: Prisma.SortOrder
+  profileBannerUrl?: Prisma.SortOrder
+  profileBannerPositionY?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -1186,6 +1282,8 @@ export type MemberMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
   badgeNumber?: Prisma.SortOrder
+  profileBannerUrl?: Prisma.SortOrder
+  profileBannerPositionY?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -1222,6 +1320,10 @@ export type MemberMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type MemberSumOrderByAggregateInput = {
+  profileBannerPositionY?: Prisma.SortOrder
 }
 
 export type MemberScalarRelationFilter = {
@@ -1389,6 +1491,34 @@ export type MemberUpdateOneRequiredWithoutIdGenerationAssetNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutIdGenerationAssetInput, Prisma.MemberUpdateWithoutIdGenerationAssetInput>, Prisma.MemberUncheckedUpdateWithoutIdGenerationAssetInput>
 }
 
+export type MemberCreateNestedOneWithoutCertificatesInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutCertificatesInput, Prisma.MemberUncheckedCreateWithoutCertificatesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutCertificatesInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutCertificatesNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutCertificatesInput, Prisma.MemberUncheckedCreateWithoutCertificatesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutCertificatesInput
+  upsert?: Prisma.MemberUpsertWithoutCertificatesInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutCertificatesInput, Prisma.MemberUpdateWithoutCertificatesInput>, Prisma.MemberUncheckedUpdateWithoutCertificatesInput>
+}
+
+export type MemberCreateNestedOneWithoutPublicRecordsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPublicRecordsInput, Prisma.MemberUncheckedCreateWithoutPublicRecordsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPublicRecordsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutPublicRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPublicRecordsInput, Prisma.MemberUncheckedCreateWithoutPublicRecordsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPublicRecordsInput
+  upsert?: Prisma.MemberUpsertWithoutPublicRecordsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutPublicRecordsInput, Prisma.MemberUpdateWithoutPublicRecordsInput>, Prisma.MemberUncheckedUpdateWithoutPublicRecordsInput>
+}
+
 export type MemberCreateNestedOneWithoutChaplaincyTrainingProgressInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutChaplaincyTrainingProgressInput
@@ -1481,6 +1611,8 @@ export type MemberCreateWithoutUserInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1525,6 +1657,8 @@ export type MemberCreateWithoutUserInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -1539,6 +1673,8 @@ export type MemberUncheckedCreateWithoutUserInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1583,6 +1719,8 @@ export type MemberUncheckedCreateWithoutUserInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -1613,6 +1751,8 @@ export type MemberUpdateWithoutUserInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1657,6 +1797,8 @@ export type MemberUpdateWithoutUserInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -1671,6 +1813,8 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1715,6 +1859,8 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -1729,6 +1875,8 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1773,6 +1921,8 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -1788,6 +1938,8 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1831,6 +1983,8 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -1861,6 +2015,8 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1905,6 +2061,8 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -1920,6 +2078,8 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1963,6 +2123,8 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -1977,6 +2139,8 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2021,6 +2185,8 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -2036,6 +2202,8 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2079,6 +2247,8 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -2109,6 +2279,8 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2153,6 +2325,8 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -2168,6 +2342,8 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2211,6 +2387,8 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -2225,6 +2403,8 @@ export type MemberCreateWithoutSignatureInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2270,6 +2450,8 @@ export type MemberCreateWithoutSignatureInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
@@ -2284,6 +2466,8 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2328,6 +2512,8 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
@@ -2357,6 +2543,8 @@ export type MemberUpdateWithoutSignatureInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2402,6 +2590,8 @@ export type MemberUpdateWithoutSignatureInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
@@ -2416,6 +2606,8 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2460,6 +2652,8 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
@@ -2473,6 +2667,8 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2517,6 +2713,8 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -2532,6 +2730,8 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2575,6 +2775,8 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -2605,6 +2807,8 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2649,6 +2853,8 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -2664,6 +2870,8 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2707,6 +2915,8 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -2721,6 +2931,8 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2765,6 +2977,8 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -2780,6 +2994,8 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2823,6 +3039,8 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -2853,6 +3071,8 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2897,6 +3117,8 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -2912,6 +3134,8 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2955,6 +3179,8 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -2969,6 +3195,8 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3013,6 +3241,8 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -3028,6 +3258,8 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3071,6 +3303,8 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -3101,6 +3335,8 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3145,6 +3381,8 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -3160,6 +3398,8 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3203,6 +3443,8 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -3217,6 +3459,8 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3261,6 +3505,8 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -3276,6 +3522,8 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3319,6 +3567,8 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -3349,6 +3599,8 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3393,6 +3645,8 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -3408,6 +3662,8 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3451,6 +3707,8 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -3465,6 +3723,8 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3509,6 +3769,8 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -3524,6 +3786,8 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3567,6 +3831,8 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -3597,6 +3863,8 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3641,6 +3909,8 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -3656,6 +3926,8 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3699,6 +3971,8 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -3707,12 +3981,14 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
 }
 
-export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
+export type MemberCreateWithoutCertificatesInput = {
   id?: string
   uniqueId?: string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3758,6 +4034,8 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
@@ -3765,13 +4043,15 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
 }
 
-export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
+export type MemberUncheckedCreateWithoutCertificatesInput = {
   id?: string
   uniqueId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3816,6 +4096,8 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
@@ -3823,28 +4105,30 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
 }
 
-export type MemberCreateOrConnectWithoutChaplaincyTrainingProgressInput = {
+export type MemberCreateOrConnectWithoutCertificatesInput = {
   where: Prisma.MemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.MemberCreateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutCertificatesInput, Prisma.MemberUncheckedCreateWithoutCertificatesInput>
 }
 
-export type MemberUpsertWithoutChaplaincyTrainingProgressInput = {
-  update: Prisma.XOR<Prisma.MemberUpdateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput>
-  create: Prisma.XOR<Prisma.MemberCreateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput>
+export type MemberUpsertWithoutCertificatesInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutCertificatesInput, Prisma.MemberUncheckedUpdateWithoutCertificatesInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutCertificatesInput, Prisma.MemberUncheckedCreateWithoutCertificatesInput>
   where?: Prisma.MemberWhereInput
 }
 
-export type MemberUpdateToOneWithWhereWithoutChaplaincyTrainingProgressInput = {
+export type MemberUpdateToOneWithWhereWithoutCertificatesInput = {
   where?: Prisma.MemberWhereInput
-  data: Prisma.XOR<Prisma.MemberUpdateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput>
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutCertificatesInput, Prisma.MemberUncheckedUpdateWithoutCertificatesInput>
 }
 
-export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
+export type MemberUpdateWithoutCertificatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3890,6 +4174,8 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
@@ -3897,13 +4183,15 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
 }
 
-export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
+export type MemberUncheckedUpdateWithoutCertificatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3948,6 +4236,536 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutPublicRecordsInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutPublicRecordsInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutPublicRecordsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutPublicRecordsInput, Prisma.MemberUncheckedCreateWithoutPublicRecordsInput>
+}
+
+export type MemberUpsertWithoutPublicRecordsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutPublicRecordsInput, Prisma.MemberUncheckedUpdateWithoutPublicRecordsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutPublicRecordsInput, Prisma.MemberUncheckedCreateWithoutPublicRecordsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutPublicRecordsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutPublicRecordsInput, Prisma.MemberUncheckedUpdateWithoutPublicRecordsInput>
+}
+
+export type MemberUpdateWithoutPublicRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutChaplaincyTrainingProgressInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput>
+}
+
+export type MemberUpsertWithoutChaplaincyTrainingProgressInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutChaplaincyTrainingProgressInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutChaplaincyTrainingProgressInput, Prisma.MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput>
+}
+
+export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
@@ -3961,6 +4779,8 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4005,6 +4825,8 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -4020,6 +4842,8 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4063,6 +4887,8 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -4093,6 +4919,8 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4137,6 +4965,8 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -4152,6 +4982,8 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4195,6 +5027,8 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -4209,6 +5043,8 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4254,6 +5090,8 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
@@ -4268,6 +5106,8 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4312,6 +5152,8 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
@@ -4341,6 +5183,8 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4386,6 +5230,8 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
@@ -4400,6 +5246,8 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4444,6 +5292,8 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
@@ -4457,6 +5307,8 @@ export type MemberCreateWithoutEventAttendancesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4502,6 +5354,8 @@ export type MemberCreateWithoutEventAttendancesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -4516,6 +5370,8 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4560,6 +5416,8 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -4589,6 +5447,8 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4634,6 +5494,8 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -4648,6 +5510,8 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4692,6 +5556,8 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -4705,6 +5571,8 @@ export type MemberCreateWithoutTaggedEventsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4750,6 +5618,8 @@ export type MemberCreateWithoutTaggedEventsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -4764,6 +5634,8 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4808,6 +5680,8 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -4837,6 +5711,8 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4882,6 +5758,8 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -4896,6 +5774,8 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4940,6 +5820,8 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -4953,6 +5835,8 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4998,6 +5882,8 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
@@ -5012,6 +5898,8 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5056,6 +5944,8 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
@@ -5085,6 +5975,8 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5130,6 +6022,8 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
@@ -5144,6 +6038,8 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5188,6 +6084,8 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
@@ -5205,6 +6103,8 @@ export type MemberCountOutputType = {
   ministerialExperiences: number
   characterReferences: number
   applicantRequirements: number
+  certificates: number
+  publicRecords: number
   officerAssignments: number
   eventAttendances: number
   taggedEvents: number
@@ -5216,6 +6116,8 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   ministerialExperiences?: boolean | MemberCountOutputTypeCountMinisterialExperiencesArgs
   characterReferences?: boolean | MemberCountOutputTypeCountCharacterReferencesArgs
   applicantRequirements?: boolean | MemberCountOutputTypeCountApplicantRequirementsArgs
+  certificates?: boolean | MemberCountOutputTypeCountCertificatesArgs
+  publicRecords?: boolean | MemberCountOutputTypeCountPublicRecordsArgs
   officerAssignments?: boolean | MemberCountOutputTypeCountOfficerAssignmentsArgs
   eventAttendances?: boolean | MemberCountOutputTypeCountEventAttendancesArgs
   taggedEvents?: boolean | MemberCountOutputTypeCountTaggedEventsArgs
@@ -5263,6 +6165,20 @@ export type MemberCountOutputTypeCountApplicantRequirementsArgs<ExtArgs extends 
 /**
  * MemberCountOutputType without action
  */
+export type MemberCountOutputTypeCountCertificatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberCertificateWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountPublicRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberPublicRecordWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
 export type MemberCountOutputTypeCountOfficerAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OfficerAssignmentWhereInput
 }
@@ -5296,6 +6212,8 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   status?: boolean
   memberType?: boolean
   badgeNumber?: boolean
+  profileBannerUrl?: boolean
+  profileBannerPositionY?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -5341,6 +6259,8 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   paymentCheckout?: boolean | Prisma.Member$paymentCheckoutArgs<ExtArgs>
   onlineInterviewAppointment?: boolean | Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs>
   idGenerationAsset?: boolean | Prisma.Member$idGenerationAssetArgs<ExtArgs>
+  certificates?: boolean | Prisma.Member$certificatesArgs<ExtArgs>
+  publicRecords?: boolean | Prisma.Member$publicRecordsArgs<ExtArgs>
   chaplaincyTrainingProgress?: boolean | Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs>
   signature?: boolean | Prisma.Member$signatureArgs<ExtArgs>
   officerAssignments?: boolean | Prisma.Member$officerAssignmentsArgs<ExtArgs>
@@ -5357,6 +6277,8 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   status?: boolean
   memberType?: boolean
   badgeNumber?: boolean
+  profileBannerUrl?: boolean
+  profileBannerPositionY?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -5403,6 +6325,8 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   status?: boolean
   memberType?: boolean
   badgeNumber?: boolean
+  profileBannerUrl?: boolean
+  profileBannerPositionY?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -5449,6 +6373,8 @@ export type MemberSelectScalar = {
   status?: boolean
   memberType?: boolean
   badgeNumber?: boolean
+  profileBannerUrl?: boolean
+  profileBannerPositionY?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -5487,7 +6413,7 @@ export type MemberSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueId" | "userId" | "status" | "memberType" | "badgeNumber" | "firstName" | "middleInitial" | "lastName" | "extensionName" | "mobilePhoneNumber" | "homeAddress" | "civilStatus" | "gender" | "nationality" | "dateOfBirth" | "region" | "province" | "municipalityCity" | "barangay" | "emergencyContactName" | "emergencyContactMobile" | "churchAffiliation" | "churchAddress" | "currentPositionRole" | "currentPositionRoleOther" | "height" | "weight" | "bloodType" | "colorOfEyes" | "colorOfSkin" | "sssNumber" | "tinNumber" | "skillsTalents" | "preferredBranchOther" | "elementarySchool" | "secondarySchool" | "tertiaryCollege" | "postGraduateStudies" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueId" | "userId" | "status" | "memberType" | "badgeNumber" | "profileBannerUrl" | "profileBannerPositionY" | "firstName" | "middleInitial" | "lastName" | "extensionName" | "mobilePhoneNumber" | "homeAddress" | "civilStatus" | "gender" | "nationality" | "dateOfBirth" | "region" | "province" | "municipalityCity" | "barangay" | "emergencyContactName" | "emergencyContactMobile" | "churchAffiliation" | "churchAddress" | "currentPositionRole" | "currentPositionRoleOther" | "height" | "weight" | "bloodType" | "colorOfEyes" | "colorOfSkin" | "sssNumber" | "tinNumber" | "skillsTalents" | "preferredBranchOther" | "elementarySchool" | "secondarySchool" | "tertiaryCollege" | "postGraduateStudies" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   preferredBranches?: boolean | Prisma.Member$preferredBranchesArgs<ExtArgs>
@@ -5498,6 +6424,8 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   paymentCheckout?: boolean | Prisma.Member$paymentCheckoutArgs<ExtArgs>
   onlineInterviewAppointment?: boolean | Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs>
   idGenerationAsset?: boolean | Prisma.Member$idGenerationAssetArgs<ExtArgs>
+  certificates?: boolean | Prisma.Member$certificatesArgs<ExtArgs>
+  publicRecords?: boolean | Prisma.Member$publicRecordsArgs<ExtArgs>
   chaplaincyTrainingProgress?: boolean | Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs>
   signature?: boolean | Prisma.Member$signatureArgs<ExtArgs>
   officerAssignments?: boolean | Prisma.Member$officerAssignmentsArgs<ExtArgs>
@@ -5525,6 +6453,8 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     paymentCheckout: Prisma.$MemberPaymentCheckoutPayload<ExtArgs> | null
     onlineInterviewAppointment: Prisma.$MemberOnlineInterviewAppointmentPayload<ExtArgs> | null
     idGenerationAsset: Prisma.$MemberIdGenerationAssetPayload<ExtArgs> | null
+    certificates: Prisma.$MemberCertificatePayload<ExtArgs>[]
+    publicRecords: Prisma.$MemberPublicRecordPayload<ExtArgs>[]
     chaplaincyTrainingProgress: Prisma.$MemberChaplaincyTrainingProgressPayload<ExtArgs> | null
     signature: Prisma.$ApplicantSignaturePayload<ExtArgs> | null
     officerAssignments: Prisma.$OfficerAssignmentPayload<ExtArgs>[]
@@ -5539,6 +6469,8 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     status: $Enums.MemberStatus
     memberType: $Enums.MemberType
     badgeNumber: string | null
+    profileBannerUrl: string | null
+    profileBannerPositionY: number
     firstName: string
     middleInitial: string | null
     lastName: string
@@ -5978,6 +6910,8 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   paymentCheckout<T extends Prisma.Member$paymentCheckoutArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$paymentCheckoutArgs<ExtArgs>>): Prisma.Prisma__MemberPaymentCheckoutClient<runtime.Types.Result.GetResult<Prisma.$MemberPaymentCheckoutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   onlineInterviewAppointment<T extends Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs>>): Prisma.Prisma__MemberOnlineInterviewAppointmentClient<runtime.Types.Result.GetResult<Prisma.$MemberOnlineInterviewAppointmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   idGenerationAsset<T extends Prisma.Member$idGenerationAssetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$idGenerationAssetArgs<ExtArgs>>): Prisma.Prisma__MemberIdGenerationAssetClient<runtime.Types.Result.GetResult<Prisma.$MemberIdGenerationAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  certificates<T extends Prisma.Member$certificatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$certificatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberCertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  publicRecords<T extends Prisma.Member$publicRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$publicRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPublicRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chaplaincyTrainingProgress<T extends Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs>>): Prisma.Prisma__MemberChaplaincyTrainingProgressClient<runtime.Types.Result.GetResult<Prisma.$MemberChaplaincyTrainingProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   signature<T extends Prisma.Member$signatureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$signatureArgs<ExtArgs>>): Prisma.Prisma__ApplicantSignatureClient<runtime.Types.Result.GetResult<Prisma.$ApplicantSignaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   officerAssignments<T extends Prisma.Member$officerAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$officerAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OfficerAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6019,6 +6953,8 @@ export interface MemberFieldRefs {
   readonly status: Prisma.FieldRef<"Member", 'MemberStatus'>
   readonly memberType: Prisma.FieldRef<"Member", 'MemberType'>
   readonly badgeNumber: Prisma.FieldRef<"Member", 'String'>
+  readonly profileBannerUrl: Prisma.FieldRef<"Member", 'String'>
+  readonly profileBannerPositionY: Prisma.FieldRef<"Member", 'Int'>
   readonly firstName: Prisma.FieldRef<"Member", 'String'>
   readonly middleInitial: Prisma.FieldRef<"Member", 'String'>
   readonly lastName: Prisma.FieldRef<"Member", 'String'>
@@ -6620,6 +7556,54 @@ export type Member$idGenerationAssetArgs<ExtArgs extends runtime.Types.Extension
    */
   include?: Prisma.MemberIdGenerationAssetInclude<ExtArgs> | null
   where?: Prisma.MemberIdGenerationAssetWhereInput
+}
+
+/**
+ * Member.certificates
+ */
+export type Member$certificatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemberCertificate
+   */
+  select?: Prisma.MemberCertificateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemberCertificate
+   */
+  omit?: Prisma.MemberCertificateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberCertificateInclude<ExtArgs> | null
+  where?: Prisma.MemberCertificateWhereInput
+  orderBy?: Prisma.MemberCertificateOrderByWithRelationInput | Prisma.MemberCertificateOrderByWithRelationInput[]
+  cursor?: Prisma.MemberCertificateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberCertificateScalarFieldEnum | Prisma.MemberCertificateScalarFieldEnum[]
+}
+
+/**
+ * Member.publicRecords
+ */
+export type Member$publicRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemberPublicRecord
+   */
+  select?: Prisma.MemberPublicRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemberPublicRecord
+   */
+  omit?: Prisma.MemberPublicRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberPublicRecordInclude<ExtArgs> | null
+  where?: Prisma.MemberPublicRecordWhereInput
+  orderBy?: Prisma.MemberPublicRecordOrderByWithRelationInput | Prisma.MemberPublicRecordOrderByWithRelationInput[]
+  cursor?: Prisma.MemberPublicRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberPublicRecordScalarFieldEnum | Prisma.MemberPublicRecordScalarFieldEnum[]
 }
 
 /**

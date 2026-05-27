@@ -166,6 +166,8 @@ model Member {
   memberType MemberType   @default(ASSOCIATE_CHAPLAIN)
 
   badgeNumber String?
+  profileBannerUrl String?
+  profileBannerPositionY Int @default(50)
 
   // Contact Information
   firstName         String
@@ -222,6 +224,8 @@ model Member {
   paymentCheckout            MemberPaymentCheckout?
   onlineInterviewAppointment MemberOnlineInterviewAppointment?
   idGenerationAsset          MemberIdGenerationAsset?
+  certificates               MemberCertificate[]
+  publicRecords              MemberPublicRecord[]
   chaplaincyTrainingProgress MemberChaplaincyTrainingProgress?
   signature                  ApplicantSignature?
   officerAssignments         OfficerAssignment[]
@@ -344,16 +348,70 @@ model MemberOnlineInterviewAppointment {
 model MemberIdGenerationAsset {
   id String @id @default(uuid())
 
-  profileUrl     String
-  qrCodeUrl      String
-  certificateUrl String
-  generatedAt    DateTime @default(now())
+  profileUrl  String
+  qrCodeUrl   String
+  generatedAt DateTime @default(now())
 
   memberId String @unique
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model MemberCertificate {
+  id String @id @default(uuid())
+
+  credentialId   String   @unique
+  title          String
+  certificateUrl String
+  dateReceived   DateTime
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([memberId, dateReceived])
+}
+
+model MemberPublicRecord {
+  id String @id @default(uuid())
+
+  title            String
+  shortDescription String
+  type             MemberPublicRecordType
+  eventAt          DateTime
+  location         String
+  status           MemberPublicRecordStatus @default(PUBLISHED)
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  attachments MemberPublicRecordAttachment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([memberId, eventAt])
+  @@index([type])
+  @@index([status])
+}
+
+model MemberPublicRecordAttachment {
+  id String @id @default(uuid())
+
+  fileUrl  String
+  fileName String?
+  mimeType String?
+  sortOrder Int @default(0)
+
+  publicRecordId String
+  publicRecord   MemberPublicRecord @relation(fields: [publicRecordId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([publicRecordId, sortOrder])
 }
 
 model MemberChaplaincyTrainingProgress {
@@ -660,6 +718,19 @@ enum MemberType {
   PROFESSIONAL_CHAPLAIN
   ORDAINED_AND_COMMISSIONED_PRACTITIONER
   CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR
+}
+
+enum MemberPublicRecordType {
+  REPORT_ACTIVITY
+  COMMUNITY_SERVICE
+  TRAINING_CONDUCTED
+  PARTICIPATION
+  RECOGNITION
+}
+
+enum MemberPublicRecordStatus {
+  PUBLISHED
+  DRAFT
 }
 
 enum VerificationType {

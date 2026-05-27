@@ -1,0 +1,93 @@
+import { HTTPSTATUS } from '@/common/http-codes';
+import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/winston';
+
+import type { Request, Response } from 'express';
+
+const normalizeOptional = (value?: string) => {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : null;
+};
+
+const normalizeEntryList = (entries?: string[]) => {
+  const cleaned = (entries ?? [])
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+  return cleaned.length > 0 ? cleaned.join(' | ') : null;
+};
+
+export const updateCurrentEducation = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const userId = req.userId;
+
+    if (!userId) {
+      res.status(HTTPSTATUS.UNAUTHORIZED).json({
+        code: 'UNAUTHORIZED',
+        message: 'Unauthorized',
+      });
+      return;
+    }
+
+    const member = await prisma.member.findUnique({
+      where: { userId },
+      select: {
+        id: true,
+        uniqueId: true,
+      },
+    });
+
+    if (!member) {
+      res.status(HTTPSTATUS.NOT_FOUND).json({
+        code: 'NOT_FOUND',
+        message: 'Member application not found',
+      });
+      return;
+    }
+
+    const {
+      elementarySchool,
+      secondarySchool,
+      tertiaryCollegeEntries,
+      postGraduateStudiesEntries,
+    } = req.body as {
+      elementarySchool?: string;
+      secondarySchool?: string;
+      tertiaryCollegeEntries?: string[];
+      postGraduateStudiesEntries?: string[];
+    };
+
+    const updatedMember = await prisma.member.update({
+      where: { id: member.id },
+      data: {
+        elementarySchool: normalizeOptional(elementarySchool),
+        secondarySchool: normalizeOptional(secondarySchool),
+        tertiaryCollege: normalizeEntryList(tertiaryCollegeEntries),
+        postGraduateStudies: normalizeEntryList(postGraduateStudiesEntries),
+      },
+      select: {
+        id: true,
+        uniqueId: true,
+        elementarySchool: true,
+        secondarySchool: true,
+        tertiaryCollege: true,
+        postGraduateStudies: true,
+      },
+    });
+
+    res.status(HTTPSTATUS.OK).json({
+      code: 'OK',
+      message: 'Education updated successfully',
+      data: updatedMember,
+    });
+  } catch (err) {
+    logger.error('Error while updating current education', { err });
+    res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Internal server error',
+    });
+  }
+};

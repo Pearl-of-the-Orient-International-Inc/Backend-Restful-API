@@ -146,13 +146,12 @@ const updateOnboardingStep = (req, res) => __awaiter(void 0, void 0, void 0, fun
                 where: { memberId: member.id },
                 select: {
                     qrCodeUrl: true,
-                    certificateUrl: true,
                 },
             });
-            if (!(idGenerationAsset === null || idGenerationAsset === void 0 ? void 0 : idGenerationAsset.qrCodeUrl) || !(idGenerationAsset === null || idGenerationAsset === void 0 ? void 0 : idGenerationAsset.certificateUrl)) {
+            if (!(idGenerationAsset === null || idGenerationAsset === void 0 ? void 0 : idGenerationAsset.qrCodeUrl)) {
                 res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
                     code: 'BAD_REQUEST',
-                    message: 'Member ID generation is incomplete. Please save QR code and certificate first.',
+                    message: 'Member ID generation is incomplete. Please save the QR code first.',
                 });
                 return;
             }

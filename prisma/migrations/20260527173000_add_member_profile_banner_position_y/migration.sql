@@ -1,0 +1,2 @@
+ALTER TABLE "Member"
+ADD COLUMN "profileBannerPositionY" INTEGER NOT NULL DEFAULT 50;

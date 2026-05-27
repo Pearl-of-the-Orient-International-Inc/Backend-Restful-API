@@ -532,6 +532,40 @@ export type EnumInterviewDayWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumInterviewDayFilter<$PrismaModel>
 }
 
+export type EnumMemberPublicRecordTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordType | Prisma.EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordTypeFilter<$PrismaModel> | $Enums.MemberPublicRecordType
+}
+
+export type EnumMemberPublicRecordStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordStatus | Prisma.EnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordStatusFilter<$PrismaModel> | $Enums.MemberPublicRecordStatus
+}
+
+export type EnumMemberPublicRecordTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordType | Prisma.EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemberPublicRecordType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberPublicRecordTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberPublicRecordTypeFilter<$PrismaModel>
+}
+
+export type EnumMemberPublicRecordStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordStatus | Prisma.EnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberPublicRecordStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberPublicRecordStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberPublicRecordStatusFilter<$PrismaModel>
+}
+
 export type JsonFilter<$PrismaModel = never> =
 | Prisma.PatchUndefined<
     Prisma.Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -1350,6 +1384,40 @@ export type NestedEnumInterviewDayWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumInterviewDayFilter<$PrismaModel>
   _max?: Prisma.NestedEnumInterviewDayFilter<$PrismaModel>
+}
+
+export type NestedEnumMemberPublicRecordTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordType | Prisma.EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordTypeFilter<$PrismaModel> | $Enums.MemberPublicRecordType
+}
+
+export type NestedEnumMemberPublicRecordStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordStatus | Prisma.EnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordStatusFilter<$PrismaModel> | $Enums.MemberPublicRecordStatus
+}
+
+export type NestedEnumMemberPublicRecordTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordType | Prisma.EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemberPublicRecordType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberPublicRecordTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberPublicRecordTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumMemberPublicRecordStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberPublicRecordStatus | Prisma.EnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberPublicRecordStatus[] | Prisma.ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberPublicRecordStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberPublicRecordStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberPublicRecordStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberPublicRecordStatusFilter<$PrismaModel>
 }
 
 export type NestedJsonFilter<$PrismaModel = never> =
