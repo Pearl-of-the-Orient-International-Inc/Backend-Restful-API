@@ -71,6 +71,9 @@ export const ModelName = {
   MemberPublicRecord: 'MemberPublicRecord',
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
+  SeminaryApplication: 'SeminaryApplication',
+  SeminaryRequirements: 'SeminaryRequirements',
+  SeminaryPayment: 'SeminaryPayment',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
@@ -424,6 +427,100 @@ export const MemberChaplaincyTrainingProgressScalarFieldEnum = {
 } as const
 
 export type MemberChaplaincyTrainingProgressScalarFieldEnum = (typeof MemberChaplaincyTrainingProgressScalarFieldEnum)[keyof typeof MemberChaplaincyTrainingProgressScalarFieldEnum]
+
+
+export const SeminaryApplicationScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  targetMemberType: 'targetMemberType',
+  studentId: 'studentId',
+  academicYear: 'academicYear',
+  surname: 'surname',
+  givenName: 'givenName',
+  middleName: 'middleName',
+  emailAddress: 'emailAddress',
+  mobilePhone: 'mobilePhone',
+  homeAddress: 'homeAddress',
+  dateOfBirth: 'dateOfBirth',
+  birthPlace: 'birthPlace',
+  age: 'age',
+  gender: 'gender',
+  height: 'height',
+  weight: 'weight',
+  civilStatus: 'civilStatus',
+  officePhone: 'officePhone',
+  churchAttended: 'churchAttended',
+  churchAddress: 'churchAddress',
+  pastorName: 'pastorName',
+  contactNumber: 'contactNumber',
+  ministryInvolved: 'ministryInvolved',
+  programLevel: 'programLevel',
+  programCourse: 'programCourse',
+  highSchool: 'highSchool',
+  highSchoolYearGraduated: 'highSchoolYearGraduated',
+  collegeSchool: 'collegeSchool',
+  collegeCourse: 'collegeCourse',
+  collegeYearGraduated: 'collegeYearGraduated',
+  vocationalSchool: 'vocationalSchool',
+  vocationalCourse: 'vocationalCourse',
+  vocationalYearGraduated: 'vocationalYearGraduated',
+  othersSchool: 'othersSchool',
+  othersCourse: 'othersCourse',
+  othersYearGraduated: 'othersYearGraduated',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  reviewRemarks: 'reviewRemarks',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryApplicationScalarFieldEnum = (typeof SeminaryApplicationScalarFieldEnum)[keyof typeof SeminaryApplicationScalarFieldEnum]
+
+
+export const SeminaryRequirementsScalarFieldEnum = {
+  id: 'id',
+  transcriptOfRecordsUrl: 'transcriptOfRecordsUrl',
+  transcriptOfRecordsFileName: 'transcriptOfRecordsFileName',
+  transcriptOfRecordsMimeType: 'transcriptOfRecordsMimeType',
+  transcriptOfRecordsFileSize: 'transcriptOfRecordsFileSize',
+  idPictureUrl: 'idPictureUrl',
+  idPictureFileName: 'idPictureFileName',
+  idPictureMimeType: 'idPictureMimeType',
+  idPictureFileSize: 'idPictureFileSize',
+  pastorRecommendationUrl: 'pastorRecommendationUrl',
+  pastorRecommendationFileName: 'pastorRecommendationFileName',
+  pastorRecommendationMimeType: 'pastorRecommendationMimeType',
+  pastorRecommendationFileSize: 'pastorRecommendationFileSize',
+  briefHistoryOfConversion: 'briefHistoryOfConversion',
+  applicationId: 'applicationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryRequirementsScalarFieldEnum = (typeof SeminaryRequirementsScalarFieldEnum)[keyof typeof SeminaryRequirementsScalarFieldEnum]
+
+
+export const SeminaryPaymentScalarFieldEnum = {
+  id: 'id',
+  paymentType: 'paymentType',
+  paymentMethod: 'paymentMethod',
+  amountPaid: 'amountPaid',
+  totalAmountDue: 'totalAmountDue',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  verifiedAt: 'verifiedAt',
+  reviewRemarks: 'reviewRemarks',
+  proofOfReceiptUrl: 'proofOfReceiptUrl',
+  proofOfReceiptFileName: 'proofOfReceiptFileName',
+  proofOfReceiptMimeType: 'proofOfReceiptMimeType',
+  proofOfReceiptFileSize: 'proofOfReceiptFileSize',
+  applicationId: 'applicationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryPaymentScalarFieldEnum = (typeof SeminaryPaymentScalarFieldEnum)[keyof typeof SeminaryPaymentScalarFieldEnum]
 
 
 export const BranchOfServiceScalarFieldEnum = {

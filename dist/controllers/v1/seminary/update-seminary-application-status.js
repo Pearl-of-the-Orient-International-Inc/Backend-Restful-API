@@ -1,0 +1,155 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateSeminaryApplicationStatus = void 0;
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const mailers_1 = require("../../../mailers");
+const seminary_application_status_1 = require("../../../mailers/templates/seminary-application-status");
+const seminary_shared_1 = require("./seminary-shared");
+const buildNextStudentId = (tx_1, ...args_1) => __awaiter(void 0, [tx_1, ...args_1], void 0, function* (tx, date = new Date()) {
+    const yearSuffix = String(date.getFullYear()).slice(-2);
+    const prefix = `POTSC-${yearSuffix}-`;
+    const latestApplication = yield tx.seminaryApplication.findFirst({
+        where: {
+            studentId: {
+                startsWith: prefix,
+            },
+        },
+        orderBy: {
+            studentId: 'desc',
+        },
+        select: {
+            studentId: true,
+        },
+    });
+    const latestSeries = (latestApplication === null || latestApplication === void 0 ? void 0 : latestApplication.studentId)
+        ? Number.parseInt(latestApplication.studentId.slice(prefix.length), 10)
+        : 0;
+    const nextSeries = Number.isFinite(latestSeries) ? latestSeries + 1 : 1;
+    return `${prefix}${String(nextSeries).padStart(4, '0')}`;
+});
+const getApplicantName = ({ givenName, middleName, surname, }) => [givenName, middleName, surname]
+    .filter(Boolean)
+    .join(' ')
+    .trim();
+const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = req.body;
+        const applicationId = String(req.params.id);
+        const existingApplication = yield prisma_1.prisma.seminaryApplication.findUnique({
+            where: { id: applicationId },
+            select: {
+                id: true,
+                memberId: true,
+                studentId: true,
+                givenName: true,
+                middleName: true,
+                surname: true,
+                emailAddress: true,
+                programCourse: true,
+            },
+        });
+        if (!existingApplication) {
+            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
+                code: 'NOT_FOUND',
+                message: 'Seminary application not found',
+            });
+            return;
+        }
+        const existingPayment = yield prisma_1.prisma.seminaryPayment.findUnique({
+            where: { applicationId: existingApplication.id },
+            select: { id: true },
+        });
+        const application = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            var _a, _b;
+            const studentId = body.status === enums_1.SeminaryApplicationStatus.APPROVED &&
+                !existingApplication.studentId
+                ? yield buildNextStudentId(tx)
+                : undefined;
+            const reviewedApplication = yield tx.seminaryApplication.update({
+                where: { id: existingApplication.id },
+                data: {
+                    status: body.status,
+                    reviewRemarks: (_a = body.reviewRemarks) !== null && _a !== void 0 ? _a : null,
+                    reviewedAt: body.status === enums_1.SeminaryApplicationStatus.UNDER_REVIEW
+                        ? null
+                        : new Date(),
+                    studentId,
+                },
+                select: {
+                    id: true,
+                },
+            });
+            if (existingPayment === null || existingPayment === void 0 ? void 0 : existingPayment.id) {
+                yield tx.seminaryPayment.update({
+                    where: { id: existingPayment.id },
+                    data: {
+                        status: body.status === enums_1.SeminaryApplicationStatus.APPROVED
+                            ? enums_1.SeminaryPaymentStatus.VERIFIED
+                            : body.status === enums_1.SeminaryApplicationStatus.REJECTED
+                                ? enums_1.SeminaryPaymentStatus.REJECTED
+                                : enums_1.SeminaryPaymentStatus.PENDING,
+                        verifiedAt: body.status === enums_1.SeminaryApplicationStatus.APPROVED
+                            ? new Date()
+                            : null,
+                        reviewRemarks: (_b = body.reviewRemarks) !== null && _b !== void 0 ? _b : null,
+                    },
+                });
+            }
+            if (body.status === enums_1.SeminaryApplicationStatus.APPROVED &&
+                existingApplication.memberId) {
+                yield tx.member.update({
+                    where: { id: existingApplication.memberId },
+                    data: {
+                        memberType: enums_1.MemberType.PROFESSIONAL_CHAPLAIN,
+                    },
+                });
+            }
+            return tx.seminaryApplication.findUnique({
+                where: { id: reviewedApplication.id },
+                include: seminary_shared_1.seminaryApplicationInclude,
+            });
+        }));
+        if (existingApplication.emailAddress) {
+            const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: existingApplication.emailAddress }, (0, seminary_application_status_1.seminaryApplicationStatusTemplate)({
+                name: getApplicantName(existingApplication) ||
+                    existingApplication.emailAddress,
+                programCourse: existingApplication.programCourse,
+                reason: body.reviewRemarks,
+                status: body.status,
+                studentId: application === null || application === void 0 ? void 0 : application.studentId,
+            })));
+            if (!emailResult.success) {
+                winston_1.logger.warn('Seminary application status email failed to send', {
+                    applicationId: existingApplication.id,
+                    email: existingApplication.emailAddress,
+                    status: body.status,
+                });
+            }
+        }
+        res.status(http_codes_1.HTTPSTATUS.OK).json({
+            code: 'OK',
+            message: `Seminary application marked as ${body.status.toLowerCase().replace(/_/g, ' ')} successfully`,
+            data: application,
+        });
+    }
+    catch (err) {
+        winston_1.logger.error('Error while updating seminary application status', { err });
+        res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Internal server error',
+        });
+    }
+});
+exports.updateSeminaryApplicationStatus = updateSeminaryApplicationStatus;

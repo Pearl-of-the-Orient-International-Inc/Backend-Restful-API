@@ -228,6 +228,7 @@ model Member {
   publicRecords              MemberPublicRecord[]
   chaplaincyTrainingProgress MemberChaplaincyTrainingProgress?
   signature                  ApplicantSignature?
+  seminaryApplications       SeminaryApplication[]
   officerAssignments         OfficerAssignment[]
   eventAttendances           EventAttendee[]
   taggedEvents               EventTaggedMember[]
@@ -426,6 +427,130 @@ model MemberChaplaincyTrainingProgress {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// ─────────────────────────────────────────────
+// SEMINARY APPLICATION SCHEMA
+// ─────────────────────────────────────────────
+
+model SeminaryApplication {
+  id String @id @default(uuid())
+
+  status           SeminaryApplicationStatus @default(SUBMITTED)
+  targetMemberType MemberType                @default(PROFESSIONAL_CHAPLAIN)
+  studentId        String?                   @unique
+
+  // Personal Information
+  academicYear String?
+  surname      String
+  givenName    String
+  middleName   String?
+  emailAddress String?
+  mobilePhone  String?
+  homeAddress  String?
+  dateOfBirth  DateTime?
+  birthPlace   String?
+  age          Int?
+  gender       Gender?
+  height       String?
+  weight       String?
+  civilStatus  CivilStatus?
+  officePhone  String?
+
+  // Ministry
+  churchAttended  String?
+  churchAddress   String?
+  pastorName      String?
+  contactNumber   String?
+  ministryInvolved String?
+
+  // Curriculum of Interest
+  programLevel  SeminaryProgramLevel
+  programCourse String
+
+  // Educational Background
+  highSchool                  String?
+  highSchoolYearGraduated     String?
+  collegeSchool               String?
+  collegeCourse               String?
+  collegeYearGraduated        String?
+  vocationalSchool            String?
+  vocationalCourse            String?
+  vocationalYearGraduated     String?
+  othersSchool                String?
+  othersCourse                String?
+  othersYearGraduated         String?
+
+  submittedAt   DateTime  @default(now())
+  reviewedAt    DateTime?
+  reviewRemarks String?
+
+  memberId String?
+  member   Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  requirements SeminaryRequirements?
+  payment      SeminaryPayment?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([memberId])
+  @@index([status])
+  @@index([targetMemberType])
+  @@index([createdAt])
+}
+
+model SeminaryRequirements {
+  id String @id @default(uuid())
+
+  transcriptOfRecordsUrl      String?
+  transcriptOfRecordsFileName String?
+  transcriptOfRecordsMimeType String?
+  transcriptOfRecordsFileSize String?
+
+  idPictureUrl      String?
+  idPictureFileName String?
+  idPictureMimeType String?
+  idPictureFileSize String?
+
+  pastorRecommendationUrl      String?
+  pastorRecommendationFileName String?
+  pastorRecommendationMimeType String?
+  pastorRecommendationFileSize String?
+
+  briefHistoryOfConversion String?
+
+  applicationId String              @unique
+  application   SeminaryApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SeminaryPayment {
+  id String @id @default(uuid())
+
+  paymentType     SeminaryPaymentType
+  paymentMethod   SeminaryPaymentMethod
+  amountPaid      Decimal              @db.Decimal(12, 2)
+  totalAmountDue  Decimal              @db.Decimal(12, 2)
+  status          SeminaryPaymentStatus @default(PENDING)
+  submittedAt     DateTime             @default(now())
+  verifiedAt      DateTime?
+  reviewRemarks   String?
+
+  proofOfReceiptUrl      String?
+  proofOfReceiptFileName String?
+  proofOfReceiptMimeType String?
+  proofOfReceiptFileSize String?
+
+  applicationId String              @unique
+  application   SeminaryApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
 }
 
 // ─────────────────────────────────────────────
@@ -676,11 +801,12 @@ enum UserType {
 
 enum UserPosition {
   CLERK
+  REGISTRAR
   HR
   IT
   ACCOUNTING_FINANCE
   OPERATIONS
-  SECRETARIAT
+  SECRETARIAN
 }
 
 enum UserAccountStatus {
@@ -800,6 +926,38 @@ enum MemberPaymentMethod {
   DIRECT_DEBIT
   OVER_THE_COUNTER
   CASH
+}
+
+enum SeminaryApplicationStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum SeminaryProgramLevel {
+  CERTIFICATE
+  BACHELOR
+  MASTER_WITH_THESIS
+  DOCTORATE_WITH_DISSERTATION
+}
+
+enum SeminaryPaymentType {
+  FULL_PAYMENT
+  PARTIAL_PAYMENT
+}
+
+enum SeminaryPaymentMethod {
+  BANK_TRANSFER
+  GCASH
+  MAYA
+}
+
+enum SeminaryPaymentStatus {
+  PENDING
+  VERIFIED
+  REJECTED
 }
 
 enum InterviewDay {

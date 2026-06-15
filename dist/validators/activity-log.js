@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteActivityLogSchema = exports.getUserActivityLogsSchema = exports.getAllActivityLogsSchema = void 0;
+exports.deleteActivityLogSchema = exports.getCurrentUserActivityLogsSchema = exports.getUserActivityLogsSchema = exports.getAllActivityLogsSchema = void 0;
 const zod_1 = require("zod");
 const limitSchema = zod_1.z
     .string()
@@ -20,6 +20,11 @@ exports.getUserActivityLogsSchema = zod_1.z.object({
     params: zod_1.z.object({
         userId: zod_1.z.uuid(),
     }),
+    query: zod_1.z.object({
+        limit: limitSchema,
+    }),
+});
+exports.getCurrentUserActivityLogsSchema = zod_1.z.object({
     query: zod_1.z.object({
         limit: limitSchema,
     }),

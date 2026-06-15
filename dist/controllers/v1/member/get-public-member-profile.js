@@ -60,6 +60,7 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                 user: {
                     select: {
                         name: true,
+                        avatar: true,
                         role: true,
                         accountStatus: true,
                         isEmailVerified: true,

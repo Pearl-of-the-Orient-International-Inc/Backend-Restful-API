@@ -12,6 +12,7 @@ const branch_service_1 = __importDefault(require("../../routes/v1/branch-service
 const office_title_1 = __importDefault(require("../../routes/v1/office-title"));
 const event_1 = __importDefault(require("../../routes/v1/event"));
 const news_blog_1 = __importDefault(require("../../routes/v1/news-blog"));
+const seminary_1 = __importDefault(require("../../routes/v1/seminary"));
 const report_1 = __importDefault(require("../../routes/v1/report"));
 const activity_log_1 = __importDefault(require("../../routes/v1/activity-log"));
 const backup_database_1 = __importDefault(require("../../routes/v1/backup-database"));
@@ -34,6 +35,7 @@ router.use('/branch-service', branch_service_1.default);
 router.use('/offices', office_title_1.default);
 router.use('/events', event_1.default);
 router.use('/news-blogs', news_blog_1.default);
+router.use('/seminary', seminary_1.default);
 router.use('/reports', report_1.default);
 router.use('/activity-logs', activity_log_1.default);
 router.use('/backups', backup_database_1.default);

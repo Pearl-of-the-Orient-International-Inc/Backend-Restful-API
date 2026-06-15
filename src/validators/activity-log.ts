@@ -25,6 +25,12 @@ export const getUserActivityLogsSchema = z.object({
   }),
 });
 
+export const getCurrentUserActivityLogsSchema = z.object({
+  query: z.object({
+    limit: limitSchema,
+  }),
+});
+
 export const deleteActivityLogSchema = z.object({
   params: z.object({
     id: z.uuid(),

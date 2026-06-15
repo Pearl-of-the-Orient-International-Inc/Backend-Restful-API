@@ -33,8 +33,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
-exports.defineExtension = exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = void 0;
+exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -81,6 +81,9 @@ exports.ModelName = {
     MemberPublicRecord: 'MemberPublicRecord',
     MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
     MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
+    SeminaryApplication: 'SeminaryApplication',
+    SeminaryRequirements: 'SeminaryRequirements',
+    SeminaryPayment: 'SeminaryPayment',
     BranchOfService: 'BranchOfService',
     OfficeTitle: 'OfficeTitle',
     OfficerAssignment: 'OfficerAssignment',
@@ -342,6 +345,88 @@ exports.MemberChaplaincyTrainingProgressScalarFieldEnum = {
     essayAnswers: 'essayAnswers',
     completedAt: 'completedAt',
     memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryApplicationScalarFieldEnum = {
+    id: 'id',
+    status: 'status',
+    targetMemberType: 'targetMemberType',
+    studentId: 'studentId',
+    academicYear: 'academicYear',
+    surname: 'surname',
+    givenName: 'givenName',
+    middleName: 'middleName',
+    emailAddress: 'emailAddress',
+    mobilePhone: 'mobilePhone',
+    homeAddress: 'homeAddress',
+    dateOfBirth: 'dateOfBirth',
+    birthPlace: 'birthPlace',
+    age: 'age',
+    gender: 'gender',
+    height: 'height',
+    weight: 'weight',
+    civilStatus: 'civilStatus',
+    officePhone: 'officePhone',
+    churchAttended: 'churchAttended',
+    churchAddress: 'churchAddress',
+    pastorName: 'pastorName',
+    contactNumber: 'contactNumber',
+    ministryInvolved: 'ministryInvolved',
+    programLevel: 'programLevel',
+    programCourse: 'programCourse',
+    highSchool: 'highSchool',
+    highSchoolYearGraduated: 'highSchoolYearGraduated',
+    collegeSchool: 'collegeSchool',
+    collegeCourse: 'collegeCourse',
+    collegeYearGraduated: 'collegeYearGraduated',
+    vocationalSchool: 'vocationalSchool',
+    vocationalCourse: 'vocationalCourse',
+    vocationalYearGraduated: 'vocationalYearGraduated',
+    othersSchool: 'othersSchool',
+    othersCourse: 'othersCourse',
+    othersYearGraduated: 'othersYearGraduated',
+    submittedAt: 'submittedAt',
+    reviewedAt: 'reviewedAt',
+    reviewRemarks: 'reviewRemarks',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryRequirementsScalarFieldEnum = {
+    id: 'id',
+    transcriptOfRecordsUrl: 'transcriptOfRecordsUrl',
+    transcriptOfRecordsFileName: 'transcriptOfRecordsFileName',
+    transcriptOfRecordsMimeType: 'transcriptOfRecordsMimeType',
+    transcriptOfRecordsFileSize: 'transcriptOfRecordsFileSize',
+    idPictureUrl: 'idPictureUrl',
+    idPictureFileName: 'idPictureFileName',
+    idPictureMimeType: 'idPictureMimeType',
+    idPictureFileSize: 'idPictureFileSize',
+    pastorRecommendationUrl: 'pastorRecommendationUrl',
+    pastorRecommendationFileName: 'pastorRecommendationFileName',
+    pastorRecommendationMimeType: 'pastorRecommendationMimeType',
+    pastorRecommendationFileSize: 'pastorRecommendationFileSize',
+    briefHistoryOfConversion: 'briefHistoryOfConversion',
+    applicationId: 'applicationId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryPaymentScalarFieldEnum = {
+    id: 'id',
+    paymentType: 'paymentType',
+    paymentMethod: 'paymentMethod',
+    amountPaid: 'amountPaid',
+    totalAmountDue: 'totalAmountDue',
+    status: 'status',
+    submittedAt: 'submittedAt',
+    verifiedAt: 'verifiedAt',
+    reviewRemarks: 'reviewRemarks',
+    proofOfReceiptUrl: 'proofOfReceiptUrl',
+    proofOfReceiptFileName: 'proofOfReceiptFileName',
+    proofOfReceiptMimeType: 'proofOfReceiptMimeType',
+    proofOfReceiptFileSize: 'proofOfReceiptFileSize',
+    applicationId: 'applicationId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

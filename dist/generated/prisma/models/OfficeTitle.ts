@@ -447,14 +447,6 @@ export type EnumOfficeTitleLevelFieldUpdateOperationsInput = {
   set?: $Enums.OfficeTitleLevel
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type OfficeTitleCreateNestedOneWithoutAssignmentsInput = {
   create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutAssignmentsInput, Prisma.OfficeTitleUncheckedCreateWithoutAssignmentsInput>
   connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutAssignmentsInput

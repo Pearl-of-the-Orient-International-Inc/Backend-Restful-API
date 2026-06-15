@@ -138,6 +138,21 @@ export type MemberPublicRecordAttachment = Prisma.MemberPublicRecordAttachmentMo
  */
 export type MemberChaplaincyTrainingProgress = Prisma.MemberChaplaincyTrainingProgressModel
 /**
+ * Model SeminaryApplication
+ * 
+ */
+export type SeminaryApplication = Prisma.SeminaryApplicationModel
+/**
+ * Model SeminaryRequirements
+ * 
+ */
+export type SeminaryRequirements = Prisma.SeminaryRequirementsModel
+/**
+ * Model SeminaryPayment
+ * 
+ */
+export type SeminaryPayment = Prisma.SeminaryPaymentModel
+/**
  * Model BranchOfService
  * 
  */

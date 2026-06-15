@@ -404,6 +404,9 @@ export const ModelName = {
   MemberPublicRecord: 'MemberPublicRecord',
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
+  SeminaryApplication: 'SeminaryApplication',
+  SeminaryRequirements: 'SeminaryRequirements',
+  SeminaryPayment: 'SeminaryPayment',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
@@ -430,7 +433,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryRequirements" | "seminaryPayment" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1914,6 +1917,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SeminaryApplication: {
+      payload: Prisma.$SeminaryApplicationPayload<ExtArgs>
+      fields: Prisma.SeminaryApplicationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryApplicationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryApplicationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryApplicationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryApplicationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryApplicationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryApplicationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryApplicationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryApplicationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryApplicationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>
+        }
+        update: {
+          args: Prisma.SeminaryApplicationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryApplicationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryApplicationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryApplicationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryApplicationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryApplicationPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryApplicationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryApplication>
+        }
+        groupBy: {
+          args: Prisma.SeminaryApplicationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryApplicationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryApplicationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryRequirements: {
+      payload: Prisma.$SeminaryRequirementsPayload<ExtArgs>
+      fields: Prisma.SeminaryRequirementsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryRequirementsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryRequirementsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryRequirementsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryRequirementsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryRequirementsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryRequirementsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryRequirementsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryRequirementsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryRequirementsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>
+        }
+        update: {
+          args: Prisma.SeminaryRequirementsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryRequirementsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryRequirementsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryRequirementsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryRequirementsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryRequirementsPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryRequirementsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryRequirements>
+        }
+        groupBy: {
+          args: Prisma.SeminaryRequirementsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryRequirementsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryRequirementsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryRequirementsCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryPayment: {
+      payload: Prisma.$SeminaryPaymentPayload<ExtArgs>
+      fields: Prisma.SeminaryPaymentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryPaymentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryPaymentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryPaymentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryPaymentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryPaymentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryPaymentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryPaymentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryPaymentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryPaymentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>
+        }
+        update: {
+          args: Prisma.SeminaryPaymentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryPaymentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryPaymentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryPaymentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryPaymentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryPaymentPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryPaymentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryPayment>
+        }
+        groupBy: {
+          args: Prisma.SeminaryPaymentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryPaymentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryPaymentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryPaymentCountAggregateOutputType> | number
+        }
+      }
+    }
     BranchOfService: {
       payload: Prisma.$BranchOfServicePayload<ExtArgs>
       fields: Prisma.BranchOfServiceFieldRefs
@@ -3093,6 +3318,100 @@ export const MemberChaplaincyTrainingProgressScalarFieldEnum = {
 export type MemberChaplaincyTrainingProgressScalarFieldEnum = (typeof MemberChaplaincyTrainingProgressScalarFieldEnum)[keyof typeof MemberChaplaincyTrainingProgressScalarFieldEnum]
 
 
+export const SeminaryApplicationScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  targetMemberType: 'targetMemberType',
+  studentId: 'studentId',
+  academicYear: 'academicYear',
+  surname: 'surname',
+  givenName: 'givenName',
+  middleName: 'middleName',
+  emailAddress: 'emailAddress',
+  mobilePhone: 'mobilePhone',
+  homeAddress: 'homeAddress',
+  dateOfBirth: 'dateOfBirth',
+  birthPlace: 'birthPlace',
+  age: 'age',
+  gender: 'gender',
+  height: 'height',
+  weight: 'weight',
+  civilStatus: 'civilStatus',
+  officePhone: 'officePhone',
+  churchAttended: 'churchAttended',
+  churchAddress: 'churchAddress',
+  pastorName: 'pastorName',
+  contactNumber: 'contactNumber',
+  ministryInvolved: 'ministryInvolved',
+  programLevel: 'programLevel',
+  programCourse: 'programCourse',
+  highSchool: 'highSchool',
+  highSchoolYearGraduated: 'highSchoolYearGraduated',
+  collegeSchool: 'collegeSchool',
+  collegeCourse: 'collegeCourse',
+  collegeYearGraduated: 'collegeYearGraduated',
+  vocationalSchool: 'vocationalSchool',
+  vocationalCourse: 'vocationalCourse',
+  vocationalYearGraduated: 'vocationalYearGraduated',
+  othersSchool: 'othersSchool',
+  othersCourse: 'othersCourse',
+  othersYearGraduated: 'othersYearGraduated',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  reviewRemarks: 'reviewRemarks',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryApplicationScalarFieldEnum = (typeof SeminaryApplicationScalarFieldEnum)[keyof typeof SeminaryApplicationScalarFieldEnum]
+
+
+export const SeminaryRequirementsScalarFieldEnum = {
+  id: 'id',
+  transcriptOfRecordsUrl: 'transcriptOfRecordsUrl',
+  transcriptOfRecordsFileName: 'transcriptOfRecordsFileName',
+  transcriptOfRecordsMimeType: 'transcriptOfRecordsMimeType',
+  transcriptOfRecordsFileSize: 'transcriptOfRecordsFileSize',
+  idPictureUrl: 'idPictureUrl',
+  idPictureFileName: 'idPictureFileName',
+  idPictureMimeType: 'idPictureMimeType',
+  idPictureFileSize: 'idPictureFileSize',
+  pastorRecommendationUrl: 'pastorRecommendationUrl',
+  pastorRecommendationFileName: 'pastorRecommendationFileName',
+  pastorRecommendationMimeType: 'pastorRecommendationMimeType',
+  pastorRecommendationFileSize: 'pastorRecommendationFileSize',
+  briefHistoryOfConversion: 'briefHistoryOfConversion',
+  applicationId: 'applicationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryRequirementsScalarFieldEnum = (typeof SeminaryRequirementsScalarFieldEnum)[keyof typeof SeminaryRequirementsScalarFieldEnum]
+
+
+export const SeminaryPaymentScalarFieldEnum = {
+  id: 'id',
+  paymentType: 'paymentType',
+  paymentMethod: 'paymentMethod',
+  amountPaid: 'amountPaid',
+  totalAmountDue: 'totalAmountDue',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  verifiedAt: 'verifiedAt',
+  reviewRemarks: 'reviewRemarks',
+  proofOfReceiptUrl: 'proofOfReceiptUrl',
+  proofOfReceiptFileName: 'proofOfReceiptFileName',
+  proofOfReceiptMimeType: 'proofOfReceiptMimeType',
+  proofOfReceiptFileSize: 'proofOfReceiptFileSize',
+  applicationId: 'applicationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryPaymentScalarFieldEnum = (typeof SeminaryPaymentScalarFieldEnum)[keyof typeof SeminaryPaymentScalarFieldEnum]
+
+
 export const BranchOfServiceScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -3660,6 +3979,90 @@ export type ListEnumMemberPublicRecordStatusFieldRefInput<$PrismaModel> = FieldR
 
 
 /**
+ * Reference to a field of type 'SeminaryApplicationStatus'
+ */
+export type EnumSeminaryApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryApplicationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryApplicationStatus[]'
+ */
+export type ListEnumSeminaryApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryApplicationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryProgramLevel'
+ */
+export type EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryProgramLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryProgramLevel[]'
+ */
+export type ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryProgramLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryPaymentType'
+ */
+export type EnumSeminaryPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryPaymentType'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryPaymentType[]'
+ */
+export type ListEnumSeminaryPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryPaymentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryPaymentMethod'
+ */
+export type EnumSeminaryPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryPaymentMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryPaymentMethod[]'
+ */
+export type ListEnumSeminaryPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryPaymentMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryPaymentStatus'
+ */
+export type EnumSeminaryPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryPaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryPaymentStatus[]'
+ */
+export type ListEnumSeminaryPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryPaymentStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'OfficeTitleLevel'
  */
 export type EnumOfficeTitleLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OfficeTitleLevel'>
@@ -3983,6 +4386,9 @@ export type GlobalOmitConfig = {
   memberPublicRecord?: Prisma.MemberPublicRecordOmit
   memberPublicRecordAttachment?: Prisma.MemberPublicRecordAttachmentOmit
   memberChaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOmit
+  seminaryApplication?: Prisma.SeminaryApplicationOmit
+  seminaryRequirements?: Prisma.SeminaryRequirementsOmit
+  seminaryPayment?: Prisma.SeminaryPaymentOmit
   branchOfService?: Prisma.BranchOfServiceOmit
   officeTitle?: Prisma.OfficeTitleOmit
   officerAssignment?: Prisma.OfficerAssignmentOmit

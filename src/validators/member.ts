@@ -205,7 +205,7 @@ export const createCurrentMemberCertificateSchema = z.object({
 
 export const createCurrentMemberPublicRecordSchema = z.object({
   title: z.string().trim().min(1).max(150),
-  shortDescription: z.string().trim().min(1).max(500),
+  shortDescription: z.string().trim().min(1).max(5000),
   type: z.enum(MemberPublicRecordType),
   eventAt: z.iso.datetime(),
   location: z.string().trim().min(1).max(255),

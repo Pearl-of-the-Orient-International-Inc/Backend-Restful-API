@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryProgramLevel = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -8,11 +8,12 @@ exports.UserType = {
 };
 exports.UserPosition = {
     CLERK: 'CLERK',
+    REGISTRAR: 'REGISTRAR',
     HR: 'HR',
     IT: 'IT',
     ACCOUNTING_FINANCE: 'ACCOUNTING_FINANCE',
     OPERATIONS: 'OPERATIONS',
-    SECRETARIAT: 'SECRETARIAT'
+    SECRETARIAN: 'SECRETARIAN'
 };
 exports.UserAccountStatus = {
     ACTIVE: 'ACTIVE',
@@ -116,6 +117,33 @@ exports.MemberPaymentMethod = {
     DIRECT_DEBIT: 'DIRECT_DEBIT',
     OVER_THE_COUNTER: 'OVER_THE_COUNTER',
     CASH: 'CASH'
+};
+exports.SeminaryApplicationStatus = {
+    SUBMITTED: 'SUBMITTED',
+    UNDER_REVIEW: 'UNDER_REVIEW',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED',
+    CANCELLED: 'CANCELLED'
+};
+exports.SeminaryProgramLevel = {
+    CERTIFICATE: 'CERTIFICATE',
+    BACHELOR: 'BACHELOR',
+    MASTER_WITH_THESIS: 'MASTER_WITH_THESIS',
+    DOCTORATE_WITH_DISSERTATION: 'DOCTORATE_WITH_DISSERTATION'
+};
+exports.SeminaryPaymentType = {
+    FULL_PAYMENT: 'FULL_PAYMENT',
+    PARTIAL_PAYMENT: 'PARTIAL_PAYMENT'
+};
+exports.SeminaryPaymentMethod = {
+    BANK_TRANSFER: 'BANK_TRANSFER',
+    GCASH: 'GCASH',
+    MAYA: 'MAYA'
+};
+exports.SeminaryPaymentStatus = {
+    PENDING: 'PENDING',
+    VERIFIED: 'VERIFIED',
+    REJECTED: 'REJECTED'
 };
 exports.InterviewDay = {
     SATURDAY: 'SATURDAY',

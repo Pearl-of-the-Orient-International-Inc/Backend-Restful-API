@@ -56,6 +56,7 @@ export const getPublicMemberProfile = async (
         user: {
           select: {
             name: true,
+            avatar: true,
             role: true,
             accountStatus: true,
             isEmailVerified: true,

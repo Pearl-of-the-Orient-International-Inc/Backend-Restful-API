@@ -20,11 +20,12 @@ export type UserType = (typeof UserType)[keyof typeof UserType]
 
 export const UserPosition = {
   CLERK: 'CLERK',
+  REGISTRAR: 'REGISTRAR',
   HR: 'HR',
   IT: 'IT',
   ACCOUNTING_FINANCE: 'ACCOUNTING_FINANCE',
   OPERATIONS: 'OPERATIONS',
-  SECRETARIAT: 'SECRETARIAT'
+  SECRETARIAN: 'SECRETARIAN'
 } as const
 
 export type UserPosition = (typeof UserPosition)[keyof typeof UserPosition]
@@ -195,6 +196,53 @@ export const MemberPaymentMethod = {
 } as const
 
 export type MemberPaymentMethod = (typeof MemberPaymentMethod)[keyof typeof MemberPaymentMethod]
+
+
+export const SeminaryApplicationStatus = {
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type SeminaryApplicationStatus = (typeof SeminaryApplicationStatus)[keyof typeof SeminaryApplicationStatus]
+
+
+export const SeminaryProgramLevel = {
+  CERTIFICATE: 'CERTIFICATE',
+  BACHELOR: 'BACHELOR',
+  MASTER_WITH_THESIS: 'MASTER_WITH_THESIS',
+  DOCTORATE_WITH_DISSERTATION: 'DOCTORATE_WITH_DISSERTATION'
+} as const
+
+export type SeminaryProgramLevel = (typeof SeminaryProgramLevel)[keyof typeof SeminaryProgramLevel]
+
+
+export const SeminaryPaymentType = {
+  FULL_PAYMENT: 'FULL_PAYMENT',
+  PARTIAL_PAYMENT: 'PARTIAL_PAYMENT'
+} as const
+
+export type SeminaryPaymentType = (typeof SeminaryPaymentType)[keyof typeof SeminaryPaymentType]
+
+
+export const SeminaryPaymentMethod = {
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  GCASH: 'GCASH',
+  MAYA: 'MAYA'
+} as const
+
+export type SeminaryPaymentMethod = (typeof SeminaryPaymentMethod)[keyof typeof SeminaryPaymentMethod]
+
+
+export const SeminaryPaymentStatus = {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type SeminaryPaymentStatus = (typeof SeminaryPaymentStatus)[keyof typeof SeminaryPaymentStatus]
 
 
 export const InterviewDay = {
