@@ -99,6 +99,7 @@ export const updateMemberUniqueId = async (
             email: true,
             avatar: true,
             role: true,
+            isEmailVerified: true,
           },
         },
       },

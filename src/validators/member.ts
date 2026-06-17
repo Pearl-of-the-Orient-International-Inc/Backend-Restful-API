@@ -256,6 +256,12 @@ export const changeMemberPasswordByAdminSchema = z.object({
     }),
 });
 
+export const verifyMemberEmailByAdminSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+  }),
+});
+
 export const deleteMemberByAdminSchema = z.object({
   params: z.object({
     id: z.uuid(),

@@ -146,6 +146,7 @@ const getMemberById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                         email: true,
                         avatar: true,
                         role: true,
+                        isEmailVerified: true,
                     },
                 },
             },

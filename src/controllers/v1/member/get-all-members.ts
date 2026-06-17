@@ -63,7 +63,14 @@ export const getAllMembers = async (
       orderBy: { createdAt: 'desc' },
       include: {
         user: {
-          select: { id: true, name: true, email: true, avatar: true, role: true },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar: true,
+            role: true,
+            isEmailVerified: true,
+          },
         },
       },
     });

@@ -142,6 +142,7 @@ export const getMemberById = async (
             email: true,
             avatar: true,
             role: true,
+            isEmailVerified: true,
           },
         },
       },

@@ -13,6 +13,7 @@ import { updateMemberStatus } from '@/controllers/v1/member/update-member-status
 import { updateMemberByAdmin } from '@/controllers/v1/member/update-member-by-admin';
 import { updateMemberUniqueId } from '@/controllers/v1/member/update-member-unique-id';
 import { changeMemberPasswordByAdmin } from '@/controllers/v1/member/change-member-password-by-admin';
+import { verifyMemberEmailByAdmin } from '@/controllers/v1/member/verify-member-email-by-admin';
 import { deleteMemberByAdmin } from '@/controllers/v1/member/delete-member-by-admin';
 import { getPendingMembers } from '@/controllers/v1/member/get-pending-members';
 import { getAllMembers } from '@/controllers/v1/member/get-all-members';
@@ -79,6 +80,7 @@ import {
   updateMemberStatusSchema,
   updateMemberUniqueIdSchema,
   changeMemberPasswordByAdminSchema,
+  verifyMemberEmailByAdminSchema,
   deleteMemberByAdminSchema,
   createOfficerAssignmentByAdminSchema,
   getAllOfficerAssignmentsSchema,
@@ -408,6 +410,15 @@ router.patch(
   authorize([UserType.ADMIN]),
   validate(changeMemberPasswordByAdminSchema),
   changeMemberPasswordByAdmin,
+);
+
+router.patch(
+  '/:id/verify-email',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(verifyMemberEmailByAdminSchema),
+  verifyMemberEmailByAdmin,
 );
 
 router.post(

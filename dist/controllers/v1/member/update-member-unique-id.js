@@ -89,6 +89,7 @@ const updateMemberUniqueId = (req, res) => __awaiter(void 0, void 0, void 0, fun
                         email: true,
                         avatar: true,
                         role: true,
+                        isEmailVerified: true,
                     },
                 },
             },
