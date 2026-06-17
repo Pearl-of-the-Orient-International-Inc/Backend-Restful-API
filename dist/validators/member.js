@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.updateCurrentBranchServicesSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
+exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.deleteMemberByAdminSchema = exports.changeMemberPasswordByAdminSchema = exports.updateMemberUniqueIdSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.updateCurrentBranchServicesSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
@@ -190,6 +190,37 @@ exports.createCurrentMemberPublicRecordSchema = zod_1.z.object({
 exports.updateMemberStatusSchema = zod_1.z.object({
     status: zod_1.z.enum(enums_1.MemberStatus).refine((value) => value !== enums_1.MemberStatus.PENDING, {
         message: 'status must be APPROVED or REJECTED',
+    }),
+});
+exports.updateMemberUniqueIdSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+    body: zod_1.z.object({
+        uniqueId: zod_1.z
+            .string()
+            .trim()
+            .min(1, { message: 'Member ID is required' })
+            .max(50, { message: 'Member ID must not exceed 50 characters' }),
+    }),
+});
+exports.changeMemberPasswordByAdminSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+    body: zod_1.z
+        .object({
+        password: auth_1.passwordSchema,
+        confirmPassword: auth_1.passwordSchema,
+    })
+        .refine((value) => value.password === value.confirmPassword, {
+        message: 'Password does not match',
+        path: ['confirmPassword'],
+    }),
+});
+exports.deleteMemberByAdminSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
     }),
 });
 exports.getAllMembersSchema = zod_1.z.object({

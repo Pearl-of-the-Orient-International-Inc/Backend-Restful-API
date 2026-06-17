@@ -9,6 +9,9 @@ const create_member_by_admin_1 = require("../../controllers/v1/member/create-mem
 const get_member_by_id_1 = require("../../controllers/v1/member/get-member-by-id");
 const update_member_status_1 = require("../../controllers/v1/member/update-member-status");
 const update_member_by_admin_1 = require("../../controllers/v1/member/update-member-by-admin");
+const update_member_unique_id_1 = require("../../controllers/v1/member/update-member-unique-id");
+const change_member_password_by_admin_1 = require("../../controllers/v1/member/change-member-password-by-admin");
+const delete_member_by_admin_1 = require("../../controllers/v1/member/delete-member-by-admin");
 const get_pending_members_1 = require("../../controllers/v1/member/get-pending-members");
 const get_all_members_1 = require("../../controllers/v1/member/get-all-members");
 const get_membership_report_1 = require("../../controllers/v1/member/get-membership-report");
@@ -96,10 +99,13 @@ router.get('/officer-assignments', (0, express_rate_limiter_1.expressRateLimit)(
 router.get('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getMemberByIdSchema), get_member_by_id_1.getMemberById);
 router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getAllMembersSchema), get_all_members_1.getAllMembers);
 router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateMemberByAdminSchema), update_member_by_admin_1.updateMemberByAdmin);
+router.patch('/:id/unique-id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateMemberUniqueIdSchema), update_member_unique_id_1.updateMemberUniqueId);
+router.patch('/:id/password', (0, express_rate_limiter_1.expressRateLimit)('passwordReset'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.changeMemberPasswordByAdminSchema), change_member_password_by_admin_1.changeMemberPasswordByAdmin);
 router.post('/:id/officer-assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createOfficerAssignmentByAdminSchema), create_officer_assignment_by_admin_1.createOfficerAssignmentByAdmin);
 router.get('/:id/officer-assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getMemberOfficerAssignmentsSchema), get_member_officer_assignments_1.getMemberOfficerAssignments);
 router.patch('/:id/officer-assignments/:assignmentId/deactivate', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.deactivateOfficerAssignmentByAdminSchema), deactivate_officer_assignment_by_admin_1.deactivateOfficerAssignmentByAdmin);
 router.post('/:id/officer-assignments/:assignmentId/replace', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.replaceOfficerAssignmentByAdminSchema), replace_officer_assignment_by_admin_1.replaceOfficerAssignmentByAdmin);
 router.patch('/:id/archive', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), archive_member_1.archiveMember);
 router.patch('/:id/retrieve', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), retrieve_member_1.retrieveMember);
+router.delete('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.deleteMemberByAdminSchema), delete_member_by_admin_1.deleteMemberByAdmin);
 exports.default = router;

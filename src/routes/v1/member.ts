@@ -11,6 +11,9 @@ import { createMemberByAdmin } from '@/controllers/v1/member/create-member-by-ad
 import { getMemberById } from '@/controllers/v1/member/get-member-by-id';
 import { updateMemberStatus } from '@/controllers/v1/member/update-member-status';
 import { updateMemberByAdmin } from '@/controllers/v1/member/update-member-by-admin';
+import { updateMemberUniqueId } from '@/controllers/v1/member/update-member-unique-id';
+import { changeMemberPasswordByAdmin } from '@/controllers/v1/member/change-member-password-by-admin';
+import { deleteMemberByAdmin } from '@/controllers/v1/member/delete-member-by-admin';
 import { getPendingMembers } from '@/controllers/v1/member/get-pending-members';
 import { getAllMembers } from '@/controllers/v1/member/get-all-members';
 import { getMembershipReport } from '@/controllers/v1/member/get-membership-report';
@@ -74,6 +77,9 @@ import {
   upsertMemberRequirementsSchema,
   updateMemberByAdminSchema,
   updateMemberStatusSchema,
+  updateMemberUniqueIdSchema,
+  changeMemberPasswordByAdminSchema,
+  deleteMemberByAdminSchema,
   createOfficerAssignmentByAdminSchema,
   getAllOfficerAssignmentsSchema,
   getMemberOfficerAssignmentsSchema,
@@ -386,6 +392,24 @@ router.put(
   updateMemberByAdmin,
 );
 
+router.patch(
+  '/:id/unique-id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateMemberUniqueIdSchema),
+  updateMemberUniqueId,
+);
+
+router.patch(
+  '/:id/password',
+  expressRateLimit('passwordReset'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(changeMemberPasswordByAdminSchema),
+  changeMemberPasswordByAdmin,
+);
+
 router.post(
   '/:id/officer-assignments',
   expressRateLimit('basic'),
@@ -436,6 +460,15 @@ router.patch(
   authenticate,
   authorize([UserType.ADMIN]),
   retrieveMember,
+);
+
+router.delete(
+  '/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(deleteMemberByAdminSchema),
+  deleteMemberByAdmin,
 );
 
 export default router;

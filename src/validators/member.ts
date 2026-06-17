@@ -13,7 +13,7 @@ import {
   SignatureType,
   UserType,
 } from '@/generated/prisma/enums';
-import { emailSchema } from './auth';
+import { emailSchema, passwordSchema } from './auth';
 
 const ministerialExperienceSchema = z.object({
   roleDescription: z
@@ -225,6 +225,40 @@ export const createCurrentMemberPublicRecordSchema = z.object({
 export const updateMemberStatusSchema = z.object({
   status: z.enum(MemberStatus).refine((value) => value !== MemberStatus.PENDING, {
     message: 'status must be APPROVED or REJECTED',
+  }),
+});
+
+export const updateMemberUniqueIdSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+  }),
+  body: z.object({
+    uniqueId: z
+      .string()
+      .trim()
+      .min(1, { message: 'Member ID is required' })
+      .max(50, { message: 'Member ID must not exceed 50 characters' }),
+  }),
+});
+
+export const changeMemberPasswordByAdminSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+  }),
+  body: z
+    .object({
+      password: passwordSchema,
+      confirmPassword: passwordSchema,
+    })
+    .refine((value) => value.password === value.confirmPassword, {
+      message: 'Password does not match',
+      path: ['confirmPassword'],
+    }),
+});
+
+export const deleteMemberByAdminSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
   }),
 });
 
