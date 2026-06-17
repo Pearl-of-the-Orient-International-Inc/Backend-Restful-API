@@ -36,13 +36,25 @@ const config = {
   WHITELIST_ORIGINS: [
     ...new Set([
       ...parseCsv(process.env.WHITELIST_ORIGINS),
+
       'https://pearl-chaplaincy.com',
+      'https://www.pearl-chaplaincy.com',
+
       'https://pearlchaplaincy.org',
+      'https://www.pearlchaplaincy.org',
+
       'https://admin.pearlchaplaincy.org',
+      'https://www.admin.pearlchaplaincy.org',
+
       'https://officer.pearlchaplaincy.org',
+      'https://www.officer.pearlchaplaincy.org',
+
+      'https://seminary.pearlchaplaincy.org',
+      'https://www.seminary.pearlchaplaincy.org',
+
       'http://localhost:3000',
       'http://localhost:3001',
-      'http://localhost:30002',
+      'http://localhost:3002',
     ]),
   ],
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
