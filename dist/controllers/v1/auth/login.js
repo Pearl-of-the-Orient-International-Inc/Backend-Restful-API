@@ -38,6 +38,32 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             where: {
                 email,
             },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                password: true,
+                avatar: true,
+                isEmailVerified: true,
+                isTwoFactorEnabled: true,
+                twoFactorSecret: true,
+                role: true,
+                position: true,
+                accountStatus: true,
+                memberProfile: {
+                    select: {
+                        id: true,
+                        uniqueId: true,
+                        status: true,
+                        createdAt: true,
+                        onboardingProgress: {
+                            select: {
+                                currentStep: true,
+                            },
+                        },
+                    },
+                },
+            },
         });
         if (!user) {
             yield (0, activity_log_1.createActivityLog)({
@@ -164,6 +190,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     accountStatus: user.accountStatus,
                     isEmailVerified: user.isEmailVerified,
                     isTwoFactorEnabled: user.isTwoFactorEnabled,
+                    memberProfile: user.memberProfile,
                 },
                 mfaRequired: true,
                 mfaToken,
@@ -275,6 +302,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 accountStatus: user.accountStatus,
                 isEmailVerified: user.isEmailVerified,
                 isTwoFactorEnabled: user.isTwoFactorEnabled,
+                memberProfile: user.memberProfile,
             },
             accessToken,
             mfaRequired: false,
