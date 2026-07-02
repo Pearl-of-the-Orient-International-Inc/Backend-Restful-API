@@ -4,6 +4,8 @@ import { createNewsBlog } from '@/controllers/v1/news-blog/create-news-blog';
 import { deleteNewsBlog } from '@/controllers/v1/news-blog/delete-news-blog';
 import { getAllNewsBlogs } from '@/controllers/v1/news-blog/get-all-news-blogs';
 import { getNewsBlogById } from '@/controllers/v1/news-blog/get-news-blog-by-id';
+import { getPublicNewsBlogById } from '@/controllers/v1/news-blog/get-public-news-blog-by-id';
+import { getPublicNewsBlogs } from '@/controllers/v1/news-blog/get-public-news-blogs';
 import { publishNewsBlog } from '@/controllers/v1/news-blog/publish-news-blog';
 import { retrieveNewsBlog } from '@/controllers/v1/news-blog/retrieve-news-blog';
 import { updateNewsBlog } from '@/controllers/v1/news-blog/update-news-blog';
@@ -28,6 +30,18 @@ router.use(
     maxFileSize: '8MB',
     maxFileCount: 10,
   }),
+);
+
+router.get(
+  '/public',
+  expressRateLimit('basic'),
+  getPublicNewsBlogs,
+);
+
+router.get(
+  '/public/:id',
+  expressRateLimit('basic'),
+  getPublicNewsBlogById,
 );
 
 router.post(

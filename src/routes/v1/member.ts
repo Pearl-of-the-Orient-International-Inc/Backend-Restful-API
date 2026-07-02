@@ -47,6 +47,7 @@ import { deactivateOfficerAssignmentByAdmin } from '@/controllers/v1/member/deac
 import { replaceOfficerAssignmentByAdmin } from '@/controllers/v1/member/replace-officer-assignment-by-admin';
 import { getPublicMemberProfile } from '@/controllers/v1/member/get-public-member-profile';
 import { getPublicDirectoryLocations } from '@/controllers/v1/member/get-public-directory-locations';
+import { getPublicServiceChaplains } from '@/controllers/v1/member/get-public-service-chaplains';
 
 /**
  * Helpers, Validators and Middlewares
@@ -103,6 +104,12 @@ router.get(
   '/public/directory-locations',
   expressRateLimit('basic'),
   getPublicDirectoryLocations,
+);
+
+router.get(
+  '/public/service-chaplains',
+  expressRateLimit('basic'),
+  getPublicServiceChaplains,
 );
 
 router.get(

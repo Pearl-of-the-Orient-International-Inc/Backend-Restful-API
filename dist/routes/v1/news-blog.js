@@ -9,6 +9,8 @@ const create_news_blog_1 = require("../../controllers/v1/news-blog/create-news-b
 const delete_news_blog_1 = require("../../controllers/v1/news-blog/delete-news-blog");
 const get_all_news_blogs_1 = require("../../controllers/v1/news-blog/get-all-news-blogs");
 const get_news_blog_by_id_1 = require("../../controllers/v1/news-blog/get-news-blog-by-id");
+const get_public_news_blog_by_id_1 = require("../../controllers/v1/news-blog/get-public-news-blog-by-id");
+const get_public_news_blogs_1 = require("../../controllers/v1/news-blog/get-public-news-blogs");
 const publish_news_blog_1 = require("../../controllers/v1/news-blog/publish-news-blog");
 const retrieve_news_blog_1 = require("../../controllers/v1/news-blog/retrieve-news-blog");
 const update_news_blog_1 = require("../../controllers/v1/news-blog/update-news-blog");
@@ -24,6 +26,8 @@ router.use('/media/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'
     maxFileSize: '8MB',
     maxFileCount: 10,
 }));
+router.get('/public', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_news_blogs_1.getPublicNewsBlogs);
+router.get('/public/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_news_blog_by_id_1.getPublicNewsBlogById);
 router.post('/create', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(news_blog_1.createNewsBlogSchema), create_news_blog_1.createNewsBlog);
 router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(news_blog_1.getAllNewsBlogsSchema), get_all_news_blogs_1.getAllNewsBlogs);
 router.get('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), get_news_blog_by_id_1.getNewsBlogById);
