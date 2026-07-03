@@ -32,6 +32,7 @@ import { sessionIdPathSchema } from '@/validators/session';
 import { createUserAccountSchema, updateUserByIdSchema } from '@/validators/user';
 
 const router = Router();
+const authenticatedUserRoles = [UserType.MEMBER, UserType.OFFICER, UserType.ADMIN];
 
 /**
  * Routes
@@ -40,7 +41,7 @@ router.get(
   '/current',
   expressRateLimit('basic'),
   authenticate,
-  authorize([UserType.MEMBER, UserType.ADMIN]),
+  authorize(authenticatedUserRoles),
   getCurrentUser,
 );
 
@@ -48,7 +49,7 @@ router.put(
   '/current',
   expressRateLimit('basic'),
   authenticate,
-  authorize([UserType.MEMBER, UserType.ADMIN]),
+  authorize(authenticatedUserRoles),
   updateCurrentUser,
 );
 
@@ -56,7 +57,7 @@ router.delete(
   '/current',
   expressRateLimit('basic'),
   authenticate,
-  authorize([UserType.MEMBER, UserType.ADMIN]),
+  authorize(authenticatedUserRoles),
   deleteCurrentUser,
 );
 
@@ -74,7 +75,7 @@ router.get(
   expressRateLimit('basic'),
   authenticate,
   getSessionFromCookie,
-  authorize([UserType.MEMBER, UserType.ADMIN]),
+  authorize(authenticatedUserRoles),
   getUserSessions,
 );
 
@@ -83,7 +84,7 @@ router.delete(
   expressRateLimit('basic'),
   authenticate,
   getSessionFromCookie,
-  authorize([UserType.MEMBER, UserType.ADMIN]),
+  authorize(authenticatedUserRoles),
   revokeOtherUserSessions,
 );
 
@@ -92,7 +93,7 @@ router.delete(
   expressRateLimit('basic'),
   authenticate,
   getSessionFromCookie,
-  authorize([UserType.MEMBER, UserType.ADMIN]),
+  authorize(authenticatedUserRoles),
   validate(sessionIdPathSchema),
   revokeUserSession,
 );
