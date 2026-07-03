@@ -179,6 +179,11 @@ export const getPublicMemberProfile = async (
             completedAt: true,
           },
         },
+        _count: {
+          select: {
+            followers: true,
+          },
+        },
       },
     });
 
@@ -198,7 +203,11 @@ export const getPublicMemberProfile = async (
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
       message: 'Public member profile retrieved successfully',
-      data: member,
+      data: {
+        ...member,
+        followerCount: member._count.followers,
+        _count: undefined,
+      },
     });
   } catch (err) {
     logger.error('Error while getting public member profile', { err });

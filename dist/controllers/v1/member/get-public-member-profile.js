@@ -183,6 +183,11 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                         completedAt: true,
                     },
                 },
+                _count: {
+                    select: {
+                        followers: true,
+                    },
+                },
             },
         });
         if (!member) {
@@ -199,7 +204,7 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',
             message: 'Public member profile retrieved successfully',
-            data: member,
+            data: Object.assign(Object.assign({}, member), { followerCount: member._count.followers, _count: undefined }),
         });
     }
     catch (err) {
