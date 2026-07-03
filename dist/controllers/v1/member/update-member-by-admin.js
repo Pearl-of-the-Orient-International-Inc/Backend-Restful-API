@@ -167,6 +167,9 @@ const updateMemberByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, func
             if (typeof body.profileBannerPositionY === 'number') {
                 updateData.profileBannerPositionY = body.profileBannerPositionY;
             }
+            if (body.createdAt) {
+                updateData.createdAt = new Date(body.createdAt);
+            }
             if (body.signature) {
                 updateData.signature = {
                     upsert: {

@@ -46,6 +46,7 @@ const replace_officer_assignment_by_admin_1 = require("../../controllers/v1/memb
 const get_public_member_profile_1 = require("../../controllers/v1/member/get-public-member-profile");
 const get_public_directory_locations_1 = require("../../controllers/v1/member/get-public-directory-locations");
 const get_public_service_chaplains_1 = require("../../controllers/v1/member/get-public-service-chaplains");
+const get_public_member_search_1 = require("../../controllers/v1/member/get-public-member-search");
 const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
 const authentication_1 = require("../../middlewares/authentication");
 const authorization_1 = __importDefault(require("../../middlewares/authorization"));
@@ -57,6 +58,7 @@ const router = (0, express_1.Router)();
 router.post('/apply', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(member_1.applyMemberSchema), apply_member_1.applyMember);
 router.get('/public/directory-locations', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_directory_locations_1.getPublicDirectoryLocations);
 router.get('/public/service-chaplains', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_service_chaplains_1.getPublicServiceChaplains);
+router.get('/public/search', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_member_search_1.getPublicMemberSearch);
 router.get('/public/:memberId', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(member_1.getPublicMemberProfileSchema), get_public_member_profile_1.getPublicMemberProfile);
 router.post('/', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createMemberByAdminSchema), create_member_by_admin_1.createMemberByAdmin);
 router.get('/current/profile-banner', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN]), get_current_profile_banner_1.getCurrentProfileBanner);

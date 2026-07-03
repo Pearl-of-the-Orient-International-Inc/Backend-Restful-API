@@ -182,6 +182,10 @@ export const updateMemberByAdmin = async (
         updateData.profileBannerPositionY = body.profileBannerPositionY;
       }
 
+      if (body.createdAt) {
+        updateData.createdAt = new Date(body.createdAt);
+      }
+
       if (body.signature) {
         updateData.signature = {
           upsert: {
