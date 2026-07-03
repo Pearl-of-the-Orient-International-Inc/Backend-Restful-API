@@ -285,8 +285,8 @@ export const getAllMembersSchema = z.object({
       .refine((val) => !val || /^\d+$/.test(val), {
         message: 'limit must be a positive integer',
       })
-      .refine((val) => !val || (parseInt(val) >= 1 && parseInt(val) <= 100), {
-        message: 'limit must be between 1 and 100',
+      .refine((val) => !val || (parseInt(val) >= 1 && parseInt(val) <= 5000), {
+        message: 'limit must be between 1 and 5000',
       }),
     search: z.string().min(1).max(100).optional(),
     status: z.enum(MemberStatus).optional(),
@@ -295,6 +295,12 @@ export const getAllMembersSchema = z.object({
       .optional()
       .refine((val) => !val || ['true', 'false'].includes(val), {
         message: 'includeArchived must be true or false',
+      }),
+    all: z
+      .string()
+      .optional()
+      .refine((val) => !val || ['true', 'false'].includes(val), {
+        message: 'all must be true or false',
       }),
   }),
 });
@@ -391,6 +397,7 @@ export const updateMemberByAdminSchema = z.object({
   gender: z.enum(Gender),
   nationality: z.string().trim().max(100).optional(),
   dateOfBirth: z.iso.datetime(),
+  createdAt: z.iso.datetime().optional(),
   region: z.string().trim().max(100).optional(),
   province: z.string().trim().max(100).optional(),
   municipalityCity: z.string().trim().max(100).optional(),

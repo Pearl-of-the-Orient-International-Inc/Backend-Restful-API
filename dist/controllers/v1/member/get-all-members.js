@@ -15,12 +15,13 @@ const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const getAllMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const all = req.query.all === 'true';
+        const page = all ? 1 : parseInt(req.query.page) || 1;
+        const limit = all ? undefined : parseInt(req.query.limit) || 10;
         const search = req.query.search || undefined;
         const status = req.query.status;
         const includeArchived = req.query.includeArchived === 'true';
-        const skip = (page - 1) * limit;
+        const skip = limit ? (page - 1) * limit : undefined;
         const where = Object.assign(Object.assign(Object.assign({}, (status ? { status } : {})), (includeArchived ? {} : { isActive: true })), (search
             ? {
                 OR: [
@@ -48,12 +49,7 @@ const getAllMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             }
             : {}));
         const totalCount = yield prisma_1.prisma.member.count({ where });
-        const members = yield prisma_1.prisma.member.findMany({
-            where,
-            skip,
-            take: limit,
-            orderBy: { createdAt: 'desc' },
-            include: {
+        const members = yield prisma_1.prisma.member.findMany(Object.assign(Object.assign(Object.assign({ where }, (skip !== undefined ? { skip } : {})), (limit !== undefined ? { take: limit } : {})), { orderBy: { createdAt: 'desc' }, include: {
                 user: {
                     select: {
                         id: true,
@@ -64,9 +60,8 @@ const getAllMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                         isEmailVerified: true,
                     },
                 },
-            },
-        });
-        const totalPages = Math.ceil(totalCount / limit);
+            } }));
+        const totalPages = limit ? Math.ceil(totalCount / limit) : 1;
         winston_1.logger.info('Members retrieved', {
             count: members.length,
             totalCount,
@@ -80,7 +75,7 @@ const getAllMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 currentPage: page,
                 totalPages,
                 totalCount,
-                limit,
+                limit: limit !== null && limit !== void 0 ? limit : totalCount,
                 hasNextPage: page < totalPages,
                 hasPreviousPage: page > 1,
             },

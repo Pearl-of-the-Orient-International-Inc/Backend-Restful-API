@@ -245,8 +245,8 @@ exports.getAllMembersSchema = zod_1.z.object({
             .refine((val) => !val || /^\d+$/.test(val), {
             message: 'limit must be a positive integer',
         })
-            .refine((val) => !val || (parseInt(val) >= 1 && parseInt(val) <= 100), {
-            message: 'limit must be between 1 and 100',
+            .refine((val) => !val || (parseInt(val) >= 1 && parseInt(val) <= 5000), {
+            message: 'limit must be between 1 and 5000',
         }),
         search: zod_1.z.string().min(1).max(100).optional(),
         status: zod_1.z.enum(enums_1.MemberStatus).optional(),
@@ -255,6 +255,12 @@ exports.getAllMembersSchema = zod_1.z.object({
             .optional()
             .refine((val) => !val || ['true', 'false'].includes(val), {
             message: 'includeArchived must be true or false',
+        }),
+        all: zod_1.z
+            .string()
+            .optional()
+            .refine((val) => !val || ['true', 'false'].includes(val), {
+            message: 'all must be true or false',
         }),
     }),
 });
@@ -343,6 +349,7 @@ exports.updateMemberByAdminSchema = zod_1.z.object({
     gender: zod_1.z.enum(enums_1.Gender),
     nationality: zod_1.z.string().trim().max(100).optional(),
     dateOfBirth: zod_1.z.iso.datetime(),
+    createdAt: zod_1.z.iso.datetime().optional(),
     region: zod_1.z.string().trim().max(100).optional(),
     province: zod_1.z.string().trim().max(100).optional(),
     municipalityCity: zod_1.z.string().trim().max(100).optional(),

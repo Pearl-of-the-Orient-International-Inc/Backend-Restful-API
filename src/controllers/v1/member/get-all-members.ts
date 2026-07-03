@@ -16,12 +16,13 @@ export const getAllMembers = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const all = (req.query.all as string) === 'true';
+    const page = all ? 1 : parseInt(req.query.page as string) || 1;
+    const limit = all ? undefined : parseInt(req.query.limit as string) || 10;
     const search = (req.query.search as string) || undefined;
     const status = req.query.status as MemberStatus | undefined;
     const includeArchived = (req.query.includeArchived as string) === 'true';
-    const skip = (page - 1) * limit;
+    const skip = limit ? (page - 1) * limit : undefined;
 
     const where = {
       ...(status ? { status } : {}),
@@ -58,8 +59,8 @@ export const getAllMembers = async (
 
     const members = await prisma.member.findMany({
       where,
-      skip,
-      take: limit,
+      ...(skip !== undefined ? { skip } : {}),
+      ...(limit !== undefined ? { take: limit } : {}),
       orderBy: { createdAt: 'desc' },
       include: {
         user: {
@@ -75,7 +76,7 @@ export const getAllMembers = async (
       },
     });
 
-    const totalPages = Math.ceil(totalCount / limit);
+    const totalPages = limit ? Math.ceil(totalCount / limit) : 1;
 
     logger.info('Members retrieved', {
       count: members.length,
@@ -91,7 +92,7 @@ export const getAllMembers = async (
         currentPage: page,
         totalPages,
         totalCount,
-        limit,
+        limit: limit ?? totalCount,
         hasNextPage: page < totalPages,
         hasPreviousPage: page > 1,
       },
