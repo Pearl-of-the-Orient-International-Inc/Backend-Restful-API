@@ -546,6 +546,7 @@ export type MemberWhereInput = {
   eventAttendances?: Prisma.EventAttendeeListRelationFilter
   taggedEvents?: Prisma.EventTaggedMemberListRelationFilter
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberListRelationFilter
+  followers?: Prisma.MemberFollowListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
@@ -611,6 +612,7 @@ export type MemberOrderByWithRelationInput = {
   eventAttendances?: Prisma.EventAttendeeOrderByRelationAggregateInput
   taggedEvents?: Prisma.EventTaggedMemberOrderByRelationAggregateInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberOrderByRelationAggregateInput
+  followers?: Prisma.MemberFollowOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -679,6 +681,7 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   eventAttendances?: Prisma.EventAttendeeListRelationFilter
   taggedEvents?: Prisma.EventTaggedMemberListRelationFilter
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberListRelationFilter
+  followers?: Prisma.MemberFollowListRelationFilter
 }, "id" | "uniqueId" | "userId">
 
 export type MemberOrderByWithAggregationInput = {
@@ -845,6 +848,7 @@ export type MemberCreateInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
@@ -909,6 +913,7 @@ export type MemberUncheckedCreateInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUpdateInput = {
@@ -973,6 +978,7 @@ export type MemberUpdateInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
@@ -1037,6 +1043,7 @@ export type MemberUncheckedUpdateInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
@@ -1386,6 +1393,20 @@ export type EnumGenderFieldUpdateOperationsInput = {
   set?: $Enums.Gender
 }
 
+export type MemberCreateNestedOneWithoutFollowersInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutFollowersInput, Prisma.MemberUncheckedCreateWithoutFollowersInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutFollowersInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutFollowersNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutFollowersInput, Prisma.MemberUncheckedCreateWithoutFollowersInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutFollowersInput
+  upsert?: Prisma.MemberUpsertWithoutFollowersInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutFollowersInput, Prisma.MemberUpdateWithoutFollowersInput>, Prisma.MemberUncheckedUpdateWithoutFollowersInput>
+}
+
 export type MemberCreateNestedOneWithoutMinisterialExperiencesInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutMinisterialExperiencesInput, Prisma.MemberUncheckedCreateWithoutMinisterialExperiencesInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutMinisterialExperiencesInput
@@ -1689,6 +1710,7 @@ export type MemberCreateWithoutUserInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutUserInput = {
@@ -1752,6 +1774,7 @@ export type MemberUncheckedCreateWithoutUserInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutUserInput = {
@@ -1831,11 +1854,285 @@ export type MemberUpdateWithoutUserInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutFollowersInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutFollowersInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutFollowersInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutFollowersInput, Prisma.MemberUncheckedCreateWithoutFollowersInput>
+}
+
+export type MemberUpsertWithoutFollowersInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutFollowersInput, Prisma.MemberUncheckedUpdateWithoutFollowersInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutFollowersInput, Prisma.MemberUncheckedCreateWithoutFollowersInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutFollowersInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutFollowersInput, Prisma.MemberUncheckedUpdateWithoutFollowersInput>
+}
+
+export type MemberUpdateWithoutFollowersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutFollowersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1957,6 +2254,7 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
@@ -2020,6 +2318,7 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutMinisterialExperiencesInput = {
@@ -2099,6 +2398,7 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
@@ -2162,6 +2462,7 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutCharacterReferencesInput = {
@@ -2225,6 +2526,7 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
@@ -2288,6 +2590,7 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCharacterReferencesInput = {
@@ -2367,6 +2670,7 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
@@ -2430,6 +2734,7 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSignatureInput = {
@@ -2493,6 +2798,7 @@ export type MemberCreateWithoutSignatureInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSignatureInput = {
@@ -2556,6 +2862,7 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSignatureInput = {
@@ -2635,6 +2942,7 @@ export type MemberUpdateWithoutSignatureInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSignatureInput = {
@@ -2698,6 +3006,7 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutApplicantRequirementsInput = {
@@ -2761,6 +3070,7 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
@@ -2824,6 +3134,7 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutApplicantRequirementsInput = {
@@ -2903,6 +3214,7 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
@@ -2966,6 +3278,7 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutOnboardingProgressInput = {
@@ -3029,6 +3342,7 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
@@ -3092,6 +3406,7 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOnboardingProgressInput = {
@@ -3171,6 +3486,7 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
@@ -3234,6 +3550,7 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPaymentCheckoutInput = {
@@ -3297,6 +3614,7 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
@@ -3360,6 +3678,7 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPaymentCheckoutInput = {
@@ -3439,6 +3758,7 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
@@ -3502,6 +3822,7 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
@@ -3565,6 +3886,7 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
@@ -3628,6 +3950,7 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOnlineInterviewAppointmentInput = {
@@ -3707,6 +4030,7 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
@@ -3770,6 +4094,7 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutIdGenerationAssetInput = {
@@ -3833,6 +4158,7 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
@@ -3896,6 +4222,7 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutIdGenerationAssetInput = {
@@ -3975,6 +4302,7 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
@@ -4038,6 +4366,7 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutCertificatesInput = {
@@ -4101,6 +4430,7 @@ export type MemberCreateWithoutCertificatesInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCertificatesInput = {
@@ -4164,6 +4494,7 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCertificatesInput = {
@@ -4243,6 +4574,7 @@ export type MemberUpdateWithoutCertificatesInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCertificatesInput = {
@@ -4306,6 +4638,7 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPublicRecordsInput = {
@@ -4369,6 +4702,7 @@ export type MemberCreateWithoutPublicRecordsInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPublicRecordsInput = {
@@ -4432,6 +4766,7 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPublicRecordsInput = {
@@ -4511,6 +4846,7 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
@@ -4574,6 +4910,7 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
@@ -4637,6 +4974,7 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
@@ -4700,6 +5038,7 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutChaplaincyTrainingProgressInput = {
@@ -4779,6 +5118,7 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
@@ -4842,6 +5182,7 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSeminaryApplicationsInput = {
@@ -4905,6 +5246,7 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
@@ -4968,6 +5310,7 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSeminaryApplicationsInput = {
@@ -5047,6 +5390,7 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
@@ -5110,6 +5454,7 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPreferredBranchesInput = {
@@ -5173,6 +5518,7 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
@@ -5236,6 +5582,7 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPreferredBranchesInput = {
@@ -5315,6 +5662,7 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
@@ -5378,6 +5726,7 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutOfficerAssignmentsInput = {
@@ -5441,6 +5790,7 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
@@ -5504,6 +5854,7 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOfficerAssignmentsInput = {
@@ -5583,6 +5934,7 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
@@ -5646,6 +5998,7 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutEventAttendancesInput = {
@@ -5709,6 +6062,7 @@ export type MemberCreateWithoutEventAttendancesInput = {
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutEventAttendancesInput = {
@@ -5772,6 +6126,7 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutEventAttendancesInput = {
@@ -5851,6 +6206,7 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
@@ -5914,6 +6270,7 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutTaggedEventsInput = {
@@ -5977,6 +6334,7 @@ export type MemberCreateWithoutTaggedEventsInput = {
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTaggedEventsInput = {
@@ -6040,6 +6398,7 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTaggedEventsInput = {
@@ -6119,6 +6478,7 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
@@ -6182,6 +6542,7 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutTaggedNewsBlogsInput = {
@@ -6245,6 +6606,7 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
@@ -6308,6 +6670,7 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
   eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTaggedNewsBlogsInput = {
@@ -6387,6 +6750,7 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
@@ -6450,6 +6814,7 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
   eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 
@@ -6469,6 +6834,7 @@ export type MemberCountOutputType = {
   eventAttendances: number
   taggedEvents: number
   taggedNewsBlogs: number
+  followers: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6483,6 +6849,7 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   eventAttendances?: boolean | MemberCountOutputTypeCountEventAttendancesArgs
   taggedEvents?: boolean | MemberCountOutputTypeCountTaggedEventsArgs
   taggedNewsBlogs?: boolean | MemberCountOutputTypeCountTaggedNewsBlogsArgs
+  followers?: boolean | MemberCountOutputTypeCountFollowersArgs
 }
 
 /**
@@ -6572,6 +6939,13 @@ export type MemberCountOutputTypeCountTaggedNewsBlogsArgs<ExtArgs extends runtim
   where?: Prisma.NewsBlogTaggedMemberWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberFollowWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6636,6 +7010,7 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   eventAttendances?: boolean | Prisma.Member$eventAttendancesArgs<ExtArgs>
   taggedEvents?: boolean | Prisma.Member$taggedEventsArgs<ExtArgs>
   taggedNewsBlogs?: boolean | Prisma.Member$taggedNewsBlogsArgs<ExtArgs>
+  followers?: boolean | Prisma.Member$followersArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
@@ -6802,6 +7177,7 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   eventAttendances?: boolean | Prisma.Member$eventAttendancesArgs<ExtArgs>
   taggedEvents?: boolean | Prisma.Member$taggedEventsArgs<ExtArgs>
   taggedNewsBlogs?: boolean | Prisma.Member$taggedNewsBlogsArgs<ExtArgs>
+  followers?: boolean | Prisma.Member$followersArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6832,6 +7208,7 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     eventAttendances: Prisma.$EventAttendeePayload<ExtArgs>[]
     taggedEvents: Prisma.$EventTaggedMemberPayload<ExtArgs>[]
     taggedNewsBlogs: Prisma.$NewsBlogTaggedMemberPayload<ExtArgs>[]
+    followers: Prisma.$MemberFollowPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -7290,6 +7667,7 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   eventAttendances<T extends Prisma.Member$eventAttendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$eventAttendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventAttendeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taggedEvents<T extends Prisma.Member$taggedEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$taggedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventTaggedMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taggedNewsBlogs<T extends Prisma.Member$taggedNewsBlogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$taggedNewsBlogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NewsBlogTaggedMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  followers<T extends Prisma.Member$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8134,6 +8512,30 @@ export type Member$taggedNewsBlogsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.NewsBlogTaggedMemberScalarFieldEnum | Prisma.NewsBlogTaggedMemberScalarFieldEnum[]
+}
+
+/**
+ * Member.followers
+ */
+export type Member$followersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemberFollow
+   */
+  select?: Prisma.MemberFollowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemberFollow
+   */
+  omit?: Prisma.MemberFollowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberFollowInclude<ExtArgs> | null
+  where?: Prisma.MemberFollowWhereInput
+  orderBy?: Prisma.MemberFollowOrderByWithRelationInput | Prisma.MemberFollowOrderByWithRelationInput[]
+  cursor?: Prisma.MemberFollowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberFollowScalarFieldEnum | Prisma.MemberFollowScalarFieldEnum[]
 }
 
 /**

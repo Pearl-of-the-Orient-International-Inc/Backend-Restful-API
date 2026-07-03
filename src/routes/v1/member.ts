@@ -49,6 +49,9 @@ import { getPublicMemberProfile } from '@/controllers/v1/member/get-public-membe
 import { getPublicDirectoryLocations } from '@/controllers/v1/member/get-public-directory-locations';
 import { getPublicServiceChaplains } from '@/controllers/v1/member/get-public-service-chaplains';
 import { getPublicMemberSearch } from '@/controllers/v1/member/get-public-member-search';
+import { getMemberFollowStatus } from '@/controllers/v1/member/get-member-follow-status';
+import { followMember } from '@/controllers/v1/member/follow-member';
+import { unfollowMember } from '@/controllers/v1/member/unfollow-member';
 
 /**
  * Helpers, Validators and Middlewares
@@ -117,6 +120,30 @@ router.get(
   '/public/search',
   expressRateLimit('basic'),
   getPublicMemberSearch,
+);
+
+router.get(
+  '/public/:memberId/follow',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  getMemberFollowStatus,
+);
+
+router.post(
+  '/public/:memberId/follow',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  followMember,
+);
+
+router.delete(
+  '/public/:memberId/follow',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  unfollowMember,
 );
 
 router.get(

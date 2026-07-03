@@ -78,6 +78,11 @@ export type PasskeyChallenge = Prisma.PasskeyChallengeModel
  */
 export type Member = Prisma.MemberModel
 /**
+ * Model MemberFollow
+ * 
+ */
+export type MemberFollow = Prisma.MemberFollowModel
+/**
  * Model MinisterialExperience
  * 
  */

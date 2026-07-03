@@ -59,6 +59,7 @@ export const ModelName = {
   PasskeyCredential: 'PasskeyCredential',
   PasskeyChallenge: 'PasskeyChallenge',
   Member: 'Member',
+  MemberFollow: 'MemberFollow',
   MinisterialExperience: 'MinisterialExperience',
   CharacterReference: 'CharacterReference',
   ApplicantSignature: 'ApplicantSignature',
@@ -258,6 +259,16 @@ export const MemberScalarFieldEnum = {
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const MemberFollowScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  memberId: 'memberId',
+  createdAt: 'createdAt'
+} as const
+
+export type MemberFollowScalarFieldEnum = (typeof MemberFollowScalarFieldEnum)[keyof typeof MemberFollowScalarFieldEnum]
 
 
 export const MinisterialExperienceScalarFieldEnum = {

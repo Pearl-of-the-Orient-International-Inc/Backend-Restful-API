@@ -392,6 +392,7 @@ export const ModelName = {
   PasskeyCredential: 'PasskeyCredential',
   PasskeyChallenge: 'PasskeyChallenge',
   Member: 'Member',
+  MemberFollow: 'MemberFollow',
   MinisterialExperience: 'MinisterialExperience',
   CharacterReference: 'CharacterReference',
   ApplicantSignature: 'ApplicantSignature',
@@ -433,7 +434,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryRequirements" | "seminaryPayment" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryRequirements" | "seminaryPayment" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1026,6 +1027,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MemberCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    MemberFollow: {
+      payload: Prisma.$MemberFollowPayload<ExtArgs>
+      fields: Prisma.MemberFollowFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemberFollowFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemberFollowFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>
+        }
+        findFirst: {
+          args: Prisma.MemberFollowFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemberFollowFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>
+        }
+        findMany: {
+          args: Prisma.MemberFollowFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>[]
+        }
+        create: {
+          args: Prisma.MemberFollowCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>
+        }
+        createMany: {
+          args: Prisma.MemberFollowCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemberFollowCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>[]
+        }
+        delete: {
+          args: Prisma.MemberFollowDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>
+        }
+        update: {
+          args: Prisma.MemberFollowUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemberFollowDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemberFollowUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemberFollowUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemberFollowUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberFollowPayload>
+        }
+        aggregate: {
+          args: Prisma.MemberFollowAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemberFollow>
+        }
+        groupBy: {
+          args: Prisma.MemberFollowGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberFollowGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemberFollowCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberFollowCountAggregateOutputType> | number
         }
       }
     }
@@ -3149,6 +3224,16 @@ export const MemberScalarFieldEnum = {
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
 
 
+export const MemberFollowScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  memberId: 'memberId',
+  createdAt: 'createdAt'
+} as const
+
+export type MemberFollowScalarFieldEnum = (typeof MemberFollowScalarFieldEnum)[keyof typeof MemberFollowScalarFieldEnum]
+
+
 export const MinisterialExperienceScalarFieldEnum = {
   id: 'id',
   roleDescription: 'roleDescription',
@@ -4374,6 +4459,7 @@ export type GlobalOmitConfig = {
   passkeyCredential?: Prisma.PasskeyCredentialOmit
   passkeyChallenge?: Prisma.PasskeyChallengeOmit
   member?: Prisma.MemberOmit
+  memberFollow?: Prisma.MemberFollowOmit
   ministerialExperience?: Prisma.MinisterialExperienceOmit
   characterReference?: Prisma.CharacterReferenceOmit
   applicantSignature?: Prisma.ApplicantSignatureOmit

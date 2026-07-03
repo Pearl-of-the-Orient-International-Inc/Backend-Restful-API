@@ -253,6 +253,7 @@ export type UserWhereInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialListRelationFilter
   passkeyChallenge?: Prisma.XOR<Prisma.PasskeyChallengeNullableScalarRelationFilter, Prisma.PasskeyChallengeWhereInput> | null
   memberProfile?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
+  followedMembers?: Prisma.MemberFollowListRelationFilter
   createdBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   restoredBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
@@ -279,6 +280,7 @@ export type UserOrderByWithRelationInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialOrderByRelationAggregateInput
   passkeyChallenge?: Prisma.PasskeyChallengeOrderByWithRelationInput
   memberProfile?: Prisma.MemberOrderByWithRelationInput
+  followedMembers?: Prisma.MemberFollowOrderByRelationAggregateInput
   createdBackups?: Prisma.DatabaseBackupSnapshotOrderByRelationAggregateInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotOrderByRelationAggregateInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsOrderByRelationAggregateInput
@@ -308,6 +310,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passkeyCredentials?: Prisma.PasskeyCredentialListRelationFilter
   passkeyChallenge?: Prisma.XOR<Prisma.PasskeyChallengeNullableScalarRelationFilter, Prisma.PasskeyChallengeWhereInput> | null
   memberProfile?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
+  followedMembers?: Prisma.MemberFollowListRelationFilter
   createdBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   restoredBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
@@ -372,6 +375,7 @@ export type UserCreateInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -398,6 +402,7 @@ export type UserUncheckedCreateInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -424,6 +429,7 @@ export type UserUpdateInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -450,6 +456,7 @@ export type UserUncheckedUpdateInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -689,6 +696,20 @@ export type UserUpdateOneRequiredWithoutMemberProfileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMemberProfileInput, Prisma.UserUpdateWithoutMemberProfileInput>, Prisma.UserUncheckedUpdateWithoutMemberProfileInput>
 }
 
+export type UserCreateNestedOneWithoutFollowedMembersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFollowedMembersInput, Prisma.UserUncheckedCreateWithoutFollowedMembersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFollowedMembersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFollowedMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFollowedMembersInput, Prisma.UserUncheckedCreateWithoutFollowedMembersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFollowedMembersInput
+  upsert?: Prisma.UserUpsertWithoutFollowedMembersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowedMembersInput, Prisma.UserUpdateWithoutFollowedMembersInput>, Prisma.UserUncheckedUpdateWithoutFollowedMembersInput>
+}
+
 export type UserCreateNestedOneWithoutBackupSettingUpdatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBackupSettingUpdatesInput, Prisma.UserUncheckedCreateWithoutBackupSettingUpdatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBackupSettingUpdatesInput
@@ -757,6 +778,7 @@ export type UserCreateWithoutUserTokensInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -782,6 +804,7 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -823,6 +846,7 @@ export type UserUpdateWithoutUserTokensInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -848,6 +872,7 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -873,6 +898,7 @@ export type UserCreateWithoutSessionsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -898,6 +924,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -939,6 +966,7 @@ export type UserUpdateWithoutSessionsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -964,6 +992,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -989,6 +1018,7 @@ export type UserCreateWithoutActivityLogsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1014,6 +1044,7 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1055,6 +1086,7 @@ export type UserUpdateWithoutActivityLogsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1080,6 +1112,7 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1105,6 +1138,7 @@ export type UserCreateWithoutVerificationCodesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1130,6 +1164,7 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1171,6 +1206,7 @@ export type UserUpdateWithoutVerificationCodesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1196,6 +1232,7 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1221,6 +1258,7 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1246,6 +1284,7 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1287,6 +1326,7 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1312,6 +1352,7 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1337,6 +1378,7 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1362,6 +1404,7 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1403,6 +1446,7 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1428,6 +1472,7 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1453,6 +1498,7 @@ export type UserCreateWithoutMemberProfileInput = {
   verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1478,6 +1524,7 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
@@ -1519,6 +1566,7 @@ export type UserUpdateWithoutMemberProfileInput = {
   verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1544,6 +1592,127 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+}
+
+export type UserCreateWithoutFollowedMembersInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+}
+
+export type UserUncheckedCreateWithoutFollowedMembersInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+}
+
+export type UserCreateOrConnectWithoutFollowedMembersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFollowedMembersInput, Prisma.UserUncheckedCreateWithoutFollowedMembersInput>
+}
+
+export type UserUpsertWithoutFollowedMembersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFollowedMembersInput, Prisma.UserUncheckedUpdateWithoutFollowedMembersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFollowedMembersInput, Prisma.UserUncheckedCreateWithoutFollowedMembersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFollowedMembersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFollowedMembersInput, Prisma.UserUncheckedUpdateWithoutFollowedMembersInput>
+}
+
+export type UserUpdateWithoutFollowedMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFollowedMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1570,6 +1739,7 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
 }
@@ -1595,6 +1765,7 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
 }
@@ -1636,6 +1807,7 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
 }
@@ -1661,6 +1833,7 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
 }
@@ -1686,6 +1859,7 @@ export type UserCreateWithoutCreatedBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
 }
@@ -1711,6 +1885,7 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
 }
@@ -1741,6 +1916,7 @@ export type UserCreateWithoutRestoredBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
 }
@@ -1766,6 +1942,7 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
   memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
 }
@@ -1807,6 +1984,7 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
 }
@@ -1832,6 +2010,7 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
 }
@@ -1868,6 +2047,7 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
 }
@@ -1893,6 +2073,7 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
 }
@@ -1908,6 +2089,7 @@ export type UserCountOutputType = {
   activityLogs: number
   verificationCodes: number
   passkeyCredentials: number
+  followedMembers: number
   createdBackups: number
   restoredBackups: number
   backupSettingUpdates: number
@@ -1919,6 +2101,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   activityLogs?: boolean | UserCountOutputTypeCountActivityLogsArgs
   verificationCodes?: boolean | UserCountOutputTypeCountVerificationCodesArgs
   passkeyCredentials?: boolean | UserCountOutputTypeCountPasskeyCredentialsArgs
+  followedMembers?: boolean | UserCountOutputTypeCountFollowedMembersArgs
   createdBackups?: boolean | UserCountOutputTypeCountCreatedBackupsArgs
   restoredBackups?: boolean | UserCountOutputTypeCountRestoredBackupsArgs
   backupSettingUpdates?: boolean | UserCountOutputTypeCountBackupSettingUpdatesArgs
@@ -1972,6 +2155,13 @@ export type UserCountOutputTypeCountPasskeyCredentialsArgs<ExtArgs extends runti
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountFollowedMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberFollowWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountCreatedBackupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DatabaseBackupSnapshotWhereInput
 }
@@ -2012,6 +2202,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passkeyCredentials?: boolean | Prisma.User$passkeyCredentialsArgs<ExtArgs>
   passkeyChallenge?: boolean | Prisma.User$passkeyChallengeArgs<ExtArgs>
   memberProfile?: boolean | Prisma.User$memberProfileArgs<ExtArgs>
+  followedMembers?: boolean | Prisma.User$followedMembersArgs<ExtArgs>
   createdBackups?: boolean | Prisma.User$createdBackupsArgs<ExtArgs>
   restoredBackups?: boolean | Prisma.User$restoredBackupsArgs<ExtArgs>
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
@@ -2075,6 +2266,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   passkeyCredentials?: boolean | Prisma.User$passkeyCredentialsArgs<ExtArgs>
   passkeyChallenge?: boolean | Prisma.User$passkeyChallengeArgs<ExtArgs>
   memberProfile?: boolean | Prisma.User$memberProfileArgs<ExtArgs>
+  followedMembers?: boolean | Prisma.User$followedMembersArgs<ExtArgs>
   createdBackups?: boolean | Prisma.User$createdBackupsArgs<ExtArgs>
   restoredBackups?: boolean | Prisma.User$restoredBackupsArgs<ExtArgs>
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
@@ -2093,6 +2285,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passkeyCredentials: Prisma.$PasskeyCredentialPayload<ExtArgs>[]
     passkeyChallenge: Prisma.$PasskeyChallengePayload<ExtArgs> | null
     memberProfile: Prisma.$MemberPayload<ExtArgs> | null
+    followedMembers: Prisma.$MemberFollowPayload<ExtArgs>[]
     createdBackups: Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>[]
     restoredBackups: Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>[]
     backupSettingUpdates: Prisma.$DatabaseBackupSettingsPayload<ExtArgs>[]
@@ -2512,6 +2705,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   passkeyCredentials<T extends Prisma.User$passkeyCredentialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passkeyCredentialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasskeyCredentialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passkeyChallenge<T extends Prisma.User$passkeyChallengeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passkeyChallengeArgs<ExtArgs>>): Prisma.Prisma__PasskeyChallengeClient<runtime.Types.Result.GetResult<Prisma.$PasskeyChallengePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   memberProfile<T extends Prisma.User$memberProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memberProfileArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  followedMembers<T extends Prisma.User$followedMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followedMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBackups<T extends Prisma.User$createdBackupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdBackupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restoredBackups<T extends Prisma.User$restoredBackupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$restoredBackupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   backupSettingUpdates<T extends Prisma.User$backupSettingUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$backupSettingUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3100,6 +3294,30 @@ export type User$memberProfileArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.MemberInclude<ExtArgs> | null
   where?: Prisma.MemberWhereInput
+}
+
+/**
+ * User.followedMembers
+ */
+export type User$followedMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemberFollow
+   */
+  select?: Prisma.MemberFollowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemberFollow
+   */
+  omit?: Prisma.MemberFollowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberFollowInclude<ExtArgs> | null
+  where?: Prisma.MemberFollowWhereInput
+  orderBy?: Prisma.MemberFollowOrderByWithRelationInput | Prisma.MemberFollowOrderByWithRelationInput[]
+  cursor?: Prisma.MemberFollowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberFollowScalarFieldEnum | Prisma.MemberFollowScalarFieldEnum[]
 }
 
 /**
