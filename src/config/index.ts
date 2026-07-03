@@ -33,6 +33,9 @@ const config = {
   BACKUP_SCHEDULER_INTERVAL_MS: Number(
     process.env.BACKUP_SCHEDULER_INTERVAL_MS ?? 60_000,
   ),
+  MEMBERSHIP_RENEWAL_SCHEDULER_INTERVAL_MS: Number(
+    process.env.MEMBERSHIP_RENEWAL_SCHEDULER_INTERVAL_MS ?? 86_400_000,
+  ),
   WHITELIST_ORIGINS: [
     ...new Set([
       ...parseCsv(process.env.WHITELIST_ORIGINS),

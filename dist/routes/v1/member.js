@@ -18,6 +18,7 @@ const get_all_members_1 = require("../../controllers/v1/member/get-all-members")
 const get_membership_report_1 = require("../../controllers/v1/member/get-membership-report");
 const archive_member_1 = require("../../controllers/v1/member/archive-member");
 const retrieve_member_1 = require("../../controllers/v1/member/retrieve-member");
+const send_member_renewal_email_1 = require("../../controllers/v1/member/send-member-renewal-email");
 const get_current_member_requirements_1 = require("../../controllers/v1/member/get-current-member-requirements");
 const upsert_member_requirements_1 = require("../../controllers/v1/member/upsert-member-requirements");
 const get_current_onboarding_progress_1 = require("../../controllers/v1/member/get-current-onboarding-progress");
@@ -113,6 +114,7 @@ router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authen
 router.patch('/:id/unique-id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateMemberUniqueIdSchema), update_member_unique_id_1.updateMemberUniqueId);
 router.patch('/:id/password', (0, express_rate_limiter_1.expressRateLimit)('passwordReset'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.changeMemberPasswordByAdminSchema), change_member_password_by_admin_1.changeMemberPasswordByAdmin);
 router.patch('/:id/verify-email', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.verifyMemberEmailByAdminSchema), verify_member_email_by_admin_1.verifyMemberEmailByAdmin);
+router.post('/:id/renewal-email', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), send_member_renewal_email_1.sendMemberRenewalEmail);
 router.post('/:id/officer-assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.createOfficerAssignmentByAdminSchema), create_officer_assignment_by_admin_1.createOfficerAssignmentByAdmin);
 router.get('/:id/officer-assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getMemberOfficerAssignmentsSchema), get_member_officer_assignments_1.getMemberOfficerAssignments);
 router.patch('/:id/officer-assignments/:assignmentId/deactivate', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.deactivateOfficerAssignmentByAdminSchema), deactivate_officer_assignment_by_admin_1.deactivateOfficerAssignmentByAdmin);

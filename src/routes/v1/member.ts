@@ -20,6 +20,7 @@ import { getAllMembers } from '@/controllers/v1/member/get-all-members';
 import { getMembershipReport } from '@/controllers/v1/member/get-membership-report';
 import { archiveMember } from '@/controllers/v1/member/archive-member';
 import { retrieveMember } from '@/controllers/v1/member/retrieve-member';
+import { sendMemberRenewalEmail } from '@/controllers/v1/member/send-member-renewal-email';
 import { getCurrentMemberRequirements } from '@/controllers/v1/member/get-current-member-requirements';
 import { upsertMemberRequirements } from '@/controllers/v1/member/upsert-member-requirements';
 import { getCurrentOnboardingProgress } from '@/controllers/v1/member/get-current-onboarding-progress';
@@ -460,6 +461,14 @@ router.patch(
   authorize([UserType.ADMIN]),
   validate(verifyMemberEmailByAdminSchema),
   verifyMemberEmailByAdmin,
+);
+
+router.post(
+  '/:id/renewal-email',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  sendMemberRenewalEmail,
 );
 
 router.post(

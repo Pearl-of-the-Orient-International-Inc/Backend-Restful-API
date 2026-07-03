@@ -21,6 +21,7 @@ const config_1 = __importDefault(require("./config"));
 const winston_1 = require("./lib/winston");
 const prisma_1 = require("./lib/prisma");
 const backup_database_scheduler_1 = require("./lib/backup-database-scheduler");
+const membership_renewal_scheduler_1 = require("./lib/membership-renewal-scheduler");
 const activity_log_1 = require("./middlewares/activity-log");
 const uploadthing_1 = require("./lib/uploadthing");
 const v1_1 = __importDefault(require("./routes/v1"));
@@ -77,6 +78,7 @@ app.use('/api/v1', activity_log_1.activityLogMiddleware, v1_1.default);
     try {
         yield prisma_1.prisma.$connect();
         (0, backup_database_scheduler_1.startBackupDatabaseScheduler)();
+        (0, membership_renewal_scheduler_1.startMembershipRenewalScheduler)();
         app.listen(config_1.default.PORT, () => {
             winston_1.logger.info(`The server will start at http://localhost:${config_1.default.PORT} with hot-reloading enabled`);
         });
@@ -91,6 +93,7 @@ app.use('/api/v1', activity_log_1.activityLogMiddleware, v1_1.default);
 const serverTermination = (signal) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         (0, backup_database_scheduler_1.stopBackupDatabaseScheduler)();
+        (0, membership_renewal_scheduler_1.stopMembershipRenewalScheduler)();
         yield prisma_1.prisma.$disconnect();
         winston_1.logger.info('Server SHUTDOWN', signal);
         winston_1.logtail.flush();

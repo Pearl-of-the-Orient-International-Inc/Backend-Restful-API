@@ -17,6 +17,10 @@ import {
   startBackupDatabaseScheduler,
   stopBackupDatabaseScheduler,
 } from '@/lib/backup-database-scheduler';
+import {
+  startMembershipRenewalScheduler,
+  stopMembershipRenewalScheduler,
+} from '@/lib/membership-renewal-scheduler';
 import { activityLogMiddleware } from '@/middlewares/activity-log';
 import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 
@@ -119,6 +123,7 @@ app.use('/api/v1', activityLogMiddleware, v1Routes);
   try {
     await prisma.$connect();
     startBackupDatabaseScheduler();
+    startMembershipRenewalScheduler();
     app.listen(config.PORT, () => {
       logger.info(
         `The server will start at http://localhost:${config.PORT} with hot-reloading enabled`,
@@ -144,6 +149,7 @@ app.use('/api/v1', activityLogMiddleware, v1Routes);
 const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
   try {
     stopBackupDatabaseScheduler();
+    stopMembershipRenewalScheduler();
     await prisma.$disconnect();
     logger.info('Server SHUTDOWN', signal);
 
