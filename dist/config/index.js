@@ -29,6 +29,7 @@ const parseTrustProxy = (value) => {
 const config = {
     PORT: process.env.PORT || 5000,
     NODE_ENV: process.env.NODE_ENV,
+    BYPASS_SEMINARY_STUDENT_AUTH: process.env.BYPASS_SEMINARY_STUDENT_AUTH === 'true',
     BACKUP_SCHEDULER_INTERVAL_MS: Number((_a = process.env.BACKUP_SCHEDULER_INTERVAL_MS) !== null && _a !== void 0 ? _a : 60000),
     MEMBERSHIP_RENEWAL_SCHEDULER_INTERVAL_MS: Number((_b = process.env.MEMBERSHIP_RENEWAL_SCHEDULER_INTERVAL_MS) !== null && _b !== void 0 ? _b : 86400000),
     WHITELIST_ORIGINS: [
@@ -47,6 +48,15 @@ const config = {
             'http://localhost:3000',
             'http://localhost:3001',
             'http://localhost:3002',
+            'http://localhost:3003',
+            'http://localhost:3004',
+            'http://localhost:3005',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:3001',
+            'http://127.0.0.1:3002',
+            'http://127.0.0.1:3003',
+            'http://127.0.0.1:3004',
+            'http://127.0.0.1:3005',
         ]),
     ],
     LOG_LEVEL: process.env.LOG_LEVEL || 'info',

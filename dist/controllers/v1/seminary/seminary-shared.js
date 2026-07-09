@@ -22,6 +22,9 @@ exports.seminaryApplicationInclude = {
     },
     requirements: true,
     payment: true,
+    credentialDocuments: {
+        orderBy: { issuedAt: 'desc' },
+    },
 };
 const trimToNull = (value) => {
     const normalized = value === null || value === void 0 ? void 0 : value.trim();
@@ -85,8 +88,8 @@ const parseMoney = (value) => {
 };
 const buildSeminaryApplicationData = (body) => ({
     academicYear: trimToNull(body.personalInformation.academicYear),
-    surname: body.personalInformation.surname.trim(),
-    givenName: body.personalInformation.givenName.trim(),
+    surname: trimToNull(body.personalInformation.surname),
+    givenName: trimToNull(body.personalInformation.givenName),
     middleName: trimToNull(body.personalInformation.middleName),
     emailAddress: trimToNull(body.personalInformation.emailAddress),
     mobilePhone: trimToNull(body.personalInformation.mobilePhone),
@@ -104,8 +107,8 @@ const buildSeminaryApplicationData = (body) => ({
     pastorName: trimToNull(body.ministry.pastorName),
     contactNumber: trimToNull(body.ministry.contactNumber),
     ministryInvolved: trimToNull(body.ministry.ministryInvolved),
-    programLevel: normalizeRequiredLabeledEnum(body.curriculum.programLevel, programLevelLabels),
-    programCourse: body.curriculum.programCourse.trim(),
+    programLevel: normalizeLabeledEnum(body.curriculum.programLevel, programLevelLabels),
+    programCourse: trimToNull(body.curriculum.programCourse),
     highSchool: trimToNull(body.educationalBackground.highSchool),
     highSchoolYearGraduated: trimToNull(body.educationalBackground.highSchoolYearGraduated),
     collegeSchool: trimToNull(body.educationalBackground.collegeSchool),

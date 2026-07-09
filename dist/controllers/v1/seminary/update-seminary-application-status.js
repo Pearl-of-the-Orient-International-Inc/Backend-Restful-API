@@ -17,33 +17,13 @@ const winston_1 = require("../../../lib/winston");
 const mailers_1 = require("../../../mailers");
 const seminary_application_status_1 = require("../../../mailers/templates/seminary-application-status");
 const seminary_shared_1 = require("./seminary-shared");
-const buildNextStudentId = (tx_1, ...args_1) => __awaiter(void 0, [tx_1, ...args_1], void 0, function* (tx, date = new Date()) {
-    const yearSuffix = String(date.getFullYear()).slice(-2);
-    const prefix = `POTSC-${yearSuffix}-`;
-    const latestApplication = yield tx.seminaryApplication.findFirst({
-        where: {
-            studentId: {
-                startsWith: prefix,
-            },
-        },
-        orderBy: {
-            studentId: 'desc',
-        },
-        select: {
-            studentId: true,
-        },
-    });
-    const latestSeries = (latestApplication === null || latestApplication === void 0 ? void 0 : latestApplication.studentId)
-        ? Number.parseInt(latestApplication.studentId.slice(prefix.length), 10)
-        : 0;
-    const nextSeries = Number.isFinite(latestSeries) ? latestSeries + 1 : 1;
-    return `${prefix}${String(nextSeries).padStart(4, '0')}`;
-});
+const student_shared_1 = require("./student-shared");
 const getApplicantName = ({ givenName, middleName, surname, }) => [givenName, middleName, surname]
     .filter(Boolean)
     .join(' ')
     .trim();
 const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const body = req.body;
         const applicationId = String(req.params.id);
@@ -75,7 +55,7 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
             var _a, _b;
             const studentId = body.status === enums_1.SeminaryApplicationStatus.APPROVED &&
                 !existingApplication.studentId
-                ? yield buildNextStudentId(tx)
+                ? yield (0, student_shared_1.buildNextStudentId)(tx)
                 : undefined;
             const reviewedApplication = yield tx.seminaryApplication.update({
                 where: { id: existingApplication.id },
@@ -125,7 +105,7 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
             const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: existingApplication.emailAddress }, (0, seminary_application_status_1.seminaryApplicationStatusTemplate)({
                 name: getApplicantName(existingApplication) ||
                     existingApplication.emailAddress,
-                programCourse: existingApplication.programCourse,
+                programCourse: (_a = existingApplication.programCourse) !== null && _a !== void 0 ? _a : 'Selected program',
                 reason: body.reviewRemarks,
                 status: body.status,
                 studentId: application === null || application === void 0 ? void 0 : application.studentId,

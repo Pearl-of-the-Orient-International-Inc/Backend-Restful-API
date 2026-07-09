@@ -30,6 +30,8 @@ const parseTrustProxy = (value?: string): boolean | number | string => {
 const config = {
   PORT: process.env.PORT || 5000,
   NODE_ENV: process.env.NODE_ENV,
+  BYPASS_SEMINARY_STUDENT_AUTH:
+    process.env.BYPASS_SEMINARY_STUDENT_AUTH === 'true',
   BACKUP_SCHEDULER_INTERVAL_MS: Number(
     process.env.BACKUP_SCHEDULER_INTERVAL_MS ?? 60_000,
   ),
@@ -58,6 +60,15 @@ const config = {
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:3002',
+      'http://localhost:3003',
+      'http://localhost:3004',
+      'http://localhost:3005',
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:3001',
+      'http://127.0.0.1:3002',
+      'http://127.0.0.1:3003',
+      'http://127.0.0.1:3004',
+      'http://127.0.0.1:3005',
     ]),
   ],
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',

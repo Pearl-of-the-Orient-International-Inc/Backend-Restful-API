@@ -148,6 +148,11 @@ export type MemberChaplaincyTrainingProgress = Prisma.MemberChaplaincyTrainingPr
  */
 export type SeminaryApplication = Prisma.SeminaryApplicationModel
 /**
+ * Model SeminaryCredentialDocument
+ * 
+ */
+export type SeminaryCredentialDocument = Prisma.SeminaryCredentialDocumentModel
+/**
  * Model SeminaryRequirements
  * 
  */

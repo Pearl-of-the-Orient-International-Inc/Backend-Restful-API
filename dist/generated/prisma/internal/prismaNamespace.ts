@@ -406,6 +406,7 @@ export const ModelName = {
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
   SeminaryApplication: 'SeminaryApplication',
+  SeminaryCredentialDocument: 'SeminaryCredentialDocument',
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
   BranchOfService: 'BranchOfService',
@@ -434,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryRequirements" | "seminaryPayment" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2066,6 +2067,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SeminaryCredentialDocument: {
+      payload: Prisma.$SeminaryCredentialDocumentPayload<ExtArgs>
+      fields: Prisma.SeminaryCredentialDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryCredentialDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryCredentialDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryCredentialDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryCredentialDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryCredentialDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryCredentialDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryCredentialDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryCredentialDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryCredentialDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>
+        }
+        update: {
+          args: Prisma.SeminaryCredentialDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryCredentialDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryCredentialDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryCredentialDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryCredentialDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCredentialDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryCredentialDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryCredentialDocument>
+        }
+        groupBy: {
+          args: Prisma.SeminaryCredentialDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryCredentialDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryCredentialDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryCredentialDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
     SeminaryRequirements: {
       payload: Prisma.$SeminaryRequirementsPayload<ExtArgs>
       fields: Prisma.SeminaryRequirementsFieldRefs
@@ -3408,6 +3483,9 @@ export const SeminaryApplicationScalarFieldEnum = {
   status: 'status',
   targetMemberType: 'targetMemberType',
   studentId: 'studentId',
+  studentStatus: 'studentStatus',
+  enrollmentType: 'enrollmentType',
+  yearLevel: 'yearLevel',
   academicYear: 'academicYear',
   surname: 'surname',
   givenName: 'givenName',
@@ -3450,6 +3528,25 @@ export const SeminaryApplicationScalarFieldEnum = {
 } as const
 
 export type SeminaryApplicationScalarFieldEnum = (typeof SeminaryApplicationScalarFieldEnum)[keyof typeof SeminaryApplicationScalarFieldEnum]
+
+
+export const SeminaryCredentialDocumentScalarFieldEnum = {
+  id: 'id',
+  documentNumber: 'documentNumber',
+  barcodeNumber: 'barcodeNumber',
+  verificationToken: 'verificationToken',
+  type: 'type',
+  status: 'status',
+  title: 'title',
+  remarks: 'remarks',
+  issuedAt: 'issuedAt',
+  revokedAt: 'revokedAt',
+  applicationId: 'applicationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryCredentialDocumentScalarFieldEnum = (typeof SeminaryCredentialDocumentScalarFieldEnum)[keyof typeof SeminaryCredentialDocumentScalarFieldEnum]
 
 
 export const SeminaryRequirementsScalarFieldEnum = {
@@ -4078,6 +4175,34 @@ export type ListEnumSeminaryApplicationStatusFieldRefInput<$PrismaModel> = Field
 
 
 /**
+ * Reference to a field of type 'SeminaryStudentStatus'
+ */
+export type EnumSeminaryStudentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryStudentStatus[]'
+ */
+export type ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryEnrollmentType'
+ */
+export type EnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryEnrollmentType'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryEnrollmentType[]'
+ */
+export type ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryEnrollmentType[]'>
+    
+
+
+/**
  * Reference to a field of type 'SeminaryProgramLevel'
  */
 export type EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryProgramLevel'>
@@ -4088,6 +4213,34 @@ export type EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> = FieldRefInputT
  * Reference to a field of type 'SeminaryProgramLevel[]'
  */
 export type ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryProgramLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCredentialDocumentType'
+ */
+export type EnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCredentialDocumentType'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCredentialDocumentType[]'
+ */
+export type ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCredentialDocumentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCredentialDocumentStatus'
+ */
+export type EnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCredentialDocumentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCredentialDocumentStatus[]'
+ */
+export type ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCredentialDocumentStatus[]'>
     
 
 
@@ -4473,6 +4626,7 @@ export type GlobalOmitConfig = {
   memberPublicRecordAttachment?: Prisma.MemberPublicRecordAttachmentOmit
   memberChaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOmit
   seminaryApplication?: Prisma.SeminaryApplicationOmit
+  seminaryCredentialDocument?: Prisma.SeminaryCredentialDocumentOmit
   seminaryRequirements?: Prisma.SeminaryRequirementsOmit
   seminaryPayment?: Prisma.SeminaryPaymentOmit
   branchOfService?: Prisma.BranchOfServiceOmit

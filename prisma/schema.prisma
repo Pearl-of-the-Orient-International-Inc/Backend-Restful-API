@@ -457,11 +457,14 @@ model SeminaryApplication {
   status           SeminaryApplicationStatus @default(SUBMITTED)
   targetMemberType MemberType                @default(PROFESSIONAL_CHAPLAIN)
   studentId        String?                   @unique
+  studentStatus    SeminaryStudentStatus     @default(ACTIVE)
+  enrollmentType   SeminaryEnrollmentType    @default(REGULAR)
+  yearLevel        String?
 
   // Personal Information
   academicYear String?
-  surname      String
-  givenName    String
+  surname      String?
+  givenName    String?
   middleName   String?
   emailAddress String?
   mobilePhone  String?
@@ -483,8 +486,8 @@ model SeminaryApplication {
   ministryInvolved String?
 
   // Curriculum of Interest
-  programLevel  SeminaryProgramLevel
-  programCourse String
+  programLevel  SeminaryProgramLevel?
+  programCourse String?
 
   // Educational Background
   highSchool                  String?
@@ -508,6 +511,7 @@ model SeminaryApplication {
 
   requirements SeminaryRequirements?
   payment      SeminaryPayment?
+  credentialDocuments SeminaryCredentialDocument[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -516,6 +520,31 @@ model SeminaryApplication {
   @@index([status])
   @@index([targetMemberType])
   @@index([createdAt])
+}
+
+model SeminaryCredentialDocument {
+  id String @id @default(uuid())
+
+  documentNumber    String                           @unique
+  barcodeNumber     String?                          @unique
+  verificationToken String                           @unique
+  type              SeminaryCredentialDocumentType
+  status            SeminaryCredentialDocumentStatus @default(ACTIVE)
+  title             String?
+  remarks           String?
+  issuedAt          DateTime                         @default(now())
+  revokedAt         DateTime?
+
+  applicationId String
+  application   SeminaryApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([applicationId])
+  @@index([type])
+  @@index([status])
+  @@index([issuedAt])
 }
 
 model SeminaryRequirements {
@@ -954,6 +983,19 @@ enum SeminaryApplicationStatus {
   CANCELLED
 }
 
+enum SeminaryStudentStatus {
+  ACTIVE
+  GRADUATING
+  LEAVE_OF_ABSENCE
+  INACTIVE
+}
+
+enum SeminaryEnrollmentType {
+  REGULAR
+  TRANSFEREE
+  CROSS_ENROLLEE
+}
+
 enum SeminaryProgramLevel {
   CERTIFICATE
   BACHELOR
@@ -976,6 +1018,18 @@ enum SeminaryPaymentStatus {
   PENDING
   VERIFIED
   REJECTED
+}
+
+enum SeminaryCredentialDocumentType {
+  DIPLOMA
+  CERTIFICATE
+  TRANSCRIPT
+}
+
+enum SeminaryCredentialDocumentStatus {
+  ACTIVE
+  REVOKED
+  VOID
 }
 
 enum InterviewDay {

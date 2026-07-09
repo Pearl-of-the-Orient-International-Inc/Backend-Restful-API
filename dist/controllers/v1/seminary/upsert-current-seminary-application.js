@@ -18,6 +18,7 @@ const mailers_1 = require("../../../mailers");
 const seminary_admission_submitted_1 = require("../../../mailers/templates/seminary-admission-submitted");
 const seminary_shared_1 = require("./seminary-shared");
 const upsertCurrentSeminaryApplication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     try {
         const userId = req.userId;
         const member = userId
@@ -108,9 +109,9 @@ const upsertCurrentSeminaryApplication = (req, res) => __awaiter(void 0, void 0,
                 .filter(Boolean)
                 .join(' ');
             const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: applicationData.emailAddress }, (0, seminary_admission_submitted_1.seminaryAdmissionSubmittedTemplate)({
-                name: applicantName,
-                programLevel: applicationData.programLevel,
-                programCourse: applicationData.programCourse,
+                name: applicantName || applicationData.emailAddress,
+                programLevel: (_a = applicationData.programLevel) !== null && _a !== void 0 ? _a : 'Selected level',
+                programCourse: (_b = applicationData.programCourse) !== null && _b !== void 0 ? _b : 'Selected program',
             })));
             if (!emailResult.success) {
                 winston_1.logger.warn('Seminary admission confirmation email failed to send', {

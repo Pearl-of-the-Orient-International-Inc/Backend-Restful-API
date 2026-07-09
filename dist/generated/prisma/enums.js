@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryProgramLevel = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryProgramLevel = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -125,6 +125,17 @@ exports.SeminaryApplicationStatus = {
     REJECTED: 'REJECTED',
     CANCELLED: 'CANCELLED'
 };
+exports.SeminaryStudentStatus = {
+    ACTIVE: 'ACTIVE',
+    GRADUATING: 'GRADUATING',
+    LEAVE_OF_ABSENCE: 'LEAVE_OF_ABSENCE',
+    INACTIVE: 'INACTIVE'
+};
+exports.SeminaryEnrollmentType = {
+    REGULAR: 'REGULAR',
+    TRANSFEREE: 'TRANSFEREE',
+    CROSS_ENROLLEE: 'CROSS_ENROLLEE'
+};
 exports.SeminaryProgramLevel = {
     CERTIFICATE: 'CERTIFICATE',
     BACHELOR: 'BACHELOR',
@@ -144,6 +155,16 @@ exports.SeminaryPaymentStatus = {
     PENDING: 'PENDING',
     VERIFIED: 'VERIFIED',
     REJECTED: 'REJECTED'
+};
+exports.SeminaryCredentialDocumentType = {
+    DIPLOMA: 'DIPLOMA',
+    CERTIFICATE: 'CERTIFICATE',
+    TRANSCRIPT: 'TRANSCRIPT'
+};
+exports.SeminaryCredentialDocumentStatus = {
+    ACTIVE: 'ACTIVE',
+    REVOKED: 'REVOKED',
+    VOID: 'VOID'
 };
 exports.InterviewDay = {
     SATURDAY: 'SATURDAY',

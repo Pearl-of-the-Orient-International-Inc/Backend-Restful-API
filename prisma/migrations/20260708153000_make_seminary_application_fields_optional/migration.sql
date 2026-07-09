@@ -1,0 +1,6 @@
+ALTER TABLE "SeminaryApplication"
+ALTER COLUMN "surname" DROP NOT NULL,
+ALTER COLUMN "givenName" DROP NOT NULL,
+ALTER COLUMN "programLevel" DROP NOT NULL,
+ALTER COLUMN "programCourse" DROP NOT NULL;
+

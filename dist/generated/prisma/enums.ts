@@ -209,6 +209,25 @@ export const SeminaryApplicationStatus = {
 export type SeminaryApplicationStatus = (typeof SeminaryApplicationStatus)[keyof typeof SeminaryApplicationStatus]
 
 
+export const SeminaryStudentStatus = {
+  ACTIVE: 'ACTIVE',
+  GRADUATING: 'GRADUATING',
+  LEAVE_OF_ABSENCE: 'LEAVE_OF_ABSENCE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SeminaryStudentStatus = (typeof SeminaryStudentStatus)[keyof typeof SeminaryStudentStatus]
+
+
+export const SeminaryEnrollmentType = {
+  REGULAR: 'REGULAR',
+  TRANSFEREE: 'TRANSFEREE',
+  CROSS_ENROLLEE: 'CROSS_ENROLLEE'
+} as const
+
+export type SeminaryEnrollmentType = (typeof SeminaryEnrollmentType)[keyof typeof SeminaryEnrollmentType]
+
+
 export const SeminaryProgramLevel = {
   CERTIFICATE: 'CERTIFICATE',
   BACHELOR: 'BACHELOR',
@@ -243,6 +262,24 @@ export const SeminaryPaymentStatus = {
 } as const
 
 export type SeminaryPaymentStatus = (typeof SeminaryPaymentStatus)[keyof typeof SeminaryPaymentStatus]
+
+
+export const SeminaryCredentialDocumentType = {
+  DIPLOMA: 'DIPLOMA',
+  CERTIFICATE: 'CERTIFICATE',
+  TRANSCRIPT: 'TRANSCRIPT'
+} as const
+
+export type SeminaryCredentialDocumentType = (typeof SeminaryCredentialDocumentType)[keyof typeof SeminaryCredentialDocumentType]
+
+
+export const SeminaryCredentialDocumentStatus = {
+  ACTIVE: 'ACTIVE',
+  REVOKED: 'REVOKED',
+  VOID: 'VOID'
+} as const
+
+export type SeminaryCredentialDocumentStatus = (typeof SeminaryCredentialDocumentStatus)[keyof typeof SeminaryCredentialDocumentStatus]
 
 
 export const InterviewDay = {

@@ -73,6 +73,7 @@ export const ModelName = {
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
   SeminaryApplication: 'SeminaryApplication',
+  SeminaryCredentialDocument: 'SeminaryCredentialDocument',
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
   BranchOfService: 'BranchOfService',
@@ -445,6 +446,9 @@ export const SeminaryApplicationScalarFieldEnum = {
   status: 'status',
   targetMemberType: 'targetMemberType',
   studentId: 'studentId',
+  studentStatus: 'studentStatus',
+  enrollmentType: 'enrollmentType',
+  yearLevel: 'yearLevel',
   academicYear: 'academicYear',
   surname: 'surname',
   givenName: 'givenName',
@@ -487,6 +491,25 @@ export const SeminaryApplicationScalarFieldEnum = {
 } as const
 
 export type SeminaryApplicationScalarFieldEnum = (typeof SeminaryApplicationScalarFieldEnum)[keyof typeof SeminaryApplicationScalarFieldEnum]
+
+
+export const SeminaryCredentialDocumentScalarFieldEnum = {
+  id: 'id',
+  documentNumber: 'documentNumber',
+  barcodeNumber: 'barcodeNumber',
+  verificationToken: 'verificationToken',
+  type: 'type',
+  status: 'status',
+  title: 'title',
+  remarks: 'remarks',
+  issuedAt: 'issuedAt',
+  revokedAt: 'revokedAt',
+  applicationId: 'applicationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryCredentialDocumentScalarFieldEnum = (typeof SeminaryCredentialDocumentScalarFieldEnum)[keyof typeof SeminaryCredentialDocumentScalarFieldEnum]
 
 
 export const SeminaryRequirementsScalarFieldEnum = {

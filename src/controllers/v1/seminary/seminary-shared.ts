@@ -29,6 +29,9 @@ export const seminaryApplicationInclude = {
   },
   requirements: true,
   payment: true,
+  credentialDocuments: {
+    orderBy: { issuedAt: 'desc' },
+  },
 } satisfies Prisma.SeminaryApplicationInclude;
 
 export type SeminaryApplicationWithDetails = Prisma.SeminaryApplicationGetPayload<{
@@ -117,8 +120,8 @@ export const buildSeminaryApplicationData = (
   body: UpsertCurrentSeminaryApplicationBody,
 ) => ({
   academicYear: trimToNull(body.personalInformation.academicYear),
-  surname: body.personalInformation.surname.trim(),
-  givenName: body.personalInformation.givenName.trim(),
+  surname: trimToNull(body.personalInformation.surname),
+  givenName: trimToNull(body.personalInformation.givenName),
   middleName: trimToNull(body.personalInformation.middleName),
   emailAddress: trimToNull(body.personalInformation.emailAddress),
   mobilePhone: trimToNull(body.personalInformation.mobilePhone),
@@ -142,11 +145,11 @@ export const buildSeminaryApplicationData = (
   pastorName: trimToNull(body.ministry.pastorName),
   contactNumber: trimToNull(body.ministry.contactNumber),
   ministryInvolved: trimToNull(body.ministry.ministryInvolved),
-  programLevel: normalizeRequiredLabeledEnum(
+  programLevel: normalizeLabeledEnum(
     body.curriculum.programLevel,
     programLevelLabels,
   ),
-  programCourse: body.curriculum.programCourse.trim(),
+  programCourse: trimToNull(body.curriculum.programCourse),
   highSchool: trimToNull(body.educationalBackground.highSchool),
   highSchoolYearGraduated: trimToNull(
     body.educationalBackground.highSchoolYearGraduated,

@@ -624,6 +624,20 @@ export type EnumSeminaryApplicationStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumSeminaryApplicationStatusFilter<$PrismaModel> | $Enums.SeminaryApplicationStatus
 }
 
+export type EnumSeminaryStudentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryStudentStatus | Prisma.EnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryStudentStatusFilter<$PrismaModel> | $Enums.SeminaryStudentStatus
+}
+
+export type EnumSeminaryEnrollmentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryEnrollmentType | Prisma.EnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel> | $Enums.SeminaryEnrollmentType
+}
+
 export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
@@ -642,11 +656,11 @@ export type EnumGenderNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
 }
 
-export type EnumSeminaryProgramLevelFilter<$PrismaModel = never> = {
-  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSeminaryProgramLevelFilter<$PrismaModel> | $Enums.SeminaryProgramLevel
+export type EnumSeminaryProgramLevelNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel> | $Enums.SeminaryProgramLevel | null
 }
 
 export type EnumSeminaryApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -657,6 +671,26 @@ export type EnumSeminaryApplicationStatusWithAggregatesFilter<$PrismaModel = nev
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSeminaryApplicationStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSeminaryApplicationStatusFilter<$PrismaModel>
+}
+
+export type EnumSeminaryStudentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryStudentStatus | Prisma.EnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryStudentStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryStudentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryStudentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryStudentStatusFilter<$PrismaModel>
+}
+
+export type EnumSeminaryEnrollmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryEnrollmentType | Prisma.EnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryEnrollmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryEnrollmentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -685,14 +719,48 @@ export type EnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumGenderNullableFilter<$PrismaModel>
 }
 
-export type EnumSeminaryProgramLevelWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSeminaryProgramLevelWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryProgramLevel
+export type EnumSeminaryProgramLevelNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumSeminaryProgramLevelNullableWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryProgramLevel | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel>
+}
+
+export type EnumSeminaryCredentialDocumentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentType | Prisma.EnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentType
+}
+
+export type EnumSeminaryCredentialDocumentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentStatus | Prisma.EnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentStatus
+}
+
+export type EnumSeminaryCredentialDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentType | Prisma.EnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumSeminaryProgramLevelFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumSeminaryProgramLevelFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel>
+}
+
+export type EnumSeminaryCredentialDocumentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentStatus | Prisma.EnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel>
 }
 
 export type EnumSeminaryPaymentTypeFilter<$PrismaModel = never> = {
@@ -1580,6 +1648,20 @@ export type NestedEnumSeminaryApplicationStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumSeminaryApplicationStatusFilter<$PrismaModel> | $Enums.SeminaryApplicationStatus
 }
 
+export type NestedEnumSeminaryStudentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryStudentStatus | Prisma.EnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryStudentStatusFilter<$PrismaModel> | $Enums.SeminaryStudentStatus
+}
+
+export type NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryEnrollmentType | Prisma.EnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel> | $Enums.SeminaryEnrollmentType
+}
+
 export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel> | null
   in?: $Enums.Gender[] | Prisma.ListEnumGenderFieldRefInput<$PrismaModel> | null
@@ -1587,11 +1669,11 @@ export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
 }
 
-export type NestedEnumSeminaryProgramLevelFilter<$PrismaModel = never> = {
-  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSeminaryProgramLevelFilter<$PrismaModel> | $Enums.SeminaryProgramLevel
+export type NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel> | $Enums.SeminaryProgramLevel | null
 }
 
 export type NestedEnumSeminaryApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1602,6 +1684,26 @@ export type NestedEnumSeminaryApplicationStatusWithAggregatesFilter<$PrismaModel
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSeminaryApplicationStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSeminaryApplicationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryStudentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryStudentStatus | Prisma.EnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryStudentStatus[] | Prisma.ListEnumSeminaryStudentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryStudentStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryStudentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryStudentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryStudentStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryEnrollmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryEnrollmentType | Prisma.EnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryEnrollmentType[] | Prisma.ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryEnrollmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryEnrollmentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -1641,14 +1743,48 @@ export type NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumGenderNullableFilter<$PrismaModel>
 }
 
-export type NestedEnumSeminaryProgramLevelWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSeminaryProgramLevelWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryProgramLevel
+export type NestedEnumSeminaryProgramLevelNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryProgramLevel | Prisma.EnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.SeminaryProgramLevel[] | Prisma.ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumSeminaryProgramLevelNullableWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryProgramLevel | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryProgramLevelNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentType | Prisma.EnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentType
+}
+
+export type NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentStatus | Prisma.EnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentStatus
+}
+
+export type NestedEnumSeminaryCredentialDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentType | Prisma.EnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentType[] | Prisma.ListEnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumSeminaryProgramLevelFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumSeminaryProgramLevelFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryCredentialDocumentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryCredentialDocumentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryCredentialDocumentStatus | Prisma.EnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryCredentialDocumentStatus[] | Prisma.ListEnumSeminaryCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryCredentialDocumentStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryCredentialDocumentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryCredentialDocumentStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumSeminaryPaymentTypeFilter<$PrismaModel = never> = {

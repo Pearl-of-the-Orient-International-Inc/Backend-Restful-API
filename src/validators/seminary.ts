@@ -3,9 +3,12 @@ import {
   CivilStatus,
   Gender,
   SeminaryApplicationStatus,
+  SeminaryCredentialDocumentType,
+  SeminaryEnrollmentType,
   SeminaryPaymentMethod,
   SeminaryPaymentType,
   SeminaryProgramLevel,
+  SeminaryStudentStatus,
 } from '@/generated/prisma/enums';
 
 const optionalText = (max = 255) => z.string().trim().max(max).optional();
@@ -30,10 +33,34 @@ const normalizeEnumValue = <T extends Record<string, string>>(
 const programLevelSchema = normalizeEnumValue(SeminaryProgramLevel, {
   Certificate: SeminaryProgramLevel.CERTIFICATE,
   Bachelor: SeminaryProgramLevel.BACHELOR,
+  Masteral: SeminaryProgramLevel.MASTER_WITH_THESIS,
   'Master with Thesis': SeminaryProgramLevel.MASTER_WITH_THESIS,
+  Doctorate: SeminaryProgramLevel.DOCTORATE_WITH_DISSERTATION,
   'Doctorate with Dissertation':
     SeminaryProgramLevel.DOCTORATE_WITH_DISSERTATION,
 });
+
+const studentStatusSchema = normalizeEnumValue(SeminaryStudentStatus, {
+  Active: SeminaryStudentStatus.ACTIVE,
+  Graduating: SeminaryStudentStatus.GRADUATING,
+  'Leave of Absence': SeminaryStudentStatus.LEAVE_OF_ABSENCE,
+  Inactive: SeminaryStudentStatus.INACTIVE,
+});
+
+const enrollmentTypeSchema = normalizeEnumValue(SeminaryEnrollmentType, {
+  Regular: SeminaryEnrollmentType.REGULAR,
+  Transferee: SeminaryEnrollmentType.TRANSFEREE,
+  'Cross Enrollee': SeminaryEnrollmentType.CROSS_ENROLLEE,
+});
+
+const credentialDocumentTypeSchema = normalizeEnumValue(
+  SeminaryCredentialDocumentType,
+  {
+    Diploma: SeminaryCredentialDocumentType.DIPLOMA,
+    Certificate: SeminaryCredentialDocumentType.CERTIFICATE,
+    Transcript: SeminaryCredentialDocumentType.TRANSCRIPT,
+  },
+);
 
 const paymentTypeSchema = normalizeEnumValue(SeminaryPaymentType, {
   'Full Payment': SeminaryPaymentType.FULL_PAYMENT,
@@ -79,8 +106,8 @@ const fileMetadataSchema = z.object({
 export const upsertCurrentSeminaryApplicationSchema = z.object({
   personalInformation: z.object({
     academicYear: optionalText(50),
-    surname: z.string().trim().min(1).max(100),
-    givenName: z.string().trim().min(1).max(100),
+    surname: optionalText(100),
+    givenName: optionalText(100),
     middleName: optionalText(100),
     emailAddress: z.email().optional().or(z.literal('')),
     mobilePhone: optionalText(30),
@@ -102,8 +129,8 @@ export const upsertCurrentSeminaryApplicationSchema = z.object({
     ministryInvolved: optionalText(255),
   }),
   curriculum: z.object({
-    programLevel: programLevelSchema,
-    programCourse: z.string().trim().min(1).max(150),
+    programLevel: programLevelSchema.optional().or(z.literal('')),
+    programCourse: optionalText(150),
   }),
   educationalBackground: z.object({
     highSchool: optionalText(150),
@@ -202,4 +229,104 @@ export const updateSeminaryApplicationStatusSchema = z.object({
         path: ['reviewRemarks'],
       },
     ),
+});
+
+const seminaryStudentBodySchema = z.object({
+  studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/).optional().or(z.literal('')),
+  academicYear: optionalText(50),
+  surname: optionalText(100),
+  givenName: optionalText(100),
+  middleName: optionalText(100),
+  emailAddress: z.email().optional().or(z.literal('')),
+  mobilePhone: optionalText(30),
+  homeAddress: optionalText(255),
+  birthPlace: optionalText(150),
+  gender: genderSchema.optional().or(z.literal('')),
+  civilStatus: civilStatusSchema.optional().or(z.literal('')),
+  churchAttended: optionalText(150),
+  churchAddress: optionalText(255),
+  pastorName: optionalText(150),
+  contactNumber: optionalText(30),
+  ministryInvolved: optionalText(255),
+  programLevel: programLevelSchema.optional().or(z.literal('')),
+  programCourse: optionalText(150),
+  enrollmentType: enrollmentTypeSchema.optional().or(z.literal('')),
+  yearLevel: optionalText(100),
+  studentStatus: studentStatusSchema.optional().or(z.literal('')),
+});
+
+export const createSeminaryStudentSchema = z.object({
+  body: seminaryStudentBodySchema,
+});
+
+export const updateSeminaryStudentSchema = z.object({
+  params: z.object({
+    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+  }),
+  body: seminaryStudentBodySchema,
+});
+
+export const getSeminaryStudentByIdSchema = z.object({
+  params: z.object({
+    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+  }),
+});
+
+export const getAllSeminaryStudentsSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'page must be a positive integer',
+      }),
+    limit: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'limit must be a positive integer',
+      }),
+    search: optionalText(100),
+    programLevel: programLevelSchema.optional(),
+    studentStatus: studentStatusSchema.optional(),
+    academicYear: optionalText(50),
+  }),
+});
+
+export const bulkImportSeminaryStudentsSchema = z.object({
+  body: z.object({
+    students: z.array(seminaryStudentBodySchema).min(1).max(1000),
+  }),
+});
+
+export const generateSeminaryCredentialDocumentSchema = z.object({
+  params: z.object({
+    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+  }),
+  body: z.object({
+    type: credentialDocumentTypeSchema,
+    title: optionalText(150),
+    remarks: optionalText(1000),
+  }),
+});
+
+export const getSeminaryCredentialDocumentsSchema = z.object({
+  params: z.object({
+    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+  }),
+  query: z.object({
+    type: credentialDocumentTypeSchema.optional(),
+  }),
+});
+
+export const getSeminaryCredentialDocumentByNumberSchema = z.object({
+  params: z.object({
+    documentNumber: z.string().trim().min(3).max(50),
+  }),
+});
+
+export const verifySeminaryCredentialDocumentSchema = z.object({
+  params: z.object({
+    token: z.string().trim().min(16).max(128),
+  }),
 });

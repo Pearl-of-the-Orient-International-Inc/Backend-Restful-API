@@ -9,46 +9,19 @@ import { logger } from '@/lib/winston';
 import { sendMail } from '@/mailers';
 import { seminaryApplicationStatusTemplate } from '@/mailers/templates/seminary-application-status';
 import { seminaryApplicationInclude } from './seminary-shared';
+import { buildNextStudentId } from './student-shared';
 
 import type { Request, Response } from 'express';
-import type { Prisma } from '@/generated/prisma/client';
 import type { UpdateSeminaryApplicationStatusBody } from './types';
-
-const buildNextStudentId = async (
-  tx: Prisma.TransactionClient,
-  date = new Date(),
-) => {
-  const yearSuffix = String(date.getFullYear()).slice(-2);
-  const prefix = `POTSC-${yearSuffix}-`;
-  const latestApplication = await tx.seminaryApplication.findFirst({
-    where: {
-      studentId: {
-        startsWith: prefix,
-      },
-    },
-    orderBy: {
-      studentId: 'desc',
-    },
-    select: {
-      studentId: true,
-    },
-  });
-  const latestSeries = latestApplication?.studentId
-    ? Number.parseInt(latestApplication.studentId.slice(prefix.length), 10)
-    : 0;
-  const nextSeries = Number.isFinite(latestSeries) ? latestSeries + 1 : 1;
-
-  return `${prefix}${String(nextSeries).padStart(4, '0')}`;
-};
 
 const getApplicantName = ({
   givenName,
   middleName,
   surname,
 }: {
-  givenName: string;
+  givenName: string | null;
   middleName: string | null;
-  surname: string;
+  surname: string | null;
 }) =>
   [givenName, middleName, surname]
     .filter(Boolean)
@@ -157,7 +130,7 @@ export const updateSeminaryApplicationStatus = async (
           name:
             getApplicantName(existingApplication) ||
             existingApplication.emailAddress,
-          programCourse: existingApplication.programCourse,
+          programCourse: existingApplication.programCourse ?? 'Selected program',
           reason: body.reviewRemarks,
           status: body.status,
           studentId: application?.studentId,

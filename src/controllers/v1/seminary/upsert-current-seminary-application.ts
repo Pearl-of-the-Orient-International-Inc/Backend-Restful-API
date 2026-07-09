@@ -134,9 +134,9 @@ export const upsertCurrentSeminaryApplication = async (
       const emailResult = await sendMail({
         sendTo: applicationData.emailAddress,
         ...seminaryAdmissionSubmittedTemplate({
-          name: applicantName,
-          programLevel: applicationData.programLevel,
-          programCourse: applicationData.programCourse,
+          name: applicantName || applicationData.emailAddress,
+          programLevel: applicationData.programLevel ?? 'Selected level',
+          programCourse: applicationData.programCourse ?? 'Selected program',
         }),
       });
 
