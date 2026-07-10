@@ -272,6 +272,12 @@ export const getSeminaryStudentByIdSchema = z.object({
   }),
 });
 
+export const deleteSeminaryStudentSchema = z.object({
+  params: z.object({
+    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+  }),
+});
+
 export const getAllSeminaryStudentsSchema = z.object({
   query: z.object({
     page: z
@@ -296,6 +302,15 @@ export const getAllSeminaryStudentsSchema = z.object({
 export const bulkImportSeminaryStudentsSchema = z.object({
   body: z.object({
     students: z.array(seminaryStudentBodySchema).min(1).max(1000),
+  }),
+});
+
+export const bulkDeleteSeminaryStudentsSchema = z.object({
+  body: z.object({
+    studentIds: z
+      .array(z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/))
+      .min(1)
+      .max(1000),
   }),
 });
 

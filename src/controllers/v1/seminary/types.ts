@@ -1,6 +1,7 @@
 import type { z } from 'zod';
 import type {
   getAllSeminaryApplicationsSchema,
+  bulkDeleteSeminaryStudentsSchema,
   bulkImportSeminaryStudentsSchema,
   createSeminaryStudentSchema,
   generateSeminaryCredentialDocumentSchema,
@@ -39,6 +40,10 @@ export type GetAllSeminaryStudentsQuery = z.infer<
 
 export type BulkImportSeminaryStudentsBody = z.infer<
   typeof bulkImportSeminaryStudentsSchema
+>['body'];
+
+export type BulkDeleteSeminaryStudentsBody = z.infer<
+  typeof bulkDeleteSeminaryStudentsSchema
 >['body'];
 
 export type GenerateSeminaryCredentialDocumentBody = z.infer<

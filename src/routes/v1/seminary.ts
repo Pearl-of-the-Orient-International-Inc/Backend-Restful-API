@@ -12,7 +12,9 @@ import { getAllSeminaryApplications } from '@/controllers/v1/seminary/get-all-se
 import { getSeminaryApplicationById } from '@/controllers/v1/seminary/get-seminary-application-by-id';
 import { updateSeminaryApplicationStatus } from '@/controllers/v1/seminary/update-seminary-application-status';
 import { bulkImportSeminaryStudents } from '@/controllers/v1/seminary/bulk-import-seminary-students';
+import { bulkDeleteSeminaryStudents } from '@/controllers/v1/seminary/bulk-delete-seminary-students';
 import { createSeminaryStudent } from '@/controllers/v1/seminary/create-seminary-student';
+import { deleteSeminaryStudent } from '@/controllers/v1/seminary/delete-seminary-student';
 import { generateSeminaryCredentialDocument } from '@/controllers/v1/seminary/generate-seminary-credential-document';
 import { getAllSeminaryStudents } from '@/controllers/v1/seminary/get-all-seminary-students';
 import { getSeminaryCredentialDocumentByNumber } from '@/controllers/v1/seminary/get-seminary-credential-document-by-number';
@@ -33,7 +35,9 @@ import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { UserType } from '@/generated/prisma/enums';
 import {
   bulkImportSeminaryStudentsSchema,
+  bulkDeleteSeminaryStudentsSchema,
   createSeminaryStudentSchema,
+  deleteSeminaryStudentSchema,
   generateSeminaryCredentialDocumentSchema,
   getAllSeminaryApplicationsSchema,
   getAllSeminaryStudentsSchema,
@@ -136,6 +140,14 @@ router.post(
   bulkImportSeminaryStudents,
 );
 
+router.delete(
+  '/students/bulk-delete',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(bulkDeleteSeminaryStudentsSchema),
+  bulkDeleteSeminaryStudents,
+);
+
 router.get(
   '/credential-documents/verify/:token',
   expressRateLimit('basic'),
@@ -181,6 +193,14 @@ router.put(
   ...seminaryStudentAdminAccess,
   validate(updateSeminaryStudentSchema),
   updateSeminaryStudent,
+);
+
+router.delete(
+  '/students/:studentId',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(deleteSeminaryStudentSchema),
+  deleteSeminaryStudent,
 );
 
 export default router;

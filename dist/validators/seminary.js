@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkImportSeminaryStudentsSchema = exports.getAllSeminaryStudentsSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
+exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.getAllSeminaryStudentsSchema = exports.deleteSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const optionalText = (max = 255) => zod_1.z.string().trim().max(max).optional();
@@ -232,6 +232,11 @@ exports.getSeminaryStudentByIdSchema = zod_1.z.object({
         studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
     }),
 });
+exports.deleteSeminaryStudentSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+    }),
+});
 exports.getAllSeminaryStudentsSchema = zod_1.z.object({
     query: zod_1.z.object({
         page: zod_1.z
@@ -255,6 +260,14 @@ exports.getAllSeminaryStudentsSchema = zod_1.z.object({
 exports.bulkImportSeminaryStudentsSchema = zod_1.z.object({
     body: zod_1.z.object({
         students: zod_1.z.array(seminaryStudentBodySchema).min(1).max(1000),
+    }),
+});
+exports.bulkDeleteSeminaryStudentsSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        studentIds: zod_1.z
+            .array(zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/))
+            .min(1)
+            .max(1000),
     }),
 });
 exports.generateSeminaryCredentialDocumentSchema = zod_1.z.object({
