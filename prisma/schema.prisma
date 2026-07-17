@@ -459,6 +459,7 @@ model SeminaryApplication {
   studentId        String?                   @unique
   studentStatus    SeminaryStudentStatus     @default(ACTIVE)
   enrollmentType   SeminaryEnrollmentType    @default(REGULAR)
+  schoolAffiliation SeminarySchoolAffiliation @default(IN_HOUSE)
   yearLevel        String?
 
   // Personal Information
@@ -994,6 +995,11 @@ enum SeminaryEnrollmentType {
   REGULAR
   TRANSFEREE
   CROSS_ENROLLEE
+}
+
+enum SeminarySchoolAffiliation {
+  IN_HOUSE
+  PARTNER_SCHOOL
 }
 
 enum SeminaryProgramLevel {

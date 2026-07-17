@@ -638,6 +638,13 @@ export type EnumSeminaryEnrollmentTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel> | $Enums.SeminaryEnrollmentType
 }
 
+export type EnumSeminarySchoolAffiliationFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminarySchoolAffiliation | Prisma.EnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel> | $Enums.SeminarySchoolAffiliation
+}
+
 export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
@@ -691,6 +698,16 @@ export type EnumSeminaryEnrollmentTypeWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
+}
+
+export type EnumSeminarySchoolAffiliationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminarySchoolAffiliation | Prisma.EnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminarySchoolAffiliationWithAggregatesFilter<$PrismaModel> | $Enums.SeminarySchoolAffiliation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel>
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -1662,6 +1679,13 @@ export type NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel> | $Enums.SeminaryEnrollmentType
 }
 
+export type NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminarySchoolAffiliation | Prisma.EnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel> | $Enums.SeminarySchoolAffiliation
+}
+
 export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel> | null
   in?: $Enums.Gender[] | Prisma.ListEnumGenderFieldRefInput<$PrismaModel> | null
@@ -1704,6 +1728,16 @@ export type NestedEnumSeminaryEnrollmentTypeWithAggregatesFilter<$PrismaModel = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSeminaryEnrollmentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminarySchoolAffiliationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminarySchoolAffiliation | Prisma.EnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminarySchoolAffiliation[] | Prisma.ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminarySchoolAffiliationWithAggregatesFilter<$PrismaModel> | $Enums.SeminarySchoolAffiliation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminarySchoolAffiliationFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {

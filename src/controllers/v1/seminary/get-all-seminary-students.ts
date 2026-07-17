@@ -25,6 +25,9 @@ export const getAllSeminaryStudents = async (
       studentId: { not: null },
       ...(query.programLevel ? { programLevel: query.programLevel } : {}),
       ...(query.studentStatus ? { studentStatus: query.studentStatus } : {}),
+      ...(query.schoolAffiliation
+        ? { schoolAffiliation: query.schoolAffiliation }
+        : {}),
       ...(query.academicYear ? { academicYear: query.academicYear } : {}),
       ...(search
         ? {
@@ -70,4 +73,3 @@ export const getAllSeminaryStudents = async (
     });
   }
 };
-

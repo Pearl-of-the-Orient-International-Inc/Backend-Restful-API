@@ -448,6 +448,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   studentId: 'studentId',
   studentStatus: 'studentStatus',
   enrollmentType: 'enrollmentType',
+  schoolAffiliation: 'schoolAffiliation',
   yearLevel: 'yearLevel',
   academicYear: 'academicYear',
   surname: 'surname',

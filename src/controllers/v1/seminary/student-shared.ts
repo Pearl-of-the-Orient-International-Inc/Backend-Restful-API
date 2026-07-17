@@ -3,6 +3,7 @@ import {
   SeminaryApplicationStatus,
   SeminaryEnrollmentType,
   SeminaryProgramLevel,
+  SeminarySchoolAffiliation,
   SeminaryStudentStatus,
 } from '@/generated/prisma/enums';
 
@@ -38,6 +39,12 @@ const enrollmentTypeLabels: Record<string, SeminaryEnrollmentType> = {
   Regular: SeminaryEnrollmentType.REGULAR,
   Transferee: SeminaryEnrollmentType.TRANSFEREE,
   'Cross Enrollee': SeminaryEnrollmentType.CROSS_ENROLLEE,
+};
+
+const schoolAffiliationLabels: Record<string, SeminarySchoolAffiliation> = {
+  'In-House': SeminarySchoolAffiliation.IN_HOUSE,
+  'In House': SeminarySchoolAffiliation.IN_HOUSE,
+  'Partner School': SeminarySchoolAffiliation.PARTNER_SCHOOL,
 };
 
 const studentStatusLabels: Record<string, SeminaryStudentStatus> = {
@@ -79,16 +86,17 @@ export const buildSeminaryStudentData = (
   ),
   programCourse: trimToNull(body.programCourse),
   enrollmentType:
+    normalizeRequiredLabeledEnum(body.enrollmentType, enrollmentTypeLabels) ??
+    SeminaryEnrollmentType.REGULAR,
+  schoolAffiliation:
     normalizeRequiredLabeledEnum(
-    body.enrollmentType,
-    enrollmentTypeLabels,
-    ) ?? SeminaryEnrollmentType.REGULAR,
+      body.schoolAffiliation,
+      schoolAffiliationLabels,
+    ) ?? SeminarySchoolAffiliation.IN_HOUSE,
   yearLevel: trimToNull(body.yearLevel),
   studentStatus:
-    normalizeRequiredLabeledEnum(
-    body.studentStatus,
-    studentStatusLabels,
-    ) ?? SeminaryStudentStatus.ACTIVE,
+    normalizeRequiredLabeledEnum(body.studentStatus, studentStatusLabels) ??
+    SeminaryStudentStatus.ACTIVE,
   status: SeminaryApplicationStatus.APPROVED,
   reviewedAt: new Date(),
   submittedAt: new Date(),

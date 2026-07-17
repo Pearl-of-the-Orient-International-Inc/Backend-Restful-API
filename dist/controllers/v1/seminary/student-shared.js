@@ -31,6 +31,11 @@ const enrollmentTypeLabels = {
     Transferee: enums_1.SeminaryEnrollmentType.TRANSFEREE,
     'Cross Enrollee': enums_1.SeminaryEnrollmentType.CROSS_ENROLLEE,
 };
+const schoolAffiliationLabels = {
+    'In-House': enums_1.SeminarySchoolAffiliation.IN_HOUSE,
+    'In House': enums_1.SeminarySchoolAffiliation.IN_HOUSE,
+    'Partner School': enums_1.SeminarySchoolAffiliation.PARTNER_SCHOOL,
+};
 const studentStatusLabels = {
     Active: enums_1.SeminaryStudentStatus.ACTIVE,
     Graduating: enums_1.SeminaryStudentStatus.GRADUATING,
@@ -45,7 +50,7 @@ const genderLabels = {
     'Prefer not to say': enums_1.Gender.PREFER_NOT_TO_SAY,
 };
 const buildSeminaryStudentData = (body) => {
-    var _a, _b;
+    var _a, _b, _c;
     return ({
         academicYear: trimToNull(body.academicYear),
         surname: trimToNull(body.surname),
@@ -65,8 +70,9 @@ const buildSeminaryStudentData = (body) => {
         programLevel: normalizeRequiredLabeledEnum(body.programLevel, programLevelLabels),
         programCourse: trimToNull(body.programCourse),
         enrollmentType: (_a = normalizeRequiredLabeledEnum(body.enrollmentType, enrollmentTypeLabels)) !== null && _a !== void 0 ? _a : enums_1.SeminaryEnrollmentType.REGULAR,
+        schoolAffiliation: (_b = normalizeRequiredLabeledEnum(body.schoolAffiliation, schoolAffiliationLabels)) !== null && _b !== void 0 ? _b : enums_1.SeminarySchoolAffiliation.IN_HOUSE,
         yearLevel: trimToNull(body.yearLevel),
-        studentStatus: (_b = normalizeRequiredLabeledEnum(body.studentStatus, studentStatusLabels)) !== null && _b !== void 0 ? _b : enums_1.SeminaryStudentStatus.ACTIVE,
+        studentStatus: (_c = normalizeRequiredLabeledEnum(body.studentStatus, studentStatusLabels)) !== null && _c !== void 0 ? _c : enums_1.SeminaryStudentStatus.ACTIVE,
         status: enums_1.SeminaryApplicationStatus.APPROVED,
         reviewedAt: new Date(),
         submittedAt: new Date(),

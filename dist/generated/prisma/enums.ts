@@ -228,6 +228,14 @@ export const SeminaryEnrollmentType = {
 export type SeminaryEnrollmentType = (typeof SeminaryEnrollmentType)[keyof typeof SeminaryEnrollmentType]
 
 
+export const SeminarySchoolAffiliation = {
+  IN_HOUSE: 'IN_HOUSE',
+  PARTNER_SCHOOL: 'PARTNER_SCHOOL'
+} as const
+
+export type SeminarySchoolAffiliation = (typeof SeminarySchoolAffiliation)[keyof typeof SeminarySchoolAffiliation]
+
+
 export const SeminaryProgramLevel = {
   CERTIFICATE: 'CERTIFICATE',
   BACHELOR: 'BACHELOR',

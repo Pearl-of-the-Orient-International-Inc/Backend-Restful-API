@@ -3485,6 +3485,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   studentId: 'studentId',
   studentStatus: 'studentStatus',
   enrollmentType: 'enrollmentType',
+  schoolAffiliation: 'schoolAffiliation',
   yearLevel: 'yearLevel',
   academicYear: 'academicYear',
   surname: 'surname',
@@ -4199,6 +4200,20 @@ export type EnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel> = FieldRefInpu
  * Reference to a field of type 'SeminaryEnrollmentType[]'
  */
 export type ListEnumSeminaryEnrollmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryEnrollmentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminarySchoolAffiliation'
+ */
+export type EnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminarySchoolAffiliation'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminarySchoolAffiliation[]'
+ */
+export type ListEnumSeminarySchoolAffiliationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminarySchoolAffiliation[]'>
     
 
 

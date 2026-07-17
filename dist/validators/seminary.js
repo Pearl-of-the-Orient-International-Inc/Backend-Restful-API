@@ -4,6 +4,14 @@ exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDo
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const optionalText = (max = 255) => zod_1.z.string().trim().max(max).optional();
+const seminaryStudentIdSchema = zod_1.z
+    .string()
+    .trim()
+    .min(3)
+    .max(60)
+    .regex(/^[A-Za-z0-9-]+$/, {
+    message: 'studentId may only contain letters, numbers, and hyphens',
+});
 const optionalUrl = zod_1.z.preprocess((value) => {
     if (typeof value !== 'string')
         return value;
@@ -35,6 +43,11 @@ const enrollmentTypeSchema = normalizeEnumValue(enums_1.SeminaryEnrollmentType, 
     Regular: enums_1.SeminaryEnrollmentType.REGULAR,
     Transferee: enums_1.SeminaryEnrollmentType.TRANSFEREE,
     'Cross Enrollee': enums_1.SeminaryEnrollmentType.CROSS_ENROLLEE,
+});
+const schoolAffiliationSchema = normalizeEnumValue(enums_1.SeminarySchoolAffiliation, {
+    'In-House': enums_1.SeminarySchoolAffiliation.IN_HOUSE,
+    'In House': enums_1.SeminarySchoolAffiliation.IN_HOUSE,
+    'Partner School': enums_1.SeminarySchoolAffiliation.PARTNER_SCHOOL,
 });
 const credentialDocumentTypeSchema = normalizeEnumValue(enums_1.SeminaryCredentialDocumentType, {
     Diploma: enums_1.SeminaryCredentialDocumentType.DIPLOMA,
@@ -179,7 +192,9 @@ exports.updateSeminaryApplicationStatusSchema = zod_1.z.object({
     }),
     body: zod_1.z
         .object({
-        status: zod_1.z.enum(enums_1.SeminaryApplicationStatus).refine((value) => value === enums_1.SeminaryApplicationStatus.UNDER_REVIEW ||
+        status: zod_1.z
+            .enum(enums_1.SeminaryApplicationStatus)
+            .refine((value) => value === enums_1.SeminaryApplicationStatus.UNDER_REVIEW ||
             value === enums_1.SeminaryApplicationStatus.APPROVED ||
             value === enums_1.SeminaryApplicationStatus.REJECTED, {
             message: 'status must be UNDER_REVIEW, APPROVED, or REJECTED',
@@ -196,7 +211,10 @@ exports.updateSeminaryApplicationStatusSchema = zod_1.z.object({
     }),
 });
 const seminaryStudentBodySchema = zod_1.z.object({
-    studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/).optional().or(zod_1.z.literal('')),
+    studentId: zod_1.z
+        .preprocess((value) => (typeof value === 'string' ? value.toUpperCase() : value), seminaryStudentIdSchema)
+        .optional()
+        .or(zod_1.z.literal('')),
     academicYear: optionalText(50),
     surname: optionalText(100),
     givenName: optionalText(100),
@@ -215,6 +233,7 @@ const seminaryStudentBodySchema = zod_1.z.object({
     programLevel: programLevelSchema.optional().or(zod_1.z.literal('')),
     programCourse: optionalText(150),
     enrollmentType: enrollmentTypeSchema.optional().or(zod_1.z.literal('')),
+    schoolAffiliation: schoolAffiliationSchema.optional().or(zod_1.z.literal('')),
     yearLevel: optionalText(100),
     studentStatus: studentStatusSchema.optional().or(zod_1.z.literal('')),
 });
@@ -223,18 +242,18 @@ exports.createSeminaryStudentSchema = zod_1.z.object({
 });
 exports.updateSeminaryStudentSchema = zod_1.z.object({
     params: zod_1.z.object({
-        studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+        studentId: seminaryStudentIdSchema,
     }),
     body: seminaryStudentBodySchema,
 });
 exports.getSeminaryStudentByIdSchema = zod_1.z.object({
     params: zod_1.z.object({
-        studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+        studentId: seminaryStudentIdSchema,
     }),
 });
 exports.deleteSeminaryStudentSchema = zod_1.z.object({
     params: zod_1.z.object({
-        studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+        studentId: seminaryStudentIdSchema,
     }),
 });
 exports.getAllSeminaryStudentsSchema = zod_1.z.object({
@@ -254,6 +273,7 @@ exports.getAllSeminaryStudentsSchema = zod_1.z.object({
         search: optionalText(100),
         programLevel: programLevelSchema.optional(),
         studentStatus: studentStatusSchema.optional(),
+        schoolAffiliation: schoolAffiliationSchema.optional(),
         academicYear: optionalText(50),
     }),
 });
@@ -265,14 +285,14 @@ exports.bulkImportSeminaryStudentsSchema = zod_1.z.object({
 exports.bulkDeleteSeminaryStudentsSchema = zod_1.z.object({
     body: zod_1.z.object({
         studentIds: zod_1.z
-            .array(zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/))
+            .array(seminaryStudentIdSchema)
             .min(1)
             .max(1000),
     }),
 });
 exports.generateSeminaryCredentialDocumentSchema = zod_1.z.object({
     params: zod_1.z.object({
-        studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+        studentId: seminaryStudentIdSchema,
     }),
     body: zod_1.z.object({
         type: credentialDocumentTypeSchema,
@@ -282,7 +302,7 @@ exports.generateSeminaryCredentialDocumentSchema = zod_1.z.object({
 });
 exports.getSeminaryCredentialDocumentsSchema = zod_1.z.object({
     params: zod_1.z.object({
-        studentId: zod_1.z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+        studentId: seminaryStudentIdSchema,
     }),
     query: zod_1.z.object({
         type: credentialDocumentTypeSchema.optional(),

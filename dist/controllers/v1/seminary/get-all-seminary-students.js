@@ -22,7 +22,9 @@ const getAllSeminaryStudents = (req, res) => __awaiter(void 0, void 0, void 0, f
         const limit = Math.min(Math.max(Number.parseInt((_b = query.limit) !== null && _b !== void 0 ? _b : '10', 10), 1), 100);
         const skip = (page - 1) * limit;
         const search = (_c = query.search) === null || _c === void 0 ? void 0 : _c.trim();
-        const where = Object.assign(Object.assign(Object.assign(Object.assign({ studentId: { not: null } }, (query.programLevel ? { programLevel: query.programLevel } : {})), (query.studentStatus ? { studentStatus: query.studentStatus } : {})), (query.academicYear ? { academicYear: query.academicYear } : {})), (search
+        const where = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ studentId: { not: null } }, (query.programLevel ? { programLevel: query.programLevel } : {})), (query.studentStatus ? { studentStatus: query.studentStatus } : {})), (query.schoolAffiliation
+            ? { schoolAffiliation: query.schoolAffiliation }
+            : {})), (query.academicYear ? { academicYear: query.academicYear } : {})), (search
             ? {
                 OR: [
                     { studentId: { contains: search, mode: 'insensitive' } },

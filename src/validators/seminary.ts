@@ -8,10 +8,19 @@ import {
   SeminaryPaymentMethod,
   SeminaryPaymentType,
   SeminaryProgramLevel,
+  SeminarySchoolAffiliation,
   SeminaryStudentStatus,
 } from '@/generated/prisma/enums';
 
 const optionalText = (max = 255) => z.string().trim().max(max).optional();
+const seminaryStudentIdSchema = z
+  .string()
+  .trim()
+  .min(3)
+  .max(60)
+  .regex(/^[A-Za-z0-9-]+$/, {
+    message: 'studentId may only contain letters, numbers, and hyphens',
+  });
 const optionalUrl = z.preprocess((value) => {
   if (typeof value !== 'string') return value;
 
@@ -51,6 +60,12 @@ const enrollmentTypeSchema = normalizeEnumValue(SeminaryEnrollmentType, {
   Regular: SeminaryEnrollmentType.REGULAR,
   Transferee: SeminaryEnrollmentType.TRANSFEREE,
   'Cross Enrollee': SeminaryEnrollmentType.CROSS_ENROLLEE,
+});
+
+const schoolAffiliationSchema = normalizeEnumValue(SeminarySchoolAffiliation, {
+  'In-House': SeminarySchoolAffiliation.IN_HOUSE,
+  'In House': SeminarySchoolAffiliation.IN_HOUSE,
+  'Partner School': SeminarySchoolAffiliation.PARTNER_SCHOOL,
 });
 
 const credentialDocumentTypeSchema = normalizeEnumValue(
@@ -209,15 +224,17 @@ export const updateSeminaryApplicationStatusSchema = z.object({
   }),
   body: z
     .object({
-      status: z.enum(SeminaryApplicationStatus).refine(
-        (value) =>
-          value === SeminaryApplicationStatus.UNDER_REVIEW ||
-          value === SeminaryApplicationStatus.APPROVED ||
-          value === SeminaryApplicationStatus.REJECTED,
-        {
-          message: 'status must be UNDER_REVIEW, APPROVED, or REJECTED',
-        },
-      ),
+      status: z
+        .enum(SeminaryApplicationStatus)
+        .refine(
+          (value) =>
+            value === SeminaryApplicationStatus.UNDER_REVIEW ||
+            value === SeminaryApplicationStatus.APPROVED ||
+            value === SeminaryApplicationStatus.REJECTED,
+          {
+            message: 'status must be UNDER_REVIEW, APPROVED, or REJECTED',
+          },
+        ),
       reviewRemarks: optionalText(1000),
     })
     .refine(
@@ -232,7 +249,13 @@ export const updateSeminaryApplicationStatusSchema = z.object({
 });
 
 const seminaryStudentBodySchema = z.object({
-  studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/).optional().or(z.literal('')),
+  studentId: z
+    .preprocess(
+      (value) => (typeof value === 'string' ? value.toUpperCase() : value),
+      seminaryStudentIdSchema,
+    )
+    .optional()
+    .or(z.literal('')),
   academicYear: optionalText(50),
   surname: optionalText(100),
   givenName: optionalText(100),
@@ -251,6 +274,7 @@ const seminaryStudentBodySchema = z.object({
   programLevel: programLevelSchema.optional().or(z.literal('')),
   programCourse: optionalText(150),
   enrollmentType: enrollmentTypeSchema.optional().or(z.literal('')),
+  schoolAffiliation: schoolAffiliationSchema.optional().or(z.literal('')),
   yearLevel: optionalText(100),
   studentStatus: studentStatusSchema.optional().or(z.literal('')),
 });
@@ -261,20 +285,20 @@ export const createSeminaryStudentSchema = z.object({
 
 export const updateSeminaryStudentSchema = z.object({
   params: z.object({
-    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+    studentId: seminaryStudentIdSchema,
   }),
   body: seminaryStudentBodySchema,
 });
 
 export const getSeminaryStudentByIdSchema = z.object({
   params: z.object({
-    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+    studentId: seminaryStudentIdSchema,
   }),
 });
 
 export const deleteSeminaryStudentSchema = z.object({
   params: z.object({
-    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+    studentId: seminaryStudentIdSchema,
   }),
 });
 
@@ -295,6 +319,7 @@ export const getAllSeminaryStudentsSchema = z.object({
     search: optionalText(100),
     programLevel: programLevelSchema.optional(),
     studentStatus: studentStatusSchema.optional(),
+    schoolAffiliation: schoolAffiliationSchema.optional(),
     academicYear: optionalText(50),
   }),
 });
@@ -308,7 +333,7 @@ export const bulkImportSeminaryStudentsSchema = z.object({
 export const bulkDeleteSeminaryStudentsSchema = z.object({
   body: z.object({
     studentIds: z
-      .array(z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/))
+      .array(seminaryStudentIdSchema)
       .min(1)
       .max(1000),
   }),
@@ -316,7 +341,7 @@ export const bulkDeleteSeminaryStudentsSchema = z.object({
 
 export const generateSeminaryCredentialDocumentSchema = z.object({
   params: z.object({
-    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+    studentId: seminaryStudentIdSchema,
   }),
   body: z.object({
     type: credentialDocumentTypeSchema,
@@ -327,7 +352,7 @@ export const generateSeminaryCredentialDocumentSchema = z.object({
 
 export const getSeminaryCredentialDocumentsSchema = z.object({
   params: z.object({
-    studentId: z.string().trim().regex(/^POTSC-\d{2}-\d{4}$/),
+    studentId: seminaryStudentIdSchema,
   }),
   query: z.object({
     type: credentialDocumentTypeSchema.optional(),
