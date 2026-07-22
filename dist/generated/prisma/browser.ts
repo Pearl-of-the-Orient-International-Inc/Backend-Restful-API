@@ -143,6 +143,31 @@ export type SeminaryRequirements = Prisma.SeminaryRequirementsModel
  */
 export type SeminaryPayment = Prisma.SeminaryPaymentModel
 /**
+ * Model SeminaryCourse
+ * 
+ */
+export type SeminaryCourse = Prisma.SeminaryCourseModel
+/**
+ * Model SeminaryAcademicYear
+ * 
+ */
+export type SeminaryAcademicYear = Prisma.SeminaryAcademicYearModel
+/**
+ * Model SeminaryGradeConfiguration
+ * 
+ */
+export type SeminaryGradeConfiguration = Prisma.SeminaryGradeConfigurationModel
+/**
+ * Model AccountingPayable
+ * 
+ */
+export type AccountingPayable = Prisma.AccountingPayableModel
+/**
+ * Model AccountingPayableItem
+ * 
+ */
+export type AccountingPayableItem = Prisma.AccountingPayableItemModel
+/**
  * Model BranchOfService
  * 
  */

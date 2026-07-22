@@ -2,8 +2,12 @@ import { z } from 'zod';
 import {
   CivilStatus,
   Gender,
+  SeminaryAcademicYearSession,
+  SeminaryAcademicYearStatus,
   SeminaryApplicationStatus,
   SeminaryCredentialDocumentType,
+  SeminaryCourseModality,
+  SeminaryCourseStatus,
   SeminaryEnrollmentType,
   SeminaryPaymentMethod,
   SeminaryPaymentType,
@@ -77,6 +81,32 @@ const credentialDocumentTypeSchema = normalizeEnumValue(
   },
 );
 
+const courseModalitySchema = normalizeEnumValue(SeminaryCourseModality, {
+  'Face to Face': SeminaryCourseModality.FACE_TO_FACE,
+  Online: SeminaryCourseModality.ONLINE,
+  Both: SeminaryCourseModality.BOTH,
+});
+
+const courseStatusSchema = normalizeEnumValue(SeminaryCourseStatus, {
+  Active: SeminaryCourseStatus.ACTIVE,
+  Inactive: SeminaryCourseStatus.INACTIVE,
+});
+
+const academicYearSessionSchema = normalizeEnumValue(
+  SeminaryAcademicYearSession,
+  {
+    Current: SeminaryAcademicYearSession.CURRENT,
+    Previous: SeminaryAcademicYearSession.PREVIOUS,
+    Upcoming: SeminaryAcademicYearSession.UPCOMING,
+  },
+);
+
+const academicYearStatusSchema = normalizeEnumValue(SeminaryAcademicYearStatus, {
+  Active: SeminaryAcademicYearStatus.ACTIVE,
+  Upcoming: SeminaryAcademicYearStatus.UPCOMING,
+  Completed: SeminaryAcademicYearStatus.COMPLETED,
+});
+
 const paymentTypeSchema = normalizeEnumValue(SeminaryPaymentType, {
   'Full Payment': SeminaryPaymentType.FULL_PAYMENT,
   'Partial Payment': SeminaryPaymentType.PARTIAL_PAYMENT,
@@ -91,16 +121,23 @@ const paymentMethodSchema = normalizeEnumValue(SeminaryPaymentMethod, {
 
 const genderSchema = normalizeEnumValue(Gender, {
   Male: Gender.MALE,
+  male: Gender.MALE,
   Female: Gender.FEMALE,
+  female: Gender.FEMALE,
   'Prefer not to say': Gender.PREFER_NOT_TO_SAY,
 });
 
 const civilStatusSchema = normalizeEnumValue(CivilStatus, {
   Single: CivilStatus.SINGLE,
+  single: CivilStatus.SINGLE,
   Married: CivilStatus.MARRIED,
+  married: CivilStatus.MARRIED,
   Widowed: CivilStatus.WIDOWED,
+  widowed: CivilStatus.WIDOWED,
   Separated: CivilStatus.SEPARATED,
+  separated: CivilStatus.SEPARATED,
   Annulled: CivilStatus.ANNULLED,
+  annulled: CivilStatus.ANNULLED,
 });
 
 const dateStringSchema = z
@@ -190,6 +227,46 @@ export const upsertCurrentSeminaryApplicationSchema = z.object({
     proofOfReceiptFileName: optionalText(),
     proofOfReceiptMimeType: optionalText(100),
     proofOfReceiptFileSize: optionalText(50),
+  }),
+});
+
+export const createSeminaryApplicationSchema = z.object({
+  body: z.object({
+    admissionDate: dateStringSchema,
+    academicYear: optionalText(50),
+    surname: optionalText(100),
+    givenName: optionalText(100),
+    middleName: optionalText(100),
+    emailAddress: z.email().optional().or(z.literal('')),
+    mobilePhone: optionalText(30),
+    mailingAddress: optionalText(255),
+    homeAddress: optionalText(255),
+    dateOfBirth: dateStringSchema,
+    birthPlace: optionalText(150),
+    age: z.string().trim().optional().or(z.number().optional()),
+    gender: genderSchema.optional().or(z.literal('')),
+    height: optionalText(30),
+    weight: optionalText(30),
+    civilStatus: civilStatusSchema.optional().or(z.literal('')),
+    officePhone: optionalText(30),
+    churchAttended: optionalText(150),
+    churchAddress: optionalText(255),
+    pastorName: optionalText(150),
+    contactNumber: optionalText(30),
+    ministryInvolved: optionalText(255),
+    programLevel: programLevelSchema.optional().or(z.literal('')),
+    programCourse: optionalText(1000),
+    highSchool: optionalText(150),
+    highSchoolYearGraduated: optionalText(50),
+    collegeSchool: optionalText(150),
+    collegeCourse: optionalText(150),
+    collegeYearGraduated: optionalText(50),
+    vocationalSchool: optionalText(150),
+    vocationalCourse: optionalText(150),
+    vocationalYearGraduated: optionalText(50),
+    othersSchool: optionalText(150),
+    othersCourse: optionalText(150),
+    othersYearGraduated: optionalText(50),
   }),
 });
 
@@ -321,6 +398,175 @@ export const getAllSeminaryStudentsSchema = z.object({
     studentStatus: studentStatusSchema.optional(),
     schoolAffiliation: schoolAffiliationSchema.optional(),
     academicYear: optionalText(50),
+  }),
+});
+
+const seminaryCourseIdSchema = z.uuid();
+
+const seminaryCourseBodySchema = z.object({
+  courseName: z.string().trim().min(1).max(200),
+  courseCode: z
+    .string()
+    .trim()
+    .min(1)
+    .max(40)
+    .transform((value) => value.toUpperCase()),
+  program: programLevelSchema,
+  units: z.coerce.number().int().min(1).max(12),
+  modality: courseModalitySchema,
+  status: courseStatusSchema.optional(),
+  sortOrder: z.coerce.number().int().min(0).optional(),
+});
+
+export const getAllSeminaryCoursesSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'page must be a positive integer',
+      }),
+    limit: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'limit must be a positive integer',
+      }),
+    search: optionalText(100),
+    program: programLevelSchema.optional(),
+    modality: courseModalitySchema.optional(),
+    status: courseStatusSchema.optional(),
+  }),
+});
+
+export const createSeminaryCourseSchema = z.object({
+  body: seminaryCourseBodySchema,
+});
+
+export const updateSeminaryCourseSchema = z.object({
+  params: z.object({
+    id: seminaryCourseIdSchema,
+  }),
+  body: seminaryCourseBodySchema,
+});
+
+export const updateSeminaryCourseStatusSchema = z.object({
+  params: z.object({
+    id: seminaryCourseIdSchema,
+  }),
+  body: z.object({
+    status: courseStatusSchema,
+  }),
+});
+
+export const deleteSeminaryCourseSchema = z.object({
+  params: z.object({
+    id: seminaryCourseIdSchema,
+  }),
+});
+
+const seminaryAcademicYearIdSchema = z.uuid();
+
+const academicYearDateSchema = z
+  .string()
+  .trim()
+  .refine((value) => !Number.isNaN(Date.parse(value)), {
+    message: 'date must be a valid date',
+  });
+
+const seminaryAcademicYearBodySchema = z
+  .object({
+    academicYear: z
+      .string()
+      .trim()
+      .min(4)
+      .max(20)
+      .regex(/^\d{4}-\d{4}$/, {
+        message: 'academicYear must use YYYY-YYYY format',
+      }),
+    session: academicYearSessionSchema,
+    status: academicYearStatusSchema,
+    startDate: academicYearDateSchema,
+    endDate: academicYearDateSchema,
+    sortOrder: z.coerce.number().int().min(0).optional(),
+  })
+  .refine((body) => new Date(body.endDate) >= new Date(body.startDate), {
+    message: 'endDate must be after startDate',
+    path: ['endDate'],
+  });
+
+export const getAllSeminaryAcademicYearsSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'page must be a positive integer',
+      }),
+    limit: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'limit must be a positive integer',
+      }),
+    search: optionalText(100),
+    session: academicYearSessionSchema.optional(),
+    status: academicYearStatusSchema.optional(),
+  }),
+});
+
+export const createSeminaryAcademicYearSchema = z.object({
+  body: seminaryAcademicYearBodySchema,
+});
+
+export const updateSeminaryAcademicYearSchema = z.object({
+  params: z.object({
+    id: seminaryAcademicYearIdSchema,
+  }),
+  body: seminaryAcademicYearBodySchema,
+});
+
+export const updateSeminaryAcademicYearSessionSchema = z.object({
+  params: z.object({
+    id: seminaryAcademicYearIdSchema,
+  }),
+  body: z.object({
+    session: academicYearSessionSchema,
+  }),
+});
+
+export const updateSeminaryAcademicYearStatusSchema = z.object({
+  params: z.object({
+    id: seminaryAcademicYearIdSchema,
+  }),
+  body: z.object({
+    status: academicYearStatusSchema,
+  }),
+});
+
+export const deleteSeminaryAcademicYearSchema = z.object({
+  params: z.object({
+    id: seminaryAcademicYearIdSchema,
+  }),
+});
+
+const gradeScaleRowSchema = z.object({
+  equivalent: z.string().trim().min(1).max(20),
+  percentageRange: z.string().trim().min(1).max(50),
+  remarks: z.string().trim().min(1).max(100),
+});
+
+export const updateSeminaryGradeConfigurationSchema = z.object({
+  body: z.object({
+    passingEquivalent: z.string().trim().min(1).max(20).optional(),
+    releaseWindow: z.string().trim().min(1).max(100).optional(),
+    weightProfile: z.string().trim().min(1).max(100).optional(),
+    completionWindowDays: z.coerce.number().int().min(1).max(365).optional(),
+    approvalWorkflow: z.boolean().optional(),
+    allowFacultyOverride: z.boolean().optional(),
+    autoPublishApproved: z.boolean().optional(),
+    showConditionalRemark: z.boolean().optional(),
+    gradeScale: z.array(gradeScaleRowSchema).min(1).max(50).optional(),
   }),
 });
 

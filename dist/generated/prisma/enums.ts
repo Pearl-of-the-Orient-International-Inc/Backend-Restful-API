@@ -246,6 +246,41 @@ export const SeminaryProgramLevel = {
 export type SeminaryProgramLevel = (typeof SeminaryProgramLevel)[keyof typeof SeminaryProgramLevel]
 
 
+export const SeminaryCourseModality = {
+  FACE_TO_FACE: 'FACE_TO_FACE',
+  ONLINE: 'ONLINE',
+  BOTH: 'BOTH'
+} as const
+
+export type SeminaryCourseModality = (typeof SeminaryCourseModality)[keyof typeof SeminaryCourseModality]
+
+
+export const SeminaryCourseStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SeminaryCourseStatus = (typeof SeminaryCourseStatus)[keyof typeof SeminaryCourseStatus]
+
+
+export const SeminaryAcademicYearSession = {
+  CURRENT: 'CURRENT',
+  PREVIOUS: 'PREVIOUS',
+  UPCOMING: 'UPCOMING'
+} as const
+
+export type SeminaryAcademicYearSession = (typeof SeminaryAcademicYearSession)[keyof typeof SeminaryAcademicYearSession]
+
+
+export const SeminaryAcademicYearStatus = {
+  ACTIVE: 'ACTIVE',
+  UPCOMING: 'UPCOMING',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type SeminaryAcademicYearStatus = (typeof SeminaryAcademicYearStatus)[keyof typeof SeminaryAcademicYearStatus]
+
+
 export const SeminaryPaymentType = {
   FULL_PAYMENT: 'FULL_PAYMENT',
   PARTIAL_PAYMENT: 'PARTIAL_PAYMENT'
@@ -288,6 +323,19 @@ export const SeminaryCredentialDocumentStatus = {
 } as const
 
 export type SeminaryCredentialDocumentStatus = (typeof SeminaryCredentialDocumentStatus)[keyof typeof SeminaryCredentialDocumentStatus]
+
+
+export const AccountingPayableStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  DUE_SOON: 'DUE_SOON',
+  OVERDUE: 'OVERDUE',
+  PARTIAL: 'PARTIAL',
+  PAID: 'PAID',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AccountingPayableStatus = (typeof AccountingPayableStatus)[keyof typeof AccountingPayableStatus]
 
 
 export const InterviewDay = {

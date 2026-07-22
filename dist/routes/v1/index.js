@@ -16,6 +16,7 @@ const seminary_1 = __importDefault(require("../../routes/v1/seminary"));
 const report_1 = __importDefault(require("../../routes/v1/report"));
 const activity_log_1 = __importDefault(require("../../routes/v1/activity-log"));
 const backup_database_1 = __importDefault(require("../../routes/v1/backup-database"));
+const accounting_payable_1 = __importDefault(require("../../routes/v1/accounting-payable"));
 const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.status(http_codes_1.HTTPSTATUS.OK).json({
@@ -39,4 +40,5 @@ router.use('/seminary', seminary_1.default);
 router.use('/reports', report_1.default);
 router.use('/activity-logs', activity_log_1.default);
 router.use('/backups', backup_database_1.default);
+router.use('/accounting/accounts-payable', accounting_payable_1.default);
 exports.default = router;

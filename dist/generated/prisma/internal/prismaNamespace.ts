@@ -409,6 +409,11 @@ export const ModelName = {
   SeminaryCredentialDocument: 'SeminaryCredentialDocument',
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
+  SeminaryCourse: 'SeminaryCourse',
+  SeminaryAcademicYear: 'SeminaryAcademicYear',
+  SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
+  AccountingPayable: 'AccountingPayable',
+  AccountingPayableItem: 'AccountingPayableItem',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
@@ -435,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryAcademicYear" | "seminaryGradeConfiguration" | "accountingPayable" | "accountingPayableItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2289,6 +2294,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SeminaryCourse: {
+      payload: Prisma.$SeminaryCoursePayload<ExtArgs>
+      fields: Prisma.SeminaryCourseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryCourseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryCourseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryCourseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryCourseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryCourseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryCourseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryCourseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryCourseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryCourseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>
+        }
+        update: {
+          args: Prisma.SeminaryCourseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryCourseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryCourseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryCourseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryCourseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCoursePayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryCourseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryCourse>
+        }
+        groupBy: {
+          args: Prisma.SeminaryCourseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryCourseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryCourseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryCourseCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryAcademicYear: {
+      payload: Prisma.$SeminaryAcademicYearPayload<ExtArgs>
+      fields: Prisma.SeminaryAcademicYearFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryAcademicYearFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryAcademicYearFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryAcademicYearFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryAcademicYearFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryAcademicYearFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryAcademicYearCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryAcademicYearCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryAcademicYearCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryAcademicYearDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>
+        }
+        update: {
+          args: Prisma.SeminaryAcademicYearUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryAcademicYearDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryAcademicYearUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryAcademicYearUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryAcademicYearUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAcademicYearPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryAcademicYearAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryAcademicYear>
+        }
+        groupBy: {
+          args: Prisma.SeminaryAcademicYearGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAcademicYearGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryAcademicYearCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAcademicYearCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryGradeConfiguration: {
+      payload: Prisma.$SeminaryGradeConfigurationPayload<ExtArgs>
+      fields: Prisma.SeminaryGradeConfigurationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryGradeConfigurationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryGradeConfigurationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryGradeConfigurationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryGradeConfigurationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryGradeConfigurationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryGradeConfigurationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryGradeConfigurationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryGradeConfigurationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryGradeConfigurationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>
+        }
+        update: {
+          args: Prisma.SeminaryGradeConfigurationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryGradeConfigurationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryGradeConfigurationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryGradeConfigurationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryGradeConfigurationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeConfigurationPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryGradeConfigurationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryGradeConfiguration>
+        }
+        groupBy: {
+          args: Prisma.SeminaryGradeConfigurationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryGradeConfigurationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryGradeConfigurationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryGradeConfigurationCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccountingPayable: {
+      payload: Prisma.$AccountingPayablePayload<ExtArgs>
+      fields: Prisma.AccountingPayableFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingPayableFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingPayableFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingPayableFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingPayableFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>
+        }
+        findMany: {
+          args: Prisma.AccountingPayableFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>[]
+        }
+        create: {
+          args: Prisma.AccountingPayableCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>
+        }
+        createMany: {
+          args: Prisma.AccountingPayableCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingPayableCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingPayableDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>
+        }
+        update: {
+          args: Prisma.AccountingPayableUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingPayableDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingPayableUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingPayableUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingPayableUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayablePayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingPayableAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingPayable>
+        }
+        groupBy: {
+          args: Prisma.AccountingPayableGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingPayableGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingPayableCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingPayableCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccountingPayableItem: {
+      payload: Prisma.$AccountingPayableItemPayload<ExtArgs>
+      fields: Prisma.AccountingPayableItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingPayableItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingPayableItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingPayableItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingPayableItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>
+        }
+        findMany: {
+          args: Prisma.AccountingPayableItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>[]
+        }
+        create: {
+          args: Prisma.AccountingPayableItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>
+        }
+        createMany: {
+          args: Prisma.AccountingPayableItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingPayableItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingPayableItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>
+        }
+        update: {
+          args: Prisma.AccountingPayableItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingPayableItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingPayableItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingPayableItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingPayableItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingPayableItemPayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingPayableItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingPayableItem>
+        }
+        groupBy: {
+          args: Prisma.AccountingPayableItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingPayableItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingPayableItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingPayableItemCountAggregateOutputType> | number
+        }
+      }
+    }
     BranchOfService: {
       payload: Prisma.$BranchOfServicePayload<ExtArgs>
       fields: Prisma.BranchOfServiceFieldRefs
@@ -3482,6 +3857,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   id: 'id',
   status: 'status',
   targetMemberType: 'targetMemberType',
+  admissionNumber: 'admissionNumber',
   studentId: 'studentId',
   studentStatus: 'studentStatus',
   enrollmentType: 'enrollmentType',
@@ -3493,6 +3869,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   middleName: 'middleName',
   emailAddress: 'emailAddress',
   mobilePhone: 'mobilePhone',
+  mailingAddress: 'mailingAddress',
   homeAddress: 'homeAddress',
   dateOfBirth: 'dateOfBirth',
   birthPlace: 'birthPlace',
@@ -3593,6 +3970,97 @@ export const SeminaryPaymentScalarFieldEnum = {
 } as const
 
 export type SeminaryPaymentScalarFieldEnum = (typeof SeminaryPaymentScalarFieldEnum)[keyof typeof SeminaryPaymentScalarFieldEnum]
+
+
+export const SeminaryCourseScalarFieldEnum = {
+  id: 'id',
+  courseName: 'courseName',
+  courseCode: 'courseCode',
+  program: 'program',
+  units: 'units',
+  modality: 'modality',
+  status: 'status',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryCourseScalarFieldEnum = (typeof SeminaryCourseScalarFieldEnum)[keyof typeof SeminaryCourseScalarFieldEnum]
+
+
+export const SeminaryAcademicYearScalarFieldEnum = {
+  id: 'id',
+  academicYear: 'academicYear',
+  session: 'session',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAcademicYearScalarFieldEnum = (typeof SeminaryAcademicYearScalarFieldEnum)[keyof typeof SeminaryAcademicYearScalarFieldEnum]
+
+
+export const SeminaryGradeConfigurationScalarFieldEnum = {
+  id: 'id',
+  passingEquivalent: 'passingEquivalent',
+  releaseWindow: 'releaseWindow',
+  weightProfile: 'weightProfile',
+  completionWindowDays: 'completionWindowDays',
+  approvalWorkflow: 'approvalWorkflow',
+  allowFacultyOverride: 'allowFacultyOverride',
+  autoPublishApproved: 'autoPublishApproved',
+  showConditionalRemark: 'showConditionalRemark',
+  gradeScale: 'gradeScale',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryGradeConfigurationScalarFieldEnum = (typeof SeminaryGradeConfigurationScalarFieldEnum)[keyof typeof SeminaryGradeConfigurationScalarFieldEnum]
+
+
+export const AccountingPayableScalarFieldEnum = {
+  id: 'id',
+  billNo: 'billNo',
+  supplier: 'supplier',
+  category: 'category',
+  billDate: 'billDate',
+  dueDate: 'dueDate',
+  reference: 'reference',
+  description: 'description',
+  paymentTerms: 'paymentTerms',
+  paymentMethod: 'paymentMethod',
+  bankAccount: 'bankAccount',
+  remarks: 'remarks',
+  discount: 'discount',
+  tax: 'tax',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  attachments: 'attachments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingPayableScalarFieldEnum = (typeof AccountingPayableScalarFieldEnum)[keyof typeof AccountingPayableScalarFieldEnum]
+
+
+export const AccountingPayableItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  category: 'category',
+  quantity: 'quantity',
+  unitCost: 'unitCost',
+  amount: 'amount',
+  sortOrder: 'sortOrder',
+  payableId: 'payableId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingPayableItemScalarFieldEnum = (typeof AccountingPayableItemScalarFieldEnum)[keyof typeof AccountingPayableItemScalarFieldEnum]
 
 
 export const BranchOfServiceScalarFieldEnum = {
@@ -4316,6 +4784,76 @@ export type ListEnumSeminaryPaymentStatusFieldRefInput<$PrismaModel> = FieldRefI
 
 
 /**
+ * Reference to a field of type 'SeminaryCourseModality'
+ */
+export type EnumSeminaryCourseModalityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseModality'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCourseModality[]'
+ */
+export type ListEnumSeminaryCourseModalityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseModality[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCourseStatus'
+ */
+export type EnumSeminaryCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCourseStatus[]'
+ */
+export type ListEnumSeminaryCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAcademicYearSession'
+ */
+export type EnumSeminaryAcademicYearSessionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAcademicYearSession'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAcademicYearSession[]'
+ */
+export type ListEnumSeminaryAcademicYearSessionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAcademicYearSession[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAcademicYearStatus'
+ */
+export type EnumSeminaryAcademicYearStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAcademicYearStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAcademicYearStatus[]'
+ */
+export type ListEnumSeminaryAcademicYearStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAcademicYearStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingPayableStatus'
+ */
+export type EnumAccountingPayableStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingPayableStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingPayableStatus[]'
+ */
+export type ListEnumAccountingPayableStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingPayableStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'OfficeTitleLevel'
  */
 export type EnumOfficeTitleLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OfficeTitleLevel'>
@@ -4644,6 +5182,11 @@ export type GlobalOmitConfig = {
   seminaryCredentialDocument?: Prisma.SeminaryCredentialDocumentOmit
   seminaryRequirements?: Prisma.SeminaryRequirementsOmit
   seminaryPayment?: Prisma.SeminaryPaymentOmit
+  seminaryCourse?: Prisma.SeminaryCourseOmit
+  seminaryAcademicYear?: Prisma.SeminaryAcademicYearOmit
+  seminaryGradeConfiguration?: Prisma.SeminaryGradeConfigurationOmit
+  accountingPayable?: Prisma.AccountingPayableOmit
+  accountingPayableItem?: Prisma.AccountingPayableItemOmit
   branchOfService?: Prisma.BranchOfServiceOmit
   officeTitle?: Prisma.OfficeTitleOmit
   officerAssignment?: Prisma.OfficerAssignmentOmit

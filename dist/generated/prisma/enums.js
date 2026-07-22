@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -146,6 +146,25 @@ exports.SeminaryProgramLevel = {
     MASTER_WITH_THESIS: 'MASTER_WITH_THESIS',
     DOCTORATE_WITH_DISSERTATION: 'DOCTORATE_WITH_DISSERTATION'
 };
+exports.SeminaryCourseModality = {
+    FACE_TO_FACE: 'FACE_TO_FACE',
+    ONLINE: 'ONLINE',
+    BOTH: 'BOTH'
+};
+exports.SeminaryCourseStatus = {
+    ACTIVE: 'ACTIVE',
+    INACTIVE: 'INACTIVE'
+};
+exports.SeminaryAcademicYearSession = {
+    CURRENT: 'CURRENT',
+    PREVIOUS: 'PREVIOUS',
+    UPCOMING: 'UPCOMING'
+};
+exports.SeminaryAcademicYearStatus = {
+    ACTIVE: 'ACTIVE',
+    UPCOMING: 'UPCOMING',
+    COMPLETED: 'COMPLETED'
+};
 exports.SeminaryPaymentType = {
     FULL_PAYMENT: 'FULL_PAYMENT',
     PARTIAL_PAYMENT: 'PARTIAL_PAYMENT'
@@ -169,6 +188,15 @@ exports.SeminaryCredentialDocumentStatus = {
     ACTIVE: 'ACTIVE',
     REVOKED: 'REVOKED',
     VOID: 'VOID'
+};
+exports.AccountingPayableStatus = {
+    DRAFT: 'DRAFT',
+    OPEN: 'OPEN',
+    DUE_SOON: 'DUE_SOON',
+    OVERDUE: 'OVERDUE',
+    PARTIAL: 'PARTIAL',
+    PAID: 'PAID',
+    CANCELLED: 'CANCELLED'
 };
 exports.InterviewDay = {
     SATURDAY: 'SATURDAY',

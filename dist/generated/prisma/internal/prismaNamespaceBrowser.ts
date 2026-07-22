@@ -76,6 +76,11 @@ export const ModelName = {
   SeminaryCredentialDocument: 'SeminaryCredentialDocument',
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
+  SeminaryCourse: 'SeminaryCourse',
+  SeminaryAcademicYear: 'SeminaryAcademicYear',
+  SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
+  AccountingPayable: 'AccountingPayable',
+  AccountingPayableItem: 'AccountingPayableItem',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
@@ -445,6 +450,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   id: 'id',
   status: 'status',
   targetMemberType: 'targetMemberType',
+  admissionNumber: 'admissionNumber',
   studentId: 'studentId',
   studentStatus: 'studentStatus',
   enrollmentType: 'enrollmentType',
@@ -456,6 +462,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   middleName: 'middleName',
   emailAddress: 'emailAddress',
   mobilePhone: 'mobilePhone',
+  mailingAddress: 'mailingAddress',
   homeAddress: 'homeAddress',
   dateOfBirth: 'dateOfBirth',
   birthPlace: 'birthPlace',
@@ -556,6 +563,97 @@ export const SeminaryPaymentScalarFieldEnum = {
 } as const
 
 export type SeminaryPaymentScalarFieldEnum = (typeof SeminaryPaymentScalarFieldEnum)[keyof typeof SeminaryPaymentScalarFieldEnum]
+
+
+export const SeminaryCourseScalarFieldEnum = {
+  id: 'id',
+  courseName: 'courseName',
+  courseCode: 'courseCode',
+  program: 'program',
+  units: 'units',
+  modality: 'modality',
+  status: 'status',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryCourseScalarFieldEnum = (typeof SeminaryCourseScalarFieldEnum)[keyof typeof SeminaryCourseScalarFieldEnum]
+
+
+export const SeminaryAcademicYearScalarFieldEnum = {
+  id: 'id',
+  academicYear: 'academicYear',
+  session: 'session',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAcademicYearScalarFieldEnum = (typeof SeminaryAcademicYearScalarFieldEnum)[keyof typeof SeminaryAcademicYearScalarFieldEnum]
+
+
+export const SeminaryGradeConfigurationScalarFieldEnum = {
+  id: 'id',
+  passingEquivalent: 'passingEquivalent',
+  releaseWindow: 'releaseWindow',
+  weightProfile: 'weightProfile',
+  completionWindowDays: 'completionWindowDays',
+  approvalWorkflow: 'approvalWorkflow',
+  allowFacultyOverride: 'allowFacultyOverride',
+  autoPublishApproved: 'autoPublishApproved',
+  showConditionalRemark: 'showConditionalRemark',
+  gradeScale: 'gradeScale',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryGradeConfigurationScalarFieldEnum = (typeof SeminaryGradeConfigurationScalarFieldEnum)[keyof typeof SeminaryGradeConfigurationScalarFieldEnum]
+
+
+export const AccountingPayableScalarFieldEnum = {
+  id: 'id',
+  billNo: 'billNo',
+  supplier: 'supplier',
+  category: 'category',
+  billDate: 'billDate',
+  dueDate: 'dueDate',
+  reference: 'reference',
+  description: 'description',
+  paymentTerms: 'paymentTerms',
+  paymentMethod: 'paymentMethod',
+  bankAccount: 'bankAccount',
+  remarks: 'remarks',
+  discount: 'discount',
+  tax: 'tax',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  attachments: 'attachments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingPayableScalarFieldEnum = (typeof AccountingPayableScalarFieldEnum)[keyof typeof AccountingPayableScalarFieldEnum]
+
+
+export const AccountingPayableItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  category: 'category',
+  quantity: 'quantity',
+  unitCost: 'unitCost',
+  amount: 'amount',
+  sortOrder: 'sortOrder',
+  payableId: 'payableId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingPayableItemScalarFieldEnum = (typeof AccountingPayableItemScalarFieldEnum)[keyof typeof AccountingPayableItemScalarFieldEnum]
 
 
 export const BranchOfServiceScalarFieldEnum = {

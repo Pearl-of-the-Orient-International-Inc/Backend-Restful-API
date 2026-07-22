@@ -38,7 +38,7 @@ export type SeminaryApplicationWithDetails = Prisma.SeminaryApplicationGetPayloa
   include: typeof seminaryApplicationInclude;
 }>;
 
-const trimToNull = (value?: string | null): string | null => {
+export const trimToNull = (value?: string | null): string | null => {
   const normalized = value?.trim();
   return normalized ? normalized : null;
 };
@@ -92,14 +92,14 @@ const paymentMethodLabels: Record<string, SeminaryPaymentMethod> = {
   Maya: SeminaryPaymentMethod.MAYA,
 };
 
-const parseAge = (value?: string | number | null): number | null => {
+export const parseAge = (value?: string | number | null): number | null => {
   if (value === null || value === undefined || value === '') return null;
 
   const parsed = typeof value === 'number' ? value : Number.parseInt(value, 10);
   return Number.isFinite(parsed) ? parsed : null;
 };
 
-const parseDate = (value?: string | null): Date | null => {
+export const parseDate = (value?: string | null): Date | null => {
   if (!value) return null;
 
   const parsed = new Date(value);

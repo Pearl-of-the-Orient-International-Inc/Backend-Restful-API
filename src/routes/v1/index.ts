@@ -22,6 +22,7 @@ import seminaryRoutes from '@/routes/v1/seminary';
 import reportRoutes from '@/routes/v1/report';
 import activityLogRoutes from '@/routes/v1/activity-log';
 import backupDatabaseRoutes from '@/routes/v1/backup-database';
+import accountingPayableRoutes from '@/routes/v1/accounting-payable';
 
 const router = Router();
 
@@ -51,5 +52,6 @@ router.use('/seminary', seminaryRoutes);
 router.use('/reports', reportRoutes);
 router.use('/activity-logs', activityLogRoutes);
 router.use('/backups', backupDatabaseRoutes);
+router.use('/accounting/accounts-payable', accountingPayableRoutes);
 
 export default router;

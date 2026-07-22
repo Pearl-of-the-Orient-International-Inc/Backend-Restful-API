@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const sanitation_1 = require("../../common/sanitation");
+const accounting_payable_controller_1 = require("../../controllers/v1/accounting-payable/accounting-payable.controller");
+const enums_1 = require("../../generated/prisma/enums");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const accounting_payable_1 = require("../../validators/accounting-payable");
+const router = (0, express_1.Router)();
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.getAccountingPayablesSchema), accounting_payable_controller_1.getAccountingPayables);
+router.post('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.createAccountingPayableSchema), accounting_payable_controller_1.createAccountingPayable);
+router.get('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.getAccountingPayableByIdSchema), accounting_payable_controller_1.getAccountingPayableById);
+router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.updateAccountingPayableSchema), accounting_payable_controller_1.updateAccountingPayable);
+router.patch('/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.updateAccountingPayableStatusSchema), accounting_payable_controller_1.updateAccountingPayableStatus);
+router.post('/:id/payments', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.recordAccountingPayablePaymentSchema), accounting_payable_controller_1.recordAccountingPayablePayment);
+router.delete('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(accounting_payable_1.deleteAccountingPayableSchema), accounting_payable_controller_1.deleteAccountingPayable);
+exports.default = router;

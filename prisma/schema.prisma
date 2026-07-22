@@ -456,6 +456,7 @@ model SeminaryApplication {
 
   status           SeminaryApplicationStatus @default(SUBMITTED)
   targetMemberType MemberType                @default(PROFESSIONAL_CHAPLAIN)
+  admissionNumber  String?                   @unique
   studentId        String?                   @unique
   studentStatus    SeminaryStudentStatus     @default(ACTIVE)
   enrollmentType   SeminaryEnrollmentType    @default(REGULAR)
@@ -469,6 +470,7 @@ model SeminaryApplication {
   middleName   String?
   emailAddress String?
   mobilePhone  String?
+  mailingAddress String?
   homeAddress  String?
   dateOfBirth  DateTime?
   birthPlace   String?
@@ -520,6 +522,7 @@ model SeminaryApplication {
   @@index([memberId])
   @@index([status])
   @@index([targetMemberType])
+  @@index([admissionNumber])
   @@index([createdAt])
 }
 
@@ -601,9 +604,120 @@ model SeminaryPayment {
   @@index([status])
 }
 
+model SeminaryCourse {
+  id String @id @default(uuid())
+
+  courseName String
+  courseCode String                 @unique
+  program    SeminaryProgramLevel
+  units      Int
+  modality   SeminaryCourseModality
+  status     SeminaryCourseStatus   @default(ACTIVE)
+  sortOrder  Int                    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([program])
+  @@index([modality])
+  @@index([status])
+  @@index([sortOrder])
+}
+
+model SeminaryAcademicYear {
+  id String @id @default(uuid())
+
+  academicYear String                     @unique
+  session      SeminaryAcademicYearSession
+  status       SeminaryAcademicYearStatus
+  startDate    DateTime
+  endDate      DateTime
+  sortOrder    Int                        @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([session])
+  @@index([status])
+  @@index([startDate])
+  @@index([sortOrder])
+}
+
 // ─────────────────────────────────────────────
 // ORGANIZATIONAL STRUCTURE SCHEMA
 // ─────────────────────────────────────────────
+
+model SeminaryGradeConfiguration {
+  id String @id @default("default")
+
+  passingEquivalent     String  @default("2.50")
+  releaseWindow         String  @default("After dean confirmation")
+  weightProfile         String  @default("Standard Coursework")
+  completionWindowDays  Int     @default(30)
+  approvalWorkflow      Boolean @default(true)
+  allowFacultyOverride  Boolean @default(true)
+  autoPublishApproved   Boolean @default(false)
+  showConditionalRemark Boolean @default(true)
+  gradeScale            Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AccountingPayable {
+  id String @id @default(uuid())
+
+  billNo        String                  @unique
+  supplier      String
+  category      String
+  billDate      DateTime
+  dueDate       DateTime
+  reference     String?
+  description   String?
+  paymentTerms  String?
+  paymentMethod String?
+  bankAccount   String?
+  remarks       String?
+  discount      Decimal                 @default(0) @db.Decimal(12, 2)
+  tax           Decimal                 @default(0) @db.Decimal(12, 2)
+  totalAmount   Decimal                 @default(0) @db.Decimal(12, 2)
+  paidAmount    Decimal                 @default(0) @db.Decimal(12, 2)
+  status        AccountingPayableStatus @default(OPEN)
+  attachments   Json                    @default("[]")
+
+  items AccountingPayableItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([billNo])
+  @@index([supplier])
+  @@index([category])
+  @@index([billDate])
+  @@index([dueDate])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AccountingPayableItem {
+  id String @id @default(uuid())
+
+  description String
+  category    String?
+  quantity    Decimal @default(1) @db.Decimal(12, 2)
+  unitCost    Decimal @default(0) @db.Decimal(12, 2)
+  amount      Decimal @default(0) @db.Decimal(12, 2)
+  sortOrder   Int     @default(0)
+
+  payableId String
+  payable   AccountingPayable @relation(fields: [payableId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([payableId])
+  @@index([sortOrder])
+}
 
 model BranchOfService {
   id          String @id @default(uuid())
@@ -1009,6 +1123,29 @@ enum SeminaryProgramLevel {
   DOCTORATE_WITH_DISSERTATION
 }
 
+enum SeminaryCourseModality {
+  FACE_TO_FACE
+  ONLINE
+  BOTH
+}
+
+enum SeminaryCourseStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum SeminaryAcademicYearSession {
+  CURRENT
+  PREVIOUS
+  UPCOMING
+}
+
+enum SeminaryAcademicYearStatus {
+  ACTIVE
+  UPCOMING
+  COMPLETED
+}
+
 enum SeminaryPaymentType {
   FULL_PAYMENT
   PARTIAL_PAYMENT
@@ -1036,6 +1173,16 @@ enum SeminaryCredentialDocumentStatus {
   ACTIVE
   REVOKED
   VOID
+}
+
+enum AccountingPayableStatus {
+  DRAFT
+  OPEN
+  DUE_SOON
+  OVERDUE
+  PARTIAL
+  PAID
+  CANCELLED
 }
 
 enum InterviewDay {
