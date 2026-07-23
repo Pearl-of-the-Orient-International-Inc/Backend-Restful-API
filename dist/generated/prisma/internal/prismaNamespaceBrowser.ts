@@ -69,6 +69,7 @@ export const ModelName = {
   MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
   MemberIdGenerationAsset: 'MemberIdGenerationAsset',
   MemberCertificate: 'MemberCertificate',
+  MemberCredentialDocument: 'MemberCredentialDocument',
   MemberPublicRecord: 'MemberPublicRecord',
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
@@ -81,6 +82,11 @@ export const ModelName = {
   SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
   AccountingPayable: 'AccountingPayable',
   AccountingPayableItem: 'AccountingPayableItem',
+  AccountingReceivable: 'AccountingReceivable',
+  AccountingReceivableItem: 'AccountingReceivableItem',
+  AccountingLedgerTransaction: 'AccountingLedgerTransaction',
+  TaskBoard: 'TaskBoard',
+  TaskItem: 'TaskItem',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
@@ -404,6 +410,23 @@ export const MemberCertificateScalarFieldEnum = {
 export type MemberCertificateScalarFieldEnum = (typeof MemberCertificateScalarFieldEnum)[keyof typeof MemberCertificateScalarFieldEnum]
 
 
+export const MemberCredentialDocumentScalarFieldEnum = {
+  id: 'id',
+  documentNumber: 'documentNumber',
+  barcodeNumber: 'barcodeNumber',
+  verificationToken: 'verificationToken',
+  type: 'type',
+  status: 'status',
+  title: 'title',
+  issuedAt: 'issuedAt',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemberCredentialDocumentScalarFieldEnum = (typeof MemberCredentialDocumentScalarFieldEnum)[keyof typeof MemberCredentialDocumentScalarFieldEnum]
+
+
 export const MemberPublicRecordScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -654,6 +677,98 @@ export const AccountingPayableItemScalarFieldEnum = {
 } as const
 
 export type AccountingPayableItemScalarFieldEnum = (typeof AccountingPayableItemScalarFieldEnum)[keyof typeof AccountingPayableItemScalarFieldEnum]
+
+
+export const AccountingReceivableScalarFieldEnum = {
+  id: 'id',
+  invoiceNo: 'invoiceNo',
+  customer: 'customer',
+  invoiceDate: 'invoiceDate',
+  dueDate: 'dueDate',
+  reference: 'reference',
+  description: 'description',
+  paymentTerms: 'paymentTerms',
+  paymentMethod: 'paymentMethod',
+  bankAccount: 'bankAccount',
+  notes: 'notes',
+  discount: 'discount',
+  tax: 'tax',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  attachments: 'attachments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingReceivableScalarFieldEnum = (typeof AccountingReceivableScalarFieldEnum)[keyof typeof AccountingReceivableScalarFieldEnum]
+
+
+export const AccountingReceivableItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  account: 'account',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  amount: 'amount',
+  sortOrder: 'sortOrder',
+  receivableId: 'receivableId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingReceivableItemScalarFieldEnum = (typeof AccountingReceivableItemScalarFieldEnum)[keyof typeof AccountingReceivableItemScalarFieldEnum]
+
+
+export const AccountingLedgerTransactionScalarFieldEnum = {
+  id: 'id',
+  transactionNo: 'transactionNo',
+  transactionDate: 'transactionDate',
+  type: 'type',
+  party: 'party',
+  note: 'note',
+  account: 'account',
+  accountNo: 'accountNo',
+  category: 'category',
+  debit: 'debit',
+  credit: 'credit',
+  status: 'status',
+  reference: 'reference',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingLedgerTransactionScalarFieldEnum = (typeof AccountingLedgerTransactionScalarFieldEnum)[keyof typeof AccountingLedgerTransactionScalarFieldEnum]
+
+
+export const TaskBoardScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  color: 'color',
+  sortOrder: 'sortOrder',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskBoardScalarFieldEnum = (typeof TaskBoardScalarFieldEnum)[keyof typeof TaskBoardScalarFieldEnum]
+
+
+export const TaskItemScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  title: 'title',
+  priority: 'priority',
+  dueDate: 'dueDate',
+  progress: 'progress',
+  sortOrder: 'sortOrder',
+  boardId: 'boardId',
+  assigneeId: 'assigneeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskItemScalarFieldEnum = (typeof TaskItemScalarFieldEnum)[keyof typeof TaskItemScalarFieldEnum]
 
 
 export const BranchOfServiceScalarFieldEnum = {

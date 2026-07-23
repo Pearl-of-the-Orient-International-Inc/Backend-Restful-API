@@ -23,6 +23,10 @@ import reportRoutes from '@/routes/v1/report';
 import activityLogRoutes from '@/routes/v1/activity-log';
 import backupDatabaseRoutes from '@/routes/v1/backup-database';
 import accountingPayableRoutes from '@/routes/v1/accounting-payable';
+import accountingReceivableRoutes from '@/routes/v1/accounting-receivable';
+import accountingLedgerRoutes from '@/routes/v1/accounting-ledger';
+import accountingInvoiceRoutes from '@/routes/v1/accounting-invoice';
+import taskManagementRoutes from '@/routes/v1/task-management';
 
 const router = Router();
 
@@ -53,5 +57,9 @@ router.use('/reports', reportRoutes);
 router.use('/activity-logs', activityLogRoutes);
 router.use('/backups', backupDatabaseRoutes);
 router.use('/accounting/accounts-payable', accountingPayableRoutes);
+router.use('/accounting/accounts-receivable', accountingReceivableRoutes);
+router.use('/accounting/cashflow-ledger', accountingLedgerRoutes);
+router.use('/accounting/invoices', accountingInvoiceRoutes);
+router.use('/task-management', taskManagementRoutes);
 
 export default router;

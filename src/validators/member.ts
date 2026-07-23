@@ -6,6 +6,7 @@ import {
   InterviewDay,
   MemberOnboardingStep,
   MemberPaymentMethod,
+  MemberCredentialDocumentType,
   MemberPublicRecordStatus,
   MemberPublicRecordType,
   MemberStatus,
@@ -265,6 +266,21 @@ export const verifyMemberEmailByAdminSchema = z.object({
 export const deleteMemberByAdminSchema = z.object({
   params: z.object({
     id: z.uuid(),
+  }),
+});
+
+export const generateMemberCredentialDocumentSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+  }),
+  body: z.object({
+    type: z.enum(MemberCredentialDocumentType),
+  }),
+});
+
+export const verifyMemberCredentialDocumentSchema = z.object({
+  params: z.object({
+    token: z.string().trim().min(16).max(128),
   }),
 });
 

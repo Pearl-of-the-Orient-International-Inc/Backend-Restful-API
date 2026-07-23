@@ -257,6 +257,7 @@ export type UserWhereInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   restoredBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
+  assignedTasks?: Prisma.TaskItemListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -284,6 +285,7 @@ export type UserOrderByWithRelationInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotOrderByRelationAggregateInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotOrderByRelationAggregateInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsOrderByRelationAggregateInput
+  assignedTasks?: Prisma.TaskItemOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -314,6 +316,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   restoredBackups?: Prisma.DatabaseBackupSnapshotListRelationFilter
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
+  assignedTasks?: Prisma.TaskItemListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -379,6 +382,7 @@ export type UserCreateInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -406,6 +410,7 @@ export type UserUncheckedCreateInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUpdateInput = {
@@ -433,6 +438,7 @@ export type UserUpdateInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -460,6 +466,7 @@ export type UserUncheckedUpdateInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -710,6 +717,22 @@ export type UserUpdateOneRequiredWithoutFollowedMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowedMembersInput, Prisma.UserUpdateWithoutFollowedMembersInput>, Prisma.UserUncheckedUpdateWithoutFollowedMembersInput>
 }
 
+export type UserCreateNestedOneWithoutAssignedTasksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedTasksInput, Prisma.UserUncheckedCreateWithoutAssignedTasksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedTasksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutAssignedTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedTasksInput, Prisma.UserUncheckedCreateWithoutAssignedTasksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedTasksInput
+  upsert?: Prisma.UserUpsertWithoutAssignedTasksInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedTasksInput, Prisma.UserUpdateWithoutAssignedTasksInput>, Prisma.UserUncheckedUpdateWithoutAssignedTasksInput>
+}
+
 export type UserCreateNestedOneWithoutBackupSettingUpdatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBackupSettingUpdatesInput, Prisma.UserUncheckedCreateWithoutBackupSettingUpdatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBackupSettingUpdatesInput
@@ -782,6 +805,7 @@ export type UserCreateWithoutUserTokensInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutUserTokensInput = {
@@ -808,6 +832,7 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutUserTokensInput = {
@@ -850,6 +875,7 @@ export type UserUpdateWithoutUserTokensInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTokensInput = {
@@ -876,6 +902,7 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -902,6 +929,7 @@ export type UserCreateWithoutSessionsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -928,6 +956,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -970,6 +999,7 @@ export type UserUpdateWithoutSessionsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -996,6 +1026,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutActivityLogsInput = {
@@ -1022,6 +1053,7 @@ export type UserCreateWithoutActivityLogsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutActivityLogsInput = {
@@ -1048,6 +1080,7 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutActivityLogsInput = {
@@ -1090,6 +1123,7 @@ export type UserUpdateWithoutActivityLogsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivityLogsInput = {
@@ -1116,6 +1150,7 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
@@ -1142,6 +1177,7 @@ export type UserCreateWithoutVerificationCodesInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -1168,6 +1204,7 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -1210,6 +1247,7 @@ export type UserUpdateWithoutVerificationCodesInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -1236,6 +1274,7 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutPasskeyCredentialsInput = {
@@ -1262,6 +1301,7 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
@@ -1288,6 +1328,7 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyCredentialsInput = {
@@ -1330,6 +1371,7 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
@@ -1356,6 +1398,7 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutPasskeyChallengeInput = {
@@ -1382,6 +1425,7 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
@@ -1408,6 +1452,7 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyChallengeInput = {
@@ -1450,6 +1495,7 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
@@ -1476,6 +1522,7 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutMemberProfileInput = {
@@ -1502,6 +1549,7 @@ export type UserCreateWithoutMemberProfileInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutMemberProfileInput = {
@@ -1528,6 +1576,7 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutMemberProfileInput = {
@@ -1570,6 +1619,7 @@ export type UserUpdateWithoutMemberProfileInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberProfileInput = {
@@ -1596,6 +1646,7 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutFollowedMembersInput = {
@@ -1622,6 +1673,7 @@ export type UserCreateWithoutFollowedMembersInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutFollowedMembersInput = {
@@ -1648,6 +1700,7 @@ export type UserUncheckedCreateWithoutFollowedMembersInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutFollowedMembersInput = {
@@ -1690,6 +1743,7 @@ export type UserUpdateWithoutFollowedMembersInput = {
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowedMembersInput = {
@@ -1713,6 +1767,131 @@ export type UserUncheckedUpdateWithoutFollowedMembersInput = {
   passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
   passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
   memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+}
+
+export type UserCreateWithoutAssignedTasksInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+}
+
+export type UserUncheckedCreateWithoutAssignedTasksInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+}
+
+export type UserCreateOrConnectWithoutAssignedTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedTasksInput, Prisma.UserUncheckedCreateWithoutAssignedTasksInput>
+}
+
+export type UserUpsertWithoutAssignedTasksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignedTasksInput, Prisma.UserUncheckedUpdateWithoutAssignedTasksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedTasksInput, Prisma.UserUncheckedCreateWithoutAssignedTasksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssignedTasksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignedTasksInput, Prisma.UserUncheckedUpdateWithoutAssignedTasksInput>
+}
+
+export type UserUpdateWithoutAssignedTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssignedTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
@@ -1742,6 +1921,7 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
@@ -1768,6 +1948,7 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutBackupSettingUpdatesInput = {
@@ -1810,6 +1991,7 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
@@ -1836,6 +2018,7 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserCreateWithoutCreatedBackupsInput = {
@@ -1862,6 +2045,7 @@ export type UserCreateWithoutCreatedBackupsInput = {
   followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutCreatedBackupsInput = {
@@ -1888,6 +2072,7 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutCreatedBackupsInput = {
@@ -1919,6 +2104,7 @@ export type UserCreateWithoutRestoredBackupsInput = {
   followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserUncheckedCreateWithoutRestoredBackupsInput = {
@@ -1945,6 +2131,7 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
 }
 
 export type UserCreateOrConnectWithoutRestoredBackupsInput = {
@@ -1987,6 +2174,7 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
@@ -2013,6 +2201,7 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUpsertWithoutRestoredBackupsInput = {
@@ -2050,6 +2239,7 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
@@ -2076,6 +2266,7 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
   createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
 }
 
 
@@ -2093,6 +2284,7 @@ export type UserCountOutputType = {
   createdBackups: number
   restoredBackups: number
   backupSettingUpdates: number
+  assignedTasks: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2105,6 +2297,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   createdBackups?: boolean | UserCountOutputTypeCountCreatedBackupsArgs
   restoredBackups?: boolean | UserCountOutputTypeCountRestoredBackupsArgs
   backupSettingUpdates?: boolean | UserCountOutputTypeCountBackupSettingUpdatesArgs
+  assignedTasks?: boolean | UserCountOutputTypeCountAssignedTasksArgs
 }
 
 /**
@@ -2180,6 +2373,13 @@ export type UserCountOutputTypeCountBackupSettingUpdatesArgs<ExtArgs extends run
   where?: Prisma.DatabaseBackupSettingsWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssignedTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskItemWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2206,6 +2406,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdBackups?: boolean | Prisma.User$createdBackupsArgs<ExtArgs>
   restoredBackups?: boolean | Prisma.User$restoredBackupsArgs<ExtArgs>
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
+  assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2270,6 +2471,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdBackups?: boolean | Prisma.User$createdBackupsArgs<ExtArgs>
   restoredBackups?: boolean | Prisma.User$restoredBackupsArgs<ExtArgs>
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
+  assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2289,6 +2491,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdBackups: Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>[]
     restoredBackups: Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>[]
     backupSettingUpdates: Prisma.$DatabaseBackupSettingsPayload<ExtArgs>[]
+    assignedTasks: Prisma.$TaskItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2709,6 +2912,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdBackups<T extends Prisma.User$createdBackupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdBackupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restoredBackups<T extends Prisma.User$restoredBackupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$restoredBackupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   backupSettingUpdates<T extends Prisma.User$backupSettingUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$backupSettingUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3390,6 +3594,30 @@ export type User$backupSettingUpdatesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.DatabaseBackupSettingsScalarFieldEnum | Prisma.DatabaseBackupSettingsScalarFieldEnum[]
+}
+
+/**
+ * User.assignedTasks
+ */
+export type User$assignedTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaskItem
+   */
+  select?: Prisma.TaskItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TaskItem
+   */
+  omit?: Prisma.TaskItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskItemInclude<ExtArgs> | null
+  where?: Prisma.TaskItemWhereInput
+  orderBy?: Prisma.TaskItemOrderByWithRelationInput | Prisma.TaskItemOrderByWithRelationInput[]
+  cursor?: Prisma.TaskItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskItemScalarFieldEnum | Prisma.TaskItemScalarFieldEnum[]
 }
 
 /**

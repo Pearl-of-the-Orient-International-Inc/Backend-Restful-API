@@ -402,6 +402,7 @@ export const ModelName = {
   MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
   MemberIdGenerationAsset: 'MemberIdGenerationAsset',
   MemberCertificate: 'MemberCertificate',
+  MemberCredentialDocument: 'MemberCredentialDocument',
   MemberPublicRecord: 'MemberPublicRecord',
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
@@ -414,6 +415,11 @@ export const ModelName = {
   SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
   AccountingPayable: 'AccountingPayable',
   AccountingPayableItem: 'AccountingPayableItem',
+  AccountingReceivable: 'AccountingReceivable',
+  AccountingReceivableItem: 'AccountingReceivableItem',
+  AccountingLedgerTransaction: 'AccountingLedgerTransaction',
+  TaskBoard: 'TaskBoard',
+  TaskItem: 'TaskItem',
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
@@ -440,7 +446,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryAcademicYear" | "seminaryGradeConfiguration" | "accountingPayable" | "accountingPayableItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryAcademicYear" | "seminaryGradeConfiguration" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1776,6 +1782,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MemberCredentialDocument: {
+      payload: Prisma.$MemberCredentialDocumentPayload<ExtArgs>
+      fields: Prisma.MemberCredentialDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemberCredentialDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemberCredentialDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.MemberCredentialDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemberCredentialDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.MemberCredentialDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.MemberCredentialDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.MemberCredentialDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemberCredentialDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.MemberCredentialDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>
+        }
+        update: {
+          args: Prisma.MemberCredentialDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemberCredentialDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemberCredentialDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemberCredentialDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemberCredentialDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberCredentialDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.MemberCredentialDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemberCredentialDocument>
+        }
+        groupBy: {
+          args: Prisma.MemberCredentialDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberCredentialDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemberCredentialDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberCredentialDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
     MemberPublicRecord: {
       payload: Prisma.$MemberPublicRecordPayload<ExtArgs>
       fields: Prisma.MemberPublicRecordFieldRefs
@@ -2661,6 +2741,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AccountingPayableItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AccountingPayableItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccountingReceivable: {
+      payload: Prisma.$AccountingReceivablePayload<ExtArgs>
+      fields: Prisma.AccountingReceivableFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingReceivableFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingReceivableFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingReceivableFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingReceivableFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>
+        }
+        findMany: {
+          args: Prisma.AccountingReceivableFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>[]
+        }
+        create: {
+          args: Prisma.AccountingReceivableCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>
+        }
+        createMany: {
+          args: Prisma.AccountingReceivableCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingReceivableCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingReceivableDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>
+        }
+        update: {
+          args: Prisma.AccountingReceivableUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingReceivableDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingReceivableUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingReceivableUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingReceivableUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivablePayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingReceivableAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingReceivable>
+        }
+        groupBy: {
+          args: Prisma.AccountingReceivableGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingReceivableGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingReceivableCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingReceivableCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccountingReceivableItem: {
+      payload: Prisma.$AccountingReceivableItemPayload<ExtArgs>
+      fields: Prisma.AccountingReceivableItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingReceivableItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingReceivableItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingReceivableItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingReceivableItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>
+        }
+        findMany: {
+          args: Prisma.AccountingReceivableItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>[]
+        }
+        create: {
+          args: Prisma.AccountingReceivableItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>
+        }
+        createMany: {
+          args: Prisma.AccountingReceivableItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingReceivableItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingReceivableItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>
+        }
+        update: {
+          args: Prisma.AccountingReceivableItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingReceivableItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingReceivableItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingReceivableItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingReceivableItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingReceivableItemPayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingReceivableItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingReceivableItem>
+        }
+        groupBy: {
+          args: Prisma.AccountingReceivableItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingReceivableItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingReceivableItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingReceivableItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccountingLedgerTransaction: {
+      payload: Prisma.$AccountingLedgerTransactionPayload<ExtArgs>
+      fields: Prisma.AccountingLedgerTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingLedgerTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingLedgerTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingLedgerTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingLedgerTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.AccountingLedgerTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.AccountingLedgerTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.AccountingLedgerTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingLedgerTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingLedgerTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>
+        }
+        update: {
+          args: Prisma.AccountingLedgerTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingLedgerTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingLedgerTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingLedgerTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingLedgerTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingLedgerTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingLedgerTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingLedgerTransaction>
+        }
+        groupBy: {
+          args: Prisma.AccountingLedgerTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingLedgerTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingLedgerTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingLedgerTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
+    TaskBoard: {
+      payload: Prisma.$TaskBoardPayload<ExtArgs>
+      fields: Prisma.TaskBoardFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TaskBoardFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TaskBoardFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>
+        }
+        findFirst: {
+          args: Prisma.TaskBoardFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TaskBoardFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>
+        }
+        findMany: {
+          args: Prisma.TaskBoardFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>[]
+        }
+        create: {
+          args: Prisma.TaskBoardCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>
+        }
+        createMany: {
+          args: Prisma.TaskBoardCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TaskBoardCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>[]
+        }
+        delete: {
+          args: Prisma.TaskBoardDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>
+        }
+        update: {
+          args: Prisma.TaskBoardUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>
+        }
+        deleteMany: {
+          args: Prisma.TaskBoardDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TaskBoardUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TaskBoardUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>[]
+        }
+        upsert: {
+          args: Prisma.TaskBoardUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskBoardPayload>
+        }
+        aggregate: {
+          args: Prisma.TaskBoardAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTaskBoard>
+        }
+        groupBy: {
+          args: Prisma.TaskBoardGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaskBoardGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TaskBoardCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaskBoardCountAggregateOutputType> | number
+        }
+      }
+    }
+    TaskItem: {
+      payload: Prisma.$TaskItemPayload<ExtArgs>
+      fields: Prisma.TaskItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TaskItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TaskItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>
+        }
+        findFirst: {
+          args: Prisma.TaskItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TaskItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>
+        }
+        findMany: {
+          args: Prisma.TaskItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>[]
+        }
+        create: {
+          args: Prisma.TaskItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>
+        }
+        createMany: {
+          args: Prisma.TaskItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TaskItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>[]
+        }
+        delete: {
+          args: Prisma.TaskItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>
+        }
+        update: {
+          args: Prisma.TaskItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.TaskItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TaskItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TaskItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.TaskItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskItemPayload>
+        }
+        aggregate: {
+          args: Prisma.TaskItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTaskItem>
+        }
+        groupBy: {
+          args: Prisma.TaskItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaskItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TaskItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaskItemCountAggregateOutputType> | number
         }
       }
     }
@@ -3811,6 +4261,23 @@ export const MemberCertificateScalarFieldEnum = {
 export type MemberCertificateScalarFieldEnum = (typeof MemberCertificateScalarFieldEnum)[keyof typeof MemberCertificateScalarFieldEnum]
 
 
+export const MemberCredentialDocumentScalarFieldEnum = {
+  id: 'id',
+  documentNumber: 'documentNumber',
+  barcodeNumber: 'barcodeNumber',
+  verificationToken: 'verificationToken',
+  type: 'type',
+  status: 'status',
+  title: 'title',
+  issuedAt: 'issuedAt',
+  memberId: 'memberId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemberCredentialDocumentScalarFieldEnum = (typeof MemberCredentialDocumentScalarFieldEnum)[keyof typeof MemberCredentialDocumentScalarFieldEnum]
+
+
 export const MemberPublicRecordScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -4061,6 +4528,98 @@ export const AccountingPayableItemScalarFieldEnum = {
 } as const
 
 export type AccountingPayableItemScalarFieldEnum = (typeof AccountingPayableItemScalarFieldEnum)[keyof typeof AccountingPayableItemScalarFieldEnum]
+
+
+export const AccountingReceivableScalarFieldEnum = {
+  id: 'id',
+  invoiceNo: 'invoiceNo',
+  customer: 'customer',
+  invoiceDate: 'invoiceDate',
+  dueDate: 'dueDate',
+  reference: 'reference',
+  description: 'description',
+  paymentTerms: 'paymentTerms',
+  paymentMethod: 'paymentMethod',
+  bankAccount: 'bankAccount',
+  notes: 'notes',
+  discount: 'discount',
+  tax: 'tax',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  attachments: 'attachments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingReceivableScalarFieldEnum = (typeof AccountingReceivableScalarFieldEnum)[keyof typeof AccountingReceivableScalarFieldEnum]
+
+
+export const AccountingReceivableItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  account: 'account',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  amount: 'amount',
+  sortOrder: 'sortOrder',
+  receivableId: 'receivableId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingReceivableItemScalarFieldEnum = (typeof AccountingReceivableItemScalarFieldEnum)[keyof typeof AccountingReceivableItemScalarFieldEnum]
+
+
+export const AccountingLedgerTransactionScalarFieldEnum = {
+  id: 'id',
+  transactionNo: 'transactionNo',
+  transactionDate: 'transactionDate',
+  type: 'type',
+  party: 'party',
+  note: 'note',
+  account: 'account',
+  accountNo: 'accountNo',
+  category: 'category',
+  debit: 'debit',
+  credit: 'credit',
+  status: 'status',
+  reference: 'reference',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingLedgerTransactionScalarFieldEnum = (typeof AccountingLedgerTransactionScalarFieldEnum)[keyof typeof AccountingLedgerTransactionScalarFieldEnum]
+
+
+export const TaskBoardScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  color: 'color',
+  sortOrder: 'sortOrder',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskBoardScalarFieldEnum = (typeof TaskBoardScalarFieldEnum)[keyof typeof TaskBoardScalarFieldEnum]
+
+
+export const TaskItemScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  title: 'title',
+  priority: 'priority',
+  dueDate: 'dueDate',
+  progress: 'progress',
+  sortOrder: 'sortOrder',
+  boardId: 'boardId',
+  assigneeId: 'assigneeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskItemScalarFieldEnum = (typeof TaskItemScalarFieldEnum)[keyof typeof TaskItemScalarFieldEnum]
 
 
 export const BranchOfServiceScalarFieldEnum = {
@@ -4602,6 +5161,34 @@ export type ListEnumInterviewDayFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'MemberCredentialDocumentType'
+ */
+export type EnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberCredentialDocumentType'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberCredentialDocumentType[]'
+ */
+export type ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberCredentialDocumentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberCredentialDocumentStatus'
+ */
+export type EnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberCredentialDocumentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberCredentialDocumentStatus[]'
+ */
+export type ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberCredentialDocumentStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'MemberPublicRecordType'
  */
 export type EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberPublicRecordType'>
@@ -4850,6 +5437,62 @@ export type EnumAccountingPayableStatusFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'AccountingPayableStatus[]'
  */
 export type ListEnumAccountingPayableStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingPayableStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingReceivableStatus'
+ */
+export type EnumAccountingReceivableStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingReceivableStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingReceivableStatus[]'
+ */
+export type ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingReceivableStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingLedgerTransactionType'
+ */
+export type EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingLedgerTransactionType'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingLedgerTransactionType[]'
+ */
+export type ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingLedgerTransactionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingLedgerTransactionStatus'
+ */
+export type EnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingLedgerTransactionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AccountingLedgerTransactionStatus[]'
+ */
+export type ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingLedgerTransactionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TaskPriority'
+ */
+export type EnumTaskPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskPriority'>
+    
+
+
+/**
+ * Reference to a field of type 'TaskPriority[]'
+ */
+export type ListEnumTaskPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskPriority[]'>
     
 
 
@@ -5175,6 +5818,7 @@ export type GlobalOmitConfig = {
   memberOnlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentOmit
   memberIdGenerationAsset?: Prisma.MemberIdGenerationAssetOmit
   memberCertificate?: Prisma.MemberCertificateOmit
+  memberCredentialDocument?: Prisma.MemberCredentialDocumentOmit
   memberPublicRecord?: Prisma.MemberPublicRecordOmit
   memberPublicRecordAttachment?: Prisma.MemberPublicRecordAttachmentOmit
   memberChaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOmit
@@ -5187,6 +5831,11 @@ export type GlobalOmitConfig = {
   seminaryGradeConfiguration?: Prisma.SeminaryGradeConfigurationOmit
   accountingPayable?: Prisma.AccountingPayableOmit
   accountingPayableItem?: Prisma.AccountingPayableItemOmit
+  accountingReceivable?: Prisma.AccountingReceivableOmit
+  accountingReceivableItem?: Prisma.AccountingReceivableItemOmit
+  accountingLedgerTransaction?: Prisma.AccountingLedgerTransactionOmit
+  taskBoard?: Prisma.TaskBoardOmit
+  taskItem?: Prisma.TaskItemOmit
   branchOfService?: Prisma.BranchOfServiceOmit
   officeTitle?: Prisma.OfficeTitleOmit
   officerAssignment?: Prisma.OfficerAssignmentOmit

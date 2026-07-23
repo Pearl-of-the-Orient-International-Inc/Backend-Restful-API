@@ -108,6 +108,11 @@ export type MemberIdGenerationAsset = Prisma.MemberIdGenerationAssetModel
  */
 export type MemberCertificate = Prisma.MemberCertificateModel
 /**
+ * Model MemberCredentialDocument
+ * 
+ */
+export type MemberCredentialDocument = Prisma.MemberCredentialDocumentModel
+/**
  * Model MemberPublicRecord
  * 
  */
@@ -167,6 +172,31 @@ export type AccountingPayable = Prisma.AccountingPayableModel
  * 
  */
 export type AccountingPayableItem = Prisma.AccountingPayableItemModel
+/**
+ * Model AccountingReceivable
+ * 
+ */
+export type AccountingReceivable = Prisma.AccountingReceivableModel
+/**
+ * Model AccountingReceivableItem
+ * 
+ */
+export type AccountingReceivableItem = Prisma.AccountingReceivableItemModel
+/**
+ * Model AccountingLedgerTransaction
+ * 
+ */
+export type AccountingLedgerTransaction = Prisma.AccountingLedgerTransactionModel
+/**
+ * Model TaskBoard
+ * 
+ */
+export type TaskBoard = Prisma.TaskBoardModel
+/**
+ * Model TaskItem
+ * 
+ */
+export type TaskItem = Prisma.TaskItemModel
 /**
  * Model BranchOfService
  * 

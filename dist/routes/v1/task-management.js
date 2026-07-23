@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const sanitation_1 = require("../../common/sanitation");
+const task_management_controller_1 = require("../../controllers/v1/task-management/task-management.controller");
+const enums_1 = require("../../generated/prisma/enums");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const task_management_1 = require("../../validators/task-management");
+const router = (0, express_1.Router)();
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.getTaskManagementSchema), task_management_controller_1.getTaskManagement);
+router.post('/boards', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.createTaskBoardSchema), task_management_controller_1.createTaskBoard);
+router.put('/boards/:boardId', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.updateTaskBoardSchema), task_management_controller_1.updateTaskBoard);
+router.delete('/boards/:boardId', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.deleteTaskBoardSchema), task_management_controller_1.deleteTaskBoard);
+router.post('/tasks', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.createTaskSchema), task_management_controller_1.createTask);
+router.put('/tasks/:taskId', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.updateTaskSchema), task_management_controller_1.updateTask);
+router.patch('/tasks/:taskId/move', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.moveTaskSchema), task_management_controller_1.moveTask);
+router.delete('/tasks/:taskId', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(task_management_1.deleteTaskSchema), task_management_controller_1.deleteTask);
+exports.default = router;

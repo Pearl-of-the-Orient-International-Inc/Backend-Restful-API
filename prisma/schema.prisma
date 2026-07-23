@@ -38,6 +38,7 @@ model User {
   createdBackups     DatabaseBackupSnapshot[] @relation("CreatedDatabaseBackups")
   restoredBackups    DatabaseBackupSnapshot[] @relation("RestoredDatabaseBackups")
   backupSettingUpdates DatabaseBackupSettings[] @relation("BackupSettingsUpdatedBy")
+  assignedTasks      TaskItem[] @relation("TaskAssignee")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -226,6 +227,7 @@ model Member {
   onlineInterviewAppointment MemberOnlineInterviewAppointment?
   idGenerationAsset          MemberIdGenerationAsset?
   certificates               MemberCertificate[]
+  credentialDocuments        MemberCredentialDocument[]
   publicRecords              MemberPublicRecord[]
   chaplaincyTrainingProgress MemberChaplaincyTrainingProgress?
   signature                  ApplicantSignature?
@@ -393,6 +395,31 @@ model MemberCertificate {
   updatedAt DateTime @updatedAt
 
   @@index([memberId, dateReceived])
+}
+
+model MemberCredentialDocument {
+  id String @id @default(uuid())
+
+  documentNumber    String                         @unique
+  barcodeNumber     String?                        @unique
+  verificationToken String                         @unique
+  type              MemberCredentialDocumentType
+  status            MemberCredentialDocumentStatus @default(ACTIVE)
+  title             String?
+  issuedAt          DateTime                       @default(now())
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([memberId, type])
+  @@index([type, status])
+  @@index([documentNumber])
+  @@index([barcodeNumber])
+  @@index([verificationToken])
+  @@index([issuedAt])
 }
 
 model MemberPublicRecord {
@@ -719,6 +746,129 @@ model AccountingPayableItem {
   @@index([sortOrder])
 }
 
+model AccountingReceivable {
+  id String @id @default(uuid())
+
+  invoiceNo     String                     @unique
+  customer      String
+  invoiceDate   DateTime
+  dueDate       DateTime
+  reference     String?
+  description   String?
+  paymentTerms  String?
+  paymentMethod String?
+  bankAccount   String?
+  notes         String?
+  discount      Decimal                    @default(0) @db.Decimal(12, 2)
+  tax           Decimal                    @default(0) @db.Decimal(12, 2)
+  totalAmount   Decimal                    @default(0) @db.Decimal(12, 2)
+  paidAmount    Decimal                    @default(0) @db.Decimal(12, 2)
+  status        AccountingReceivableStatus @default(UNPAID)
+  attachments   Json                       @default("[]")
+
+  items AccountingReceivableItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([invoiceNo])
+  @@index([customer])
+  @@index([invoiceDate])
+  @@index([dueDate])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AccountingReceivableItem {
+  id String @id @default(uuid())
+
+  description String
+  account     String?
+  quantity    Decimal @default(1) @db.Decimal(12, 2)
+  unitPrice   Decimal @default(0) @db.Decimal(12, 2)
+  amount      Decimal @default(0) @db.Decimal(12, 2)
+  sortOrder   Int     @default(0)
+
+  receivableId String
+  receivable   AccountingReceivable @relation(fields: [receivableId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([receivableId])
+  @@index([sortOrder])
+}
+
+model AccountingLedgerTransaction {
+  id String @id @default(uuid())
+
+  transactionNo String                          @unique
+  transactionDate DateTime
+  type          AccountingLedgerTransactionType
+  party         String
+  note          String?
+  account       String
+  accountNo     String?
+  category      String
+  debit         Decimal                         @default(0) @db.Decimal(12, 2)
+  credit        Decimal                         @default(0) @db.Decimal(12, 2)
+  status        AccountingLedgerTransactionStatus
+  reference     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([transactionNo])
+  @@index([transactionDate])
+  @@index([type])
+  @@index([status])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model TaskBoard {
+  id String @id @default(uuid())
+
+  title     String
+  color     String
+  sortOrder Int    @default(0)
+  isDefault Boolean @default(false)
+
+  tasks TaskItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+  @@index([createdAt])
+}
+
+model TaskItem {
+  id String @id @default(uuid())
+
+  code      String       @unique
+  title     String
+  priority  TaskPriority @default(MEDIUM)
+  dueDate   DateTime?
+  progress  String       @default("0/1")
+  sortOrder Int          @default(0)
+
+  boardId String
+  board   TaskBoard @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  assigneeId String?
+  assignee   User?   @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([boardId])
+  @@index([assigneeId])
+  @@index([priority])
+  @@index([sortOrder])
+  @@index([createdAt])
+}
+
 model BranchOfService {
   id          String @id @default(uuid())
   title       String // Prison, Humanitarian
@@ -1021,6 +1171,16 @@ enum MemberPublicRecordStatus {
   DRAFT
 }
 
+enum MemberCredentialDocumentType {
+  CERTIFICATE
+  RECOGNITION
+}
+
+enum MemberCredentialDocumentStatus {
+  ACTIVE
+  REVOKED
+}
+
 enum VerificationType {
   EMAIL_VERIFICATION
   PASSWORD_RESET
@@ -1183,6 +1343,36 @@ enum AccountingPayableStatus {
   PARTIAL
   PAID
   CANCELLED
+}
+
+enum AccountingReceivableStatus {
+  DRAFT
+  UNPAID
+  PARTIAL
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum AccountingLedgerTransactionType {
+  INCOME
+  EXPENSE
+  PAYABLE
+  RECEIVABLE
+}
+
+enum AccountingLedgerTransactionStatus {
+  PAID
+  RECEIVED
+  UNPAID
+  PENDING
+  VOID
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
 }
 
 enum InterviewDay {

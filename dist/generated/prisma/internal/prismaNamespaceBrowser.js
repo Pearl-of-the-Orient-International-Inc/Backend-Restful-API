@@ -33,8 +33,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = void 0;
+exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -64,6 +64,7 @@ exports.ModelName = {
     MemberOnlineInterviewAppointment: 'MemberOnlineInterviewAppointment',
     MemberIdGenerationAsset: 'MemberIdGenerationAsset',
     MemberCertificate: 'MemberCertificate',
+    MemberCredentialDocument: 'MemberCredentialDocument',
     MemberPublicRecord: 'MemberPublicRecord',
     MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
     MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
@@ -76,6 +77,11 @@ exports.ModelName = {
     SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
     AccountingPayable: 'AccountingPayable',
     AccountingPayableItem: 'AccountingPayableItem',
+    AccountingReceivable: 'AccountingReceivable',
+    AccountingReceivableItem: 'AccountingReceivableItem',
+    AccountingLedgerTransaction: 'AccountingLedgerTransaction',
+    TaskBoard: 'TaskBoard',
+    TaskItem: 'TaskItem',
     BranchOfService: 'BranchOfService',
     OfficeTitle: 'OfficeTitle',
     OfficerAssignment: 'OfficerAssignment',
@@ -316,6 +322,19 @@ exports.MemberCertificateScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.MemberCredentialDocumentScalarFieldEnum = {
+    id: 'id',
+    documentNumber: 'documentNumber',
+    barcodeNumber: 'barcodeNumber',
+    verificationToken: 'verificationToken',
+    type: 'type',
+    status: 'status',
+    title: 'title',
+    issuedAt: 'issuedAt',
+    memberId: 'memberId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
 exports.MemberPublicRecordScalarFieldEnum = {
     id: 'id',
     title: 'title',
@@ -517,6 +536,78 @@ exports.AccountingPayableItemScalarFieldEnum = {
     amount: 'amount',
     sortOrder: 'sortOrder',
     payableId: 'payableId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.AccountingReceivableScalarFieldEnum = {
+    id: 'id',
+    invoiceNo: 'invoiceNo',
+    customer: 'customer',
+    invoiceDate: 'invoiceDate',
+    dueDate: 'dueDate',
+    reference: 'reference',
+    description: 'description',
+    paymentTerms: 'paymentTerms',
+    paymentMethod: 'paymentMethod',
+    bankAccount: 'bankAccount',
+    notes: 'notes',
+    discount: 'discount',
+    tax: 'tax',
+    totalAmount: 'totalAmount',
+    paidAmount: 'paidAmount',
+    status: 'status',
+    attachments: 'attachments',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.AccountingReceivableItemScalarFieldEnum = {
+    id: 'id',
+    description: 'description',
+    account: 'account',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    amount: 'amount',
+    sortOrder: 'sortOrder',
+    receivableId: 'receivableId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.AccountingLedgerTransactionScalarFieldEnum = {
+    id: 'id',
+    transactionNo: 'transactionNo',
+    transactionDate: 'transactionDate',
+    type: 'type',
+    party: 'party',
+    note: 'note',
+    account: 'account',
+    accountNo: 'accountNo',
+    category: 'category',
+    debit: 'debit',
+    credit: 'credit',
+    status: 'status',
+    reference: 'reference',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.TaskBoardScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    color: 'color',
+    sortOrder: 'sortOrder',
+    isDefault: 'isDefault',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.TaskItemScalarFieldEnum = {
+    id: 'id',
+    code: 'code',
+    title: 'title',
+    priority: 'priority',
+    dueDate: 'dueDate',
+    progress: 'progress',
+    sortOrder: 'sortOrder',
+    boardId: 'boardId',
+    assigneeId: 'assigneeId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

@@ -17,6 +17,10 @@ const report_1 = __importDefault(require("../../routes/v1/report"));
 const activity_log_1 = __importDefault(require("../../routes/v1/activity-log"));
 const backup_database_1 = __importDefault(require("../../routes/v1/backup-database"));
 const accounting_payable_1 = __importDefault(require("../../routes/v1/accounting-payable"));
+const accounting_receivable_1 = __importDefault(require("../../routes/v1/accounting-receivable"));
+const accounting_ledger_1 = __importDefault(require("../../routes/v1/accounting-ledger"));
+const accounting_invoice_1 = __importDefault(require("../../routes/v1/accounting-invoice"));
+const task_management_1 = __importDefault(require("../../routes/v1/task-management"));
 const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.status(http_codes_1.HTTPSTATUS.OK).json({
@@ -41,4 +45,8 @@ router.use('/reports', report_1.default);
 router.use('/activity-logs', activity_log_1.default);
 router.use('/backups', backup_database_1.default);
 router.use('/accounting/accounts-payable', accounting_payable_1.default);
+router.use('/accounting/accounts-receivable', accounting_receivable_1.default);
+router.use('/accounting/cashflow-ledger', accounting_ledger_1.default);
+router.use('/accounting/invoices', accounting_invoice_1.default);
+router.use('/task-management', task_management_1.default);
 exports.default = router;

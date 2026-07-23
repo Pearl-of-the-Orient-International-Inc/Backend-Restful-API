@@ -14,7 +14,9 @@ import { updateMemberByAdmin } from '@/controllers/v1/member/update-member-by-ad
 import { updateMemberUniqueId } from '@/controllers/v1/member/update-member-unique-id';
 import { changeMemberPasswordByAdmin } from '@/controllers/v1/member/change-member-password-by-admin';
 import { verifyMemberEmailByAdmin } from '@/controllers/v1/member/verify-member-email-by-admin';
+import { verifyMemberCredentialDocument } from '@/controllers/v1/member/verify-member-credential-document';
 import { deleteMemberByAdmin } from '@/controllers/v1/member/delete-member-by-admin';
+import { generateMemberCredentialDocument } from '@/controllers/v1/member/generate-member-credential-document';
 import { getPendingMembers } from '@/controllers/v1/member/get-pending-members';
 import { getAllMembers } from '@/controllers/v1/member/get-all-members';
 import { getMembershipReport } from '@/controllers/v1/member/get-membership-report';
@@ -88,6 +90,8 @@ import {
   changeMemberPasswordByAdminSchema,
   verifyMemberEmailByAdminSchema,
   deleteMemberByAdminSchema,
+  generateMemberCredentialDocumentSchema,
+  verifyMemberCredentialDocumentSchema,
   createOfficerAssignmentByAdminSchema,
   getAllOfficerAssignmentsSchema,
   getMemberOfficerAssignmentsSchema,
@@ -152,6 +156,13 @@ router.get(
   expressRateLimit('basic'),
   validate(getPublicMemberProfileSchema),
   getPublicMemberProfile,
+);
+
+router.get(
+  '/credential-documents/verify/:token',
+  expressRateLimit('basic'),
+  validate(verifyMemberCredentialDocumentSchema),
+  verifyMemberCredentialDocument,
 );
 
 router.post(
@@ -461,6 +472,15 @@ router.patch(
   authorize([UserType.ADMIN]),
   validate(verifyMemberEmailByAdminSchema),
   verifyMemberEmailByAdmin,
+);
+
+router.post(
+  '/:id/credential-documents',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(generateMemberCredentialDocumentSchema),
+  generateMemberCredentialDocument,
 );
 
 router.post(

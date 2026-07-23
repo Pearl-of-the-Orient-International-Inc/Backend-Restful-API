@@ -9,6 +9,8 @@ import type {
   updatePreOrientationProgressSchema,
   upsertMemberRequirementsSchema,
   updateMemberStatusSchema,
+  generateMemberCredentialDocumentSchema,
+  verifyMemberCredentialDocumentSchema,
 } from '@/validators/member';
 
 export type ApplyMemberBody = z.infer<typeof applyMemberSchema>;
@@ -20,3 +22,9 @@ export type UpsertOnlineInterviewAppointmentBody = z.infer<typeof upsertOnlineIn
 export type UpsertMemberIdGenerationAssetBody = z.infer<typeof upsertMemberIdGenerationAssetSchema>;
 export type UpsertChaplaincyTrainingProgressBody = z.infer<typeof upsertChaplaincyTrainingProgressSchema>;
 export type UpdateMemberStatusBody = z.infer<typeof updateMemberStatusSchema>;
+export type GenerateMemberCredentialDocumentBody = z.infer<
+  typeof generateMemberCredentialDocumentSchema
+>['body'];
+export type VerifyMemberCredentialDocumentParams = z.infer<
+  typeof verifyMemberCredentialDocumentSchema
+>['params'];

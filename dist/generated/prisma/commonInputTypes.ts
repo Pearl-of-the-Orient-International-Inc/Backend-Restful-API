@@ -532,6 +532,40 @@ export type EnumInterviewDayWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumInterviewDayFilter<$PrismaModel>
 }
 
+export type EnumMemberCredentialDocumentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentType | Prisma.EnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel> | $Enums.MemberCredentialDocumentType
+}
+
+export type EnumMemberCredentialDocumentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentStatus | Prisma.EnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel> | $Enums.MemberCredentialDocumentStatus
+}
+
+export type EnumMemberCredentialDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentType | Prisma.EnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemberCredentialDocumentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel>
+}
+
+export type EnumMemberCredentialDocumentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentStatus | Prisma.EnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberCredentialDocumentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel>
+}
+
 export type EnumMemberPublicRecordTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.MemberPublicRecordType | Prisma.EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
   in?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
@@ -958,6 +992,74 @@ export type EnumAccountingPayableStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAccountingPayableStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAccountingPayableStatusFilter<$PrismaModel>
+}
+
+export type EnumAccountingReceivableStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingReceivableStatus | Prisma.EnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel> | $Enums.AccountingReceivableStatus
+}
+
+export type EnumAccountingReceivableStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingReceivableStatus | Prisma.EnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingReceivableStatusWithAggregatesFilter<$PrismaModel> | $Enums.AccountingReceivableStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
+}
+
+export type EnumAccountingLedgerTransactionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionType | Prisma.EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionType
+}
+
+export type EnumAccountingLedgerTransactionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionStatus | Prisma.EnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionStatus
+}
+
+export type EnumAccountingLedgerTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionType | Prisma.EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel>
+}
+
+export type EnumAccountingLedgerTransactionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionStatus | Prisma.EnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionStatusWithAggregatesFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel>
+}
+
+export type EnumTaskPriorityFilter<$PrismaModel = never> = {
+  equals?: $Enums.TaskPriority | Prisma.EnumTaskPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTaskPriorityFilter<$PrismaModel> | $Enums.TaskPriority
+}
+
+export type EnumTaskPriorityWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TaskPriority | Prisma.EnumTaskPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTaskPriorityWithAggregatesFilter<$PrismaModel> | $Enums.TaskPriority
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTaskPriorityFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTaskPriorityFilter<$PrismaModel>
 }
 
 export type EnumOfficeTitleLevelFilter<$PrismaModel = never> = {
@@ -1702,6 +1804,40 @@ export type NestedEnumInterviewDayWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumInterviewDayFilter<$PrismaModel>
 }
 
+export type NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentType | Prisma.EnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel> | $Enums.MemberCredentialDocumentType
+}
+
+export type NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentStatus | Prisma.EnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel> | $Enums.MemberCredentialDocumentStatus
+}
+
+export type NestedEnumMemberCredentialDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentType | Prisma.EnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentType[] | Prisma.ListEnumMemberCredentialDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemberCredentialDocumentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberCredentialDocumentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumMemberCredentialDocumentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemberCredentialDocumentStatus | Prisma.EnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemberCredentialDocumentStatus[] | Prisma.ListEnumMemberCredentialDocumentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemberCredentialDocumentStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberCredentialDocumentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemberCredentialDocumentStatusFilter<$PrismaModel>
+}
+
 export type NestedEnumMemberPublicRecordTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.MemberPublicRecordType | Prisma.EnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
   in?: $Enums.MemberPublicRecordType[] | Prisma.ListEnumMemberPublicRecordTypeFieldRefInput<$PrismaModel>
@@ -2101,6 +2237,74 @@ export type NestedEnumAccountingPayableStatusWithAggregatesFilter<$PrismaModel =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAccountingPayableStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAccountingPayableStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumAccountingReceivableStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingReceivableStatus | Prisma.EnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel> | $Enums.AccountingReceivableStatus
+}
+
+export type NestedEnumAccountingReceivableStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingReceivableStatus | Prisma.EnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingReceivableStatus[] | Prisma.ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingReceivableStatusWithAggregatesFilter<$PrismaModel> | $Enums.AccountingReceivableStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionType | Prisma.EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionType
+}
+
+export type NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionStatus | Prisma.EnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionStatus
+}
+
+export type NestedEnumAccountingLedgerTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionType | Prisma.EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumAccountingLedgerTransactionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AccountingLedgerTransactionStatus | Prisma.EnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AccountingLedgerTransactionStatus[] | Prisma.ListEnumAccountingLedgerTransactionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAccountingLedgerTransactionStatusWithAggregatesFilter<$PrismaModel> | $Enums.AccountingLedgerTransactionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccountingLedgerTransactionStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumTaskPriorityFilter<$PrismaModel = never> = {
+  equals?: $Enums.TaskPriority | Prisma.EnumTaskPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTaskPriorityFilter<$PrismaModel> | $Enums.TaskPriority
+}
+
+export type NestedEnumTaskPriorityWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TaskPriority | Prisma.EnumTaskPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TaskPriority[] | Prisma.ListEnumTaskPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTaskPriorityWithAggregatesFilter<$PrismaModel> | $Enums.TaskPriority
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTaskPriorityFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTaskPriorityFilter<$PrismaModel>
 }
 
 export type NestedEnumOfficeTitleLevelFilter<$PrismaModel = never> = {

@@ -538,6 +538,7 @@ export type MemberWhereInput = {
   onlineInterviewAppointment?: Prisma.XOR<Prisma.MemberOnlineInterviewAppointmentNullableScalarRelationFilter, Prisma.MemberOnlineInterviewAppointmentWhereInput> | null
   idGenerationAsset?: Prisma.XOR<Prisma.MemberIdGenerationAssetNullableScalarRelationFilter, Prisma.MemberIdGenerationAssetWhereInput> | null
   certificates?: Prisma.MemberCertificateListRelationFilter
+  credentialDocuments?: Prisma.MemberCredentialDocumentListRelationFilter
   publicRecords?: Prisma.MemberPublicRecordListRelationFilter
   chaplaincyTrainingProgress?: Prisma.XOR<Prisma.MemberChaplaincyTrainingProgressNullableScalarRelationFilter, Prisma.MemberChaplaincyTrainingProgressWhereInput> | null
   signature?: Prisma.XOR<Prisma.ApplicantSignatureNullableScalarRelationFilter, Prisma.ApplicantSignatureWhereInput> | null
@@ -604,6 +605,7 @@ export type MemberOrderByWithRelationInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentOrderByWithRelationInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetOrderByWithRelationInput
   certificates?: Prisma.MemberCertificateOrderByRelationAggregateInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentOrderByRelationAggregateInput
   publicRecords?: Prisma.MemberPublicRecordOrderByRelationAggregateInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOrderByWithRelationInput
   signature?: Prisma.ApplicantSignatureOrderByWithRelationInput
@@ -673,6 +675,7 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   onlineInterviewAppointment?: Prisma.XOR<Prisma.MemberOnlineInterviewAppointmentNullableScalarRelationFilter, Prisma.MemberOnlineInterviewAppointmentWhereInput> | null
   idGenerationAsset?: Prisma.XOR<Prisma.MemberIdGenerationAssetNullableScalarRelationFilter, Prisma.MemberIdGenerationAssetWhereInput> | null
   certificates?: Prisma.MemberCertificateListRelationFilter
+  credentialDocuments?: Prisma.MemberCredentialDocumentListRelationFilter
   publicRecords?: Prisma.MemberPublicRecordListRelationFilter
   chaplaincyTrainingProgress?: Prisma.XOR<Prisma.MemberChaplaincyTrainingProgressNullableScalarRelationFilter, Prisma.MemberChaplaincyTrainingProgressWhereInput> | null
   signature?: Prisma.XOR<Prisma.ApplicantSignatureNullableScalarRelationFilter, Prisma.ApplicantSignatureWhereInput> | null
@@ -840,6 +843,7 @@ export type MemberCreateInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -905,6 +909,7 @@ export type MemberUncheckedCreateInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -970,6 +975,7 @@ export type MemberUpdateInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -1035,6 +1041,7 @@ export type MemberUncheckedUpdateInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -1533,6 +1540,20 @@ export type MemberUpdateOneRequiredWithoutCertificatesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutCertificatesInput, Prisma.MemberUpdateWithoutCertificatesInput>, Prisma.MemberUncheckedUpdateWithoutCertificatesInput>
 }
 
+export type MemberCreateNestedOneWithoutCredentialDocumentsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutCredentialDocumentsInput, Prisma.MemberUncheckedCreateWithoutCredentialDocumentsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutCredentialDocumentsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutCredentialDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutCredentialDocumentsInput, Prisma.MemberUncheckedCreateWithoutCredentialDocumentsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutCredentialDocumentsInput
+  upsert?: Prisma.MemberUpsertWithoutCredentialDocumentsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutCredentialDocumentsInput, Prisma.MemberUpdateWithoutCredentialDocumentsInput>, Prisma.MemberUncheckedUpdateWithoutCredentialDocumentsInput>
+}
+
 export type MemberCreateNestedOneWithoutPublicRecordsInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutPublicRecordsInput, Prisma.MemberUncheckedCreateWithoutPublicRecordsInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPublicRecordsInput
@@ -1702,6 +1723,7 @@ export type MemberCreateWithoutUserInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -1766,6 +1788,7 @@ export type MemberUncheckedCreateWithoutUserInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -1846,6 +1869,7 @@ export type MemberUpdateWithoutUserInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -1910,6 +1934,7 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -1975,6 +2000,7 @@ export type MemberCreateWithoutFollowersInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -2039,6 +2065,7 @@ export type MemberUncheckedCreateWithoutFollowersInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -2119,6 +2146,7 @@ export type MemberUpdateWithoutFollowersInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -2183,6 +2211,7 @@ export type MemberUncheckedUpdateWithoutFollowersInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -2246,6 +2275,7 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -2310,6 +2340,7 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -2390,6 +2421,7 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -2454,6 +2486,7 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -2518,6 +2551,7 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -2582,6 +2616,7 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -2662,6 +2697,7 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -2726,6 +2762,7 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -2791,6 +2828,7 @@ export type MemberCreateWithoutSignatureInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
@@ -2855,6 +2893,7 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
@@ -2935,6 +2974,7 @@ export type MemberUpdateWithoutSignatureInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
@@ -2999,6 +3039,7 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
@@ -3062,6 +3103,7 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -3126,6 +3168,7 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -3206,6 +3249,7 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -3270,6 +3314,7 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -3334,6 +3379,7 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -3398,6 +3444,7 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -3478,6 +3525,7 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -3542,6 +3590,7 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -3606,6 +3655,7 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -3670,6 +3720,7 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -3750,6 +3801,7 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -3814,6 +3866,7 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -3878,6 +3931,7 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -3942,6 +3996,7 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -4022,6 +4077,7 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -4086,6 +4142,7 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -4150,6 +4207,7 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -4214,6 +4272,7 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -4294,6 +4353,7 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -4358,6 +4418,7 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -4422,6 +4483,7 @@ export type MemberCreateWithoutCertificatesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -4486,6 +4548,7 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -4566,6 +4629,7 @@ export type MemberUpdateWithoutCertificatesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -4630,6 +4694,283 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutCredentialDocumentsInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutCredentialDocumentsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutCredentialDocumentsInput, Prisma.MemberUncheckedCreateWithoutCredentialDocumentsInput>
+}
+
+export type MemberUpsertWithoutCredentialDocumentsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutCredentialDocumentsInput, Prisma.MemberUncheckedUpdateWithoutCredentialDocumentsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutCredentialDocumentsInput, Prisma.MemberUncheckedCreateWithoutCredentialDocumentsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutCredentialDocumentsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutCredentialDocumentsInput, Prisma.MemberUncheckedUpdateWithoutCredentialDocumentsInput>
+}
+
+export type MemberUpdateWithoutCredentialDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -4695,6 +5036,7 @@ export type MemberCreateWithoutPublicRecordsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
@@ -4759,6 +5101,7 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
@@ -4839,6 +5182,7 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
@@ -4903,6 +5247,7 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
@@ -4967,6 +5312,7 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
   seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
@@ -5031,6 +5377,7 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
   seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
@@ -5111,6 +5458,7 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
   seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
@@ -5175,6 +5523,7 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
   seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
@@ -5239,6 +5588,7 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -5303,6 +5653,7 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -5383,6 +5734,7 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -5447,6 +5799,7 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -5510,6 +5863,7 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -5574,6 +5928,7 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -5654,6 +6009,7 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -5718,6 +6074,7 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -5783,6 +6140,7 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -5847,6 +6205,7 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -5927,6 +6286,7 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -5991,6 +6351,7 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -6055,6 +6416,7 @@ export type MemberCreateWithoutEventAttendancesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -6119,6 +6481,7 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -6199,6 +6562,7 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -6263,6 +6627,7 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -6327,6 +6692,7 @@ export type MemberCreateWithoutTaggedEventsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -6391,6 +6757,7 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -6471,6 +6838,7 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -6535,6 +6903,7 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -6599,6 +6968,7 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
@@ -6663,6 +7033,7 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
   certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
   signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
@@ -6743,6 +7114,7 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
@@ -6807,6 +7179,7 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
   idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
   certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
   publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
   chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
   signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
@@ -6828,6 +7201,7 @@ export type MemberCountOutputType = {
   characterReferences: number
   applicantRequirements: number
   certificates: number
+  credentialDocuments: number
   publicRecords: number
   seminaryApplications: number
   officerAssignments: number
@@ -6843,6 +7217,7 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   characterReferences?: boolean | MemberCountOutputTypeCountCharacterReferencesArgs
   applicantRequirements?: boolean | MemberCountOutputTypeCountApplicantRequirementsArgs
   certificates?: boolean | MemberCountOutputTypeCountCertificatesArgs
+  credentialDocuments?: boolean | MemberCountOutputTypeCountCredentialDocumentsArgs
   publicRecords?: boolean | MemberCountOutputTypeCountPublicRecordsArgs
   seminaryApplications?: boolean | MemberCountOutputTypeCountSeminaryApplicationsArgs
   officerAssignments?: boolean | MemberCountOutputTypeCountOfficerAssignmentsArgs
@@ -6895,6 +7270,13 @@ export type MemberCountOutputTypeCountApplicantRequirementsArgs<ExtArgs extends 
  */
 export type MemberCountOutputTypeCountCertificatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MemberCertificateWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountCredentialDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberCredentialDocumentWhereInput
 }
 
 /**
@@ -7002,6 +7384,7 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   onlineInterviewAppointment?: boolean | Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs>
   idGenerationAsset?: boolean | Prisma.Member$idGenerationAssetArgs<ExtArgs>
   certificates?: boolean | Prisma.Member$certificatesArgs<ExtArgs>
+  credentialDocuments?: boolean | Prisma.Member$credentialDocumentsArgs<ExtArgs>
   publicRecords?: boolean | Prisma.Member$publicRecordsArgs<ExtArgs>
   chaplaincyTrainingProgress?: boolean | Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs>
   signature?: boolean | Prisma.Member$signatureArgs<ExtArgs>
@@ -7169,6 +7552,7 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   onlineInterviewAppointment?: boolean | Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs>
   idGenerationAsset?: boolean | Prisma.Member$idGenerationAssetArgs<ExtArgs>
   certificates?: boolean | Prisma.Member$certificatesArgs<ExtArgs>
+  credentialDocuments?: boolean | Prisma.Member$credentialDocumentsArgs<ExtArgs>
   publicRecords?: boolean | Prisma.Member$publicRecordsArgs<ExtArgs>
   chaplaincyTrainingProgress?: boolean | Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs>
   signature?: boolean | Prisma.Member$signatureArgs<ExtArgs>
@@ -7200,6 +7584,7 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     onlineInterviewAppointment: Prisma.$MemberOnlineInterviewAppointmentPayload<ExtArgs> | null
     idGenerationAsset: Prisma.$MemberIdGenerationAssetPayload<ExtArgs> | null
     certificates: Prisma.$MemberCertificatePayload<ExtArgs>[]
+    credentialDocuments: Prisma.$MemberCredentialDocumentPayload<ExtArgs>[]
     publicRecords: Prisma.$MemberPublicRecordPayload<ExtArgs>[]
     chaplaincyTrainingProgress: Prisma.$MemberChaplaincyTrainingProgressPayload<ExtArgs> | null
     signature: Prisma.$ApplicantSignaturePayload<ExtArgs> | null
@@ -7659,6 +8044,7 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   onlineInterviewAppointment<T extends Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$onlineInterviewAppointmentArgs<ExtArgs>>): Prisma.Prisma__MemberOnlineInterviewAppointmentClient<runtime.Types.Result.GetResult<Prisma.$MemberOnlineInterviewAppointmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   idGenerationAsset<T extends Prisma.Member$idGenerationAssetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$idGenerationAssetArgs<ExtArgs>>): Prisma.Prisma__MemberIdGenerationAssetClient<runtime.Types.Result.GetResult<Prisma.$MemberIdGenerationAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   certificates<T extends Prisma.Member$certificatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$certificatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberCertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  credentialDocuments<T extends Prisma.Member$credentialDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$credentialDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberCredentialDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   publicRecords<T extends Prisma.Member$publicRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$publicRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPublicRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chaplaincyTrainingProgress<T extends Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$chaplaincyTrainingProgressArgs<ExtArgs>>): Prisma.Prisma__MemberChaplaincyTrainingProgressClient<runtime.Types.Result.GetResult<Prisma.$MemberChaplaincyTrainingProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   signature<T extends Prisma.Member$signatureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$signatureArgs<ExtArgs>>): Prisma.Prisma__ApplicantSignatureClient<runtime.Types.Result.GetResult<Prisma.$ApplicantSignaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -8330,6 +8716,30 @@ export type Member$certificatesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.MemberCertificateScalarFieldEnum | Prisma.MemberCertificateScalarFieldEnum[]
+}
+
+/**
+ * Member.credentialDocuments
+ */
+export type Member$credentialDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemberCredentialDocument
+   */
+  select?: Prisma.MemberCredentialDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemberCredentialDocument
+   */
+  omit?: Prisma.MemberCredentialDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberCredentialDocumentInclude<ExtArgs> | null
+  where?: Prisma.MemberCredentialDocumentWhereInput
+  orderBy?: Prisma.MemberCredentialDocumentOrderByWithRelationInput | Prisma.MemberCredentialDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.MemberCredentialDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberCredentialDocumentScalarFieldEnum | Prisma.MemberCredentialDocumentScalarFieldEnum[]
 }
 
 /**

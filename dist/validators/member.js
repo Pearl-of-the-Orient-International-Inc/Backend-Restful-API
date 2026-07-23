@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.deleteMemberByAdminSchema = exports.verifyMemberEmailByAdminSchema = exports.changeMemberPasswordByAdminSchema = exports.updateMemberUniqueIdSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.updateCurrentBranchServicesSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
+exports.replaceOfficerAssignmentByAdminSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.verifyMemberCredentialDocumentSchema = exports.generateMemberCredentialDocumentSchema = exports.deleteMemberByAdminSchema = exports.verifyMemberEmailByAdminSchema = exports.changeMemberPasswordByAdminSchema = exports.updateMemberUniqueIdSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.updateCurrentBranchServicesSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
@@ -226,6 +226,19 @@ exports.verifyMemberEmailByAdminSchema = zod_1.z.object({
 exports.deleteMemberByAdminSchema = zod_1.z.object({
     params: zod_1.z.object({
         id: zod_1.z.uuid(),
+    }),
+});
+exports.generateMemberCredentialDocumentSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+    body: zod_1.z.object({
+        type: zod_1.z.enum(enums_1.MemberCredentialDocumentType),
+    }),
+});
+exports.verifyMemberCredentialDocumentSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        token: zod_1.z.string().trim().min(16).max(128),
     }),
 });
 exports.getAllMembersSchema = zod_1.z.object({

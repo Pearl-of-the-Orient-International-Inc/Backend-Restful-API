@@ -102,6 +102,22 @@ export const MemberPublicRecordStatus = {
 export type MemberPublicRecordStatus = (typeof MemberPublicRecordStatus)[keyof typeof MemberPublicRecordStatus]
 
 
+export const MemberCredentialDocumentType = {
+  CERTIFICATE: 'CERTIFICATE',
+  RECOGNITION: 'RECOGNITION'
+} as const
+
+export type MemberCredentialDocumentType = (typeof MemberCredentialDocumentType)[keyof typeof MemberCredentialDocumentType]
+
+
+export const MemberCredentialDocumentStatus = {
+  ACTIVE: 'ACTIVE',
+  REVOKED: 'REVOKED'
+} as const
+
+export type MemberCredentialDocumentStatus = (typeof MemberCredentialDocumentStatus)[keyof typeof MemberCredentialDocumentStatus]
+
+
 export const VerificationType = {
   EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
   PASSWORD_RESET: 'PASSWORD_RESET',
@@ -336,6 +352,48 @@ export const AccountingPayableStatus = {
 } as const
 
 export type AccountingPayableStatus = (typeof AccountingPayableStatus)[keyof typeof AccountingPayableStatus]
+
+
+export const AccountingReceivableStatus = {
+  DRAFT: 'DRAFT',
+  UNPAID: 'UNPAID',
+  PARTIAL: 'PARTIAL',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AccountingReceivableStatus = (typeof AccountingReceivableStatus)[keyof typeof AccountingReceivableStatus]
+
+
+export const AccountingLedgerTransactionType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  PAYABLE: 'PAYABLE',
+  RECEIVABLE: 'RECEIVABLE'
+} as const
+
+export type AccountingLedgerTransactionType = (typeof AccountingLedgerTransactionType)[keyof typeof AccountingLedgerTransactionType]
+
+
+export const AccountingLedgerTransactionStatus = {
+  PAID: 'PAID',
+  RECEIVED: 'RECEIVED',
+  UNPAID: 'UNPAID',
+  PENDING: 'PENDING',
+  VOID: 'VOID'
+} as const
+
+export type AccountingLedgerTransactionStatus = (typeof AccountingLedgerTransactionStatus)[keyof typeof AccountingLedgerTransactionStatus]
+
+
+export const TaskPriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+} as const
+
+export type TaskPriority = (typeof TaskPriority)[keyof typeof TaskPriority]
 
 
 export const InterviewDay = {
