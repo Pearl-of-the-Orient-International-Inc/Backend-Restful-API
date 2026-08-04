@@ -12,7 +12,8 @@
 export const UserType = {
   MEMBER: 'MEMBER',
   OFFICER: 'OFFICER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  INSTRUCTOR: 'INSTRUCTOR'
 } as const
 
 export type UserType = (typeof UserType)[keyof typeof UserType]
@@ -218,6 +219,7 @@ export const SeminaryApplicationStatus = {
   SUBMITTED: 'SUBMITTED',
   UNDER_REVIEW: 'UNDER_REVIEW',
   APPROVED: 'APPROVED',
+  ENROLLED: 'ENROLLED',
   REJECTED: 'REJECTED',
   CANCELLED: 'CANCELLED'
 } as const
@@ -297,6 +299,27 @@ export const SeminaryAcademicYearStatus = {
 export type SeminaryAcademicYearStatus = (typeof SeminaryAcademicYearStatus)[keyof typeof SeminaryAcademicYearStatus]
 
 
+export const SeminaryInstructorStatus = {
+  ACTIVE: 'ACTIVE',
+  PART_TIME: 'PART_TIME',
+  ON_LEAVE: 'ON_LEAVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SeminaryInstructorStatus = (typeof SeminaryInstructorStatus)[keyof typeof SeminaryInstructorStatus]
+
+
+export const SeminaryInstructorRank = {
+  ADJUNCT_INSTRUCTOR: 'ADJUNCT_INSTRUCTOR',
+  LECTURER: 'LECTURER',
+  ASSISTANT_PROFESSOR: 'ASSISTANT_PROFESSOR',
+  ASSOCIATE_PROFESSOR: 'ASSOCIATE_PROFESSOR',
+  PROFESSOR: 'PROFESSOR'
+} as const
+
+export type SeminaryInstructorRank = (typeof SeminaryInstructorRank)[keyof typeof SeminaryInstructorRank]
+
+
 export const SeminaryPaymentType = {
   FULL_PAYMENT: 'FULL_PAYMENT',
   PARTIAL_PAYMENT: 'PARTIAL_PAYMENT'
@@ -321,6 +344,16 @@ export const SeminaryPaymentStatus = {
 } as const
 
 export type SeminaryPaymentStatus = (typeof SeminaryPaymentStatus)[keyof typeof SeminaryPaymentStatus]
+
+
+export const SeminaryFeeCollectionStatus = {
+  PENDING: 'PENDING',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE'
+} as const
+
+export type SeminaryFeeCollectionStatus = (typeof SeminaryFeeCollectionStatus)[keyof typeof SeminaryFeeCollectionStatus]
 
 
 export const SeminaryCredentialDocumentType = {

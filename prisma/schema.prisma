@@ -39,6 +39,7 @@ model User {
   restoredBackups    DatabaseBackupSnapshot[] @relation("RestoredDatabaseBackups")
   backupSettingUpdates DatabaseBackupSettings[] @relation("BackupSettingsUpdatedBy")
   assignedTasks      TaskItem[] @relation("TaskAssignee")
+  seminaryInstructor SeminaryInstructor?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -670,6 +671,54 @@ model SeminaryAcademicYear {
   @@index([sortOrder])
 }
 
+model SeminaryInstructor {
+  id String @id @default(uuid())
+
+  userId            String?                  @unique
+  user              User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  facultyId         String                   @unique
+  name              String
+  professionalTitle String
+  email             String                   @unique
+  contactNumber     String
+  teachingPrograms  SeminaryProgramLevel[]   @default([])
+  rank              SeminaryInstructorRank
+  status            SeminaryInstructorStatus @default(ACTIVE)
+  loadUnits         Int                      @default(0)
+
+  biography             String
+  educationalBackground String
+  areasOfExpertise      String[]             @default([])
+  credentials           String[]             @default([])
+  formalPhotoUrl        String
+
+  isFilipinoCitizen              Boolean  @default(true)
+  highSchoolGraduateOrEquivalent Boolean  @default(true)
+  ministerialExperienceYears     Int
+  submissionDeadline             DateTime
+
+  attendanceParticipation     Float
+  leadershipCharacter         Float
+  ministryCommunityEngagement Float
+  knowledgeSkillsAssessment   Float
+  professionalConductEthics   Float
+  totalScore                  Float
+  rating                      String
+  rankingClassification       String
+  award                       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([facultyId])
+  @@index([userId])
+  @@index([name])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
 // ─────────────────────────────────────────────
 // ORGANIZATIONAL STRUCTURE SCHEMA
 // ─────────────────────────────────────────────
@@ -689,6 +738,42 @@ model SeminaryGradeConfiguration {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model SeminaryFeeConfiguration {
+  id String @id @default("default")
+
+  feeBreakdowns Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SeminaryFeeCollectionAccount {
+  id String @id @default(uuid())
+
+  referenceNumber String                      @unique
+  studentId       String                      @unique
+  studentName     String
+  program         String
+  programLevel    SeminaryProgramLevel
+  totalCharges    Decimal                     @db.Decimal(12, 2)
+  amountPaid      Decimal                     @default(0) @db.Decimal(12, 2)
+  balance         Decimal                     @default(0) @db.Decimal(12, 2)
+  dueDate         DateTime
+  paymentMethod   String
+  status          SeminaryFeeCollectionStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([referenceNumber])
+  @@index([studentId])
+  @@index([studentName])
+  @@index([programLevel])
+  @@index([status])
+  @@index([dueDate])
+  @@index([createdAt])
 }
 
 model AccountingPayable {
@@ -1109,6 +1194,7 @@ enum UserType {
   MEMBER
   OFFICER
   ADMIN
+  INSTRUCTOR
 }
 
 enum UserPosition {
@@ -1254,6 +1340,7 @@ enum SeminaryApplicationStatus {
   SUBMITTED
   UNDER_REVIEW
   APPROVED
+  ENROLLED
   REJECTED
   CANCELLED
 }
@@ -1306,6 +1393,21 @@ enum SeminaryAcademicYearStatus {
   COMPLETED
 }
 
+enum SeminaryInstructorStatus {
+  ACTIVE
+  PART_TIME
+  ON_LEAVE
+  INACTIVE
+}
+
+enum SeminaryInstructorRank {
+  ADJUNCT_INSTRUCTOR
+  LECTURER
+  ASSISTANT_PROFESSOR
+  ASSOCIATE_PROFESSOR
+  PROFESSOR
+}
+
 enum SeminaryPaymentType {
   FULL_PAYMENT
   PARTIAL_PAYMENT
@@ -1321,6 +1423,13 @@ enum SeminaryPaymentStatus {
   PENDING
   VERIFIED
   REJECTED
+}
+
+enum SeminaryFeeCollectionStatus {
+  PENDING
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
 }
 
 enum SeminaryCredentialDocumentType {

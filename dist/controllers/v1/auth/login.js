@@ -27,6 +27,9 @@ const client_1 = require("../../../generated/prisma/client");
 const activity_log_1 = require("../../../lib/activity-log");
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password, userAgent } = req.body;
+    const loginIdentifier = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email)
+        ? email.trim().toUpperCase()
+        : email.trim().toLowerCase();
     const ipAddress = (0, helpers_1.getClientIp)(req);
     const headerUserAgent = req.headers['user-agent'];
     const userAgentString = Array.isArray(headerUserAgent)
@@ -36,7 +39,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield prisma_1.prisma.user.findUnique({
             where: {
-                email,
+                email: loginIdentifier,
             },
             select: {
                 id: true,
@@ -73,7 +76,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 actionLabel: 'Login attempt',
                 moduleLabel: 'Authentication',
                 targetLabel: 'Admin portal',
-                description: `Login attempt failed because no account exists for ${email}.`,
+                description: `Login attempt failed because no account exists for ${loginIdentifier}.`,
                 result: client_1.ActivityLogResult.FAILED,
                 ipAddress: ipAddress !== null && ipAddress !== void 0 ? ipAddress : null,
                 deviceLabel: finalUserAgent !== null && finalUserAgent !== void 0 ? finalUserAgent : null,

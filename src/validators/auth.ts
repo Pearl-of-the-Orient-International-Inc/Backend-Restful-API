@@ -20,6 +20,25 @@ export const passwordSchema = z
     error: 'Password must contain at least 1 special character',
   });
 
+export const loginIdentifierSchema = z
+  .string()
+  .trim()
+  .min(1, { error: 'Email or instructor ID is required' })
+  .max(255, { error: 'Email or instructor ID must not exceed 255 characters' })
+  .refine(
+    (value) =>
+      z.email().safeParse(value).success ||
+      /^POTSCI-\d{2}-\d{4}-INS$/i.test(value),
+    {
+      error: 'Enter a valid email address or instructor ID',
+    },
+  )
+  .transform((value) =>
+    /^POTSCI-\d{2}-\d{4}-INS$/i.test(value)
+      ? value.toUpperCase()
+      : value.toLowerCase(),
+  );
+
 export const registerSchema = z.object({
   name: z
     .string()
@@ -34,7 +53,7 @@ export const registerSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  email: emailSchema,
+  email: loginIdentifierSchema,
   password: passwordSchema,
   userAgent: z.string().optional(),
 });

@@ -31,6 +31,9 @@ import { LoginSchema } from '@/validators/auth';
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password, userAgent } = req.body as LoginSchema;
+  const loginIdentifier = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email)
+    ? email.trim().toUpperCase()
+    : email.trim().toLowerCase();
   const ipAddress = getClientIp(req);
 
   // Handle the user-agent header properly
@@ -45,7 +48,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     // Check existing user
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email: loginIdentifier,
       },
       select: {
         id: true,
@@ -83,7 +86,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         actionLabel: 'Login attempt',
         moduleLabel: 'Authentication',
         targetLabel: 'Admin portal',
-        description: `Login attempt failed because no account exists for ${email}.`,
+        description: `Login attempt failed because no account exists for ${loginIdentifier}.`,
         result: ActivityLogResult.FAILED,
         ipAddress: ipAddress ?? null,
         deviceLabel: finalUserAgent ?? null,

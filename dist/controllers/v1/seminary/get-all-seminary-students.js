@@ -19,8 +19,11 @@ const getAllSeminaryStudents = (req, res) => __awaiter(void 0, void 0, void 0, f
     try {
         const query = req.query;
         const page = Math.max(Number.parseInt((_a = query.page) !== null && _a !== void 0 ? _a : '1', 10), 1);
-        const limit = Math.min(Math.max(Number.parseInt((_b = query.limit) !== null && _b !== void 0 ? _b : '10', 10), 1), 100);
-        const skip = (page - 1) * limit;
+        const hasLimit = typeof query.limit === 'string';
+        const limit = hasLimit
+            ? Math.min(Math.max(Number.parseInt((_b = query.limit) !== null && _b !== void 0 ? _b : '10', 10), 1), 100)
+            : undefined;
+        const skip = limit ? (page - 1) * limit : undefined;
         const search = (_c = query.search) === null || _c === void 0 ? void 0 : _c.trim();
         const where = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ studentId: { not: null } }, (query.programLevel ? { programLevel: query.programLevel } : {})), (query.studentStatus ? { studentStatus: query.studentStatus } : {})), (query.schoolAffiliation
             ? { schoolAffiliation: query.schoolAffiliation }
@@ -52,9 +55,9 @@ const getAllSeminaryStudents = (req, res) => __awaiter(void 0, void 0, void 0, f
             data: students,
             meta: {
                 page,
-                limit,
+                limit: limit !== null && limit !== void 0 ? limit : total,
                 total,
-                totalPages: Math.ceil(total / limit),
+                totalPages: limit ? Math.ceil(total / limit) : 1,
             },
         });
     }

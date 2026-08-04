@@ -3,6 +3,8 @@ import { SeminaryApplicationStatus } from '@/generated/prisma/enums';
 type SeminaryDecisionStatus =
   | (typeof SeminaryApplicationStatus)['UNDER_REVIEW']
   | (typeof SeminaryApplicationStatus)['APPROVED']
+  | (typeof SeminaryApplicationStatus)['ENROLLED']
+  | (typeof SeminaryApplicationStatus)['CANCELLED']
   | (typeof SeminaryApplicationStatus)['REJECTED'];
 
 const statusCopy: Record<
@@ -17,9 +19,17 @@ const statusCopy: Record<
     subject: 'Your Seminary Application Has Been Approved',
     heading: 'Congratulations, your application has been approved',
   },
+  [SeminaryApplicationStatus.ENROLLED]: {
+    subject: 'Your Seminary Enrollment Is Active',
+    heading: 'Your enrollment is now active',
+  },
   [SeminaryApplicationStatus.REJECTED]: {
     subject: 'Your Seminary Application Update',
     heading: 'Your application has been reviewed',
+  },
+  [SeminaryApplicationStatus.CANCELLED]: {
+    subject: 'Your Seminary Application Was Cancelled',
+    heading: 'Your application has been cancelled',
   },
 };
 
@@ -38,7 +48,9 @@ export const seminaryApplicationStatusTemplate = ({
 }) => {
   const copy = statusCopy[status];
   const studentIdLine =
-    status === SeminaryApplicationStatus.APPROVED && studentId
+    (status === SeminaryApplicationStatus.APPROVED ||
+      status === SeminaryApplicationStatus.ENROLLED) &&
+    studentId
       ? `\nStudent ID: ${studentId}\n`
       : '';
   const reasonLine =
@@ -67,7 +79,9 @@ Pearl of the Orient Theological Seminary and Colleges
           <p style="margin:0 0 8px;"><strong>Status:</strong> ${status.replace(/_/g, ' ')}</p>
           <p style="margin:0 0 8px;"><strong>Program/Course:</strong> ${programCourse}</p>
           ${
-            status === SeminaryApplicationStatus.APPROVED && studentId
+            (status === SeminaryApplicationStatus.APPROVED ||
+              status === SeminaryApplicationStatus.ENROLLED) &&
+            studentId
               ? `<p style="margin:0;"><strong>Student ID:</strong> ${studentId}</p>`
               : ''
           }

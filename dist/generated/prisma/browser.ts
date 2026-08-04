@@ -158,10 +158,25 @@ export type SeminaryCourse = Prisma.SeminaryCourseModel
  */
 export type SeminaryAcademicYear = Prisma.SeminaryAcademicYearModel
 /**
+ * Model SeminaryInstructor
+ * 
+ */
+export type SeminaryInstructor = Prisma.SeminaryInstructorModel
+/**
  * Model SeminaryGradeConfiguration
  * 
  */
 export type SeminaryGradeConfiguration = Prisma.SeminaryGradeConfigurationModel
+/**
+ * Model SeminaryFeeConfiguration
+ * 
+ */
+export type SeminaryFeeConfiguration = Prisma.SeminaryFeeConfigurationModel
+/**
+ * Model SeminaryFeeCollectionAccount
+ * 
+ */
+export type SeminaryFeeCollectionAccount = Prisma.SeminaryFeeCollectionAccountModel
 /**
  * Model AccountingPayable
  * 

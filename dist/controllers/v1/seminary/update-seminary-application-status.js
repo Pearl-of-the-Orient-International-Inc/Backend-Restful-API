@@ -53,7 +53,8 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
         });
         const application = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
             var _a, _b;
-            const studentId = body.status === enums_1.SeminaryApplicationStatus.APPROVED &&
+            const studentId = (body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
+                body.status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
                 !existingApplication.studentId
                 ? yield (0, student_shared_1.buildNextStudentId)(tx)
                 : undefined;
@@ -75,19 +76,22 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
                 yield tx.seminaryPayment.update({
                     where: { id: existingPayment.id },
                     data: {
-                        status: body.status === enums_1.SeminaryApplicationStatus.APPROVED
+                        status: body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
+                            body.status === enums_1.SeminaryApplicationStatus.ENROLLED
                             ? enums_1.SeminaryPaymentStatus.VERIFIED
                             : body.status === enums_1.SeminaryApplicationStatus.REJECTED
                                 ? enums_1.SeminaryPaymentStatus.REJECTED
                                 : enums_1.SeminaryPaymentStatus.PENDING,
-                        verifiedAt: body.status === enums_1.SeminaryApplicationStatus.APPROVED
+                        verifiedAt: body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
+                            body.status === enums_1.SeminaryApplicationStatus.ENROLLED
                             ? new Date()
                             : null,
                         reviewRemarks: (_b = body.reviewRemarks) !== null && _b !== void 0 ? _b : null,
                     },
                 });
             }
-            if (body.status === enums_1.SeminaryApplicationStatus.APPROVED &&
+            if ((body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
+                body.status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
                 existingApplication.memberId) {
                 yield tx.member.update({
                     where: { id: existingApplication.memberId },

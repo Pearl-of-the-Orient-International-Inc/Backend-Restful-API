@@ -14,11 +14,11 @@ export const getAllSeminaryApplications = async (
   try {
     const query = req.query as GetAllSeminaryApplicationsQuery;
     const page = Math.max(Number.parseInt(query.page ?? '1', 10), 1);
-    const limit = Math.min(
-      Math.max(Number.parseInt(query.limit ?? '10', 10), 1),
-      100,
-    );
-    const skip = (page - 1) * limit;
+    const hasLimit = typeof query.limit === 'string';
+    const limit = hasLimit
+      ? Math.min(Math.max(Number.parseInt(query.limit ?? '10', 10), 1), 100)
+      : undefined;
+    const skip = limit ? (page - 1) * limit : undefined;
     const search = query.search?.trim();
 
     const where: Prisma.SeminaryApplicationWhereInput = {
@@ -59,9 +59,9 @@ export const getAllSeminaryApplications = async (
       data: applications,
       meta: {
         page,
-        limit,
+        limit: limit ?? total,
         total,
-        totalPages: Math.ceil(total / limit),
+        totalPages: limit ? Math.ceil(total / limit) : 1,
       },
     });
   } catch (err) {

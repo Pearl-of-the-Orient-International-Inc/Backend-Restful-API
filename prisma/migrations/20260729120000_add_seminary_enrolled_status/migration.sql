@@ -1,0 +1,1 @@
+ALTER TYPE "SeminaryApplicationStatus" ADD VALUE IF NOT EXISTS 'ENROLLED';

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.passkeyAuthenticationVerifySchema = exports.passkeyAuthenticationOptionsSchema = exports.passkeyRegistrationVerifySchema = exports.passkeyRegistrationOptionsSchema = exports.verifyTwoFactorSchema = exports.twoFactorEnableSchema = exports.changePasswordSchema = exports.verifyPasswordSchema = exports.verificationEmailSchema = exports.resendVerificationSchema = exports.resetPasswordSchema = exports.forgotPasswordSchema = exports.loginSchema = exports.registerSchema = exports.passwordSchema = exports.emailSchema = void 0;
+exports.passkeyAuthenticationVerifySchema = exports.passkeyAuthenticationOptionsSchema = exports.passkeyRegistrationVerifySchema = exports.passkeyRegistrationOptionsSchema = exports.verifyTwoFactorSchema = exports.twoFactorEnableSchema = exports.changePasswordSchema = exports.verifyPasswordSchema = exports.verificationEmailSchema = exports.resendVerificationSchema = exports.resetPasswordSchema = exports.forgotPasswordSchema = exports.loginSchema = exports.registerSchema = exports.loginIdentifierSchema = exports.passwordSchema = exports.emailSchema = void 0;
 const enums_1 = require("../generated/prisma/enums");
 const zod_1 = __importDefault(require("zod"));
 exports.emailSchema = zod_1.default
@@ -23,6 +23,18 @@ exports.passwordSchema = zod_1.default
     .regex(/[^A-Za-z0-9]/, {
     error: 'Password must contain at least 1 special character',
 });
+exports.loginIdentifierSchema = zod_1.default
+    .string()
+    .trim()
+    .min(1, { error: 'Email or instructor ID is required' })
+    .max(255, { error: 'Email or instructor ID must not exceed 255 characters' })
+    .refine((value) => zod_1.default.email().safeParse(value).success ||
+    /^POTSCI-\d{2}-\d{4}-INS$/i.test(value), {
+    error: 'Enter a valid email address or instructor ID',
+})
+    .transform((value) => /^POTSCI-\d{2}-\d{4}-INS$/i.test(value)
+    ? value.toUpperCase()
+    : value.toLowerCase());
 exports.registerSchema = zod_1.default.object({
     name: zod_1.default
         .string()
@@ -36,7 +48,7 @@ exports.registerSchema = zod_1.default.object({
     }),
 });
 exports.loginSchema = zod_1.default.object({
-    email: exports.emailSchema,
+    email: exports.loginIdentifierSchema,
     password: exports.passwordSchema,
     userAgent: zod_1.default.string().optional(),
 });

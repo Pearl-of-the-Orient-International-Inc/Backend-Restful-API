@@ -79,7 +79,10 @@ export const ModelName = {
   SeminaryPayment: 'SeminaryPayment',
   SeminaryCourse: 'SeminaryCourse',
   SeminaryAcademicYear: 'SeminaryAcademicYear',
+  SeminaryInstructor: 'SeminaryInstructor',
   SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
+  SeminaryFeeConfiguration: 'SeminaryFeeConfiguration',
+  SeminaryFeeCollectionAccount: 'SeminaryFeeCollectionAccount',
   AccountingPayable: 'AccountingPayable',
   AccountingPayableItem: 'AccountingPayableItem',
   AccountingReceivable: 'AccountingReceivable',
@@ -619,6 +622,43 @@ export const SeminaryAcademicYearScalarFieldEnum = {
 export type SeminaryAcademicYearScalarFieldEnum = (typeof SeminaryAcademicYearScalarFieldEnum)[keyof typeof SeminaryAcademicYearScalarFieldEnum]
 
 
+export const SeminaryInstructorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  facultyId: 'facultyId',
+  name: 'name',
+  professionalTitle: 'professionalTitle',
+  email: 'email',
+  contactNumber: 'contactNumber',
+  teachingPrograms: 'teachingPrograms',
+  rank: 'rank',
+  status: 'status',
+  loadUnits: 'loadUnits',
+  biography: 'biography',
+  educationalBackground: 'educationalBackground',
+  areasOfExpertise: 'areasOfExpertise',
+  credentials: 'credentials',
+  formalPhotoUrl: 'formalPhotoUrl',
+  isFilipinoCitizen: 'isFilipinoCitizen',
+  highSchoolGraduateOrEquivalent: 'highSchoolGraduateOrEquivalent',
+  ministerialExperienceYears: 'ministerialExperienceYears',
+  submissionDeadline: 'submissionDeadline',
+  attendanceParticipation: 'attendanceParticipation',
+  leadershipCharacter: 'leadershipCharacter',
+  ministryCommunityEngagement: 'ministryCommunityEngagement',
+  knowledgeSkillsAssessment: 'knowledgeSkillsAssessment',
+  professionalConductEthics: 'professionalConductEthics',
+  totalScore: 'totalScore',
+  rating: 'rating',
+  rankingClassification: 'rankingClassification',
+  award: 'award',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryInstructorScalarFieldEnum = (typeof SeminaryInstructorScalarFieldEnum)[keyof typeof SeminaryInstructorScalarFieldEnum]
+
+
 export const SeminaryGradeConfigurationScalarFieldEnum = {
   id: 'id',
   passingEquivalent: 'passingEquivalent',
@@ -635,6 +675,36 @@ export const SeminaryGradeConfigurationScalarFieldEnum = {
 } as const
 
 export type SeminaryGradeConfigurationScalarFieldEnum = (typeof SeminaryGradeConfigurationScalarFieldEnum)[keyof typeof SeminaryGradeConfigurationScalarFieldEnum]
+
+
+export const SeminaryFeeConfigurationScalarFieldEnum = {
+  id: 'id',
+  feeBreakdowns: 'feeBreakdowns',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryFeeConfigurationScalarFieldEnum = (typeof SeminaryFeeConfigurationScalarFieldEnum)[keyof typeof SeminaryFeeConfigurationScalarFieldEnum]
+
+
+export const SeminaryFeeCollectionAccountScalarFieldEnum = {
+  id: 'id',
+  referenceNumber: 'referenceNumber',
+  studentId: 'studentId',
+  studentName: 'studentName',
+  program: 'program',
+  programLevel: 'programLevel',
+  totalCharges: 'totalCharges',
+  amountPaid: 'amountPaid',
+  balance: 'balance',
+  dueDate: 'dueDate',
+  paymentMethod: 'paymentMethod',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryFeeCollectionAccountScalarFieldEnum = (typeof SeminaryFeeCollectionAccountScalarFieldEnum)[keyof typeof SeminaryFeeCollectionAccountScalarFieldEnum]
 
 
 export const AccountingPayableScalarFieldEnum = {

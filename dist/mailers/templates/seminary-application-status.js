@@ -11,14 +11,24 @@ const statusCopy = {
         subject: 'Your Seminary Application Has Been Approved',
         heading: 'Congratulations, your application has been approved',
     },
+    [enums_1.SeminaryApplicationStatus.ENROLLED]: {
+        subject: 'Your Seminary Enrollment Is Active',
+        heading: 'Your enrollment is now active',
+    },
     [enums_1.SeminaryApplicationStatus.REJECTED]: {
         subject: 'Your Seminary Application Update',
         heading: 'Your application has been reviewed',
     },
+    [enums_1.SeminaryApplicationStatus.CANCELLED]: {
+        subject: 'Your Seminary Application Was Cancelled',
+        heading: 'Your application has been cancelled',
+    },
 };
 const seminaryApplicationStatusTemplate = ({ name, programCourse, reason, status, studentId, }) => {
     const copy = statusCopy[status];
-    const studentIdLine = status === enums_1.SeminaryApplicationStatus.APPROVED && studentId
+    const studentIdLine = (status === enums_1.SeminaryApplicationStatus.APPROVED ||
+        status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
+        studentId
         ? `\nStudent ID: ${studentId}\n`
         : '';
     const reasonLine = status === enums_1.SeminaryApplicationStatus.REJECTED && reason
@@ -44,7 +54,9 @@ Pearl of the Orient Theological Seminary and Colleges
         <div style="background:#f3f7f5;border:1px solid #dfe8e3;border-radius:8px;padding:14px;margin:18px 0;">
           <p style="margin:0 0 8px;"><strong>Status:</strong> ${status.replace(/_/g, ' ')}</p>
           <p style="margin:0 0 8px;"><strong>Program/Course:</strong> ${programCourse}</p>
-          ${status === enums_1.SeminaryApplicationStatus.APPROVED && studentId
+          ${(status === enums_1.SeminaryApplicationStatus.APPROVED ||
+            status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
+            studentId
             ? `<p style="margin:0;"><strong>Student ID:</strong> ${studentId}</p>`
             : ''}
           ${status === enums_1.SeminaryApplicationStatus.REJECTED && reason

@@ -977,6 +977,84 @@ export type EnumSeminaryAcademicYearStatusWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumSeminaryAcademicYearStatusFilter<$PrismaModel>
 }
 
+export type EnumSeminaryInstructorRankFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorRank | Prisma.EnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorRankFilter<$PrismaModel> | $Enums.SeminaryInstructorRank
+}
+
+export type EnumSeminaryInstructorStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorStatus | Prisma.EnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorStatusFilter<$PrismaModel> | $Enums.SeminaryInstructorStatus
+}
+
+export type FloatFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type EnumSeminaryInstructorRankWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorRank | Prisma.EnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorRankWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryInstructorRank
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryInstructorRankFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryInstructorRankFilter<$PrismaModel>
+}
+
+export type EnumSeminaryInstructorStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorStatus | Prisma.EnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryInstructorStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryInstructorStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryInstructorStatusFilter<$PrismaModel>
+}
+
+export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type EnumSeminaryFeeCollectionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryFeeCollectionStatus | Prisma.EnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel> | $Enums.SeminaryFeeCollectionStatus
+}
+
+export type EnumSeminaryFeeCollectionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryFeeCollectionStatus | Prisma.EnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryFeeCollectionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryFeeCollectionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel>
+}
+
 export type EnumAccountingPayableStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.AccountingPayableStatus | Prisma.EnumAccountingPayableStatusFieldRefInput<$PrismaModel>
   in?: $Enums.AccountingPayableStatus[] | Prisma.ListEnumAccountingPayableStatusFieldRefInput<$PrismaModel>
@@ -2220,6 +2298,73 @@ export type NestedEnumSeminaryAcademicYearStatusWithAggregatesFilter<$PrismaMode
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSeminaryAcademicYearStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSeminaryAcademicYearStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryInstructorRankFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorRank | Prisma.EnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorRankFilter<$PrismaModel> | $Enums.SeminaryInstructorRank
+}
+
+export type NestedEnumSeminaryInstructorStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorStatus | Prisma.EnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorStatusFilter<$PrismaModel> | $Enums.SeminaryInstructorStatus
+}
+
+export type NestedEnumSeminaryInstructorRankWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorRank | Prisma.EnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorRank[] | Prisma.ListEnumSeminaryInstructorRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorRankWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryInstructorRank
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryInstructorRankFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryInstructorRankFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryInstructorStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryInstructorStatus | Prisma.EnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryInstructorStatus[] | Prisma.ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryInstructorStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryInstructorStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryInstructorStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryInstructorStatusFilter<$PrismaModel>
+}
+
+export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryFeeCollectionStatus | Prisma.EnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel> | $Enums.SeminaryFeeCollectionStatus
+}
+
+export type NestedEnumSeminaryFeeCollectionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SeminaryFeeCollectionStatus | Prisma.EnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SeminaryFeeCollectionStatus[] | Prisma.ListEnumSeminaryFeeCollectionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSeminaryFeeCollectionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SeminaryFeeCollectionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSeminaryFeeCollectionStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumAccountingPayableStatusFilter<$PrismaModel = never> = {

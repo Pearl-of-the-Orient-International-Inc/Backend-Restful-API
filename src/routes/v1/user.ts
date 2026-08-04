@@ -32,7 +32,12 @@ import { sessionIdPathSchema } from '@/validators/session';
 import { createUserAccountSchema, updateUserByIdSchema } from '@/validators/user';
 
 const router = Router();
-const authenticatedUserRoles = [UserType.MEMBER, UserType.OFFICER, UserType.ADMIN];
+const authenticatedUserRoles = [
+  UserType.MEMBER,
+  UserType.OFFICER,
+  UserType.ADMIN,
+  UserType.INSTRUCTOR,
+];
 
 /**
  * Routes

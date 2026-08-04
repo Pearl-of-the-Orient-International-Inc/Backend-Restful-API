@@ -65,7 +65,8 @@ export const updateSeminaryApplicationStatus = async (
 
     const application = await prisma.$transaction(async (tx) => {
       const studentId =
-        body.status === SeminaryApplicationStatus.APPROVED &&
+        (body.status === SeminaryApplicationStatus.APPROVED ||
+          body.status === SeminaryApplicationStatus.ENROLLED) &&
         !existingApplication.studentId
           ? await buildNextStudentId(tx)
           : undefined;
@@ -91,13 +92,15 @@ export const updateSeminaryApplicationStatus = async (
           where: { id: existingPayment.id },
           data: {
             status:
-              body.status === SeminaryApplicationStatus.APPROVED
+              body.status === SeminaryApplicationStatus.APPROVED ||
+              body.status === SeminaryApplicationStatus.ENROLLED
                 ? SeminaryPaymentStatus.VERIFIED
                 : body.status === SeminaryApplicationStatus.REJECTED
                   ? SeminaryPaymentStatus.REJECTED
                   : SeminaryPaymentStatus.PENDING,
             verifiedAt:
-              body.status === SeminaryApplicationStatus.APPROVED
+              body.status === SeminaryApplicationStatus.APPROVED ||
+              body.status === SeminaryApplicationStatus.ENROLLED
                 ? new Date()
                 : null,
             reviewRemarks: body.reviewRemarks ?? null,
@@ -106,7 +109,8 @@ export const updateSeminaryApplicationStatus = async (
       }
 
       if (
-        body.status === SeminaryApplicationStatus.APPROVED &&
+        (body.status === SeminaryApplicationStatus.APPROVED ||
+          body.status === SeminaryApplicationStatus.ENROLLED) &&
         existingApplication.memberId
       ) {
         await tx.member.update({

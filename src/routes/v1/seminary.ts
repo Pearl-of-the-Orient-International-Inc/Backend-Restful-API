@@ -16,24 +16,35 @@ import { bulkDeleteSeminaryStudents } from '@/controllers/v1/seminary/bulk-delet
 import { createSeminaryAcademicYear } from '@/controllers/v1/seminary/create-seminary-academic-year';
 import { createSeminaryApplication } from '@/controllers/v1/seminary/create-seminary-application';
 import { createSeminaryCourse } from '@/controllers/v1/seminary/create-seminary-course';
+import { createSeminaryInstructor } from '@/controllers/v1/seminary/create-seminary-instructor';
 import { createSeminaryStudent } from '@/controllers/v1/seminary/create-seminary-student';
 import { deleteSeminaryAcademicYear } from '@/controllers/v1/seminary/delete-seminary-academic-year';
 import { deleteSeminaryCourse } from '@/controllers/v1/seminary/delete-seminary-course';
+import { deleteSeminaryInstructor } from '@/controllers/v1/seminary/delete-seminary-instructor';
 import { deleteSeminaryStudent } from '@/controllers/v1/seminary/delete-seminary-student';
 import { generateSeminaryCredentialDocument } from '@/controllers/v1/seminary/generate-seminary-credential-document';
 import { getAllSeminaryAcademicYears } from '@/controllers/v1/seminary/get-all-seminary-academic-years';
 import { getAllSeminaryCourses } from '@/controllers/v1/seminary/get-all-seminary-courses';
+import { getAllSeminaryFeeCollections } from '@/controllers/v1/seminary/get-all-seminary-fee-collections';
+import { getAllSeminaryInstructors } from '@/controllers/v1/seminary/get-all-seminary-instructors';
 import { getAllSeminaryStudents } from '@/controllers/v1/seminary/get-all-seminary-students';
+import { getSeminaryFeeConfiguration } from '@/controllers/v1/seminary/get-seminary-fee-configuration';
 import { getSeminaryGradeConfiguration } from '@/controllers/v1/seminary/get-seminary-grade-configuration';
 import { getSeminaryCredentialDocumentByNumber } from '@/controllers/v1/seminary/get-seminary-credential-document-by-number';
 import { getSeminaryCredentialDocuments } from '@/controllers/v1/seminary/get-seminary-credential-documents';
+import { getSeminaryInstructorById } from '@/controllers/v1/seminary/get-seminary-instructor-by-id';
 import { getSeminaryStudentById } from '@/controllers/v1/seminary/get-seminary-student-by-id';
 import { updateSeminaryAcademicYear } from '@/controllers/v1/seminary/update-seminary-academic-year';
 import { updateSeminaryAcademicYearSession } from '@/controllers/v1/seminary/update-seminary-academic-year-session';
 import { updateSeminaryAcademicYearStatus } from '@/controllers/v1/seminary/update-seminary-academic-year-status';
 import { updateSeminaryCourse } from '@/controllers/v1/seminary/update-seminary-course';
 import { updateSeminaryCourseStatus } from '@/controllers/v1/seminary/update-seminary-course-status';
+import { updateSeminaryFeeConfiguration } from '@/controllers/v1/seminary/update-seminary-fee-configuration';
+import { updateSeminaryFeeCollectionStatus } from '@/controllers/v1/seminary/update-seminary-fee-collection-status';
+import { updateSeminaryFeeCollectionPayment } from '@/controllers/v1/seminary/update-seminary-fee-collection-payment';
 import { updateSeminaryGradeConfiguration } from '@/controllers/v1/seminary/update-seminary-grade-configuration';
+import { updateSeminaryInstructor } from '@/controllers/v1/seminary/update-seminary-instructor';
+import { updateSeminaryInstructorStatus } from '@/controllers/v1/seminary/update-seminary-instructor-status';
 import { updateSeminaryStudent } from '@/controllers/v1/seminary/update-seminary-student';
 import { verifySeminaryCredentialDocument } from '@/controllers/v1/seminary/verify-seminary-credential-document';
 
@@ -52,18 +63,23 @@ import {
   createSeminaryAcademicYearSchema,
   createSeminaryApplicationSchema,
   createSeminaryCourseSchema,
+  createSeminaryInstructorSchema,
   bulkDeleteSeminaryStudentsSchema,
   createSeminaryStudentSchema,
   deleteSeminaryAcademicYearSchema,
   deleteSeminaryCourseSchema,
+  deleteSeminaryInstructorSchema,
   deleteSeminaryStudentSchema,
   generateSeminaryCredentialDocumentSchema,
   getAllSeminaryAcademicYearsSchema,
   getAllSeminaryApplicationsSchema,
   getAllSeminaryCoursesSchema,
+  getAllSeminaryFeeCollectionsSchema,
+  getAllSeminaryInstructorsSchema,
   getAllSeminaryStudentsSchema,
   getSeminaryCredentialDocumentByNumberSchema,
   getSeminaryCredentialDocumentsSchema,
+  getSeminaryInstructorByIdSchema,
   getSeminaryApplicationByIdSchema,
   getSeminaryStudentByIdSchema,
   updateSeminaryApplicationStatusSchema,
@@ -72,7 +88,12 @@ import {
   updateSeminaryAcademicYearStatusSchema,
   updateSeminaryCourseSchema,
   updateSeminaryCourseStatusSchema,
+  updateSeminaryFeeConfigurationSchema,
+  updateSeminaryFeeCollectionStatusSchema,
+  updateSeminaryFeeCollectionPaymentSchema,
   updateSeminaryGradeConfigurationSchema,
+  updateSeminaryInstructorSchema,
+  updateSeminaryInstructorStatusSchema,
   updateSeminaryStudentSchema,
   upsertCurrentSeminaryApplicationSchema,
   verifySeminaryCredentialDocumentSchema,
@@ -82,6 +103,9 @@ const router = Router();
 const seminaryStudentAdminAccess = config.BYPASS_SEMINARY_STUDENT_AUTH
   ? []
   : [authenticate, authorize([UserType.ADMIN])];
+const seminaryStudentReadAccess = config.BYPASS_SEMINARY_STUDENT_AUTH
+  ? []
+  : [authenticate, authorize([UserType.ADMIN, UserType.INSTRUCTOR])];
 
 router.get(
   '/current/application',
@@ -153,9 +177,73 @@ router.patch(
 );
 
 router.get(
-  '/students',
+  '/enrollments',
   expressRateLimit('basic'),
   ...seminaryStudentAdminAccess,
+  validate(getAllSeminaryApplicationsSchema),
+  getAllSeminaryApplications,
+);
+
+router.patch(
+  '/enrollments/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryApplicationStatusSchema),
+  updateSeminaryApplicationStatus,
+);
+
+router.get(
+  '/instructors',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(getAllSeminaryInstructorsSchema),
+  getAllSeminaryInstructors,
+);
+
+router.post(
+  '/instructors',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(createSeminaryInstructorSchema),
+  createSeminaryInstructor,
+);
+
+router.get(
+  '/instructors/:id',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(getSeminaryInstructorByIdSchema),
+  getSeminaryInstructorById,
+);
+
+router.put(
+  '/instructors/:id',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryInstructorSchema),
+  updateSeminaryInstructor,
+);
+
+router.patch(
+  '/instructors/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryInstructorStatusSchema),
+  updateSeminaryInstructorStatus,
+);
+
+router.delete(
+  '/instructors/:id',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(deleteSeminaryInstructorSchema),
+  deleteSeminaryInstructor,
+);
+
+router.get(
+  '/students',
+  expressRateLimit('basic'),
+  ...seminaryStudentReadAccess,
   validate(getAllSeminaryStudentsSchema),
   getAllSeminaryStudents,
 );
@@ -288,6 +376,45 @@ router.put(
 );
 
 router.get(
+  '/fee-configuration',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  getSeminaryFeeConfiguration,
+);
+
+router.put(
+  '/fee-configuration',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryFeeConfigurationSchema),
+  updateSeminaryFeeConfiguration,
+);
+
+router.get(
+  '/fee-collections',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(getAllSeminaryFeeCollectionsSchema),
+  getAllSeminaryFeeCollections,
+);
+
+router.patch(
+  '/fee-collections/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryFeeCollectionStatusSchema),
+  updateSeminaryFeeCollectionStatus,
+);
+
+router.patch(
+  '/fee-collections/:id/payment',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryFeeCollectionPaymentSchema),
+  updateSeminaryFeeCollectionPayment,
+);
+
+router.get(
   '/credential-documents/verify/:token',
   expressRateLimit('basic'),
   validate(verifySeminaryCredentialDocumentSchema),
@@ -305,7 +432,7 @@ router.get(
 router.get(
   '/students/:studentId/credential-documents',
   expressRateLimit('basic'),
-  ...seminaryStudentAdminAccess,
+  ...seminaryStudentReadAccess,
   validate(getSeminaryCredentialDocumentsSchema),
   getSeminaryCredentialDocuments,
 );
@@ -321,7 +448,7 @@ router.post(
 router.get(
   '/students/:studentId',
   expressRateLimit('basic'),
-  ...seminaryStudentAdminAccess,
+  ...seminaryStudentReadAccess,
   validate(getSeminaryStudentByIdSchema),
   getSeminaryStudentById,
 );

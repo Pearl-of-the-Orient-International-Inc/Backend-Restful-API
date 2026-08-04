@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.deleteSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
+exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.deleteSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const optionalText = (max = 255) => zod_1.z.string().trim().max(max).optional();
@@ -73,6 +73,20 @@ const academicYearStatusSchema = normalizeEnumValue(enums_1.SeminaryAcademicYear
     Upcoming: enums_1.SeminaryAcademicYearStatus.UPCOMING,
     Completed: enums_1.SeminaryAcademicYearStatus.COMPLETED,
 });
+const instructorStatusSchema = normalizeEnumValue(enums_1.SeminaryInstructorStatus, {
+    Active: enums_1.SeminaryInstructorStatus.ACTIVE,
+    'Part-time': enums_1.SeminaryInstructorStatus.PART_TIME,
+    'Part Time': enums_1.SeminaryInstructorStatus.PART_TIME,
+    'On Leave': enums_1.SeminaryInstructorStatus.ON_LEAVE,
+    Inactive: enums_1.SeminaryInstructorStatus.INACTIVE,
+});
+const instructorRankSchema = normalizeEnumValue(enums_1.SeminaryInstructorRank, {
+    'Adjunct Instructor': enums_1.SeminaryInstructorRank.ADJUNCT_INSTRUCTOR,
+    Lecturer: enums_1.SeminaryInstructorRank.LECTURER,
+    'Assistant Professor': enums_1.SeminaryInstructorRank.ASSISTANT_PROFESSOR,
+    'Associate Professor': enums_1.SeminaryInstructorRank.ASSOCIATE_PROFESSOR,
+    Professor: enums_1.SeminaryInstructorRank.PROFESSOR,
+});
 const paymentTypeSchema = normalizeEnumValue(enums_1.SeminaryPaymentType, {
     'Full Payment': enums_1.SeminaryPaymentType.FULL_PAYMENT,
     'Partial Payment': enums_1.SeminaryPaymentType.PARTIAL_PAYMENT,
@@ -82,6 +96,12 @@ const paymentMethodSchema = normalizeEnumValue(enums_1.SeminaryPaymentMethod, {
     'Bank Transfer': enums_1.SeminaryPaymentMethod.BANK_TRANSFER,
     GCash: enums_1.SeminaryPaymentMethod.GCASH,
     Maya: enums_1.SeminaryPaymentMethod.MAYA,
+});
+const feeCollectionStatusSchema = normalizeEnumValue(enums_1.SeminaryFeeCollectionStatus, {
+    Pending: enums_1.SeminaryFeeCollectionStatus.PENDING,
+    'Partially Paid': enums_1.SeminaryFeeCollectionStatus.PARTIALLY_PAID,
+    Paid: enums_1.SeminaryFeeCollectionStatus.PAID,
+    Overdue: enums_1.SeminaryFeeCollectionStatus.OVERDUE,
 });
 const genderSchema = normalizeEnumValue(enums_1.Gender, {
     Male: enums_1.Gender.MALE,
@@ -261,8 +281,10 @@ exports.updateSeminaryApplicationStatusSchema = zod_1.z.object({
             .enum(enums_1.SeminaryApplicationStatus)
             .refine((value) => value === enums_1.SeminaryApplicationStatus.UNDER_REVIEW ||
             value === enums_1.SeminaryApplicationStatus.APPROVED ||
-            value === enums_1.SeminaryApplicationStatus.REJECTED, {
-            message: 'status must be UNDER_REVIEW, APPROVED, or REJECTED',
+            value === enums_1.SeminaryApplicationStatus.ENROLLED ||
+            value === enums_1.SeminaryApplicationStatus.REJECTED ||
+            value === enums_1.SeminaryApplicationStatus.CANCELLED, {
+            message: 'status must be UNDER_REVIEW, APPROVED, ENROLLED, REJECTED, or CANCELLED',
         }),
         reviewRemarks: optionalText(1000),
     })
@@ -475,6 +497,84 @@ exports.deleteSeminaryAcademicYearSchema = zod_1.z.object({
         id: seminaryAcademicYearIdSchema,
     }),
 });
+const seminaryInstructorIdSchema = zod_1.z.uuid();
+const scoreSchema = zod_1.z.coerce.number().min(0).max(100);
+const listTextSchema = zod_1.z
+    .array(zod_1.z.string().trim().min(1).max(255))
+    .min(1)
+    .max(50);
+const seminaryInstructorBodySchema = zod_1.z.object({
+    name: zod_1.z.string().trim().min(1).max(150),
+    professionalTitle: zod_1.z.string().trim().min(1).max(150),
+    email: zod_1.z.email(),
+    contactNumber: zod_1.z.string().trim().min(1).max(30),
+    teachingPrograms: zod_1.z.array(programLevelSchema).min(1).max(4),
+    rank: instructorRankSchema,
+    status: instructorStatusSchema.optional(),
+    loadUnits: zod_1.z.coerce.number().int().min(0).max(60),
+    biography: zod_1.z.string().trim().min(1).max(5000),
+    educationalBackground: zod_1.z.string().trim().min(1).max(5000),
+    areasOfExpertise: listTextSchema,
+    credentials: listTextSchema,
+    formalPhotoUrl: zod_1.z.string().trim().min(1).max(5000000),
+    isFilipinoCitizen: zod_1.z.boolean(),
+    highSchoolGraduateOrEquivalent: zod_1.z.boolean(),
+    ministerialExperienceYears: zod_1.z.coerce.number().int().min(5).max(80),
+    submissionDeadline: academicYearDateSchema.optional(),
+    evaluation: zod_1.z.object({
+        attendanceParticipation: scoreSchema,
+        leadershipCharacter: scoreSchema,
+        ministryCommunityEngagement: scoreSchema,
+        knowledgeSkillsAssessment: scoreSchema,
+        professionalConductEthics: scoreSchema,
+    }),
+});
+exports.getAllSeminaryInstructorsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'page must be a positive integer',
+        }),
+        limit: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'limit must be a positive integer',
+        }),
+        search: optionalText(100),
+        status: instructorStatusSchema.optional(),
+        teachingProgram: programLevelSchema.optional(),
+    }),
+});
+exports.getSeminaryInstructorByIdSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryInstructorIdSchema,
+    }),
+});
+exports.createSeminaryInstructorSchema = zod_1.z.object({
+    body: seminaryInstructorBodySchema,
+});
+exports.updateSeminaryInstructorSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryInstructorIdSchema,
+    }),
+    body: seminaryInstructorBodySchema,
+});
+exports.updateSeminaryInstructorStatusSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryInstructorIdSchema,
+    }),
+    body: zod_1.z.object({
+        status: instructorStatusSchema,
+    }),
+});
+exports.deleteSeminaryInstructorSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryInstructorIdSchema,
+    }),
+});
 const gradeScaleRowSchema = zod_1.z.object({
     equivalent: zod_1.z.string().trim().min(1).max(20),
     percentageRange: zod_1.z.string().trim().min(1).max(50),
@@ -491,6 +591,58 @@ exports.updateSeminaryGradeConfigurationSchema = zod_1.z.object({
         autoPublishApproved: zod_1.z.boolean().optional(),
         showConditionalRemark: zod_1.z.boolean().optional(),
         gradeScale: zod_1.z.array(gradeScaleRowSchema).min(1).max(50).optional(),
+    }),
+});
+const feeBreakdownItemSchema = zod_1.z.object({
+    label: zod_1.z.string().trim().min(1).max(120),
+    amount: zod_1.z.coerce.number().min(0).max(1000000),
+});
+exports.updateSeminaryFeeConfigurationSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        feeBreakdowns: zod_1.z.object({
+            Certificate: zod_1.z.array(feeBreakdownItemSchema).min(1).max(50),
+            Bachelor: zod_1.z.array(feeBreakdownItemSchema).min(1).max(50),
+            Masteral: zod_1.z.array(feeBreakdownItemSchema).min(1).max(50),
+            Doctorate: zod_1.z.array(feeBreakdownItemSchema).min(1).max(50),
+        }),
+    }),
+});
+exports.getAllSeminaryFeeCollectionsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'page must be a positive integer',
+        }),
+        limit: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'limit must be a positive integer',
+        }),
+        search: optionalText(100),
+        programLevel: programLevelSchema.optional(),
+        status: feeCollectionStatusSchema.optional(),
+    }),
+});
+exports.updateSeminaryFeeCollectionStatusSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+    body: zod_1.z.object({
+        status: feeCollectionStatusSchema,
+    }),
+});
+exports.updateSeminaryFeeCollectionPaymentSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+    }),
+    body: zod_1.z.object({
+        amountPaid: zod_1.z.coerce.number().min(0).max(1000000),
+        dueDate: academicYearDateSchema.optional(),
+        paymentMethod: zod_1.z.string().trim().min(1).max(80),
+        status: feeCollectionStatusSchema.optional(),
     }),
 });
 exports.bulkImportSeminaryStudentsSchema = zod_1.z.object({

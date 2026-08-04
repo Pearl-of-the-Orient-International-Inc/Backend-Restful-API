@@ -33,8 +33,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = void 0;
+exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryFeeCollectionAccountScalarFieldEnum = exports.SeminaryFeeConfigurationScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryInstructorScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -74,7 +74,10 @@ exports.ModelName = {
     SeminaryPayment: 'SeminaryPayment',
     SeminaryCourse: 'SeminaryCourse',
     SeminaryAcademicYear: 'SeminaryAcademicYear',
+    SeminaryInstructor: 'SeminaryInstructor',
     SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
+    SeminaryFeeConfiguration: 'SeminaryFeeConfiguration',
+    SeminaryFeeCollectionAccount: 'SeminaryFeeCollectionAccount',
     AccountingPayable: 'AccountingPayable',
     AccountingPayableItem: 'AccountingPayableItem',
     AccountingReceivable: 'AccountingReceivable',
@@ -491,6 +494,39 @@ exports.SeminaryAcademicYearScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.SeminaryInstructorScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    facultyId: 'facultyId',
+    name: 'name',
+    professionalTitle: 'professionalTitle',
+    email: 'email',
+    contactNumber: 'contactNumber',
+    teachingPrograms: 'teachingPrograms',
+    rank: 'rank',
+    status: 'status',
+    loadUnits: 'loadUnits',
+    biography: 'biography',
+    educationalBackground: 'educationalBackground',
+    areasOfExpertise: 'areasOfExpertise',
+    credentials: 'credentials',
+    formalPhotoUrl: 'formalPhotoUrl',
+    isFilipinoCitizen: 'isFilipinoCitizen',
+    highSchoolGraduateOrEquivalent: 'highSchoolGraduateOrEquivalent',
+    ministerialExperienceYears: 'ministerialExperienceYears',
+    submissionDeadline: 'submissionDeadline',
+    attendanceParticipation: 'attendanceParticipation',
+    leadershipCharacter: 'leadershipCharacter',
+    ministryCommunityEngagement: 'ministryCommunityEngagement',
+    knowledgeSkillsAssessment: 'knowledgeSkillsAssessment',
+    professionalConductEthics: 'professionalConductEthics',
+    totalScore: 'totalScore',
+    rating: 'rating',
+    rankingClassification: 'rankingClassification',
+    award: 'award',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
 exports.SeminaryGradeConfigurationScalarFieldEnum = {
     id: 'id',
     passingEquivalent: 'passingEquivalent',
@@ -502,6 +538,28 @@ exports.SeminaryGradeConfigurationScalarFieldEnum = {
     autoPublishApproved: 'autoPublishApproved',
     showConditionalRemark: 'showConditionalRemark',
     gradeScale: 'gradeScale',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryFeeConfigurationScalarFieldEnum = {
+    id: 'id',
+    feeBreakdowns: 'feeBreakdowns',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryFeeCollectionAccountScalarFieldEnum = {
+    id: 'id',
+    referenceNumber: 'referenceNumber',
+    studentId: 'studentId',
+    studentName: 'studentName',
+    program: 'program',
+    programLevel: 'programLevel',
+    totalCharges: 'totalCharges',
+    amountPaid: 'amountPaid',
+    balance: 'balance',
+    dueDate: 'dueDate',
+    paymentMethod: 'paymentMethod',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

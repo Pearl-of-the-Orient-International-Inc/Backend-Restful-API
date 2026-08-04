@@ -8,7 +8,10 @@ import {
   SeminaryCredentialDocumentType,
   SeminaryCourseModality,
   SeminaryCourseStatus,
+  SeminaryFeeCollectionStatus,
   SeminaryEnrollmentType,
+  SeminaryInstructorRank,
+  SeminaryInstructorStatus,
   SeminaryPaymentMethod,
   SeminaryPaymentType,
   SeminaryProgramLevel,
@@ -107,6 +110,22 @@ const academicYearStatusSchema = normalizeEnumValue(SeminaryAcademicYearStatus, 
   Completed: SeminaryAcademicYearStatus.COMPLETED,
 });
 
+const instructorStatusSchema = normalizeEnumValue(SeminaryInstructorStatus, {
+  Active: SeminaryInstructorStatus.ACTIVE,
+  'Part-time': SeminaryInstructorStatus.PART_TIME,
+  'Part Time': SeminaryInstructorStatus.PART_TIME,
+  'On Leave': SeminaryInstructorStatus.ON_LEAVE,
+  Inactive: SeminaryInstructorStatus.INACTIVE,
+});
+
+const instructorRankSchema = normalizeEnumValue(SeminaryInstructorRank, {
+  'Adjunct Instructor': SeminaryInstructorRank.ADJUNCT_INSTRUCTOR,
+  Lecturer: SeminaryInstructorRank.LECTURER,
+  'Assistant Professor': SeminaryInstructorRank.ASSISTANT_PROFESSOR,
+  'Associate Professor': SeminaryInstructorRank.ASSOCIATE_PROFESSOR,
+  Professor: SeminaryInstructorRank.PROFESSOR,
+});
+
 const paymentTypeSchema = normalizeEnumValue(SeminaryPaymentType, {
   'Full Payment': SeminaryPaymentType.FULL_PAYMENT,
   'Partial Payment': SeminaryPaymentType.PARTIAL_PAYMENT,
@@ -118,6 +137,16 @@ const paymentMethodSchema = normalizeEnumValue(SeminaryPaymentMethod, {
   GCash: SeminaryPaymentMethod.GCASH,
   Maya: SeminaryPaymentMethod.MAYA,
 });
+
+const feeCollectionStatusSchema = normalizeEnumValue(
+  SeminaryFeeCollectionStatus,
+  {
+    Pending: SeminaryFeeCollectionStatus.PENDING,
+    'Partially Paid': SeminaryFeeCollectionStatus.PARTIALLY_PAID,
+    Paid: SeminaryFeeCollectionStatus.PAID,
+    Overdue: SeminaryFeeCollectionStatus.OVERDUE,
+  },
+);
 
 const genderSchema = normalizeEnumValue(Gender, {
   Male: Gender.MALE,
@@ -307,9 +336,12 @@ export const updateSeminaryApplicationStatusSchema = z.object({
           (value) =>
             value === SeminaryApplicationStatus.UNDER_REVIEW ||
             value === SeminaryApplicationStatus.APPROVED ||
-            value === SeminaryApplicationStatus.REJECTED,
+            value === SeminaryApplicationStatus.ENROLLED ||
+            value === SeminaryApplicationStatus.REJECTED ||
+            value === SeminaryApplicationStatus.CANCELLED,
           {
-            message: 'status must be UNDER_REVIEW, APPROVED, or REJECTED',
+            message:
+              'status must be UNDER_REVIEW, APPROVED, ENROLLED, REJECTED, or CANCELLED',
           },
         ),
       reviewRemarks: optionalText(1000),
@@ -550,6 +582,93 @@ export const deleteSeminaryAcademicYearSchema = z.object({
   }),
 });
 
+const seminaryInstructorIdSchema = z.uuid();
+
+const scoreSchema = z.coerce.number().min(0).max(100);
+const listTextSchema = z
+  .array(z.string().trim().min(1).max(255))
+  .min(1)
+  .max(50);
+
+const seminaryInstructorBodySchema = z.object({
+  name: z.string().trim().min(1).max(150),
+  professionalTitle: z.string().trim().min(1).max(150),
+  email: z.email(),
+  contactNumber: z.string().trim().min(1).max(30),
+  teachingPrograms: z.array(programLevelSchema).min(1).max(4),
+  rank: instructorRankSchema,
+  status: instructorStatusSchema.optional(),
+  loadUnits: z.coerce.number().int().min(0).max(60),
+  biography: z.string().trim().min(1).max(5000),
+  educationalBackground: z.string().trim().min(1).max(5000),
+  areasOfExpertise: listTextSchema,
+  credentials: listTextSchema,
+  formalPhotoUrl: z.string().trim().min(1).max(5_000_000),
+  isFilipinoCitizen: z.boolean(),
+  highSchoolGraduateOrEquivalent: z.boolean(),
+  ministerialExperienceYears: z.coerce.number().int().min(5).max(80),
+  submissionDeadline: academicYearDateSchema.optional(),
+  evaluation: z.object({
+    attendanceParticipation: scoreSchema,
+    leadershipCharacter: scoreSchema,
+    ministryCommunityEngagement: scoreSchema,
+    knowledgeSkillsAssessment: scoreSchema,
+    professionalConductEthics: scoreSchema,
+  }),
+});
+
+export const getAllSeminaryInstructorsSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'page must be a positive integer',
+      }),
+    limit: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'limit must be a positive integer',
+      }),
+    search: optionalText(100),
+    status: instructorStatusSchema.optional(),
+    teachingProgram: programLevelSchema.optional(),
+  }),
+});
+
+export const getSeminaryInstructorByIdSchema = z.object({
+  params: z.object({
+    id: seminaryInstructorIdSchema,
+  }),
+});
+
+export const createSeminaryInstructorSchema = z.object({
+  body: seminaryInstructorBodySchema,
+});
+
+export const updateSeminaryInstructorSchema = z.object({
+  params: z.object({
+    id: seminaryInstructorIdSchema,
+  }),
+  body: seminaryInstructorBodySchema,
+});
+
+export const updateSeminaryInstructorStatusSchema = z.object({
+  params: z.object({
+    id: seminaryInstructorIdSchema,
+  }),
+  body: z.object({
+    status: instructorStatusSchema,
+  }),
+});
+
+export const deleteSeminaryInstructorSchema = z.object({
+  params: z.object({
+    id: seminaryInstructorIdSchema,
+  }),
+});
+
 const gradeScaleRowSchema = z.object({
   equivalent: z.string().trim().min(1).max(20),
   percentageRange: z.string().trim().min(1).max(50),
@@ -567,6 +686,63 @@ export const updateSeminaryGradeConfigurationSchema = z.object({
     autoPublishApproved: z.boolean().optional(),
     showConditionalRemark: z.boolean().optional(),
     gradeScale: z.array(gradeScaleRowSchema).min(1).max(50).optional(),
+  }),
+});
+
+const feeBreakdownItemSchema = z.object({
+  label: z.string().trim().min(1).max(120),
+  amount: z.coerce.number().min(0).max(1_000_000),
+});
+
+export const updateSeminaryFeeConfigurationSchema = z.object({
+  body: z.object({
+    feeBreakdowns: z.object({
+      Certificate: z.array(feeBreakdownItemSchema).min(1).max(50),
+      Bachelor: z.array(feeBreakdownItemSchema).min(1).max(50),
+      Masteral: z.array(feeBreakdownItemSchema).min(1).max(50),
+      Doctorate: z.array(feeBreakdownItemSchema).min(1).max(50),
+    }),
+  }),
+});
+
+export const getAllSeminaryFeeCollectionsSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'page must be a positive integer',
+      }),
+    limit: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d+$/.test(value), {
+        message: 'limit must be a positive integer',
+      }),
+    search: optionalText(100),
+    programLevel: programLevelSchema.optional(),
+    status: feeCollectionStatusSchema.optional(),
+  }),
+});
+
+export const updateSeminaryFeeCollectionStatusSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+  }),
+  body: z.object({
+    status: feeCollectionStatusSchema,
+  }),
+});
+
+export const updateSeminaryFeeCollectionPaymentSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+  }),
+  body: z.object({
+    amountPaid: z.coerce.number().min(0).max(1_000_000),
+    dueDate: academicYearDateSchema.optional(),
+    paymentMethod: z.string().trim().min(1).max(80),
+    status: feeCollectionStatusSchema.optional(),
   }),
 });
 

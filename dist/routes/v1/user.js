@@ -25,7 +25,12 @@ const sanitation_1 = require("../../common/sanitation");
 const session_1 = require("../../validators/session");
 const user_1 = require("../../validators/user");
 const router = (0, express_1.Router)();
-const authenticatedUserRoles = [enums_1.UserType.MEMBER, enums_1.UserType.OFFICER, enums_1.UserType.ADMIN];
+const authenticatedUserRoles = [
+    enums_1.UserType.MEMBER,
+    enums_1.UserType.OFFICER,
+    enums_1.UserType.ADMIN,
+    enums_1.UserType.INSTRUCTOR,
+];
 router.get('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)(authenticatedUserRoles), get_current_user_1.getCurrentUser);
 router.put('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)(authenticatedUserRoles), update_current_user_1.updateCurrentUser);
 router.delete('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)(authenticatedUserRoles), delete_current_user_1.deleteCurrentUser);
