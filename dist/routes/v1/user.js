@@ -15,6 +15,8 @@ const update_user_by_id_1 = require("../../controllers/v1/user/update-user-by-id
 const get_user_sessions_1 = require("../../controllers/v1/user/get-user-sessions");
 const revoke_user_session_1 = require("../../controllers/v1/user/revoke-user-session");
 const revoke_other_user_sessions_1 = require("../../controllers/v1/user/revoke-other-user-sessions");
+const change_user_password_by_admin_1 = require("../../controllers/v1/user/change-user-password-by-admin");
+const resend_user_email_verification_by_admin_1 = require("../../controllers/v1/user/resend-user-email-verification-by-admin");
 const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
 const authentication_1 = require("../../middlewares/authentication");
 const enums_1 = require("../../generated/prisma/enums");
@@ -45,5 +47,7 @@ router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentic
 router.post('/', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(user_1.createUserAccountSchema), create_user_account_1.createUserAccount);
 router.get('/:userId', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), get_user_by_id_1.getUserById);
 router.put('/:userId', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(user_1.updateUserByIdSchema), update_user_by_id_1.updateUserById);
+router.post('/:userId/change-password', (0, express_rate_limiter_1.expressRateLimit)('passwordReset'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(user_1.changeUserPasswordByAdminSchema), change_user_password_by_admin_1.changeUserPasswordByAdmin);
+router.post('/:userId/resend-email-verification', (0, express_rate_limiter_1.expressRateLimit)('auth'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), resend_user_email_verification_by_admin_1.resendUserEmailVerificationByAdmin);
 router.delete('/:userId', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), delete_user_by_id_1.deleteUserById);
 exports.default = router;

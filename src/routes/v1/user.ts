@@ -17,6 +17,8 @@ import { updateUserById } from '@/controllers/v1/user/update-user-by-id';
 import { getUserSessions } from '@/controllers/v1/user/get-user-sessions';
 import { revokeUserSession } from '@/controllers/v1/user/revoke-user-session';
 import { revokeOtherUserSessions } from '@/controllers/v1/user/revoke-other-user-sessions';
+import { changeUserPasswordByAdmin } from '@/controllers/v1/user/change-user-password-by-admin';
+import { resendUserEmailVerificationByAdmin } from '@/controllers/v1/user/resend-user-email-verification-by-admin';
 
 /**
  * Helpers, Validators and Middlewares
@@ -29,7 +31,11 @@ import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 import { getSessionFromCookie } from '@/middlewares/get-session-from-cookie';
 import { validate } from '@/common/sanitation';
 import { sessionIdPathSchema } from '@/validators/session';
-import { createUserAccountSchema, updateUserByIdSchema } from '@/validators/user';
+import {
+  changeUserPasswordByAdminSchema,
+  createUserAccountSchema,
+  updateUserByIdSchema,
+} from '@/validators/user';
 
 const router = Router();
 const authenticatedUserRoles = [
@@ -135,6 +141,23 @@ router.put(
   authorize([UserType.ADMIN]),
   validate(updateUserByIdSchema),
   updateUserById,
+);
+
+router.post(
+  '/:userId/change-password',
+  expressRateLimit('passwordReset'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(changeUserPasswordByAdminSchema),
+  changeUserPasswordByAdmin,
+);
+
+router.post(
+  '/:userId/resend-email-verification',
+  expressRateLimit('auth'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  resendUserEmailVerificationByAdmin,
 );
 
 router.delete(

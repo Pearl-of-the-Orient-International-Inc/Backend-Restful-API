@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserByIdSchema = exports.createUserAccountSchema = void 0;
+exports.changeUserPasswordByAdminSchema = exports.updateUserByIdSchema = exports.createUserAccountSchema = void 0;
 const enums_1 = require("../generated/prisma/enums");
 const zod_1 = __importDefault(require("zod"));
 const auth_1 = require("./auth");
@@ -53,4 +53,13 @@ exports.updateUserByIdSchema = zod_1.default
 })
     .refine((payload) => Object.keys(payload).length > 0, {
     message: 'At least one field is required',
+});
+exports.changeUserPasswordByAdminSchema = zod_1.default
+    .object({
+    password: auth_1.passwordSchema,
+    confirmPassword: auth_1.passwordSchema,
+})
+    .refine((val) => val.password === val.confirmPassword, {
+    message: 'Password does not match',
+    path: ['confirmPassword'],
 });

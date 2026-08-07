@@ -51,5 +51,18 @@ export const updateUserByIdSchema = z
     message: 'At least one field is required',
   });
 
+export const changeUserPasswordByAdminSchema = z
+  .object({
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
+  })
+  .refine((val) => val.password === val.confirmPassword, {
+    message: 'Password does not match',
+    path: ['confirmPassword'],
+  });
+
 export type CreateUserAccountSchema = z.infer<typeof createUserAccountSchema>;
 export type UpdateUserByIdSchema = z.infer<typeof updateUserByIdSchema>;
+export type ChangeUserPasswordByAdminSchema = z.infer<
+  typeof changeUserPasswordByAdminSchema
+>;
