@@ -28,19 +28,17 @@ export const verifyEmail = async (
       return;
     }
 
-    const now = new Date();
     const validCode = await prisma.verificationCode.findFirst({
       where: {
         code,
         type: VerificationType.EMAIL_VERIFICATION,
-        expiresAt: { gt: now },
       },
     });
 
     if (!validCode) {
       res.status(HTTPSTATUS.BAD_REQUEST).json({
         code: 'BAD_REQUEST',
-        message: 'Code is invalid',
+        message: 'Verification link is invalid. Please request a new verification email.',
       });
       return;
     }

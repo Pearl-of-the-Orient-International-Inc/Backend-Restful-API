@@ -55,7 +55,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             data: {
                 userId: user.id,
                 type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                expiresAt: (0, helpers_1.calculateExpirationDate)('36500d'),
                 code: uniqueCode,
             },
         });

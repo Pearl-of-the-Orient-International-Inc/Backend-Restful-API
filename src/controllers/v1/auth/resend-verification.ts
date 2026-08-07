@@ -65,13 +65,13 @@ export const resendVerification = async (
       },
       update: {
         type: VerificationType.EMAIL_VERIFICATION,
-        expiresAt: calculateExpirationDate('1h'),
+        expiresAt: calculateExpirationDate('36500d'),
         code: uniqueCode,
       },
       create: {
         userId: user.id,
         type: VerificationType.EMAIL_VERIFICATION,
-        expiresAt: calculateExpirationDate('1h'),
+        expiresAt: calculateExpirationDate('36500d'),
         code: uniqueCode,
       },
     });

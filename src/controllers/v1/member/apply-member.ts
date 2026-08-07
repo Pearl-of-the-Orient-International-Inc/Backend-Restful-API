@@ -170,13 +170,13 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
                   },
                   update: {
                     type: VerificationType.EMAIL_VERIFICATION,
-                    expiresAt: calculateExpirationDate('1h'),
+                      expiresAt: calculateExpirationDate('36500d'),
                     code: randomBytes(16).toString('hex'),
                   },
                   create: {
                     userId: user.id,
                     type: VerificationType.EMAIL_VERIFICATION,
-                    expiresAt: calculateExpirationDate('1h'),
+                      expiresAt: calculateExpirationDate('36500d'),
                     code: randomBytes(16).toString('hex'),
                   },
                 });

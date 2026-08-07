@@ -35,18 +35,16 @@ const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             });
             return;
         }
-        const now = new Date();
         const validCode = yield prisma_1.prisma.verificationCode.findFirst({
             where: {
                 code,
                 type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                expiresAt: { gt: now },
             },
         });
         if (!validCode) {
             res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
                 code: 'BAD_REQUEST',
-                message: 'Code is invalid',
+                message: 'Verification link is invalid. Please request a new verification email.',
             });
             return;
         }

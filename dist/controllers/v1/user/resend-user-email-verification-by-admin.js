@@ -61,13 +61,13 @@ const resendUserEmailVerificationByAdmin = (req, res) => __awaiter(void 0, void 
             where: { userId: user.id },
             update: {
                 type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                expiresAt: (0, helpers_1.calculateExpirationDate)('36500d'),
                 code: uniqueCode,
             },
             create: {
                 userId: user.id,
                 type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                expiresAt: (0, helpers_1.calculateExpirationDate)('36500d'),
                 code: uniqueCode,
             },
         });

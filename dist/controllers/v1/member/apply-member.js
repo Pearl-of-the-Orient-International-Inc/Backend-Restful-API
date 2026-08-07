@@ -128,13 +128,13 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                             },
                             update: {
                                 type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                                expiresAt: (0, helpers_1.calculateExpirationDate)('36500d'),
                                 code: (0, crypto_1.randomBytes)(16).toString('hex'),
                             },
                             create: {
                                 userId: user.id,
                                 type: enums_1.VerificationType.EMAIL_VERIFICATION,
-                                expiresAt: (0, helpers_1.calculateExpirationDate)('1h'),
+                                expiresAt: (0, helpers_1.calculateExpirationDate)('36500d'),
                                 code: (0, crypto_1.randomBytes)(16).toString('hex'),
                             },
                         });
