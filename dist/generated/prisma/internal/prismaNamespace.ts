@@ -420,6 +420,8 @@ export const ModelName = {
   AccountingPayableItem: 'AccountingPayableItem',
   AccountingReceivable: 'AccountingReceivable',
   AccountingReceivableItem: 'AccountingReceivableItem',
+  AccountingAcknowledgementReceipt: 'AccountingAcknowledgementReceipt',
+  AccountingAcknowledgementReceiptItem: 'AccountingAcknowledgementReceiptItem',
   AccountingLedgerTransaction: 'AccountingLedgerTransaction',
   TaskBoard: 'TaskBoard',
   TaskItem: 'TaskItem',
@@ -449,7 +451,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3117,6 +3119,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AccountingAcknowledgementReceipt: {
+      payload: Prisma.$AccountingAcknowledgementReceiptPayload<ExtArgs>
+      fields: Prisma.AccountingAcknowledgementReceiptFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingAcknowledgementReceiptFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingAcknowledgementReceiptFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingAcknowledgementReceiptFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingAcknowledgementReceiptFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>
+        }
+        findMany: {
+          args: Prisma.AccountingAcknowledgementReceiptFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>[]
+        }
+        create: {
+          args: Prisma.AccountingAcknowledgementReceiptCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>
+        }
+        createMany: {
+          args: Prisma.AccountingAcknowledgementReceiptCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingAcknowledgementReceiptCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingAcknowledgementReceiptDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>
+        }
+        update: {
+          args: Prisma.AccountingAcknowledgementReceiptUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingAcknowledgementReceiptDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingAcknowledgementReceiptUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingAcknowledgementReceiptUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingAcknowledgementReceiptUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptPayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingAcknowledgementReceiptAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingAcknowledgementReceipt>
+        }
+        groupBy: {
+          args: Prisma.AccountingAcknowledgementReceiptGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingAcknowledgementReceiptGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingAcknowledgementReceiptCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingAcknowledgementReceiptCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccountingAcknowledgementReceiptItem: {
+      payload: Prisma.$AccountingAcknowledgementReceiptItemPayload<ExtArgs>
+      fields: Prisma.AccountingAcknowledgementReceiptItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccountingAcknowledgementReceiptItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccountingAcknowledgementReceiptItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>
+        }
+        findFirst: {
+          args: Prisma.AccountingAcknowledgementReceiptItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccountingAcknowledgementReceiptItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>
+        }
+        findMany: {
+          args: Prisma.AccountingAcknowledgementReceiptItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>[]
+        }
+        create: {
+          args: Prisma.AccountingAcknowledgementReceiptItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>
+        }
+        createMany: {
+          args: Prisma.AccountingAcknowledgementReceiptItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AccountingAcknowledgementReceiptItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>[]
+        }
+        delete: {
+          args: Prisma.AccountingAcknowledgementReceiptItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>
+        }
+        update: {
+          args: Prisma.AccountingAcknowledgementReceiptItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccountingAcknowledgementReceiptItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccountingAcknowledgementReceiptItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AccountingAcknowledgementReceiptItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.AccountingAcknowledgementReceiptItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccountingAcknowledgementReceiptItemPayload>
+        }
+        aggregate: {
+          args: Prisma.AccountingAcknowledgementReceiptItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccountingAcknowledgementReceiptItem>
+        }
+        groupBy: {
+          args: Prisma.AccountingAcknowledgementReceiptItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingAcknowledgementReceiptItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccountingAcknowledgementReceiptItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountingAcknowledgementReceiptItemCountAggregateOutputType> | number
+        }
+      }
+    }
     AccountingLedgerTransaction: {
       payload: Prisma.$AccountingLedgerTransactionPayload<ExtArgs>
       fields: Prisma.AccountingLedgerTransactionFieldRefs
@@ -4863,6 +5013,40 @@ export const AccountingReceivableItemScalarFieldEnum = {
 export type AccountingReceivableItemScalarFieldEnum = (typeof AccountingReceivableItemScalarFieldEnum)[keyof typeof AccountingReceivableItemScalarFieldEnum]
 
 
+export const AccountingAcknowledgementReceiptScalarFieldEnum = {
+  id: 'id',
+  receiptNo: 'receiptNo',
+  organization: 'organization',
+  name: 'name',
+  receiptDate: 'receiptDate',
+  course: 'course',
+  school: 'school',
+  paymentType: 'paymentType',
+  checkNo: 'checkNo',
+  cashier: 'cashier',
+  remarks: 'remarks',
+  totalAmount: 'totalAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingAcknowledgementReceiptScalarFieldEnum = (typeof AccountingAcknowledgementReceiptScalarFieldEnum)[keyof typeof AccountingAcknowledgementReceiptScalarFieldEnum]
+
+
+export const AccountingAcknowledgementReceiptItemScalarFieldEnum = {
+  id: 'id',
+  particulars: 'particulars',
+  amount: 'amount',
+  remarks: 'remarks',
+  sortOrder: 'sortOrder',
+  receiptId: 'receiptId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingAcknowledgementReceiptItemScalarFieldEnum = (typeof AccountingAcknowledgementReceiptItemScalarFieldEnum)[keyof typeof AccountingAcknowledgementReceiptItemScalarFieldEnum]
+
+
 export const AccountingLedgerTransactionScalarFieldEnum = {
   id: 'id',
   transactionNo: 'transactionNo',
@@ -5803,6 +5987,34 @@ export type ListEnumAccountingReceivableStatusFieldRefInput<$PrismaModel> = Fiel
 
 
 /**
+ * Reference to a field of type 'ReceiptOrganization'
+ */
+export type EnumReceiptOrganizationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReceiptOrganization'>
+    
+
+
+/**
+ * Reference to a field of type 'ReceiptOrganization[]'
+ */
+export type ListEnumReceiptOrganizationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReceiptOrganization[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ReceiptPaymentType'
+ */
+export type EnumReceiptPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReceiptPaymentType'>
+    
+
+
+/**
+ * Reference to a field of type 'ReceiptPaymentType[]'
+ */
+export type ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReceiptPaymentType[]'>
+    
+
+
+/**
  * Reference to a field of type 'AccountingLedgerTransactionType'
  */
 export type EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccountingLedgerTransactionType'>
@@ -6170,6 +6382,8 @@ export type GlobalOmitConfig = {
   accountingPayableItem?: Prisma.AccountingPayableItemOmit
   accountingReceivable?: Prisma.AccountingReceivableOmit
   accountingReceivableItem?: Prisma.AccountingReceivableItemOmit
+  accountingAcknowledgementReceipt?: Prisma.AccountingAcknowledgementReceiptOmit
+  accountingAcknowledgementReceiptItem?: Prisma.AccountingAcknowledgementReceiptItemOmit
   accountingLedgerTransaction?: Prisma.AccountingLedgerTransactionOmit
   taskBoard?: Prisma.TaskBoardOmit
   taskItem?: Prisma.TaskItemOmit

@@ -26,6 +26,7 @@ import accountingPayableRoutes from '@/routes/v1/accounting-payable';
 import accountingReceivableRoutes from '@/routes/v1/accounting-receivable';
 import accountingLedgerRoutes from '@/routes/v1/accounting-ledger';
 import accountingInvoiceRoutes from '@/routes/v1/accounting-invoice';
+import accountingAcknowledgementReceiptRoutes from '@/routes/v1/accounting-acknowledgement-receipt';
 import taskManagementRoutes from '@/routes/v1/task-management';
 
 const router = Router();
@@ -60,6 +61,7 @@ router.use('/accounting/accounts-payable', accountingPayableRoutes);
 router.use('/accounting/accounts-receivable', accountingReceivableRoutes);
 router.use('/accounting/cashflow-ledger', accountingLedgerRoutes);
 router.use('/accounting/invoices', accountingInvoiceRoutes);
+router.use('/accounting/acknowledgement-receipts', accountingAcknowledgementReceiptRoutes);
 router.use('/task-management', taskManagementRoutes);
 
 export default router;

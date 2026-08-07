@@ -87,6 +87,8 @@ export const ModelName = {
   AccountingPayableItem: 'AccountingPayableItem',
   AccountingReceivable: 'AccountingReceivable',
   AccountingReceivableItem: 'AccountingReceivableItem',
+  AccountingAcknowledgementReceipt: 'AccountingAcknowledgementReceipt',
+  AccountingAcknowledgementReceiptItem: 'AccountingAcknowledgementReceiptItem',
   AccountingLedgerTransaction: 'AccountingLedgerTransaction',
   TaskBoard: 'TaskBoard',
   TaskItem: 'TaskItem',
@@ -788,6 +790,40 @@ export const AccountingReceivableItemScalarFieldEnum = {
 } as const
 
 export type AccountingReceivableItemScalarFieldEnum = (typeof AccountingReceivableItemScalarFieldEnum)[keyof typeof AccountingReceivableItemScalarFieldEnum]
+
+
+export const AccountingAcknowledgementReceiptScalarFieldEnum = {
+  id: 'id',
+  receiptNo: 'receiptNo',
+  organization: 'organization',
+  name: 'name',
+  receiptDate: 'receiptDate',
+  course: 'course',
+  school: 'school',
+  paymentType: 'paymentType',
+  checkNo: 'checkNo',
+  cashier: 'cashier',
+  remarks: 'remarks',
+  totalAmount: 'totalAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingAcknowledgementReceiptScalarFieldEnum = (typeof AccountingAcknowledgementReceiptScalarFieldEnum)[keyof typeof AccountingAcknowledgementReceiptScalarFieldEnum]
+
+
+export const AccountingAcknowledgementReceiptItemScalarFieldEnum = {
+  id: 'id',
+  particulars: 'particulars',
+  amount: 'amount',
+  remarks: 'remarks',
+  sortOrder: 'sortOrder',
+  receiptId: 'receiptId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountingAcknowledgementReceiptItemScalarFieldEnum = (typeof AccountingAcknowledgementReceiptItemScalarFieldEnum)[keyof typeof AccountingAcknowledgementReceiptItemScalarFieldEnum]
 
 
 export const AccountingLedgerTransactionScalarFieldEnum = {

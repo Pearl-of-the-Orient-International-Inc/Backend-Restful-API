@@ -1089,6 +1089,40 @@ export type EnumAccountingReceivableStatusWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
 }
 
+export type EnumReceiptOrganizationFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptOrganization | Prisma.EnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptOrganizationFilter<$PrismaModel> | $Enums.ReceiptOrganization
+}
+
+export type EnumReceiptPaymentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptPaymentType | Prisma.EnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptPaymentTypeFilter<$PrismaModel> | $Enums.ReceiptPaymentType
+}
+
+export type EnumReceiptOrganizationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptOrganization | Prisma.EnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptOrganizationWithAggregatesFilter<$PrismaModel> | $Enums.ReceiptOrganization
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReceiptOrganizationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReceiptOrganizationFilter<$PrismaModel>
+}
+
+export type EnumReceiptPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptPaymentType | Prisma.EnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReceiptPaymentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReceiptPaymentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReceiptPaymentTypeFilter<$PrismaModel>
+}
+
 export type EnumAccountingLedgerTransactionTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.AccountingLedgerTransactionType | Prisma.EnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.AccountingLedgerTransactionType[] | Prisma.ListEnumAccountingLedgerTransactionTypeFieldRefInput<$PrismaModel>
@@ -2399,6 +2433,40 @@ export type NestedEnumAccountingReceivableStatusWithAggregatesFilter<$PrismaMode
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAccountingReceivableStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumReceiptOrganizationFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptOrganization | Prisma.EnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptOrganizationFilter<$PrismaModel> | $Enums.ReceiptOrganization
+}
+
+export type NestedEnumReceiptPaymentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptPaymentType | Prisma.EnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptPaymentTypeFilter<$PrismaModel> | $Enums.ReceiptPaymentType
+}
+
+export type NestedEnumReceiptOrganizationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptOrganization | Prisma.EnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptOrganization[] | Prisma.ListEnumReceiptOrganizationFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptOrganizationWithAggregatesFilter<$PrismaModel> | $Enums.ReceiptOrganization
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReceiptOrganizationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReceiptOrganizationFilter<$PrismaModel>
+}
+
+export type NestedEnumReceiptPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReceiptPaymentType | Prisma.EnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReceiptPaymentType[] | Prisma.ListEnumReceiptPaymentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReceiptPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReceiptPaymentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReceiptPaymentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReceiptPaymentTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumAccountingLedgerTransactionTypeFilter<$PrismaModel = never> = {

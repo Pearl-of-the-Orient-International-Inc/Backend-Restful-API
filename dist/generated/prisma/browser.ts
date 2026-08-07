@@ -198,6 +198,16 @@ export type AccountingReceivable = Prisma.AccountingReceivableModel
  */
 export type AccountingReceivableItem = Prisma.AccountingReceivableItemModel
 /**
+ * Model AccountingAcknowledgementReceipt
+ * 
+ */
+export type AccountingAcknowledgementReceipt = Prisma.AccountingAcknowledgementReceiptModel
+/**
+ * Model AccountingAcknowledgementReceiptItem
+ * 
+ */
+export type AccountingAcknowledgementReceiptItem = Prisma.AccountingAcknowledgementReceiptItemModel
+/**
  * Model AccountingLedgerTransaction
  * 
  */

@@ -399,6 +399,23 @@ export const AccountingReceivableStatus = {
 export type AccountingReceivableStatus = (typeof AccountingReceivableStatus)[keyof typeof AccountingReceivableStatus]
 
 
+export const ReceiptOrganization = {
+  POILE: 'POILE',
+  POTSCI: 'POTSCI',
+  PEARL_CHAPLAINCY: 'PEARL_CHAPLAINCY'
+} as const
+
+export type ReceiptOrganization = (typeof ReceiptOrganization)[keyof typeof ReceiptOrganization]
+
+
+export const ReceiptPaymentType = {
+  CASH: 'CASH',
+  CHECK: 'CHECK'
+} as const
+
+export type ReceiptPaymentType = (typeof ReceiptPaymentType)[keyof typeof ReceiptPaymentType]
+
+
 export const AccountingLedgerTransactionType = {
   INCOME: 'INCOME',
   EXPENSE: 'EXPENSE',

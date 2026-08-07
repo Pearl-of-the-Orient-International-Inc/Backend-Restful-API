@@ -884,6 +884,51 @@ model AccountingReceivableItem {
   @@index([sortOrder])
 }
 
+model AccountingAcknowledgementReceipt {
+  id String @id @default(uuid())
+
+  receiptNo    String                        @unique
+  organization ReceiptOrganization
+  name         String
+  receiptDate  DateTime
+  course       String?
+  school       String?
+  paymentType  ReceiptPaymentType            @default(CASH)
+  checkNo      String?
+  cashier      String?
+  remarks      String?
+  totalAmount  Decimal                       @default(0) @db.Decimal(12, 2)
+
+  items AccountingAcknowledgementReceiptItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([receiptNo])
+  @@index([organization])
+  @@index([name])
+  @@index([receiptDate])
+  @@index([createdAt])
+}
+
+model AccountingAcknowledgementReceiptItem {
+  id String @id @default(uuid())
+
+  particulars String
+  amount      Decimal @default(0) @db.Decimal(12, 2)
+  remarks     String?
+  sortOrder   Int     @default(0)
+
+  receiptId String
+  receipt   AccountingAcknowledgementReceipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([receiptId])
+  @@index([sortOrder])
+}
+
 model AccountingLedgerTransaction {
   id String @id @default(uuid())
 
@@ -1461,6 +1506,17 @@ enum AccountingReceivableStatus {
   PAID
   OVERDUE
   CANCELLED
+}
+
+enum ReceiptOrganization {
+  POILE
+  POTSCI
+  PEARL_CHAPLAINCY
+}
+
+enum ReceiptPaymentType {
+  CASH
+  CHECK
 }
 
 enum AccountingLedgerTransactionType {
