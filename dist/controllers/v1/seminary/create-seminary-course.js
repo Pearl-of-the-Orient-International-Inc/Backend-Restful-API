@@ -15,6 +15,10 @@ const client_1 = require("../../../generated/prisma/client");
 const enums_1 = require("../../../generated/prisma/enums");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
+const getCourseSummary = (subjects) => ({
+    units: subjects.reduce((total, subject) => total + subject.units, 0),
+    modality: subjects[0].modality,
+});
 const createSeminaryCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {
@@ -22,13 +26,15 @@ const createSeminaryCourse = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const sortOrder = (_a = body.sortOrder) !== null && _a !== void 0 ? _a : ((_b = (yield prisma_1.prisma.seminaryCourse.aggregate({
             _max: { sortOrder: true },
         }))._max.sortOrder) !== null && _b !== void 0 ? _b : 0) + 1;
+        const summary = getCourseSummary(body.subjects);
         const course = yield prisma_1.prisma.seminaryCourse.create({
             data: {
                 courseName: body.courseName,
                 courseCode: body.courseCode,
                 program: body.program,
-                units: body.units,
-                modality: body.modality,
+                units: summary.units,
+                modality: summary.modality,
+                subjects: body.subjects,
                 status: (_c = body.status) !== null && _c !== void 0 ? _c : enums_1.SeminaryCourseStatus.ACTIVE,
                 sortOrder,
             },

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = exports.AccountingLedgerTransactionStatus = exports.AccountingLedgerTransactionType = exports.ReceiptPaymentType = exports.ReceiptOrganization = exports.AccountingReceivableStatus = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryFeeCollectionStatus = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryInstructorRank = exports.SeminaryInstructorStatus = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberCredentialDocumentStatus = exports.MemberCredentialDocumentType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = void 0;
+exports.AccountingLedgerTransactionStatus = exports.AccountingLedgerTransactionType = exports.ReceiptPaymentType = exports.ReceiptOrganization = exports.AccountingReceivableStatus = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryFeeCollectionStatus = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryInstructorRank = exports.SeminaryInstructorStatus = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryStudentNotificationType = exports.SeminaryGradeRecordRemark = exports.SeminaryGradeRecordStatus = exports.SeminaryExaminationStatus = exports.SeminaryAssignmentStatus = exports.SeminaryStudyMaterialStatus = exports.SeminaryStudyMaterialType = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberCredentialDocumentStatus = exports.MemberCredentialDocumentType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -71,6 +71,7 @@ exports.MemberCredentialDocumentStatus = {
 exports.VerificationType = {
     EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
     PASSWORD_RESET: 'PASSWORD_RESET',
+    INSTRUCTOR_INVITATION: 'INSTRUCTOR_INVITATION',
     TWO_FACTOR: 'TWO_FACTOR'
 };
 exports.PasskeyChallengeType = {
@@ -165,6 +166,43 @@ exports.SeminaryCourseModality = {
 exports.SeminaryCourseStatus = {
     ACTIVE: 'ACTIVE',
     INACTIVE: 'INACTIVE'
+};
+exports.SeminaryStudyMaterialType = {
+    NOTES: 'NOTES',
+    PRESENTATION: 'PRESENTATION',
+    DOCUMENT: 'DOCUMENT',
+    CHART: 'CHART',
+    ARCHIVE: 'ARCHIVE'
+};
+exports.SeminaryStudyMaterialStatus = {
+    PUBLISHED: 'PUBLISHED',
+    DRAFT: 'DRAFT'
+};
+exports.SeminaryAssignmentStatus = {
+    PUBLISHED: 'PUBLISHED',
+    DRAFT: 'DRAFT',
+    SCHEDULED: 'SCHEDULED'
+};
+exports.SeminaryExaminationStatus = {
+    SCHEDULED: 'SCHEDULED',
+    ONGOING: 'ONGOING',
+    COMPLETED: 'COMPLETED',
+    DRAFT: 'DRAFT'
+};
+exports.SeminaryGradeRecordStatus = {
+    COMPLETE: 'COMPLETE',
+    PENDING_REVIEW: 'PENDING_REVIEW',
+    IN_PROGRESS: 'IN_PROGRESS',
+    INCOMPLETE: 'INCOMPLETE'
+};
+exports.SeminaryGradeRecordRemark = {
+    PASSED: 'PASSED',
+    CONDITIONAL: 'CONDITIONAL',
+    FAILED: 'FAILED',
+    ONGOING: 'ONGOING'
+};
+exports.SeminaryStudentNotificationType = {
+    ASSIGNMENT: 'ASSIGNMENT'
 };
 exports.SeminaryAcademicYearSession = {
     CURRENT: 'CURRENT',

@@ -73,6 +73,7 @@ export type SeminaryGradeConfigurationCountAggregateOutputType = {
   autoPublishApproved: number
   showConditionalRemark: number
   gradeScale: number
+  criteriaWeights: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -126,6 +127,7 @@ export type SeminaryGradeConfigurationCountAggregateInputType = {
   autoPublishApproved?: true
   showConditionalRemark?: true
   gradeScale?: true
+  criteriaWeights?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -228,6 +230,7 @@ export type SeminaryGradeConfigurationGroupByOutputType = {
   autoPublishApproved: boolean
   showConditionalRemark: boolean
   gradeScale: runtime.JsonValue
+  criteriaWeights: runtime.JsonValue
   createdAt: Date
   updatedAt: Date
   _count: SeminaryGradeConfigurationCountAggregateOutputType | null
@@ -266,6 +269,7 @@ export type SeminaryGradeConfigurationWhereInput = {
   autoPublishApproved?: Prisma.BoolFilter<"SeminaryGradeConfiguration"> | boolean
   showConditionalRemark?: Prisma.BoolFilter<"SeminaryGradeConfiguration"> | boolean
   gradeScale?: Prisma.JsonFilter<"SeminaryGradeConfiguration">
+  criteriaWeights?: Prisma.JsonFilter<"SeminaryGradeConfiguration">
   createdAt?: Prisma.DateTimeFilter<"SeminaryGradeConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryGradeConfiguration"> | Date | string
 }
@@ -281,6 +285,7 @@ export type SeminaryGradeConfigurationOrderByWithRelationInput = {
   autoPublishApproved?: Prisma.SortOrder
   showConditionalRemark?: Prisma.SortOrder
   gradeScale?: Prisma.SortOrder
+  criteriaWeights?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -299,6 +304,7 @@ export type SeminaryGradeConfigurationWhereUniqueInput = Prisma.AtLeast<{
   autoPublishApproved?: Prisma.BoolFilter<"SeminaryGradeConfiguration"> | boolean
   showConditionalRemark?: Prisma.BoolFilter<"SeminaryGradeConfiguration"> | boolean
   gradeScale?: Prisma.JsonFilter<"SeminaryGradeConfiguration">
+  criteriaWeights?: Prisma.JsonFilter<"SeminaryGradeConfiguration">
   createdAt?: Prisma.DateTimeFilter<"SeminaryGradeConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryGradeConfiguration"> | Date | string
 }, "id">
@@ -314,6 +320,7 @@ export type SeminaryGradeConfigurationOrderByWithAggregationInput = {
   autoPublishApproved?: Prisma.SortOrder
   showConditionalRemark?: Prisma.SortOrder
   gradeScale?: Prisma.SortOrder
+  criteriaWeights?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SeminaryGradeConfigurationCountOrderByAggregateInput
@@ -337,6 +344,7 @@ export type SeminaryGradeConfigurationScalarWhereWithAggregatesInput = {
   autoPublishApproved?: Prisma.BoolWithAggregatesFilter<"SeminaryGradeConfiguration"> | boolean
   showConditionalRemark?: Prisma.BoolWithAggregatesFilter<"SeminaryGradeConfiguration"> | boolean
   gradeScale?: Prisma.JsonWithAggregatesFilter<"SeminaryGradeConfiguration">
+  criteriaWeights?: Prisma.JsonWithAggregatesFilter<"SeminaryGradeConfiguration">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryGradeConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryGradeConfiguration"> | Date | string
 }
@@ -352,6 +360,7 @@ export type SeminaryGradeConfigurationCreateInput = {
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -367,6 +376,7 @@ export type SeminaryGradeConfigurationUncheckedCreateInput = {
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -382,6 +392,7 @@ export type SeminaryGradeConfigurationUpdateInput = {
   autoPublishApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   showConditionalRemark?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradeScale?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -397,6 +408,7 @@ export type SeminaryGradeConfigurationUncheckedUpdateInput = {
   autoPublishApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   showConditionalRemark?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradeScale?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -412,6 +424,7 @@ export type SeminaryGradeConfigurationCreateManyInput = {
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -427,6 +440,7 @@ export type SeminaryGradeConfigurationUpdateManyMutationInput = {
   autoPublishApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   showConditionalRemark?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradeScale?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -442,6 +456,7 @@ export type SeminaryGradeConfigurationUncheckedUpdateManyInput = {
   autoPublishApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   showConditionalRemark?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradeScale?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  criteriaWeights?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -457,6 +472,7 @@ export type SeminaryGradeConfigurationCountOrderByAggregateInput = {
   autoPublishApproved?: Prisma.SortOrder
   showConditionalRemark?: Prisma.SortOrder
   gradeScale?: Prisma.SortOrder
+  criteriaWeights?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -510,6 +526,7 @@ export type SeminaryGradeConfigurationSelect<ExtArgs extends runtime.Types.Exten
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale?: boolean
+  criteriaWeights?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["seminaryGradeConfiguration"]>
@@ -525,6 +542,7 @@ export type SeminaryGradeConfigurationSelectCreateManyAndReturn<ExtArgs extends 
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale?: boolean
+  criteriaWeights?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["seminaryGradeConfiguration"]>
@@ -540,6 +558,7 @@ export type SeminaryGradeConfigurationSelectUpdateManyAndReturn<ExtArgs extends 
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale?: boolean
+  criteriaWeights?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["seminaryGradeConfiguration"]>
@@ -555,11 +574,12 @@ export type SeminaryGradeConfigurationSelectScalar = {
   autoPublishApproved?: boolean
   showConditionalRemark?: boolean
   gradeScale?: boolean
+  criteriaWeights?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SeminaryGradeConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "passingEquivalent" | "releaseWindow" | "weightProfile" | "completionWindowDays" | "approvalWorkflow" | "allowFacultyOverride" | "autoPublishApproved" | "showConditionalRemark" | "gradeScale" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryGradeConfiguration"]>
+export type SeminaryGradeConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "passingEquivalent" | "releaseWindow" | "weightProfile" | "completionWindowDays" | "approvalWorkflow" | "allowFacultyOverride" | "autoPublishApproved" | "showConditionalRemark" | "gradeScale" | "criteriaWeights" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryGradeConfiguration"]>
 
 export type $SeminaryGradeConfigurationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SeminaryGradeConfiguration"
@@ -575,6 +595,7 @@ export type $SeminaryGradeConfigurationPayload<ExtArgs extends runtime.Types.Ext
     autoPublishApproved: boolean
     showConditionalRemark: boolean
     gradeScale: runtime.JsonValue
+    criteriaWeights: runtime.JsonValue
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["seminaryGradeConfiguration"]>
@@ -1010,6 +1031,7 @@ export interface SeminaryGradeConfigurationFieldRefs {
   readonly autoPublishApproved: Prisma.FieldRef<"SeminaryGradeConfiguration", 'Boolean'>
   readonly showConditionalRemark: Prisma.FieldRef<"SeminaryGradeConfiguration", 'Boolean'>
   readonly gradeScale: Prisma.FieldRef<"SeminaryGradeConfiguration", 'Json'>
+  readonly criteriaWeights: Prisma.FieldRef<"SeminaryGradeConfiguration", 'Json'>
   readonly createdAt: Prisma.FieldRef<"SeminaryGradeConfiguration", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SeminaryGradeConfiguration", 'DateTime'>
 }

@@ -19,6 +19,10 @@ export const getVerificationBaseUrlByRole = (role: UserType): string => {
       return removeTrailingSlash(config.VERIFY_REDIRECT_OFFICER_PROD);
     }
 
+    if (role === UserType.INSTRUCTOR) {
+      return removeTrailingSlash(config.VERIFY_REDIRECT_INSTRUCTOR_PROD);
+    }
+
     return removeTrailingSlash(config.VERIFY_REDIRECT_MEMBER_PROD);
   }
 
@@ -31,6 +35,12 @@ export const getVerificationBaseUrlByRole = (role: UserType): string => {
   if (role === UserType.OFFICER) {
     return removeTrailingSlash(
       config.VERIFY_REDIRECT_OFFICER_DEV || config.VERIFY_REDIRECT_MEMBER_DEV,
+    );
+  }
+
+  if (role === UserType.INSTRUCTOR) {
+    return removeTrailingSlash(
+      config.VERIFY_REDIRECT_INSTRUCTOR_DEV || config.VERIFY_REDIRECT_MEMBER_DEV,
     );
   }
 
@@ -57,4 +67,12 @@ export const buildPasswordResetUrl = (
   }
 
   return `${getVerificationBaseUrlByRole(role)}/reset-password?token=${code}`;
+};
+
+export const buildInstructorInvitationUrl = (code: string | null): string => {
+  if (!code) {
+    throw new Error('Invitation code is missing.');
+  }
+
+  return `${getVerificationBaseUrlByRole(UserType.INSTRUCTOR)}/auth/instructor?token=${code}`;
 };

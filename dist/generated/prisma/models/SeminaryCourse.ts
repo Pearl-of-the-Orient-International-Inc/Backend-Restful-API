@@ -69,6 +69,7 @@ export type SeminaryCourseCountAggregateOutputType = {
   program: number
   units: number
   modality: number
+  subjects: number
   status: number
   sortOrder: number
   createdAt: number
@@ -120,6 +121,7 @@ export type SeminaryCourseCountAggregateInputType = {
   program?: true
   units?: true
   modality?: true
+  subjects?: true
   status?: true
   sortOrder?: true
   createdAt?: true
@@ -220,6 +222,7 @@ export type SeminaryCourseGroupByOutputType = {
   program: $Enums.SeminaryProgramLevel
   units: number
   modality: $Enums.SeminaryCourseModality
+  subjects: runtime.JsonValue
   status: $Enums.SeminaryCourseStatus
   sortOrder: number
   createdAt: Date
@@ -256,6 +259,7 @@ export type SeminaryCourseWhereInput = {
   program?: Prisma.EnumSeminaryProgramLevelFilter<"SeminaryCourse"> | $Enums.SeminaryProgramLevel
   units?: Prisma.IntFilter<"SeminaryCourse"> | number
   modality?: Prisma.EnumSeminaryCourseModalityFilter<"SeminaryCourse"> | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonFilter<"SeminaryCourse">
   status?: Prisma.EnumSeminaryCourseStatusFilter<"SeminaryCourse"> | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntFilter<"SeminaryCourse"> | number
   createdAt?: Prisma.DateTimeFilter<"SeminaryCourse"> | Date | string
@@ -269,6 +273,7 @@ export type SeminaryCourseOrderByWithRelationInput = {
   program?: Prisma.SortOrder
   units?: Prisma.SortOrder
   modality?: Prisma.SortOrder
+  subjects?: Prisma.SortOrder
   status?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -285,6 +290,7 @@ export type SeminaryCourseWhereUniqueInput = Prisma.AtLeast<{
   program?: Prisma.EnumSeminaryProgramLevelFilter<"SeminaryCourse"> | $Enums.SeminaryProgramLevel
   units?: Prisma.IntFilter<"SeminaryCourse"> | number
   modality?: Prisma.EnumSeminaryCourseModalityFilter<"SeminaryCourse"> | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonFilter<"SeminaryCourse">
   status?: Prisma.EnumSeminaryCourseStatusFilter<"SeminaryCourse"> | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntFilter<"SeminaryCourse"> | number
   createdAt?: Prisma.DateTimeFilter<"SeminaryCourse"> | Date | string
@@ -298,6 +304,7 @@ export type SeminaryCourseOrderByWithAggregationInput = {
   program?: Prisma.SortOrder
   units?: Prisma.SortOrder
   modality?: Prisma.SortOrder
+  subjects?: Prisma.SortOrder
   status?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -319,6 +326,7 @@ export type SeminaryCourseScalarWhereWithAggregatesInput = {
   program?: Prisma.EnumSeminaryProgramLevelWithAggregatesFilter<"SeminaryCourse"> | $Enums.SeminaryProgramLevel
   units?: Prisma.IntWithAggregatesFilter<"SeminaryCourse"> | number
   modality?: Prisma.EnumSeminaryCourseModalityWithAggregatesFilter<"SeminaryCourse"> | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonWithAggregatesFilter<"SeminaryCourse">
   status?: Prisma.EnumSeminaryCourseStatusWithAggregatesFilter<"SeminaryCourse"> | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntWithAggregatesFilter<"SeminaryCourse"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryCourse"> | Date | string
@@ -332,6 +340,7 @@ export type SeminaryCourseCreateInput = {
   program: $Enums.SeminaryProgramLevel
   units: number
   modality: $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.SeminaryCourseStatus
   sortOrder?: number
   createdAt?: Date | string
@@ -345,6 +354,7 @@ export type SeminaryCourseUncheckedCreateInput = {
   program: $Enums.SeminaryProgramLevel
   units: number
   modality: $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.SeminaryCourseStatus
   sortOrder?: number
   createdAt?: Date | string
@@ -358,6 +368,7 @@ export type SeminaryCourseUpdateInput = {
   program?: Prisma.EnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel
   units?: Prisma.IntFieldUpdateOperationsInput | number
   modality?: Prisma.EnumSeminaryCourseModalityFieldUpdateOperationsInput | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumSeminaryCourseStatusFieldUpdateOperationsInput | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -371,6 +382,7 @@ export type SeminaryCourseUncheckedUpdateInput = {
   program?: Prisma.EnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel
   units?: Prisma.IntFieldUpdateOperationsInput | number
   modality?: Prisma.EnumSeminaryCourseModalityFieldUpdateOperationsInput | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumSeminaryCourseStatusFieldUpdateOperationsInput | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -384,6 +396,7 @@ export type SeminaryCourseCreateManyInput = {
   program: $Enums.SeminaryProgramLevel
   units: number
   modality: $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.SeminaryCourseStatus
   sortOrder?: number
   createdAt?: Date | string
@@ -397,6 +410,7 @@ export type SeminaryCourseUpdateManyMutationInput = {
   program?: Prisma.EnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel
   units?: Prisma.IntFieldUpdateOperationsInput | number
   modality?: Prisma.EnumSeminaryCourseModalityFieldUpdateOperationsInput | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumSeminaryCourseStatusFieldUpdateOperationsInput | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -410,6 +424,7 @@ export type SeminaryCourseUncheckedUpdateManyInput = {
   program?: Prisma.EnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel
   units?: Prisma.IntFieldUpdateOperationsInput | number
   modality?: Prisma.EnumSeminaryCourseModalityFieldUpdateOperationsInput | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumSeminaryCourseStatusFieldUpdateOperationsInput | $Enums.SeminaryCourseStatus
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -423,6 +438,7 @@ export type SeminaryCourseCountOrderByAggregateInput = {
   program?: Prisma.SortOrder
   units?: Prisma.SortOrder
   modality?: Prisma.SortOrder
+  subjects?: Prisma.SortOrder
   status?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -486,6 +502,7 @@ export type SeminaryCourseSelect<ExtArgs extends runtime.Types.Extensions.Intern
   program?: boolean
   units?: boolean
   modality?: boolean
+  subjects?: boolean
   status?: boolean
   sortOrder?: boolean
   createdAt?: boolean
@@ -499,6 +516,7 @@ export type SeminaryCourseSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   program?: boolean
   units?: boolean
   modality?: boolean
+  subjects?: boolean
   status?: boolean
   sortOrder?: boolean
   createdAt?: boolean
@@ -512,6 +530,7 @@ export type SeminaryCourseSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   program?: boolean
   units?: boolean
   modality?: boolean
+  subjects?: boolean
   status?: boolean
   sortOrder?: boolean
   createdAt?: boolean
@@ -525,13 +544,14 @@ export type SeminaryCourseSelectScalar = {
   program?: boolean
   units?: boolean
   modality?: boolean
+  subjects?: boolean
   status?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SeminaryCourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "courseName" | "courseCode" | "program" | "units" | "modality" | "status" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryCourse"]>
+export type SeminaryCourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "courseName" | "courseCode" | "program" | "units" | "modality" | "subjects" | "status" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryCourse"]>
 
 export type $SeminaryCoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SeminaryCourse"
@@ -543,6 +563,7 @@ export type $SeminaryCoursePayload<ExtArgs extends runtime.Types.Extensions.Inte
     program: $Enums.SeminaryProgramLevel
     units: number
     modality: $Enums.SeminaryCourseModality
+    subjects: runtime.JsonValue
     status: $Enums.SeminaryCourseStatus
     sortOrder: number
     createdAt: Date
@@ -976,6 +997,7 @@ export interface SeminaryCourseFieldRefs {
   readonly program: Prisma.FieldRef<"SeminaryCourse", 'SeminaryProgramLevel'>
   readonly units: Prisma.FieldRef<"SeminaryCourse", 'Int'>
   readonly modality: Prisma.FieldRef<"SeminaryCourse", 'SeminaryCourseModality'>
+  readonly subjects: Prisma.FieldRef<"SeminaryCourse", 'Json'>
   readonly status: Prisma.FieldRef<"SeminaryCourse", 'SeminaryCourseStatus'>
   readonly sortOrder: Prisma.FieldRef<"SeminaryCourse", 'Int'>
   readonly createdAt: Prisma.FieldRef<"SeminaryCourse", 'DateTime'>

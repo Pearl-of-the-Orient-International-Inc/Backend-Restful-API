@@ -173,6 +173,31 @@ export type SeminaryPayment = Prisma.SeminaryPaymentModel
  */
 export type SeminaryCourse = Prisma.SeminaryCourseModel
 /**
+ * Model SeminaryStudyMaterial
+ * 
+ */
+export type SeminaryStudyMaterial = Prisma.SeminaryStudyMaterialModel
+/**
+ * Model SeminaryAssignment
+ * 
+ */
+export type SeminaryAssignment = Prisma.SeminaryAssignmentModel
+/**
+ * Model SeminaryExamination
+ * 
+ */
+export type SeminaryExamination = Prisma.SeminaryExaminationModel
+/**
+ * Model SeminaryGradeRecord
+ * 
+ */
+export type SeminaryGradeRecord = Prisma.SeminaryGradeRecordModel
+/**
+ * Model SeminaryStudentNotification
+ * 
+ */
+export type SeminaryStudentNotification = Prisma.SeminaryStudentNotificationModel
+/**
  * Model SeminaryAcademicYear
  * 
  */

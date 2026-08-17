@@ -33,8 +33,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SeminaryFeeConfigurationScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryInstructorScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
-exports.defineExtension = exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = exports.AccountingAcknowledgementReceiptItemScalarFieldEnum = exports.AccountingAcknowledgementReceiptScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryFeeCollectionAccountScalarFieldEnum = void 0;
+exports.SeminaryGradeRecordScalarFieldEnum = exports.SeminaryExaminationScalarFieldEnum = exports.SeminaryAssignmentScalarFieldEnum = exports.SeminaryStudyMaterialScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = exports.AccountingAcknowledgementReceiptItemScalarFieldEnum = exports.AccountingAcknowledgementReceiptScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryFeeCollectionAccountScalarFieldEnum = exports.SeminaryFeeConfigurationScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryInstructorScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryStudentNotificationScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -88,6 +88,11 @@ exports.ModelName = {
     SeminaryRequirements: 'SeminaryRequirements',
     SeminaryPayment: 'SeminaryPayment',
     SeminaryCourse: 'SeminaryCourse',
+    SeminaryStudyMaterial: 'SeminaryStudyMaterial',
+    SeminaryAssignment: 'SeminaryAssignment',
+    SeminaryExamination: 'SeminaryExamination',
+    SeminaryGradeRecord: 'SeminaryGradeRecord',
+    SeminaryStudentNotification: 'SeminaryStudentNotification',
     SeminaryAcademicYear: 'SeminaryAcademicYear',
     SeminaryInstructor: 'SeminaryInstructor',
     SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
@@ -495,10 +500,109 @@ exports.SeminaryCourseScalarFieldEnum = {
     program: 'program',
     units: 'units',
     modality: 'modality',
+    subjects: 'subjects',
     status: 'status',
     sortOrder: 'sortOrder',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+exports.SeminaryStudyMaterialScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    subtitle: 'subtitle',
+    subject: 'subject',
+    type: 'type',
+    status: 'status',
+    fileUrl: 'fileUrl',
+    fileName: 'fileName',
+    mimeType: 'mimeType',
+    fileSize: 'fileSize',
+    downloads: 'downloads',
+    uploadedByName: 'uploadedByName',
+    uploadedByRole: 'uploadedByRole',
+    uploadedByUserId: 'uploadedByUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryAssignmentScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    subject: 'subject',
+    courseId: 'courseId',
+    courseName: 'courseName',
+    courseCode: 'courseCode',
+    instructorUserId: 'instructorUserId',
+    instructorName: 'instructorName',
+    assignmentType: 'assignmentType',
+    dueAt: 'dueAt',
+    status: 'status',
+    totalMarks: 'totalMarks',
+    additionalInstructions: 'additionalInstructions',
+    allowLateSubmission: 'allowLateSubmission',
+    lateSubmissionDeadline: 'lateSubmissionDeadline',
+    notifyStudents: 'notifyStudents',
+    attachmentLabel: 'attachmentLabel',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryExaminationScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    coverage: 'coverage',
+    subject: 'subject',
+    courseId: 'courseId',
+    courseName: 'courseName',
+    courseCode: 'courseCode',
+    instructorUserId: 'instructorUserId',
+    instructorName: 'instructorName',
+    examType: 'examType',
+    scheduledAt: 'scheduledAt',
+    durationMinutes: 'durationMinutes',
+    status: 'status',
+    totalPoints: 'totalPoints',
+    passingScore: 'passingScore',
+    instructions: 'instructions',
+    randomizeQuestions: 'randomizeQuestions',
+    showResults: 'showResults',
+    questions: 'questions',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryGradeRecordScalarFieldEnum = {
+    id: 'id',
+    recordNumber: 'recordNumber',
+    studentApplicationId: 'studentApplicationId',
+    studentId: 'studentId',
+    studentName: 'studentName',
+    program: 'program',
+    programLevel: 'programLevel',
+    subject: 'subject',
+    courseId: 'courseId',
+    courseTitle: 'courseTitle',
+    courseCode: 'courseCode',
+    instructorUserId: 'instructorUserId',
+    instructorName: 'instructorName',
+    term: 'term',
+    finalGrade: 'finalGrade',
+    remarks: 'remarks',
+    status: 'status',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SeminaryStudentNotificationScalarFieldEnum = {
+    id: 'id',
+    studentApplicationId: 'studentApplicationId',
+    studentId: 'studentId',
+    studentName: 'studentName',
+    studentEmail: 'studentEmail',
+    title: 'title',
+    message: 'message',
+    type: 'type',
+    assignmentId: 'assignmentId',
+    readAt: 'readAt',
+    createdAt: 'createdAt'
 };
 exports.SeminaryAcademicYearScalarFieldEnum = {
     id: 'id',
@@ -541,6 +645,8 @@ exports.SeminaryInstructorScalarFieldEnum = {
     rating: 'rating',
     rankingClassification: 'rankingClassification',
     award: 'award',
+    inviteTokenSentAt: 'inviteTokenSentAt',
+    inviteAcceptedAt: 'inviteAcceptedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
@@ -555,6 +661,7 @@ exports.SeminaryGradeConfigurationScalarFieldEnum = {
     autoPublishApproved: 'autoPublishApproved',
     showConditionalRemark: 'showConditionalRemark',
     gradeScale: 'gradeScale',
+    criteriaWeights: 'criteriaWeights',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

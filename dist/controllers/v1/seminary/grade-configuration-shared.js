@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildGradeConfigurationCreateData = exports.buildGradeConfigurationUpdateData = exports.defaultGradeConfiguration = exports.defaultGradeScale = void 0;
+exports.buildGradeConfigurationCreateData = exports.buildGradeConfigurationUpdateData = exports.defaultGradeConfiguration = exports.defaultCriteriaWeights = exports.defaultGradeScale = void 0;
 exports.defaultGradeScale = [
     { equivalent: '1.00', percentageRange: '98-100', remarks: 'Excellent' },
     { equivalent: '1.25', percentageRange: '95-97', remarks: 'Superior' },
@@ -13,6 +13,11 @@ exports.defaultGradeScale = [
     { equivalent: '3.00', percentageRange: '75-76', remarks: 'Barely Passed' },
     { equivalent: '5.00', percentageRange: 'Below 75', remarks: 'Failed' },
 ];
+exports.defaultCriteriaWeights = {
+    attendance: 20,
+    coursework: 40,
+    exam: 40,
+};
 exports.defaultGradeConfiguration = {
     id: 'default',
     passingEquivalent: '2.50',
@@ -24,8 +29,9 @@ exports.defaultGradeConfiguration = {
     autoPublishApproved: false,
     showConditionalRemark: true,
     gradeScale: exports.defaultGradeScale,
+    criteriaWeights: exports.defaultCriteriaWeights,
 };
-const buildGradeConfigurationUpdateData = (body) => (Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, (body.passingEquivalent === undefined
+const buildGradeConfigurationUpdateData = (body) => (Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, (body.passingEquivalent === undefined
     ? {}
     : { passingEquivalent: body.passingEquivalent })), (body.releaseWindow === undefined
     ? {}
@@ -39,9 +45,11 @@ const buildGradeConfigurationUpdateData = (body) => (Object.assign(Object.assign
     ? {}
     : { autoPublishApproved: body.autoPublishApproved })), (body.showConditionalRemark === undefined
     ? {}
-    : { showConditionalRemark: body.showConditionalRemark })), (body.gradeScale === undefined ? {} : { gradeScale: body.gradeScale })));
+    : { showConditionalRemark: body.showConditionalRemark })), (body.gradeScale === undefined ? {} : { gradeScale: body.gradeScale })), (body.criteriaWeights === undefined
+    ? {}
+    : { criteriaWeights: body.criteriaWeights })));
 exports.buildGradeConfigurationUpdateData = buildGradeConfigurationUpdateData;
-const buildGradeConfigurationCreateData = (body) => (Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, exports.defaultGradeConfiguration), (body.passingEquivalent === undefined
+const buildGradeConfigurationCreateData = (body) => (Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, exports.defaultGradeConfiguration), (body.passingEquivalent === undefined
     ? {}
     : { passingEquivalent: body.passingEquivalent })), (body.releaseWindow === undefined
     ? {}
@@ -55,5 +63,7 @@ const buildGradeConfigurationCreateData = (body) => (Object.assign(Object.assign
     ? {}
     : { autoPublishApproved: body.autoPublishApproved })), (body.showConditionalRemark === undefined
     ? {}
-    : { showConditionalRemark: body.showConditionalRemark })), (body.gradeScale === undefined ? {} : { gradeScale: body.gradeScale })));
+    : { showConditionalRemark: body.showConditionalRemark })), (body.gradeScale === undefined ? {} : { gradeScale: body.gradeScale })), (body.criteriaWeights === undefined
+    ? {}
+    : { criteriaWeights: body.criteriaWeights })));
 exports.buildGradeConfigurationCreateData = buildGradeConfigurationCreateData;

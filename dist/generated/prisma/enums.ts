@@ -122,6 +122,7 @@ export type MemberCredentialDocumentStatus = (typeof MemberCredentialDocumentSta
 export const VerificationType = {
   EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
   PASSWORD_RESET: 'PASSWORD_RESET',
+  INSTRUCTOR_INVITATION: 'INSTRUCTOR_INVITATION',
   TWO_FACTOR: 'TWO_FACTOR'
 } as const
 
@@ -279,6 +280,71 @@ export const SeminaryCourseStatus = {
 } as const
 
 export type SeminaryCourseStatus = (typeof SeminaryCourseStatus)[keyof typeof SeminaryCourseStatus]
+
+
+export const SeminaryStudyMaterialType = {
+  NOTES: 'NOTES',
+  PRESENTATION: 'PRESENTATION',
+  DOCUMENT: 'DOCUMENT',
+  CHART: 'CHART',
+  ARCHIVE: 'ARCHIVE'
+} as const
+
+export type SeminaryStudyMaterialType = (typeof SeminaryStudyMaterialType)[keyof typeof SeminaryStudyMaterialType]
+
+
+export const SeminaryStudyMaterialStatus = {
+  PUBLISHED: 'PUBLISHED',
+  DRAFT: 'DRAFT'
+} as const
+
+export type SeminaryStudyMaterialStatus = (typeof SeminaryStudyMaterialStatus)[keyof typeof SeminaryStudyMaterialStatus]
+
+
+export const SeminaryAssignmentStatus = {
+  PUBLISHED: 'PUBLISHED',
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED'
+} as const
+
+export type SeminaryAssignmentStatus = (typeof SeminaryAssignmentStatus)[keyof typeof SeminaryAssignmentStatus]
+
+
+export const SeminaryExaminationStatus = {
+  SCHEDULED: 'SCHEDULED',
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  DRAFT: 'DRAFT'
+} as const
+
+export type SeminaryExaminationStatus = (typeof SeminaryExaminationStatus)[keyof typeof SeminaryExaminationStatus]
+
+
+export const SeminaryGradeRecordStatus = {
+  COMPLETE: 'COMPLETE',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  INCOMPLETE: 'INCOMPLETE'
+} as const
+
+export type SeminaryGradeRecordStatus = (typeof SeminaryGradeRecordStatus)[keyof typeof SeminaryGradeRecordStatus]
+
+
+export const SeminaryGradeRecordRemark = {
+  PASSED: 'PASSED',
+  CONDITIONAL: 'CONDITIONAL',
+  FAILED: 'FAILED',
+  ONGOING: 'ONGOING'
+} as const
+
+export type SeminaryGradeRecordRemark = (typeof SeminaryGradeRecordRemark)[keyof typeof SeminaryGradeRecordRemark]
+
+
+export const SeminaryStudentNotificationType = {
+  ASSIGNMENT: 'ASSIGNMENT'
+} as const
+
+export type SeminaryStudentNotificationType = (typeof SeminaryStudentNotificationType)[keyof typeof SeminaryStudentNotificationType]
 
 
 export const SeminaryAcademicYearSession = {

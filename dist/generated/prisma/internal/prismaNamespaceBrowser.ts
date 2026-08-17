@@ -78,6 +78,11 @@ export const ModelName = {
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
   SeminaryCourse: 'SeminaryCourse',
+  SeminaryStudyMaterial: 'SeminaryStudyMaterial',
+  SeminaryAssignment: 'SeminaryAssignment',
+  SeminaryExamination: 'SeminaryExamination',
+  SeminaryGradeRecord: 'SeminaryGradeRecord',
+  SeminaryStudentNotification: 'SeminaryStudentNotification',
   SeminaryAcademicYear: 'SeminaryAcademicYear',
   SeminaryInstructor: 'SeminaryInstructor',
   SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
@@ -600,6 +605,7 @@ export const SeminaryCourseScalarFieldEnum = {
   program: 'program',
   units: 'units',
   modality: 'modality',
+  subjects: 'subjects',
   status: 'status',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
@@ -607,6 +613,124 @@ export const SeminaryCourseScalarFieldEnum = {
 } as const
 
 export type SeminaryCourseScalarFieldEnum = (typeof SeminaryCourseScalarFieldEnum)[keyof typeof SeminaryCourseScalarFieldEnum]
+
+
+export const SeminaryStudyMaterialScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  subtitle: 'subtitle',
+  subject: 'subject',
+  type: 'type',
+  status: 'status',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  downloads: 'downloads',
+  uploadedByName: 'uploadedByName',
+  uploadedByRole: 'uploadedByRole',
+  uploadedByUserId: 'uploadedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryStudyMaterialScalarFieldEnum = (typeof SeminaryStudyMaterialScalarFieldEnum)[keyof typeof SeminaryStudyMaterialScalarFieldEnum]
+
+
+export const SeminaryAssignmentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  subject: 'subject',
+  courseId: 'courseId',
+  courseName: 'courseName',
+  courseCode: 'courseCode',
+  instructorUserId: 'instructorUserId',
+  instructorName: 'instructorName',
+  assignmentType: 'assignmentType',
+  dueAt: 'dueAt',
+  status: 'status',
+  totalMarks: 'totalMarks',
+  additionalInstructions: 'additionalInstructions',
+  allowLateSubmission: 'allowLateSubmission',
+  lateSubmissionDeadline: 'lateSubmissionDeadline',
+  notifyStudents: 'notifyStudents',
+  attachmentLabel: 'attachmentLabel',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAssignmentScalarFieldEnum = (typeof SeminaryAssignmentScalarFieldEnum)[keyof typeof SeminaryAssignmentScalarFieldEnum]
+
+
+export const SeminaryExaminationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  coverage: 'coverage',
+  subject: 'subject',
+  courseId: 'courseId',
+  courseName: 'courseName',
+  courseCode: 'courseCode',
+  instructorUserId: 'instructorUserId',
+  instructorName: 'instructorName',
+  examType: 'examType',
+  scheduledAt: 'scheduledAt',
+  durationMinutes: 'durationMinutes',
+  status: 'status',
+  totalPoints: 'totalPoints',
+  passingScore: 'passingScore',
+  instructions: 'instructions',
+  randomizeQuestions: 'randomizeQuestions',
+  showResults: 'showResults',
+  questions: 'questions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryExaminationScalarFieldEnum = (typeof SeminaryExaminationScalarFieldEnum)[keyof typeof SeminaryExaminationScalarFieldEnum]
+
+
+export const SeminaryGradeRecordScalarFieldEnum = {
+  id: 'id',
+  recordNumber: 'recordNumber',
+  studentApplicationId: 'studentApplicationId',
+  studentId: 'studentId',
+  studentName: 'studentName',
+  program: 'program',
+  programLevel: 'programLevel',
+  subject: 'subject',
+  courseId: 'courseId',
+  courseTitle: 'courseTitle',
+  courseCode: 'courseCode',
+  instructorUserId: 'instructorUserId',
+  instructorName: 'instructorName',
+  term: 'term',
+  finalGrade: 'finalGrade',
+  remarks: 'remarks',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryGradeRecordScalarFieldEnum = (typeof SeminaryGradeRecordScalarFieldEnum)[keyof typeof SeminaryGradeRecordScalarFieldEnum]
+
+
+export const SeminaryStudentNotificationScalarFieldEnum = {
+  id: 'id',
+  studentApplicationId: 'studentApplicationId',
+  studentId: 'studentId',
+  studentName: 'studentName',
+  studentEmail: 'studentEmail',
+  title: 'title',
+  message: 'message',
+  type: 'type',
+  assignmentId: 'assignmentId',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SeminaryStudentNotificationScalarFieldEnum = (typeof SeminaryStudentNotificationScalarFieldEnum)[keyof typeof SeminaryStudentNotificationScalarFieldEnum]
 
 
 export const SeminaryAcademicYearScalarFieldEnum = {
@@ -654,6 +778,8 @@ export const SeminaryInstructorScalarFieldEnum = {
   rating: 'rating',
   rankingClassification: 'rankingClassification',
   award: 'award',
+  inviteTokenSentAt: 'inviteTokenSentAt',
+  inviteAcceptedAt: 'inviteAcceptedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -672,6 +798,7 @@ export const SeminaryGradeConfigurationScalarFieldEnum = {
   autoPublishApproved: 'autoPublishApproved',
   showConditionalRemark: 'showConditionalRemark',
   gradeScale: 'gradeScale',
+  criteriaWeights: 'criteriaWeights',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

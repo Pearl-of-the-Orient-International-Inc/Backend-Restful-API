@@ -75,6 +75,8 @@ export type SeminaryInstructorMinAggregateOutputType = {
   rating: string | null
   rankingClassification: string | null
   award: string | null
+  inviteTokenSentAt: Date | null
+  inviteAcceptedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -106,6 +108,8 @@ export type SeminaryInstructorMaxAggregateOutputType = {
   rating: string | null
   rankingClassification: string | null
   award: string | null
+  inviteTokenSentAt: Date | null
+  inviteAcceptedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -140,6 +144,8 @@ export type SeminaryInstructorCountAggregateOutputType = {
   rating: number
   rankingClassification: number
   award: number
+  inviteTokenSentAt: number
+  inviteAcceptedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -195,6 +201,8 @@ export type SeminaryInstructorMinAggregateInputType = {
   rating?: true
   rankingClassification?: true
   award?: true
+  inviteTokenSentAt?: true
+  inviteAcceptedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -226,6 +234,8 @@ export type SeminaryInstructorMaxAggregateInputType = {
   rating?: true
   rankingClassification?: true
   award?: true
+  inviteTokenSentAt?: true
+  inviteAcceptedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -260,6 +270,8 @@ export type SeminaryInstructorCountAggregateInputType = {
   rating?: true
   rankingClassification?: true
   award?: true
+  inviteTokenSentAt?: true
+  inviteAcceptedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -381,6 +393,8 @@ export type SeminaryInstructorGroupByOutputType = {
   rating: string
   rankingClassification: string
   award: string
+  inviteTokenSentAt: Date | null
+  inviteAcceptedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: SeminaryInstructorCountAggregateOutputType | null
@@ -438,6 +452,8 @@ export type SeminaryInstructorWhereInput = {
   rating?: Prisma.StringFilter<"SeminaryInstructor"> | string
   rankingClassification?: Prisma.StringFilter<"SeminaryInstructor"> | string
   award?: Prisma.StringFilter<"SeminaryInstructor"> | string
+  inviteTokenSentAt?: Prisma.DateTimeNullableFilter<"SeminaryInstructor"> | Date | string | null
+  inviteAcceptedAt?: Prisma.DateTimeNullableFilter<"SeminaryInstructor"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -473,6 +489,8 @@ export type SeminaryInstructorOrderByWithRelationInput = {
   rating?: Prisma.SortOrder
   rankingClassification?: Prisma.SortOrder
   award?: Prisma.SortOrder
+  inviteTokenSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  inviteAcceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -511,6 +529,8 @@ export type SeminaryInstructorWhereUniqueInput = Prisma.AtLeast<{
   rating?: Prisma.StringFilter<"SeminaryInstructor"> | string
   rankingClassification?: Prisma.StringFilter<"SeminaryInstructor"> | string
   award?: Prisma.StringFilter<"SeminaryInstructor"> | string
+  inviteTokenSentAt?: Prisma.DateTimeNullableFilter<"SeminaryInstructor"> | Date | string | null
+  inviteAcceptedAt?: Prisma.DateTimeNullableFilter<"SeminaryInstructor"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -546,6 +566,8 @@ export type SeminaryInstructorOrderByWithAggregationInput = {
   rating?: Prisma.SortOrder
   rankingClassification?: Prisma.SortOrder
   award?: Prisma.SortOrder
+  inviteTokenSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  inviteAcceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SeminaryInstructorCountOrderByAggregateInput
@@ -588,6 +610,8 @@ export type SeminaryInstructorScalarWhereWithAggregatesInput = {
   rating?: Prisma.StringWithAggregatesFilter<"SeminaryInstructor"> | string
   rankingClassification?: Prisma.StringWithAggregatesFilter<"SeminaryInstructor"> | string
   award?: Prisma.StringWithAggregatesFilter<"SeminaryInstructor"> | string
+  inviteTokenSentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SeminaryInstructor"> | Date | string | null
+  inviteAcceptedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SeminaryInstructor"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryInstructor"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryInstructor"> | Date | string
 }
@@ -621,6 +645,8 @@ export type SeminaryInstructorCreateInput = {
   rating: string
   rankingClassification: string
   award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutSeminaryInstructorInput
@@ -656,6 +682,8 @@ export type SeminaryInstructorUncheckedCreateInput = {
   rating: string
   rankingClassification: string
   award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -689,6 +717,8 @@ export type SeminaryInstructorUpdateInput = {
   rating?: Prisma.StringFieldUpdateOperationsInput | string
   rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
   award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutSeminaryInstructorNestedInput
@@ -724,6 +754,8 @@ export type SeminaryInstructorUncheckedUpdateInput = {
   rating?: Prisma.StringFieldUpdateOperationsInput | string
   rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
   award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -758,6 +790,8 @@ export type SeminaryInstructorCreateManyInput = {
   rating: string
   rankingClassification: string
   award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -791,6 +825,8 @@ export type SeminaryInstructorUpdateManyMutationInput = {
   rating?: Prisma.StringFieldUpdateOperationsInput | string
   rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
   award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -825,6 +861,8 @@ export type SeminaryInstructorUncheckedUpdateManyInput = {
   rating?: Prisma.StringFieldUpdateOperationsInput | string
   rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
   award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -872,6 +910,8 @@ export type SeminaryInstructorCountOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   rankingClassification?: Prisma.SortOrder
   award?: Prisma.SortOrder
+  inviteTokenSentAt?: Prisma.SortOrder
+  inviteAcceptedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -914,6 +954,8 @@ export type SeminaryInstructorMaxOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   rankingClassification?: Prisma.SortOrder
   award?: Prisma.SortOrder
+  inviteTokenSentAt?: Prisma.SortOrder
+  inviteAcceptedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -945,6 +987,8 @@ export type SeminaryInstructorMinOrderByAggregateInput = {
   rating?: Prisma.SortOrder
   rankingClassification?: Prisma.SortOrder
   award?: Prisma.SortOrder
+  inviteTokenSentAt?: Prisma.SortOrder
+  inviteAcceptedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1064,6 +1108,8 @@ export type SeminaryInstructorCreateWithoutUserInput = {
   rating: string
   rankingClassification: string
   award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1097,6 +1143,8 @@ export type SeminaryInstructorUncheckedCreateWithoutUserInput = {
   rating: string
   rankingClassification: string
   award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1146,6 +1194,8 @@ export type SeminaryInstructorUpdateWithoutUserInput = {
   rating?: Prisma.StringFieldUpdateOperationsInput | string
   rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
   award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1179,6 +1229,8 @@ export type SeminaryInstructorUncheckedUpdateWithoutUserInput = {
   rating?: Prisma.StringFieldUpdateOperationsInput | string
   rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
   award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1215,6 +1267,8 @@ export type SeminaryInstructorSelect<ExtArgs extends runtime.Types.Extensions.In
   rating?: boolean
   rankingClassification?: boolean
   award?: boolean
+  inviteTokenSentAt?: boolean
+  inviteAcceptedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
@@ -1250,6 +1304,8 @@ export type SeminaryInstructorSelectCreateManyAndReturn<ExtArgs extends runtime.
   rating?: boolean
   rankingClassification?: boolean
   award?: boolean
+  inviteTokenSentAt?: boolean
+  inviteAcceptedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
@@ -1285,6 +1341,8 @@ export type SeminaryInstructorSelectUpdateManyAndReturn<ExtArgs extends runtime.
   rating?: boolean
   rankingClassification?: boolean
   award?: boolean
+  inviteTokenSentAt?: boolean
+  inviteAcceptedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
@@ -1320,11 +1378,13 @@ export type SeminaryInstructorSelectScalar = {
   rating?: boolean
   rankingClassification?: boolean
   award?: boolean
+  inviteTokenSentAt?: boolean
+  inviteAcceptedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SeminaryInstructorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "facultyId" | "name" | "professionalTitle" | "email" | "contactNumber" | "teachingPrograms" | "rank" | "status" | "loadUnits" | "biography" | "educationalBackground" | "areasOfExpertise" | "credentials" | "formalPhotoUrl" | "isFilipinoCitizen" | "highSchoolGraduateOrEquivalent" | "ministerialExperienceYears" | "submissionDeadline" | "attendanceParticipation" | "leadershipCharacter" | "ministryCommunityEngagement" | "knowledgeSkillsAssessment" | "professionalConductEthics" | "totalScore" | "rating" | "rankingClassification" | "award" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryInstructor"]>
+export type SeminaryInstructorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "facultyId" | "name" | "professionalTitle" | "email" | "contactNumber" | "teachingPrograms" | "rank" | "status" | "loadUnits" | "biography" | "educationalBackground" | "areasOfExpertise" | "credentials" | "formalPhotoUrl" | "isFilipinoCitizen" | "highSchoolGraduateOrEquivalent" | "ministerialExperienceYears" | "submissionDeadline" | "attendanceParticipation" | "leadershipCharacter" | "ministryCommunityEngagement" | "knowledgeSkillsAssessment" | "professionalConductEthics" | "totalScore" | "rating" | "rankingClassification" | "award" | "inviteTokenSentAt" | "inviteAcceptedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryInstructor"]>
 export type SeminaryInstructorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
 }
@@ -1370,6 +1430,8 @@ export type $SeminaryInstructorPayload<ExtArgs extends runtime.Types.Extensions.
     rating: string
     rankingClassification: string
     award: string
+    inviteTokenSentAt: Date | null
+    inviteAcceptedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["seminaryInstructor"]>
@@ -1825,6 +1887,8 @@ export interface SeminaryInstructorFieldRefs {
   readonly rating: Prisma.FieldRef<"SeminaryInstructor", 'String'>
   readonly rankingClassification: Prisma.FieldRef<"SeminaryInstructor", 'String'>
   readonly award: Prisma.FieldRef<"SeminaryInstructor", 'String'>
+  readonly inviteTokenSentAt: Prisma.FieldRef<"SeminaryInstructor", 'DateTime'>
+  readonly inviteAcceptedAt: Prisma.FieldRef<"SeminaryInstructor", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"SeminaryInstructor", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SeminaryInstructor", 'DateTime'>
 }

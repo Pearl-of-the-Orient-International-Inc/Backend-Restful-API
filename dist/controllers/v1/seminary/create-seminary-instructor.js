@@ -13,18 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSeminaryInstructor = void 0;
-const crypto_1 = require("crypto");
 const http_codes_1 = require("../../../common/http-codes");
+const crypto_1 = require("crypto");
 const client_1 = require("../../../generated/prisma/client");
 const enums_1 = require("../../../generated/prisma/enums");
 const password_hash_1 = require("../../../lib/password-hash");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
-const mailers_1 = require("../../../mailers");
-const seminary_instructor_account_1 = require("../../../mailers/templates/seminary-instructor-account");
 const config_1 = __importDefault(require("../../../config"));
 const instructor_shared_1 = require("./instructor-shared");
-const generateTemporaryPassword = () => `Potsci!${(0, crypto_1.randomBytes)(5).toString('hex').toUpperCase()}9`;
+const instructor_invitation_1 = require("./instructor-invitation");
 const createSeminaryInstructor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
@@ -34,16 +32,15 @@ const createSeminaryInstructor = (req, res) => __awaiter(void 0, void 0, void 0,
             ? (0, instructor_shared_1.normalizeInstructorStatus)(body.status)
             : enums_1.SeminaryInstructorStatus.ACTIVE;
         const teachingPrograms = body.teachingPrograms.map(instructor_shared_1.normalizeInstructorProgram);
-        const temporaryPassword = generateTemporaryPassword();
-        const hashedPassword = yield (0, password_hash_1.hashValue)(temporaryPassword);
+        const hashedPassword = yield (0, password_hash_1.hashValue)(`Pending!${(0, crypto_1.randomUUID)()}9`);
         const instructor = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
             var _a;
             const instructorId = yield (0, instructor_shared_1.getNextFacultyId)(tx);
             const user = yield tx.user.create({
                 data: {
-                    accountStatus: enums_1.UserAccountStatus.ACTIVE,
+                    accountStatus: enums_1.UserAccountStatus.PENDING,
                     email: instructorId,
-                    isEmailVerified: true,
+                    isEmailVerified: false,
                     name: body.name,
                     password: hashedPassword,
                     role: enums_1.UserType.INSTRUCTOR,
@@ -83,22 +80,12 @@ const createSeminaryInstructor = (req, res) => __awaiter(void 0, void 0, void 0,
                 },
             });
         }));
-        const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: body.email }, (0, seminary_instructor_account_1.seminaryInstructorAccountTemplate)({
-            instructorId: instructor.facultyId,
-            name: instructor.name,
-            temporaryPassword,
-        })));
-        if (!emailResult.success) {
-            winston_1.logger.warn('Instructor account created but credentials email failed', {
-                email: body.email,
-                instructorId: instructor.facultyId,
-            });
-        }
+        const emailSent = yield (0, instructor_invitation_1.sendInstructorInvitation)(instructor);
         res.status(http_codes_1.HTTPSTATUS.CREATED).json({
             code: 'CREATED',
-            message: emailResult.success
-                ? 'Seminary instructor created successfully'
-                : 'Seminary instructor created successfully, but credentials email failed to send',
+            message: emailSent
+                ? 'Seminary instructor created and invitation sent successfully'
+                : 'Seminary instructor created, but invitation email failed to send',
             data: (0, instructor_shared_1.toInstructorResponse)(instructor),
         });
     }

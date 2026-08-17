@@ -411,6 +411,11 @@ export const ModelName = {
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
   SeminaryCourse: 'SeminaryCourse',
+  SeminaryStudyMaterial: 'SeminaryStudyMaterial',
+  SeminaryAssignment: 'SeminaryAssignment',
+  SeminaryExamination: 'SeminaryExamination',
+  SeminaryGradeRecord: 'SeminaryGradeRecord',
+  SeminaryStudentNotification: 'SeminaryStudentNotification',
   SeminaryAcademicYear: 'SeminaryAcademicYear',
   SeminaryInstructor: 'SeminaryInstructor',
   SeminaryGradeConfiguration: 'SeminaryGradeConfiguration',
@@ -451,7 +456,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2450,6 +2455,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SeminaryCourseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SeminaryCourseCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryStudyMaterial: {
+      payload: Prisma.$SeminaryStudyMaterialPayload<ExtArgs>
+      fields: Prisma.SeminaryStudyMaterialFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryStudyMaterialFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryStudyMaterialFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryStudyMaterialFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryStudyMaterialFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryStudyMaterialFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryStudyMaterialCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryStudyMaterialCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryStudyMaterialCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryStudyMaterialDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>
+        }
+        update: {
+          args: Prisma.SeminaryStudyMaterialUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryStudyMaterialDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryStudyMaterialUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryStudyMaterialUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryStudyMaterialUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudyMaterialPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryStudyMaterialAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryStudyMaterial>
+        }
+        groupBy: {
+          args: Prisma.SeminaryStudyMaterialGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryStudyMaterialGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryStudyMaterialCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryStudyMaterialCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryAssignment: {
+      payload: Prisma.$SeminaryAssignmentPayload<ExtArgs>
+      fields: Prisma.SeminaryAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryAssignmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>
+        }
+        update: {
+          args: Prisma.SeminaryAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryAssignmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryAssignment>
+        }
+        groupBy: {
+          args: Prisma.SeminaryAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAssignmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryExamination: {
+      payload: Prisma.$SeminaryExaminationPayload<ExtArgs>
+      fields: Prisma.SeminaryExaminationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryExaminationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryExaminationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryExaminationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryExaminationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryExaminationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryExaminationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryExaminationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryExaminationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryExaminationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>
+        }
+        update: {
+          args: Prisma.SeminaryExaminationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryExaminationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryExaminationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryExaminationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryExaminationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryExaminationPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryExaminationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryExamination>
+        }
+        groupBy: {
+          args: Prisma.SeminaryExaminationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryExaminationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryExaminationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryExaminationCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryGradeRecord: {
+      payload: Prisma.$SeminaryGradeRecordPayload<ExtArgs>
+      fields: Prisma.SeminaryGradeRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryGradeRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryGradeRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryGradeRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryGradeRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryGradeRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryGradeRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryGradeRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryGradeRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryGradeRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>
+        }
+        update: {
+          args: Prisma.SeminaryGradeRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryGradeRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryGradeRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryGradeRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryGradeRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryGradeRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryGradeRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryGradeRecord>
+        }
+        groupBy: {
+          args: Prisma.SeminaryGradeRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryGradeRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryGradeRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryGradeRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryStudentNotification: {
+      payload: Prisma.$SeminaryStudentNotificationPayload<ExtArgs>
+      fields: Prisma.SeminaryStudentNotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryStudentNotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryStudentNotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryStudentNotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryStudentNotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryStudentNotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryStudentNotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryStudentNotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryStudentNotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryStudentNotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>
+        }
+        update: {
+          args: Prisma.SeminaryStudentNotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryStudentNotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryStudentNotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryStudentNotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryStudentNotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryStudentNotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryStudentNotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryStudentNotification>
+        }
+        groupBy: {
+          args: Prisma.SeminaryStudentNotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryStudentNotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryStudentNotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryStudentNotificationCountAggregateOutputType> | number
         }
       }
     }
@@ -4821,6 +5196,7 @@ export const SeminaryCourseScalarFieldEnum = {
   program: 'program',
   units: 'units',
   modality: 'modality',
+  subjects: 'subjects',
   status: 'status',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
@@ -4828,6 +5204,124 @@ export const SeminaryCourseScalarFieldEnum = {
 } as const
 
 export type SeminaryCourseScalarFieldEnum = (typeof SeminaryCourseScalarFieldEnum)[keyof typeof SeminaryCourseScalarFieldEnum]
+
+
+export const SeminaryStudyMaterialScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  subtitle: 'subtitle',
+  subject: 'subject',
+  type: 'type',
+  status: 'status',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  downloads: 'downloads',
+  uploadedByName: 'uploadedByName',
+  uploadedByRole: 'uploadedByRole',
+  uploadedByUserId: 'uploadedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryStudyMaterialScalarFieldEnum = (typeof SeminaryStudyMaterialScalarFieldEnum)[keyof typeof SeminaryStudyMaterialScalarFieldEnum]
+
+
+export const SeminaryAssignmentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  subject: 'subject',
+  courseId: 'courseId',
+  courseName: 'courseName',
+  courseCode: 'courseCode',
+  instructorUserId: 'instructorUserId',
+  instructorName: 'instructorName',
+  assignmentType: 'assignmentType',
+  dueAt: 'dueAt',
+  status: 'status',
+  totalMarks: 'totalMarks',
+  additionalInstructions: 'additionalInstructions',
+  allowLateSubmission: 'allowLateSubmission',
+  lateSubmissionDeadline: 'lateSubmissionDeadline',
+  notifyStudents: 'notifyStudents',
+  attachmentLabel: 'attachmentLabel',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAssignmentScalarFieldEnum = (typeof SeminaryAssignmentScalarFieldEnum)[keyof typeof SeminaryAssignmentScalarFieldEnum]
+
+
+export const SeminaryExaminationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  coverage: 'coverage',
+  subject: 'subject',
+  courseId: 'courseId',
+  courseName: 'courseName',
+  courseCode: 'courseCode',
+  instructorUserId: 'instructorUserId',
+  instructorName: 'instructorName',
+  examType: 'examType',
+  scheduledAt: 'scheduledAt',
+  durationMinutes: 'durationMinutes',
+  status: 'status',
+  totalPoints: 'totalPoints',
+  passingScore: 'passingScore',
+  instructions: 'instructions',
+  randomizeQuestions: 'randomizeQuestions',
+  showResults: 'showResults',
+  questions: 'questions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryExaminationScalarFieldEnum = (typeof SeminaryExaminationScalarFieldEnum)[keyof typeof SeminaryExaminationScalarFieldEnum]
+
+
+export const SeminaryGradeRecordScalarFieldEnum = {
+  id: 'id',
+  recordNumber: 'recordNumber',
+  studentApplicationId: 'studentApplicationId',
+  studentId: 'studentId',
+  studentName: 'studentName',
+  program: 'program',
+  programLevel: 'programLevel',
+  subject: 'subject',
+  courseId: 'courseId',
+  courseTitle: 'courseTitle',
+  courseCode: 'courseCode',
+  instructorUserId: 'instructorUserId',
+  instructorName: 'instructorName',
+  term: 'term',
+  finalGrade: 'finalGrade',
+  remarks: 'remarks',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryGradeRecordScalarFieldEnum = (typeof SeminaryGradeRecordScalarFieldEnum)[keyof typeof SeminaryGradeRecordScalarFieldEnum]
+
+
+export const SeminaryStudentNotificationScalarFieldEnum = {
+  id: 'id',
+  studentApplicationId: 'studentApplicationId',
+  studentId: 'studentId',
+  studentName: 'studentName',
+  studentEmail: 'studentEmail',
+  title: 'title',
+  message: 'message',
+  type: 'type',
+  assignmentId: 'assignmentId',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SeminaryStudentNotificationScalarFieldEnum = (typeof SeminaryStudentNotificationScalarFieldEnum)[keyof typeof SeminaryStudentNotificationScalarFieldEnum]
 
 
 export const SeminaryAcademicYearScalarFieldEnum = {
@@ -4875,6 +5369,8 @@ export const SeminaryInstructorScalarFieldEnum = {
   rating: 'rating',
   rankingClassification: 'rankingClassification',
   award: 'award',
+  inviteTokenSentAt: 'inviteTokenSentAt',
+  inviteAcceptedAt: 'inviteAcceptedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4893,6 +5389,7 @@ export const SeminaryGradeConfigurationScalarFieldEnum = {
   autoPublishApproved: 'autoPublishApproved',
   showConditionalRemark: 'showConditionalRemark',
   gradeScale: 'gradeScale',
+  criteriaWeights: 'criteriaWeights',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5875,6 +6372,104 @@ export type ListEnumSeminaryCourseStatusFieldRefInput<$PrismaModel> = FieldRefIn
 
 
 /**
+ * Reference to a field of type 'SeminaryStudyMaterialType'
+ */
+export type EnumSeminaryStudyMaterialTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudyMaterialType'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryStudyMaterialType[]'
+ */
+export type ListEnumSeminaryStudyMaterialTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudyMaterialType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryStudyMaterialStatus'
+ */
+export type EnumSeminaryStudyMaterialStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudyMaterialStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryStudyMaterialStatus[]'
+ */
+export type ListEnumSeminaryStudyMaterialStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudyMaterialStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAssignmentStatus'
+ */
+export type EnumSeminaryAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAssignmentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAssignmentStatus[]'
+ */
+export type ListEnumSeminaryAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAssignmentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryExaminationStatus'
+ */
+export type EnumSeminaryExaminationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryExaminationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryExaminationStatus[]'
+ */
+export type ListEnumSeminaryExaminationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryExaminationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryGradeRecordRemark'
+ */
+export type EnumSeminaryGradeRecordRemarkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryGradeRecordRemark'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryGradeRecordRemark[]'
+ */
+export type ListEnumSeminaryGradeRecordRemarkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryGradeRecordRemark[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryGradeRecordStatus'
+ */
+export type EnumSeminaryGradeRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryGradeRecordStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryGradeRecordStatus[]'
+ */
+export type ListEnumSeminaryGradeRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryGradeRecordStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryStudentNotificationType'
+ */
+export type EnumSeminaryStudentNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudentNotificationType'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryStudentNotificationType[]'
+ */
+export type ListEnumSeminaryStudentNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryStudentNotificationType[]'>
+    
+
+
+/**
  * Reference to a field of type 'SeminaryAcademicYearSession'
  */
 export type EnumSeminaryAcademicYearSessionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAcademicYearSession'>
@@ -6373,6 +6968,11 @@ export type GlobalOmitConfig = {
   seminaryRequirements?: Prisma.SeminaryRequirementsOmit
   seminaryPayment?: Prisma.SeminaryPaymentOmit
   seminaryCourse?: Prisma.SeminaryCourseOmit
+  seminaryStudyMaterial?: Prisma.SeminaryStudyMaterialOmit
+  seminaryAssignment?: Prisma.SeminaryAssignmentOmit
+  seminaryExamination?: Prisma.SeminaryExaminationOmit
+  seminaryGradeRecord?: Prisma.SeminaryGradeRecordOmit
+  seminaryStudentNotification?: Prisma.SeminaryStudentNotificationOmit
   seminaryAcademicYear?: Prisma.SeminaryAcademicYearOmit
   seminaryInstructor?: Prisma.SeminaryInstructorOmit
   seminaryGradeConfiguration?: Prisma.SeminaryGradeConfigurationOmit

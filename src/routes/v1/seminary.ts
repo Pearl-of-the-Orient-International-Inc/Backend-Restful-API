@@ -7,6 +7,7 @@ import { Router } from 'express';
  * Controllers
  */
 import { getCurrentSeminaryApplication } from '@/controllers/v1/seminary/get-current-seminary-application';
+import { getCurrentSeminaryStudentNotifications } from '@/controllers/v1/seminary/get-current-seminary-student-notifications';
 import { upsertCurrentSeminaryApplication } from '@/controllers/v1/seminary/upsert-current-seminary-application';
 import { getAllSeminaryApplications } from '@/controllers/v1/seminary/get-all-seminary-applications';
 import { getSeminaryApplicationById } from '@/controllers/v1/seminary/get-seminary-application-by-id';
@@ -15,36 +16,61 @@ import { bulkImportSeminaryStudents } from '@/controllers/v1/seminary/bulk-impor
 import { bulkDeleteSeminaryStudents } from '@/controllers/v1/seminary/bulk-delete-seminary-students';
 import { createSeminaryAcademicYear } from '@/controllers/v1/seminary/create-seminary-academic-year';
 import { createSeminaryApplication } from '@/controllers/v1/seminary/create-seminary-application';
+import { createSeminaryAssignment } from '@/controllers/v1/seminary/create-seminary-assignment';
 import { createSeminaryCourse } from '@/controllers/v1/seminary/create-seminary-course';
+import { createSeminaryExamination } from '@/controllers/v1/seminary/create-seminary-examination';
+import { createSeminaryGradeRecord } from '@/controllers/v1/seminary/create-seminary-grade-record';
 import { createSeminaryInstructor } from '@/controllers/v1/seminary/create-seminary-instructor';
+import { createSeminaryStudyMaterial } from '@/controllers/v1/seminary/create-seminary-study-material';
 import { createSeminaryStudent } from '@/controllers/v1/seminary/create-seminary-student';
 import { deleteSeminaryAcademicYear } from '@/controllers/v1/seminary/delete-seminary-academic-year';
+import { deleteSeminaryAssignment } from '@/controllers/v1/seminary/delete-seminary-assignment';
 import { deleteSeminaryCourse } from '@/controllers/v1/seminary/delete-seminary-course';
+import { deleteSeminaryExamination } from '@/controllers/v1/seminary/delete-seminary-examination';
+import { deleteSeminaryGradeRecord } from '@/controllers/v1/seminary/delete-seminary-grade-record';
 import { deleteSeminaryInstructor } from '@/controllers/v1/seminary/delete-seminary-instructor';
+import { deleteSeminaryStudyMaterial } from '@/controllers/v1/seminary/delete-seminary-study-material';
 import { deleteSeminaryStudent } from '@/controllers/v1/seminary/delete-seminary-student';
 import { generateSeminaryCredentialDocument } from '@/controllers/v1/seminary/generate-seminary-credential-document';
 import { getAllSeminaryAcademicYears } from '@/controllers/v1/seminary/get-all-seminary-academic-years';
+import { getAllSeminaryAssignments } from '@/controllers/v1/seminary/get-all-seminary-assignments';
 import { getAllSeminaryCourses } from '@/controllers/v1/seminary/get-all-seminary-courses';
+import { getAllSeminaryExaminations } from '@/controllers/v1/seminary/get-all-seminary-examinations';
+import { getAllSeminaryGradeRecords } from '@/controllers/v1/seminary/get-all-seminary-grade-records';
 import { getAllSeminaryFeeCollections } from '@/controllers/v1/seminary/get-all-seminary-fee-collections';
 import { getAllSeminaryInstructors } from '@/controllers/v1/seminary/get-all-seminary-instructors';
+import { getAllSeminaryStudyMaterials } from '@/controllers/v1/seminary/get-all-seminary-study-materials';
 import { getAllSeminaryStudents } from '@/controllers/v1/seminary/get-all-seminary-students';
 import { getSeminaryFeeConfiguration } from '@/controllers/v1/seminary/get-seminary-fee-configuration';
 import { getSeminaryGradeConfiguration } from '@/controllers/v1/seminary/get-seminary-grade-configuration';
+import { getSeminaryGradeRecord } from '@/controllers/v1/seminary/get-seminary-grade-record';
 import { getSeminaryCredentialDocumentByNumber } from '@/controllers/v1/seminary/get-seminary-credential-document-by-number';
 import { getSeminaryCredentialDocuments } from '@/controllers/v1/seminary/get-seminary-credential-documents';
+import { getSeminaryExaminationById } from '@/controllers/v1/seminary/get-seminary-examination-by-id';
 import { getSeminaryInstructorById } from '@/controllers/v1/seminary/get-seminary-instructor-by-id';
+import {
+  acceptSeminaryInstructorInvite,
+  inviteSeminaryInstructor,
+} from '@/controllers/v1/seminary/instructor-invitation';
 import { getSeminaryStudentById } from '@/controllers/v1/seminary/get-seminary-student-by-id';
 import { updateSeminaryAcademicYear } from '@/controllers/v1/seminary/update-seminary-academic-year';
 import { updateSeminaryAcademicYearSession } from '@/controllers/v1/seminary/update-seminary-academic-year-session';
 import { updateSeminaryAcademicYearStatus } from '@/controllers/v1/seminary/update-seminary-academic-year-status';
+import { updateSeminaryAssignment } from '@/controllers/v1/seminary/update-seminary-assignment';
+import { updateSeminaryAssignmentStatus } from '@/controllers/v1/seminary/update-seminary-assignment-status';
 import { updateSeminaryCourse } from '@/controllers/v1/seminary/update-seminary-course';
 import { updateSeminaryCourseStatus } from '@/controllers/v1/seminary/update-seminary-course-status';
+import { updateSeminaryExamination } from '@/controllers/v1/seminary/update-seminary-examination';
+import { updateSeminaryExaminationStatus } from '@/controllers/v1/seminary/update-seminary-examination-status';
+import { updateSeminaryGradeRecord } from '@/controllers/v1/seminary/update-seminary-grade-record';
+import { updateSeminaryGradeRecordStatus } from '@/controllers/v1/seminary/update-seminary-grade-record-status';
 import { updateSeminaryFeeConfiguration } from '@/controllers/v1/seminary/update-seminary-fee-configuration';
 import { updateSeminaryFeeCollectionStatus } from '@/controllers/v1/seminary/update-seminary-fee-collection-status';
 import { updateSeminaryFeeCollectionPayment } from '@/controllers/v1/seminary/update-seminary-fee-collection-payment';
 import { updateSeminaryGradeConfiguration } from '@/controllers/v1/seminary/update-seminary-grade-configuration';
 import { updateSeminaryInstructor } from '@/controllers/v1/seminary/update-seminary-instructor';
 import { updateSeminaryInstructorStatus } from '@/controllers/v1/seminary/update-seminary-instructor-status';
+import { updateSeminaryStudyMaterial } from '@/controllers/v1/seminary/update-seminary-study-material';
 import { updateSeminaryStudent } from '@/controllers/v1/seminary/update-seminary-student';
 import { verifySeminaryCredentialDocument } from '@/controllers/v1/seminary/verify-seminary-credential-document';
 
@@ -62,38 +88,61 @@ import {
   bulkImportSeminaryStudentsSchema,
   createSeminaryAcademicYearSchema,
   createSeminaryApplicationSchema,
+  createSeminaryAssignmentSchema,
   createSeminaryCourseSchema,
+  createSeminaryExaminationSchema,
+  createSeminaryGradeRecordSchema,
   createSeminaryInstructorSchema,
+  createSeminaryStudyMaterialSchema,
+  acceptSeminaryInstructorInviteSchema,
   bulkDeleteSeminaryStudentsSchema,
   createSeminaryStudentSchema,
   deleteSeminaryAcademicYearSchema,
+  deleteSeminaryAssignmentSchema,
   deleteSeminaryCourseSchema,
+  deleteSeminaryExaminationSchema,
+  deleteSeminaryGradeRecordSchema,
   deleteSeminaryInstructorSchema,
+  deleteSeminaryStudyMaterialSchema,
   deleteSeminaryStudentSchema,
   generateSeminaryCredentialDocumentSchema,
   getAllSeminaryAcademicYearsSchema,
+  getAllSeminaryAssignmentsSchema,
   getAllSeminaryApplicationsSchema,
   getAllSeminaryCoursesSchema,
+  getAllSeminaryExaminationsSchema,
+  getAllSeminaryGradeRecordsSchema,
   getAllSeminaryFeeCollectionsSchema,
   getAllSeminaryInstructorsSchema,
+  getAllSeminaryStudyMaterialsSchema,
   getAllSeminaryStudentsSchema,
   getSeminaryCredentialDocumentByNumberSchema,
   getSeminaryCredentialDocumentsSchema,
   getSeminaryInstructorByIdSchema,
+  getSeminaryExaminationByIdSchema,
+  getSeminaryGradeRecordSchema,
+  inviteSeminaryInstructorSchema,
   getSeminaryApplicationByIdSchema,
   getSeminaryStudentByIdSchema,
   updateSeminaryApplicationStatusSchema,
   updateSeminaryAcademicYearSchema,
   updateSeminaryAcademicYearSessionSchema,
   updateSeminaryAcademicYearStatusSchema,
+  updateSeminaryAssignmentSchema,
+  updateSeminaryAssignmentStatusSchema,
   updateSeminaryCourseSchema,
   updateSeminaryCourseStatusSchema,
+  updateSeminaryExaminationSchema,
+  updateSeminaryExaminationStatusSchema,
+  updateSeminaryGradeRecordSchema,
+  updateSeminaryGradeRecordStatusSchema,
   updateSeminaryFeeConfigurationSchema,
   updateSeminaryFeeCollectionStatusSchema,
   updateSeminaryFeeCollectionPaymentSchema,
   updateSeminaryGradeConfigurationSchema,
   updateSeminaryInstructorSchema,
   updateSeminaryInstructorStatusSchema,
+  updateSeminaryStudyMaterialSchema,
   updateSeminaryStudentSchema,
   upsertCurrentSeminaryApplicationSchema,
   verifySeminaryCredentialDocumentSchema,
@@ -106,6 +155,22 @@ const seminaryStudentAdminAccess = config.BYPASS_SEMINARY_STUDENT_AUTH
 const seminaryStudentReadAccess = config.BYPASS_SEMINARY_STUDENT_AUTH
   ? []
   : [authenticate, authorize([UserType.ADMIN, UserType.INSTRUCTOR])];
+const seminaryStudyMaterialAccess = [
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR]),
+];
+const seminaryAssignmentAccess = [
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR]),
+];
+const seminaryExaminationAccess = [
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR]),
+];
+const seminaryGradeRecordAccess = [
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR]),
+];
 
 router.get(
   '/current/application',
@@ -113,6 +178,13 @@ router.get(
   authenticate,
   authorize([UserType.MEMBER]),
   getCurrentSeminaryApplication,
+);
+
+router.get(
+  '/current/student-notifications',
+  expressRateLimit('basic'),
+  authenticate,
+  getCurrentSeminaryStudentNotifications,
 );
 
 router.put(
@@ -136,6 +208,15 @@ router.use(
   expressRateLimit('basic'),
   createUploadthingExpressHandler({
     maxFileSize: '8MB',
+    maxFileCount: 1,
+  }),
+);
+
+router.use(
+  '/study-materials/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '32MB',
     maxFileCount: 1,
   }),
 );
@@ -201,11 +282,26 @@ router.get(
 );
 
 router.post(
+  '/instructors/accept-invite',
+  expressRateLimit('passwordReset'),
+  validate(acceptSeminaryInstructorInviteSchema),
+  acceptSeminaryInstructorInvite,
+);
+
+router.post(
   '/instructors',
   expressRateLimit('basic'),
   ...seminaryStudentAdminAccess,
   validate(createSeminaryInstructorSchema),
   createSeminaryInstructor,
+);
+
+router.post(
+  '/instructors/:id/invite',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(inviteSeminaryInstructorSchema),
+  inviteSeminaryInstructor,
 );
 
 router.get(
@@ -275,7 +371,7 @@ router.delete(
 router.get(
   '/courses',
   expressRateLimit('basic'),
-  ...seminaryStudentAdminAccess,
+  ...seminaryStudentReadAccess,
   validate(getAllSeminaryCoursesSchema),
   getAllSeminaryCourses,
 );
@@ -310,6 +406,126 @@ router.delete(
   ...seminaryStudentAdminAccess,
   validate(deleteSeminaryCourseSchema),
   deleteSeminaryCourse,
+);
+
+router.get(
+  '/study-materials',
+  expressRateLimit('basic'),
+  ...seminaryStudyMaterialAccess,
+  validate(getAllSeminaryStudyMaterialsSchema),
+  getAllSeminaryStudyMaterials,
+);
+
+router.post(
+  '/study-materials',
+  expressRateLimit('basic'),
+  ...seminaryStudyMaterialAccess,
+  validate(createSeminaryStudyMaterialSchema),
+  createSeminaryStudyMaterial,
+);
+
+router.put(
+  '/study-materials/:id',
+  expressRateLimit('basic'),
+  ...seminaryStudyMaterialAccess,
+  validate(updateSeminaryStudyMaterialSchema),
+  updateSeminaryStudyMaterial,
+);
+
+router.delete(
+  '/study-materials/:id',
+  expressRateLimit('basic'),
+  ...seminaryStudyMaterialAccess,
+  validate(deleteSeminaryStudyMaterialSchema),
+  deleteSeminaryStudyMaterial,
+);
+
+router.get(
+  '/assignments',
+  expressRateLimit('basic'),
+  ...seminaryAssignmentAccess,
+  validate(getAllSeminaryAssignmentsSchema),
+  getAllSeminaryAssignments,
+);
+
+router.post(
+  '/assignments',
+  expressRateLimit('basic'),
+  ...seminaryAssignmentAccess,
+  validate(createSeminaryAssignmentSchema),
+  createSeminaryAssignment,
+);
+
+router.put(
+  '/assignments/:id',
+  expressRateLimit('basic'),
+  ...seminaryAssignmentAccess,
+  validate(updateSeminaryAssignmentSchema),
+  updateSeminaryAssignment,
+);
+
+router.patch(
+  '/assignments/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryAssignmentAccess,
+  validate(updateSeminaryAssignmentStatusSchema),
+  updateSeminaryAssignmentStatus,
+);
+
+router.delete(
+  '/assignments/:id',
+  expressRateLimit('basic'),
+  ...seminaryAssignmentAccess,
+  validate(deleteSeminaryAssignmentSchema),
+  deleteSeminaryAssignment,
+);
+
+router.get(
+  '/examinations',
+  expressRateLimit('basic'),
+  ...seminaryExaminationAccess,
+  validate(getAllSeminaryExaminationsSchema),
+  getAllSeminaryExaminations,
+);
+
+router.post(
+  '/examinations',
+  expressRateLimit('basic'),
+  ...seminaryExaminationAccess,
+  validate(createSeminaryExaminationSchema),
+  createSeminaryExamination,
+);
+
+router.get(
+  '/examinations/:id',
+  expressRateLimit('basic'),
+  ...seminaryExaminationAccess,
+  validate(getSeminaryExaminationByIdSchema),
+  getSeminaryExaminationById,
+);
+
+router.put(
+  '/examinations/:id',
+  expressRateLimit('basic'),
+  ...seminaryExaminationAccess,
+  validate(updateSeminaryExaminationSchema),
+  updateSeminaryExamination,
+);
+
+router.patch(
+  '/examinations/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryExaminationAccess,
+  validate(updateSeminaryExaminationStatusSchema),
+  updateSeminaryExaminationStatus,
+);
+
+router.delete(
+  '/examinations/:id',
+  expressRateLimit('basic'),
+  ...seminaryExaminationAccess,
+  validate(deleteSeminaryExaminationSchema),
+  deleteSeminaryExamination,
 );
 
 router.get(
@@ -373,6 +589,54 @@ router.put(
   ...seminaryStudentAdminAccess,
   validate(updateSeminaryGradeConfigurationSchema),
   updateSeminaryGradeConfiguration,
+);
+
+router.get(
+  '/grade-records',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(getAllSeminaryGradeRecordsSchema),
+  getAllSeminaryGradeRecords,
+);
+
+router.post(
+  '/grade-records',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(createSeminaryGradeRecordSchema),
+  createSeminaryGradeRecord,
+);
+
+router.get(
+  '/grade-records/:id',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(getSeminaryGradeRecordSchema),
+  getSeminaryGradeRecord,
+);
+
+router.put(
+  '/grade-records/:id',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(updateSeminaryGradeRecordSchema),
+  updateSeminaryGradeRecord,
+);
+
+router.patch(
+  '/grade-records/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(updateSeminaryGradeRecordStatusSchema),
+  updateSeminaryGradeRecordStatus,
+);
+
+router.delete(
+  '/grade-records/:id',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(deleteSeminaryGradeRecordSchema),
+  deleteSeminaryGradeRecord,
 );
 
 router.get(

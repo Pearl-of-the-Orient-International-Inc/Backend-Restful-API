@@ -14,6 +14,12 @@ export const defaultGradeScale = [
   { equivalent: '5.00', percentageRange: 'Below 75', remarks: 'Failed' },
 ];
 
+export const defaultCriteriaWeights = {
+  attendance: 20,
+  coursework: 40,
+  exam: 40,
+};
+
 export const defaultGradeConfiguration = {
   id: 'default',
   passingEquivalent: '2.50',
@@ -25,6 +31,7 @@ export const defaultGradeConfiguration = {
   autoPublishApproved: false,
   showConditionalRemark: true,
   gradeScale: defaultGradeScale,
+  criteriaWeights: defaultCriteriaWeights,
 } satisfies Prisma.SeminaryGradeConfigurationUncheckedCreateInput;
 
 export const buildGradeConfigurationUpdateData = (
@@ -53,6 +60,9 @@ export const buildGradeConfigurationUpdateData = (
     ? {}
     : { showConditionalRemark: body.showConditionalRemark }),
   ...(body.gradeScale === undefined ? {} : { gradeScale: body.gradeScale }),
+  ...(body.criteriaWeights === undefined
+    ? {}
+    : { criteriaWeights: body.criteriaWeights }),
 });
 
 export const buildGradeConfigurationCreateData = (
@@ -82,4 +92,7 @@ export const buildGradeConfigurationCreateData = (
     ? {}
     : { showConditionalRemark: body.showConditionalRemark }),
   ...(body.gradeScale === undefined ? {} : { gradeScale: body.gradeScale }),
+  ...(body.criteriaWeights === undefined
+    ? {}
+    : { criteriaWeights: body.criteriaWeights }),
 });

@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.deleteSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
+exports.deleteSeminaryInstructorSchema = exports.acceptSeminaryInstructorInviteSchema = exports.inviteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryGradeRecordSchema = exports.updateSeminaryGradeRecordStatusSchema = exports.updateSeminaryGradeRecordSchema = exports.getSeminaryGradeRecordSchema = exports.createSeminaryGradeRecordSchema = exports.getAllSeminaryGradeRecordsSchema = exports.deleteSeminaryExaminationSchema = exports.updateSeminaryExaminationStatusSchema = exports.updateSeminaryExaminationSchema = exports.createSeminaryExaminationSchema = exports.getSeminaryExaminationByIdSchema = exports.getAllSeminaryExaminationsSchema = exports.deleteSeminaryAssignmentSchema = exports.updateSeminaryAssignmentStatusSchema = exports.updateSeminaryAssignmentSchema = exports.createSeminaryAssignmentSchema = exports.getAllSeminaryAssignmentsSchema = exports.deleteSeminaryStudyMaterialSchema = exports.updateSeminaryStudyMaterialSchema = exports.createSeminaryStudyMaterialSchema = exports.getAllSeminaryStudyMaterialsSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.deleteSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
+exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
+const auth_1 = require("./auth");
 const optionalText = (max = 255) => zod_1.z.string().trim().max(max).optional();
 const seminaryStudentIdSchema = zod_1.z
     .string()
@@ -62,6 +64,40 @@ const courseModalitySchema = normalizeEnumValue(enums_1.SeminaryCourseModality, 
 const courseStatusSchema = normalizeEnumValue(enums_1.SeminaryCourseStatus, {
     Active: enums_1.SeminaryCourseStatus.ACTIVE,
     Inactive: enums_1.SeminaryCourseStatus.INACTIVE,
+});
+const studyMaterialTypeSchema = normalizeEnumValue(enums_1.SeminaryStudyMaterialType, {
+    Notes: enums_1.SeminaryStudyMaterialType.NOTES,
+    Presentation: enums_1.SeminaryStudyMaterialType.PRESENTATION,
+    Document: enums_1.SeminaryStudyMaterialType.DOCUMENT,
+    Chart: enums_1.SeminaryStudyMaterialType.CHART,
+    Archive: enums_1.SeminaryStudyMaterialType.ARCHIVE,
+});
+const studyMaterialStatusSchema = normalizeEnumValue(enums_1.SeminaryStudyMaterialStatus, {
+    Published: enums_1.SeminaryStudyMaterialStatus.PUBLISHED,
+    Draft: enums_1.SeminaryStudyMaterialStatus.DRAFT,
+});
+const assignmentStatusSchema = normalizeEnumValue(enums_1.SeminaryAssignmentStatus, {
+    Published: enums_1.SeminaryAssignmentStatus.PUBLISHED,
+    Draft: enums_1.SeminaryAssignmentStatus.DRAFT,
+    Scheduled: enums_1.SeminaryAssignmentStatus.SCHEDULED,
+});
+const examinationStatusSchema = normalizeEnumValue(enums_1.SeminaryExaminationStatus, {
+    Scheduled: enums_1.SeminaryExaminationStatus.SCHEDULED,
+    Ongoing: enums_1.SeminaryExaminationStatus.ONGOING,
+    Completed: enums_1.SeminaryExaminationStatus.COMPLETED,
+    Draft: enums_1.SeminaryExaminationStatus.DRAFT,
+});
+const gradeRecordStatusSchema = normalizeEnumValue(enums_1.SeminaryGradeRecordStatus, {
+    Complete: enums_1.SeminaryGradeRecordStatus.COMPLETE,
+    'Pending Review': enums_1.SeminaryGradeRecordStatus.PENDING_REVIEW,
+    'In Progress': enums_1.SeminaryGradeRecordStatus.IN_PROGRESS,
+    Incomplete: enums_1.SeminaryGradeRecordStatus.INCOMPLETE,
+});
+const gradeRecordRemarkSchema = normalizeEnumValue(enums_1.SeminaryGradeRecordRemark, {
+    Passed: enums_1.SeminaryGradeRecordRemark.PASSED,
+    Conditional: enums_1.SeminaryGradeRecordRemark.CONDITIONAL,
+    Failed: enums_1.SeminaryGradeRecordRemark.FAILED,
+    Ongoing: enums_1.SeminaryGradeRecordRemark.ONGOING,
 });
 const academicYearSessionSchema = normalizeEnumValue(enums_1.SeminaryAcademicYearSession, {
     Current: enums_1.SeminaryAcademicYearSession.CURRENT,
@@ -365,6 +401,20 @@ exports.getAllSeminaryStudentsSchema = zod_1.z.object({
     }),
 });
 const seminaryCourseIdSchema = zod_1.z.uuid();
+const seminaryCourseSubjectSchema = zod_1.z.object({
+    date: zod_1.z
+        .string()
+        .trim()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: 'date must be in YYYY-MM-DD format',
+    }),
+    subjectName: zod_1.z.string().trim().min(1).max(200),
+    units: zod_1.z.coerce.number().int().min(1).max(12),
+    startTime: zod_1.z.string().trim().min(1).max(20),
+    endTime: zod_1.z.string().trim().min(1).max(20),
+    professor: zod_1.z.string().trim().min(1).max(150),
+    modality: courseModalitySchema,
+});
 const seminaryCourseBodySchema = zod_1.z.object({
     courseName: zod_1.z.string().trim().min(1).max(200),
     courseCode: zod_1.z
@@ -374,10 +424,9 @@ const seminaryCourseBodySchema = zod_1.z.object({
         .max(40)
         .transform((value) => value.toUpperCase()),
     program: programLevelSchema,
-    units: zod_1.z.coerce.number().int().min(1).max(12),
-    modality: courseModalitySchema,
     status: courseStatusSchema.optional(),
     sortOrder: zod_1.z.coerce.number().int().min(0).optional(),
+    subjects: zod_1.z.array(seminaryCourseSubjectSchema).min(1).max(50),
 });
 exports.getAllSeminaryCoursesSchema = zod_1.z.object({
     query: zod_1.z.object({
@@ -419,6 +468,240 @@ exports.updateSeminaryCourseStatusSchema = zod_1.z.object({
 exports.deleteSeminaryCourseSchema = zod_1.z.object({
     params: zod_1.z.object({
         id: seminaryCourseIdSchema,
+    }),
+});
+const seminaryStudyMaterialIdSchema = zod_1.z.uuid();
+exports.getAllSeminaryStudyMaterialsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'page must be a positive integer',
+        }),
+        limit: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'limit must be a positive integer',
+        }),
+        search: optionalText(100),
+        subject: optionalText(200),
+        type: studyMaterialTypeSchema.optional(),
+        status: studyMaterialStatusSchema.optional(),
+    }),
+});
+exports.createSeminaryStudyMaterialSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        title: zod_1.z.string().trim().min(1).max(200),
+        subtitle: optionalText(500),
+        subject: zod_1.z.string().trim().min(1).max(200),
+        type: studyMaterialTypeSchema,
+        status: studyMaterialStatusSchema.optional(),
+        fileUrl: zod_1.z.url(),
+        fileName: zod_1.z.string().trim().min(1).max(255),
+        mimeType: optionalText(120),
+        fileSize: zod_1.z.coerce.number().int().min(0).optional(),
+    }),
+});
+exports.updateSeminaryStudyMaterialSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryStudyMaterialIdSchema,
+    }),
+    body: zod_1.z.object({
+        title: zod_1.z.string().trim().min(1).max(200),
+        subtitle: optionalText(500),
+        subject: zod_1.z.string().trim().min(1).max(200),
+        type: studyMaterialTypeSchema,
+        status: studyMaterialStatusSchema.optional(),
+    }),
+});
+exports.deleteSeminaryStudyMaterialSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryStudyMaterialIdSchema,
+    }),
+});
+const seminaryAssignmentIdSchema = zod_1.z.uuid();
+const seminaryAssignmentBodySchema = zod_1.z.object({
+    title: zod_1.z.string().trim().min(1).max(200),
+    description: zod_1.z.string().trim().min(1).max(4000),
+    subject: zod_1.z.string().trim().min(1).max(200),
+    assignmentType: zod_1.z.string().trim().min(1).max(100),
+    dueAt: zod_1.z.coerce.date(),
+    status: assignmentStatusSchema.optional(),
+    totalMarks: zod_1.z.coerce.number().int().min(1).max(10000),
+    additionalInstructions: optionalText(4000),
+    allowLateSubmission: zod_1.z.boolean().optional(),
+    lateSubmissionDeadline: zod_1.z.coerce.date().optional(),
+    notifyStudents: zod_1.z.boolean().optional(),
+    attachmentLabel: optionalText(500),
+});
+exports.getAllSeminaryAssignmentsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'page must be a positive integer',
+        }),
+        limit: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'limit must be a positive integer',
+        }),
+        search: optionalText(100),
+        subject: optionalText(200),
+        status: assignmentStatusSchema.optional(),
+    }),
+});
+exports.createSeminaryAssignmentSchema = zod_1.z.object({
+    body: seminaryAssignmentBodySchema,
+});
+exports.updateSeminaryAssignmentSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryAssignmentIdSchema,
+    }),
+    body: seminaryAssignmentBodySchema,
+});
+exports.updateSeminaryAssignmentStatusSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryAssignmentIdSchema,
+    }),
+    body: zod_1.z.object({
+        status: assignmentStatusSchema,
+    }),
+});
+exports.deleteSeminaryAssignmentSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryAssignmentIdSchema,
+    }),
+});
+const seminaryExaminationIdSchema = zod_1.z.uuid();
+const seminaryExaminationQuestionSchema = zod_1.z.object({
+    id: zod_1.z.string().trim().min(1).max(80),
+    type: zod_1.z.enum(['MULTIPLE_CHOICE', 'TRUE_FALSE', 'SHORT_ANSWER', 'ESSAY']),
+    prompt: zod_1.z.string().trim().min(1).max(4000),
+    points: zod_1.z.coerce.number().int().min(1).max(1000),
+    options: zod_1.z.array(zod_1.z.string().trim().min(1).max(500)).max(10).optional(),
+    answer: zod_1.z.string().trim().max(2000).optional(),
+});
+const seminaryExaminationBodySchema = zod_1.z.object({
+    title: zod_1.z.string().trim().min(1).max(200),
+    coverage: zod_1.z.string().trim().min(1).max(500),
+    subject: zod_1.z.string().trim().min(1).max(200),
+    examType: zod_1.z.string().trim().min(1).max(100),
+    scheduledAt: zod_1.z.coerce.date(),
+    durationMinutes: zod_1.z.coerce.number().int().min(1).max(1440),
+    status: examinationStatusSchema.optional(),
+    totalPoints: zod_1.z.coerce.number().int().min(1).max(10000),
+    passingScore: zod_1.z.coerce.number().int().min(1).max(10000),
+    instructions: optionalText(4000),
+    randomizeQuestions: zod_1.z.boolean().optional(),
+    showResults: zod_1.z.boolean().optional(),
+    questions: zod_1.z.array(seminaryExaminationQuestionSchema).min(1).max(200),
+});
+exports.getAllSeminaryExaminationsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'page must be a positive integer',
+        }),
+        limit: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'limit must be a positive integer',
+        }),
+        search: optionalText(100),
+        subject: optionalText(200),
+        status: examinationStatusSchema.optional(),
+    }),
+});
+exports.getSeminaryExaminationByIdSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryExaminationIdSchema,
+    }),
+});
+exports.createSeminaryExaminationSchema = zod_1.z.object({
+    body: seminaryExaminationBodySchema,
+});
+exports.updateSeminaryExaminationSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryExaminationIdSchema,
+    }),
+    body: seminaryExaminationBodySchema,
+});
+exports.updateSeminaryExaminationStatusSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryExaminationIdSchema,
+    }),
+    body: zod_1.z.object({
+        status: examinationStatusSchema,
+    }),
+});
+exports.deleteSeminaryExaminationSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryExaminationIdSchema,
+    }),
+});
+const seminaryGradeRecordIdSchema = zod_1.z.uuid();
+const seminaryGradeRecordBodySchema = zod_1.z.object({
+    studentApplicationId: zod_1.z.uuid(),
+    subject: zod_1.z.string().trim().min(1).max(200),
+    term: zod_1.z.string().trim().min(1).max(80),
+    finalGrade: zod_1.z.string().trim().min(1).max(20),
+    remarks: gradeRecordRemarkSchema.optional(),
+    status: gradeRecordStatusSchema.optional(),
+    notes: optionalText(2000),
+});
+exports.getAllSeminaryGradeRecordsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'page must be a positive integer',
+        }),
+        limit: zod_1.z
+            .string()
+            .optional()
+            .refine((value) => !value || /^\d+$/.test(value), {
+            message: 'limit must be a positive integer',
+        }),
+        search: optionalText(100),
+        program: optionalText(80),
+        status: gradeRecordStatusSchema.optional(),
+        term: optionalText(80),
+    }),
+});
+exports.createSeminaryGradeRecordSchema = zod_1.z.object({
+    body: seminaryGradeRecordBodySchema,
+});
+exports.getSeminaryGradeRecordSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryGradeRecordIdSchema,
+    }),
+});
+exports.updateSeminaryGradeRecordSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryGradeRecordIdSchema,
+    }),
+    body: seminaryGradeRecordBodySchema,
+});
+exports.updateSeminaryGradeRecordStatusSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryGradeRecordIdSchema,
+    }),
+    body: zod_1.z.object({
+        status: gradeRecordStatusSchema,
+    }),
+});
+exports.deleteSeminaryGradeRecordSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryGradeRecordIdSchema,
     }),
 });
 const seminaryAcademicYearIdSchema = zod_1.z.uuid();
@@ -570,6 +853,25 @@ exports.updateSeminaryInstructorStatusSchema = zod_1.z.object({
         status: instructorStatusSchema,
     }),
 });
+exports.inviteSeminaryInstructorSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: seminaryInstructorIdSchema,
+    }),
+});
+exports.acceptSeminaryInstructorInviteSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        token: zod_1.z.string().trim().min(1),
+    }),
+    body: zod_1.z
+        .object({
+        password: auth_1.passwordSchema,
+        confirmPassword: auth_1.passwordSchema,
+    })
+        .refine((val) => val.password === val.confirmPassword, {
+        message: 'Password does not match',
+        path: ['confirmPassword'],
+    }),
+});
 exports.deleteSeminaryInstructorSchema = zod_1.z.object({
     params: zod_1.z.object({
         id: seminaryInstructorIdSchema,
@@ -579,6 +881,15 @@ const gradeScaleRowSchema = zod_1.z.object({
     equivalent: zod_1.z.string().trim().min(1).max(20),
     percentageRange: zod_1.z.string().trim().min(1).max(50),
     remarks: zod_1.z.string().trim().min(1).max(100),
+});
+const gradeCriteriaWeightsSchema = zod_1.z
+    .object({
+    attendance: zod_1.z.coerce.number().min(0).max(100),
+    coursework: zod_1.z.coerce.number().min(0).max(100),
+    exam: zod_1.z.coerce.number().min(0).max(100),
+})
+    .refine((value) => value.attendance + value.coursework + value.exam === 100, {
+    message: 'criteria weights must total 100',
 });
 exports.updateSeminaryGradeConfigurationSchema = zod_1.z.object({
     body: zod_1.z.object({
@@ -591,6 +902,7 @@ exports.updateSeminaryGradeConfigurationSchema = zod_1.z.object({
         autoPublishApproved: zod_1.z.boolean().optional(),
         showConditionalRemark: zod_1.z.boolean().optional(),
         gradeScale: zod_1.z.array(gradeScaleRowSchema).min(1).max(50).optional(),
+        criteriaWeights: gradeCriteriaWeightsSchema.optional(),
     }),
 });
 const feeBreakdownItemSchema = zod_1.z.object({

@@ -7,6 +7,11 @@ import { logger } from '@/lib/winston';
 import type { Request, Response } from 'express';
 import type { CreateSeminaryCourseBody } from './types';
 
+const getCourseSummary = (subjects: CreateSeminaryCourseBody['subjects']) => ({
+  units: subjects.reduce((total, subject) => total + subject.units, 0),
+  modality: subjects[0].modality,
+});
+
 export const createSeminaryCourse = async (
   req: Request,
   res: Response,
@@ -18,14 +23,16 @@ export const createSeminaryCourse = async (
       ((await prisma.seminaryCourse.aggregate({
         _max: { sortOrder: true },
       }))._max.sortOrder ?? 0) + 1;
+    const summary = getCourseSummary(body.subjects);
 
     const course = await prisma.seminaryCourse.create({
       data: {
         courseName: body.courseName,
         courseCode: body.courseCode,
         program: body.program,
-        units: body.units,
-        modality: body.modality,
+        units: summary.units,
+        modality: summary.modality,
+        subjects: body.subjects,
         status: body.status ?? SeminaryCourseStatus.ACTIVE,
         sortOrder,
       },

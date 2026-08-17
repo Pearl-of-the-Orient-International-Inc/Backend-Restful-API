@@ -133,6 +133,21 @@ const createSeminaryDocumentUploaderRoute = () => f({
         fileSize: file.size,
     });
 }));
+const createSeminaryStudyMaterialUploaderRoute = () => f({
+    blob: {
+        maxFileSize: '32MB',
+        maxFileCount: 1,
+    },
+})
+    .middleware(() => __awaiter(void 0, void 0, void 0, function* () { return ({}); }))
+    .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ file }) {
+    return ({
+        fileUrl: file.ufsUrl,
+        fileName: file.name,
+        mimeType: file.type,
+        fileSize: file.size,
+    });
+}));
 const createMemberProfileBannerUploaderRoute = (options = {}) => {
     var _a;
     const maxFileSize = (_a = options.maxFileSize) !== null && _a !== void 0 ? _a : defaultUploadLimits.maxFileSize;
@@ -356,6 +371,7 @@ const createUploadRouter = (options = {}) => {
         requirementUploader: createMemberRequirementUploaderRoute(),
         seminaryRequirementUploader: createSeminaryDocumentUploaderRoute(),
         seminaryPaymentReceiptUploader: createSeminaryDocumentUploaderRoute(),
+        seminaryStudyMaterialUploader: createSeminaryStudyMaterialUploaderRoute(),
         memberProfileBannerUploader: createMemberProfileBannerUploaderRoute(options),
         memberCertificateUploader: createMemberCertificateUploaderRoute(),
         memberPublicRecordAttachmentUploader: createMemberPublicRecordAttachmentUploaderRoute({

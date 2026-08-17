@@ -15,6 +15,10 @@ const client_1 = require("../../../generated/prisma/client");
 const enums_1 = require("../../../generated/prisma/enums");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
+const getCourseSummary = (subjects) => ({
+    units: subjects.reduce((total, subject) => total + subject.units, 0),
+    modality: subjects[0].modality,
+});
 const updateSeminaryCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
@@ -31,9 +35,10 @@ const updateSeminaryCourse = (req, res) => __awaiter(void 0, void 0, void 0, fun
             });
             return;
         }
+        const summary = getCourseSummary(body.subjects);
         const course = yield prisma_1.prisma.seminaryCourse.update({
             where: { id },
-            data: Object.assign({ courseName: body.courseName, courseCode: body.courseCode, program: body.program, units: body.units, modality: body.modality, status: (_a = body.status) !== null && _a !== void 0 ? _a : enums_1.SeminaryCourseStatus.ACTIVE }, (body.sortOrder === undefined ? {} : { sortOrder: body.sortOrder })),
+            data: Object.assign({ courseName: body.courseName, courseCode: body.courseCode, program: body.program, units: summary.units, modality: summary.modality, subjects: body.subjects, status: (_a = body.status) !== null && _a !== void 0 ? _a : enums_1.SeminaryCourseStatus.ACTIVE }, (body.sortOrder === undefined ? {} : { sortOrder: body.sortOrder })),
         });
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

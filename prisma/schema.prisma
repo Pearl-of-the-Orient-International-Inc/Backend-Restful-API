@@ -640,6 +640,7 @@ model SeminaryCourse {
   program    SeminaryProgramLevel
   units      Int
   modality   SeminaryCourseModality
+  subjects   Json                   @default("[]")
   status     SeminaryCourseStatus   @default(ACTIVE)
   sortOrder  Int                    @default(0)
 
@@ -650,6 +651,153 @@ model SeminaryCourse {
   @@index([modality])
   @@index([status])
   @@index([sortOrder])
+}
+
+model SeminaryStudyMaterial {
+  id String @id @default(uuid())
+
+  title          String
+  subtitle       String?
+  subject        String
+  type           SeminaryStudyMaterialType
+  status         SeminaryStudyMaterialStatus @default(DRAFT)
+  fileUrl        String
+  fileName       String
+  mimeType       String?
+  fileSize       Int?
+  downloads      Int                         @default(0)
+  uploadedByName String
+  uploadedByRole String
+  uploadedByUserId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subject])
+  @@index([type])
+  @@index([status])
+  @@index([uploadedByUserId])
+  @@index([createdAt])
+}
+
+model SeminaryAssignment {
+  id String @id @default(uuid())
+
+  title                  String
+  description            String
+  subject                String
+  courseId               String?
+  courseName             String?
+  courseCode             String?
+  instructorUserId       String?
+  instructorName         String
+  assignmentType         String
+  dueAt                  DateTime
+  status                 SeminaryAssignmentStatus @default(DRAFT)
+  totalMarks             Int
+  additionalInstructions String?
+  allowLateSubmission    Boolean                  @default(true)
+  lateSubmissionDeadline DateTime?
+  notifyStudents         Boolean                  @default(true)
+  attachmentLabel        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subject])
+  @@index([courseId])
+  @@index([instructorUserId])
+  @@index([status])
+  @@index([dueAt])
+}
+
+model SeminaryExamination {
+  id String @id @default(uuid())
+
+  title            String
+  coverage         String
+  subject          String
+  courseId         String?
+  courseName       String?
+  courseCode       String?
+  instructorUserId String?
+  instructorName   String
+  examType         String
+  scheduledAt      DateTime
+  durationMinutes  Int
+  status           SeminaryExaminationStatus @default(DRAFT)
+  totalPoints      Int
+  passingScore     Int
+  instructions     String?
+  randomizeQuestions Boolean @default(false)
+  showResults      Boolean @default(true)
+  questions        Json @default("[]")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subject])
+  @@index([courseId])
+  @@index([instructorUserId])
+  @@index([status])
+  @@index([scheduledAt])
+}
+
+model SeminaryGradeRecord {
+  id String @id @default(uuid())
+
+  recordNumber         String                    @unique
+  studentApplicationId String?
+  studentId            String
+  studentName          String
+  program              String
+  programLevel         SeminaryProgramLevel?
+  subject              String
+  courseId             String?
+  courseTitle          String
+  courseCode           String
+  instructorUserId     String?
+  instructorName       String
+  term                 String
+  finalGrade           String
+  remarks              SeminaryGradeRecordRemark @default(ONGOING)
+  status               SeminaryGradeRecordStatus @default(IN_PROGRESS)
+  notes                String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentApplicationId])
+  @@index([studentId])
+  @@index([programLevel])
+  @@index([subject])
+  @@index([courseId])
+  @@index([instructorUserId])
+  @@index([status])
+  @@index([term])
+}
+
+model SeminaryStudentNotification {
+  id String @id @default(uuid())
+
+  studentApplicationId String?
+  studentId            String?
+  studentName          String
+  studentEmail         String?
+  title                String
+  message              String
+  type                 SeminaryStudentNotificationType
+  assignmentId         String?
+  readAt               DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([studentApplicationId])
+  @@index([studentId])
+  @@index([type])
+  @@index([assignmentId])
+  @@index([readAt])
+  @@index([createdAt])
 }
 
 model SeminaryAcademicYear {
@@ -708,6 +856,9 @@ model SeminaryInstructor {
   rankingClassification       String
   award                       String
 
+  inviteTokenSentAt DateTime?
+  inviteAcceptedAt  DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -735,6 +886,7 @@ model SeminaryGradeConfiguration {
   autoPublishApproved   Boolean @default(false)
   showConditionalRemark Boolean @default(true)
   gradeScale            Json
+  criteriaWeights       Json    @default("{\"attendance\":20,\"coursework\":40,\"exam\":40}")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1315,6 +1467,7 @@ enum MemberCredentialDocumentStatus {
 enum VerificationType {
   EMAIL_VERIFICATION
   PASSWORD_RESET
+  INSTRUCTOR_INVITATION
   TWO_FACTOR
 }
 
@@ -1424,6 +1577,50 @@ enum SeminaryCourseModality {
 enum SeminaryCourseStatus {
   ACTIVE
   INACTIVE
+}
+
+enum SeminaryStudyMaterialType {
+  NOTES
+  PRESENTATION
+  DOCUMENT
+  CHART
+  ARCHIVE
+}
+
+enum SeminaryStudyMaterialStatus {
+  PUBLISHED
+  DRAFT
+}
+
+enum SeminaryAssignmentStatus {
+  PUBLISHED
+  DRAFT
+  SCHEDULED
+}
+
+enum SeminaryExaminationStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  DRAFT
+}
+
+enum SeminaryGradeRecordStatus {
+  COMPLETE
+  PENDING_REVIEW
+  IN_PROGRESS
+  INCOMPLETE
+}
+
+enum SeminaryGradeRecordRemark {
+  PASSED
+  CONDITIONAL
+  FAILED
+  ONGOING
+}
+
+enum SeminaryStudentNotificationType {
+  ASSIGNMENT
 }
 
 enum SeminaryAcademicYearSession {

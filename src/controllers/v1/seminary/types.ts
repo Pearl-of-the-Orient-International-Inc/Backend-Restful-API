@@ -1,36 +1,59 @@
 import type { z } from 'zod';
 import type {
   getAllSeminaryApplicationsSchema,
+  acceptSeminaryInstructorInviteSchema,
   bulkDeleteSeminaryStudentsSchema,
   bulkImportSeminaryStudentsSchema,
   createSeminaryAcademicYearSchema,
   createSeminaryApplicationSchema,
+  createSeminaryAssignmentSchema,
   createSeminaryCourseSchema,
+  createSeminaryExaminationSchema,
+  createSeminaryGradeRecordSchema,
   createSeminaryInstructorSchema,
+  createSeminaryStudyMaterialSchema,
   createSeminaryStudentSchema,
   deleteSeminaryAcademicYearSchema,
+  deleteSeminaryAssignmentSchema,
   deleteSeminaryCourseSchema,
+  deleteSeminaryExaminationSchema,
+  deleteSeminaryGradeRecordSchema,
   deleteSeminaryInstructorSchema,
+  deleteSeminaryStudyMaterialSchema,
   generateSeminaryCredentialDocumentSchema,
   getAllSeminaryAcademicYearsSchema,
+  getAllSeminaryAssignmentsSchema,
   getAllSeminaryCoursesSchema,
+  getAllSeminaryExaminationsSchema,
+  getAllSeminaryGradeRecordsSchema,
   getAllSeminaryFeeCollectionsSchema,
   getAllSeminaryInstructorsSchema,
+  getAllSeminaryStudyMaterialsSchema,
   getAllSeminaryStudentsSchema,
   getSeminaryCredentialDocumentByNumberSchema,
   getSeminaryCredentialDocumentsSchema,
+  getSeminaryExaminationByIdSchema,
+  getSeminaryGradeRecordSchema,
+  inviteSeminaryInstructorSchema,
   updateSeminaryApplicationStatusSchema,
   updateSeminaryAcademicYearSchema,
   updateSeminaryAcademicYearSessionSchema,
   updateSeminaryAcademicYearStatusSchema,
+  updateSeminaryAssignmentSchema,
+  updateSeminaryAssignmentStatusSchema,
   updateSeminaryCourseSchema,
   updateSeminaryCourseStatusSchema,
+  updateSeminaryExaminationSchema,
+  updateSeminaryExaminationStatusSchema,
+  updateSeminaryGradeRecordSchema,
+  updateSeminaryGradeRecordStatusSchema,
   updateSeminaryGradeConfigurationSchema,
   updateSeminaryFeeConfigurationSchema,
   updateSeminaryFeeCollectionStatusSchema,
   updateSeminaryFeeCollectionPaymentSchema,
   updateSeminaryInstructorSchema,
   updateSeminaryInstructorStatusSchema,
+  updateSeminaryStudyMaterialSchema,
   updateSeminaryStudentSchema,
   upsertCurrentSeminaryApplicationSchema,
   verifySeminaryCredentialDocumentSchema,
@@ -136,12 +159,100 @@ export type DeleteSeminaryCourseParams = z.infer<
   typeof deleteSeminaryCourseSchema
 >['params'];
 
+export type GetAllSeminaryStudyMaterialsQuery = z.infer<
+  typeof getAllSeminaryStudyMaterialsSchema
+>['query'];
+
+export type CreateSeminaryStudyMaterialBody = z.infer<
+  typeof createSeminaryStudyMaterialSchema
+>['body'];
+
+export type UpdateSeminaryStudyMaterialBody = z.infer<
+  typeof updateSeminaryStudyMaterialSchema
+>['body'];
+
+export type DeleteSeminaryStudyMaterialParams = z.infer<
+  typeof deleteSeminaryStudyMaterialSchema
+>['params'];
+
+export type GetAllSeminaryAssignmentsQuery = z.infer<
+  typeof getAllSeminaryAssignmentsSchema
+>['query'];
+
+export type CreateSeminaryAssignmentBody = z.infer<
+  typeof createSeminaryAssignmentSchema
+>['body'];
+
+export type UpdateSeminaryAssignmentBody = z.infer<
+  typeof updateSeminaryAssignmentSchema
+>['body'];
+
+export type UpdateSeminaryAssignmentStatusBody = z.infer<
+  typeof updateSeminaryAssignmentStatusSchema
+>['body'];
+
+export type DeleteSeminaryAssignmentParams = z.infer<
+  typeof deleteSeminaryAssignmentSchema
+>['params'];
+
+export type GetAllSeminaryExaminationsQuery = z.infer<
+  typeof getAllSeminaryExaminationsSchema
+>['query'];
+
+export type GetSeminaryExaminationByIdParams = z.infer<
+  typeof getSeminaryExaminationByIdSchema
+>['params'];
+
+export type CreateSeminaryExaminationBody = z.infer<
+  typeof createSeminaryExaminationSchema
+>['body'];
+
+export type UpdateSeminaryExaminationBody = z.infer<
+  typeof updateSeminaryExaminationSchema
+>['body'];
+
+export type UpdateSeminaryExaminationStatusBody = z.infer<
+  typeof updateSeminaryExaminationStatusSchema
+>['body'];
+
+export type DeleteSeminaryExaminationParams = z.infer<
+  typeof deleteSeminaryExaminationSchema
+>['params'];
+
+export type GetAllSeminaryGradeRecordsQuery = z.infer<
+  typeof getAllSeminaryGradeRecordsSchema
+>['query'];
+
+export type GetSeminaryGradeRecordParams = z.infer<
+  typeof getSeminaryGradeRecordSchema
+>['params'];
+
+export type CreateSeminaryGradeRecordBody = z.infer<
+  typeof createSeminaryGradeRecordSchema
+>['body'];
+
+export type UpdateSeminaryGradeRecordBody = z.infer<
+  typeof updateSeminaryGradeRecordSchema
+>['body'];
+
+export type UpdateSeminaryGradeRecordStatusBody = z.infer<
+  typeof updateSeminaryGradeRecordStatusSchema
+>['body'];
+
+export type DeleteSeminaryGradeRecordParams = z.infer<
+  typeof deleteSeminaryGradeRecordSchema
+>['params'];
+
 export type GetAllSeminaryInstructorsQuery = z.infer<
   typeof getAllSeminaryInstructorsSchema
 >['query'];
 
 export type CreateSeminaryInstructorBody = z.infer<
   typeof createSeminaryInstructorSchema
+>['body'];
+
+export type AcceptSeminaryInstructorInviteBody = z.infer<
+  typeof acceptSeminaryInstructorInviteSchema
 >['body'];
 
 export type UpdateSeminaryInstructorBody = z.infer<
@@ -151,6 +262,10 @@ export type UpdateSeminaryInstructorBody = z.infer<
 export type UpdateSeminaryInstructorStatusBody = z.infer<
   typeof updateSeminaryInstructorStatusSchema
 >['body'];
+
+export type InviteSeminaryInstructorParams = z.infer<
+  typeof inviteSeminaryInstructorSchema
+>['params'];
 
 export type DeleteSeminaryInstructorParams = z.infer<
   typeof deleteSeminaryInstructorSchema

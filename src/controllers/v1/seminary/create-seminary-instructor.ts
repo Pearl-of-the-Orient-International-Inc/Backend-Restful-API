@@ -1,5 +1,5 @@
-import { randomBytes } from 'crypto';
 import { HTTPSTATUS } from '@/common/http-codes';
+import { randomUUID } from 'crypto';
 import { Prisma } from '@/generated/prisma/client';
 import {
   SeminaryInstructorStatus,
@@ -9,8 +9,6 @@ import {
 import { hashValue } from '@/lib/password-hash';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { sendMail } from '@/mailers';
-import { seminaryInstructorAccountTemplate } from '@/mailers/templates/seminary-instructor-account';
 import config from '@/config';
 
 import type { Request, Response } from 'express';
@@ -23,9 +21,7 @@ import {
   normalizeInstructorStatus,
   toInstructorResponse,
 } from './instructor-shared';
-
-const generateTemporaryPassword = (): string =>
-  `Potsci!${randomBytes(5).toString('hex').toUpperCase()}9`;
+import { sendInstructorInvitation } from './instructor-invitation';
 
 export const createSeminaryInstructor = async (
   req: Request,
@@ -39,16 +35,15 @@ export const createSeminaryInstructor = async (
       ? normalizeInstructorStatus(body.status)
       : SeminaryInstructorStatus.ACTIVE;
     const teachingPrograms = body.teachingPrograms.map(normalizeInstructorProgram);
-    const temporaryPassword = generateTemporaryPassword();
-    const hashedPassword = await hashValue(temporaryPassword);
+    const hashedPassword = await hashValue(`Pending!${randomUUID()}9`);
 
     const instructor = await prisma.$transaction(async (tx) => {
       const instructorId = await getNextFacultyId(tx);
       const user = await tx.user.create({
         data: {
-          accountStatus: UserAccountStatus.ACTIVE,
+          accountStatus: UserAccountStatus.PENDING,
           email: instructorId,
-          isEmailVerified: true,
+          isEmailVerified: false,
           name: body.name,
           password: hashedPassword,
           role: UserType.INSTRUCTOR,
@@ -94,27 +89,13 @@ export const createSeminaryInstructor = async (
       });
     });
 
-    const emailResult = await sendMail({
-      sendTo: body.email,
-      ...seminaryInstructorAccountTemplate({
-        instructorId: instructor.facultyId,
-        name: instructor.name,
-        temporaryPassword,
-      }),
-    });
-
-    if (!emailResult.success) {
-      logger.warn('Instructor account created but credentials email failed', {
-        email: body.email,
-        instructorId: instructor.facultyId,
-      });
-    }
+    const emailSent = await sendInstructorInvitation(instructor);
 
     res.status(HTTPSTATUS.CREATED).json({
       code: 'CREATED',
-      message: emailResult.success
-        ? 'Seminary instructor created successfully'
-        : 'Seminary instructor created successfully, but credentials email failed to send',
+      message: emailSent
+        ? 'Seminary instructor created and invitation sent successfully'
+        : 'Seminary instructor created, but invitation email failed to send',
       data: toInstructorResponse(instructor),
     });
   } catch (err) {
