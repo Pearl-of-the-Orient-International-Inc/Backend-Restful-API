@@ -259,6 +259,8 @@ export type UserWhereInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
   assignedTasks?: Prisma.TaskItemListRelationFilter
   seminaryInstructor?: Prisma.XOR<Prisma.SeminaryInstructorNullableScalarRelationFilter, Prisma.SeminaryInstructorWhereInput> | null
+  authoredMemos?: Prisma.MemoAnnouncementListRelationFilter
+  memoRecipients?: Prisma.MemoRecipientListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -288,6 +290,8 @@ export type UserOrderByWithRelationInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsOrderByRelationAggregateInput
   assignedTasks?: Prisma.TaskItemOrderByRelationAggregateInput
   seminaryInstructor?: Prisma.SeminaryInstructorOrderByWithRelationInput
+  authoredMemos?: Prisma.MemoAnnouncementOrderByRelationAggregateInput
+  memoRecipients?: Prisma.MemoRecipientOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -320,6 +324,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
   assignedTasks?: Prisma.TaskItemListRelationFilter
   seminaryInstructor?: Prisma.XOR<Prisma.SeminaryInstructorNullableScalarRelationFilter, Prisma.SeminaryInstructorWhereInput> | null
+  authoredMemos?: Prisma.MemoAnnouncementListRelationFilter
+  memoRecipients?: Prisma.MemoRecipientListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -387,6 +393,8 @@ export type UserCreateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -416,6 +424,8 @@ export type UserUncheckedCreateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -445,6 +455,8 @@ export type UserUpdateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -474,6 +486,8 @@ export type UserUncheckedUpdateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -756,6 +770,38 @@ export type UserUpdateOneWithoutAssignedTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedTasksInput, Prisma.UserUpdateWithoutAssignedTasksInput>, Prisma.UserUncheckedUpdateWithoutAssignedTasksInput>
 }
 
+export type UserCreateNestedOneWithoutAuthoredMemosInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthoredMemosInput, Prisma.UserUncheckedCreateWithoutAuthoredMemosInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthoredMemosInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutAuthoredMemosNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthoredMemosInput, Prisma.UserUncheckedCreateWithoutAuthoredMemosInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthoredMemosInput
+  upsert?: Prisma.UserUpsertWithoutAuthoredMemosInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthoredMemosInput, Prisma.UserUpdateWithoutAuthoredMemosInput>, Prisma.UserUncheckedUpdateWithoutAuthoredMemosInput>
+}
+
+export type UserCreateNestedOneWithoutMemoRecipientsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMemoRecipientsInput, Prisma.UserUncheckedCreateWithoutMemoRecipientsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemoRecipientsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutMemoRecipientsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMemoRecipientsInput, Prisma.UserUncheckedCreateWithoutMemoRecipientsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemoRecipientsInput
+  upsert?: Prisma.UserUpsertWithoutMemoRecipientsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMemoRecipientsInput, Prisma.UserUpdateWithoutMemoRecipientsInput>, Prisma.UserUncheckedUpdateWithoutMemoRecipientsInput>
+}
+
 export type UserCreateNestedOneWithoutBackupSettingUpdatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBackupSettingUpdatesInput, Prisma.UserUncheckedCreateWithoutBackupSettingUpdatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBackupSettingUpdatesInput
@@ -830,6 +876,8 @@ export type UserCreateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserTokensInput = {
@@ -858,6 +906,8 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserTokensInput = {
@@ -902,6 +952,8 @@ export type UserUpdateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTokensInput = {
@@ -930,6 +982,8 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -958,6 +1012,8 @@ export type UserCreateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -986,6 +1042,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1030,6 +1088,8 @@ export type UserUpdateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1058,6 +1118,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutActivityLogsInput = {
@@ -1086,6 +1148,8 @@ export type UserCreateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutActivityLogsInput = {
@@ -1114,6 +1178,8 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutActivityLogsInput = {
@@ -1158,6 +1224,8 @@ export type UserUpdateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivityLogsInput = {
@@ -1186,6 +1254,8 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
@@ -1214,6 +1284,8 @@ export type UserCreateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -1242,6 +1314,8 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -1286,6 +1360,8 @@ export type UserUpdateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -1314,6 +1390,8 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasskeyCredentialsInput = {
@@ -1342,6 +1420,8 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
@@ -1370,6 +1450,8 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyCredentialsInput = {
@@ -1414,6 +1496,8 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
@@ -1442,6 +1526,8 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasskeyChallengeInput = {
@@ -1470,6 +1556,8 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
@@ -1498,6 +1586,8 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyChallengeInput = {
@@ -1542,6 +1632,8 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
@@ -1570,6 +1662,8 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMemberProfileInput = {
@@ -1598,6 +1692,8 @@ export type UserCreateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMemberProfileInput = {
@@ -1626,6 +1722,8 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMemberProfileInput = {
@@ -1670,6 +1768,8 @@ export type UserUpdateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberProfileInput = {
@@ -1698,6 +1798,8 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFollowedMembersInput = {
@@ -1726,6 +1828,8 @@ export type UserCreateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowedMembersInput = {
@@ -1754,6 +1858,8 @@ export type UserUncheckedCreateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowedMembersInput = {
@@ -1798,6 +1904,8 @@ export type UserUpdateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowedMembersInput = {
@@ -1826,6 +1934,8 @@ export type UserUncheckedUpdateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSeminaryInstructorInput = {
@@ -1854,6 +1964,8 @@ export type UserCreateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
@@ -1882,6 +1994,8 @@ export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSeminaryInstructorInput = {
@@ -1926,6 +2040,8 @@ export type UserUpdateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
@@ -1954,6 +2070,8 @@ export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -1982,6 +2100,8 @@ export type UserCreateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -2010,6 +2130,8 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -2054,6 +2176,8 @@ export type UserUpdateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -2082,6 +2206,280 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAuthoredMemosInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuthoredMemosInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuthoredMemosInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthoredMemosInput, Prisma.UserUncheckedCreateWithoutAuthoredMemosInput>
+}
+
+export type UserUpsertWithoutAuthoredMemosInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthoredMemosInput, Prisma.UserUncheckedUpdateWithoutAuthoredMemosInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthoredMemosInput, Prisma.UserUncheckedCreateWithoutAuthoredMemosInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthoredMemosInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthoredMemosInput, Prisma.UserUncheckedUpdateWithoutAuthoredMemosInput>
+}
+
+export type UserUpdateWithoutAuthoredMemosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMemoRecipientsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+}
+
+export type UserUncheckedCreateWithoutMemoRecipientsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+}
+
+export type UserCreateOrConnectWithoutMemoRecipientsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMemoRecipientsInput, Prisma.UserUncheckedCreateWithoutMemoRecipientsInput>
+}
+
+export type UserUpsertWithoutMemoRecipientsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMemoRecipientsInput, Prisma.UserUncheckedUpdateWithoutMemoRecipientsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMemoRecipientsInput, Prisma.UserUncheckedCreateWithoutMemoRecipientsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMemoRecipientsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMemoRecipientsInput, Prisma.UserUncheckedUpdateWithoutMemoRecipientsInput>
+}
+
+export type UserUpdateWithoutMemoRecipientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
 }
 
 export type UserCreateWithoutBackupSettingUpdatesInput = {
@@ -2110,6 +2508,8 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
@@ -2138,6 +2538,8 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBackupSettingUpdatesInput = {
@@ -2182,6 +2584,8 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
@@ -2210,6 +2614,8 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedBackupsInput = {
@@ -2238,6 +2644,8 @@ export type UserCreateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedBackupsInput = {
@@ -2266,6 +2674,8 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedBackupsInput = {
@@ -2299,6 +2709,8 @@ export type UserCreateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRestoredBackupsInput = {
@@ -2327,6 +2739,8 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRestoredBackupsInput = {
@@ -2371,6 +2785,8 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
@@ -2399,6 +2815,8 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutRestoredBackupsInput = {
@@ -2438,6 +2856,8 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
@@ -2466,6 +2886,8 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2484,6 +2906,8 @@ export type UserCountOutputType = {
   restoredBackups: number
   backupSettingUpdates: number
   assignedTasks: number
+  authoredMemos: number
+  memoRecipients: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2497,6 +2921,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   restoredBackups?: boolean | UserCountOutputTypeCountRestoredBackupsArgs
   backupSettingUpdates?: boolean | UserCountOutputTypeCountBackupSettingUpdatesArgs
   assignedTasks?: boolean | UserCountOutputTypeCountAssignedTasksArgs
+  authoredMemos?: boolean | UserCountOutputTypeCountAuthoredMemosArgs
+  memoRecipients?: boolean | UserCountOutputTypeCountMemoRecipientsArgs
 }
 
 /**
@@ -2579,6 +3005,20 @@ export type UserCountOutputTypeCountAssignedTasksArgs<ExtArgs extends runtime.Ty
   where?: Prisma.TaskItemWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthoredMemosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemoAnnouncementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMemoRecipientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemoRecipientWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2607,6 +3047,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   seminaryInstructor?: boolean | Prisma.User$seminaryInstructorArgs<ExtArgs>
+  authoredMemos?: boolean | Prisma.User$authoredMemosArgs<ExtArgs>
+  memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2673,6 +3115,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   seminaryInstructor?: boolean | Prisma.User$seminaryInstructorArgs<ExtArgs>
+  authoredMemos?: boolean | Prisma.User$authoredMemosArgs<ExtArgs>
+  memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2694,6 +3138,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     backupSettingUpdates: Prisma.$DatabaseBackupSettingsPayload<ExtArgs>[]
     assignedTasks: Prisma.$TaskItemPayload<ExtArgs>[]
     seminaryInstructor: Prisma.$SeminaryInstructorPayload<ExtArgs> | null
+    authoredMemos: Prisma.$MemoAnnouncementPayload<ExtArgs>[]
+    memoRecipients: Prisma.$MemoRecipientPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3116,6 +3562,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   backupSettingUpdates<T extends Prisma.User$backupSettingUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$backupSettingUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   seminaryInstructor<T extends Prisma.User$seminaryInstructorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seminaryInstructorArgs<ExtArgs>>): Prisma.Prisma__SeminaryInstructorClient<runtime.Types.Result.GetResult<Prisma.$SeminaryInstructorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  authoredMemos<T extends Prisma.User$authoredMemosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authoredMemosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoAnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  memoRecipients<T extends Prisma.User$memoRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memoRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3840,6 +4288,54 @@ export type User$seminaryInstructorArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.SeminaryInstructorInclude<ExtArgs> | null
   where?: Prisma.SeminaryInstructorWhereInput
+}
+
+/**
+ * User.authoredMemos
+ */
+export type User$authoredMemosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemoAnnouncement
+   */
+  select?: Prisma.MemoAnnouncementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemoAnnouncement
+   */
+  omit?: Prisma.MemoAnnouncementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemoAnnouncementInclude<ExtArgs> | null
+  where?: Prisma.MemoAnnouncementWhereInput
+  orderBy?: Prisma.MemoAnnouncementOrderByWithRelationInput | Prisma.MemoAnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.MemoAnnouncementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemoAnnouncementScalarFieldEnum | Prisma.MemoAnnouncementScalarFieldEnum[]
+}
+
+/**
+ * User.memoRecipients
+ */
+export type User$memoRecipientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemoRecipient
+   */
+  select?: Prisma.MemoRecipientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemoRecipient
+   */
+  omit?: Prisma.MemoRecipientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemoRecipientInclude<ExtArgs> | null
+  where?: Prisma.MemoRecipientWhereInput
+  orderBy?: Prisma.MemoRecipientOrderByWithRelationInput | Prisma.MemoRecipientOrderByWithRelationInput[]
+  cursor?: Prisma.MemoRecipientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemoRecipientScalarFieldEnum | Prisma.MemoRecipientScalarFieldEnum[]
 }
 
 /**

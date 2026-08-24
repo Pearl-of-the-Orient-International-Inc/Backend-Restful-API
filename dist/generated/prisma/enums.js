@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingLedgerTransactionStatus = exports.AccountingLedgerTransactionType = exports.ReceiptPaymentType = exports.ReceiptOrganization = exports.AccountingReceivableStatus = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryFeeCollectionStatus = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryInstructorRank = exports.SeminaryInstructorStatus = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryStudentNotificationType = exports.SeminaryGradeRecordRemark = exports.SeminaryGradeRecordStatus = exports.SeminaryExaminationStatus = exports.SeminaryAssignmentStatus = exports.SeminaryStudyMaterialStatus = exports.SeminaryStudyMaterialType = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberCredentialDocumentStatus = exports.MemberCredentialDocumentType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.MemoDeliveryStatus = exports.MemoAttachmentKind = exports.MemoRecipientType = exports.MemoStatus = exports.MemoTemplateType = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -367,6 +367,34 @@ exports.NewsBlogPlatform = {
 exports.NewsBlogMediaKind = {
     IMAGE: 'IMAGE',
     VIDEO: 'VIDEO'
+};
+exports.MemoTemplateType = {
+    ANNOUNCEMENT: 'ANNOUNCEMENT',
+    GENERAL_OFFICE: 'GENERAL_OFFICE',
+    INCIDENT_REPORT: 'INCIDENT_REPORT',
+    MEETING_NOTICE: 'MEETING_NOTICE',
+    POLICY_CHANGE: 'POLICY_CHANGE',
+    BLANK: 'BLANK'
+};
+exports.MemoStatus = {
+    DRAFT: 'DRAFT',
+    PUBLISHING: 'PUBLISHING',
+    PUBLISHED: 'PUBLISHED',
+    FAILED: 'FAILED',
+    ARCHIVED: 'ARCHIVED'
+};
+exports.MemoRecipientType = {
+    USER: 'USER',
+    MEMBER: 'MEMBER'
+};
+exports.MemoAttachmentKind = {
+    DOCX: 'DOCX',
+    PDF: 'PDF'
+};
+exports.MemoDeliveryStatus = {
+    PENDING: 'PENDING',
+    SENT: 'SENT',
+    FAILED: 'FAILED'
 };
 exports.BackupFrequency = {
     HOURLY: 'HOURLY',

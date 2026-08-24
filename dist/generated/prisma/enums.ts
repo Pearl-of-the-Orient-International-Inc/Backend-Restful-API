@@ -627,6 +627,54 @@ export const NewsBlogMediaKind = {
 export type NewsBlogMediaKind = (typeof NewsBlogMediaKind)[keyof typeof NewsBlogMediaKind]
 
 
+export const MemoTemplateType = {
+  ANNOUNCEMENT: 'ANNOUNCEMENT',
+  GENERAL_OFFICE: 'GENERAL_OFFICE',
+  INCIDENT_REPORT: 'INCIDENT_REPORT',
+  MEETING_NOTICE: 'MEETING_NOTICE',
+  POLICY_CHANGE: 'POLICY_CHANGE',
+  BLANK: 'BLANK'
+} as const
+
+export type MemoTemplateType = (typeof MemoTemplateType)[keyof typeof MemoTemplateType]
+
+
+export const MemoStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHING: 'PUBLISHING',
+  PUBLISHED: 'PUBLISHED',
+  FAILED: 'FAILED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type MemoStatus = (typeof MemoStatus)[keyof typeof MemoStatus]
+
+
+export const MemoRecipientType = {
+  USER: 'USER',
+  MEMBER: 'MEMBER'
+} as const
+
+export type MemoRecipientType = (typeof MemoRecipientType)[keyof typeof MemoRecipientType]
+
+
+export const MemoAttachmentKind = {
+  DOCX: 'DOCX',
+  PDF: 'PDF'
+} as const
+
+export type MemoAttachmentKind = (typeof MemoAttachmentKind)[keyof typeof MemoAttachmentKind]
+
+
+export const MemoDeliveryStatus = {
+  PENDING: 'PENDING',
+  SENT: 'SENT',
+  FAILED: 'FAILED'
+} as const
+
+export type MemoDeliveryStatus = (typeof MemoDeliveryStatus)[keyof typeof MemoDeliveryStatus]
+
+
 export const BackupFrequency = {
   HOURLY: 'HOURLY',
   DAILY: 'DAILY',

@@ -1480,6 +1480,91 @@ export type EnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
 }
 
+export type EnumMemoTemplateTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoTemplateType | Prisma.EnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoTemplateTypeFilter<$PrismaModel> | $Enums.MemoTemplateType
+}
+
+export type EnumMemoStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoStatus | Prisma.EnumMemoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoStatusFilter<$PrismaModel> | $Enums.MemoStatus
+}
+
+export type EnumMemoTemplateTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoTemplateType | Prisma.EnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoTemplateTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemoTemplateType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoTemplateTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoTemplateTypeFilter<$PrismaModel>
+}
+
+export type EnumMemoStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoStatus | Prisma.EnumMemoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemoStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoStatusFilter<$PrismaModel>
+}
+
+export type EnumMemoRecipientTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoRecipientType | Prisma.EnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoRecipientTypeFilter<$PrismaModel> | $Enums.MemoRecipientType
+}
+
+export type EnumMemoRecipientTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoRecipientType | Prisma.EnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoRecipientTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemoRecipientType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoRecipientTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoRecipientTypeFilter<$PrismaModel>
+}
+
+export type EnumMemoAttachmentKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoAttachmentKind | Prisma.EnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoAttachmentKindFilter<$PrismaModel> | $Enums.MemoAttachmentKind
+}
+
+export type EnumMemoAttachmentKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoAttachmentKind | Prisma.EnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoAttachmentKindWithAggregatesFilter<$PrismaModel> | $Enums.MemoAttachmentKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoAttachmentKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoAttachmentKindFilter<$PrismaModel>
+}
+
+export type EnumMemoDeliveryStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoDeliveryStatus | Prisma.EnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoDeliveryStatusFilter<$PrismaModel> | $Enums.MemoDeliveryStatus
+}
+
+export type EnumMemoDeliveryStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoDeliveryStatus | Prisma.EnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoDeliveryStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemoDeliveryStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoDeliveryStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoDeliveryStatusFilter<$PrismaModel>
+}
+
 export type EnumBackupFrequencyFilter<$PrismaModel = never> = {
   equals?: $Enums.BackupFrequency | Prisma.EnumBackupFrequencyFieldRefInput<$PrismaModel>
   in?: $Enums.BackupFrequency[] | Prisma.ListEnumBackupFrequencyFieldRefInput<$PrismaModel>
@@ -2943,6 +3028,91 @@ export type NestedEnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
   _max?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
+}
+
+export type NestedEnumMemoTemplateTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoTemplateType | Prisma.EnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoTemplateTypeFilter<$PrismaModel> | $Enums.MemoTemplateType
+}
+
+export type NestedEnumMemoStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoStatus | Prisma.EnumMemoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoStatusFilter<$PrismaModel> | $Enums.MemoStatus
+}
+
+export type NestedEnumMemoTemplateTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoTemplateType | Prisma.EnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoTemplateTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemoTemplateType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoTemplateTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoTemplateTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumMemoStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoStatus | Prisma.EnumMemoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoStatus[] | Prisma.ListEnumMemoStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemoStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumMemoRecipientTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoRecipientType | Prisma.EnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoRecipientTypeFilter<$PrismaModel> | $Enums.MemoRecipientType
+}
+
+export type NestedEnumMemoRecipientTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoRecipientType | Prisma.EnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoRecipientType[] | Prisma.ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoRecipientTypeWithAggregatesFilter<$PrismaModel> | $Enums.MemoRecipientType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoRecipientTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoRecipientTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumMemoAttachmentKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoAttachmentKind | Prisma.EnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoAttachmentKindFilter<$PrismaModel> | $Enums.MemoAttachmentKind
+}
+
+export type NestedEnumMemoAttachmentKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoAttachmentKind | Prisma.EnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoAttachmentKind[] | Prisma.ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoAttachmentKindWithAggregatesFilter<$PrismaModel> | $Enums.MemoAttachmentKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoAttachmentKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoAttachmentKindFilter<$PrismaModel>
+}
+
+export type NestedEnumMemoDeliveryStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoDeliveryStatus | Prisma.EnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoDeliveryStatusFilter<$PrismaModel> | $Enums.MemoDeliveryStatus
+}
+
+export type NestedEnumMemoDeliveryStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MemoDeliveryStatus | Prisma.EnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MemoDeliveryStatus[] | Prisma.ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMemoDeliveryStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemoDeliveryStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMemoDeliveryStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMemoDeliveryStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumBackupFrequencyFilter<$PrismaModel = never> = {

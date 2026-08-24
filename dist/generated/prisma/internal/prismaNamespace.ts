@@ -439,6 +439,10 @@ export const ModelName = {
   NewsBlog: 'NewsBlog',
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
+  MemoAnnouncement: 'MemoAnnouncement',
+  MemoRecipient: 'MemoRecipient',
+  MemoAttachment: 'MemoAttachment',
+  MemoDeliveryLog: 'MemoDeliveryLog',
   DatabaseBackupSettings: 'DatabaseBackupSettings',
   DatabaseBackupSnapshot: 'DatabaseBackupSnapshot'
 } as const
@@ -456,7 +460,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4530,6 +4534,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MemoAnnouncement: {
+      payload: Prisma.$MemoAnnouncementPayload<ExtArgs>
+      fields: Prisma.MemoAnnouncementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemoAnnouncementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemoAnnouncementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>
+        }
+        findFirst: {
+          args: Prisma.MemoAnnouncementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemoAnnouncementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>
+        }
+        findMany: {
+          args: Prisma.MemoAnnouncementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>[]
+        }
+        create: {
+          args: Prisma.MemoAnnouncementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>
+        }
+        createMany: {
+          args: Prisma.MemoAnnouncementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemoAnnouncementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>[]
+        }
+        delete: {
+          args: Prisma.MemoAnnouncementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>
+        }
+        update: {
+          args: Prisma.MemoAnnouncementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemoAnnouncementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemoAnnouncementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemoAnnouncementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemoAnnouncementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAnnouncementPayload>
+        }
+        aggregate: {
+          args: Prisma.MemoAnnouncementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemoAnnouncement>
+        }
+        groupBy: {
+          args: Prisma.MemoAnnouncementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoAnnouncementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemoAnnouncementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoAnnouncementCountAggregateOutputType> | number
+        }
+      }
+    }
+    MemoRecipient: {
+      payload: Prisma.$MemoRecipientPayload<ExtArgs>
+      fields: Prisma.MemoRecipientFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemoRecipientFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemoRecipientFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>
+        }
+        findFirst: {
+          args: Prisma.MemoRecipientFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemoRecipientFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>
+        }
+        findMany: {
+          args: Prisma.MemoRecipientFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>[]
+        }
+        create: {
+          args: Prisma.MemoRecipientCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>
+        }
+        createMany: {
+          args: Prisma.MemoRecipientCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemoRecipientCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>[]
+        }
+        delete: {
+          args: Prisma.MemoRecipientDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>
+        }
+        update: {
+          args: Prisma.MemoRecipientUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemoRecipientDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemoRecipientUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemoRecipientUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemoRecipientUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoRecipientPayload>
+        }
+        aggregate: {
+          args: Prisma.MemoRecipientAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemoRecipient>
+        }
+        groupBy: {
+          args: Prisma.MemoRecipientGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoRecipientGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemoRecipientCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoRecipientCountAggregateOutputType> | number
+        }
+      }
+    }
+    MemoAttachment: {
+      payload: Prisma.$MemoAttachmentPayload<ExtArgs>
+      fields: Prisma.MemoAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemoAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemoAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.MemoAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemoAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.MemoAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.MemoAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.MemoAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemoAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.MemoAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>
+        }
+        update: {
+          args: Prisma.MemoAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemoAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemoAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemoAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemoAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.MemoAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemoAttachment>
+        }
+        groupBy: {
+          args: Prisma.MemoAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemoAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    MemoDeliveryLog: {
+      payload: Prisma.$MemoDeliveryLogPayload<ExtArgs>
+      fields: Prisma.MemoDeliveryLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemoDeliveryLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemoDeliveryLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>
+        }
+        findFirst: {
+          args: Prisma.MemoDeliveryLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemoDeliveryLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>
+        }
+        findMany: {
+          args: Prisma.MemoDeliveryLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>[]
+        }
+        create: {
+          args: Prisma.MemoDeliveryLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>
+        }
+        createMany: {
+          args: Prisma.MemoDeliveryLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemoDeliveryLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>[]
+        }
+        delete: {
+          args: Prisma.MemoDeliveryLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>
+        }
+        update: {
+          args: Prisma.MemoDeliveryLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemoDeliveryLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemoDeliveryLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemoDeliveryLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemoDeliveryLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemoDeliveryLogPayload>
+        }
+        aggregate: {
+          args: Prisma.MemoDeliveryLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMemoDeliveryLog>
+        }
+        groupBy: {
+          args: Prisma.MemoDeliveryLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoDeliveryLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemoDeliveryLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemoDeliveryLogCountAggregateOutputType> | number
+        }
+      }
+    }
     DatabaseBackupSettings: {
       payload: Prisma.$DatabaseBackupSettingsPayload<ExtArgs>
       fields: Prisma.DatabaseBackupSettingsFieldRefs
@@ -5729,6 +6029,71 @@ export const NewsBlogTaggedMemberScalarFieldEnum = {
 export type NewsBlogTaggedMemberScalarFieldEnum = (typeof NewsBlogTaggedMemberScalarFieldEnum)[keyof typeof NewsBlogTaggedMemberScalarFieldEnum]
 
 
+export const MemoAnnouncementScalarFieldEnum = {
+  id: 'id',
+  referenceNumber: 'referenceNumber',
+  title: 'title',
+  category: 'category',
+  customCategory: 'customCategory',
+  status: 'status',
+  summary: 'summary',
+  documentName: 'documentName',
+  docxFilePath: 'docxFilePath',
+  pdfFilePath: 'pdfFilePath',
+  pages: 'pages',
+  authorUserId: 'authorUserId',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemoAnnouncementScalarFieldEnum = (typeof MemoAnnouncementScalarFieldEnum)[keyof typeof MemoAnnouncementScalarFieldEnum]
+
+
+export const MemoRecipientScalarFieldEnum = {
+  id: 'id',
+  memoId: 'memoId',
+  userId: 'userId',
+  memberId: 'memberId',
+  name: 'name',
+  email: 'email',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type MemoRecipientScalarFieldEnum = (typeof MemoRecipientScalarFieldEnum)[keyof typeof MemoRecipientScalarFieldEnum]
+
+
+export const MemoAttachmentScalarFieldEnum = {
+  id: 'id',
+  memoId: 'memoId',
+  kind: 'kind',
+  fileName: 'fileName',
+  filePath: 'filePath',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  createdAt: 'createdAt'
+} as const
+
+export type MemoAttachmentScalarFieldEnum = (typeof MemoAttachmentScalarFieldEnum)[keyof typeof MemoAttachmentScalarFieldEnum]
+
+
+export const MemoDeliveryLogScalarFieldEnum = {
+  id: 'id',
+  memoId: 'memoId',
+  recipientId: 'recipientId',
+  email: 'email',
+  status: 'status',
+  messageId: 'messageId',
+  error: 'error',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemoDeliveryLogScalarFieldEnum = (typeof MemoDeliveryLogScalarFieldEnum)[keyof typeof MemoDeliveryLogScalarFieldEnum]
+
+
 export const DatabaseBackupSettingsScalarFieldEnum = {
   id: 'id',
   automaticBackupEnabled: 'automaticBackupEnabled',
@@ -6806,6 +7171,76 @@ export type ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'MemoTemplateType'
+ */
+export type EnumMemoTemplateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoTemplateType'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoTemplateType[]'
+ */
+export type ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoTemplateType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoStatus'
+ */
+export type EnumMemoStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoStatus[]'
+ */
+export type ListEnumMemoStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoRecipientType'
+ */
+export type EnumMemoRecipientTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoRecipientType'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoRecipientType[]'
+ */
+export type ListEnumMemoRecipientTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoRecipientType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoAttachmentKind'
+ */
+export type EnumMemoAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoAttachmentKind'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoAttachmentKind[]'
+ */
+export type ListEnumMemoAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoAttachmentKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoDeliveryStatus'
+ */
+export type EnumMemoDeliveryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoDeliveryStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MemoDeliveryStatus[]'
+ */
+export type ListEnumMemoDeliveryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoDeliveryStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'BackupFrequency'
  */
 export type EnumBackupFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BackupFrequency'>
@@ -6996,6 +7431,10 @@ export type GlobalOmitConfig = {
   newsBlog?: Prisma.NewsBlogOmit
   newsBlogMedia?: Prisma.NewsBlogMediaOmit
   newsBlogTaggedMember?: Prisma.NewsBlogTaggedMemberOmit
+  memoAnnouncement?: Prisma.MemoAnnouncementOmit
+  memoRecipient?: Prisma.MemoRecipientOmit
+  memoAttachment?: Prisma.MemoAttachmentOmit
+  memoDeliveryLog?: Prisma.MemoDeliveryLogOmit
   databaseBackupSettings?: Prisma.DatabaseBackupSettingsOmit
   databaseBackupSnapshot?: Prisma.DatabaseBackupSnapshotOmit
 }

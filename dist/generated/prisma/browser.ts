@@ -293,6 +293,26 @@ export type NewsBlogMedia = Prisma.NewsBlogMediaModel
  */
 export type NewsBlogTaggedMember = Prisma.NewsBlogTaggedMemberModel
 /**
+ * Model MemoAnnouncement
+ * 
+ */
+export type MemoAnnouncement = Prisma.MemoAnnouncementModel
+/**
+ * Model MemoRecipient
+ * 
+ */
+export type MemoRecipient = Prisma.MemoRecipientModel
+/**
+ * Model MemoAttachment
+ * 
+ */
+export type MemoAttachment = Prisma.MemoAttachmentModel
+/**
+ * Model MemoDeliveryLog
+ * 
+ */
+export type MemoDeliveryLog = Prisma.MemoDeliveryLogModel
+/**
  * Model DatabaseBackupSettings
  * 
  */

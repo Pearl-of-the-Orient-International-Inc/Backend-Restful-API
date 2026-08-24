@@ -29,11 +29,18 @@ export async function sendMail({
   subject,
   text,
   html,
+  attachments,
 }: {
   sendTo?: string;
   subject: string;
   text: string;
   html?: string;
+  attachments?: Array<{
+    filename: string;
+    path?: string;
+    content?: Buffer | string;
+    contentType?: string;
+  }>;
 }) {
   try {
     // Verify transporter connection
@@ -46,6 +53,7 @@ export async function sendMail({
       subject: subject,
       text: text,
       html: html ? html : '',
+      attachments,
     });
 
     logger.info('Email sent successfully', {

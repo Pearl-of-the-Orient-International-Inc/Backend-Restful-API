@@ -106,6 +106,10 @@ export const ModelName = {
   NewsBlog: 'NewsBlog',
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
+  MemoAnnouncement: 'MemoAnnouncement',
+  MemoRecipient: 'MemoRecipient',
+  MemoAttachment: 'MemoAttachment',
+  MemoDeliveryLog: 'MemoDeliveryLog',
   DatabaseBackupSettings: 'DatabaseBackupSettings',
   DatabaseBackupSnapshot: 'DatabaseBackupSnapshot'
 } as const
@@ -1136,6 +1140,71 @@ export const NewsBlogTaggedMemberScalarFieldEnum = {
 } as const
 
 export type NewsBlogTaggedMemberScalarFieldEnum = (typeof NewsBlogTaggedMemberScalarFieldEnum)[keyof typeof NewsBlogTaggedMemberScalarFieldEnum]
+
+
+export const MemoAnnouncementScalarFieldEnum = {
+  id: 'id',
+  referenceNumber: 'referenceNumber',
+  title: 'title',
+  category: 'category',
+  customCategory: 'customCategory',
+  status: 'status',
+  summary: 'summary',
+  documentName: 'documentName',
+  docxFilePath: 'docxFilePath',
+  pdfFilePath: 'pdfFilePath',
+  pages: 'pages',
+  authorUserId: 'authorUserId',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemoAnnouncementScalarFieldEnum = (typeof MemoAnnouncementScalarFieldEnum)[keyof typeof MemoAnnouncementScalarFieldEnum]
+
+
+export const MemoRecipientScalarFieldEnum = {
+  id: 'id',
+  memoId: 'memoId',
+  userId: 'userId',
+  memberId: 'memberId',
+  name: 'name',
+  email: 'email',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type MemoRecipientScalarFieldEnum = (typeof MemoRecipientScalarFieldEnum)[keyof typeof MemoRecipientScalarFieldEnum]
+
+
+export const MemoAttachmentScalarFieldEnum = {
+  id: 'id',
+  memoId: 'memoId',
+  kind: 'kind',
+  fileName: 'fileName',
+  filePath: 'filePath',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  createdAt: 'createdAt'
+} as const
+
+export type MemoAttachmentScalarFieldEnum = (typeof MemoAttachmentScalarFieldEnum)[keyof typeof MemoAttachmentScalarFieldEnum]
+
+
+export const MemoDeliveryLogScalarFieldEnum = {
+  id: 'id',
+  memoId: 'memoId',
+  recipientId: 'recipientId',
+  email: 'email',
+  status: 'status',
+  messageId: 'messageId',
+  error: 'error',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MemoDeliveryLogScalarFieldEnum = (typeof MemoDeliveryLogScalarFieldEnum)[keyof typeof MemoDeliveryLogScalarFieldEnum]
 
 
 export const DatabaseBackupSettingsScalarFieldEnum = {

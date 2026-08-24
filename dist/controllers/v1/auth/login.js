@@ -25,7 +25,28 @@ const login_notification_1 = require("../../../mailers/templates/login-notificat
 const enums_1 = require("../../../generated/prisma/enums");
 const client_1 = require("../../../generated/prisma/client");
 const activity_log_1 = require("../../../lib/activity-log");
+const formatDateOfBirthPassword = (dateOfBirth) => {
+    if (!dateOfBirth)
+        return null;
+    const month = String(dateOfBirth.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(dateOfBirth.getUTCDate()).padStart(2, '0');
+    const year = String(dateOfBirth.getUTCFullYear());
+    return `${month}${day}${year}`;
+};
+const getAccountAccessDeniedMessage = (accountStatus, memberStatus) => {
+    if (memberStatus === enums_1.MemberStatus.REJECTED) {
+        return 'Your membership application has been rejected, so this account cannot sign in. Please contact an administrator if you believe this is a mistake.';
+    }
+    if (accountStatus === enums_1.UserAccountStatus.PENDING) {
+        return 'Your account is pending approval. Your membership application has not been approved yet, so sign-in is temporarily disabled. Please wait for an administrator to approve your account.';
+    }
+    if (accountStatus === enums_1.UserAccountStatus.SUSPENDED) {
+        return 'Your account is suspended. Sign-in is disabled for this account. Please contact an administrator for help.';
+    }
+    return 'Your account is not active. Please contact an administrator.';
+};
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     const { email, password, userAgent } = req.body;
     const loginIdentifier = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email)
         ? email.trim().toUpperCase()
@@ -57,6 +78,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     select: {
                         id: true,
                         uniqueId: true,
+                        dateOfBirth: true,
                         status: true,
                         createdAt: true,
                         onboardingProgress: {
@@ -89,7 +111,9 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             return;
         }
-        const isPasswordValid = yield (0, password_hash_1.compareValue)(password, user.password);
+        const dateOfBirthPassword = formatDateOfBirthPassword((_a = user.memberProfile) === null || _a === void 0 ? void 0 : _a.dateOfBirth);
+        const isPasswordValid = (yield (0, password_hash_1.compareValue)(password, user.password)) ||
+            password === dateOfBirthPassword;
         if (!isPasswordValid) {
             yield (0, activity_log_1.createActivityLog)({
                 userId: user.id,
@@ -163,7 +187,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
                 code: 'FORBIDDEN',
-                message: 'Your account is not active. Please contact an administrator.',
+                message: getAccountAccessDeniedMessage(user.accountStatus, (_b = user.memberProfile) === null || _b === void 0 ? void 0 : _b.status),
             });
             return;
         }

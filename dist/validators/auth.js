@@ -49,7 +49,11 @@ exports.registerSchema = zod_1.default.object({
 });
 exports.loginSchema = zod_1.default.object({
     email: exports.loginIdentifierSchema,
-    password: exports.passwordSchema,
+    password: zod_1.default
+        .string()
+        .trim()
+        .min(1, { error: 'Password is required' })
+        .max(255, { error: 'Password must not exceed 255 characters' }),
     userAgent: zod_1.default.string().optional(),
 });
 exports.forgotPasswordSchema = zod_1.default.object({

@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingAcknowledgementReceiptItemScalarFieldEnum = exports.AccountingAcknowledgementReceiptScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryFeeCollectionAccountScalarFieldEnum = exports.SeminaryFeeConfigurationScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryInstructorScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryStudentNotificationScalarFieldEnum = exports.SeminaryGradeRecordScalarFieldEnum = exports.SeminaryExaminationScalarFieldEnum = exports.SeminaryAssignmentScalarFieldEnum = exports.SeminaryStudyMaterialScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.MemoDeliveryLogScalarFieldEnum = exports.MemoAttachmentScalarFieldEnum = exports.MemoRecipientScalarFieldEnum = exports.MemoAnnouncementScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -101,6 +101,10 @@ exports.ModelName = {
     NewsBlog: 'NewsBlog',
     NewsBlogMedia: 'NewsBlogMedia',
     NewsBlogTaggedMember: 'NewsBlogTaggedMember',
+    MemoAnnouncement: 'MemoAnnouncement',
+    MemoRecipient: 'MemoRecipient',
+    MemoAttachment: 'MemoAttachment',
+    MemoDeliveryLog: 'MemoDeliveryLog',
     DatabaseBackupSettings: 'DatabaseBackupSettings',
     DatabaseBackupSnapshot: 'DatabaseBackupSnapshot'
 };
@@ -901,6 +905,55 @@ exports.NewsBlogTaggedMemberScalarFieldEnum = {
     newsBlogId: 'newsBlogId',
     memberId: 'memberId',
     taggedAt: 'taggedAt'
+};
+exports.MemoAnnouncementScalarFieldEnum = {
+    id: 'id',
+    referenceNumber: 'referenceNumber',
+    title: 'title',
+    category: 'category',
+    customCategory: 'customCategory',
+    status: 'status',
+    summary: 'summary',
+    documentName: 'documentName',
+    docxFilePath: 'docxFilePath',
+    pdfFilePath: 'pdfFilePath',
+    pages: 'pages',
+    authorUserId: 'authorUserId',
+    publishedAt: 'publishedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MemoRecipientScalarFieldEnum = {
+    id: 'id',
+    memoId: 'memoId',
+    userId: 'userId',
+    memberId: 'memberId',
+    name: 'name',
+    email: 'email',
+    type: 'type',
+    createdAt: 'createdAt'
+};
+exports.MemoAttachmentScalarFieldEnum = {
+    id: 'id',
+    memoId: 'memoId',
+    kind: 'kind',
+    fileName: 'fileName',
+    filePath: 'filePath',
+    mimeType: 'mimeType',
+    fileSize: 'fileSize',
+    createdAt: 'createdAt'
+};
+exports.MemoDeliveryLogScalarFieldEnum = {
+    id: 'id',
+    memoId: 'memoId',
+    recipientId: 'recipientId',
+    email: 'email',
+    status: 'status',
+    messageId: 'messageId',
+    error: 'error',
+    sentAt: 'sentAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
 exports.DatabaseBackupSettingsScalarFieldEnum = {
     id: 'id',

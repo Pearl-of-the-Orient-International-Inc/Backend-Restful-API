@@ -27,19 +27,21 @@ model User {
   twoFactorSecret    String?
   role               UserType @default(MEMBER)
 
-  userTokens         UserToken[]
-  sessions           Session[]
-  activityLogs       ActivityLog[]
-  verificationCodes  VerificationCode[]
-  passkeyCredentials PasskeyCredential[]
-  passkeyChallenge   PasskeyChallenge?
-  memberProfile      Member?
-  followedMembers    MemberFollow[]
-  createdBackups     DatabaseBackupSnapshot[] @relation("CreatedDatabaseBackups")
-  restoredBackups    DatabaseBackupSnapshot[] @relation("RestoredDatabaseBackups")
+  userTokens           UserToken[]
+  sessions             Session[]
+  activityLogs         ActivityLog[]
+  verificationCodes    VerificationCode[]
+  passkeyCredentials   PasskeyCredential[]
+  passkeyChallenge     PasskeyChallenge?
+  memberProfile        Member?
+  followedMembers      MemberFollow[]
+  createdBackups       DatabaseBackupSnapshot[] @relation("CreatedDatabaseBackups")
+  restoredBackups      DatabaseBackupSnapshot[] @relation("RestoredDatabaseBackups")
   backupSettingUpdates DatabaseBackupSettings[] @relation("BackupSettingsUpdatedBy")
-  assignedTasks      TaskItem[] @relation("TaskAssignee")
-  seminaryInstructor SeminaryInstructor?
+  assignedTasks        TaskItem[]               @relation("TaskAssignee")
+  seminaryInstructor   SeminaryInstructor?
+  authoredMemos        MemoAnnouncement[]       @relation("MemoAnnouncementAuthor")
+  memoRecipients       MemoRecipient[]          @relation("MemoRecipientUser")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -168,9 +170,9 @@ model Member {
   status     MemberStatus @default(PENDING)
   memberType MemberType   @default(ASSOCIATE_CHAPLAIN)
 
-  badgeNumber String?
-  profileBannerUrl String?
-  profileBannerPositionY Int @default(50)
+  badgeNumber            String?
+  profileBannerUrl       String?
+  profileBannerPositionY Int     @default(50)
 
   // Contact Information
   firstName         String
@@ -237,6 +239,7 @@ model Member {
   eventAttendances           EventAttendee[]
   taggedEvents               EventTaggedMember[]
   taggedNewsBlogs            NewsBlogTaggedMember[]
+  memoRecipients             MemoRecipient[]                   @relation("MemoRecipientMember")
   followers                  MemberFollow[]
 
   isActive Boolean @default(true)
@@ -433,8 +436,8 @@ model MemberPublicRecord {
   location         String
   status           MemberPublicRecordStatus @default(PUBLISHED)
 
-  memberId String
-  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId    String
+  member      Member                         @relation(fields: [memberId], references: [id], onDelete: Cascade)
   attachments MemberPublicRecordAttachment[]
 
   createdAt DateTime @default(now())
@@ -448,10 +451,10 @@ model MemberPublicRecord {
 model MemberPublicRecordAttachment {
   id String @id @default(uuid())
 
-  fileUrl  String
-  fileName String?
-  mimeType String?
-  sortOrder Int @default(0)
+  fileUrl   String
+  fileName  String?
+  mimeType  String?
+  sortOrder Int     @default(0)
 
   publicRecordId String
   publicRecord   MemberPublicRecord @relation(fields: [publicRecordId], references: [id], onDelete: Cascade)
@@ -482,38 +485,38 @@ model MemberChaplaincyTrainingProgress {
 model SeminaryApplication {
   id String @id @default(uuid())
 
-  status           SeminaryApplicationStatus @default(SUBMITTED)
-  targetMemberType MemberType                @default(PROFESSIONAL_CHAPLAIN)
-  admissionNumber  String?                   @unique
-  studentId        String?                   @unique
-  studentStatus    SeminaryStudentStatus     @default(ACTIVE)
-  enrollmentType   SeminaryEnrollmentType    @default(REGULAR)
+  status            SeminaryApplicationStatus @default(SUBMITTED)
+  targetMemberType  MemberType                @default(PROFESSIONAL_CHAPLAIN)
+  admissionNumber   String?                   @unique
+  studentId         String?                   @unique
+  studentStatus     SeminaryStudentStatus     @default(ACTIVE)
+  enrollmentType    SeminaryEnrollmentType    @default(REGULAR)
   schoolAffiliation SeminarySchoolAffiliation @default(IN_HOUSE)
-  yearLevel        String?
+  yearLevel         String?
 
   // Personal Information
-  academicYear String?
-  surname      String?
-  givenName    String?
-  middleName   String?
-  emailAddress String?
-  mobilePhone  String?
+  academicYear   String?
+  surname        String?
+  givenName      String?
+  middleName     String?
+  emailAddress   String?
+  mobilePhone    String?
   mailingAddress String?
-  homeAddress  String?
-  dateOfBirth  DateTime?
-  birthPlace   String?
-  age          Int?
-  gender       Gender?
-  height       String?
-  weight       String?
-  civilStatus  CivilStatus?
-  officePhone  String?
+  homeAddress    String?
+  dateOfBirth    DateTime?
+  birthPlace     String?
+  age            Int?
+  gender         Gender?
+  height         String?
+  weight         String?
+  civilStatus    CivilStatus?
+  officePhone    String?
 
   // Ministry
-  churchAttended  String?
-  churchAddress   String?
-  pastorName      String?
-  contactNumber   String?
+  churchAttended   String?
+  churchAddress    String?
+  pastorName       String?
+  contactNumber    String?
   ministryInvolved String?
 
   // Curriculum of Interest
@@ -521,17 +524,17 @@ model SeminaryApplication {
   programCourse String?
 
   // Educational Background
-  highSchool                  String?
-  highSchoolYearGraduated     String?
-  collegeSchool               String?
-  collegeCourse               String?
-  collegeYearGraduated        String?
-  vocationalSchool            String?
-  vocationalCourse            String?
-  vocationalYearGraduated     String?
-  othersSchool                String?
-  othersCourse                String?
-  othersYearGraduated         String?
+  highSchool              String?
+  highSchoolYearGraduated String?
+  collegeSchool           String?
+  collegeCourse           String?
+  collegeYearGraduated    String?
+  vocationalSchool        String?
+  vocationalCourse        String?
+  vocationalYearGraduated String?
+  othersSchool            String?
+  othersCourse            String?
+  othersYearGraduated     String?
 
   submittedAt   DateTime  @default(now())
   reviewedAt    DateTime?
@@ -540,8 +543,8 @@ model SeminaryApplication {
   memberId String?
   member   Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
-  requirements SeminaryRequirements?
-  payment      SeminaryPayment?
+  requirements        SeminaryRequirements?
+  payment             SeminaryPayment?
   credentialDocuments SeminaryCredentialDocument[]
 
   createdAt DateTime @default(now())
@@ -609,14 +612,14 @@ model SeminaryRequirements {
 model SeminaryPayment {
   id String @id @default(uuid())
 
-  paymentType     SeminaryPaymentType
-  paymentMethod   SeminaryPaymentMethod
-  amountPaid      Decimal              @db.Decimal(12, 2)
-  totalAmountDue  Decimal              @db.Decimal(12, 2)
-  status          SeminaryPaymentStatus @default(PENDING)
-  submittedAt     DateTime             @default(now())
-  verifiedAt      DateTime?
-  reviewRemarks   String?
+  paymentType    SeminaryPaymentType
+  paymentMethod  SeminaryPaymentMethod
+  amountPaid     Decimal               @db.Decimal(12, 2)
+  totalAmountDue Decimal               @db.Decimal(12, 2)
+  status         SeminaryPaymentStatus @default(PENDING)
+  submittedAt    DateTime              @default(now())
+  verifiedAt     DateTime?
+  reviewRemarks  String?
 
   proofOfReceiptUrl      String?
   proofOfReceiptFileName String?
@@ -656,18 +659,18 @@ model SeminaryCourse {
 model SeminaryStudyMaterial {
   id String @id @default(uuid())
 
-  title          String
-  subtitle       String?
-  subject        String
-  type           SeminaryStudyMaterialType
-  status         SeminaryStudyMaterialStatus @default(DRAFT)
-  fileUrl        String
-  fileName       String
-  mimeType       String?
-  fileSize       Int?
-  downloads      Int                         @default(0)
-  uploadedByName String
-  uploadedByRole String
+  title            String
+  subtitle         String?
+  subject          String
+  type             SeminaryStudyMaterialType
+  status           SeminaryStudyMaterialStatus @default(DRAFT)
+  fileUrl          String
+  fileName         String
+  mimeType         String?
+  fileSize         Int?
+  downloads        Int                         @default(0)
+  uploadedByName   String
+  uploadedByRole   String
   uploadedByUserId String?
 
   createdAt DateTime @default(now())
@@ -714,24 +717,24 @@ model SeminaryAssignment {
 model SeminaryExamination {
   id String @id @default(uuid())
 
-  title            String
-  coverage         String
-  subject          String
-  courseId         String?
-  courseName       String?
-  courseCode       String?
-  instructorUserId String?
-  instructorName   String
-  examType         String
-  scheduledAt      DateTime
-  durationMinutes  Int
-  status           SeminaryExaminationStatus @default(DRAFT)
-  totalPoints      Int
-  passingScore     Int
-  instructions     String?
-  randomizeQuestions Boolean @default(false)
-  showResults      Boolean @default(true)
-  questions        Json @default("[]")
+  title              String
+  coverage           String
+  subject            String
+  courseId           String?
+  courseName         String?
+  courseCode         String?
+  instructorUserId   String?
+  instructorName     String
+  examType           String
+  scheduledAt        DateTime
+  durationMinutes    Int
+  status             SeminaryExaminationStatus @default(DRAFT)
+  totalPoints        Int
+  passingScore       Int
+  instructions       String?
+  randomizeQuestions Boolean                   @default(false)
+  showResults        Boolean                   @default(true)
+  questions          Json                      @default("[]")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -803,12 +806,12 @@ model SeminaryStudentNotification {
 model SeminaryAcademicYear {
   id String @id @default(uuid())
 
-  academicYear String                     @unique
+  academicYear String                      @unique
   session      SeminaryAcademicYearSession
   status       SeminaryAcademicYearStatus
   startDate    DateTime
   endDate      DateTime
-  sortOrder    Int                        @default(0)
+  sortOrder    Int                         @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -822,8 +825,8 @@ model SeminaryAcademicYear {
 model SeminaryInstructor {
   id String @id @default(uuid())
 
-  userId            String?                  @unique
-  user              User?                    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   facultyId         String                   @unique
   name              String
@@ -837,8 +840,8 @@ model SeminaryInstructor {
 
   biography             String
   educationalBackground String
-  areasOfExpertise      String[]             @default([])
-  credentials           String[]             @default([])
+  areasOfExpertise      String[] @default([])
+  credentials           String[] @default([])
   formalPhotoUrl        String
 
   isFilipinoCitizen              Boolean  @default(true)
@@ -1039,17 +1042,17 @@ model AccountingReceivableItem {
 model AccountingAcknowledgementReceipt {
   id String @id @default(uuid())
 
-  receiptNo    String                        @unique
+  receiptNo    String              @unique
   organization ReceiptOrganization
   name         String
   receiptDate  DateTime
   course       String?
   school       String?
-  paymentType  ReceiptPaymentType            @default(CASH)
+  paymentType  ReceiptPaymentType  @default(CASH)
   checkNo      String?
   cashier      String?
   remarks      String?
-  totalAmount  Decimal                       @default(0) @db.Decimal(12, 2)
+  totalAmount  Decimal             @default(0) @db.Decimal(12, 2)
 
   items AccountingAcknowledgementReceiptItem[]
 
@@ -1084,18 +1087,18 @@ model AccountingAcknowledgementReceiptItem {
 model AccountingLedgerTransaction {
   id String @id @default(uuid())
 
-  transactionNo String                          @unique
+  transactionNo   String                            @unique
   transactionDate DateTime
-  type          AccountingLedgerTransactionType
-  party         String
-  note          String?
-  account       String
-  accountNo     String?
-  category      String
-  debit         Decimal                         @default(0) @db.Decimal(12, 2)
-  credit        Decimal                         @default(0) @db.Decimal(12, 2)
-  status        AccountingLedgerTransactionStatus
-  reference     String?
+  type            AccountingLedgerTransactionType
+  party           String
+  note            String?
+  account         String
+  accountNo       String?
+  category        String
+  debit           Decimal                           @default(0) @db.Decimal(12, 2)
+  credit          Decimal                           @default(0) @db.Decimal(12, 2)
+  status          AccountingLedgerTransactionStatus
+  reference       String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1113,7 +1116,7 @@ model TaskBoard {
 
   title     String
   color     String
-  sortOrder Int    @default(0)
+  sortOrder Int     @default(0)
   isDefault Boolean @default(false)
 
   tasks TaskItem[]
@@ -1229,9 +1232,9 @@ model Event {
   startsAt DateTime
   endsAt   DateTime
 
-  status     EventStatus     @default(SCHEDULED)
-  visibility EventVisibility @default(PUBLIC)
-  attendees  EventAttendee[]
+  status        EventStatus         @default(SCHEDULED)
+  visibility    EventVisibility     @default(PUBLIC)
+  attendees     EventAttendee[]
   taggedMembers EventTaggedMember[]
 
   createdAt DateTime @default(now())
@@ -1247,12 +1250,12 @@ model EventAttendee {
   id String @id @default(uuid())
 
   eventId String
-  event   Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
-  accessLevel EventAttendeeAccessLevel   @default(FULL_ACCESS)
+  accessLevel  EventAttendeeAccessLevel  @default(FULL_ACCESS)
   inviteStatus EventAttendeeInviteStatus @default(INVITED)
 
   invitedAt DateTime @default(now())
@@ -1267,7 +1270,7 @@ model EventTaggedMember {
   id String @id @default(uuid())
 
   eventId String
-  event   Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -1288,7 +1291,7 @@ model NewsBlog {
   status   NewsBlogStatus   @default(DRAFT)
   platform NewsBlogPlatform @default(FACEBOOK)
 
-  hashtags    String[] @default([])
+  hashtags    String[]  @default([])
   scheduledAt DateTime?
   publishedAt DateTime?
 
@@ -1339,6 +1342,110 @@ model NewsBlogTaggedMember {
   @@index([memberId])
 }
 
+model MemoAnnouncement {
+  id String @id @default(uuid())
+
+  referenceNumber String           @unique
+  title           String
+  category        MemoTemplateType
+  customCategory  String?
+  status          MemoStatus       @default(DRAFT)
+  summary         String?
+  documentName    String
+  docxFilePath    String?
+  pdfFilePath     String?
+  pages           Int?
+
+  authorUserId String?
+  authorUser   User?   @relation("MemoAnnouncementAuthor", fields: [authorUserId], references: [id], onDelete: SetNull)
+
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  recipients   MemoRecipient[]
+  attachments  MemoAttachment[]
+  deliveryLogs MemoDeliveryLog[]
+
+  @@index([referenceNumber])
+  @@index([title])
+  @@index([category])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([createdAt])
+  @@index([updatedAt])
+}
+
+model MemoRecipient {
+  id String @id @default(uuid())
+
+  memoId String
+  memo   MemoAnnouncement @relation(fields: [memoId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation("MemoRecipientUser", fields: [userId], references: [id], onDelete: SetNull)
+
+  memberId String?
+  member   Member? @relation("MemoRecipientMember", fields: [memberId], references: [id], onDelete: SetNull)
+
+  name  String
+  email String
+  type  MemoRecipientType
+
+  createdAt DateTime @default(now())
+
+  deliveryLogs MemoDeliveryLog[]
+
+  @@unique([memoId, userId])
+  @@unique([memoId, memberId])
+  @@index([memoId])
+  @@index([userId])
+  @@index([memberId])
+  @@index([email])
+}
+
+model MemoAttachment {
+  id String @id @default(uuid())
+
+  memoId String
+  memo   MemoAnnouncement @relation(fields: [memoId], references: [id], onDelete: Cascade)
+
+  kind     MemoAttachmentKind
+  fileName String
+  filePath String
+  mimeType String
+  fileSize Int
+
+  createdAt DateTime @default(now())
+
+  @@index([memoId])
+  @@index([kind])
+}
+
+model MemoDeliveryLog {
+  id String @id @default(uuid())
+
+  memoId String
+  memo   MemoAnnouncement @relation(fields: [memoId], references: [id], onDelete: Cascade)
+
+  recipientId String
+  recipient   MemoRecipient @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+
+  email     String
+  status    MemoDeliveryStatus @default(PENDING)
+  messageId String?
+  error     String?
+  sentAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([memoId])
+  @@index([recipientId])
+  @@index([email])
+  @@index([status])
+}
+
 model DatabaseBackupSettings {
   id String @id @default(uuid())
 
@@ -1361,19 +1468,19 @@ model DatabaseBackupSnapshot {
   fileUrl  String
   fileName String
 
-  source       BackupSnapshotSource @default(MANUAL)
-  status       BackupSnapshotStatus @default(READY)
-  sizeBytes    Int
-  tableCount   Int
+  source        BackupSnapshotSource @default(MANUAL)
+  status        BackupSnapshotStatus @default(READY)
+  sizeBytes     Int
+  tableCount    Int
   retentionDays Int
-  metadata     Json?
+  metadata      Json?
 
   createdByUserId String?
   createdByUser   User?   @relation("CreatedDatabaseBackups", fields: [createdByUserId], references: [id], onDelete: SetNull)
 
   restoredAt       DateTime?
   restoredByUserId String?
-  restoredByUser   User?   @relation("RestoredDatabaseBackups", fields: [restoredByUserId], references: [id], onDelete: SetNull)
+  restoredByUser   User?     @relation("RestoredDatabaseBackups", fields: [restoredByUserId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1814,6 +1921,39 @@ enum NewsBlogPlatform {
 enum NewsBlogMediaKind {
   IMAGE
   VIDEO
+}
+
+enum MemoTemplateType {
+  ANNOUNCEMENT
+  GENERAL_OFFICE
+  INCIDENT_REPORT
+  MEETING_NOTICE
+  POLICY_CHANGE
+  BLANK
+}
+
+enum MemoStatus {
+  DRAFT
+  PUBLISHING
+  PUBLISHED
+  FAILED
+  ARCHIVED
+}
+
+enum MemoRecipientType {
+  USER
+  MEMBER
+}
+
+enum MemoAttachmentKind {
+  DOCX
+  PDF
+}
+
+enum MemoDeliveryStatus {
+  PENDING
+  SENT
+  FAILED
 }
 
 enum BackupFrequency {

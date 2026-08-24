@@ -30,7 +30,7 @@ const transporter = nodemailer_1.default.createTransport({
     },
 });
 function sendMail(_a) {
-    return __awaiter(this, arguments, void 0, function* ({ sendTo, subject, text, html, }) {
+    return __awaiter(this, arguments, void 0, function* ({ sendTo, subject, text, html, attachments, }) {
         try {
             yield transporter.verify();
             const info = yield transporter.sendMail({
@@ -39,6 +39,7 @@ function sendMail(_a) {
                 subject: subject,
                 text: text,
                 html: html ? html : '',
+                attachments,
             });
             winston_1.logger.info('Email sent successfully', {
                 messageId: info.messageId,

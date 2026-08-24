@@ -16,7 +16,7 @@ import {
 import config from '@/config';
 import { sendMail } from '@/mailers';
 import { loginNotificationTemplate } from '@/mailers/templates/login-notification';
-import { UserAccountStatus } from '@/generated/prisma/enums';
+import { MemberStatus, UserAccountStatus } from '@/generated/prisma/enums';
 import {
   ActivityLogActionType,
   ActivityLogResult,
@@ -28,6 +28,35 @@ import { createActivityLog } from '@/lib/activity-log';
  */
 import type { Request, Response } from 'express';
 import { LoginSchema } from '@/validators/auth';
+
+const formatDateOfBirthPassword = (dateOfBirth?: Date | null) => {
+  if (!dateOfBirth) return null;
+
+  const month = String(dateOfBirth.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(dateOfBirth.getUTCDate()).padStart(2, '0');
+  const year = String(dateOfBirth.getUTCFullYear());
+
+  return `${month}${day}${year}`;
+};
+
+const getAccountAccessDeniedMessage = (
+  accountStatus: UserAccountStatus,
+  memberStatus?: MemberStatus | null,
+) => {
+  if (memberStatus === MemberStatus.REJECTED) {
+    return 'Your membership application has been rejected, so this account cannot sign in. Please contact an administrator if you believe this is a mistake.';
+  }
+
+  if (accountStatus === UserAccountStatus.PENDING) {
+    return 'Your account is pending approval. Your membership application has not been approved yet, so sign-in is temporarily disabled. Please wait for an administrator to approve your account.';
+  }
+
+  if (accountStatus === UserAccountStatus.SUSPENDED) {
+    return 'Your account is suspended. Sign-in is disabled for this account. Please contact an administrator for help.';
+  }
+
+  return 'Your account is not active. Please contact an administrator.';
+};
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password, userAgent } = req.body as LoginSchema;
@@ -66,6 +95,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
           select: {
             id: true,
             uniqueId: true,
+            dateOfBirth: true,
             status: true,
             createdAt: true,
             onboardingProgress: {
@@ -101,7 +131,12 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const isPasswordValid = await compareValue(password, user.password);
+    const dateOfBirthPassword = formatDateOfBirthPassword(
+      user.memberProfile?.dateOfBirth,
+    );
+    const isPasswordValid =
+      (await compareValue(password, user.password)) ||
+      password === dateOfBirthPassword;
 
     if (!isPasswordValid) {
       await createActivityLog({
@@ -183,7 +218,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       });
       res.status(HTTPSTATUS.FORBIDDEN).json({
         code: 'FORBIDDEN',
-        message: 'Your account is not active. Please contact an administrator.',
+        message: getAccountAccessDeniedMessage(
+          user.accountStatus,
+          user.memberProfile?.status,
+        ),
       });
       return;
     }
