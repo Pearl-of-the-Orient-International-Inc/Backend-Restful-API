@@ -30,9 +30,14 @@ const newsBlogBodySchema = zod_1.z.object({
         .max(20000, { message: 'Caption must not exceed 20000 characters' }),
     status: zod_1.z.enum(enums_1.NewsBlogStatus).optional(),
     platform: zod_1.z.enum(enums_1.NewsBlogPlatform).optional(),
-    media: zod_1.z.array(mediaItemSchema).max(10, { message: 'Media must not exceed 10 files' }),
+    media: zod_1.z
+        .array(mediaItemSchema)
+        .max(10, { message: 'Media must not exceed 10 files' }),
     taggedMemberIds: zod_1.z.array(zod_1.z.uuid()).max(100).optional(),
-    hashtags: zod_1.z.array(hashtagSchema).max(50, { message: 'Hashtags must not exceed 50 items' }),
+    hashtags: zod_1.z
+        .array(hashtagSchema)
+        .max(50, { message: 'Hashtags must not exceed 50 items' }),
+    facebookPostId: zod_1.z.string().trim().min(1).max(255).nullable().optional(),
     scheduledAt: zod_1.z.iso.datetime().nullable().optional(),
     publishedAt: zod_1.z.iso.datetime().nullable().optional(),
 });
@@ -60,7 +65,9 @@ exports.getAllNewsBlogsSchema = zod_1.z.object({
         }),
         search: zod_1.z.string().trim().min(1).max(150).optional(),
         status: zod_1.z.enum(enums_1.NewsBlogStatus).optional(),
-        sortBy: zod_1.z.enum(['createdAt', 'updatedAt', 'scheduledAt', 'title']).optional(),
+        sortBy: zod_1.z
+            .enum(['createdAt', 'updatedAt', 'scheduledAt', 'title'])
+            .optional(),
         sortOrder: zod_1.z.enum(['asc', 'desc']).optional(),
     }),
 });

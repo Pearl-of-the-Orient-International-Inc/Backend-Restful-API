@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingAcknowledgementReceiptItemScalarFieldEnum = exports.AccountingAcknowledgementReceiptScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryFeeCollectionAccountScalarFieldEnum = exports.SeminaryFeeConfigurationScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryInstructorScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryStudentNotificationScalarFieldEnum = exports.SeminaryGradeRecordScalarFieldEnum = exports.SeminaryExaminationScalarFieldEnum = exports.SeminaryAssignmentScalarFieldEnum = exports.SeminaryStudyMaterialScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.MemoDeliveryLogScalarFieldEnum = exports.MemoAttachmentScalarFieldEnum = exports.MemoRecipientScalarFieldEnum = exports.MemoAnnouncementScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.MemoDeliveryLogScalarFieldEnum = exports.MemoAttachmentScalarFieldEnum = exports.MemoRecipientScalarFieldEnum = exports.MemoAnnouncementScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.OwnerAccessCredentialScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -90,6 +90,7 @@ exports.ModelName = {
     AccountingAcknowledgementReceipt: 'AccountingAcknowledgementReceipt',
     AccountingAcknowledgementReceiptItem: 'AccountingAcknowledgementReceiptItem',
     AccountingLedgerTransaction: 'AccountingLedgerTransaction',
+    OwnerAccessCredential: 'OwnerAccessCredential',
     TaskBoard: 'TaskBoard',
     TaskItem: 'TaskItem',
     BranchOfService: 'BranchOfService',
@@ -786,6 +787,13 @@ exports.AccountingLedgerTransactionScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.OwnerAccessCredentialScalarFieldEnum = {
+    id: 'id',
+    pinHash: 'pinHash',
+    lastLoginAt: 'lastLoginAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
 exports.TaskBoardScalarFieldEnum = {
     id: 'id',
     title: 'title',
@@ -886,6 +894,7 @@ exports.NewsBlogScalarFieldEnum = {
     status: 'status',
     platform: 'platform',
     hashtags: 'hashtags',
+    facebookPostId: 'facebookPostId',
     scheduledAt: 'scheduledAt',
     publishedAt: 'publishedAt',
     createdAt: 'createdAt',

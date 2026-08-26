@@ -1111,6 +1111,16 @@ model AccountingLedgerTransaction {
   @@index([createdAt])
 }
 
+model OwnerAccessCredential {
+  id String @id @default("owner")
+
+  pinHash     String
+  lastLoginAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model TaskBoard {
   id String @id @default(uuid())
 
@@ -1291,9 +1301,10 @@ model NewsBlog {
   status   NewsBlogStatus   @default(DRAFT)
   platform NewsBlogPlatform @default(FACEBOOK)
 
-  hashtags    String[]  @default([])
-  scheduledAt DateTime?
-  publishedAt DateTime?
+  hashtags       String[]  @default([])
+  facebookPostId String?
+  scheduledAt    DateTime?
+  publishedAt    DateTime?
 
   media         NewsBlogMedia[]
   taggedMembers NewsBlogTaggedMember[]
@@ -1304,6 +1315,7 @@ model NewsBlog {
   @@index([status])
   @@index([isActive])
   @@index([platform])
+  @@index([facebookPostId])
   @@index([scheduledAt])
   @@index([createdAt])
   @@index([updatedAt])

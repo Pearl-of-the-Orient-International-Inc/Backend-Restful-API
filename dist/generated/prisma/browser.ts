@@ -238,6 +238,11 @@ export type AccountingAcknowledgementReceiptItem = Prisma.AccountingAcknowledgem
  */
 export type AccountingLedgerTransaction = Prisma.AccountingLedgerTransactionModel
 /**
+ * Model OwnerAccessCredential
+ * 
+ */
+export type OwnerAccessCredential = Prisma.OwnerAccessCredentialModel
+/**
  * Model TaskBoard
  * 
  */

@@ -31,6 +31,7 @@ export type NewsBlogMinAggregateOutputType = {
   isActive: boolean | null
   status: $Enums.NewsBlogStatus | null
   platform: $Enums.NewsBlogPlatform | null
+  facebookPostId: string | null
   scheduledAt: Date | null
   publishedAt: Date | null
   createdAt: Date | null
@@ -44,6 +45,7 @@ export type NewsBlogMaxAggregateOutputType = {
   isActive: boolean | null
   status: $Enums.NewsBlogStatus | null
   platform: $Enums.NewsBlogPlatform | null
+  facebookPostId: string | null
   scheduledAt: Date | null
   publishedAt: Date | null
   createdAt: Date | null
@@ -58,6 +60,7 @@ export type NewsBlogCountAggregateOutputType = {
   status: number
   platform: number
   hashtags: number
+  facebookPostId: number
   scheduledAt: number
   publishedAt: number
   createdAt: number
@@ -73,6 +76,7 @@ export type NewsBlogMinAggregateInputType = {
   isActive?: true
   status?: true
   platform?: true
+  facebookPostId?: true
   scheduledAt?: true
   publishedAt?: true
   createdAt?: true
@@ -86,6 +90,7 @@ export type NewsBlogMaxAggregateInputType = {
   isActive?: true
   status?: true
   platform?: true
+  facebookPostId?: true
   scheduledAt?: true
   publishedAt?: true
   createdAt?: true
@@ -100,6 +105,7 @@ export type NewsBlogCountAggregateInputType = {
   status?: true
   platform?: true
   hashtags?: true
+  facebookPostId?: true
   scheduledAt?: true
   publishedAt?: true
   createdAt?: true
@@ -187,6 +193,7 @@ export type NewsBlogGroupByOutputType = {
   status: $Enums.NewsBlogStatus
   platform: $Enums.NewsBlogPlatform
   hashtags: string[]
+  facebookPostId: string | null
   scheduledAt: Date | null
   publishedAt: Date | null
   createdAt: Date
@@ -222,6 +229,7 @@ export type NewsBlogWhereInput = {
   status?: Prisma.EnumNewsBlogStatusFilter<"NewsBlog"> | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFilter<"NewsBlog"> | $Enums.NewsBlogPlatform
   hashtags?: Prisma.StringNullableListFilter<"NewsBlog">
+  facebookPostId?: Prisma.StringNullableFilter<"NewsBlog"> | string | null
   scheduledAt?: Prisma.DateTimeNullableFilter<"NewsBlog"> | Date | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"NewsBlog"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"NewsBlog"> | Date | string
@@ -238,6 +246,7 @@ export type NewsBlogOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   hashtags?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -257,6 +266,7 @@ export type NewsBlogWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumNewsBlogStatusFilter<"NewsBlog"> | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFilter<"NewsBlog"> | $Enums.NewsBlogPlatform
   hashtags?: Prisma.StringNullableListFilter<"NewsBlog">
+  facebookPostId?: Prisma.StringNullableFilter<"NewsBlog"> | string | null
   scheduledAt?: Prisma.DateTimeNullableFilter<"NewsBlog"> | Date | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"NewsBlog"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"NewsBlog"> | Date | string
@@ -273,6 +283,7 @@ export type NewsBlogOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   hashtags?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -293,6 +304,7 @@ export type NewsBlogScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumNewsBlogStatusWithAggregatesFilter<"NewsBlog"> | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformWithAggregatesFilter<"NewsBlog"> | $Enums.NewsBlogPlatform
   hashtags?: Prisma.StringNullableListFilter<"NewsBlog">
+  facebookPostId?: Prisma.StringNullableWithAggregatesFilter<"NewsBlog"> | string | null
   scheduledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"NewsBlog"> | Date | string | null
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"NewsBlog"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"NewsBlog"> | Date | string
@@ -307,6 +319,7 @@ export type NewsBlogCreateInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -323,6 +336,7 @@ export type NewsBlogUncheckedCreateInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -339,6 +353,7 @@ export type NewsBlogUpdateInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -355,6 +370,7 @@ export type NewsBlogUncheckedUpdateInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -371,6 +387,7 @@ export type NewsBlogCreateManyInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -385,6 +402,7 @@ export type NewsBlogUpdateManyMutationInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -399,6 +417,7 @@ export type NewsBlogUncheckedUpdateManyInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -413,6 +432,7 @@ export type NewsBlogCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   hashtags?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -426,6 +446,7 @@ export type NewsBlogMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   status?: Prisma.SortOrder
   platform?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -439,6 +460,7 @@ export type NewsBlogMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   status?: Prisma.SortOrder
   platform?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -503,6 +525,7 @@ export type NewsBlogCreateWithoutMediaInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -518,6 +541,7 @@ export type NewsBlogUncheckedCreateWithoutMediaInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -549,6 +573,7 @@ export type NewsBlogUpdateWithoutMediaInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -564,6 +589,7 @@ export type NewsBlogUncheckedUpdateWithoutMediaInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -579,6 +605,7 @@ export type NewsBlogCreateWithoutTaggedMembersInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -594,6 +621,7 @@ export type NewsBlogUncheckedCreateWithoutTaggedMembersInput = {
   status?: $Enums.NewsBlogStatus
   platform?: $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogCreatehashtagsInput | string[]
+  facebookPostId?: string | null
   scheduledAt?: Date | string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
@@ -625,6 +653,7 @@ export type NewsBlogUpdateWithoutTaggedMembersInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -640,6 +669,7 @@ export type NewsBlogUncheckedUpdateWithoutTaggedMembersInput = {
   status?: Prisma.EnumNewsBlogStatusFieldUpdateOperationsInput | $Enums.NewsBlogStatus
   platform?: Prisma.EnumNewsBlogPlatformFieldUpdateOperationsInput | $Enums.NewsBlogPlatform
   hashtags?: Prisma.NewsBlogUpdatehashtagsInput | string[]
+  facebookPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -695,6 +725,7 @@ export type NewsBlogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   platform?: boolean
   hashtags?: boolean
+  facebookPostId?: boolean
   scheduledAt?: boolean
   publishedAt?: boolean
   createdAt?: boolean
@@ -712,6 +743,7 @@ export type NewsBlogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   platform?: boolean
   hashtags?: boolean
+  facebookPostId?: boolean
   scheduledAt?: boolean
   publishedAt?: boolean
   createdAt?: boolean
@@ -726,6 +758,7 @@ export type NewsBlogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   platform?: boolean
   hashtags?: boolean
+  facebookPostId?: boolean
   scheduledAt?: boolean
   publishedAt?: boolean
   createdAt?: boolean
@@ -740,13 +773,14 @@ export type NewsBlogSelectScalar = {
   status?: boolean
   platform?: boolean
   hashtags?: boolean
+  facebookPostId?: boolean
   scheduledAt?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type NewsBlogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "caption" | "isActive" | "status" | "platform" | "hashtags" | "scheduledAt" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["newsBlog"]>
+export type NewsBlogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "caption" | "isActive" | "status" | "platform" | "hashtags" | "facebookPostId" | "scheduledAt" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["newsBlog"]>
 export type NewsBlogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   media?: boolean | Prisma.NewsBlog$mediaArgs<ExtArgs>
   taggedMembers?: boolean | Prisma.NewsBlog$taggedMembersArgs<ExtArgs>
@@ -769,6 +803,7 @@ export type $NewsBlogPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     status: $Enums.NewsBlogStatus
     platform: $Enums.NewsBlogPlatform
     hashtags: string[]
+    facebookPostId: string | null
     scheduledAt: Date | null
     publishedAt: Date | null
     createdAt: Date
@@ -1205,6 +1240,7 @@ export interface NewsBlogFieldRefs {
   readonly status: Prisma.FieldRef<"NewsBlog", 'NewsBlogStatus'>
   readonly platform: Prisma.FieldRef<"NewsBlog", 'NewsBlogPlatform'>
   readonly hashtags: Prisma.FieldRef<"NewsBlog", 'String[]'>
+  readonly facebookPostId: Prisma.FieldRef<"NewsBlog", 'String'>
   readonly scheduledAt: Prisma.FieldRef<"NewsBlog", 'DateTime'>
   readonly publishedAt: Prisma.FieldRef<"NewsBlog", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"NewsBlog", 'DateTime'>

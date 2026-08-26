@@ -96,11 +96,13 @@ const serializeNewsBlogTaggedMember = (taggedMember) => ({
     },
 });
 exports.serializeNewsBlogTaggedMember = serializeNewsBlogTaggedMember;
-const buildNewsBlogWriteInput = ({ title, caption, status, platform, hashtags, scheduledAt, publishedAt, }) => {
-    const normalizedHashtags = [...new Set(hashtags
+const buildNewsBlogWriteInput = ({ title, caption, status, platform, hashtags, facebookPostId, scheduledAt, publishedAt, }) => {
+    const normalizedHashtags = [
+        ...new Set(hashtags
             .map((tag) => (0, exports.sanitizePlainText)(tag).trim().replace(/\s+/g, ''))
             .filter(Boolean)
-            .map((tag) => (tag.startsWith('#') ? tag : `#${tag}`)))];
+            .map((tag) => (tag.startsWith('#') ? tag : `#${tag}`))),
+    ];
     return {
         title: (0, exports.sanitizePlainText)(title).trim(),
         caption: (0, exports.sanitizeCaptionHtml)(caption),
@@ -111,6 +113,7 @@ const buildNewsBlogWriteInput = ({ title, caption, status, platform, hashtags, s
                 : client_1.NewsBlogStatus.DRAFT),
         platform: platform !== null && platform !== void 0 ? platform : client_1.NewsBlogPlatform.FACEBOOK,
         hashtags: normalizedHashtags,
+        facebookPostId: (facebookPostId === null || facebookPostId === void 0 ? void 0 : facebookPostId.trim()) || undefined,
         scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
         publishedAt: publishedAt ? new Date(publishedAt) : null,
     };

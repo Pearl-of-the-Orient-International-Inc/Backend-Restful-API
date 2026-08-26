@@ -119,6 +119,7 @@ type BuildNewsBlogWriteInputArgs = {
   status?: NewsBlogStatus;
   platform?: NewsBlog['platform'];
   hashtags: string[];
+  facebookPostId?: string | null;
   scheduledAt?: string | null;
   publishedAt?: string | null;
 };
@@ -129,21 +130,24 @@ export const buildNewsBlogWriteInput = ({
   status,
   platform,
   hashtags,
+  facebookPostId,
   scheduledAt,
   publishedAt,
 }: BuildNewsBlogWriteInputArgs) => {
-  const normalizedHashtags = [...new Set(
-    hashtags
-      .map((tag) => sanitizePlainText(tag).trim().replace(/\s+/g, ''))
-      .filter(Boolean)
-      .map((tag) => (tag.startsWith('#') ? tag : `#${tag}`)),
-  )];
+  const normalizedHashtags = [
+    ...new Set(
+      hashtags
+        .map((tag) => sanitizePlainText(tag).trim().replace(/\s+/g, ''))
+        .filter(Boolean)
+        .map((tag) => (tag.startsWith('#') ? tag : `#${tag}`)),
+    ),
+  ];
 
   return {
     title: sanitizePlainText(title).trim(),
     caption: sanitizeCaptionHtml(caption),
     status:
-    status ??
+      status ??
       (publishedAt
         ? NewsBlogStatus.PUBLISHED
         : scheduledAt
@@ -151,12 +155,15 @@ export const buildNewsBlogWriteInput = ({
           : NewsBlogStatus.DRAFT),
     platform: platform ?? NewsBlogPlatform.FACEBOOK,
     hashtags: normalizedHashtags,
+    facebookPostId: facebookPostId?.trim() || undefined,
     scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
     publishedAt: publishedAt ? new Date(publishedAt) : null,
   };
 };
 
-export const serializeNewsBlog = (newsBlog: NewsBlogWithRelations | NewsBlog) => ({
+export const serializeNewsBlog = (
+  newsBlog: NewsBlogWithRelations | NewsBlog,
+) => ({
   ...newsBlog,
   status: resolveNewsBlogStatus(newsBlog),
   media:

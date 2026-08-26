@@ -428,6 +428,7 @@ export const ModelName = {
   AccountingAcknowledgementReceipt: 'AccountingAcknowledgementReceipt',
   AccountingAcknowledgementReceiptItem: 'AccountingAcknowledgementReceiptItem',
   AccountingLedgerTransaction: 'AccountingLedgerTransaction',
+  OwnerAccessCredential: 'OwnerAccessCredential',
   TaskBoard: 'TaskBoard',
   TaskItem: 'TaskItem',
   BranchOfService: 'BranchOfService',
@@ -460,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3720,6 +3721,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OwnerAccessCredential: {
+      payload: Prisma.$OwnerAccessCredentialPayload<ExtArgs>
+      fields: Prisma.OwnerAccessCredentialFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OwnerAccessCredentialFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OwnerAccessCredentialFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>
+        }
+        findFirst: {
+          args: Prisma.OwnerAccessCredentialFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OwnerAccessCredentialFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>
+        }
+        findMany: {
+          args: Prisma.OwnerAccessCredentialFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>[]
+        }
+        create: {
+          args: Prisma.OwnerAccessCredentialCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>
+        }
+        createMany: {
+          args: Prisma.OwnerAccessCredentialCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OwnerAccessCredentialCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>[]
+        }
+        delete: {
+          args: Prisma.OwnerAccessCredentialDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>
+        }
+        update: {
+          args: Prisma.OwnerAccessCredentialUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>
+        }
+        deleteMany: {
+          args: Prisma.OwnerAccessCredentialDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OwnerAccessCredentialUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OwnerAccessCredentialUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>[]
+        }
+        upsert: {
+          args: Prisma.OwnerAccessCredentialUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerAccessCredentialPayload>
+        }
+        aggregate: {
+          args: Prisma.OwnerAccessCredentialAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOwnerAccessCredential>
+        }
+        groupBy: {
+          args: Prisma.OwnerAccessCredentialGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OwnerAccessCredentialGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OwnerAccessCredentialCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OwnerAccessCredentialCountAggregateOutputType> | number
+        }
+      }
+    }
     TaskBoard: {
       payload: Prisma.$TaskBoardPayload<ExtArgs>
       fields: Prisma.TaskBoardFieldRefs
@@ -5865,6 +5940,17 @@ export const AccountingLedgerTransactionScalarFieldEnum = {
 export type AccountingLedgerTransactionScalarFieldEnum = (typeof AccountingLedgerTransactionScalarFieldEnum)[keyof typeof AccountingLedgerTransactionScalarFieldEnum]
 
 
+export const OwnerAccessCredentialScalarFieldEnum = {
+  id: 'id',
+  pinHash: 'pinHash',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OwnerAccessCredentialScalarFieldEnum = (typeof OwnerAccessCredentialScalarFieldEnum)[keyof typeof OwnerAccessCredentialScalarFieldEnum]
+
+
 export const TaskBoardScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -5997,6 +6083,7 @@ export const NewsBlogScalarFieldEnum = {
   status: 'status',
   platform: 'platform',
   hashtags: 'hashtags',
+  facebookPostId: 'facebookPostId',
   scheduledAt: 'scheduledAt',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
@@ -7420,6 +7507,7 @@ export type GlobalOmitConfig = {
   accountingAcknowledgementReceipt?: Prisma.AccountingAcknowledgementReceiptOmit
   accountingAcknowledgementReceiptItem?: Prisma.AccountingAcknowledgementReceiptItemOmit
   accountingLedgerTransaction?: Prisma.AccountingLedgerTransactionOmit
+  ownerAccessCredential?: Prisma.OwnerAccessCredentialOmit
   taskBoard?: Prisma.TaskBoardOmit
   taskItem?: Prisma.TaskItemOmit
   branchOfService?: Prisma.BranchOfServiceOmit

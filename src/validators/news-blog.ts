@@ -34,9 +34,14 @@ const newsBlogBodySchema = z.object({
     .max(20000, { message: 'Caption must not exceed 20000 characters' }),
   status: z.enum(NewsBlogStatus).optional(),
   platform: z.enum(NewsBlogPlatform).optional(),
-  media: z.array(mediaItemSchema).max(10, { message: 'Media must not exceed 10 files' }),
+  media: z
+    .array(mediaItemSchema)
+    .max(10, { message: 'Media must not exceed 10 files' }),
   taggedMemberIds: z.array(z.uuid()).max(100).optional(),
-  hashtags: z.array(hashtagSchema).max(50, { message: 'Hashtags must not exceed 50 items' }),
+  hashtags: z
+    .array(hashtagSchema)
+    .max(50, { message: 'Hashtags must not exceed 50 items' }),
+  facebookPostId: z.string().trim().min(1).max(255).nullable().optional(),
   scheduledAt: z.iso.datetime().nullable().optional(),
   publishedAt: z.iso.datetime().nullable().optional(),
 });
@@ -61,12 +66,17 @@ export const getAllNewsBlogsSchema = z.object({
       .refine((val) => !val || /^\d+$/.test(val), {
         message: 'limit must be a positive integer',
       })
-      .refine((val) => !val || (parseInt(val, 10) >= 1 && parseInt(val, 10) <= 100), {
-        message: 'limit must be between 1 and 100',
-      }),
+      .refine(
+        (val) => !val || (parseInt(val, 10) >= 1 && parseInt(val, 10) <= 100),
+        {
+          message: 'limit must be between 1 and 100',
+        },
+      ),
     search: z.string().trim().min(1).max(150).optional(),
     status: z.enum(NewsBlogStatus).optional(),
-    sortBy: z.enum(['createdAt', 'updatedAt', 'scheduledAt', 'title']).optional(),
+    sortBy: z
+      .enum(['createdAt', 'updatedAt', 'scheduledAt', 'title'])
+      .optional(),
     sortOrder: z.enum(['asc', 'desc']).optional(),
   }),
 });

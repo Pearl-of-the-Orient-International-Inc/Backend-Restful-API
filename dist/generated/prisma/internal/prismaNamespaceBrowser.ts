@@ -95,6 +95,7 @@ export const ModelName = {
   AccountingAcknowledgementReceipt: 'AccountingAcknowledgementReceipt',
   AccountingAcknowledgementReceiptItem: 'AccountingAcknowledgementReceiptItem',
   AccountingLedgerTransaction: 'AccountingLedgerTransaction',
+  OwnerAccessCredential: 'OwnerAccessCredential',
   TaskBoard: 'TaskBoard',
   TaskItem: 'TaskItem',
   BranchOfService: 'BranchOfService',
@@ -978,6 +979,17 @@ export const AccountingLedgerTransactionScalarFieldEnum = {
 export type AccountingLedgerTransactionScalarFieldEnum = (typeof AccountingLedgerTransactionScalarFieldEnum)[keyof typeof AccountingLedgerTransactionScalarFieldEnum]
 
 
+export const OwnerAccessCredentialScalarFieldEnum = {
+  id: 'id',
+  pinHash: 'pinHash',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OwnerAccessCredentialScalarFieldEnum = (typeof OwnerAccessCredentialScalarFieldEnum)[keyof typeof OwnerAccessCredentialScalarFieldEnum]
+
+
 export const TaskBoardScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -1110,6 +1122,7 @@ export const NewsBlogScalarFieldEnum = {
   status: 'status',
   platform: 'platform',
   hashtags: 'hashtags',
+  facebookPostId: 'facebookPostId',
   scheduledAt: 'scheduledAt',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',

@@ -79,6 +79,9 @@ const config = {
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET!,
   JWT_ACCESS_EXPIRES_IN: process.env.JWT_ACCESS_EXPIRES_IN as ms.StringValue,
   JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN as ms.StringValue,
+  OWNER_DEFAULT_PIN: process.env.OWNER_DEFAULT_PIN,
+  OWNER_SESSION_COOKIE_NAME:
+    process.env.OWNER_SESSION_COOKIE_NAME || 'ownerAccessSession',
   SMTP_EMAIL: process.env.SMTP_EMAIL || process.env.SMTP_USER,
   SMTP_PASSWORD: process.env.SMTP_PASSWORD || process.env.SMTP_PASS,
 
