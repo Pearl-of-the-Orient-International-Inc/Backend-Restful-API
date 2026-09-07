@@ -94,25 +94,22 @@ const generateReferenceNumber = () => __awaiter(void 0, void 0, void 0, function
     const yy = String(now.getFullYear()).slice(-2);
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const prefix = `R${yy}${mm}`;
-    for (let attempt = 0; attempt < 25; attempt += 1) {
-        const count = yield prisma_1.prisma.memoAnnouncement.count({
-            where: {
-                referenceNumber: {
-                    startsWith: `${prefix}-`,
-                },
+    const latestMemo = yield prisma_1.prisma.memoAnnouncement.findFirst({
+        where: {
+            referenceNumber: {
+                startsWith: `${prefix}-`,
             },
-        });
-        const sequence = String(count + attempt + 1).padStart(4, '0');
-        const referenceNumber = `${prefix}-${sequence}`;
-        const existing = yield prisma_1.prisma.memoAnnouncement.findUnique({
-            where: { referenceNumber },
-            select: { id: true },
-        });
-        if (!existing) {
-            return referenceNumber;
-        }
+        },
+        orderBy: { referenceNumber: 'desc' },
+        select: { referenceNumber: true },
+    });
+    const latestSequence = latestMemo
+        ? Number.parseInt(latestMemo.referenceNumber.slice(prefix.length + 1), 10)
+        : 0;
+    if (!Number.isSafeInteger(latestSequence) || latestSequence >= 9999) {
+        throw new Error('Unable to generate a unique memo reference number');
     }
-    throw new Error('Unable to generate a unique memo reference number');
+    return `${prefix}-${String(latestSequence + 1).padStart(4, '0')}`;
 });
 exports.generateReferenceNumber = generateReferenceNumber;
 const resolveRecipientTargets = (targets) => __awaiter(void 0, void 0, void 0, function* () {

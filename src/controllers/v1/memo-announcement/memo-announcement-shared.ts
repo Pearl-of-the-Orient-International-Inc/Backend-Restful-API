@@ -99,28 +99,24 @@ export const generateReferenceNumber = async () => {
   const yy = String(now.getFullYear()).slice(-2);
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const prefix = `R${yy}${mm}`;
-
-  for (let attempt = 0; attempt < 25; attempt += 1) {
-    const count = await prisma.memoAnnouncement.count({
-      where: {
-        referenceNumber: {
-          startsWith: `${prefix}-`,
-        },
+  const latestMemo = await prisma.memoAnnouncement.findFirst({
+    where: {
+      referenceNumber: {
+        startsWith: `${prefix}-`,
       },
-    });
-    const sequence = String(count + attempt + 1).padStart(4, '0');
-    const referenceNumber = `${prefix}-${sequence}`;
-    const existing = await prisma.memoAnnouncement.findUnique({
-      where: { referenceNumber },
-      select: { id: true },
-    });
+    },
+    orderBy: { referenceNumber: 'desc' },
+    select: { referenceNumber: true },
+  });
+  const latestSequence = latestMemo
+    ? Number.parseInt(latestMemo.referenceNumber.slice(prefix.length + 1), 10)
+    : 0;
 
-    if (!existing) {
-      return referenceNumber;
-    }
+  if (!Number.isSafeInteger(latestSequence) || latestSequence >= 9999) {
+    throw new Error('Unable to generate a unique memo reference number');
   }
 
-  throw new Error('Unable to generate a unique memo reference number');
+  return `${prefix}-${String(latestSequence + 1).padStart(4, '0')}`;
 };
 
 export const resolveRecipientTargets = async (targets: RecipientTarget[]) => {

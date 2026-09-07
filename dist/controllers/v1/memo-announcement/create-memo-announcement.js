@@ -11,33 +11,59 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createMemoAnnouncement = void 0;
 const http_codes_1 = require("../../../common/http-codes");
+const client_1 = require("../../../generated/prisma/client");
 const prisma_1 = require("../../../lib/prisma");
 const winston_1 = require("../../../lib/winston");
 const memo_announcement_shared_1 = require("./memo-announcement-shared");
+const isReferenceNumberConflict = (error) => {
+    var _a;
+    if (!(error instanceof client_1.Prisma.PrismaClientKnownRequestError) ||
+        error.code !== 'P2002') {
+        return false;
+    }
+    const target = (_a = error.meta) === null || _a === void 0 ? void 0 : _a.target;
+    const normalizedTarget = Array.isArray(target)
+        ? target.join(',').toLowerCase()
+        : String(target !== null && target !== void 0 ? target : '').toLowerCase();
+    return normalizedTarget.includes('referencenumber');
+};
 const createMemoAnnouncement = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d;
+    var _a;
     try {
         const body = req.body;
         const recipients = yield (0, memo_announcement_shared_1.resolveMemoRecipients)({
             scope: body.recipientScope,
             targets: (_a = body.recipientTargets) !== null && _a !== void 0 ? _a : [],
         });
-        const referenceNumber = yield (0, memo_announcement_shared_1.generateReferenceNumber)();
-        const memo = yield prisma_1.prisma.memoAnnouncement.create({
-            data: {
-                referenceNumber,
-                title: body.title.trim(),
-                category: body.category,
-                customCategory: ((_b = body.customCategory) === null || _b === void 0 ? void 0 : _b.trim()) || null,
-                summary: ((_c = body.summary) === null || _c === void 0 ? void 0 : _c.trim()) || null,
-                documentName: body.documentName.trim(),
-                authorUserId: (_d = req.userId) !== null && _d !== void 0 ? _d : null,
-                recipients: {
-                    create: recipients,
-                },
-            },
-            include: memo_announcement_shared_1.memoInclude,
-        });
+        const memo = yield (() => __awaiter(void 0, void 0, void 0, function* () {
+            var _a, _b, _c;
+            for (let attempt = 0; attempt < 5; attempt += 1) {
+                const referenceNumber = yield (0, memo_announcement_shared_1.generateReferenceNumber)();
+                try {
+                    return yield prisma_1.prisma.memoAnnouncement.create({
+                        data: {
+                            referenceNumber,
+                            title: body.title.trim(),
+                            category: body.category,
+                            customCategory: ((_a = body.customCategory) === null || _a === void 0 ? void 0 : _a.trim()) || null,
+                            summary: ((_b = body.summary) === null || _b === void 0 ? void 0 : _b.trim()) || null,
+                            documentName: body.documentName.trim(),
+                            authorUserId: (_c = req.userId) !== null && _c !== void 0 ? _c : null,
+                            recipients: {
+                                create: recipients,
+                            },
+                        },
+                        include: memo_announcement_shared_1.memoInclude,
+                    });
+                }
+                catch (error) {
+                    if (!isReferenceNumberConflict(error) || attempt === 4) {
+                        throw error;
+                    }
+                }
+            }
+            throw new Error('Unable to generate a unique memo reference number');
+        }))();
         if (body.docxBase64) {
             const docx = yield (0, memo_announcement_shared_1.writeMemoDocx)({
                 memoId: memo.id,

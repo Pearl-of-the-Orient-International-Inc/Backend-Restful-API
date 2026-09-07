@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import { HTTPSTATUS } from '@/common/http-codes';
+import { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import type { CreateMemoAnnouncementSchema } from '@/validators/memo-announcement';
@@ -12,6 +13,22 @@ import {
   writeMemoDocx,
 } from './memo-announcement-shared';
 
+const isReferenceNumberConflict = (error: unknown): boolean => {
+  if (
+    !(error instanceof Prisma.PrismaClientKnownRequestError) ||
+    error.code !== 'P2002'
+  ) {
+    return false;
+  }
+
+  const target = error.meta?.target;
+  const normalizedTarget = Array.isArray(target)
+    ? target.join(',').toLowerCase()
+    : String(target ?? '').toLowerCase();
+
+  return normalizedTarget.includes('referencenumber');
+};
+
 export const createMemoAnnouncement = async (
   req: Request,
   res: Response,
@@ -22,23 +39,35 @@ export const createMemoAnnouncement = async (
       scope: body.recipientScope,
       targets: body.recipientTargets ?? [],
     });
-    const referenceNumber = await generateReferenceNumber();
+    const memo = await (async () => {
+      for (let attempt = 0; attempt < 5; attempt += 1) {
+        const referenceNumber = await generateReferenceNumber();
 
-    const memo = await prisma.memoAnnouncement.create({
-      data: {
-        referenceNumber,
-        title: body.title.trim(),
-        category: body.category,
-        customCategory: body.customCategory?.trim() || null,
-        summary: body.summary?.trim() || null,
-        documentName: body.documentName.trim(),
-        authorUserId: req.userId ?? null,
-        recipients: {
-          create: recipients,
-        },
-      },
-      include: memoInclude,
-    });
+        try {
+          return await prisma.memoAnnouncement.create({
+            data: {
+              referenceNumber,
+              title: body.title.trim(),
+              category: body.category,
+              customCategory: body.customCategory?.trim() || null,
+              summary: body.summary?.trim() || null,
+              documentName: body.documentName.trim(),
+              authorUserId: req.userId ?? null,
+              recipients: {
+                create: recipients,
+              },
+            },
+            include: memoInclude,
+          });
+        } catch (error) {
+          if (!isReferenceNumberConflict(error) || attempt === 4) {
+            throw error;
+          }
+        }
+      }
+
+      throw new Error('Unable to generate a unique memo reference number');
+    })();
 
     if (body.docxBase64) {
       const docx = await writeMemoDocx({
