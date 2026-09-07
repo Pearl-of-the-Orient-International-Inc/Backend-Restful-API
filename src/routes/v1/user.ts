@@ -19,6 +19,7 @@ import { revokeUserSession } from '@/controllers/v1/user/revoke-user-session';
 import { revokeOtherUserSessions } from '@/controllers/v1/user/revoke-other-user-sessions';
 import { changeUserPasswordByAdmin } from '@/controllers/v1/user/change-user-password-by-admin';
 import { resendUserEmailVerificationByAdmin } from '@/controllers/v1/user/resend-user-email-verification-by-admin';
+import { verifyUserEmailByAdmin } from '@/controllers/v1/user/verify-user-email-by-admin';
 
 /**
  * Helpers, Validators and Middlewares
@@ -158,6 +159,14 @@ router.post(
   authenticate,
   authorize([UserType.ADMIN]),
   resendUserEmailVerificationByAdmin,
+);
+
+router.patch(
+  '/:userId/verify-email',
+  expressRateLimit('auth'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  verifyUserEmailByAdmin,
 );
 
 router.delete(
