@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc && tsc-alias -p tsconfig.json --verbose && node scripts/postbuild.cjs",
+    "seed:chaplain-products": "ts-node prisma/seed-chaplain-products.ts",
     "start": "node dist/server.js",
     "start:prod": "pm2 start dist/server.js --name api"
   },

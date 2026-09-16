@@ -638,6 +638,89 @@ export const BulletinEntryType = {
 export type BulletinEntryType = (typeof BulletinEntryType)[keyof typeof BulletinEntryType]
 
 
+export const ChaplainProductCategory = {
+  PIN: 'PIN',
+  PATCH: 'PATCH',
+  STICKER: 'STICKER',
+  ACCESSORY: 'ACCESSORY',
+  APPAREL: 'APPAREL',
+  OTHER: 'OTHER'
+} as const
+
+export type ChaplainProductCategory = (typeof ChaplainProductCategory)[keyof typeof ChaplainProductCategory]
+
+
+export const ChaplainOrderFulfillmentMethod = {
+  DELIVERY: 'DELIVERY',
+  PICKUP: 'PICKUP'
+} as const
+
+export type ChaplainOrderFulfillmentMethod = (typeof ChaplainOrderFulfillmentMethod)[keyof typeof ChaplainOrderFulfillmentMethod]
+
+
+export const ChaplainOrderPaymentMethod = {
+  CASH: 'CASH',
+  ONLINE: 'ONLINE'
+} as const
+
+export type ChaplainOrderPaymentMethod = (typeof ChaplainOrderPaymentMethod)[keyof typeof ChaplainOrderPaymentMethod]
+
+
+export const ChaplainOrderPaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type ChaplainOrderPaymentStatus = (typeof ChaplainOrderPaymentStatus)[keyof typeof ChaplainOrderPaymentStatus]
+
+
+export const PaymentGateway = {
+  XENDIT: 'XENDIT',
+  PAYPAL: 'PAYPAL'
+} as const
+
+export type PaymentGateway = (typeof PaymentGateway)[keyof typeof PaymentGateway]
+
+
+export const PaymentPurpose = {
+  CHAPLAIN_PRODUCT_ORDER: 'CHAPLAIN_PRODUCT_ORDER',
+  SERVICE_BOOKING: 'SERVICE_BOOKING',
+  SEMINARY_FEE: 'SEMINARY_FEE',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentPurpose = (typeof PaymentPurpose)[keyof typeof PaymentPurpose]
+
+
+export const PaymentTransactionStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentTransactionStatus = (typeof PaymentTransactionStatus)[keyof typeof PaymentTransactionStatus]
+
+
+export const ChaplainOrderStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type ChaplainOrderStatus = (typeof ChaplainOrderStatus)[keyof typeof ChaplainOrderStatus]
+
+
 export const BulletinEntryStatus = {
   DRAFT: 'DRAFT',
   SCHEDULED: 'SCHEDULED',

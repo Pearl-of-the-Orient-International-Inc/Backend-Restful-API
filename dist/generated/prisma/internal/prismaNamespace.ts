@@ -441,6 +441,9 @@ export const ModelName = {
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   BulletinEntry: 'BulletinEntry',
+  ChaplainProduct: 'ChaplainProduct',
+  ChaplainProductOrder: 'ChaplainProductOrder',
+  PaymentTransaction: 'PaymentTransaction',
   MemoAnnouncement: 'MemoAnnouncement',
   MemoRecipient: 'MemoRecipient',
   MemoAttachment: 'MemoAttachment',
@@ -462,7 +465,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4684,6 +4687,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ChaplainProduct: {
+      payload: Prisma.$ChaplainProductPayload<ExtArgs>
+      fields: Prisma.ChaplainProductFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChaplainProductFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChaplainProductFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>
+        }
+        findFirst: {
+          args: Prisma.ChaplainProductFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChaplainProductFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>
+        }
+        findMany: {
+          args: Prisma.ChaplainProductFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>[]
+        }
+        create: {
+          args: Prisma.ChaplainProductCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>
+        }
+        createMany: {
+          args: Prisma.ChaplainProductCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChaplainProductCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>[]
+        }
+        delete: {
+          args: Prisma.ChaplainProductDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>
+        }
+        update: {
+          args: Prisma.ChaplainProductUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChaplainProductDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChaplainProductUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChaplainProductUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChaplainProductUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductPayload>
+        }
+        aggregate: {
+          args: Prisma.ChaplainProductAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChaplainProduct>
+        }
+        groupBy: {
+          args: Prisma.ChaplainProductGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainProductGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChaplainProductCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainProductCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChaplainProductOrder: {
+      payload: Prisma.$ChaplainProductOrderPayload<ExtArgs>
+      fields: Prisma.ChaplainProductOrderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChaplainProductOrderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChaplainProductOrderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>
+        }
+        findFirst: {
+          args: Prisma.ChaplainProductOrderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChaplainProductOrderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>
+        }
+        findMany: {
+          args: Prisma.ChaplainProductOrderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>[]
+        }
+        create: {
+          args: Prisma.ChaplainProductOrderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>
+        }
+        createMany: {
+          args: Prisma.ChaplainProductOrderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChaplainProductOrderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>[]
+        }
+        delete: {
+          args: Prisma.ChaplainProductOrderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>
+        }
+        update: {
+          args: Prisma.ChaplainProductOrderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChaplainProductOrderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChaplainProductOrderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChaplainProductOrderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChaplainProductOrderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainProductOrderPayload>
+        }
+        aggregate: {
+          args: Prisma.ChaplainProductOrderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChaplainProductOrder>
+        }
+        groupBy: {
+          args: Prisma.ChaplainProductOrderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainProductOrderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChaplainProductOrderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainProductOrderCountAggregateOutputType> | number
+        }
+      }
+    }
+    PaymentTransaction: {
+      payload: Prisma.$PaymentTransactionPayload<ExtArgs>
+      fields: Prisma.PaymentTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PaymentTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PaymentTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.PaymentTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PaymentTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.PaymentTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.PaymentTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.PaymentTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PaymentTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.PaymentTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>
+        }
+        update: {
+          args: Prisma.PaymentTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PaymentTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PaymentTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PaymentTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PaymentTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PaymentTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.PaymentTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePaymentTransaction>
+        }
+        groupBy: {
+          args: Prisma.PaymentTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PaymentTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PaymentTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PaymentTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
     MemoAnnouncement: {
       payload: Prisma.$MemoAnnouncementPayload<ExtArgs>
       fields: Prisma.MemoAnnouncementFieldRefs
@@ -6214,6 +6439,82 @@ export const BulletinEntryScalarFieldEnum = {
 export type BulletinEntryScalarFieldEnum = (typeof BulletinEntryScalarFieldEnum)[keyof typeof BulletinEntryScalarFieldEnum]
 
 
+export const ChaplainProductScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  price: 'price',
+  stockQuantity: 'stockQuantity',
+  lowStockThreshold: 'lowStockThreshold',
+  imageUrl: 'imageUrl',
+  imageFileName: 'imageFileName',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainProductScalarFieldEnum = (typeof ChaplainProductScalarFieldEnum)[keyof typeof ChaplainProductScalarFieldEnum]
+
+
+export const ChaplainProductOrderScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  checkoutToken: 'checkoutToken',
+  productId: 'productId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  platformFee: 'platformFee',
+  total: 'total',
+  customerUserId: 'customerUserId',
+  customerName: 'customerName',
+  customerEmail: 'customerEmail',
+  customerPhone: 'customerPhone',
+  fulfillmentMethod: 'fulfillmentMethod',
+  deliveryAddress: 'deliveryAddress',
+  customerNotes: 'customerNotes',
+  paymentMethod: 'paymentMethod',
+  paymentStatus: 'paymentStatus',
+  paymentGateway: 'paymentGateway',
+  providerCheckoutId: 'providerCheckoutId',
+  providerCheckoutUrl: 'providerCheckoutUrl',
+  status: 'status',
+  inventoryReleasedAt: 'inventoryReleasedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainProductOrderScalarFieldEnum = (typeof ChaplainProductOrderScalarFieldEnum)[keyof typeof ChaplainProductOrderScalarFieldEnum]
+
+
+export const PaymentTransactionScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  amount: 'amount',
+  currency: 'currency',
+  purpose: 'purpose',
+  payerReference: 'payerReference',
+  gateway: 'gateway',
+  gatewayReference: 'gatewayReference',
+  checkoutUrl: 'checkoutUrl',
+  status: 'status',
+  providerStatus: 'providerStatus',
+  failureReason: 'failureReason',
+  metadata: 'metadata',
+  paidAt: 'paidAt',
+  expiresAt: 'expiresAt',
+  chaplainProductOrderId: 'chaplainProductOrderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
+
+
 export const MemoAnnouncementScalarFieldEnum = {
   id: 'id',
   referenceNumber: 'referenceNumber',
@@ -7384,6 +7685,118 @@ export type ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'ChaplainProductCategory'
+ */
+export type EnumChaplainProductCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainProductCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainProductCategory[]'
+ */
+export type ListEnumChaplainProductCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainProductCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderFulfillmentMethod'
+ */
+export type EnumChaplainOrderFulfillmentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderFulfillmentMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderFulfillmentMethod[]'
+ */
+export type ListEnumChaplainOrderFulfillmentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderFulfillmentMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderPaymentMethod'
+ */
+export type EnumChaplainOrderPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderPaymentMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderPaymentMethod[]'
+ */
+export type ListEnumChaplainOrderPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderPaymentMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderPaymentStatus'
+ */
+export type EnumChaplainOrderPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderPaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderPaymentStatus[]'
+ */
+export type ListEnumChaplainOrderPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderPaymentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderStatus'
+ */
+export type EnumChaplainOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainOrderStatus[]'
+ */
+export type ListEnumChaplainOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainOrderStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentPurpose'
+ */
+export type EnumPaymentPurposeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentPurpose'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentPurpose[]'
+ */
+export type ListEnumPaymentPurposeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentPurpose[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentGateway'
+ */
+export type EnumPaymentGatewayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentGateway'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentGateway[]'
+ */
+export type ListEnumPaymentGatewayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentGateway[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentTransactionStatus'
+ */
+export type EnumPaymentTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentTransactionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentTransactionStatus[]'
+ */
+export type ListEnumPaymentTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentTransactionStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'MemoTemplateType'
  */
 export type EnumMemoTemplateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoTemplateType'>
@@ -7646,6 +8059,9 @@ export type GlobalOmitConfig = {
   newsBlogMedia?: Prisma.NewsBlogMediaOmit
   newsBlogTaggedMember?: Prisma.NewsBlogTaggedMemberOmit
   bulletinEntry?: Prisma.BulletinEntryOmit
+  chaplainProduct?: Prisma.ChaplainProductOmit
+  chaplainProductOrder?: Prisma.ChaplainProductOrderOmit
+  paymentTransaction?: Prisma.PaymentTransactionOmit
   memoAnnouncement?: Prisma.MemoAnnouncementOmit
   memoRecipient?: Prisma.MemoRecipientOmit
   memoAttachment?: Prisma.MemoAttachmentOmit

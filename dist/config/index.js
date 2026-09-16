@@ -2,7 +2,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a, _b;
+var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({
@@ -87,5 +87,17 @@ const config = {
     PASSKEY_RP_ID: process.env.PASSKEY_RP_ID,
     PASSKEY_EXPECTED_ORIGINS: parseCsv(process.env.PASSKEY_EXPECTED_ORIGINS),
     TRUST_PROXY: parseTrustProxy(process.env.TRUST_PROXY),
+    XENDIT_SECRET_KEY: process.env.XENDIT_SECRET_KEY,
+    XENDIT_WEBHOOK_TOKEN: process.env.XENDIT_WEBHOOK_TOKEN,
+    PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
+    PAYPAL_CLIENT_SECRET: process.env.PAYPAL_CLIENT_SECRET,
+    PAYPAL_WEBHOOK_ID: process.env.PAYPAL_WEBHOOK_ID,
+    PAYPAL_API_BASE: process.env.PAYPAL_ENVIRONMENT === 'live'
+        ? 'https://api-m.paypal.com'
+        : 'https://api-m.sandbox.paypal.com',
+    XENDIT_PLATFORM_FEE_PERCENT: Number((_c = process.env.XENDIT_PLATFORM_FEE_PERCENT) !== null && _c !== void 0 ? _c : 3.5),
+    XENDIT_PLATFORM_FEE_FIXED: Number((_d = process.env.XENDIT_PLATFORM_FEE_FIXED) !== null && _d !== void 0 ? _d : 11),
+    PAYPAL_PLATFORM_FEE_PERCENT: Number((_e = process.env.PAYPAL_PLATFORM_FEE_PERCENT) !== null && _e !== void 0 ? _e : 4.4),
+    PAYPAL_PLATFORM_FEE_FIXED: Number((_f = process.env.PAYPAL_PLATFORM_FEE_FIXED) !== null && _f !== void 0 ? _f : 15),
 };
 exports.default = config;

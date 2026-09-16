@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const sanitation_1 = require("../../common/sanitation");
+const chaplain_product_controller_1 = require("../../controllers/v1/chaplain-product/chaplain-product.controller");
+const enums_1 = require("../../generated/prisma/enums");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const chaplain_product_1 = require("../../validators/chaplain-product");
+const router = (0, express_1.Router)();
+const adminAccess = [authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN])];
+router.get('/public', (0, express_rate_limiter_1.expressRateLimit)('basic'), chaplain_product_controller_1.getPublicChaplainProducts);
+router.get('/public/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), chaplain_product_controller_1.getPublicChaplainProduct);
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, (0, sanitation_1.validate)(chaplain_product_1.getChaplainProductsSchema), chaplain_product_controller_1.getChaplainProducts);
+router.post('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, (0, sanitation_1.validate)(chaplain_product_1.chaplainProductBodySchema), chaplain_product_controller_1.createChaplainProduct);
+router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, (0, sanitation_1.validate)(chaplain_product_1.chaplainProductBodySchema), chaplain_product_controller_1.updateChaplainProduct);
+router.delete('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, chaplain_product_controller_1.deleteChaplainProduct);
+exports.default = router;

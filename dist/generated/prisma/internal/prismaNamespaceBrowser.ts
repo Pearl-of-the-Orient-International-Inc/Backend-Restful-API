@@ -108,6 +108,9 @@ export const ModelName = {
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   BulletinEntry: 'BulletinEntry',
+  ChaplainProduct: 'ChaplainProduct',
+  ChaplainProductOrder: 'ChaplainProductOrder',
+  PaymentTransaction: 'PaymentTransaction',
   MemoAnnouncement: 'MemoAnnouncement',
   MemoRecipient: 'MemoRecipient',
   MemoAttachment: 'MemoAttachment',
@@ -1177,6 +1180,82 @@ export const BulletinEntryScalarFieldEnum = {
 } as const
 
 export type BulletinEntryScalarFieldEnum = (typeof BulletinEntryScalarFieldEnum)[keyof typeof BulletinEntryScalarFieldEnum]
+
+
+export const ChaplainProductScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  price: 'price',
+  stockQuantity: 'stockQuantity',
+  lowStockThreshold: 'lowStockThreshold',
+  imageUrl: 'imageUrl',
+  imageFileName: 'imageFileName',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainProductScalarFieldEnum = (typeof ChaplainProductScalarFieldEnum)[keyof typeof ChaplainProductScalarFieldEnum]
+
+
+export const ChaplainProductOrderScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  checkoutToken: 'checkoutToken',
+  productId: 'productId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  platformFee: 'platformFee',
+  total: 'total',
+  customerUserId: 'customerUserId',
+  customerName: 'customerName',
+  customerEmail: 'customerEmail',
+  customerPhone: 'customerPhone',
+  fulfillmentMethod: 'fulfillmentMethod',
+  deliveryAddress: 'deliveryAddress',
+  customerNotes: 'customerNotes',
+  paymentMethod: 'paymentMethod',
+  paymentStatus: 'paymentStatus',
+  paymentGateway: 'paymentGateway',
+  providerCheckoutId: 'providerCheckoutId',
+  providerCheckoutUrl: 'providerCheckoutUrl',
+  status: 'status',
+  inventoryReleasedAt: 'inventoryReleasedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainProductOrderScalarFieldEnum = (typeof ChaplainProductOrderScalarFieldEnum)[keyof typeof ChaplainProductOrderScalarFieldEnum]
+
+
+export const PaymentTransactionScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  amount: 'amount',
+  currency: 'currency',
+  purpose: 'purpose',
+  payerReference: 'payerReference',
+  gateway: 'gateway',
+  gatewayReference: 'gatewayReference',
+  checkoutUrl: 'checkoutUrl',
+  status: 'status',
+  providerStatus: 'providerStatus',
+  failureReason: 'failureReason',
+  metadata: 'metadata',
+  paidAt: 'paidAt',
+  expiresAt: 'expiresAt',
+  chaplainProductOrderId: 'chaplainProductOrderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
 
 
 export const MemoAnnouncementScalarFieldEnum = {

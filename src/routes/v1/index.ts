@@ -31,6 +31,9 @@ import accountingAcknowledgementReceiptRoutes from '@/routes/v1/accounting-ackno
 import taskManagementRoutes from '@/routes/v1/task-management';
 import ownerAccessRoutes from '@/routes/v1/owner-access';
 import bulletinEntryRoutes from '@/routes/v1/bulletin-entry';
+import chaplainProductRoutes from '@/routes/v1/chaplain-product';
+import chaplainProductOrderRoutes from '@/routes/v1/chaplain-product-order';
+import paymentRoutes from '@/routes/v1/payment';
 
 const router = Router();
 
@@ -72,5 +75,8 @@ router.use(
 router.use('/task-management', taskManagementRoutes);
 router.use('/owner', ownerAccessRoutes);
 router.use('/bulletins', bulletinEntryRoutes);
+router.use('/chaplain-products', chaplainProductRoutes);
+router.use('/chaplain-product-orders', chaplainProductOrderRoutes);
+router.use('/payments', paymentRoutes);
 
 export default router;

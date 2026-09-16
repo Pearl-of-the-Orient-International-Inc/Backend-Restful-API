@@ -109,6 +109,27 @@ const config = {
   PASSKEY_RP_ID: process.env.PASSKEY_RP_ID,
   PASSKEY_EXPECTED_ORIGINS: parseCsv(process.env.PASSKEY_EXPECTED_ORIGINS),
   TRUST_PROXY: parseTrustProxy(process.env.TRUST_PROXY),
+  XENDIT_SECRET_KEY: process.env.XENDIT_SECRET_KEY,
+  XENDIT_WEBHOOK_TOKEN: process.env.XENDIT_WEBHOOK_TOKEN,
+  PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
+  PAYPAL_CLIENT_SECRET: process.env.PAYPAL_CLIENT_SECRET,
+  PAYPAL_WEBHOOK_ID: process.env.PAYPAL_WEBHOOK_ID,
+  PAYPAL_API_BASE:
+    process.env.PAYPAL_ENVIRONMENT === 'live'
+      ? 'https://api-m.paypal.com'
+      : 'https://api-m.sandbox.paypal.com',
+  XENDIT_PLATFORM_FEE_PERCENT: Number(
+    process.env.XENDIT_PLATFORM_FEE_PERCENT ?? 3.5,
+  ),
+  XENDIT_PLATFORM_FEE_FIXED: Number(
+    process.env.XENDIT_PLATFORM_FEE_FIXED ?? 11,
+  ),
+  PAYPAL_PLATFORM_FEE_PERCENT: Number(
+    process.env.PAYPAL_PLATFORM_FEE_PERCENT ?? 4.4,
+  ),
+  PAYPAL_PLATFORM_FEE_FIXED: Number(
+    process.env.PAYPAL_PLATFORM_FEE_FIXED ?? 15,
+  ),
 };
 
 export default config;

@@ -80,3 +80,30 @@ export const authenticate = (
     });
   }
 };
+
+export const optionalAuthenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader?.startsWith('Bearer ')) {
+    next();
+    return;
+  }
+
+  const token = authHeader.slice('Bearer '.length).trim();
+
+  try {
+    const jwtPayload = verifyAccessToken(token) as { userId: string };
+    req.userId = jwtPayload.userId;
+    next();
+  } catch (err) {
+    logger.warn('Invalid optional authentication token', { error: err });
+    res.status(HTTPSTATUS.UNAUTHORIZED).json({
+      code: 'UNAUTHORIZED',
+      message: 'Invalid or expired access token',
+    });
+  }
+};

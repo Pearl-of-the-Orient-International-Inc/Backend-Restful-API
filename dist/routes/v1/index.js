@@ -25,6 +25,9 @@ const accounting_acknowledgement_receipt_1 = __importDefault(require("../../rout
 const task_management_1 = __importDefault(require("../../routes/v1/task-management"));
 const owner_access_1 = __importDefault(require("../../routes/v1/owner-access"));
 const bulletin_entry_1 = __importDefault(require("../../routes/v1/bulletin-entry"));
+const chaplain_product_1 = __importDefault(require("../../routes/v1/chaplain-product"));
+const chaplain_product_order_1 = __importDefault(require("../../routes/v1/chaplain-product-order"));
+const payment_1 = __importDefault(require("../../routes/v1/payment"));
 const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.status(http_codes_1.HTTPSTATUS.OK).json({
@@ -57,4 +60,7 @@ router.use('/accounting/acknowledgement-receipts', accounting_acknowledgement_re
 router.use('/task-management', task_management_1.default);
 router.use('/owner', owner_access_1.default);
 router.use('/bulletins', bulletin_entry_1.default);
+router.use('/chaplain-products', chaplain_product_1.default);
+router.use('/chaplain-product-orders', chaplain_product_order_1.default);
+router.use('/payments', payment_1.default);
 exports.default = router;

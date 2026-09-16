@@ -303,6 +303,21 @@ export type NewsBlogTaggedMember = Prisma.NewsBlogTaggedMemberModel
  */
 export type BulletinEntry = Prisma.BulletinEntryModel
 /**
+ * Model ChaplainProduct
+ * 
+ */
+export type ChaplainProduct = Prisma.ChaplainProductModel
+/**
+ * Model ChaplainProductOrder
+ * 
+ */
+export type ChaplainProductOrder = Prisma.ChaplainProductOrderModel
+/**
+ * Model PaymentTransaction
+ * 
+ */
+export type PaymentTransaction = Prisma.PaymentTransactionModel
+/**
  * Model MemoAnnouncement
  * 
  */

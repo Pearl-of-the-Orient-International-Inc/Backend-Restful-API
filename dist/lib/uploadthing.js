@@ -97,7 +97,11 @@ const createMemberRequirementUploaderRoute = () => f({
     }
     const user = yield prisma_1.prisma.user.findUnique({
         where: { id: userId },
-        select: { id: true, role: true, memberProfile: { select: { id: true } } },
+        select: {
+            id: true,
+            role: true,
+            memberProfile: { select: { id: true } },
+        },
     });
     if (!user || !user.memberProfile) {
         throw new Error('Member profile not found');
@@ -173,7 +177,11 @@ const createMemberProfileBannerUploaderRoute = (options = {}) => {
         }
         const user = yield prisma_1.prisma.user.findUnique({
             where: { id: userId },
-            select: { id: true, role: true, memberProfile: { select: { id: true } } },
+            select: {
+                id: true,
+                role: true,
+                memberProfile: { select: { id: true } },
+            },
         });
         if (!user || !user.memberProfile) {
             throw new Error('Member profile not found');
@@ -405,6 +413,41 @@ const createBulletinFileUploaderRoute = () => f({
         fileSize: file.size,
     });
 }));
+const createChaplainProductImageUploaderRoute = () => f({
+    image: {
+        maxFileSize: '8MB',
+        maxFileCount: 1,
+    },
+})
+    .middleware((_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
+    const authHeader = req.headers.authorization;
+    const bearerToken = (authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer '))
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+    if (!bearerToken)
+        throw new Error('Unauthorized upload attempt');
+    const decoded = (0, jwt_1.verifyAccessToken)(bearerToken);
+    const userId = decoded === null || decoded === void 0 ? void 0 : decoded.userId;
+    if (!userId)
+        throw new Error('Invalid or expired access token');
+    const user = yield prisma_1.prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true },
+    });
+    if (!user || user.role !== enums_1.UserType.ADMIN) {
+        throw new Error('Only admins can upload chaplain product images');
+    }
+    return { userId };
+}))
+    .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) {
+    return ({
+        userId: metadata.userId,
+        fileUrl: file.ufsUrl,
+        fileName: file.name,
+        mimeType: file.type,
+        fileSize: file.size,
+    });
+}));
 const createUploadRouter = (options = {}) => {
     var _a, _b;
     return ({
@@ -422,6 +465,7 @@ const createUploadRouter = (options = {}) => {
         eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
         newsBlogMediaUploader: createNewsBlogMediaUploaderRoute(options),
         bulletinFileUploader: createBulletinFileUploaderRoute(),
+        chaplainProductImageUploader: createChaplainProductImageUploaderRoute(),
     });
 };
 exports.createUploadRouter = createUploadRouter;

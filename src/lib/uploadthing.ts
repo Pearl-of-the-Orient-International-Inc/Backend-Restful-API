@@ -1,10 +1,22 @@
-import { createRouteHandler, createUploadthing, type FileRouter } from 'uploadthing/express';
+import {
+  createRouteHandler,
+  createUploadthing,
+  type FileRouter,
+} from 'uploadthing/express';
 import { UTApi } from 'uploadthing/server';
 import { prisma } from '@/lib/prisma';
 import { verifyAccessToken } from '@/lib/jwt';
 import { UserType } from '@/generated/prisma/enums';
 
-type UploadFileSize = '512KB' | '1MB' | '2MB' | '4MB' | '8MB' | '16MB' | '32MB' | '64MB';
+type UploadFileSize =
+  | '512KB'
+  | '1MB'
+  | '2MB'
+  | '4MB'
+  | '8MB'
+  | '16MB'
+  | '32MB'
+  | '64MB';
 
 export interface UploadLimitOptions {
   maxFileSize?: UploadFileSize;
@@ -20,7 +32,8 @@ const defaultUploadLimits: Required<UploadLimitOptions> = {
 };
 
 const sanitizeMaxFileCount = (value?: number): number => {
-  if (!value || !Number.isFinite(value)) return defaultUploadLimits.maxFileCount;
+  if (!value || !Number.isFinite(value))
+    return defaultUploadLimits.maxFileCount;
   return Math.min(Math.max(Math.floor(value), 1), 10);
 };
 
@@ -44,7 +57,9 @@ const createAvatarUploaderRoute = (options: UploadLimitOptions = {}) => {
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -98,7 +113,9 @@ const createMemberRequirementUploaderRoute = () =>
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -107,7 +124,11 @@ const createMemberRequirementUploaderRoute = () =>
 
       const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: { id: true, role: true, memberProfile: { select: { id: true } } },
+        select: {
+          id: true,
+          role: true,
+          memberProfile: { select: { id: true } },
+        },
       });
 
       if (!user || !user.memberProfile) {
@@ -159,7 +180,9 @@ const createSeminaryStudyMaterialUploaderRoute = () =>
       fileSize: file.size,
     }));
 
-const createMemberProfileBannerUploaderRoute = (options: UploadLimitOptions = {}) => {
+const createMemberProfileBannerUploaderRoute = (
+  options: UploadLimitOptions = {},
+) => {
   const maxFileSize = options.maxFileSize ?? defaultUploadLimits.maxFileSize;
   const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
 
@@ -179,7 +202,9 @@ const createMemberProfileBannerUploaderRoute = (options: UploadLimitOptions = {}
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -188,7 +213,11 @@ const createMemberProfileBannerUploaderRoute = (options: UploadLimitOptions = {}
 
       const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: { id: true, role: true, memberProfile: { select: { id: true } } },
+        select: {
+          id: true,
+          role: true,
+          memberProfile: { select: { id: true } },
+        },
       });
 
       if (!user || !user.memberProfile) {
@@ -228,7 +257,9 @@ const createMemberCertificateUploaderRoute = () =>
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -277,7 +308,9 @@ const createMemberPublicRecordAttachmentUploaderRoute = (
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -305,7 +338,9 @@ const createMemberPublicRecordAttachmentUploaderRoute = (
     }));
 };
 
-const createEventThumbnailUploaderRoute = (options: UploadLimitOptions = {}) => {
+const createEventThumbnailUploaderRoute = (
+  options: UploadLimitOptions = {},
+) => {
   const maxFileSize = options.maxFileSize ?? defaultUploadLimits.maxFileSize;
   const maxFileCount = sanitizeMaxFileCount(options.maxFileCount);
 
@@ -325,7 +360,9 @@ const createEventThumbnailUploaderRoute = (options: UploadLimitOptions = {}) => 
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -376,7 +413,9 @@ const createNewsBlogMediaUploaderRoute = (options: UploadLimitOptions = {}) => {
         throw new Error('Unauthorized upload attempt');
       }
 
-      const decoded = verifyAccessToken(bearerToken) as { userId?: string } | null;
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
       const userId = decoded?.userId;
 
       if (!userId) {
@@ -452,6 +491,47 @@ const createBulletinFileUploaderRoute = () =>
       fileSize: file.size,
     }));
 
+const createChaplainProductImageUploaderRoute = () =>
+  f({
+    image: {
+      maxFileSize: '8MB',
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) throw new Error('Unauthorized upload attempt');
+
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) throw new Error('Invalid or expired access token');
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true },
+      });
+
+      if (!user || user.role !== UserType.ADMIN) {
+        throw new Error('Only admins can upload chaplain product images');
+      }
+
+      return { userId };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+
 export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
@@ -459,7 +539,8 @@ export const createUploadRouter = (options: UploadLimitOptions = {}) =>
     seminaryRequirementUploader: createSeminaryDocumentUploaderRoute(),
     seminaryPaymentReceiptUploader: createSeminaryDocumentUploaderRoute(),
     seminaryStudyMaterialUploader: createSeminaryStudyMaterialUploaderRoute(),
-    memberProfileBannerUploader: createMemberProfileBannerUploaderRoute(options),
+    memberProfileBannerUploader:
+      createMemberProfileBannerUploaderRoute(options),
     memberCertificateUploader: createMemberCertificateUploaderRoute(),
     memberPublicRecordAttachmentUploader:
       createMemberPublicRecordAttachmentUploaderRoute({
@@ -469,6 +550,7 @@ export const createUploadRouter = (options: UploadLimitOptions = {}) =>
     eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
     newsBlogMediaUploader: createNewsBlogMediaUploaderRoute(options),
     bulletinFileUploader: createBulletinFileUploaderRoute(),
+    chaplainProductImageUploader: createChaplainProductImageUploaderRoute(),
   }) satisfies FileRouter;
 
 export const uploadRouter = createUploadRouter();

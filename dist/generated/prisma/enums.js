@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingLedgerTransactionStatus = exports.AccountingLedgerTransactionType = exports.ReceiptPaymentType = exports.ReceiptOrganization = exports.AccountingReceivableStatus = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryFeeCollectionStatus = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryInstructorRank = exports.SeminaryInstructorStatus = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryStudentNotificationType = exports.SeminaryGradeRecordRemark = exports.SeminaryGradeRecordStatus = exports.SeminaryExaminationStatus = exports.SeminaryAssignmentStatus = exports.SeminaryStudyMaterialStatus = exports.SeminaryStudyMaterialType = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberCredentialDocumentStatus = exports.MemberCredentialDocumentType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.MemoDeliveryStatus = exports.MemoAttachmentKind = exports.MemoRecipientType = exports.MemoStatus = exports.MemoTemplateType = exports.BulletinEntryStatus = exports.BulletinEntryType = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.MemoDeliveryStatus = exports.MemoAttachmentKind = exports.MemoRecipientType = exports.MemoStatus = exports.MemoTemplateType = exports.BulletinEntryStatus = exports.ChaplainOrderStatus = exports.PaymentTransactionStatus = exports.PaymentPurpose = exports.PaymentGateway = exports.ChaplainOrderPaymentStatus = exports.ChaplainOrderPaymentMethod = exports.ChaplainOrderFulfillmentMethod = exports.ChaplainProductCategory = exports.BulletinEntryType = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -374,6 +374,57 @@ exports.BulletinEntryType = {
     MEMO: 'MEMO',
     EVENT: 'EVENT',
     OTHER: 'OTHER'
+};
+exports.ChaplainProductCategory = {
+    PIN: 'PIN',
+    PATCH: 'PATCH',
+    STICKER: 'STICKER',
+    ACCESSORY: 'ACCESSORY',
+    APPAREL: 'APPAREL',
+    OTHER: 'OTHER'
+};
+exports.ChaplainOrderFulfillmentMethod = {
+    DELIVERY: 'DELIVERY',
+    PICKUP: 'PICKUP'
+};
+exports.ChaplainOrderPaymentMethod = {
+    CASH: 'CASH',
+    ONLINE: 'ONLINE'
+};
+exports.ChaplainOrderPaymentStatus = {
+    PENDING: 'PENDING',
+    PAID: 'PAID',
+    FAILED: 'FAILED',
+    CANCELLED: 'CANCELLED',
+    EXPIRED: 'EXPIRED',
+    REFUNDED: 'REFUNDED'
+};
+exports.PaymentGateway = {
+    XENDIT: 'XENDIT',
+    PAYPAL: 'PAYPAL'
+};
+exports.PaymentPurpose = {
+    CHAPLAIN_PRODUCT_ORDER: 'CHAPLAIN_PRODUCT_ORDER',
+    SERVICE_BOOKING: 'SERVICE_BOOKING',
+    SEMINARY_FEE: 'SEMINARY_FEE',
+    OTHER: 'OTHER'
+};
+exports.PaymentTransactionStatus = {
+    PENDING: 'PENDING',
+    PAID: 'PAID',
+    FAILED: 'FAILED',
+    CANCELLED: 'CANCELLED',
+    EXPIRED: 'EXPIRED',
+    REFUNDED: 'REFUNDED'
+};
+exports.ChaplainOrderStatus = {
+    PENDING: 'PENDING',
+    PAID: 'PAID',
+    PROCESSING: 'PROCESSING',
+    READY: 'READY',
+    COMPLETED: 'COMPLETED',
+    CANCELLED: 'CANCELLED',
+    REFUNDED: 'REFUNDED'
 };
 exports.BulletinEntryStatus = {
     DRAFT: 'DRAFT',

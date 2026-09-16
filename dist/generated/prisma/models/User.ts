@@ -262,6 +262,7 @@ export type UserWhereInput = {
   authoredMemos?: Prisma.MemoAnnouncementListRelationFilter
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   bulletinEntries?: Prisma.BulletinEntryListRelationFilter
+  chaplainProductOrders?: Prisma.ChaplainProductOrderListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -294,6 +295,7 @@ export type UserOrderByWithRelationInput = {
   authoredMemos?: Prisma.MemoAnnouncementOrderByRelationAggregateInput
   memoRecipients?: Prisma.MemoRecipientOrderByRelationAggregateInput
   bulletinEntries?: Prisma.BulletinEntryOrderByRelationAggregateInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -329,6 +331,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   authoredMemos?: Prisma.MemoAnnouncementListRelationFilter
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   bulletinEntries?: Prisma.BulletinEntryListRelationFilter
+  chaplainProductOrders?: Prisma.ChaplainProductOrderListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -399,6 +402,7 @@ export type UserCreateInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -431,6 +435,7 @@ export type UserUncheckedCreateInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUpdateInput = {
@@ -463,6 +468,7 @@ export type UserUpdateInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -495,6 +501,7 @@ export type UserUncheckedUpdateInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -793,6 +800,22 @@ export type UserUpdateOneWithoutBulletinEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBulletinEntriesInput, Prisma.UserUpdateWithoutBulletinEntriesInput>, Prisma.UserUncheckedUpdateWithoutBulletinEntriesInput>
 }
 
+export type UserCreateNestedOneWithoutChaplainProductOrdersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutChaplainProductOrdersInput, Prisma.UserUncheckedCreateWithoutChaplainProductOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChaplainProductOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutChaplainProductOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutChaplainProductOrdersInput, Prisma.UserUncheckedCreateWithoutChaplainProductOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChaplainProductOrdersInput
+  upsert?: Prisma.UserUpsertWithoutChaplainProductOrdersInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChaplainProductOrdersInput, Prisma.UserUpdateWithoutChaplainProductOrdersInput>, Prisma.UserUncheckedUpdateWithoutChaplainProductOrdersInput>
+}
+
 export type UserCreateNestedOneWithoutAuthoredMemosInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuthoredMemosInput, Prisma.UserUncheckedCreateWithoutAuthoredMemosInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthoredMemosInput
@@ -902,6 +925,7 @@ export type UserCreateWithoutUserTokensInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutUserTokensInput = {
@@ -933,6 +957,7 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutUserTokensInput = {
@@ -980,6 +1005,7 @@ export type UserUpdateWithoutUserTokensInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTokensInput = {
@@ -1011,6 +1037,7 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1042,6 +1069,7 @@ export type UserCreateWithoutSessionsInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1073,6 +1101,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1120,6 +1149,7 @@ export type UserUpdateWithoutSessionsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1151,6 +1181,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutActivityLogsInput = {
@@ -1182,6 +1213,7 @@ export type UserCreateWithoutActivityLogsInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutActivityLogsInput = {
@@ -1213,6 +1245,7 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutActivityLogsInput = {
@@ -1260,6 +1293,7 @@ export type UserUpdateWithoutActivityLogsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivityLogsInput = {
@@ -1291,6 +1325,7 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
@@ -1322,6 +1357,7 @@ export type UserCreateWithoutVerificationCodesInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -1353,6 +1389,7 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -1400,6 +1437,7 @@ export type UserUpdateWithoutVerificationCodesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -1431,6 +1469,7 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutPasskeyCredentialsInput = {
@@ -1462,6 +1501,7 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
@@ -1493,6 +1533,7 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyCredentialsInput = {
@@ -1540,6 +1581,7 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
@@ -1571,6 +1613,7 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutPasskeyChallengeInput = {
@@ -1602,6 +1645,7 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
@@ -1633,6 +1677,7 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyChallengeInput = {
@@ -1680,6 +1725,7 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
@@ -1711,6 +1757,7 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutMemberProfileInput = {
@@ -1742,6 +1789,7 @@ export type UserCreateWithoutMemberProfileInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutMemberProfileInput = {
@@ -1773,6 +1821,7 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutMemberProfileInput = {
@@ -1820,6 +1869,7 @@ export type UserUpdateWithoutMemberProfileInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberProfileInput = {
@@ -1851,6 +1901,7 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutFollowedMembersInput = {
@@ -1882,6 +1933,7 @@ export type UserCreateWithoutFollowedMembersInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowedMembersInput = {
@@ -1913,6 +1965,7 @@ export type UserUncheckedCreateWithoutFollowedMembersInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowedMembersInput = {
@@ -1960,6 +2013,7 @@ export type UserUpdateWithoutFollowedMembersInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowedMembersInput = {
@@ -1991,6 +2045,7 @@ export type UserUncheckedUpdateWithoutFollowedMembersInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutSeminaryInstructorInput = {
@@ -2022,6 +2077,7 @@ export type UserCreateWithoutSeminaryInstructorInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
@@ -2053,6 +2109,7 @@ export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutSeminaryInstructorInput = {
@@ -2100,6 +2157,7 @@ export type UserUpdateWithoutSeminaryInstructorInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
@@ -2131,6 +2189,7 @@ export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -2162,6 +2221,7 @@ export type UserCreateWithoutAssignedTasksInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -2193,6 +2253,7 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -2240,6 +2301,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -2271,6 +2333,7 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutBulletinEntriesInput = {
@@ -2302,6 +2365,7 @@ export type UserCreateWithoutBulletinEntriesInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutBulletinEntriesInput = {
@@ -2333,6 +2397,7 @@ export type UserUncheckedCreateWithoutBulletinEntriesInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutBulletinEntriesInput = {
@@ -2380,6 +2445,7 @@ export type UserUpdateWithoutBulletinEntriesInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBulletinEntriesInput = {
@@ -2411,6 +2477,151 @@ export type UserUncheckedUpdateWithoutBulletinEntriesInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+}
+
+export type UserCreateWithoutChaplainProductOrdersInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+}
+
+export type UserUncheckedCreateWithoutChaplainProductOrdersInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+}
+
+export type UserCreateOrConnectWithoutChaplainProductOrdersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutChaplainProductOrdersInput, Prisma.UserUncheckedCreateWithoutChaplainProductOrdersInput>
+}
+
+export type UserUpsertWithoutChaplainProductOrdersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutChaplainProductOrdersInput, Prisma.UserUncheckedUpdateWithoutChaplainProductOrdersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutChaplainProductOrdersInput, Prisma.UserUncheckedCreateWithoutChaplainProductOrdersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutChaplainProductOrdersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutChaplainProductOrdersInput, Prisma.UserUncheckedUpdateWithoutChaplainProductOrdersInput>
+}
+
+export type UserUpdateWithoutChaplainProductOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutChaplainProductOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
 }
 
 export type UserCreateWithoutAuthoredMemosInput = {
@@ -2442,6 +2653,7 @@ export type UserCreateWithoutAuthoredMemosInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthoredMemosInput = {
@@ -2473,6 +2685,7 @@ export type UserUncheckedCreateWithoutAuthoredMemosInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthoredMemosInput = {
@@ -2520,6 +2733,7 @@ export type UserUpdateWithoutAuthoredMemosInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
@@ -2551,6 +2765,7 @@ export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutMemoRecipientsInput = {
@@ -2582,6 +2797,7 @@ export type UserCreateWithoutMemoRecipientsInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutMemoRecipientsInput = {
@@ -2613,6 +2829,7 @@ export type UserUncheckedCreateWithoutMemoRecipientsInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutMemoRecipientsInput = {
@@ -2660,6 +2877,7 @@ export type UserUpdateWithoutMemoRecipientsInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
@@ -2691,6 +2909,7 @@ export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutBackupSettingUpdatesInput = {
@@ -2722,6 +2941,7 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
@@ -2753,6 +2973,7 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutBackupSettingUpdatesInput = {
@@ -2800,6 +3021,7 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
@@ -2831,6 +3053,7 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserCreateWithoutCreatedBackupsInput = {
@@ -2862,6 +3085,7 @@ export type UserCreateWithoutCreatedBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedBackupsInput = {
@@ -2893,6 +3117,7 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedBackupsInput = {
@@ -2929,6 +3154,7 @@ export type UserCreateWithoutRestoredBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserUncheckedCreateWithoutRestoredBackupsInput = {
@@ -2960,6 +3186,7 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
 }
 
 export type UserCreateOrConnectWithoutRestoredBackupsInput = {
@@ -3007,6 +3234,7 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
@@ -3038,6 +3266,7 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUpsertWithoutRestoredBackupsInput = {
@@ -3080,6 +3309,7 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
@@ -3111,6 +3341,7 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
 }
 
 
@@ -3132,6 +3363,7 @@ export type UserCountOutputType = {
   authoredMemos: number
   memoRecipients: number
   bulletinEntries: number
+  chaplainProductOrders: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3148,6 +3380,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   authoredMemos?: boolean | UserCountOutputTypeCountAuthoredMemosArgs
   memoRecipients?: boolean | UserCountOutputTypeCountMemoRecipientsArgs
   bulletinEntries?: boolean | UserCountOutputTypeCountBulletinEntriesArgs
+  chaplainProductOrders?: boolean | UserCountOutputTypeCountChaplainProductOrdersArgs
 }
 
 /**
@@ -3251,6 +3484,13 @@ export type UserCountOutputTypeCountBulletinEntriesArgs<ExtArgs extends runtime.
   where?: Prisma.BulletinEntryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountChaplainProductOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChaplainProductOrderWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3282,6 +3522,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   authoredMemos?: boolean | Prisma.User$authoredMemosArgs<ExtArgs>
   memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   bulletinEntries?: boolean | Prisma.User$bulletinEntriesArgs<ExtArgs>
+  chaplainProductOrders?: boolean | Prisma.User$chaplainProductOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3351,6 +3592,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   authoredMemos?: boolean | Prisma.User$authoredMemosArgs<ExtArgs>
   memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   bulletinEntries?: boolean | Prisma.User$bulletinEntriesArgs<ExtArgs>
+  chaplainProductOrders?: boolean | Prisma.User$chaplainProductOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3375,6 +3617,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     authoredMemos: Prisma.$MemoAnnouncementPayload<ExtArgs>[]
     memoRecipients: Prisma.$MemoRecipientPayload<ExtArgs>[]
     bulletinEntries: Prisma.$BulletinEntryPayload<ExtArgs>[]
+    chaplainProductOrders: Prisma.$ChaplainProductOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3800,6 +4043,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   authoredMemos<T extends Prisma.User$authoredMemosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authoredMemosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoAnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memoRecipients<T extends Prisma.User$memoRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memoRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bulletinEntries<T extends Prisma.User$bulletinEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bulletinEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BulletinEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chaplainProductOrders<T extends Prisma.User$chaplainProductOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chaplainProductOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainProductOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4596,6 +4840,30 @@ export type User$bulletinEntriesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.BulletinEntryScalarFieldEnum | Prisma.BulletinEntryScalarFieldEnum[]
+}
+
+/**
+ * User.chaplainProductOrders
+ */
+export type User$chaplainProductOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChaplainProductOrder
+   */
+  select?: Prisma.ChaplainProductOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChaplainProductOrder
+   */
+  omit?: Prisma.ChaplainProductOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChaplainProductOrderInclude<ExtArgs> | null
+  where?: Prisma.ChaplainProductOrderWhereInput
+  orderBy?: Prisma.ChaplainProductOrderOrderByWithRelationInput | Prisma.ChaplainProductOrderOrderByWithRelationInput[]
+  cursor?: Prisma.ChaplainProductOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChaplainProductOrderScalarFieldEnum | Prisma.ChaplainProductOrderScalarFieldEnum[]
 }
 
 /**
