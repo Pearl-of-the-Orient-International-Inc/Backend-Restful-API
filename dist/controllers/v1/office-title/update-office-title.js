@@ -53,6 +53,7 @@ const sanitizeText = (text) => {
     return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
 };
 const updateOfficeTitle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
         if (!id || typeof id !== 'string') {
@@ -62,7 +63,7 @@ const updateOfficeTitle = (req, res) => __awaiter(void 0, void 0, void 0, functi
             });
             return;
         }
-        const { name, title, level, description, maxSlots, sections, } = req.body;
+        const { name, title, level, description, maxSlots, isPublic, sortOrder, reportsToId, sections, } = req.body;
         const existingOffice = yield prisma_1.prisma.officeTitle.findUnique({
             where: { id },
         });
@@ -108,6 +109,48 @@ const updateOfficeTitle = (req, res) => __awaiter(void 0, void 0, void 0, functi
         }
         if (maxSlots !== undefined) {
             updateData.maxSlots = maxSlots;
+        }
+        if (isPublic !== undefined)
+            updateData.isPublic = isPublic;
+        if (sortOrder !== undefined)
+            updateData.sortOrder = sortOrder;
+        if (reportsToId !== undefined) {
+            if (reportsToId === id) {
+                res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                    code: 'BAD_REQUEST',
+                    message: 'An office cannot report to itself',
+                });
+                return;
+            }
+            if (reportsToId) {
+                const reportingOffice = yield prisma_1.prisma.officeTitle.findUnique({
+                    where: { id: reportsToId },
+                    select: { id: true, reportsToId: true },
+                });
+                if (!reportingOffice) {
+                    res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                        code: 'BAD_REQUEST',
+                        message: 'The selected reporting office does not exist',
+                    });
+                    return;
+                }
+                let ancestorId = reportingOffice.reportsToId;
+                while (ancestorId) {
+                    if (ancestorId === id) {
+                        res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                            code: 'BAD_REQUEST',
+                            message: 'This reporting assignment would create a cycle',
+                        });
+                        return;
+                    }
+                    const ancestor = yield prisma_1.prisma.officeTitle.findUnique({
+                        where: { id: ancestorId },
+                        select: { reportsToId: true },
+                    });
+                    ancestorId = (_a = ancestor === null || ancestor === void 0 ? void 0 : ancestor.reportsToId) !== null && _a !== void 0 ? _a : null;
+                }
+            }
+            updateData.reportsToId = reportsToId;
         }
         if (sections !== undefined) {
             updateData.sections = sections.map((section) => {

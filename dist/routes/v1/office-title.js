@@ -11,6 +11,7 @@ const update_office_title_1 = require("../../controllers/v1/office-title/update-
 const delete_office_title_1 = require("../../controllers/v1/office-title/delete-office-title");
 const archive_office_title_1 = require("../../controllers/v1/office-title/archive-office-title");
 const retrieve_office_title_1 = require("../../controllers/v1/office-title/retrieve-office-title");
+const get_public_organizational_structure_1 = require("../../controllers/v1/office-title/get-public-organizational-structure");
 const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
 const authentication_1 = require("../../middlewares/authentication");
 const enums_1 = require("../../generated/prisma/enums");
@@ -18,6 +19,7 @@ const authorization_1 = __importDefault(require("../../middlewares/authorization
 const sanitation_1 = require("../../common/sanitation");
 const office_title_1 = require("../../validators/office-title");
 const router = (0, express_1.Router)();
+router.get('/public/organizational-structure', (0, express_rate_limiter_1.expressRateLimit)('basic'), get_public_organizational_structure_1.getPublicOrganizationalStructure);
 router.post('/create', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(office_title_1.createOfficeTitleSchema), create_office_title_1.createOfficeTitle);
 router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(office_title_1.getAllOfficeTitlesSchema), get_all_office_titles_1.getAllOfficeTitles);
 router.get('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), get_office_title_by_id_1.getOfficeTitleById);

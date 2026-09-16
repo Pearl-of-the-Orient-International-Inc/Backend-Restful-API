@@ -65,6 +65,9 @@ export const createOfficeTitle = async (
     level,
     description,
     maxSlots,
+    isPublic,
+    sortOrder,
+    reportsToId,
     sections,
   } = req.body as CreateOfficeTitleSchema;
 
@@ -91,6 +94,20 @@ export const createOfficeTitle = async (
         message: `Office title "${sanitizedName}" already exists`,
       });
       return;
+    }
+
+    if (reportsToId) {
+      const reportingOffice = await prisma.officeTitle.findUnique({
+        where: { id: reportsToId },
+        select: { id: true },
+      });
+      if (!reportingOffice) {
+        res.status(HTTPSTATUS.BAD_REQUEST).json({
+          code: 'BAD_REQUEST',
+          message: 'The selected reporting office does not exist',
+        });
+        return;
+      }
     }
 
     const sanitizedSections = (sections ?? []).map((section) => {
@@ -123,6 +140,9 @@ export const createOfficeTitle = async (
         level,
         description: sanitizedDescription,
         maxSlots: maxSlots ?? null,
+        isPublic: isPublic ?? false,
+        sortOrder: sortOrder ?? 0,
+        reportsToId: reportsToId ?? null,
         sections: sanitizedSections,
       },
     });

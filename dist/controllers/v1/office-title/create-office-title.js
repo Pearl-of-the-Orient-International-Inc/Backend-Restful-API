@@ -53,7 +53,7 @@ const sanitizeText = (text) => {
     return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
 };
 const createOfficeTitle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, title, level, description, maxSlots, sections, } = req.body;
+    const { name, title, level, description, maxSlots, isPublic, sortOrder, reportsToId, sections, } = req.body;
     const rawName = name !== null && name !== void 0 ? name : title;
     const sanitizedName = sanitizeText(rawName);
     const sanitizedDescription = description === null || description === undefined
@@ -74,6 +74,19 @@ const createOfficeTitle = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 message: `Office title "${sanitizedName}" already exists`,
             });
             return;
+        }
+        if (reportsToId) {
+            const reportingOffice = yield prisma_1.prisma.officeTitle.findUnique({
+                where: { id: reportsToId },
+                select: { id: true },
+            });
+            if (!reportingOffice) {
+                res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                    code: 'BAD_REQUEST',
+                    message: 'The selected reporting office does not exist',
+                });
+                return;
+            }
         }
         const sanitizedSections = (sections !== null && sections !== void 0 ? sections : []).map((section) => {
             var _a;
@@ -102,6 +115,9 @@ const createOfficeTitle = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 level,
                 description: sanitizedDescription,
                 maxSlots: maxSlots !== null && maxSlots !== void 0 ? maxSlots : null,
+                isPublic: isPublic !== null && isPublic !== void 0 ? isPublic : false,
+                sortOrder: sortOrder !== null && sortOrder !== void 0 ? sortOrder : 0,
+                reportsToId: reportsToId !== null && reportsToId !== void 0 ? reportsToId : null,
                 sections: sanitizedSections,
             },
         });

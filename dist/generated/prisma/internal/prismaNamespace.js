@@ -852,6 +852,9 @@ exports.OfficeTitleScalarFieldEnum = {
     maxSlots: 'maxSlots',
     sections: 'sections',
     isActive: 'isActive',
+    isPublic: 'isPublic',
+    sortOrder: 'sortOrder',
+    reportsToId: 'reportsToId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
@@ -865,6 +868,7 @@ exports.OfficerAssignmentScalarFieldEnum = {
     cityMunicipality: 'cityMunicipality',
     barangay: 'barangay',
     isActive: 'isActive',
+    isPublic: 'isPublic',
     startDate: 'startDate',
     endDate: 'endDate',
     createdAt: 'createdAt',

@@ -34,6 +34,7 @@ export type OfficerAssignmentMinAggregateOutputType = {
   cityMunicipality: string | null
   barangay: string | null
   isActive: boolean | null
+  isPublic: boolean | null
   startDate: Date | null
   endDate: Date | null
   createdAt: Date | null
@@ -50,6 +51,7 @@ export type OfficerAssignmentMaxAggregateOutputType = {
   cityMunicipality: string | null
   barangay: string | null
   isActive: boolean | null
+  isPublic: boolean | null
   startDate: Date | null
   endDate: Date | null
   createdAt: Date | null
@@ -66,6 +68,7 @@ export type OfficerAssignmentCountAggregateOutputType = {
   cityMunicipality: number
   barangay: number
   isActive: number
+  isPublic: number
   startDate: number
   endDate: number
   createdAt: number
@@ -84,6 +87,7 @@ export type OfficerAssignmentMinAggregateInputType = {
   cityMunicipality?: true
   barangay?: true
   isActive?: true
+  isPublic?: true
   startDate?: true
   endDate?: true
   createdAt?: true
@@ -100,6 +104,7 @@ export type OfficerAssignmentMaxAggregateInputType = {
   cityMunicipality?: true
   barangay?: true
   isActive?: true
+  isPublic?: true
   startDate?: true
   endDate?: true
   createdAt?: true
@@ -116,6 +121,7 @@ export type OfficerAssignmentCountAggregateInputType = {
   cityMunicipality?: true
   barangay?: true
   isActive?: true
+  isPublic?: true
   startDate?: true
   endDate?: true
   createdAt?: true
@@ -205,6 +211,7 @@ export type OfficerAssignmentGroupByOutputType = {
   cityMunicipality: string | null
   barangay: string | null
   isActive: boolean
+  isPublic: boolean
   startDate: Date
   endDate: Date | null
   createdAt: Date
@@ -242,6 +249,7 @@ export type OfficerAssignmentWhereInput = {
   cityMunicipality?: Prisma.StringNullableFilter<"OfficerAssignment"> | string | null
   barangay?: Prisma.StringNullableFilter<"OfficerAssignment"> | string | null
   isActive?: Prisma.BoolFilter<"OfficerAssignment"> | boolean
+  isPublic?: Prisma.BoolFilter<"OfficerAssignment"> | boolean
   startDate?: Prisma.DateTimeFilter<"OfficerAssignment"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"OfficerAssignment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OfficerAssignment"> | Date | string
@@ -260,6 +268,7 @@ export type OfficerAssignmentOrderByWithRelationInput = {
   cityMunicipality?: Prisma.SortOrderInput | Prisma.SortOrder
   barangay?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -282,6 +291,7 @@ export type OfficerAssignmentWhereUniqueInput = Prisma.AtLeast<{
   cityMunicipality?: Prisma.StringNullableFilter<"OfficerAssignment"> | string | null
   barangay?: Prisma.StringNullableFilter<"OfficerAssignment"> | string | null
   isActive?: Prisma.BoolFilter<"OfficerAssignment"> | boolean
+  isPublic?: Prisma.BoolFilter<"OfficerAssignment"> | boolean
   startDate?: Prisma.DateTimeFilter<"OfficerAssignment"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"OfficerAssignment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OfficerAssignment"> | Date | string
@@ -300,6 +310,7 @@ export type OfficerAssignmentOrderByWithAggregationInput = {
   cityMunicipality?: Prisma.SortOrderInput | Prisma.SortOrder
   barangay?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -322,6 +333,7 @@ export type OfficerAssignmentScalarWhereWithAggregatesInput = {
   cityMunicipality?: Prisma.StringNullableWithAggregatesFilter<"OfficerAssignment"> | string | null
   barangay?: Prisma.StringNullableWithAggregatesFilter<"OfficerAssignment"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"OfficerAssignment"> | boolean
+  isPublic?: Prisma.BoolWithAggregatesFilter<"OfficerAssignment"> | boolean
   startDate?: Prisma.DateTimeWithAggregatesFilter<"OfficerAssignment"> | Date | string
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"OfficerAssignment"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OfficerAssignment"> | Date | string
@@ -336,6 +348,7 @@ export type OfficerAssignmentCreateInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -354,6 +367,7 @@ export type OfficerAssignmentUncheckedCreateInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -368,6 +382,7 @@ export type OfficerAssignmentUpdateInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -386,6 +401,7 @@ export type OfficerAssignmentUncheckedUpdateInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -402,6 +418,7 @@ export type OfficerAssignmentCreateManyInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -416,6 +433,7 @@ export type OfficerAssignmentUpdateManyMutationInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,6 +450,7 @@ export type OfficerAssignmentUncheckedUpdateManyInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -468,6 +487,7 @@ export type OfficerAssignmentCountOrderByAggregateInput = {
   cityMunicipality?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -484,6 +504,7 @@ export type OfficerAssignmentMaxOrderByAggregateInput = {
   cityMunicipality?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -500,6 +521,7 @@ export type OfficerAssignmentMinOrderByAggregateInput = {
   cityMunicipality?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -598,6 +620,7 @@ export type OfficerAssignmentCreateWithoutMemberInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -614,6 +637,7 @@ export type OfficerAssignmentUncheckedCreateWithoutMemberInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -659,6 +683,7 @@ export type OfficerAssignmentScalarWhereInput = {
   cityMunicipality?: Prisma.StringNullableFilter<"OfficerAssignment"> | string | null
   barangay?: Prisma.StringNullableFilter<"OfficerAssignment"> | string | null
   isActive?: Prisma.BoolFilter<"OfficerAssignment"> | boolean
+  isPublic?: Prisma.BoolFilter<"OfficerAssignment"> | boolean
   startDate?: Prisma.DateTimeFilter<"OfficerAssignment"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"OfficerAssignment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OfficerAssignment"> | Date | string
@@ -673,6 +698,7 @@ export type OfficerAssignmentCreateWithoutOfficeTitleInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -689,6 +715,7 @@ export type OfficerAssignmentUncheckedCreateWithoutOfficeTitleInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -730,6 +757,7 @@ export type OfficerAssignmentCreateManyMemberInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -744,6 +772,7 @@ export type OfficerAssignmentUpdateWithoutMemberInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -760,6 +789,7 @@ export type OfficerAssignmentUncheckedUpdateWithoutMemberInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -775,6 +805,7 @@ export type OfficerAssignmentUncheckedUpdateManyWithoutMemberInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -790,6 +821,7 @@ export type OfficerAssignmentCreateManyOfficeTitleInput = {
   cityMunicipality?: string | null
   barangay?: string | null
   isActive?: boolean
+  isPublic?: boolean
   startDate?: Date | string
   endDate?: Date | string | null
   createdAt?: Date | string
@@ -804,6 +836,7 @@ export type OfficerAssignmentUpdateWithoutOfficeTitleInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -820,6 +853,7 @@ export type OfficerAssignmentUncheckedUpdateWithoutOfficeTitleInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -835,6 +869,7 @@ export type OfficerAssignmentUncheckedUpdateManyWithoutOfficeTitleInput = {
   cityMunicipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -853,6 +888,7 @@ export type OfficerAssignmentSelect<ExtArgs extends runtime.Types.Extensions.Int
   cityMunicipality?: boolean
   barangay?: boolean
   isActive?: boolean
+  isPublic?: boolean
   startDate?: boolean
   endDate?: boolean
   createdAt?: boolean
@@ -871,6 +907,7 @@ export type OfficerAssignmentSelectCreateManyAndReturn<ExtArgs extends runtime.T
   cityMunicipality?: boolean
   barangay?: boolean
   isActive?: boolean
+  isPublic?: boolean
   startDate?: boolean
   endDate?: boolean
   createdAt?: boolean
@@ -889,6 +926,7 @@ export type OfficerAssignmentSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   cityMunicipality?: boolean
   barangay?: boolean
   isActive?: boolean
+  isPublic?: boolean
   startDate?: boolean
   endDate?: boolean
   createdAt?: boolean
@@ -907,13 +945,14 @@ export type OfficerAssignmentSelectScalar = {
   cityMunicipality?: boolean
   barangay?: boolean
   isActive?: boolean
+  isPublic?: boolean
   startDate?: boolean
   endDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OfficerAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "officeTitleId" | "department" | "region" | "province" | "cityMunicipality" | "barangay" | "isActive" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["officerAssignment"]>
+export type OfficerAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "officeTitleId" | "department" | "region" | "province" | "cityMunicipality" | "barangay" | "isActive" | "isPublic" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["officerAssignment"]>
 export type OfficerAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   officeTitle?: boolean | Prisma.OfficeTitleDefaultArgs<ExtArgs>
@@ -943,6 +982,7 @@ export type $OfficerAssignmentPayload<ExtArgs extends runtime.Types.Extensions.I
     cityMunicipality: string | null
     barangay: string | null
     isActive: boolean
+    isPublic: boolean
     startDate: Date
     endDate: Date | null
     createdAt: Date
@@ -1381,6 +1421,7 @@ export interface OfficerAssignmentFieldRefs {
   readonly cityMunicipality: Prisma.FieldRef<"OfficerAssignment", 'String'>
   readonly barangay: Prisma.FieldRef<"OfficerAssignment", 'String'>
   readonly isActive: Prisma.FieldRef<"OfficerAssignment", 'Boolean'>
+  readonly isPublic: Prisma.FieldRef<"OfficerAssignment", 'Boolean'>
   readonly startDate: Prisma.FieldRef<"OfficerAssignment", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"OfficerAssignment", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"OfficerAssignment", 'DateTime'>

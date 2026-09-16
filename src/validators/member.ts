@@ -479,6 +479,14 @@ export const deactivateOfficerAssignmentByAdminSchema = z.object({
   }),
 });
 
+export const updateOfficerAssignmentPublicationSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+    assignmentId: z.uuid(),
+  }),
+  body: z.object({ isPublic: z.boolean() }),
+});
+
 export const replaceOfficerAssignmentByAdminSchema = z.object({
   params: z.object({
     id: z.uuid(),

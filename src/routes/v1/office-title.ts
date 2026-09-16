@@ -13,6 +13,7 @@ import { updateOfficeTitle } from '@/controllers/v1/office-title/update-office-t
 import { deleteOfficeTitle } from '@/controllers/v1/office-title/delete-office-title';
 import { archiveOfficeTitle } from '@/controllers/v1/office-title/archive-office-title';
 import { retrieveOfficeTitle } from '@/controllers/v1/office-title/retrieve-office-title';
+import { getPublicOrganizationalStructure } from '@/controllers/v1/office-title/get-public-organizational-structure';
 
 /**
  * Helpers, Validators and Middlewares
@@ -29,6 +30,12 @@ import {
 } from '@/validators/office-title';
 
 const router = Router();
+
+router.get(
+  '/public/organizational-structure',
+  expressRateLimit('basic'),
+  getPublicOrganizationalStructure,
+);
 
 router.post(
   '/create',

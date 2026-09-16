@@ -78,6 +78,9 @@ export const updateOfficeTitle = async (
       level,
       description,
       maxSlots,
+      isPublic,
+      sortOrder,
+      reportsToId,
       sections,
     } = req.body as UpdateOfficeTitleSchema;
 
@@ -123,6 +126,9 @@ export const updateOfficeTitle = async (
       level?: OfficeTitleLevel;
       description?: string | null;
       maxSlots?: number | null;
+      isPublic?: boolean;
+      sortOrder?: number;
+      reportsToId?: string | null;
       sections?: Prisma.InputJsonValue;
     } = {};
 
@@ -141,6 +147,50 @@ export const updateOfficeTitle = async (
 
     if (maxSlots !== undefined) {
       updateData.maxSlots = maxSlots;
+    }
+
+    if (isPublic !== undefined) updateData.isPublic = isPublic;
+    if (sortOrder !== undefined) updateData.sortOrder = sortOrder;
+
+    if (reportsToId !== undefined) {
+      if (reportsToId === id) {
+        res.status(HTTPSTATUS.BAD_REQUEST).json({
+          code: 'BAD_REQUEST',
+          message: 'An office cannot report to itself',
+        });
+        return;
+      }
+
+      if (reportsToId) {
+        const reportingOffice = await prisma.officeTitle.findUnique({
+          where: { id: reportsToId },
+          select: { id: true, reportsToId: true },
+        });
+        if (!reportingOffice) {
+          res.status(HTTPSTATUS.BAD_REQUEST).json({
+            code: 'BAD_REQUEST',
+            message: 'The selected reporting office does not exist',
+          });
+          return;
+        }
+
+        let ancestorId: string | null = reportingOffice.reportsToId;
+        while (ancestorId) {
+          if (ancestorId === id) {
+            res.status(HTTPSTATUS.BAD_REQUEST).json({
+              code: 'BAD_REQUEST',
+              message: 'This reporting assignment would create a cycle',
+            });
+            return;
+          }
+          const ancestor = await prisma.officeTitle.findUnique({
+            where: { id: ancestorId },
+            select: { reportsToId: true },
+          });
+          ancestorId = ancestor?.reportsToId ?? null;
+        }
+      }
+      updateData.reportsToId = reportsToId;
     }
 
     if (sections !== undefined) {

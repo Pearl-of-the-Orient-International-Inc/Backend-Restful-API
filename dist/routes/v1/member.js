@@ -46,6 +46,7 @@ const get_all_officer_assignments_1 = require("../../controllers/v1/member/get-a
 const get_member_officer_assignments_1 = require("../../controllers/v1/member/get-member-officer-assignments");
 const deactivate_officer_assignment_by_admin_1 = require("../../controllers/v1/member/deactivate-officer-assignment-by-admin");
 const replace_officer_assignment_by_admin_1 = require("../../controllers/v1/member/replace-officer-assignment-by-admin");
+const update_officer_assignment_publication_1 = require("../../controllers/v1/member/update-officer-assignment-publication");
 const get_public_member_profile_1 = require("../../controllers/v1/member/get-public-member-profile");
 const get_public_directory_locations_1 = require("../../controllers/v1/member/get-public-directory-locations");
 const get_public_service_chaplains_1 = require("../../controllers/v1/member/get-public-service-chaplains");
@@ -123,6 +124,7 @@ router.post('/:id/officer-assignments', (0, express_rate_limiter_1.expressRateLi
 router.get('/:id/officer-assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.getMemberOfficerAssignmentsSchema), get_member_officer_assignments_1.getMemberOfficerAssignments);
 router.patch('/:id/officer-assignments/:assignmentId/deactivate', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.deactivateOfficerAssignmentByAdminSchema), deactivate_officer_assignment_by_admin_1.deactivateOfficerAssignmentByAdmin);
 router.post('/:id/officer-assignments/:assignmentId/replace', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.replaceOfficerAssignmentByAdminSchema), replace_officer_assignment_by_admin_1.replaceOfficerAssignmentByAdmin);
+router.patch('/:id/officer-assignments/:assignmentId/publication', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.updateOfficerAssignmentPublicationSchema), update_officer_assignment_publication_1.updateOfficerAssignmentPublication);
 router.patch('/:id/archive', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), archive_member_1.archiveMember);
 router.patch('/:id/retrieve', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), retrieve_member_1.retrieveMember);
 router.delete('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(member_1.deleteMemberByAdminSchema), delete_member_by_admin_1.deleteMemberByAdmin);

@@ -53,6 +53,7 @@ export const replaceOfficerAssignmentByAdmin = async (
         cityMunicipality: true,
         barangay: true,
         isActive: true,
+        isPublic: true,
         member: {
           select: {
             userId: true,
@@ -144,6 +145,7 @@ export const replaceOfficerAssignmentByAdmin = async (
               isActive: true,
               startDate: body.startDate ? new Date(body.startDate) : new Date(),
               endDate: null,
+              isPublic: currentAssignment.isPublic,
             },
             select: {
               id: true,
@@ -155,6 +157,7 @@ export const replaceOfficerAssignmentByAdmin = async (
               cityMunicipality: true,
               barangay: true,
               isActive: true,
+              isPublic: true,
               startDate: true,
               endDate: true,
               createdAt: true,
@@ -180,6 +183,7 @@ export const replaceOfficerAssignmentByAdmin = async (
               cityMunicipality: currentAssignment.cityMunicipality,
               barangay: currentAssignment.barangay,
               isActive: true,
+              isPublic: currentAssignment.isPublic,
               startDate: body.startDate ? new Date(body.startDate) : new Date(),
             },
             select: {
@@ -192,6 +196,7 @@ export const replaceOfficerAssignmentByAdmin = async (
               cityMunicipality: true,
               barangay: true,
               isActive: true,
+              isPublic: true,
               startDate: true,
               endDate: true,
               createdAt: true,

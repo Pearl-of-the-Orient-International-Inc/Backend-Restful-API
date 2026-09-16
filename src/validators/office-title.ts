@@ -47,6 +47,9 @@ const officeTitleBodySchema = z.object({
     .positive({ message: 'maxSlots must be greater than 0' })
     .nullable()
     .optional(),
+  isPublic: z.boolean().optional(),
+  sortOrder: z.number().int().min(0).max(10000).optional(),
+  reportsToId: z.uuid().nullable().optional(),
   sections: z
     .array(sectionSchema)
     .max(20, { message: 'Cannot exceed 20 sections' })
@@ -70,6 +73,9 @@ export const updateOfficeTitleSchema = officeTitleBodySchema
       data.level !== undefined ||
       data.description !== undefined ||
       data.maxSlots !== undefined ||
+      data.isPublic !== undefined ||
+      data.sortOrder !== undefined ||
+      data.reportsToId !== undefined ||
       data.sections !== undefined,
     {
       message: 'At least one field is required for update',

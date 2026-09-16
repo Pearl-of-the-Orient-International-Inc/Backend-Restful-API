@@ -28,10 +28,12 @@ export type AggregateOfficeTitle = {
 
 export type OfficeTitleAvgAggregateOutputType = {
   maxSlots: number | null
+  sortOrder: number | null
 }
 
 export type OfficeTitleSumAggregateOutputType = {
   maxSlots: number | null
+  sortOrder: number | null
 }
 
 export type OfficeTitleMinAggregateOutputType = {
@@ -41,6 +43,9 @@ export type OfficeTitleMinAggregateOutputType = {
   description: string | null
   maxSlots: number | null
   isActive: boolean | null
+  isPublic: boolean | null
+  sortOrder: number | null
+  reportsToId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +57,9 @@ export type OfficeTitleMaxAggregateOutputType = {
   description: string | null
   maxSlots: number | null
   isActive: boolean | null
+  isPublic: boolean | null
+  sortOrder: number | null
+  reportsToId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -64,6 +72,9 @@ export type OfficeTitleCountAggregateOutputType = {
   maxSlots: number
   sections: number
   isActive: number
+  isPublic: number
+  sortOrder: number
+  reportsToId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -72,10 +83,12 @@ export type OfficeTitleCountAggregateOutputType = {
 
 export type OfficeTitleAvgAggregateInputType = {
   maxSlots?: true
+  sortOrder?: true
 }
 
 export type OfficeTitleSumAggregateInputType = {
   maxSlots?: true
+  sortOrder?: true
 }
 
 export type OfficeTitleMinAggregateInputType = {
@@ -85,6 +98,9 @@ export type OfficeTitleMinAggregateInputType = {
   description?: true
   maxSlots?: true
   isActive?: true
+  isPublic?: true
+  sortOrder?: true
+  reportsToId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -96,6 +112,9 @@ export type OfficeTitleMaxAggregateInputType = {
   description?: true
   maxSlots?: true
   isActive?: true
+  isPublic?: true
+  sortOrder?: true
+  reportsToId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -108,6 +127,9 @@ export type OfficeTitleCountAggregateInputType = {
   maxSlots?: true
   sections?: true
   isActive?: true
+  isPublic?: true
+  sortOrder?: true
+  reportsToId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -207,6 +229,9 @@ export type OfficeTitleGroupByOutputType = {
   maxSlots: number | null
   sections: runtime.JsonValue
   isActive: boolean
+  isPublic: boolean
+  sortOrder: number
+  reportsToId: string | null
   createdAt: Date
   updatedAt: Date
   _count: OfficeTitleCountAggregateOutputType | null
@@ -242,8 +267,13 @@ export type OfficeTitleWhereInput = {
   maxSlots?: Prisma.IntNullableFilter<"OfficeTitle"> | number | null
   sections?: Prisma.JsonFilter<"OfficeTitle">
   isActive?: Prisma.BoolFilter<"OfficeTitle"> | boolean
+  isPublic?: Prisma.BoolFilter<"OfficeTitle"> | boolean
+  sortOrder?: Prisma.IntFilter<"OfficeTitle"> | number
+  reportsToId?: Prisma.StringNullableFilter<"OfficeTitle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OfficeTitle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OfficeTitle"> | Date | string
+  reportsTo?: Prisma.XOR<Prisma.OfficeTitleNullableScalarRelationFilter, Prisma.OfficeTitleWhereInput> | null
+  directReports?: Prisma.OfficeTitleListRelationFilter
   assignments?: Prisma.OfficerAssignmentListRelationFilter
 }
 
@@ -255,8 +285,13 @@ export type OfficeTitleOrderByWithRelationInput = {
   maxSlots?: Prisma.SortOrderInput | Prisma.SortOrder
   sections?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  reportsToId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  reportsTo?: Prisma.OfficeTitleOrderByWithRelationInput
+  directReports?: Prisma.OfficeTitleOrderByRelationAggregateInput
   assignments?: Prisma.OfficerAssignmentOrderByRelationAggregateInput
 }
 
@@ -271,8 +306,13 @@ export type OfficeTitleWhereUniqueInput = Prisma.AtLeast<{
   maxSlots?: Prisma.IntNullableFilter<"OfficeTitle"> | number | null
   sections?: Prisma.JsonFilter<"OfficeTitle">
   isActive?: Prisma.BoolFilter<"OfficeTitle"> | boolean
+  isPublic?: Prisma.BoolFilter<"OfficeTitle"> | boolean
+  sortOrder?: Prisma.IntFilter<"OfficeTitle"> | number
+  reportsToId?: Prisma.StringNullableFilter<"OfficeTitle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OfficeTitle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OfficeTitle"> | Date | string
+  reportsTo?: Prisma.XOR<Prisma.OfficeTitleNullableScalarRelationFilter, Prisma.OfficeTitleWhereInput> | null
+  directReports?: Prisma.OfficeTitleListRelationFilter
   assignments?: Prisma.OfficerAssignmentListRelationFilter
 }, "id" | "name">
 
@@ -284,6 +324,9 @@ export type OfficeTitleOrderByWithAggregationInput = {
   maxSlots?: Prisma.SortOrderInput | Prisma.SortOrder
   sections?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  reportsToId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OfficeTitleCountOrderByAggregateInput
@@ -304,6 +347,9 @@ export type OfficeTitleScalarWhereWithAggregatesInput = {
   maxSlots?: Prisma.IntNullableWithAggregatesFilter<"OfficeTitle"> | number | null
   sections?: Prisma.JsonWithAggregatesFilter<"OfficeTitle">
   isActive?: Prisma.BoolWithAggregatesFilter<"OfficeTitle"> | boolean
+  isPublic?: Prisma.BoolWithAggregatesFilter<"OfficeTitle"> | boolean
+  sortOrder?: Prisma.IntWithAggregatesFilter<"OfficeTitle"> | number
+  reportsToId?: Prisma.StringNullableWithAggregatesFilter<"OfficeTitle"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OfficeTitle"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OfficeTitle"> | Date | string
 }
@@ -316,8 +362,12 @@ export type OfficeTitleCreateInput = {
   maxSlots?: number | null
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  reportsTo?: Prisma.OfficeTitleCreateNestedOneWithoutDirectReportsInput
+  directReports?: Prisma.OfficeTitleCreateNestedManyWithoutReportsToInput
   assignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutOfficeTitleInput
 }
 
@@ -329,8 +379,12 @@ export type OfficeTitleUncheckedCreateInput = {
   maxSlots?: number | null
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  reportsToId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  directReports?: Prisma.OfficeTitleUncheckedCreateNestedManyWithoutReportsToInput
   assignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutOfficeTitleInput
 }
 
@@ -342,8 +396,12 @@ export type OfficeTitleUpdateInput = {
   maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reportsTo?: Prisma.OfficeTitleUpdateOneWithoutDirectReportsNestedInput
+  directReports?: Prisma.OfficeTitleUpdateManyWithoutReportsToNestedInput
   assignments?: Prisma.OfficerAssignmentUpdateManyWithoutOfficeTitleNestedInput
 }
 
@@ -355,8 +413,12 @@ export type OfficeTitleUncheckedUpdateInput = {
   maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  reportsToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  directReports?: Prisma.OfficeTitleUncheckedUpdateManyWithoutReportsToNestedInput
   assignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutOfficeTitleNestedInput
 }
 
@@ -368,6 +430,9 @@ export type OfficeTitleCreateManyInput = {
   maxSlots?: number | null
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  reportsToId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -380,6 +445,8 @@ export type OfficeTitleUpdateManyMutationInput = {
   maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -392,8 +459,26 @@ export type OfficeTitleUncheckedUpdateManyInput = {
   maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  reportsToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OfficeTitleNullableScalarRelationFilter = {
+  is?: Prisma.OfficeTitleWhereInput | null
+  isNot?: Prisma.OfficeTitleWhereInput | null
+}
+
+export type OfficeTitleListRelationFilter = {
+  every?: Prisma.OfficeTitleWhereInput
+  some?: Prisma.OfficeTitleWhereInput
+  none?: Prisma.OfficeTitleWhereInput
+}
+
+export type OfficeTitleOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type OfficeTitleCountOrderByAggregateInput = {
@@ -404,12 +489,16 @@ export type OfficeTitleCountOrderByAggregateInput = {
   maxSlots?: Prisma.SortOrder
   sections?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  reportsToId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OfficeTitleAvgOrderByAggregateInput = {
   maxSlots?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
 }
 
 export type OfficeTitleMaxOrderByAggregateInput = {
@@ -419,6 +508,9 @@ export type OfficeTitleMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   maxSlots?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  reportsToId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -430,12 +522,16 @@ export type OfficeTitleMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   maxSlots?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isPublic?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  reportsToId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OfficeTitleSumOrderByAggregateInput = {
   maxSlots?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
 }
 
 export type OfficeTitleScalarRelationFilter = {
@@ -443,8 +539,66 @@ export type OfficeTitleScalarRelationFilter = {
   isNot?: Prisma.OfficeTitleWhereInput
 }
 
+export type OfficeTitleCreateNestedOneWithoutDirectReportsInput = {
+  create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutDirectReportsInput, Prisma.OfficeTitleUncheckedCreateWithoutDirectReportsInput>
+  connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutDirectReportsInput
+  connect?: Prisma.OfficeTitleWhereUniqueInput
+}
+
+export type OfficeTitleCreateNestedManyWithoutReportsToInput = {
+  create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutReportsToInput, Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput> | Prisma.OfficeTitleCreateWithoutReportsToInput[] | Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput[]
+  connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput | Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput[]
+  createMany?: Prisma.OfficeTitleCreateManyReportsToInputEnvelope
+  connect?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+}
+
+export type OfficeTitleUncheckedCreateNestedManyWithoutReportsToInput = {
+  create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutReportsToInput, Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput> | Prisma.OfficeTitleCreateWithoutReportsToInput[] | Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput[]
+  connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput | Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput[]
+  createMany?: Prisma.OfficeTitleCreateManyReportsToInputEnvelope
+  connect?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+}
+
 export type EnumOfficeTitleLevelFieldUpdateOperationsInput = {
   set?: $Enums.OfficeTitleLevel
+}
+
+export type OfficeTitleUpdateOneWithoutDirectReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutDirectReportsInput, Prisma.OfficeTitleUncheckedCreateWithoutDirectReportsInput>
+  connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutDirectReportsInput
+  upsert?: Prisma.OfficeTitleUpsertWithoutDirectReportsInput
+  disconnect?: Prisma.OfficeTitleWhereInput | boolean
+  delete?: Prisma.OfficeTitleWhereInput | boolean
+  connect?: Prisma.OfficeTitleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OfficeTitleUpdateToOneWithWhereWithoutDirectReportsInput, Prisma.OfficeTitleUpdateWithoutDirectReportsInput>, Prisma.OfficeTitleUncheckedUpdateWithoutDirectReportsInput>
+}
+
+export type OfficeTitleUpdateManyWithoutReportsToNestedInput = {
+  create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutReportsToInput, Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput> | Prisma.OfficeTitleCreateWithoutReportsToInput[] | Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput[]
+  connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput | Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput[]
+  upsert?: Prisma.OfficeTitleUpsertWithWhereUniqueWithoutReportsToInput | Prisma.OfficeTitleUpsertWithWhereUniqueWithoutReportsToInput[]
+  createMany?: Prisma.OfficeTitleCreateManyReportsToInputEnvelope
+  set?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  disconnect?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  delete?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  connect?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  update?: Prisma.OfficeTitleUpdateWithWhereUniqueWithoutReportsToInput | Prisma.OfficeTitleUpdateWithWhereUniqueWithoutReportsToInput[]
+  updateMany?: Prisma.OfficeTitleUpdateManyWithWhereWithoutReportsToInput | Prisma.OfficeTitleUpdateManyWithWhereWithoutReportsToInput[]
+  deleteMany?: Prisma.OfficeTitleScalarWhereInput | Prisma.OfficeTitleScalarWhereInput[]
+}
+
+export type OfficeTitleUncheckedUpdateManyWithoutReportsToNestedInput = {
+  create?: Prisma.XOR<Prisma.OfficeTitleCreateWithoutReportsToInput, Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput> | Prisma.OfficeTitleCreateWithoutReportsToInput[] | Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput[]
+  connectOrCreate?: Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput | Prisma.OfficeTitleCreateOrConnectWithoutReportsToInput[]
+  upsert?: Prisma.OfficeTitleUpsertWithWhereUniqueWithoutReportsToInput | Prisma.OfficeTitleUpsertWithWhereUniqueWithoutReportsToInput[]
+  createMany?: Prisma.OfficeTitleCreateManyReportsToInputEnvelope
+  set?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  disconnect?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  delete?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  connect?: Prisma.OfficeTitleWhereUniqueInput | Prisma.OfficeTitleWhereUniqueInput[]
+  update?: Prisma.OfficeTitleUpdateWithWhereUniqueWithoutReportsToInput | Prisma.OfficeTitleUpdateWithWhereUniqueWithoutReportsToInput[]
+  updateMany?: Prisma.OfficeTitleUpdateManyWithWhereWithoutReportsToInput | Prisma.OfficeTitleUpdateManyWithWhereWithoutReportsToInput[]
+  deleteMany?: Prisma.OfficeTitleScalarWhereInput | Prisma.OfficeTitleScalarWhereInput[]
 }
 
 export type OfficeTitleCreateNestedOneWithoutAssignmentsInput = {
@@ -461,6 +615,162 @@ export type OfficeTitleUpdateOneRequiredWithoutAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OfficeTitleUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.OfficeTitleUpdateWithoutAssignmentsInput>, Prisma.OfficeTitleUncheckedUpdateWithoutAssignmentsInput>
 }
 
+export type OfficeTitleCreateWithoutDirectReportsInput = {
+  id?: string
+  name: string
+  level: $Enums.OfficeTitleLevel
+  description?: string | null
+  maxSlots?: number | null
+  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reportsTo?: Prisma.OfficeTitleCreateNestedOneWithoutDirectReportsInput
+  assignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutOfficeTitleInput
+}
+
+export type OfficeTitleUncheckedCreateWithoutDirectReportsInput = {
+  id?: string
+  name: string
+  level: $Enums.OfficeTitleLevel
+  description?: string | null
+  maxSlots?: number | null
+  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  reportsToId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutOfficeTitleInput
+}
+
+export type OfficeTitleCreateOrConnectWithoutDirectReportsInput = {
+  where: Prisma.OfficeTitleWhereUniqueInput
+  create: Prisma.XOR<Prisma.OfficeTitleCreateWithoutDirectReportsInput, Prisma.OfficeTitleUncheckedCreateWithoutDirectReportsInput>
+}
+
+export type OfficeTitleCreateWithoutReportsToInput = {
+  id?: string
+  name: string
+  level: $Enums.OfficeTitleLevel
+  description?: string | null
+  maxSlots?: number | null
+  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  directReports?: Prisma.OfficeTitleCreateNestedManyWithoutReportsToInput
+  assignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutOfficeTitleInput
+}
+
+export type OfficeTitleUncheckedCreateWithoutReportsToInput = {
+  id?: string
+  name: string
+  level: $Enums.OfficeTitleLevel
+  description?: string | null
+  maxSlots?: number | null
+  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  directReports?: Prisma.OfficeTitleUncheckedCreateNestedManyWithoutReportsToInput
+  assignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutOfficeTitleInput
+}
+
+export type OfficeTitleCreateOrConnectWithoutReportsToInput = {
+  where: Prisma.OfficeTitleWhereUniqueInput
+  create: Prisma.XOR<Prisma.OfficeTitleCreateWithoutReportsToInput, Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput>
+}
+
+export type OfficeTitleCreateManyReportsToInputEnvelope = {
+  data: Prisma.OfficeTitleCreateManyReportsToInput | Prisma.OfficeTitleCreateManyReportsToInput[]
+  skipDuplicates?: boolean
+}
+
+export type OfficeTitleUpsertWithoutDirectReportsInput = {
+  update: Prisma.XOR<Prisma.OfficeTitleUpdateWithoutDirectReportsInput, Prisma.OfficeTitleUncheckedUpdateWithoutDirectReportsInput>
+  create: Prisma.XOR<Prisma.OfficeTitleCreateWithoutDirectReportsInput, Prisma.OfficeTitleUncheckedCreateWithoutDirectReportsInput>
+  where?: Prisma.OfficeTitleWhereInput
+}
+
+export type OfficeTitleUpdateToOneWithWhereWithoutDirectReportsInput = {
+  where?: Prisma.OfficeTitleWhereInput
+  data: Prisma.XOR<Prisma.OfficeTitleUpdateWithoutDirectReportsInput, Prisma.OfficeTitleUncheckedUpdateWithoutDirectReportsInput>
+}
+
+export type OfficeTitleUpdateWithoutDirectReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumOfficeTitleLevelFieldUpdateOperationsInput | $Enums.OfficeTitleLevel
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reportsTo?: Prisma.OfficeTitleUpdateOneWithoutDirectReportsNestedInput
+  assignments?: Prisma.OfficerAssignmentUpdateManyWithoutOfficeTitleNestedInput
+}
+
+export type OfficeTitleUncheckedUpdateWithoutDirectReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumOfficeTitleLevelFieldUpdateOperationsInput | $Enums.OfficeTitleLevel
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  reportsToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutOfficeTitleNestedInput
+}
+
+export type OfficeTitleUpsertWithWhereUniqueWithoutReportsToInput = {
+  where: Prisma.OfficeTitleWhereUniqueInput
+  update: Prisma.XOR<Prisma.OfficeTitleUpdateWithoutReportsToInput, Prisma.OfficeTitleUncheckedUpdateWithoutReportsToInput>
+  create: Prisma.XOR<Prisma.OfficeTitleCreateWithoutReportsToInput, Prisma.OfficeTitleUncheckedCreateWithoutReportsToInput>
+}
+
+export type OfficeTitleUpdateWithWhereUniqueWithoutReportsToInput = {
+  where: Prisma.OfficeTitleWhereUniqueInput
+  data: Prisma.XOR<Prisma.OfficeTitleUpdateWithoutReportsToInput, Prisma.OfficeTitleUncheckedUpdateWithoutReportsToInput>
+}
+
+export type OfficeTitleUpdateManyWithWhereWithoutReportsToInput = {
+  where: Prisma.OfficeTitleScalarWhereInput
+  data: Prisma.XOR<Prisma.OfficeTitleUpdateManyMutationInput, Prisma.OfficeTitleUncheckedUpdateManyWithoutReportsToInput>
+}
+
+export type OfficeTitleScalarWhereInput = {
+  AND?: Prisma.OfficeTitleScalarWhereInput | Prisma.OfficeTitleScalarWhereInput[]
+  OR?: Prisma.OfficeTitleScalarWhereInput[]
+  NOT?: Prisma.OfficeTitleScalarWhereInput | Prisma.OfficeTitleScalarWhereInput[]
+  id?: Prisma.StringFilter<"OfficeTitle"> | string
+  name?: Prisma.StringFilter<"OfficeTitle"> | string
+  level?: Prisma.EnumOfficeTitleLevelFilter<"OfficeTitle"> | $Enums.OfficeTitleLevel
+  description?: Prisma.StringNullableFilter<"OfficeTitle"> | string | null
+  maxSlots?: Prisma.IntNullableFilter<"OfficeTitle"> | number | null
+  sections?: Prisma.JsonFilter<"OfficeTitle">
+  isActive?: Prisma.BoolFilter<"OfficeTitle"> | boolean
+  isPublic?: Prisma.BoolFilter<"OfficeTitle"> | boolean
+  sortOrder?: Prisma.IntFilter<"OfficeTitle"> | number
+  reportsToId?: Prisma.StringNullableFilter<"OfficeTitle"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"OfficeTitle"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"OfficeTitle"> | Date | string
+}
+
 export type OfficeTitleCreateWithoutAssignmentsInput = {
   id?: string
   name: string
@@ -469,8 +779,12 @@ export type OfficeTitleCreateWithoutAssignmentsInput = {
   maxSlots?: number | null
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  reportsTo?: Prisma.OfficeTitleCreateNestedOneWithoutDirectReportsInput
+  directReports?: Prisma.OfficeTitleCreateNestedManyWithoutReportsToInput
 }
 
 export type OfficeTitleUncheckedCreateWithoutAssignmentsInput = {
@@ -481,8 +795,12 @@ export type OfficeTitleUncheckedCreateWithoutAssignmentsInput = {
   maxSlots?: number | null
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  reportsToId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  directReports?: Prisma.OfficeTitleUncheckedCreateNestedManyWithoutReportsToInput
 }
 
 export type OfficeTitleCreateOrConnectWithoutAssignmentsInput = {
@@ -509,8 +827,12 @@ export type OfficeTitleUpdateWithoutAssignmentsInput = {
   maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reportsTo?: Prisma.OfficeTitleUpdateOneWithoutDirectReportsNestedInput
+  directReports?: Prisma.OfficeTitleUpdateManyWithoutReportsToNestedInput
 }
 
 export type OfficeTitleUncheckedUpdateWithoutAssignmentsInput = {
@@ -521,6 +843,70 @@ export type OfficeTitleUncheckedUpdateWithoutAssignmentsInput = {
   maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  reportsToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  directReports?: Prisma.OfficeTitleUncheckedUpdateManyWithoutReportsToNestedInput
+}
+
+export type OfficeTitleCreateManyReportsToInput = {
+  id?: string
+  name: string
+  level: $Enums.OfficeTitleLevel
+  description?: string | null
+  maxSlots?: number | null
+  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OfficeTitleUpdateWithoutReportsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumOfficeTitleLevelFieldUpdateOperationsInput | $Enums.OfficeTitleLevel
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  directReports?: Prisma.OfficeTitleUpdateManyWithoutReportsToNestedInput
+  assignments?: Prisma.OfficerAssignmentUpdateManyWithoutOfficeTitleNestedInput
+}
+
+export type OfficeTitleUncheckedUpdateWithoutReportsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumOfficeTitleLevelFieldUpdateOperationsInput | $Enums.OfficeTitleLevel
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  directReports?: Prisma.OfficeTitleUncheckedUpdateManyWithoutReportsToNestedInput
+  assignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutOfficeTitleNestedInput
+}
+
+export type OfficeTitleUncheckedUpdateManyWithoutReportsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumOfficeTitleLevelFieldUpdateOperationsInput | $Enums.OfficeTitleLevel
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -531,10 +917,12 @@ export type OfficeTitleUncheckedUpdateWithoutAssignmentsInput = {
  */
 
 export type OfficeTitleCountOutputType = {
+  directReports: number
   assignments: number
 }
 
 export type OfficeTitleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  directReports?: boolean | OfficeTitleCountOutputTypeCountDirectReportsArgs
   assignments?: boolean | OfficeTitleCountOutputTypeCountAssignmentsArgs
 }
 
@@ -546,6 +934,13 @@ export type OfficeTitleCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
    * Select specific fields to fetch from the OfficeTitleCountOutputType
    */
   select?: Prisma.OfficeTitleCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * OfficeTitleCountOutputType without action
+ */
+export type OfficeTitleCountOutputTypeCountDirectReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OfficeTitleWhereInput
 }
 
 /**
@@ -564,8 +959,13 @@ export type OfficeTitleSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   maxSlots?: boolean
   sections?: boolean
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: boolean
+  reportsToId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  reportsTo?: boolean | Prisma.OfficeTitle$reportsToArgs<ExtArgs>
+  directReports?: boolean | Prisma.OfficeTitle$directReportsArgs<ExtArgs>
   assignments?: boolean | Prisma.OfficeTitle$assignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.OfficeTitleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["officeTitle"]>
@@ -578,8 +978,12 @@ export type OfficeTitleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   maxSlots?: boolean
   sections?: boolean
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: boolean
+  reportsToId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  reportsTo?: boolean | Prisma.OfficeTitle$reportsToArgs<ExtArgs>
 }, ExtArgs["result"]["officeTitle"]>
 
 export type OfficeTitleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -590,8 +994,12 @@ export type OfficeTitleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   maxSlots?: boolean
   sections?: boolean
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: boolean
+  reportsToId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  reportsTo?: boolean | Prisma.OfficeTitle$reportsToArgs<ExtArgs>
 }, ExtArgs["result"]["officeTitle"]>
 
 export type OfficeTitleSelectScalar = {
@@ -602,21 +1010,32 @@ export type OfficeTitleSelectScalar = {
   maxSlots?: boolean
   sections?: boolean
   isActive?: boolean
+  isPublic?: boolean
+  sortOrder?: boolean
+  reportsToId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OfficeTitleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "level" | "description" | "maxSlots" | "sections" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["officeTitle"]>
+export type OfficeTitleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "level" | "description" | "maxSlots" | "sections" | "isActive" | "isPublic" | "sortOrder" | "reportsToId" | "createdAt" | "updatedAt", ExtArgs["result"]["officeTitle"]>
 export type OfficeTitleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  reportsTo?: boolean | Prisma.OfficeTitle$reportsToArgs<ExtArgs>
+  directReports?: boolean | Prisma.OfficeTitle$directReportsArgs<ExtArgs>
   assignments?: boolean | Prisma.OfficeTitle$assignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.OfficeTitleCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type OfficeTitleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type OfficeTitleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type OfficeTitleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  reportsTo?: boolean | Prisma.OfficeTitle$reportsToArgs<ExtArgs>
+}
+export type OfficeTitleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  reportsTo?: boolean | Prisma.OfficeTitle$reportsToArgs<ExtArgs>
+}
 
 export type $OfficeTitlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OfficeTitle"
   objects: {
+    reportsTo: Prisma.$OfficeTitlePayload<ExtArgs> | null
+    directReports: Prisma.$OfficeTitlePayload<ExtArgs>[]
     assignments: Prisma.$OfficerAssignmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -627,6 +1046,9 @@ export type $OfficeTitlePayload<ExtArgs extends runtime.Types.Extensions.Interna
     maxSlots: number | null
     sections: runtime.JsonValue
     isActive: boolean
+    isPublic: boolean
+    sortOrder: number
+    reportsToId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["officeTitle"]>
@@ -1023,6 +1445,8 @@ readonly fields: OfficeTitleFieldRefs;
  */
 export interface Prisma__OfficeTitleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  reportsTo<T extends Prisma.OfficeTitle$reportsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OfficeTitle$reportsToArgs<ExtArgs>>): Prisma.Prisma__OfficeTitleClient<runtime.Types.Result.GetResult<Prisma.$OfficeTitlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  directReports<T extends Prisma.OfficeTitle$directReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OfficeTitle$directReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OfficeTitlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignments<T extends Prisma.OfficeTitle$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OfficeTitle$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OfficerAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1060,6 +1484,9 @@ export interface OfficeTitleFieldRefs {
   readonly maxSlots: Prisma.FieldRef<"OfficeTitle", 'Int'>
   readonly sections: Prisma.FieldRef<"OfficeTitle", 'Json'>
   readonly isActive: Prisma.FieldRef<"OfficeTitle", 'Boolean'>
+  readonly isPublic: Prisma.FieldRef<"OfficeTitle", 'Boolean'>
+  readonly sortOrder: Prisma.FieldRef<"OfficeTitle", 'Int'>
+  readonly reportsToId: Prisma.FieldRef<"OfficeTitle", 'String'>
   readonly createdAt: Prisma.FieldRef<"OfficeTitle", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OfficeTitle", 'DateTime'>
 }
@@ -1311,6 +1738,10 @@ export type OfficeTitleCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.OfficeTitleCreateManyInput | Prisma.OfficeTitleCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OfficeTitleIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1381,6 +1812,10 @@ export type OfficeTitleUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many OfficeTitles to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OfficeTitleIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1447,6 +1882,49 @@ export type OfficeTitleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many OfficeTitles to delete.
    */
   limit?: number
+}
+
+/**
+ * OfficeTitle.reportsTo
+ */
+export type OfficeTitle$reportsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OfficeTitle
+   */
+  select?: Prisma.OfficeTitleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OfficeTitle
+   */
+  omit?: Prisma.OfficeTitleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OfficeTitleInclude<ExtArgs> | null
+  where?: Prisma.OfficeTitleWhereInput
+}
+
+/**
+ * OfficeTitle.directReports
+ */
+export type OfficeTitle$directReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OfficeTitle
+   */
+  select?: Prisma.OfficeTitleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OfficeTitle
+   */
+  omit?: Prisma.OfficeTitleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OfficeTitleInclude<ExtArgs> | null
+  where?: Prisma.OfficeTitleWhereInput
+  orderBy?: Prisma.OfficeTitleOrderByWithRelationInput | Prisma.OfficeTitleOrderByWithRelationInput[]
+  cursor?: Prisma.OfficeTitleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OfficeTitleScalarFieldEnum | Prisma.OfficeTitleScalarFieldEnum[]
 }
 
 /**

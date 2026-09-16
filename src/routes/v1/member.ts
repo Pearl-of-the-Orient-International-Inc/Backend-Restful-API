@@ -48,6 +48,7 @@ import { getAllOfficerAssignments } from '@/controllers/v1/member/get-all-office
 import { getMemberOfficerAssignments } from '@/controllers/v1/member/get-member-officer-assignments';
 import { deactivateOfficerAssignmentByAdmin } from '@/controllers/v1/member/deactivate-officer-assignment-by-admin';
 import { replaceOfficerAssignmentByAdmin } from '@/controllers/v1/member/replace-officer-assignment-by-admin';
+import { updateOfficerAssignmentPublication } from '@/controllers/v1/member/update-officer-assignment-publication';
 import { getPublicMemberProfile } from '@/controllers/v1/member/get-public-member-profile';
 import { getPublicDirectoryLocations } from '@/controllers/v1/member/get-public-directory-locations';
 import { getPublicServiceChaplains } from '@/controllers/v1/member/get-public-service-chaplains';
@@ -98,6 +99,7 @@ import {
   getPublicMemberProfileSchema,
   deactivateOfficerAssignmentByAdminSchema,
   replaceOfficerAssignmentByAdminSchema,
+  updateOfficerAssignmentPublicationSchema,
 } from '@/validators/member';
 
 const router = Router();
@@ -525,6 +527,15 @@ router.post(
   authorize([UserType.ADMIN]),
   validate(replaceOfficerAssignmentByAdminSchema),
   replaceOfficerAssignmentByAdmin,
+);
+
+router.patch(
+  '/:id/officer-assignments/:assignmentId/publication',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateOfficerAssignmentPublicationSchema),
+  updateOfficerAssignmentPublication,
 );
 
 router.patch(

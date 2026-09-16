@@ -1188,12 +1188,21 @@ model OfficeTitle {
   maxSlots    Int? // null = unlimited, 1 = Chief Chaplain only
 
   sections Json
-  isActive Boolean @default(true)
+  isActive  Boolean @default(true)
+  isPublic  Boolean @default(false)
+  sortOrder Int     @default(0)
+
+  reportsToId  String?
+  reportsTo    OfficeTitle?  @relation("OfficeTitleHierarchy", fields: [reportsToId], references: [id], onDelete: SetNull)
+  directReports OfficeTitle[] @relation("OfficeTitleHierarchy")
 
   assignments OfficerAssignment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([reportsToId])
+  @@index([isActive, isPublic, sortOrder])
 }
 
 model OfficerAssignment {
@@ -1213,6 +1222,7 @@ model OfficerAssignment {
   barangay         String? // Barangay level
 
   isActive  Boolean   @default(true)
+  isPublic  Boolean   @default(false)
   startDate DateTime  @default(now())
   endDate   DateTime?
 
@@ -1222,6 +1232,7 @@ model OfficerAssignment {
   @@unique([memberId, officeTitleId, department, region, province, cityMunicipality, barangay])
   @@index([memberId])
   @@index([officeTitleId])
+  @@index([isActive, isPublic])
 }
 
 model Event {
