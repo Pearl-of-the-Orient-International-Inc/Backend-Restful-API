@@ -1,4 +1,5 @@
 import {
+  CivilStatus,
   Gender,
   SeminaryApplicationStatus,
   SeminaryEnrollmentType,
@@ -62,6 +63,21 @@ const genderLabels: Record<string, Gender> = {
   'Prefer not to say': Gender.PREFER_NOT_TO_SAY,
 };
 
+const civilStatusLabels: Record<string, CivilStatus> = {
+  Single: CivilStatus.SINGLE,
+  single: CivilStatus.SINGLE,
+  Married: CivilStatus.MARRIED,
+  married: CivilStatus.MARRIED,
+  Widow: CivilStatus.WIDOWED,
+  widow: CivilStatus.WIDOWED,
+  Widowed: CivilStatus.WIDOWED,
+  widowed: CivilStatus.WIDOWED,
+  Separated: CivilStatus.SEPARATED,
+  separated: CivilStatus.SEPARATED,
+  Annulled: CivilStatus.ANNULLED,
+  annulled: CivilStatus.ANNULLED,
+};
+
 export const buildSeminaryStudentData = (
   body: StudentBody,
 ): Prisma.SeminaryApplicationUncheckedCreateInput => ({
@@ -74,7 +90,10 @@ export const buildSeminaryStudentData = (
   homeAddress: trimToNull(body.homeAddress),
   birthPlace: trimToNull(body.birthPlace),
   gender: normalizeRequiredLabeledEnum(body.gender, genderLabels),
-  civilStatus: body.civilStatus ? (body.civilStatus as never) : null,
+  civilStatus: normalizeRequiredLabeledEnum(
+    body.civilStatus,
+    civilStatusLabels,
+  ),
   churchAttended: trimToNull(body.churchAttended),
   churchAddress: trimToNull(body.churchAddress),
   pastorName: trimToNull(body.pastorName),

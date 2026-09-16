@@ -107,6 +107,7 @@ export const ModelName = {
   NewsBlog: 'NewsBlog',
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
+  BulletinEntry: 'BulletinEntry',
   MemoAnnouncement: 'MemoAnnouncement',
   MemoRecipient: 'MemoRecipient',
   MemoAttachment: 'MemoAttachment',
@@ -1153,6 +1154,29 @@ export const NewsBlogTaggedMemberScalarFieldEnum = {
 } as const
 
 export type NewsBlogTaggedMemberScalarFieldEnum = (typeof NewsBlogTaggedMemberScalarFieldEnum)[keyof typeof NewsBlogTaggedMemberScalarFieldEnum]
+
+
+export const BulletinEntryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  type: 'type',
+  status: 'status',
+  publicationDate: 'publicationDate',
+  scheduledAt: 'scheduledAt',
+  authorName: 'authorName',
+  issuingOffice: 'issuingOffice',
+  featuredImageUrl: 'featuredImageUrl',
+  featuredImageFileName: 'featuredImageFileName',
+  attachmentUrl: 'attachmentUrl',
+  attachmentFileName: 'attachmentFileName',
+  attachmentMimeType: 'attachmentMimeType',
+  authorUserId: 'authorUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BulletinEntryScalarFieldEnum = (typeof BulletinEntryScalarFieldEnum)[keyof typeof BulletinEntryScalarFieldEnum]
 
 
 export const MemoAnnouncementScalarFieldEnum = {

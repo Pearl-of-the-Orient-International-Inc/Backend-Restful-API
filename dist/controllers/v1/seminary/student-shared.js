@@ -49,6 +49,20 @@ const genderLabels = {
     Female: enums_1.Gender.FEMALE,
     'Prefer not to say': enums_1.Gender.PREFER_NOT_TO_SAY,
 };
+const civilStatusLabels = {
+    Single: enums_1.CivilStatus.SINGLE,
+    single: enums_1.CivilStatus.SINGLE,
+    Married: enums_1.CivilStatus.MARRIED,
+    married: enums_1.CivilStatus.MARRIED,
+    Widow: enums_1.CivilStatus.WIDOWED,
+    widow: enums_1.CivilStatus.WIDOWED,
+    Widowed: enums_1.CivilStatus.WIDOWED,
+    widowed: enums_1.CivilStatus.WIDOWED,
+    Separated: enums_1.CivilStatus.SEPARATED,
+    separated: enums_1.CivilStatus.SEPARATED,
+    Annulled: enums_1.CivilStatus.ANNULLED,
+    annulled: enums_1.CivilStatus.ANNULLED,
+};
 const buildSeminaryStudentData = (body) => {
     var _a, _b, _c;
     return ({
@@ -61,7 +75,7 @@ const buildSeminaryStudentData = (body) => {
         homeAddress: trimToNull(body.homeAddress),
         birthPlace: trimToNull(body.birthPlace),
         gender: normalizeRequiredLabeledEnum(body.gender, genderLabels),
-        civilStatus: body.civilStatus ? body.civilStatus : null,
+        civilStatus: normalizeRequiredLabeledEnum(body.civilStatus, civilStatusLabels),
         churchAttended: trimToNull(body.churchAttended),
         churchAddress: trimToNull(body.churchAddress),
         pastorName: trimToNull(body.pastorName),

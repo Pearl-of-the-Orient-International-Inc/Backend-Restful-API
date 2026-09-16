@@ -403,6 +403,55 @@ const createNewsBlogMediaUploaderRoute = (options: UploadLimitOptions = {}) => {
     }));
 };
 
+const createBulletinFileUploaderRoute = () =>
+  f({
+    image: {
+      maxFileSize: '8MB',
+      maxFileCount: 1,
+    },
+    pdf: {
+      maxFileSize: '16MB',
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+
+      if (!bearerToken) {
+        throw new Error('Unauthorized upload attempt');
+      }
+
+      const decoded = verifyAccessToken(bearerToken) as {
+        userId?: string;
+      } | null;
+      const userId = decoded?.userId;
+
+      if (!userId) {
+        throw new Error('Invalid or expired access token');
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, role: true },
+      });
+
+      if (!user || user.role !== UserType.ADMIN) {
+        throw new Error('Only admins can upload bulletin files');
+      }
+
+      return { userId };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({
+      userId: metadata.userId,
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+
 export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
@@ -419,6 +468,7 @@ export const createUploadRouter = (options: UploadLimitOptions = {}) =>
       }),
     eventThumbnailUploader: createEventThumbnailUploaderRoute(options),
     newsBlogMediaUploader: createNewsBlogMediaUploaderRoute(options),
+    bulletinFileUploader: createBulletinFileUploaderRoute(),
   }) satisfies FileRouter;
 
 export const uploadRouter = createUploadRouter();

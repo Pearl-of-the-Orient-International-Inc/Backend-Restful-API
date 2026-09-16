@@ -1480,6 +1480,40 @@ export type EnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
 }
 
+export type EnumBulletinEntryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryType | Prisma.EnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryTypeFilter<$PrismaModel> | $Enums.BulletinEntryType
+}
+
+export type EnumBulletinEntryStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryStatus | Prisma.EnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryStatusFilter<$PrismaModel> | $Enums.BulletinEntryStatus
+}
+
+export type EnumBulletinEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryType | Prisma.EnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryTypeWithAggregatesFilter<$PrismaModel> | $Enums.BulletinEntryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBulletinEntryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBulletinEntryTypeFilter<$PrismaModel>
+}
+
+export type EnumBulletinEntryStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryStatus | Prisma.EnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryStatusWithAggregatesFilter<$PrismaModel> | $Enums.BulletinEntryStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBulletinEntryStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBulletinEntryStatusFilter<$PrismaModel>
+}
+
 export type EnumMemoTemplateTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.MemoTemplateType | Prisma.EnumMemoTemplateTypeFieldRefInput<$PrismaModel>
   in?: $Enums.MemoTemplateType[] | Prisma.ListEnumMemoTemplateTypeFieldRefInput<$PrismaModel>
@@ -3028,6 +3062,40 @@ export type NestedEnumNewsBlogMediaKindWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
   _max?: Prisma.NestedEnumNewsBlogMediaKindFilter<$PrismaModel>
+}
+
+export type NestedEnumBulletinEntryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryType | Prisma.EnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryTypeFilter<$PrismaModel> | $Enums.BulletinEntryType
+}
+
+export type NestedEnumBulletinEntryStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryStatus | Prisma.EnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryStatusFilter<$PrismaModel> | $Enums.BulletinEntryStatus
+}
+
+export type NestedEnumBulletinEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryType | Prisma.EnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryType[] | Prisma.ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryTypeWithAggregatesFilter<$PrismaModel> | $Enums.BulletinEntryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBulletinEntryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBulletinEntryTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumBulletinEntryStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BulletinEntryStatus | Prisma.EnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BulletinEntryStatus[] | Prisma.ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBulletinEntryStatusWithAggregatesFilter<$PrismaModel> | $Enums.BulletinEntryStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBulletinEntryStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBulletinEntryStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumMemoTemplateTypeFilter<$PrismaModel = never> = {

@@ -440,6 +440,7 @@ export const ModelName = {
   NewsBlog: 'NewsBlog',
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
+  BulletinEntry: 'BulletinEntry',
   MemoAnnouncement: 'MemoAnnouncement',
   MemoRecipient: 'MemoRecipient',
   MemoAttachment: 'MemoAttachment',
@@ -461,7 +462,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4609,6 +4610,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BulletinEntry: {
+      payload: Prisma.$BulletinEntryPayload<ExtArgs>
+      fields: Prisma.BulletinEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BulletinEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BulletinEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.BulletinEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BulletinEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>
+        }
+        findMany: {
+          args: Prisma.BulletinEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>[]
+        }
+        create: {
+          args: Prisma.BulletinEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>
+        }
+        createMany: {
+          args: Prisma.BulletinEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BulletinEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.BulletinEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>
+        }
+        update: {
+          args: Prisma.BulletinEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.BulletinEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BulletinEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BulletinEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.BulletinEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BulletinEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.BulletinEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBulletinEntry>
+        }
+        groupBy: {
+          args: Prisma.BulletinEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BulletinEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BulletinEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BulletinEntryCountAggregateOutputType> | number
+        }
+      }
+    }
     MemoAnnouncement: {
       payload: Prisma.$MemoAnnouncementPayload<ExtArgs>
       fields: Prisma.MemoAnnouncementFieldRefs
@@ -6116,6 +6191,29 @@ export const NewsBlogTaggedMemberScalarFieldEnum = {
 export type NewsBlogTaggedMemberScalarFieldEnum = (typeof NewsBlogTaggedMemberScalarFieldEnum)[keyof typeof NewsBlogTaggedMemberScalarFieldEnum]
 
 
+export const BulletinEntryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  type: 'type',
+  status: 'status',
+  publicationDate: 'publicationDate',
+  scheduledAt: 'scheduledAt',
+  authorName: 'authorName',
+  issuingOffice: 'issuingOffice',
+  featuredImageUrl: 'featuredImageUrl',
+  featuredImageFileName: 'featuredImageFileName',
+  attachmentUrl: 'attachmentUrl',
+  attachmentFileName: 'attachmentFileName',
+  attachmentMimeType: 'attachmentMimeType',
+  authorUserId: 'authorUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BulletinEntryScalarFieldEnum = (typeof BulletinEntryScalarFieldEnum)[keyof typeof BulletinEntryScalarFieldEnum]
+
+
 export const MemoAnnouncementScalarFieldEnum = {
   id: 'id',
   referenceNumber: 'referenceNumber',
@@ -7258,6 +7356,34 @@ export type ListEnumNewsBlogMediaKindFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'BulletinEntryType'
+ */
+export type EnumBulletinEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BulletinEntryType'>
+    
+
+
+/**
+ * Reference to a field of type 'BulletinEntryType[]'
+ */
+export type ListEnumBulletinEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BulletinEntryType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BulletinEntryStatus'
+ */
+export type EnumBulletinEntryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BulletinEntryStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BulletinEntryStatus[]'
+ */
+export type ListEnumBulletinEntryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BulletinEntryStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'MemoTemplateType'
  */
 export type EnumMemoTemplateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemoTemplateType'>
@@ -7519,6 +7645,7 @@ export type GlobalOmitConfig = {
   newsBlog?: Prisma.NewsBlogOmit
   newsBlogMedia?: Prisma.NewsBlogMediaOmit
   newsBlogTaggedMember?: Prisma.NewsBlogTaggedMemberOmit
+  bulletinEntry?: Prisma.BulletinEntryOmit
   memoAnnouncement?: Prisma.MemoAnnouncementOmit
   memoRecipient?: Prisma.MemoRecipientOmit
   memoAttachment?: Prisma.MemoAttachmentOmit

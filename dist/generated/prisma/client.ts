@@ -318,6 +318,11 @@ export type NewsBlogMedia = Prisma.NewsBlogMediaModel
  */
 export type NewsBlogTaggedMember = Prisma.NewsBlogTaggedMemberModel
 /**
+ * Model BulletinEntry
+ * 
+ */
+export type BulletinEntry = Prisma.BulletinEntryModel
+/**
  * Model MemoAnnouncement
  * 
  */

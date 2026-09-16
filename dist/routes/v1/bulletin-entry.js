@@ -1,0 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const sanitation_1 = require("../../common/sanitation");
+const bulletin_entry_controller_1 = require("../../controllers/v1/bulletin-entry/bulletin-entry.controller");
+const enums_1 = require("../../generated/prisma/enums");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const bulletin_entry_1 = require("../../validators/bulletin-entry");
+const router = (0, express_1.Router)();
+const adminAccess = [authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN])];
+router.get('/public', (0, express_rate_limiter_1.expressRateLimit)('basic'), bulletin_entry_controller_1.getPublicBulletinEntries);
+router.get('/public/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), bulletin_entry_controller_1.getPublicBulletinEntry);
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, (0, sanitation_1.validate)(bulletin_entry_1.getBulletinEntriesSchema), bulletin_entry_controller_1.getBulletinEntries);
+router.post('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, (0, sanitation_1.validate)(bulletin_entry_1.createBulletinEntrySchema), bulletin_entry_controller_1.createBulletinEntry);
+router.put('/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, (0, sanitation_1.validate)(bulletin_entry_1.updateBulletinEntrySchema), bulletin_entry_controller_1.updateBulletinEntry);
+router.patch('/:id/publish', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, bulletin_entry_controller_1.publishBulletinEntry);
+router.patch('/:id/unpublish', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, bulletin_entry_controller_1.unpublishBulletinEntry);
+router.patch('/:id/archive', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, bulletin_entry_controller_1.archiveBulletinEntry);
+router.patch('/:id/restore', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...adminAccess, bulletin_entry_controller_1.restoreBulletinEntry);
+exports.default = router;

@@ -151,6 +151,8 @@ const civilStatusSchema = normalizeEnumValue(enums_1.CivilStatus, {
     single: enums_1.CivilStatus.SINGLE,
     Married: enums_1.CivilStatus.MARRIED,
     married: enums_1.CivilStatus.MARRIED,
+    Widow: enums_1.CivilStatus.WIDOWED,
+    widow: enums_1.CivilStatus.WIDOWED,
     Widowed: enums_1.CivilStatus.WIDOWED,
     widowed: enums_1.CivilStatus.WIDOWED,
     Separated: enums_1.CivilStatus.SEPARATED,

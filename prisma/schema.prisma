@@ -42,6 +42,7 @@ model User {
   seminaryInstructor   SeminaryInstructor?
   authoredMemos        MemoAnnouncement[]       @relation("MemoAnnouncementAuthor")
   memoRecipients       MemoRecipient[]          @relation("MemoRecipientUser")
+  bulletinEntries      BulletinEntry[]          @relation("BulletinEntryAuthor")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1354,6 +1355,39 @@ model NewsBlogTaggedMember {
   @@index([memberId])
 }
 
+model BulletinEntry {
+  id String @id @default(uuid())
+
+  title   String
+  content String
+  type    BulletinEntryType
+  status  BulletinEntryStatus @default(DRAFT)
+
+  publicationDate DateTime?
+  scheduledAt     DateTime?
+
+  authorName    String?
+  issuingOffice String?
+
+  featuredImageUrl      String?
+  featuredImageFileName String?
+  attachmentUrl         String?
+  attachmentFileName    String?
+  attachmentMimeType    String?
+
+  authorUserId String?
+  authorUser   User?   @relation("BulletinEntryAuthor", fields: [authorUserId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([publicationDate])
+  @@index([scheduledAt])
+  @@index([createdAt])
+}
+
 model MemoAnnouncement {
   id String @id @default(uuid())
 
@@ -1933,6 +1967,22 @@ enum NewsBlogPlatform {
 enum NewsBlogMediaKind {
   IMAGE
   VIDEO
+}
+
+enum BulletinEntryType {
+  NOTICE
+  ANNOUNCEMENT
+  MEMO
+  EVENT
+  OTHER
+}
+
+enum BulletinEntryStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  UNPUBLISHED
+  ARCHIVED
 }
 
 enum MemoTemplateType {

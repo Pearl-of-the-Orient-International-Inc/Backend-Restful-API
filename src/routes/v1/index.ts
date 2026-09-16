@@ -30,6 +30,7 @@ import accountingInvoiceRoutes from '@/routes/v1/accounting-invoice';
 import accountingAcknowledgementReceiptRoutes from '@/routes/v1/accounting-acknowledgement-receipt';
 import taskManagementRoutes from '@/routes/v1/task-management';
 import ownerAccessRoutes from '@/routes/v1/owner-access';
+import bulletinEntryRoutes from '@/routes/v1/bulletin-entry';
 
 const router = Router();
 
@@ -70,5 +71,6 @@ router.use(
 );
 router.use('/task-management', taskManagementRoutes);
 router.use('/owner', ownerAccessRoutes);
+router.use('/bulletins', bulletinEntryRoutes);
 
 export default router;

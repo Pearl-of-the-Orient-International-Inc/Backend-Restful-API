@@ -627,6 +627,28 @@ export const NewsBlogMediaKind = {
 export type NewsBlogMediaKind = (typeof NewsBlogMediaKind)[keyof typeof NewsBlogMediaKind]
 
 
+export const BulletinEntryType = {
+  NOTICE: 'NOTICE',
+  ANNOUNCEMENT: 'ANNOUNCEMENT',
+  MEMO: 'MEMO',
+  EVENT: 'EVENT',
+  OTHER: 'OTHER'
+} as const
+
+export type BulletinEntryType = (typeof BulletinEntryType)[keyof typeof BulletinEntryType]
+
+
+export const BulletinEntryStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  PUBLISHED: 'PUBLISHED',
+  UNPUBLISHED: 'UNPUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type BulletinEntryStatus = (typeof BulletinEntryStatus)[keyof typeof BulletinEntryStatus]
+
+
 export const MemoTemplateType = {
   ANNOUNCEMENT: 'ANNOUNCEMENT',
   GENERAL_OFFICE: 'GENERAL_OFFICE',
