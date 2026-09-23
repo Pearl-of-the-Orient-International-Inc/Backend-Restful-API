@@ -37,6 +37,9 @@ const getPublicServiceChaplains = (_req, res) => __awaiter(void 0, void 0, void 
                 municipalityCity: true,
                 barangay: true,
                 preferredBranchOther: true,
+                serviceLicenseUrl: true,
+                serviceLicenseFileName: true,
+                serviceLicenseMimeType: true,
                 createdAt: true,
                 user: {
                     select: {

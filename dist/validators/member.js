@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replaceOfficerAssignmentByAdminSchema = exports.updateOfficerAssignmentPublicationSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.verifyMemberCredentialDocumentSchema = exports.generateMemberCredentialDocumentSchema = exports.deleteMemberByAdminSchema = exports.verifyMemberEmailByAdminSchema = exports.changeMemberPasswordByAdminSchema = exports.updateMemberUniqueIdSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.updateCurrentBranchServicesSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
+exports.replaceOfficerAssignmentByAdminSchema = exports.updateOfficerAssignmentPublicationSchema = exports.deactivateOfficerAssignmentByAdminSchema = exports.getMemberOfficerAssignmentsSchema = exports.getAllOfficerAssignmentsSchema = exports.createOfficerAssignmentByAdminSchema = exports.updateMemberByAdminSchema = exports.getPublicMemberProfileSchema = exports.getMemberByIdSchema = exports.createMemberByAdminSchema = exports.applyMemberAllowedRoles = exports.getMembershipReportSchema = exports.getAllMembersSchema = exports.verifyMemberCredentialDocumentSchema = exports.generateMemberCredentialDocumentSchema = exports.deleteMemberByAdminSchema = exports.verifyMemberEmailByAdminSchema = exports.changeMemberPasswordByAdminSchema = exports.updateMemberUniqueIdSchema = exports.updateMemberStatusSchema = exports.createCurrentMemberPublicRecordSchema = exports.createCurrentMemberCertificateSchema = exports.getPublicServiceAvailabilitySchema = exports.deleteCurrentServiceAvailabilitySchema = exports.createCurrentServiceAvailabilitySchema = exports.updateCurrentBranchServicesSchema = exports.updateCurrentEducationSchema = exports.updateCurrentChurchAffiliationSchema = exports.updateCurrentServiceLicenseSchema = exports.updateCurrentProfileBannerSchema = exports.upsertChaplaincyTrainingProgressSchema = exports.upsertMemberIdGenerationAssetSchema = exports.upsertOnlineInterviewAppointmentSchema = exports.upsertPaymentCheckoutSchema = exports.updateOnboardingStepSchema = exports.updatePreOrientationProgressSchema = exports.upsertMemberRequirementsSchema = exports.applyMemberSchema = void 0;
 const zod_1 = require("zod");
+const max_1 = require("libphonenumber-js/max");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
 const ministerialExperienceSchema = zod_1.z.object({
@@ -40,13 +41,22 @@ const signatureSchema = zod_1.z.object({
         .trim()
         .min(1, { message: 'signatureData is required' }),
 });
+const internationalPhoneSchema = zod_1.z
+    .string()
+    .trim()
+    .regex(/^\+[1-9]\d{7,14}$/, {
+    message: 'Phone number must include a valid international country code',
+})
+    .refine((value) => (0, max_1.isValidPhoneNumber)(value), {
+    message: 'Phone number is not valid for its selected country',
+});
 exports.applyMemberSchema = zod_1.z.object({
     email: auth_1.emailSchema,
     firstName: zod_1.z.string().trim().min(1).max(100),
     middleInitial: zod_1.z.string().trim().max(1).optional(),
     lastName: zod_1.z.string().trim().min(1).max(100),
     extensionName: zod_1.z.string().trim().max(30).optional(),
-    mobilePhoneNumber: zod_1.z.string().trim().min(1).max(30),
+    mobilePhoneNumber: internationalPhoneSchema,
     homeAddress: zod_1.z.string().trim().min(1).max(255),
     civilStatus: zod_1.z.enum(enums_1.CivilStatus),
     gender: zod_1.z.enum(enums_1.Gender),
@@ -57,7 +67,7 @@ exports.applyMemberSchema = zod_1.z.object({
     municipalityCity: zod_1.z.string().trim().min(1).max(100),
     barangay: zod_1.z.string().trim().min(1).max(100),
     emergencyContactName: zod_1.z.string().trim().min(1).max(100),
-    emergencyContactMobile: zod_1.z.string().trim().min(1).max(30),
+    emergencyContactMobile: internationalPhoneSchema,
     churchAffiliation: zod_1.z.string().trim().max(150).optional(),
     churchAddress: zod_1.z.string().trim().max(255).optional(),
     currentPositionRole: zod_1.z.string().trim().min(1).max(150),
@@ -148,6 +158,11 @@ exports.updateCurrentProfileBannerSchema = zod_1.z.object({
     message: 'profileBannerUrl or profileBannerPositionY is required',
     path: ['profileBannerUrl'],
 });
+exports.updateCurrentServiceLicenseSchema = zod_1.z.object({
+    fileUrl: zod_1.z.url(),
+    fileName: zod_1.z.string().trim().min(1).max(255),
+    mimeType: zod_1.z.enum(['image/png', 'application/pdf']),
+});
 exports.updateCurrentChurchAffiliationSchema = zod_1.z.object({
     churchAffiliation: zod_1.z.string().trim().max(150).optional(),
     churchAddress: zod_1.z.string().trim().max(255).optional(),
@@ -166,10 +181,39 @@ exports.updateCurrentEducationSchema = zod_1.z.object({
 exports.updateCurrentBranchServicesSchema = zod_1.z.object({
     preferredBranchOther: zod_1.z.string().trim().max(255).optional(),
 });
-exports.createCurrentMemberCertificateSchema = zod_1.z.object({
+exports.createCurrentServiceAvailabilitySchema = zod_1.z
+    .object({
+    startsAt: zod_1.z.iso.datetime(),
+    endsAt: zod_1.z.iso.datetime(),
+    note: zod_1.z.string().trim().max(500).optional(),
+})
+    .refine((value) => new Date(value.endsAt) > new Date(value.startsAt), {
+    message: 'Availability end time must be after its start time',
+    path: ['endsAt'],
+});
+exports.deleteCurrentServiceAvailabilitySchema = zod_1.z.object({
+    params: zod_1.z.object({
+        slotId: zod_1.z.uuid(),
+    }),
+});
+exports.getPublicServiceAvailabilitySchema = zod_1.z.object({
+    params: zod_1.z.object({
+        memberId: zod_1.z.string().trim().min(1).max(50),
+    }),
+});
+exports.createCurrentMemberCertificateSchema = zod_1.z
+    .object({
+    type: zod_1.z.enum(enums_1.MemberCertificateType),
     title: zod_1.z.string().trim().min(1).max(150),
+    issuer: zod_1.z.string().trim().min(1).max(150),
+    referenceNumber: zod_1.z.string().trim().min(1).max(100),
     certificateUrl: zod_1.z.url(),
     issuedAt: zod_1.z.iso.datetime(),
+    expiresAt: zod_1.z.iso.datetime().nullable().optional(),
+})
+    .refine(({ issuedAt, expiresAt }) => !expiresAt || new Date(expiresAt) >= new Date(issuedAt), {
+    message: 'Expiration date must be on or after the issue date',
+    path: ['expiresAt'],
 });
 exports.createCurrentMemberPublicRecordSchema = zod_1.z.object({
     title: zod_1.z.string().trim().min(1).max(150),

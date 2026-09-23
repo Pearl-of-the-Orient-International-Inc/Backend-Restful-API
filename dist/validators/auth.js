@@ -7,7 +7,7 @@ exports.passkeyAuthenticationVerifySchema = exports.passkeyAuthenticationOptions
 const enums_1 = require("../generated/prisma/enums");
 const zod_1 = __importDefault(require("zod"));
 exports.emailSchema = zod_1.default
-    .email()
+    .email({ error: 'Enter a valid email address from any email provider' })
     .trim()
     .min(1, { error: 'Email is required' })
     .max(255, { error: 'Email must not exceed 255 characters' });

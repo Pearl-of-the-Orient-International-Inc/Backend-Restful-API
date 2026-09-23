@@ -56,6 +56,16 @@ import { getPublicMemberSearch } from '@/controllers/v1/member/get-public-member
 import { getMemberFollowStatus } from '@/controllers/v1/member/get-member-follow-status';
 import { followMember } from '@/controllers/v1/member/follow-member';
 import { unfollowMember } from '@/controllers/v1/member/unfollow-member';
+import {
+  createCurrentServiceAvailability,
+  deleteCurrentServiceAvailability,
+  getCurrentServiceAvailability,
+  getPublicServiceAvailability,
+} from '@/controllers/v1/member/service-availability';
+import {
+  deleteCurrentServiceLicense,
+  updateCurrentServiceLicense,
+} from '@/controllers/v1/member/service-license';
 
 /**
  * Helpers, Validators and Middlewares
@@ -100,6 +110,10 @@ import {
   deactivateOfficerAssignmentByAdminSchema,
   replaceOfficerAssignmentByAdminSchema,
   updateOfficerAssignmentPublicationSchema,
+  createCurrentServiceAvailabilitySchema,
+  deleteCurrentServiceAvailabilitySchema,
+  getPublicServiceAvailabilitySchema,
+  updateCurrentServiceLicenseSchema,
 } from '@/validators/member';
 
 const router = Router();
@@ -127,6 +141,13 @@ router.get(
   '/public/search',
   expressRateLimit('basic'),
   getPublicMemberSearch,
+);
+
+router.get(
+  '/public/:memberId/service-availability',
+  expressRateLimit('basic'),
+  validate(getPublicServiceAvailabilitySchema),
+  getPublicServiceAvailability,
 );
 
 router.get(
@@ -219,6 +240,49 @@ router.put(
   authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
   validate(updateCurrentBranchServicesSchema),
   updateCurrentBranchServices,
+);
+
+router.get(
+  '/current/service-availability',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  getCurrentServiceAvailability,
+);
+
+router.post(
+  '/current/service-availability',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(createCurrentServiceAvailabilitySchema),
+  createCurrentServiceAvailability,
+);
+
+router.delete(
+  '/current/service-availability/:slotId',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(deleteCurrentServiceAvailabilitySchema),
+  deleteCurrentServiceAvailability,
+);
+
+router.put(
+  '/current/service-license',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  validate(updateCurrentServiceLicenseSchema),
+  updateCurrentServiceLicense,
+);
+
+router.delete(
+  '/current/service-license',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  deleteCurrentServiceLicense,
 );
 
 router.post(

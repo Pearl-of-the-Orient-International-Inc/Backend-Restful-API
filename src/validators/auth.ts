@@ -2,7 +2,7 @@ import { UserType } from '@/generated/prisma/enums';
 import z from 'zod';
 
 export const emailSchema = z
-  .email()
+  .email({ error: 'Enter a valid email address from any email provider' })
   .trim()
   .min(1, { error: 'Email is required' })
   .max(255, { error: 'Email must not exceed 255 characters' });

@@ -96,9 +96,13 @@ const getMemberById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                     select: {
                         id: true,
                         credentialId: true,
+                        type: true,
                         title: true,
+                        issuer: true,
+                        referenceNumber: true,
                         certificateUrl: true,
                         dateReceived: true,
+                        expiresAt: true,
                         createdAt: true,
                         updatedAt: true,
                     },

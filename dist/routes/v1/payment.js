@@ -7,7 +7,10 @@ const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter")
 const chaplain_product_order_1 = require("../../validators/chaplain-product-order");
 const router = (0, express_1.Router)();
 router.get('/public/fees', (0, express_rate_limiter_1.expressRateLimit)('basic'), payment_controller_1.getPublicPaymentFeePolicies);
+router.get('/public/config', (0, express_rate_limiter_1.expressRateLimit)('basic'), payment_controller_1.getPublicPaymentConfiguration);
+router.get('/public/status/:reference', (0, express_rate_limiter_1.expressRateLimit)('basic'), payment_controller_1.getPublicPaymentStatus);
 router.post('/public/chaplain-orders/:id/checkout', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(chaplain_product_order_1.initiateChaplainOrderPaymentSchema), payment_controller_1.initiateChaplainOrderPayment);
+router.post('/public/paypal/:orderId/capture', (0, express_rate_limiter_1.expressRateLimit)('basic'), payment_controller_1.capturePublicPayPalOrder);
 router.post('/webhooks/xendit', payment_controller_1.receiveXenditWebhook);
 router.post('/webhooks/paypal', payment_controller_1.receivePayPalWebhook);
 exports.default = router;

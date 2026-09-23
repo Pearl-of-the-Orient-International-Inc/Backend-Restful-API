@@ -92,9 +92,13 @@ export const getMemberById = async (
           select: {
             id: true,
             credentialId: true,
+            type: true,
             title: true,
+            issuer: true,
+            referenceNumber: true,
             certificateUrl: true,
             dateReceived: true,
+            expiresAt: true,
             createdAt: true,
             updatedAt: true,
           },

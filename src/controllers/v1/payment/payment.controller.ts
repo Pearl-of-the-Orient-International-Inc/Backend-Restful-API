@@ -31,6 +31,57 @@ export const getPublicPaymentFeePolicies = (
   });
 };
 
+export const getPublicPaymentConfiguration = (
+  _req: Request,
+  res: Response,
+): void => {
+  res.status(HTTPSTATUS.OK).json({
+    code: 'OK',
+    message: 'Public payment configuration retrieved successfully',
+    data: { paypalClientId: config.PAYPAL_CLIENT_ID ?? null },
+  });
+};
+
+export const getPublicPaymentStatus = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const reference = typeof req.params.reference === 'string' ? req.params.reference : '';
+    if (!/^PAY-[A-Z0-9-]{10,50}$/.test(reference)) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({ code: 'BAD_REQUEST', message: 'Invalid payment reference' });
+      return;
+    }
+    const payment = await prisma.paymentTransaction.findUnique({
+      where: { reference },
+      select: {
+        reference: true,
+        amount: true,
+        currency: true,
+        gateway: true,
+        status: true,
+        providerStatus: true,
+        failureReason: true,
+        paidAt: true,
+        createdAt: true,
+        chaplainProductOrder: { select: { orderNumber: true } },
+      },
+    });
+    if (!payment) {
+      res.status(HTTPSTATUS.NOT_FOUND).json({ code: 'NOT_FOUND', message: 'Payment reference not found' });
+      return;
+    }
+    res.status(HTTPSTATUS.OK).json({
+      code: 'OK',
+      message: 'Payment status retrieved successfully',
+      data: { ...payment, amount: Number(payment.amount), orderNumber: payment.chaplainProductOrder?.orderNumber ?? null, chaplainProductOrder: undefined },
+    });
+  } catch (err) {
+    logger.error('Error while fetching public payment status', { err });
+    res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({ code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+  }
+};
+
 const safeEqual = (received: string, expected?: string) => {
   if (!expected) return false;
   const left = Buffer.from(received);
@@ -157,6 +208,7 @@ export const initiateChaplainOrderPayment = async (
         data: {
           reference: existing.reference,
           checkoutUrl: existing.checkoutUrl,
+          gatewayReference: existing.gatewayReference,
         },
       });
       return;
@@ -227,7 +279,7 @@ export const initiateChaplainOrderPayment = async (
     res.status(HTTPSTATUS.CREATED).json({
       code: 'CREATED',
       message: 'Payment checkout created successfully',
-      data: { reference, checkoutUrl: checkout.checkoutUrl },
+      data: { reference, checkoutUrl: checkout.checkoutUrl, gatewayReference: checkout.gatewayReference },
     });
   } catch (err) {
     if (transactionId) {
@@ -249,6 +301,40 @@ export const initiateChaplainOrderPayment = async (
       message:
         err instanceof Error ? err.message : 'Payment gateway unavailable',
     });
+  }
+};
+
+export const capturePublicPayPalOrder = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const orderId = typeof req.params.orderId === 'string' ? req.params.orderId : '';
+    const checkoutToken = String(req.body.checkoutToken ?? '');
+    const transaction = await prisma.paymentTransaction.findFirst({
+      where: {
+        gateway: PaymentGateway.PAYPAL,
+        gatewayReference: orderId,
+        chaplainProductOrder: { checkoutToken },
+      },
+      select: { gatewayReference: true, reference: true, status: true },
+    });
+    if (!transaction?.gatewayReference) {
+      res.status(HTTPSTATUS.NOT_FOUND).json({ code: 'NOT_FOUND', message: 'Eligible PayPal checkout was not found' });
+      return;
+    }
+    if (transaction.status !== PaymentTransactionStatus.PAID) {
+      const capture = await capturePayPalOrder(transaction.gatewayReference);
+      if (capture.status !== 'COMPLETED') {
+        res.status(HTTPSTATUS.BAD_GATEWAY).json({ code: 'PAYMENT_PENDING', message: 'PayPal has not completed this payment yet' });
+        return;
+      }
+      await syncPaidTransaction(transaction.gatewayReference, capture.status);
+    }
+    res.status(HTTPSTATUS.OK).json({ code: 'OK', message: 'PayPal payment captured successfully', data: { reference: transaction.reference, status: 'PAID' } });
+  } catch (err) {
+    logger.error('Error while capturing PayPal order', { err });
+    res.status(HTTPSTATUS.BAD_GATEWAY).json({ code: 'PAYMENT_GATEWAY_ERROR', message: err instanceof Error ? err.message : 'Unable to capture PayPal payment' });
   }
 };
 
@@ -356,12 +442,7 @@ export const receivePayPalWebhook = async (
 
     const eventType = String(req.body.event_type ?? '');
     const resource = (req.body.resource ?? {}) as Record<string, unknown>;
-    if (eventType === 'CHECKOUT.ORDER.APPROVED') {
-      const orderId = String(resource.id ?? '');
-      const capture = await capturePayPalOrder(orderId);
-      if (capture.status === 'COMPLETED')
-        await syncPaidTransaction(orderId, capture.status);
-    } else {
+    if (eventType !== 'CHECKOUT.ORDER.APPROVED') {
       const supplementary = resource.supplementary_data as
         | { related_ids?: { order_id?: string } }
         | undefined;

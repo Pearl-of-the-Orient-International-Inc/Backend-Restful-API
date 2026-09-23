@@ -84,6 +84,38 @@ export const MemberType = {
 export type MemberType = (typeof MemberType)[keyof typeof MemberType]
 
 
+export const OrdinationApplicationStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  ADDITIONAL_INFORMATION_REQUIRED: 'ADDITIONAL_INFORMATION_REQUIRED',
+  RETURNED_FOR_CORRECTION: 'RETURNED_FOR_CORRECTION',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type OrdinationApplicationStatus = (typeof OrdinationApplicationStatus)[keyof typeof OrdinationApplicationStatus]
+
+
+export const OrdinationEligibilityBasis = {
+  PROFESSIONAL_CHAPLAIN: 'PROFESSIONAL_CHAPLAIN',
+  SEMINARY_GRADUATE: 'SEMINARY_GRADUATE'
+} as const
+
+export type OrdinationEligibilityBasis = (typeof OrdinationEligibilityBasis)[keyof typeof OrdinationEligibilityBasis]
+
+
+export const OrdinationReviewAction = {
+  START_REVIEW: 'START_REVIEW',
+  REQUEST_ADDITIONAL_INFORMATION: 'REQUEST_ADDITIONAL_INFORMATION',
+  RETURN_FOR_CORRECTION: 'RETURN_FOR_CORRECTION',
+  APPROVE: 'APPROVE',
+  REJECT: 'REJECT'
+} as const
+
+export type OrdinationReviewAction = (typeof OrdinationReviewAction)[keyof typeof OrdinationReviewAction]
+
+
 export const MemberPublicRecordType = {
   REPORT_ACTIVITY: 'REPORT_ACTIVITY',
   COMMUNITY_SERVICE: 'COMMUNITY_SERVICE',
@@ -117,6 +149,14 @@ export const MemberCredentialDocumentStatus = {
 } as const
 
 export type MemberCredentialDocumentStatus = (typeof MemberCredentialDocumentStatus)[keyof typeof MemberCredentialDocumentStatus]
+
+
+export const MemberCertificateType = {
+  CERTIFICATE: 'CERTIFICATE',
+  RECOGNITION: 'RECOGNITION'
+} as const
+
+export type MemberCertificateType = (typeof MemberCertificateType)[keyof typeof MemberCertificateType]
 
 
 export const VerificationType = {
@@ -719,6 +759,49 @@ export const ChaplainOrderStatus = {
 } as const
 
 export type ChaplainOrderStatus = (typeof ChaplainOrderStatus)[keyof typeof ChaplainOrderStatus]
+
+
+export const ChaplainServiceDeliveryMethod = {
+  ON_SITE: 'ON_SITE',
+  ONLINE: 'ONLINE',
+  PHONE: 'PHONE'
+} as const
+
+export type ChaplainServiceDeliveryMethod = (typeof ChaplainServiceDeliveryMethod)[keyof typeof ChaplainServiceDeliveryMethod]
+
+
+export const ChaplainServiceBookingStatus = {
+  PENDING: 'PENDING',
+  AWAITING_CHAPLAIN_APPROVAL: 'AWAITING_CHAPLAIN_APPROVAL',
+  CONFIRMED: 'CONFIRMED',
+  RESCHEDULED: 'RESCHEDULED',
+  REJECTED: 'REJECTED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type ChaplainServiceBookingStatus = (typeof ChaplainServiceBookingStatus)[keyof typeof ChaplainServiceBookingStatus]
+
+
+export const ChaplainServicePaymentStatus = {
+  NOT_REQUIRED: 'NOT_REQUIRED',
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type ChaplainServicePaymentStatus = (typeof ChaplainServicePaymentStatus)[keyof typeof ChaplainServicePaymentStatus]
+
+
+export const ChaplainServiceCommissionStatus = {
+  NOT_APPLICABLE: 'NOT_APPLICABLE',
+  PENDING: 'PENDING',
+  SETTLED: 'SETTLED',
+  WAIVED: 'WAIVED'
+} as const
+
+export type ChaplainServiceCommissionStatus = (typeof ChaplainServiceCommissionStatus)[keyof typeof ChaplainServiceCommissionStatus]
 
 
 export const BulletinEntryStatus = {

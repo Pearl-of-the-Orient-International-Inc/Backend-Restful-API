@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authentication_1 = require("../../middlewares/authentication");
+const authorization_1 = __importDefault(require("../../middlewares/authorization"));
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const sanitation_1 = require("../../common/sanitation");
+const enums_1 = require("../../generated/prisma/enums");
+const uploadthing_1 = require("../../lib/uploadthing");
+const ordination_application_controller_1 = require("../../controllers/v1/ordination-application/ordination-application.controller");
+const ordination_application_1 = require("../../validators/ordination-application");
+const router = (0, express_1.Router)();
+router.use('/current/documents/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({ maxFileSize: '16MB', maxFileCount: 1 }));
+router.get('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER]), ordination_application_controller_1.getCurrentOrdinationApplication);
+router.put('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER]), (0, sanitation_1.validate)(ordination_application_1.saveOrdinationApplicationSchema), ordination_application_controller_1.saveCurrentOrdinationApplication);
+router.post('/current/submit', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER]), (0, sanitation_1.validate)(ordination_application_1.submitOrdinationApplicationSchema), ordination_application_controller_1.submitCurrentOrdinationApplication);
+router.get('/', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), ordination_application_controller_1.getAllOrdinationApplications);
+router.patch('/:id/review', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(ordination_application_1.reviewOrdinationApplicationSchema), ordination_application_controller_1.reviewOrdinationApplication);
+exports.default = router;

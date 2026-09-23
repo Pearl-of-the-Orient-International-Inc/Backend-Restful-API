@@ -122,12 +122,21 @@ app.use('/api/v1', activityLogMiddleware, v1Routes);
 (async (): Promise<void> => {
   try {
     await prisma.$connect();
-    startBackupDatabaseScheduler();
-    startMembershipRenewalScheduler();
-    app.listen(config.PORT, () => {
+    const server = app.listen(config.PORT, () => {
+      startBackupDatabaseScheduler();
+      startMembershipRenewalScheduler();
       logger.info(
         `The server will start at http://localhost:${config.PORT} with hot-reloading enabled`,
       );
+    });
+    server.on('error', (error: NodeJS.ErrnoException) => {
+      logger.error(
+        error.code === 'EADDRINUSE'
+          ? `Port ${config.PORT} is already in use. Stop the existing backend process before restarting.`
+          : 'Backend HTTP server failed',
+        { error },
+      );
+      void prisma.$disconnect().finally(() => process.exit(1));
     });
   } catch (err) {
     logger.error('Failed to start server', err);

@@ -268,6 +268,16 @@ export type OfficeTitle = Prisma.OfficeTitleModel
  */
 export type OfficerAssignment = Prisma.OfficerAssignmentModel
 /**
+ * Model OrdinationApplication
+ * 
+ */
+export type OrdinationApplication = Prisma.OrdinationApplicationModel
+/**
+ * Model OrdinationApplicationReview
+ * 
+ */
+export type OrdinationApplicationReview = Prisma.OrdinationApplicationReviewModel
+/**
  * Model Event
  * 
  */
@@ -307,6 +317,31 @@ export type BulletinEntry = Prisma.BulletinEntryModel
  * 
  */
 export type ChaplainProduct = Prisma.ChaplainProductModel
+/**
+ * Model ChaplainService
+ * 
+ */
+export type ChaplainService = Prisma.ChaplainServiceModel
+/**
+ * Model ChaplainServiceBooking
+ * 
+ */
+export type ChaplainServiceBooking = Prisma.ChaplainServiceBookingModel
+/**
+ * Model ChaplainServiceBookingStatusHistory
+ * 
+ */
+export type ChaplainServiceBookingStatusHistory = Prisma.ChaplainServiceBookingStatusHistoryModel
+/**
+ * Model ChaplainServiceAvailability
+ * 
+ */
+export type ChaplainServiceAvailability = Prisma.ChaplainServiceAvailabilityModel
+/**
+ * Model SurveyFeedbackResponse
+ * 
+ */
+export type SurveyFeedbackResponse = Prisma.SurveyFeedbackResponseModel
 /**
  * Model ChaplainProductOrder
  * 

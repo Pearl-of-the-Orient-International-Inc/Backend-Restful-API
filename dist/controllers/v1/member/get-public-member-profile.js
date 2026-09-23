@@ -33,6 +33,9 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                 badgeNumber: true,
                 profileBannerUrl: true,
                 profileBannerPositionY: true,
+                serviceLicenseUrl: true,
+                serviceLicenseFileName: true,
+                serviceLicenseMimeType: true,
                 status: true,
                 memberType: true,
                 isActive: true,
@@ -148,9 +151,13 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                     orderBy: [{ dateReceived: 'desc' }, { createdAt: 'desc' }],
                     select: {
                         credentialId: true,
+                        type: true,
                         title: true,
+                        issuer: true,
+                        referenceNumber: true,
                         certificateUrl: true,
                         dateReceived: true,
+                        expiresAt: true,
                     },
                 },
                 publicRecords: {

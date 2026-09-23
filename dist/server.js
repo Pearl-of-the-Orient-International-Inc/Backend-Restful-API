@@ -77,10 +77,16 @@ app.use('/api/v1', activity_log_1.activityLogMiddleware, v1_1.default);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield prisma_1.prisma.$connect();
-        (0, backup_database_scheduler_1.startBackupDatabaseScheduler)();
-        (0, membership_renewal_scheduler_1.startMembershipRenewalScheduler)();
-        app.listen(config_1.default.PORT, () => {
+        const server = app.listen(config_1.default.PORT, () => {
+            (0, backup_database_scheduler_1.startBackupDatabaseScheduler)();
+            (0, membership_renewal_scheduler_1.startMembershipRenewalScheduler)();
             winston_1.logger.info(`The server will start at http://localhost:${config_1.default.PORT} with hot-reloading enabled`);
+        });
+        server.on('error', (error) => {
+            winston_1.logger.error(error.code === 'EADDRINUSE'
+                ? `Port ${config_1.default.PORT} is already in use. Stop the existing backend process before restarting.`
+                : 'Backend HTTP server failed', { error });
+            void prisma_1.prisma.$disconnect().finally(() => process.exit(1));
         });
     }
     catch (err) {

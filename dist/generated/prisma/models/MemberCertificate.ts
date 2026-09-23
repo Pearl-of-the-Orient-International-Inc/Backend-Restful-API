@@ -27,9 +27,13 @@ export type AggregateMemberCertificate = {
 export type MemberCertificateMinAggregateOutputType = {
   id: string | null
   credentialId: string | null
+  type: $Enums.MemberCertificateType | null
   title: string | null
+  issuer: string | null
+  referenceNumber: string | null
   certificateUrl: string | null
   dateReceived: Date | null
+  expiresAt: Date | null
   memberId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -38,9 +42,13 @@ export type MemberCertificateMinAggregateOutputType = {
 export type MemberCertificateMaxAggregateOutputType = {
   id: string | null
   credentialId: string | null
+  type: $Enums.MemberCertificateType | null
   title: string | null
+  issuer: string | null
+  referenceNumber: string | null
   certificateUrl: string | null
   dateReceived: Date | null
+  expiresAt: Date | null
   memberId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,9 +57,13 @@ export type MemberCertificateMaxAggregateOutputType = {
 export type MemberCertificateCountAggregateOutputType = {
   id: number
   credentialId: number
+  type: number
   title: number
+  issuer: number
+  referenceNumber: number
   certificateUrl: number
   dateReceived: number
+  expiresAt: number
   memberId: number
   createdAt: number
   updatedAt: number
@@ -62,9 +74,13 @@ export type MemberCertificateCountAggregateOutputType = {
 export type MemberCertificateMinAggregateInputType = {
   id?: true
   credentialId?: true
+  type?: true
   title?: true
+  issuer?: true
+  referenceNumber?: true
   certificateUrl?: true
   dateReceived?: true
+  expiresAt?: true
   memberId?: true
   createdAt?: true
   updatedAt?: true
@@ -73,9 +89,13 @@ export type MemberCertificateMinAggregateInputType = {
 export type MemberCertificateMaxAggregateInputType = {
   id?: true
   credentialId?: true
+  type?: true
   title?: true
+  issuer?: true
+  referenceNumber?: true
   certificateUrl?: true
   dateReceived?: true
+  expiresAt?: true
   memberId?: true
   createdAt?: true
   updatedAt?: true
@@ -84,9 +104,13 @@ export type MemberCertificateMaxAggregateInputType = {
 export type MemberCertificateCountAggregateInputType = {
   id?: true
   credentialId?: true
+  type?: true
   title?: true
+  issuer?: true
+  referenceNumber?: true
   certificateUrl?: true
   dateReceived?: true
+  expiresAt?: true
   memberId?: true
   createdAt?: true
   updatedAt?: true
@@ -168,9 +192,13 @@ export type MemberCertificateGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type MemberCertificateGroupByOutputType = {
   id: string
   credentialId: string
+  type: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date
+  expiresAt: Date | null
   memberId: string
   createdAt: Date
   updatedAt: Date
@@ -200,9 +228,13 @@ export type MemberCertificateWhereInput = {
   NOT?: Prisma.MemberCertificateWhereInput | Prisma.MemberCertificateWhereInput[]
   id?: Prisma.StringFilter<"MemberCertificate"> | string
   credentialId?: Prisma.StringFilter<"MemberCertificate"> | string
+  type?: Prisma.EnumMemberCertificateTypeFilter<"MemberCertificate"> | $Enums.MemberCertificateType
   title?: Prisma.StringFilter<"MemberCertificate"> | string
+  issuer?: Prisma.StringFilter<"MemberCertificate"> | string
+  referenceNumber?: Prisma.StringFilter<"MemberCertificate"> | string
   certificateUrl?: Prisma.StringFilter<"MemberCertificate"> | string
   dateReceived?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableFilter<"MemberCertificate"> | Date | string | null
   memberId?: Prisma.StringFilter<"MemberCertificate"> | string
   createdAt?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
@@ -212,9 +244,13 @@ export type MemberCertificateWhereInput = {
 export type MemberCertificateOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   credentialId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  issuer?: Prisma.SortOrder
+  referenceNumber?: Prisma.SortOrder
   certificateUrl?: Prisma.SortOrder
   dateReceived?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -227,9 +263,13 @@ export type MemberCertificateWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MemberCertificateWhereInput | Prisma.MemberCertificateWhereInput[]
   OR?: Prisma.MemberCertificateWhereInput[]
   NOT?: Prisma.MemberCertificateWhereInput | Prisma.MemberCertificateWhereInput[]
+  type?: Prisma.EnumMemberCertificateTypeFilter<"MemberCertificate"> | $Enums.MemberCertificateType
   title?: Prisma.StringFilter<"MemberCertificate"> | string
+  issuer?: Prisma.StringFilter<"MemberCertificate"> | string
+  referenceNumber?: Prisma.StringFilter<"MemberCertificate"> | string
   certificateUrl?: Prisma.StringFilter<"MemberCertificate"> | string
   dateReceived?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableFilter<"MemberCertificate"> | Date | string | null
   memberId?: Prisma.StringFilter<"MemberCertificate"> | string
   createdAt?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
@@ -239,9 +279,13 @@ export type MemberCertificateWhereUniqueInput = Prisma.AtLeast<{
 export type MemberCertificateOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   credentialId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  issuer?: Prisma.SortOrder
+  referenceNumber?: Prisma.SortOrder
   certificateUrl?: Prisma.SortOrder
   dateReceived?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -256,9 +300,13 @@ export type MemberCertificateScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MemberCertificateScalarWhereWithAggregatesInput | Prisma.MemberCertificateScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
   credentialId?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
+  type?: Prisma.EnumMemberCertificateTypeWithAggregatesFilter<"MemberCertificate"> | $Enums.MemberCertificateType
   title?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
+  issuer?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
+  referenceNumber?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
   certificateUrl?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
   dateReceived?: Prisma.DateTimeWithAggregatesFilter<"MemberCertificate"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MemberCertificate"> | Date | string | null
   memberId?: Prisma.StringWithAggregatesFilter<"MemberCertificate"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MemberCertificate"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MemberCertificate"> | Date | string
@@ -267,9 +315,13 @@ export type MemberCertificateScalarWhereWithAggregatesInput = {
 export type MemberCertificateCreateInput = {
   id?: string
   credentialId: string
+  type?: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutCertificatesInput
@@ -278,9 +330,13 @@ export type MemberCertificateCreateInput = {
 export type MemberCertificateUncheckedCreateInput = {
   id?: string
   credentialId: string
+  type?: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date | string
+  expiresAt?: Date | string | null
   memberId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -289,9 +345,13 @@ export type MemberCertificateUncheckedCreateInput = {
 export type MemberCertificateUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutCertificatesNestedInput
@@ -300,9 +360,13 @@ export type MemberCertificateUpdateInput = {
 export type MemberCertificateUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -311,9 +375,13 @@ export type MemberCertificateUncheckedUpdateInput = {
 export type MemberCertificateCreateManyInput = {
   id?: string
   credentialId: string
+  type?: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date | string
+  expiresAt?: Date | string | null
   memberId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -322,9 +390,13 @@ export type MemberCertificateCreateManyInput = {
 export type MemberCertificateUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -332,9 +404,13 @@ export type MemberCertificateUpdateManyMutationInput = {
 export type MemberCertificateUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -353,9 +429,13 @@ export type MemberCertificateOrderByRelationAggregateInput = {
 export type MemberCertificateCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   credentialId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  issuer?: Prisma.SortOrder
+  referenceNumber?: Prisma.SortOrder
   certificateUrl?: Prisma.SortOrder
   dateReceived?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -364,9 +444,13 @@ export type MemberCertificateCountOrderByAggregateInput = {
 export type MemberCertificateMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   credentialId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  issuer?: Prisma.SortOrder
+  referenceNumber?: Prisma.SortOrder
   certificateUrl?: Prisma.SortOrder
   dateReceived?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -375,9 +459,13 @@ export type MemberCertificateMaxOrderByAggregateInput = {
 export type MemberCertificateMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   credentialId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  issuer?: Prisma.SortOrder
+  referenceNumber?: Prisma.SortOrder
   certificateUrl?: Prisma.SortOrder
   dateReceived?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -425,12 +513,20 @@ export type MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput = {
   deleteMany?: Prisma.MemberCertificateScalarWhereInput | Prisma.MemberCertificateScalarWhereInput[]
 }
 
+export type EnumMemberCertificateTypeFieldUpdateOperationsInput = {
+  set?: $Enums.MemberCertificateType
+}
+
 export type MemberCertificateCreateWithoutMemberInput = {
   id?: string
   credentialId: string
+  type?: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -438,9 +534,13 @@ export type MemberCertificateCreateWithoutMemberInput = {
 export type MemberCertificateUncheckedCreateWithoutMemberInput = {
   id?: string
   credentialId: string
+  type?: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -477,9 +577,13 @@ export type MemberCertificateScalarWhereInput = {
   NOT?: Prisma.MemberCertificateScalarWhereInput | Prisma.MemberCertificateScalarWhereInput[]
   id?: Prisma.StringFilter<"MemberCertificate"> | string
   credentialId?: Prisma.StringFilter<"MemberCertificate"> | string
+  type?: Prisma.EnumMemberCertificateTypeFilter<"MemberCertificate"> | $Enums.MemberCertificateType
   title?: Prisma.StringFilter<"MemberCertificate"> | string
+  issuer?: Prisma.StringFilter<"MemberCertificate"> | string
+  referenceNumber?: Prisma.StringFilter<"MemberCertificate"> | string
   certificateUrl?: Prisma.StringFilter<"MemberCertificate"> | string
   dateReceived?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableFilter<"MemberCertificate"> | Date | string | null
   memberId?: Prisma.StringFilter<"MemberCertificate"> | string
   createdAt?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemberCertificate"> | Date | string
@@ -488,9 +592,13 @@ export type MemberCertificateScalarWhereInput = {
 export type MemberCertificateCreateManyMemberInput = {
   id?: string
   credentialId: string
+  type?: $Enums.MemberCertificateType
   title: string
+  issuer: string
+  referenceNumber: string
   certificateUrl: string
   dateReceived: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -498,9 +606,13 @@ export type MemberCertificateCreateManyMemberInput = {
 export type MemberCertificateUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -508,9 +620,13 @@ export type MemberCertificateUpdateWithoutMemberInput = {
 export type MemberCertificateUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -518,9 +634,13 @@ export type MemberCertificateUncheckedUpdateWithoutMemberInput = {
 export type MemberCertificateUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   credentialId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMemberCertificateTypeFieldUpdateOperationsInput | $Enums.MemberCertificateType
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  issuer?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   certificateUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dateReceived?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -530,9 +650,13 @@ export type MemberCertificateUncheckedUpdateManyWithoutMemberInput = {
 export type MemberCertificateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   credentialId?: boolean
+  type?: boolean
   title?: boolean
+  issuer?: boolean
+  referenceNumber?: boolean
   certificateUrl?: boolean
   dateReceived?: boolean
+  expiresAt?: boolean
   memberId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -542,9 +666,13 @@ export type MemberCertificateSelect<ExtArgs extends runtime.Types.Extensions.Int
 export type MemberCertificateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   credentialId?: boolean
+  type?: boolean
   title?: boolean
+  issuer?: boolean
+  referenceNumber?: boolean
   certificateUrl?: boolean
   dateReceived?: boolean
+  expiresAt?: boolean
   memberId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -554,9 +682,13 @@ export type MemberCertificateSelectCreateManyAndReturn<ExtArgs extends runtime.T
 export type MemberCertificateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   credentialId?: boolean
+  type?: boolean
   title?: boolean
+  issuer?: boolean
+  referenceNumber?: boolean
   certificateUrl?: boolean
   dateReceived?: boolean
+  expiresAt?: boolean
   memberId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -566,15 +698,19 @@ export type MemberCertificateSelectUpdateManyAndReturn<ExtArgs extends runtime.T
 export type MemberCertificateSelectScalar = {
   id?: boolean
   credentialId?: boolean
+  type?: boolean
   title?: boolean
+  issuer?: boolean
+  referenceNumber?: boolean
   certificateUrl?: boolean
   dateReceived?: boolean
+  expiresAt?: boolean
   memberId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MemberCertificateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "credentialId" | "title" | "certificateUrl" | "dateReceived" | "memberId" | "createdAt" | "updatedAt", ExtArgs["result"]["memberCertificate"]>
+export type MemberCertificateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "credentialId" | "type" | "title" | "issuer" | "referenceNumber" | "certificateUrl" | "dateReceived" | "expiresAt" | "memberId" | "createdAt" | "updatedAt", ExtArgs["result"]["memberCertificate"]>
 export type MemberCertificateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
@@ -593,9 +729,13 @@ export type $MemberCertificatePayload<ExtArgs extends runtime.Types.Extensions.I
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     credentialId: string
+    type: $Enums.MemberCertificateType
     title: string
+    issuer: string
+    referenceNumber: string
     certificateUrl: string
     dateReceived: Date
+    expiresAt: Date | null
     memberId: string
     createdAt: Date
     updatedAt: Date
@@ -1025,9 +1165,13 @@ export interface Prisma__MemberCertificateClient<T, Null = never, ExtArgs extend
 export interface MemberCertificateFieldRefs {
   readonly id: Prisma.FieldRef<"MemberCertificate", 'String'>
   readonly credentialId: Prisma.FieldRef<"MemberCertificate", 'String'>
+  readonly type: Prisma.FieldRef<"MemberCertificate", 'MemberCertificateType'>
   readonly title: Prisma.FieldRef<"MemberCertificate", 'String'>
+  readonly issuer: Prisma.FieldRef<"MemberCertificate", 'String'>
+  readonly referenceNumber: Prisma.FieldRef<"MemberCertificate", 'String'>
   readonly certificateUrl: Prisma.FieldRef<"MemberCertificate", 'String'>
   readonly dateReceived: Prisma.FieldRef<"MemberCertificate", 'DateTime'>
+  readonly expiresAt: Prisma.FieldRef<"MemberCertificate", 'DateTime'>
   readonly memberId: Prisma.FieldRef<"MemberCertificate", 'String'>
   readonly createdAt: Prisma.FieldRef<"MemberCertificate", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MemberCertificate", 'DateTime'>

@@ -2,6 +2,9 @@ import { Router } from 'express';
 import { validate } from '@/common/sanitation';
 import {
   getPublicPaymentFeePolicies,
+  getPublicPaymentConfiguration,
+  getPublicPaymentStatus,
+  capturePublicPayPalOrder,
   initiateChaplainOrderPayment,
   receivePayPalWebhook,
   receiveXenditWebhook,
@@ -16,12 +19,15 @@ router.get(
   expressRateLimit('basic'),
   getPublicPaymentFeePolicies,
 );
+router.get('/public/config', expressRateLimit('basic'), getPublicPaymentConfiguration);
+router.get('/public/status/:reference', expressRateLimit('basic'), getPublicPaymentStatus);
 router.post(
   '/public/chaplain-orders/:id/checkout',
   expressRateLimit('basic'),
   validate(initiateChaplainOrderPaymentSchema),
   initiateChaplainOrderPayment,
 );
+router.post('/public/paypal/:orderId/capture', expressRateLimit('basic'), capturePublicPayPalOrder);
 router.post('/webhooks/xendit', receiveXenditWebhook);
 router.post('/webhooks/paypal', receivePayPalWebhook);
 

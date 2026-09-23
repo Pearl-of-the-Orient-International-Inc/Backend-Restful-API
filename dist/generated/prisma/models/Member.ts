@@ -43,6 +43,9 @@ export type MemberMinAggregateOutputType = {
   badgeNumber: string | null
   profileBannerUrl: string | null
   profileBannerPositionY: number | null
+  serviceLicenseUrl: string | null
+  serviceLicenseFileName: string | null
+  serviceLicenseMimeType: string | null
   firstName: string | null
   middleInitial: string | null
   lastName: string | null
@@ -90,6 +93,9 @@ export type MemberMaxAggregateOutputType = {
   badgeNumber: string | null
   profileBannerUrl: string | null
   profileBannerPositionY: number | null
+  serviceLicenseUrl: string | null
+  serviceLicenseFileName: string | null
+  serviceLicenseMimeType: string | null
   firstName: string | null
   middleInitial: string | null
   lastName: string | null
@@ -137,6 +143,9 @@ export type MemberCountAggregateOutputType = {
   badgeNumber: number
   profileBannerUrl: number
   profileBannerPositionY: number
+  serviceLicenseUrl: number
+  serviceLicenseFileName: number
+  serviceLicenseMimeType: number
   firstName: number
   middleInitial: number
   lastName: number
@@ -194,6 +203,9 @@ export type MemberMinAggregateInputType = {
   badgeNumber?: true
   profileBannerUrl?: true
   profileBannerPositionY?: true
+  serviceLicenseUrl?: true
+  serviceLicenseFileName?: true
+  serviceLicenseMimeType?: true
   firstName?: true
   middleInitial?: true
   lastName?: true
@@ -241,6 +253,9 @@ export type MemberMaxAggregateInputType = {
   badgeNumber?: true
   profileBannerUrl?: true
   profileBannerPositionY?: true
+  serviceLicenseUrl?: true
+  serviceLicenseFileName?: true
+  serviceLicenseMimeType?: true
   firstName?: true
   middleInitial?: true
   lastName?: true
@@ -288,6 +303,9 @@ export type MemberCountAggregateInputType = {
   badgeNumber?: true
   profileBannerUrl?: true
   profileBannerPositionY?: true
+  serviceLicenseUrl?: true
+  serviceLicenseFileName?: true
+  serviceLicenseMimeType?: true
   firstName?: true
   middleInitial?: true
   lastName?: true
@@ -422,6 +440,9 @@ export type MemberGroupByOutputType = {
   badgeNumber: string | null
   profileBannerUrl: string | null
   profileBannerPositionY: number
+  serviceLicenseUrl: string | null
+  serviceLicenseFileName: string | null
+  serviceLicenseMimeType: string | null
   firstName: string
   middleInitial: string | null
   lastName: string
@@ -492,6 +513,9 @@ export type MemberWhereInput = {
   badgeNumber?: Prisma.StringNullableFilter<"Member"> | string | null
   profileBannerUrl?: Prisma.StringNullableFilter<"Member"> | string | null
   profileBannerPositionY?: Prisma.IntFilter<"Member"> | number
+  serviceLicenseUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  serviceLicenseFileName?: Prisma.StringNullableFilter<"Member"> | string | null
+  serviceLicenseMimeType?: Prisma.StringNullableFilter<"Member"> | string | null
   firstName?: Prisma.StringFilter<"Member"> | string
   middleInitial?: Prisma.StringNullableFilter<"Member"> | string | null
   lastName?: Prisma.StringFilter<"Member"> | string
@@ -549,6 +573,9 @@ export type MemberWhereInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberListRelationFilter
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   followers?: Prisma.MemberFollowListRelationFilter
+  ordinationApplication?: Prisma.XOR<Prisma.OrdinationApplicationNullableScalarRelationFilter, Prisma.OrdinationApplicationWhereInput> | null
+  providedServiceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
@@ -560,6 +587,9 @@ export type MemberOrderByWithRelationInput = {
   badgeNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   profileBannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   profileBannerPositionY?: Prisma.SortOrder
+  serviceLicenseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceLicenseFileName?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceLicenseMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -617,6 +647,9 @@ export type MemberOrderByWithRelationInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberOrderByRelationAggregateInput
   memoRecipients?: Prisma.MemoRecipientOrderByRelationAggregateInput
   followers?: Prisma.MemberFollowOrderByRelationAggregateInput
+  ordinationApplication?: Prisma.OrdinationApplicationOrderByWithRelationInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingOrderByRelationAggregateInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -631,6 +664,9 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   badgeNumber?: Prisma.StringNullableFilter<"Member"> | string | null
   profileBannerUrl?: Prisma.StringNullableFilter<"Member"> | string | null
   profileBannerPositionY?: Prisma.IntFilter<"Member"> | number
+  serviceLicenseUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  serviceLicenseFileName?: Prisma.StringNullableFilter<"Member"> | string | null
+  serviceLicenseMimeType?: Prisma.StringNullableFilter<"Member"> | string | null
   firstName?: Prisma.StringFilter<"Member"> | string
   middleInitial?: Prisma.StringNullableFilter<"Member"> | string | null
   lastName?: Prisma.StringFilter<"Member"> | string
@@ -688,6 +724,9 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberListRelationFilter
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   followers?: Prisma.MemberFollowListRelationFilter
+  ordinationApplication?: Prisma.XOR<Prisma.OrdinationApplicationNullableScalarRelationFilter, Prisma.OrdinationApplicationWhereInput> | null
+  providedServiceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityListRelationFilter
 }, "id" | "uniqueId" | "userId">
 
 export type MemberOrderByWithAggregationInput = {
@@ -699,6 +738,9 @@ export type MemberOrderByWithAggregationInput = {
   badgeNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   profileBannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   profileBannerPositionY?: Prisma.SortOrder
+  serviceLicenseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceLicenseFileName?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceLicenseMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -754,6 +796,9 @@ export type MemberScalarWhereWithAggregatesInput = {
   badgeNumber?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   profileBannerUrl?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   profileBannerPositionY?: Prisma.IntWithAggregatesFilter<"Member"> | number
+  serviceLicenseUrl?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  serviceLicenseFileName?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  serviceLicenseMimeType?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   firstName?: Prisma.StringWithAggregatesFilter<"Member"> | string
   middleInitial?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   lastName?: Prisma.StringWithAggregatesFilter<"Member"> | string
@@ -800,6 +845,9 @@ export type MemberCreateInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -857,6 +905,9 @@ export type MemberCreateInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
@@ -868,6 +919,9 @@ export type MemberUncheckedCreateInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -924,6 +978,9 @@ export type MemberUncheckedCreateInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUpdateInput = {
@@ -934,6 +991,9 @@ export type MemberUpdateInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -991,6 +1051,9 @@ export type MemberUpdateInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
@@ -1002,6 +1065,9 @@ export type MemberUncheckedUpdateInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1058,6 +1124,9 @@ export type MemberUncheckedUpdateInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
@@ -1069,6 +1138,9 @@ export type MemberCreateManyInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1115,6 +1187,9 @@ export type MemberUpdateManyMutationInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1162,6 +1237,9 @@ export type MemberUncheckedUpdateManyInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1214,6 +1292,9 @@ export type MemberCountOrderByAggregateInput = {
   badgeNumber?: Prisma.SortOrder
   profileBannerUrl?: Prisma.SortOrder
   profileBannerPositionY?: Prisma.SortOrder
+  serviceLicenseUrl?: Prisma.SortOrder
+  serviceLicenseFileName?: Prisma.SortOrder
+  serviceLicenseMimeType?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -1265,6 +1346,9 @@ export type MemberMaxOrderByAggregateInput = {
   badgeNumber?: Prisma.SortOrder
   profileBannerUrl?: Prisma.SortOrder
   profileBannerPositionY?: Prisma.SortOrder
+  serviceLicenseUrl?: Prisma.SortOrder
+  serviceLicenseFileName?: Prisma.SortOrder
+  serviceLicenseMimeType?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -1312,6 +1396,9 @@ export type MemberMinOrderByAggregateInput = {
   badgeNumber?: Prisma.SortOrder
   profileBannerUrl?: Prisma.SortOrder
   profileBannerPositionY?: Prisma.SortOrder
+  serviceLicenseUrl?: Prisma.SortOrder
+  serviceLicenseFileName?: Prisma.SortOrder
+  serviceLicenseMimeType?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   middleInitial?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
@@ -1635,6 +1722,20 @@ export type MemberUpdateOneRequiredWithoutOfficerAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutOfficerAssignmentsInput, Prisma.MemberUpdateWithoutOfficerAssignmentsInput>, Prisma.MemberUncheckedUpdateWithoutOfficerAssignmentsInput>
 }
 
+export type MemberCreateNestedOneWithoutOrdinationApplicationInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutOrdinationApplicationInput, Prisma.MemberUncheckedCreateWithoutOrdinationApplicationInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutOrdinationApplicationInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutOrdinationApplicationNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutOrdinationApplicationInput, Prisma.MemberUncheckedCreateWithoutOrdinationApplicationInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutOrdinationApplicationInput
+  upsert?: Prisma.MemberUpsertWithoutOrdinationApplicationInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutOrdinationApplicationInput, Prisma.MemberUpdateWithoutOrdinationApplicationInput>, Prisma.MemberUncheckedUpdateWithoutOrdinationApplicationInput>
+}
+
 export type MemberCreateNestedOneWithoutEventAttendancesInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutEventAttendancesInput, Prisma.MemberUncheckedCreateWithoutEventAttendancesInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutEventAttendancesInput
@@ -1677,6 +1778,34 @@ export type MemberUpdateOneRequiredWithoutTaggedNewsBlogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutTaggedNewsBlogsInput, Prisma.MemberUpdateWithoutTaggedNewsBlogsInput>, Prisma.MemberUncheckedUpdateWithoutTaggedNewsBlogsInput>
 }
 
+export type MemberCreateNestedOneWithoutProvidedServiceBookingsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutProvidedServiceBookingsInput, Prisma.MemberUncheckedCreateWithoutProvidedServiceBookingsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutProvidedServiceBookingsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutProvidedServiceBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutProvidedServiceBookingsInput, Prisma.MemberUncheckedCreateWithoutProvidedServiceBookingsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutProvidedServiceBookingsInput
+  upsert?: Prisma.MemberUpsertWithoutProvidedServiceBookingsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutProvidedServiceBookingsInput, Prisma.MemberUpdateWithoutProvidedServiceBookingsInput>, Prisma.MemberUncheckedUpdateWithoutProvidedServiceBookingsInput>
+}
+
+export type MemberCreateNestedOneWithoutServiceAvailabilitySlotsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutServiceAvailabilitySlotsInput, Prisma.MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutServiceAvailabilitySlotsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutServiceAvailabilitySlotsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutServiceAvailabilitySlotsInput, Prisma.MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutServiceAvailabilitySlotsInput
+  upsert?: Prisma.MemberUpsertWithoutServiceAvailabilitySlotsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutServiceAvailabilitySlotsInput, Prisma.MemberUpdateWithoutServiceAvailabilitySlotsInput>, Prisma.MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput>
+}
+
 export type MemberCreateNestedOneWithoutMemoRecipientsInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutMemoRecipientsInput, Prisma.MemberUncheckedCreateWithoutMemoRecipientsInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutMemoRecipientsInput
@@ -1701,6 +1830,9 @@ export type MemberCreateWithoutUserInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1757,6 +1889,9 @@ export type MemberCreateWithoutUserInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutUserInput = {
@@ -1767,6 +1902,9 @@ export type MemberUncheckedCreateWithoutUserInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -1823,6 +1961,9 @@ export type MemberUncheckedCreateWithoutUserInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutUserInput = {
@@ -1849,6 +1990,9 @@ export type MemberUpdateWithoutUserInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1905,6 +2049,9 @@ export type MemberUpdateWithoutUserInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutUserInput = {
@@ -1915,6 +2062,9 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1971,6 +2121,9 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutFollowersInput = {
@@ -1981,6 +2134,9 @@ export type MemberCreateWithoutFollowersInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2037,6 +2193,9 @@ export type MemberCreateWithoutFollowersInput = {
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutFollowersInput = {
@@ -2048,6 +2207,9 @@ export type MemberUncheckedCreateWithoutFollowersInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2103,6 +2265,9 @@ export type MemberUncheckedCreateWithoutFollowersInput = {
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutFollowersInput = {
@@ -2129,6 +2294,9 @@ export type MemberUpdateWithoutFollowersInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2185,6 +2353,9 @@ export type MemberUpdateWithoutFollowersInput = {
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutFollowersInput = {
@@ -2196,6 +2367,9 @@ export type MemberUncheckedUpdateWithoutFollowersInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2251,6 +2425,9 @@ export type MemberUncheckedUpdateWithoutFollowersInput = {
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutMinisterialExperiencesInput = {
@@ -2261,6 +2438,9 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2317,6 +2497,9 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
@@ -2328,6 +2511,9 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2383,6 +2569,9 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutMinisterialExperiencesInput = {
@@ -2409,6 +2598,9 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2465,6 +2657,9 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
@@ -2476,6 +2671,9 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2531,6 +2729,9 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutCharacterReferencesInput = {
@@ -2541,6 +2742,9 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2597,6 +2801,9 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
@@ -2608,6 +2815,9 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2663,6 +2873,9 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCharacterReferencesInput = {
@@ -2689,6 +2902,9 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2745,6 +2961,9 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
@@ -2756,6 +2975,9 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2811,6 +3033,9 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSignatureInput = {
@@ -2821,6 +3046,9 @@ export type MemberCreateWithoutSignatureInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2877,6 +3105,9 @@ export type MemberCreateWithoutSignatureInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSignatureInput = {
@@ -2888,6 +3119,9 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -2943,6 +3177,9 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSignatureInput = {
@@ -2969,6 +3206,9 @@ export type MemberUpdateWithoutSignatureInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3025,6 +3265,9 @@ export type MemberUpdateWithoutSignatureInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSignatureInput = {
@@ -3036,6 +3279,9 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3091,6 +3337,9 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutApplicantRequirementsInput = {
@@ -3101,6 +3350,9 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3157,6 +3409,9 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
@@ -3168,6 +3423,9 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3223,6 +3481,9 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutApplicantRequirementsInput = {
@@ -3249,6 +3510,9 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3305,6 +3569,9 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
@@ -3316,6 +3583,9 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3371,6 +3641,9 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutOnboardingProgressInput = {
@@ -3381,6 +3654,9 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3437,6 +3713,9 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
@@ -3448,6 +3727,9 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3503,6 +3785,9 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOnboardingProgressInput = {
@@ -3529,6 +3814,9 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3585,6 +3873,9 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
@@ -3596,6 +3887,9 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3651,6 +3945,9 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPaymentCheckoutInput = {
@@ -3661,6 +3958,9 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3717,6 +4017,9 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
@@ -3728,6 +4031,9 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3783,6 +4089,9 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPaymentCheckoutInput = {
@@ -3809,6 +4118,9 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3865,6 +4177,9 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
@@ -3876,6 +4191,9 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3931,6 +4249,9 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
@@ -3941,6 +4262,9 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -3997,6 +4321,9 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
@@ -4008,6 +4335,9 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4063,6 +4393,9 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOnlineInterviewAppointmentInput = {
@@ -4089,6 +4422,9 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4145,6 +4481,9 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
@@ -4156,6 +4495,9 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4211,6 +4553,9 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutIdGenerationAssetInput = {
@@ -4221,6 +4566,9 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4277,6 +4625,9 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
@@ -4288,6 +4639,9 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4343,6 +4697,9 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutIdGenerationAssetInput = {
@@ -4369,6 +4726,9 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4425,6 +4785,9 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
@@ -4436,6 +4799,9 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4491,6 +4857,9 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutCertificatesInput = {
@@ -4501,6 +4870,9 @@ export type MemberCreateWithoutCertificatesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4557,6 +4929,9 @@ export type MemberCreateWithoutCertificatesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCertificatesInput = {
@@ -4568,6 +4943,9 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4623,6 +5001,9 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCertificatesInput = {
@@ -4649,6 +5030,9 @@ export type MemberUpdateWithoutCertificatesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4705,6 +5089,9 @@ export type MemberUpdateWithoutCertificatesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCertificatesInput = {
@@ -4716,6 +5103,9 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4771,6 +5161,9 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutCredentialDocumentsInput = {
@@ -4781,6 +5174,9 @@ export type MemberCreateWithoutCredentialDocumentsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4837,6 +5233,9 @@ export type MemberCreateWithoutCredentialDocumentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
@@ -4848,6 +5247,9 @@ export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -4903,6 +5305,9 @@ export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCredentialDocumentsInput = {
@@ -4929,6 +5334,9 @@ export type MemberUpdateWithoutCredentialDocumentsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4985,6 +5393,9 @@ export type MemberUpdateWithoutCredentialDocumentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
@@ -4996,6 +5407,9 @@ export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5051,6 +5465,9 @@ export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPublicRecordsInput = {
@@ -5061,6 +5478,9 @@ export type MemberCreateWithoutPublicRecordsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5117,6 +5537,9 @@ export type MemberCreateWithoutPublicRecordsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPublicRecordsInput = {
@@ -5128,6 +5551,9 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5183,6 +5609,9 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPublicRecordsInput = {
@@ -5209,6 +5638,9 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5265,6 +5697,9 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
@@ -5276,6 +5711,9 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5331,6 +5769,9 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
@@ -5341,6 +5782,9 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5397,6 +5841,9 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
@@ -5408,6 +5855,9 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5463,6 +5913,9 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutChaplaincyTrainingProgressInput = {
@@ -5489,6 +5942,9 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5545,6 +6001,9 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
@@ -5556,6 +6015,9 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5611,6 +6073,9 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSeminaryApplicationsInput = {
@@ -5621,6 +6086,9 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5677,6 +6145,9 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
@@ -5688,6 +6159,9 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5743,6 +6217,9 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSeminaryApplicationsInput = {
@@ -5769,6 +6246,9 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5825,6 +6305,9 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
@@ -5836,6 +6319,9 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5891,6 +6377,9 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPreferredBranchesInput = {
@@ -5901,6 +6390,9 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -5957,6 +6449,9 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
@@ -5968,6 +6463,9 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6023,6 +6521,9 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPreferredBranchesInput = {
@@ -6049,6 +6550,9 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6105,6 +6609,9 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
@@ -6116,6 +6623,9 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6171,6 +6681,9 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutOfficerAssignmentsInput = {
@@ -6181,6 +6694,9 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6237,6 +6753,9 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
@@ -6248,6 +6767,9 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6303,6 +6825,9 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOfficerAssignmentsInput = {
@@ -6329,6 +6854,9 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6385,6 +6913,9 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
@@ -6396,6 +6927,9 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6451,6 +6985,313 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutOrdinationApplicationInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutOrdinationApplicationInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutOrdinationApplicationInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutOrdinationApplicationInput, Prisma.MemberUncheckedCreateWithoutOrdinationApplicationInput>
+}
+
+export type MemberUpsertWithoutOrdinationApplicationInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutOrdinationApplicationInput, Prisma.MemberUncheckedUpdateWithoutOrdinationApplicationInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutOrdinationApplicationInput, Prisma.MemberUncheckedCreateWithoutOrdinationApplicationInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutOrdinationApplicationInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutOrdinationApplicationInput, Prisma.MemberUncheckedUpdateWithoutOrdinationApplicationInput>
+}
+
+export type MemberUpdateWithoutOrdinationApplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutOrdinationApplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutEventAttendancesInput = {
@@ -6461,6 +7302,9 @@ export type MemberCreateWithoutEventAttendancesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6517,6 +7361,9 @@ export type MemberCreateWithoutEventAttendancesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutEventAttendancesInput = {
@@ -6528,6 +7375,9 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6583,6 +7433,9 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutEventAttendancesInput = {
@@ -6609,6 +7462,9 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6665,6 +7521,9 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
@@ -6676,6 +7535,9 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6731,6 +7593,9 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutTaggedEventsInput = {
@@ -6741,6 +7606,9 @@ export type MemberCreateWithoutTaggedEventsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6797,6 +7665,9 @@ export type MemberCreateWithoutTaggedEventsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTaggedEventsInput = {
@@ -6808,6 +7679,9 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -6863,6 +7737,9 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTaggedEventsInput = {
@@ -6889,6 +7766,9 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6945,6 +7825,9 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
@@ -6956,6 +7839,9 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7011,6 +7897,9 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutTaggedNewsBlogsInput = {
@@ -7021,6 +7910,9 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -7077,6 +7969,9 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
@@ -7088,6 +7983,9 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -7143,6 +8041,9 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTaggedNewsBlogsInput = {
@@ -7169,6 +8070,9 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7225,6 +8129,9 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
@@ -7236,6 +8143,9 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7291,6 +8201,617 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutProvidedServiceBookingsInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutProvidedServiceBookingsInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutProvidedServiceBookingsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutProvidedServiceBookingsInput, Prisma.MemberUncheckedCreateWithoutProvidedServiceBookingsInput>
+}
+
+export type MemberUpsertWithoutProvidedServiceBookingsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutProvidedServiceBookingsInput, Prisma.MemberUncheckedUpdateWithoutProvidedServiceBookingsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutProvidedServiceBookingsInput, Prisma.MemberUncheckedCreateWithoutProvidedServiceBookingsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutProvidedServiceBookingsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutProvidedServiceBookingsInput, Prisma.MemberUncheckedUpdateWithoutProvidedServiceBookingsInput>
+}
+
+export type MemberUpdateWithoutProvidedServiceBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutProvidedServiceBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutServiceAvailabilitySlotsInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+}
+
+export type MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+}
+
+export type MemberCreateOrConnectWithoutServiceAvailabilitySlotsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutServiceAvailabilitySlotsInput, Prisma.MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput>
+}
+
+export type MemberUpsertWithoutServiceAvailabilitySlotsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutServiceAvailabilitySlotsInput, Prisma.MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutServiceAvailabilitySlotsInput, Prisma.MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutServiceAvailabilitySlotsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutServiceAvailabilitySlotsInput, Prisma.MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput>
+}
+
+export type MemberUpdateWithoutServiceAvailabilitySlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
 }
 
 export type MemberCreateWithoutMemoRecipientsInput = {
@@ -7301,6 +8822,9 @@ export type MemberCreateWithoutMemoRecipientsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -7357,6 +8881,9 @@ export type MemberCreateWithoutMemoRecipientsInput = {
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
@@ -7368,6 +8895,9 @@ export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
   badgeNumber?: string | null
   profileBannerUrl?: string | null
   profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
   firstName: string
   middleInitial?: string | null
   lastName: string
@@ -7423,6 +8953,9 @@ export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
   taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutMemoRecipientsInput = {
@@ -7449,6 +8982,9 @@ export type MemberUpdateWithoutMemoRecipientsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7505,6 +9041,9 @@ export type MemberUpdateWithoutMemoRecipientsInput = {
   taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
@@ -7516,6 +9055,9 @@ export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7571,6 +9113,9 @@ export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
   taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 
@@ -7593,6 +9138,8 @@ export type MemberCountOutputType = {
   taggedNewsBlogs: number
   memoRecipients: number
   followers: number
+  providedServiceBookings: number
+  serviceAvailabilitySlots: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7610,6 +9157,8 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   taggedNewsBlogs?: boolean | MemberCountOutputTypeCountTaggedNewsBlogsArgs
   memoRecipients?: boolean | MemberCountOutputTypeCountMemoRecipientsArgs
   followers?: boolean | MemberCountOutputTypeCountFollowersArgs
+  providedServiceBookings?: boolean | MemberCountOutputTypeCountProvidedServiceBookingsArgs
+  serviceAvailabilitySlots?: boolean | MemberCountOutputTypeCountServiceAvailabilitySlotsArgs
 }
 
 /**
@@ -7720,6 +9269,20 @@ export type MemberCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.Type
   where?: Prisma.MemberFollowWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountProvidedServiceBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChaplainServiceBookingWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountServiceAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChaplainServiceAvailabilityWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -7730,6 +9293,9 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   badgeNumber?: boolean
   profileBannerUrl?: boolean
   profileBannerPositionY?: boolean
+  serviceLicenseUrl?: boolean
+  serviceLicenseFileName?: boolean
+  serviceLicenseMimeType?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -7787,6 +9353,9 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   taggedNewsBlogs?: boolean | Prisma.Member$taggedNewsBlogsArgs<ExtArgs>
   memoRecipients?: boolean | Prisma.Member$memoRecipientsArgs<ExtArgs>
   followers?: boolean | Prisma.Member$followersArgs<ExtArgs>
+  ordinationApplication?: boolean | Prisma.Member$ordinationApplicationArgs<ExtArgs>
+  providedServiceBookings?: boolean | Prisma.Member$providedServiceBookingsArgs<ExtArgs>
+  serviceAvailabilitySlots?: boolean | Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
@@ -7799,6 +9368,9 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   badgeNumber?: boolean
   profileBannerUrl?: boolean
   profileBannerPositionY?: boolean
+  serviceLicenseUrl?: boolean
+  serviceLicenseFileName?: boolean
+  serviceLicenseMimeType?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -7847,6 +9419,9 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   badgeNumber?: boolean
   profileBannerUrl?: boolean
   profileBannerPositionY?: boolean
+  serviceLicenseUrl?: boolean
+  serviceLicenseFileName?: boolean
+  serviceLicenseMimeType?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -7895,6 +9470,9 @@ export type MemberSelectScalar = {
   badgeNumber?: boolean
   profileBannerUrl?: boolean
   profileBannerPositionY?: boolean
+  serviceLicenseUrl?: boolean
+  serviceLicenseFileName?: boolean
+  serviceLicenseMimeType?: boolean
   firstName?: boolean
   middleInitial?: boolean
   lastName?: boolean
@@ -7933,7 +9511,7 @@ export type MemberSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueId" | "userId" | "status" | "memberType" | "badgeNumber" | "profileBannerUrl" | "profileBannerPositionY" | "firstName" | "middleInitial" | "lastName" | "extensionName" | "mobilePhoneNumber" | "homeAddress" | "civilStatus" | "gender" | "nationality" | "dateOfBirth" | "region" | "province" | "municipalityCity" | "barangay" | "emergencyContactName" | "emergencyContactMobile" | "churchAffiliation" | "churchAddress" | "currentPositionRole" | "currentPositionRoleOther" | "height" | "weight" | "bloodType" | "colorOfEyes" | "colorOfSkin" | "sssNumber" | "tinNumber" | "skillsTalents" | "preferredBranchOther" | "elementarySchool" | "secondarySchool" | "tertiaryCollege" | "postGraduateStudies" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueId" | "userId" | "status" | "memberType" | "badgeNumber" | "profileBannerUrl" | "profileBannerPositionY" | "serviceLicenseUrl" | "serviceLicenseFileName" | "serviceLicenseMimeType" | "firstName" | "middleInitial" | "lastName" | "extensionName" | "mobilePhoneNumber" | "homeAddress" | "civilStatus" | "gender" | "nationality" | "dateOfBirth" | "region" | "province" | "municipalityCity" | "barangay" | "emergencyContactName" | "emergencyContactMobile" | "churchAffiliation" | "churchAddress" | "currentPositionRole" | "currentPositionRoleOther" | "height" | "weight" | "bloodType" | "colorOfEyes" | "colorOfSkin" | "sssNumber" | "tinNumber" | "skillsTalents" | "preferredBranchOther" | "elementarySchool" | "secondarySchool" | "tertiaryCollege" | "postGraduateStudies" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   preferredBranches?: boolean | Prisma.Member$preferredBranchesArgs<ExtArgs>
@@ -7956,6 +9534,9 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   taggedNewsBlogs?: boolean | Prisma.Member$taggedNewsBlogsArgs<ExtArgs>
   memoRecipients?: boolean | Prisma.Member$memoRecipientsArgs<ExtArgs>
   followers?: boolean | Prisma.Member$followersArgs<ExtArgs>
+  ordinationApplication?: boolean | Prisma.Member$ordinationApplicationArgs<ExtArgs>
+  providedServiceBookings?: boolean | Prisma.Member$providedServiceBookingsArgs<ExtArgs>
+  serviceAvailabilitySlots?: boolean | Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7989,6 +9570,9 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     taggedNewsBlogs: Prisma.$NewsBlogTaggedMemberPayload<ExtArgs>[]
     memoRecipients: Prisma.$MemoRecipientPayload<ExtArgs>[]
     followers: Prisma.$MemberFollowPayload<ExtArgs>[]
+    ordinationApplication: Prisma.$OrdinationApplicationPayload<ExtArgs> | null
+    providedServiceBookings: Prisma.$ChaplainServiceBookingPayload<ExtArgs>[]
+    serviceAvailabilitySlots: Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -7999,6 +9583,9 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     badgeNumber: string | null
     profileBannerUrl: string | null
     profileBannerPositionY: number
+    serviceLicenseUrl: string | null
+    serviceLicenseFileName: string | null
+    serviceLicenseMimeType: string | null
     firstName: string
     middleInitial: string | null
     lastName: string
@@ -8450,6 +10037,9 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   taggedNewsBlogs<T extends Prisma.Member$taggedNewsBlogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$taggedNewsBlogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NewsBlogTaggedMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memoRecipients<T extends Prisma.Member$memoRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$memoRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followers<T extends Prisma.Member$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ordinationApplication<T extends Prisma.Member$ordinationApplicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$ordinationApplicationArgs<ExtArgs>>): Prisma.Prisma__OrdinationApplicationClient<runtime.Types.Result.GetResult<Prisma.$OrdinationApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  providedServiceBookings<T extends Prisma.Member$providedServiceBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$providedServiceBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceBookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceAvailabilitySlots<T extends Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8487,6 +10077,9 @@ export interface MemberFieldRefs {
   readonly badgeNumber: Prisma.FieldRef<"Member", 'String'>
   readonly profileBannerUrl: Prisma.FieldRef<"Member", 'String'>
   readonly profileBannerPositionY: Prisma.FieldRef<"Member", 'Int'>
+  readonly serviceLicenseUrl: Prisma.FieldRef<"Member", 'String'>
+  readonly serviceLicenseFileName: Prisma.FieldRef<"Member", 'String'>
+  readonly serviceLicenseMimeType: Prisma.FieldRef<"Member", 'String'>
   readonly firstName: Prisma.FieldRef<"Member", 'String'>
   readonly middleInitial: Prisma.FieldRef<"Member", 'String'>
   readonly lastName: Prisma.FieldRef<"Member", 'String'>
@@ -9366,6 +10959,73 @@ export type Member$followersArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.MemberFollowScalarFieldEnum | Prisma.MemberFollowScalarFieldEnum[]
+}
+
+/**
+ * Member.ordinationApplication
+ */
+export type Member$ordinationApplicationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrdinationApplication
+   */
+  select?: Prisma.OrdinationApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrdinationApplication
+   */
+  omit?: Prisma.OrdinationApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrdinationApplicationInclude<ExtArgs> | null
+  where?: Prisma.OrdinationApplicationWhereInput
+}
+
+/**
+ * Member.providedServiceBookings
+ */
+export type Member$providedServiceBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChaplainServiceBooking
+   */
+  select?: Prisma.ChaplainServiceBookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChaplainServiceBooking
+   */
+  omit?: Prisma.ChaplainServiceBookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChaplainServiceBookingInclude<ExtArgs> | null
+  where?: Prisma.ChaplainServiceBookingWhereInput
+  orderBy?: Prisma.ChaplainServiceBookingOrderByWithRelationInput | Prisma.ChaplainServiceBookingOrderByWithRelationInput[]
+  cursor?: Prisma.ChaplainServiceBookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChaplainServiceBookingScalarFieldEnum | Prisma.ChaplainServiceBookingScalarFieldEnum[]
+}
+
+/**
+ * Member.serviceAvailabilitySlots
+ */
+export type Member$serviceAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChaplainServiceAvailability
+   */
+  select?: Prisma.ChaplainServiceAvailabilitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChaplainServiceAvailability
+   */
+  omit?: Prisma.ChaplainServiceAvailabilityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChaplainServiceAvailabilityInclude<ExtArgs> | null
+  where?: Prisma.ChaplainServiceAvailabilityWhereInput
+  orderBy?: Prisma.ChaplainServiceAvailabilityOrderByWithRelationInput | Prisma.ChaplainServiceAvailabilityOrderByWithRelationInput[]
+  cursor?: Prisma.ChaplainServiceAvailabilityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChaplainServiceAvailabilityScalarFieldEnum | Prisma.ChaplainServiceAvailabilityScalarFieldEnum[]
 }
 
 /**

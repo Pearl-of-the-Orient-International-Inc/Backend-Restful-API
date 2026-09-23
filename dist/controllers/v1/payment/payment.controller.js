@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.receivePayPalWebhook = exports.receiveXenditWebhook = exports.initiateChaplainOrderPayment = exports.getPublicPaymentFeePolicies = void 0;
+exports.receivePayPalWebhook = exports.receiveXenditWebhook = exports.capturePublicPayPalOrder = exports.initiateChaplainOrderPayment = exports.getPublicPaymentStatus = exports.getPublicPaymentConfiguration = exports.getPublicPaymentFeePolicies = void 0;
 const node_crypto_1 = require("node:crypto");
 const http_codes_1 = require("../../../common/http-codes");
 const config_1 = __importDefault(require("../../../config"));
@@ -29,6 +29,54 @@ const getPublicPaymentFeePolicies = (_req, res) => {
     });
 };
 exports.getPublicPaymentFeePolicies = getPublicPaymentFeePolicies;
+const getPublicPaymentConfiguration = (_req, res) => {
+    var _a;
+    res.status(http_codes_1.HTTPSTATUS.OK).json({
+        code: 'OK',
+        message: 'Public payment configuration retrieved successfully',
+        data: { paypalClientId: (_a = config_1.default.PAYPAL_CLIENT_ID) !== null && _a !== void 0 ? _a : null },
+    });
+};
+exports.getPublicPaymentConfiguration = getPublicPaymentConfiguration;
+const getPublicPaymentStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    try {
+        const reference = typeof req.params.reference === 'string' ? req.params.reference : '';
+        if (!/^PAY-[A-Z0-9-]{10,50}$/.test(reference)) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({ code: 'BAD_REQUEST', message: 'Invalid payment reference' });
+            return;
+        }
+        const payment = yield prisma_1.prisma.paymentTransaction.findUnique({
+            where: { reference },
+            select: {
+                reference: true,
+                amount: true,
+                currency: true,
+                gateway: true,
+                status: true,
+                providerStatus: true,
+                failureReason: true,
+                paidAt: true,
+                createdAt: true,
+                chaplainProductOrder: { select: { orderNumber: true } },
+            },
+        });
+        if (!payment) {
+            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({ code: 'NOT_FOUND', message: 'Payment reference not found' });
+            return;
+        }
+        res.status(http_codes_1.HTTPSTATUS.OK).json({
+            code: 'OK',
+            message: 'Payment status retrieved successfully',
+            data: Object.assign(Object.assign({}, payment), { amount: Number(payment.amount), orderNumber: (_b = (_a = payment.chaplainProductOrder) === null || _a === void 0 ? void 0 : _a.orderNumber) !== null && _b !== void 0 ? _b : null, chaplainProductOrder: undefined }),
+        });
+    }
+    catch (err) {
+        winston_1.logger.error('Error while fetching public payment status', { err });
+        res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({ code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+    }
+});
+exports.getPublicPaymentStatus = getPublicPaymentStatus;
 const safeEqual = (received, expected) => {
     if (!expected)
         return false;
@@ -135,6 +183,7 @@ const initiateChaplainOrderPayment = (req, res) => __awaiter(void 0, void 0, voi
                 data: {
                     reference: existing.reference,
                     checkoutUrl: existing.checkoutUrl,
+                    gatewayReference: existing.gatewayReference,
                 },
             });
             return;
@@ -199,7 +248,7 @@ const initiateChaplainOrderPayment = (req, res) => __awaiter(void 0, void 0, voi
         res.status(http_codes_1.HTTPSTATUS.CREATED).json({
             code: 'CREATED',
             message: 'Payment checkout created successfully',
-            data: { reference, checkoutUrl: checkout.checkoutUrl },
+            data: { reference, checkoutUrl: checkout.checkoutUrl, gatewayReference: checkout.gatewayReference },
         });
     }
     catch (err) {
@@ -223,6 +272,39 @@ const initiateChaplainOrderPayment = (req, res) => __awaiter(void 0, void 0, voi
     }
 });
 exports.initiateChaplainOrderPayment = initiateChaplainOrderPayment;
+const capturePublicPayPalOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    try {
+        const orderId = typeof req.params.orderId === 'string' ? req.params.orderId : '';
+        const checkoutToken = String((_a = req.body.checkoutToken) !== null && _a !== void 0 ? _a : '');
+        const transaction = yield prisma_1.prisma.paymentTransaction.findFirst({
+            where: {
+                gateway: enums_1.PaymentGateway.PAYPAL,
+                gatewayReference: orderId,
+                chaplainProductOrder: { checkoutToken },
+            },
+            select: { gatewayReference: true, reference: true, status: true },
+        });
+        if (!(transaction === null || transaction === void 0 ? void 0 : transaction.gatewayReference)) {
+            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({ code: 'NOT_FOUND', message: 'Eligible PayPal checkout was not found' });
+            return;
+        }
+        if (transaction.status !== enums_1.PaymentTransactionStatus.PAID) {
+            const capture = yield (0, payment_gateways_1.capturePayPalOrder)(transaction.gatewayReference);
+            if (capture.status !== 'COMPLETED') {
+                res.status(http_codes_1.HTTPSTATUS.BAD_GATEWAY).json({ code: 'PAYMENT_PENDING', message: 'PayPal has not completed this payment yet' });
+                return;
+            }
+            yield syncPaidTransaction(transaction.gatewayReference, capture.status);
+        }
+        res.status(http_codes_1.HTTPSTATUS.OK).json({ code: 'OK', message: 'PayPal payment captured successfully', data: { reference: transaction.reference, status: 'PAID' } });
+    }
+    catch (err) {
+        winston_1.logger.error('Error while capturing PayPal order', { err });
+        res.status(http_codes_1.HTTPSTATUS.BAD_GATEWAY).json({ code: 'PAYMENT_GATEWAY_ERROR', message: err instanceof Error ? err.message : 'Unable to capture PayPal payment' });
+    }
+});
+exports.capturePublicPayPalOrder = capturePublicPayPalOrder;
 const receiveXenditWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j;
     try {
@@ -265,7 +347,7 @@ const receiveXenditWebhook = (req, res) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.receiveXenditWebhook = receiveXenditWebhook;
 const receivePayPalWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e;
     try {
         if (!config_1.default.PAYPAL_WEBHOOK_ID)
             throw new Error('PAYPAL_WEBHOOK_ID is not configured');
@@ -297,15 +379,9 @@ const receivePayPalWebhook = (req, res) => __awaiter(void 0, void 0, void 0, fun
         }
         const eventType = String((_a = req.body.event_type) !== null && _a !== void 0 ? _a : '');
         const resource = ((_b = req.body.resource) !== null && _b !== void 0 ? _b : {});
-        if (eventType === 'CHECKOUT.ORDER.APPROVED') {
-            const orderId = String((_c = resource.id) !== null && _c !== void 0 ? _c : '');
-            const capture = yield (0, payment_gateways_1.capturePayPalOrder)(orderId);
-            if (capture.status === 'COMPLETED')
-                yield syncPaidTransaction(orderId, capture.status);
-        }
-        else {
+        if (eventType !== 'CHECKOUT.ORDER.APPROVED') {
             const supplementary = resource.supplementary_data;
-            const orderId = (_e = (_d = supplementary === null || supplementary === void 0 ? void 0 : supplementary.related_ids) === null || _d === void 0 ? void 0 : _d.order_id) !== null && _e !== void 0 ? _e : String((_f = resource.id) !== null && _f !== void 0 ? _f : '');
+            const orderId = (_d = (_c = supplementary === null || supplementary === void 0 ? void 0 : supplementary.related_ids) === null || _c === void 0 ? void 0 : _c.order_id) !== null && _d !== void 0 ? _d : String((_e = resource.id) !== null && _e !== void 0 ? _e : '');
             if (eventType === 'PAYMENT.CAPTURE.COMPLETED') {
                 yield syncPaidTransaction(orderId, 'COMPLETED');
             }

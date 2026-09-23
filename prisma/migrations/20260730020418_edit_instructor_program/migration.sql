@@ -1,2 +1,2 @@
 -- DropIndex
-DROP INDEX "SeminaryInstructor_teachingPrograms_idx";
+DROP INDEX IF EXISTS "SeminaryInstructor_teachingPrograms_idx";

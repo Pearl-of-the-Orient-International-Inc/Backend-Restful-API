@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AccountingLedgerTransactionStatus = exports.AccountingLedgerTransactionType = exports.ReceiptPaymentType = exports.ReceiptOrganization = exports.AccountingReceivableStatus = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryFeeCollectionStatus = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryInstructorRank = exports.SeminaryInstructorStatus = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryStudentNotificationType = exports.SeminaryGradeRecordRemark = exports.SeminaryGradeRecordStatus = exports.SeminaryExaminationStatus = exports.SeminaryAssignmentStatus = exports.SeminaryStudyMaterialStatus = exports.SeminaryStudyMaterialType = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberCredentialDocumentStatus = exports.MemberCredentialDocumentType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
-exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.MemoDeliveryStatus = exports.MemoAttachmentKind = exports.MemoRecipientType = exports.MemoStatus = exports.MemoTemplateType = exports.BulletinEntryStatus = exports.ChaplainOrderStatus = exports.PaymentTransactionStatus = exports.PaymentPurpose = exports.PaymentGateway = exports.ChaplainOrderPaymentStatus = exports.ChaplainOrderPaymentMethod = exports.ChaplainOrderFulfillmentMethod = exports.ChaplainProductCategory = exports.BulletinEntryType = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = void 0;
+exports.AccountingReceivableStatus = exports.AccountingPayableStatus = exports.SeminaryCredentialDocumentStatus = exports.SeminaryCredentialDocumentType = exports.SeminaryFeeCollectionStatus = exports.SeminaryPaymentStatus = exports.SeminaryPaymentMethod = exports.SeminaryPaymentType = exports.SeminaryInstructorRank = exports.SeminaryInstructorStatus = exports.SeminaryAcademicYearStatus = exports.SeminaryAcademicYearSession = exports.SeminaryStudentNotificationType = exports.SeminaryGradeRecordRemark = exports.SeminaryGradeRecordStatus = exports.SeminaryExaminationStatus = exports.SeminaryAssignmentStatus = exports.SeminaryStudyMaterialStatus = exports.SeminaryStudyMaterialType = exports.SeminaryCourseStatus = exports.SeminaryCourseModality = exports.SeminaryProgramLevel = exports.SeminarySchoolAffiliation = exports.SeminaryEnrollmentType = exports.SeminaryStudentStatus = exports.SeminaryApplicationStatus = exports.MemberPaymentMethod = exports.MemberOnboardingStep = exports.RequirementReviewStatus = exports.ApplicantRequirementType = exports.SignatureType = exports.Gender = exports.CivilStatus = exports.PasskeyChallengeType = exports.VerificationType = exports.MemberCertificateType = exports.MemberCredentialDocumentStatus = exports.MemberCredentialDocumentType = exports.MemberPublicRecordStatus = exports.MemberPublicRecordType = exports.OrdinationReviewAction = exports.OrdinationEligibilityBasis = exports.OrdinationApplicationStatus = exports.MemberType = exports.MemberStatus = exports.ActivityLogResult = exports.ActivityLogActionType = exports.UserAccountStatus = exports.UserPosition = exports.UserType = void 0;
+exports.BackupSnapshotStatus = exports.BackupSnapshotSource = exports.BackupFrequency = exports.MemoDeliveryStatus = exports.MemoAttachmentKind = exports.MemoRecipientType = exports.MemoStatus = exports.MemoTemplateType = exports.BulletinEntryStatus = exports.ChaplainServiceCommissionStatus = exports.ChaplainServicePaymentStatus = exports.ChaplainServiceBookingStatus = exports.ChaplainServiceDeliveryMethod = exports.ChaplainOrderStatus = exports.PaymentTransactionStatus = exports.PaymentPurpose = exports.PaymentGateway = exports.ChaplainOrderPaymentStatus = exports.ChaplainOrderPaymentMethod = exports.ChaplainOrderFulfillmentMethod = exports.ChaplainProductCategory = exports.BulletinEntryType = exports.NewsBlogMediaKind = exports.NewsBlogPlatform = exports.NewsBlogStatus = exports.EventAttendeeInviteStatus = exports.EventAttendeeAccessLevel = exports.EventMeetingPlatform = exports.EventVisibility = exports.EventStatus = exports.EventType = exports.EventCategory = exports.OfficeTitleLevel = exports.InterviewDay = exports.TaskPriority = exports.AccountingLedgerTransactionStatus = exports.AccountingLedgerTransactionType = exports.ReceiptPaymentType = exports.ReceiptOrganization = void 0;
 exports.UserType = {
     MEMBER: 'MEMBER',
     OFFICER: 'OFFICER',
@@ -49,6 +49,26 @@ exports.MemberType = {
     ORDAINED_AND_COMMISSIONED_PRACTITIONER: 'ORDAINED_AND_COMMISSIONED_PRACTITIONER',
     CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR: 'CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR'
 };
+exports.OrdinationApplicationStatus = {
+    DRAFT: 'DRAFT',
+    SUBMITTED: 'SUBMITTED',
+    UNDER_REVIEW: 'UNDER_REVIEW',
+    ADDITIONAL_INFORMATION_REQUIRED: 'ADDITIONAL_INFORMATION_REQUIRED',
+    RETURNED_FOR_CORRECTION: 'RETURNED_FOR_CORRECTION',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED'
+};
+exports.OrdinationEligibilityBasis = {
+    PROFESSIONAL_CHAPLAIN: 'PROFESSIONAL_CHAPLAIN',
+    SEMINARY_GRADUATE: 'SEMINARY_GRADUATE'
+};
+exports.OrdinationReviewAction = {
+    START_REVIEW: 'START_REVIEW',
+    REQUEST_ADDITIONAL_INFORMATION: 'REQUEST_ADDITIONAL_INFORMATION',
+    RETURN_FOR_CORRECTION: 'RETURN_FOR_CORRECTION',
+    APPROVE: 'APPROVE',
+    REJECT: 'REJECT'
+};
 exports.MemberPublicRecordType = {
     REPORT_ACTIVITY: 'REPORT_ACTIVITY',
     COMMUNITY_SERVICE: 'COMMUNITY_SERVICE',
@@ -67,6 +87,10 @@ exports.MemberCredentialDocumentType = {
 exports.MemberCredentialDocumentStatus = {
     ACTIVE: 'ACTIVE',
     REVOKED: 'REVOKED'
+};
+exports.MemberCertificateType = {
+    CERTIFICATE: 'CERTIFICATE',
+    RECOGNITION: 'RECOGNITION'
 };
 exports.VerificationType = {
     EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
@@ -425,6 +449,33 @@ exports.ChaplainOrderStatus = {
     COMPLETED: 'COMPLETED',
     CANCELLED: 'CANCELLED',
     REFUNDED: 'REFUNDED'
+};
+exports.ChaplainServiceDeliveryMethod = {
+    ON_SITE: 'ON_SITE',
+    ONLINE: 'ONLINE',
+    PHONE: 'PHONE'
+};
+exports.ChaplainServiceBookingStatus = {
+    PENDING: 'PENDING',
+    AWAITING_CHAPLAIN_APPROVAL: 'AWAITING_CHAPLAIN_APPROVAL',
+    CONFIRMED: 'CONFIRMED',
+    RESCHEDULED: 'RESCHEDULED',
+    REJECTED: 'REJECTED',
+    COMPLETED: 'COMPLETED',
+    CANCELLED: 'CANCELLED'
+};
+exports.ChaplainServicePaymentStatus = {
+    NOT_REQUIRED: 'NOT_REQUIRED',
+    PENDING: 'PENDING',
+    PAID: 'PAID',
+    FAILED: 'FAILED',
+    REFUNDED: 'REFUNDED'
+};
+exports.ChaplainServiceCommissionStatus = {
+    NOT_APPLICABLE: 'NOT_APPLICABLE',
+    PENDING: 'PENDING',
+    SETTLED: 'SETTLED',
+    WAIVED: 'WAIVED'
 };
 exports.BulletinEntryStatus = {
     DRAFT: 'DRAFT',

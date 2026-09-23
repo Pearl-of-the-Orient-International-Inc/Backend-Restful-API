@@ -27,7 +27,10 @@ const owner_access_1 = __importDefault(require("../../routes/v1/owner-access"));
 const bulletin_entry_1 = __importDefault(require("../../routes/v1/bulletin-entry"));
 const chaplain_product_1 = __importDefault(require("../../routes/v1/chaplain-product"));
 const chaplain_product_order_1 = __importDefault(require("../../routes/v1/chaplain-product-order"));
+const chaplain_service_1 = __importDefault(require("../../routes/v1/chaplain-service"));
 const payment_1 = __importDefault(require("../../routes/v1/payment"));
+const ordination_application_1 = __importDefault(require("../../routes/v1/ordination-application"));
+const survey_feedback_1 = __importDefault(require("../../routes/v1/survey-feedback"));
 const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.status(http_codes_1.HTTPSTATUS.OK).json({
@@ -62,5 +65,8 @@ router.use('/owner', owner_access_1.default);
 router.use('/bulletins', bulletin_entry_1.default);
 router.use('/chaplain-products', chaplain_product_1.default);
 router.use('/chaplain-product-orders', chaplain_product_order_1.default);
+router.use('/chaplain-services', chaplain_service_1.default);
 router.use('/payments', payment_1.default);
+router.use('/ordination-applications', ordination_application_1.default);
+router.use('/survey-feedback', survey_feedback_1.default);
 exports.default = router;

@@ -434,6 +434,8 @@ export const ModelName = {
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
+  OrdinationApplication: 'OrdinationApplication',
+  OrdinationApplicationReview: 'OrdinationApplicationReview',
   Event: 'Event',
   EventAttendee: 'EventAttendee',
   EventTaggedMember: 'EventTaggedMember',
@@ -442,6 +444,11 @@ export const ModelName = {
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   BulletinEntry: 'BulletinEntry',
   ChaplainProduct: 'ChaplainProduct',
+  ChaplainService: 'ChaplainService',
+  ChaplainServiceBooking: 'ChaplainServiceBooking',
+  ChaplainServiceBookingStatusHistory: 'ChaplainServiceBookingStatusHistory',
+  ChaplainServiceAvailability: 'ChaplainServiceAvailability',
+  SurveyFeedbackResponse: 'SurveyFeedbackResponse',
   ChaplainProductOrder: 'ChaplainProductOrder',
   PaymentTransaction: 'PaymentTransaction',
   MemoAnnouncement: 'MemoAnnouncement',
@@ -465,7 +472,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4169,6 +4176,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OrdinationApplication: {
+      payload: Prisma.$OrdinationApplicationPayload<ExtArgs>
+      fields: Prisma.OrdinationApplicationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrdinationApplicationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrdinationApplicationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>
+        }
+        findFirst: {
+          args: Prisma.OrdinationApplicationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrdinationApplicationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>
+        }
+        findMany: {
+          args: Prisma.OrdinationApplicationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>[]
+        }
+        create: {
+          args: Prisma.OrdinationApplicationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>
+        }
+        createMany: {
+          args: Prisma.OrdinationApplicationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrdinationApplicationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>[]
+        }
+        delete: {
+          args: Prisma.OrdinationApplicationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>
+        }
+        update: {
+          args: Prisma.OrdinationApplicationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrdinationApplicationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrdinationApplicationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrdinationApplicationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrdinationApplicationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationPayload>
+        }
+        aggregate: {
+          args: Prisma.OrdinationApplicationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrdinationApplication>
+        }
+        groupBy: {
+          args: Prisma.OrdinationApplicationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrdinationApplicationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrdinationApplicationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrdinationApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrdinationApplicationReview: {
+      payload: Prisma.$OrdinationApplicationReviewPayload<ExtArgs>
+      fields: Prisma.OrdinationApplicationReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrdinationApplicationReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrdinationApplicationReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.OrdinationApplicationReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrdinationApplicationReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>
+        }
+        findMany: {
+          args: Prisma.OrdinationApplicationReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>[]
+        }
+        create: {
+          args: Prisma.OrdinationApplicationReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>
+        }
+        createMany: {
+          args: Prisma.OrdinationApplicationReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrdinationApplicationReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>[]
+        }
+        delete: {
+          args: Prisma.OrdinationApplicationReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>
+        }
+        update: {
+          args: Prisma.OrdinationApplicationReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrdinationApplicationReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrdinationApplicationReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrdinationApplicationReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrdinationApplicationReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrdinationApplicationReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.OrdinationApplicationReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrdinationApplicationReview>
+        }
+        groupBy: {
+          args: Prisma.OrdinationApplicationReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrdinationApplicationReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrdinationApplicationReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrdinationApplicationReviewCountAggregateOutputType> | number
+        }
+      }
+    }
     Event: {
       payload: Prisma.$EventPayload<ExtArgs>
       fields: Prisma.EventFieldRefs
@@ -4758,6 +4913,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChaplainProductCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChaplainProductCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChaplainService: {
+      payload: Prisma.$ChaplainServicePayload<ExtArgs>
+      fields: Prisma.ChaplainServiceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChaplainServiceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChaplainServiceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>
+        }
+        findFirst: {
+          args: Prisma.ChaplainServiceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChaplainServiceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>
+        }
+        findMany: {
+          args: Prisma.ChaplainServiceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>[]
+        }
+        create: {
+          args: Prisma.ChaplainServiceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>
+        }
+        createMany: {
+          args: Prisma.ChaplainServiceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChaplainServiceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>[]
+        }
+        delete: {
+          args: Prisma.ChaplainServiceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>
+        }
+        update: {
+          args: Prisma.ChaplainServiceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>
+        }
+        deleteMany: {
+          args: Prisma.ChaplainServiceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChaplainServiceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChaplainServiceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>[]
+        }
+        upsert: {
+          args: Prisma.ChaplainServiceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServicePayload>
+        }
+        aggregate: {
+          args: Prisma.ChaplainServiceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChaplainService>
+        }
+        groupBy: {
+          args: Prisma.ChaplainServiceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChaplainServiceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChaplainServiceBooking: {
+      payload: Prisma.$ChaplainServiceBookingPayload<ExtArgs>
+      fields: Prisma.ChaplainServiceBookingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChaplainServiceBookingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChaplainServiceBookingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>
+        }
+        findFirst: {
+          args: Prisma.ChaplainServiceBookingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChaplainServiceBookingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>
+        }
+        findMany: {
+          args: Prisma.ChaplainServiceBookingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>[]
+        }
+        create: {
+          args: Prisma.ChaplainServiceBookingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>
+        }
+        createMany: {
+          args: Prisma.ChaplainServiceBookingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChaplainServiceBookingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>[]
+        }
+        delete: {
+          args: Prisma.ChaplainServiceBookingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>
+        }
+        update: {
+          args: Prisma.ChaplainServiceBookingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChaplainServiceBookingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChaplainServiceBookingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChaplainServiceBookingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChaplainServiceBookingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingPayload>
+        }
+        aggregate: {
+          args: Prisma.ChaplainServiceBookingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChaplainServiceBooking>
+        }
+        groupBy: {
+          args: Prisma.ChaplainServiceBookingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceBookingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChaplainServiceBookingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceBookingCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChaplainServiceBookingStatusHistory: {
+      payload: Prisma.$ChaplainServiceBookingStatusHistoryPayload<ExtArgs>
+      fields: Prisma.ChaplainServiceBookingStatusHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>
+        }
+        update: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceBookingStatusHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChaplainServiceBookingStatusHistory>
+        }
+        groupBy: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceBookingStatusHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChaplainServiceBookingStatusHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceBookingStatusHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChaplainServiceAvailability: {
+      payload: Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>
+      fields: Prisma.ChaplainServiceAvailabilityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChaplainServiceAvailabilityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChaplainServiceAvailabilityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>
+        }
+        findFirst: {
+          args: Prisma.ChaplainServiceAvailabilityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChaplainServiceAvailabilityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>
+        }
+        findMany: {
+          args: Prisma.ChaplainServiceAvailabilityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>[]
+        }
+        create: {
+          args: Prisma.ChaplainServiceAvailabilityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>
+        }
+        createMany: {
+          args: Prisma.ChaplainServiceAvailabilityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChaplainServiceAvailabilityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>[]
+        }
+        delete: {
+          args: Prisma.ChaplainServiceAvailabilityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>
+        }
+        update: {
+          args: Prisma.ChaplainServiceAvailabilityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChaplainServiceAvailabilityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChaplainServiceAvailabilityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChaplainServiceAvailabilityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChaplainServiceAvailabilityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChaplainServiceAvailabilityPayload>
+        }
+        aggregate: {
+          args: Prisma.ChaplainServiceAvailabilityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChaplainServiceAvailability>
+        }
+        groupBy: {
+          args: Prisma.ChaplainServiceAvailabilityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceAvailabilityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChaplainServiceAvailabilityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChaplainServiceAvailabilityCountAggregateOutputType> | number
+        }
+      }
+    }
+    SurveyFeedbackResponse: {
+      payload: Prisma.$SurveyFeedbackResponsePayload<ExtArgs>
+      fields: Prisma.SurveyFeedbackResponseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SurveyFeedbackResponseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SurveyFeedbackResponseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>
+        }
+        findFirst: {
+          args: Prisma.SurveyFeedbackResponseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SurveyFeedbackResponseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>
+        }
+        findMany: {
+          args: Prisma.SurveyFeedbackResponseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>[]
+        }
+        create: {
+          args: Prisma.SurveyFeedbackResponseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>
+        }
+        createMany: {
+          args: Prisma.SurveyFeedbackResponseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SurveyFeedbackResponseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>[]
+        }
+        delete: {
+          args: Prisma.SurveyFeedbackResponseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>
+        }
+        update: {
+          args: Prisma.SurveyFeedbackResponseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>
+        }
+        deleteMany: {
+          args: Prisma.SurveyFeedbackResponseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SurveyFeedbackResponseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SurveyFeedbackResponseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>[]
+        }
+        upsert: {
+          args: Prisma.SurveyFeedbackResponseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurveyFeedbackResponsePayload>
+        }
+        aggregate: {
+          args: Prisma.SurveyFeedbackResponseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSurveyFeedbackResponse>
+        }
+        groupBy: {
+          args: Prisma.SurveyFeedbackResponseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurveyFeedbackResponseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SurveyFeedbackResponseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurveyFeedbackResponseCountAggregateOutputType> | number
         }
       }
     }
@@ -5508,6 +6033,9 @@ export const MemberScalarFieldEnum = {
   badgeNumber: 'badgeNumber',
   profileBannerUrl: 'profileBannerUrl',
   profileBannerPositionY: 'profileBannerPositionY',
+  serviceLicenseUrl: 'serviceLicenseUrl',
+  serviceLicenseFileName: 'serviceLicenseFileName',
+  serviceLicenseMimeType: 'serviceLicenseMimeType',
   firstName: 'firstName',
   middleInitial: 'middleInitial',
   lastName: 'lastName',
@@ -5675,9 +6203,13 @@ export type MemberIdGenerationAssetScalarFieldEnum = (typeof MemberIdGenerationA
 export const MemberCertificateScalarFieldEnum = {
   id: 'id',
   credentialId: 'credentialId',
+  type: 'type',
   title: 'title',
+  issuer: 'issuer',
+  referenceNumber: 'referenceNumber',
   certificateUrl: 'certificateUrl',
   dateReceived: 'dateReceived',
+  expiresAt: 'expiresAt',
   memberId: 'memberId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -6332,6 +6864,44 @@ export const OfficerAssignmentScalarFieldEnum = {
 export type OfficerAssignmentScalarFieldEnum = (typeof OfficerAssignmentScalarFieldEnum)[keyof typeof OfficerAssignmentScalarFieldEnum]
 
 
+export const OrdinationApplicationScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  status: 'status',
+  eligibilityBasis: 'eligibilityBasis',
+  eligibilityMemberType: 'eligibilityMemberType',
+  ministryBackground: 'ministryBackground',
+  callingStatement: 'callingStatement',
+  proposedMinistry: 'proposedMinistry',
+  additionalInformation: 'additionalInformation',
+  documents: 'documents',
+  informationAccurate: 'informationAccurate',
+  codeOfConductAccepted: 'codeOfConductAccepted',
+  backgroundCheckConsent: 'backgroundCheckConsent',
+  requestedInformation: 'requestedInformation',
+  adminNotes: 'adminNotes',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrdinationApplicationScalarFieldEnum = (typeof OrdinationApplicationScalarFieldEnum)[keyof typeof OrdinationApplicationScalarFieldEnum]
+
+
+export const OrdinationApplicationReviewScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  reviewerId: 'reviewerId',
+  action: 'action',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type OrdinationApplicationReviewScalarFieldEnum = (typeof OrdinationApplicationReviewScalarFieldEnum)[keyof typeof OrdinationApplicationReviewScalarFieldEnum]
+
+
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -6461,6 +7031,95 @@ export const ChaplainProductScalarFieldEnum = {
 } as const
 
 export type ChaplainProductScalarFieldEnum = (typeof ChaplainProductScalarFieldEnum)[keyof typeof ChaplainProductScalarFieldEnum]
+
+
+export const ChaplainServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  availability: 'availability',
+  commissionPercent: 'commissionPercent',
+  maxConcurrentBookings: 'maxConcurrentBookings',
+  sharedResourceName: 'sharedResourceName',
+  sharedResourceKey: 'sharedResourceKey',
+  sharedResourceCapacity: 'sharedResourceCapacity',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainServiceScalarFieldEnum = (typeof ChaplainServiceScalarFieldEnum)[keyof typeof ChaplainServiceScalarFieldEnum]
+
+
+export const ChaplainServiceBookingScalarFieldEnum = {
+  id: 'id',
+  serviceId: 'serviceId',
+  providerMemberId: 'providerMemberId',
+  requesterUserId: 'requesterUserId',
+  requesterName: 'requesterName',
+  requesterEmail: 'requesterEmail',
+  requesterPhone: 'requesterPhone',
+  preferredAt: 'preferredAt',
+  deliveryMethod: 'deliveryMethod',
+  locationDetails: 'locationDetails',
+  notes: 'notes',
+  status: 'status',
+  statusReason: 'statusReason',
+  providerServiceFee: 'providerServiceFee',
+  providerCommissionAmount: 'providerCommissionAmount',
+  providerCommissionStatus: 'providerCommissionStatus',
+  requesterPaymentStatus: 'requesterPaymentStatus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainServiceBookingScalarFieldEnum = (typeof ChaplainServiceBookingScalarFieldEnum)[keyof typeof ChaplainServiceBookingScalarFieldEnum]
+
+
+export const ChaplainServiceBookingStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  status: 'status',
+  reason: 'reason',
+  changedByUserId: 'changedByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type ChaplainServiceBookingStatusHistoryScalarFieldEnum = (typeof ChaplainServiceBookingStatusHistoryScalarFieldEnum)[keyof typeof ChaplainServiceBookingStatusHistoryScalarFieldEnum]
+
+
+export const ChaplainServiceAvailabilityScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainServiceAvailabilityScalarFieldEnum = (typeof ChaplainServiceAvailabilityScalarFieldEnum)[keyof typeof ChaplainServiceAvailabilityScalarFieldEnum]
+
+
+export const SurveyFeedbackResponseScalarFieldEnum = {
+  id: 'id',
+  respondentName: 'respondentName',
+  respondentType: 'respondentType',
+  discoverySource: 'discoverySource',
+  improvementAreas: 'improvementAreas',
+  welcomeRating: 'welcomeRating',
+  accessibilityRating: 'accessibilityRating',
+  satisfactionRating: 'satisfactionRating',
+  feedback: 'feedback',
+  hasIssue: 'hasIssue',
+  issueCategory: 'issueCategory',
+  issueDescription: 'issueDescription',
+  contactEmail: 'contactEmail',
+  createdAt: 'createdAt'
+} as const
+
+export type SurveyFeedbackResponseScalarFieldEnum = (typeof SurveyFeedbackResponseScalarFieldEnum)[keyof typeof SurveyFeedbackResponseScalarFieldEnum]
 
 
 export const ChaplainProductOrderScalarFieldEnum = {
@@ -6985,6 +7644,20 @@ export type EnumInterviewDayFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'InterviewDay[]'
  */
 export type ListEnumInterviewDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InterviewDay[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberCertificateType'
+ */
+export type EnumMemberCertificateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberCertificateType'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberCertificateType[]'
+ */
+export type ListEnumMemberCertificateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberCertificateType[]'>
     
 
 
@@ -7521,6 +8194,48 @@ export type ListEnumOfficeTitleLevelFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'OrdinationApplicationStatus'
+ */
+export type EnumOrdinationApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrdinationApplicationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'OrdinationApplicationStatus[]'
+ */
+export type ListEnumOrdinationApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrdinationApplicationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrdinationEligibilityBasis'
+ */
+export type EnumOrdinationEligibilityBasisFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrdinationEligibilityBasis'>
+    
+
+
+/**
+ * Reference to a field of type 'OrdinationEligibilityBasis[]'
+ */
+export type ListEnumOrdinationEligibilityBasisFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrdinationEligibilityBasis[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrdinationReviewAction'
+ */
+export type EnumOrdinationReviewActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrdinationReviewAction'>
+    
+
+
+/**
+ * Reference to a field of type 'OrdinationReviewAction[]'
+ */
+export type ListEnumOrdinationReviewActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrdinationReviewAction[]'>
+    
+
+
+/**
  * Reference to a field of type 'EventCategory'
  */
 export type EnumEventCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventCategory'>
@@ -7699,6 +8414,62 @@ export type EnumChaplainProductCategoryFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'ChaplainProductCategory[]'
  */
 export type ListEnumChaplainProductCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainProductCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServiceDeliveryMethod'
+ */
+export type EnumChaplainServiceDeliveryMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServiceDeliveryMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServiceDeliveryMethod[]'
+ */
+export type ListEnumChaplainServiceDeliveryMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServiceDeliveryMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServiceBookingStatus'
+ */
+export type EnumChaplainServiceBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServiceBookingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServiceBookingStatus[]'
+ */
+export type ListEnumChaplainServiceBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServiceBookingStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServiceCommissionStatus'
+ */
+export type EnumChaplainServiceCommissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServiceCommissionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServiceCommissionStatus[]'
+ */
+export type ListEnumChaplainServiceCommissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServiceCommissionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServicePaymentStatus'
+ */
+export type EnumChaplainServicePaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServicePaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChaplainServicePaymentStatus[]'
+ */
+export type ListEnumChaplainServicePaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChaplainServicePaymentStatus[]'>
     
 
 
@@ -8056,6 +8827,8 @@ export type GlobalOmitConfig = {
   branchOfService?: Prisma.BranchOfServiceOmit
   officeTitle?: Prisma.OfficeTitleOmit
   officerAssignment?: Prisma.OfficerAssignmentOmit
+  ordinationApplication?: Prisma.OrdinationApplicationOmit
+  ordinationApplicationReview?: Prisma.OrdinationApplicationReviewOmit
   event?: Prisma.EventOmit
   eventAttendee?: Prisma.EventAttendeeOmit
   eventTaggedMember?: Prisma.EventTaggedMemberOmit
@@ -8064,6 +8837,11 @@ export type GlobalOmitConfig = {
   newsBlogTaggedMember?: Prisma.NewsBlogTaggedMemberOmit
   bulletinEntry?: Prisma.BulletinEntryOmit
   chaplainProduct?: Prisma.ChaplainProductOmit
+  chaplainService?: Prisma.ChaplainServiceOmit
+  chaplainServiceBooking?: Prisma.ChaplainServiceBookingOmit
+  chaplainServiceBookingStatusHistory?: Prisma.ChaplainServiceBookingStatusHistoryOmit
+  chaplainServiceAvailability?: Prisma.ChaplainServiceAvailabilityOmit
+  surveyFeedbackResponse?: Prisma.SurveyFeedbackResponseOmit
   chaplainProductOrder?: Prisma.ChaplainProductOrderOmit
   paymentTransaction?: Prisma.PaymentTransactionOmit
   memoAnnouncement?: Prisma.MemoAnnouncementOmit

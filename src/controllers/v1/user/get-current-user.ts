@@ -44,6 +44,7 @@ export const getCurrentUser = async (
             id: true,
             uniqueId: true,
             status: true,
+            memberType: true,
             createdAt: true,
             onboardingProgress: {
               select: {

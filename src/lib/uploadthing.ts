@@ -165,6 +165,22 @@ const createSeminaryDocumentUploaderRoute = () =>
       fileSize: file.size,
     }));
 
+const createOrdinationDocumentUploaderRoute = () =>
+  f({
+    image: { maxFileSize: '8MB', maxFileCount: 1 },
+    pdf: { maxFileSize: '16MB', maxFileCount: 1 },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7).trim() : undefined;
+      const decoded = bearerToken ? verifyAccessToken(bearerToken) as { userId?: string } | null : null;
+      if (!decoded?.userId) throw new Error('Authentication required');
+      const member = await prisma.member.findUnique({ where: { userId: decoded.userId }, select: { id: true, memberType: true, status: true, isActive: true } });
+      if (!member || !member.isActive || member.status !== 'APPROVED' || member.memberType !== 'PROFESSIONAL_CHAPLAIN') throw new Error('Only eligible Professional Chaplains may upload ordination documents');
+      return { userId: decoded.userId, memberId: member.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({ memberId: metadata.memberId, fileUrl: file.ufsUrl, fileName: file.name, mimeType: file.type, fileSize: file.size }));
+
 const createSeminaryStudyMaterialUploaderRoute = () =>
   f({
     blob: {
@@ -285,6 +301,61 @@ const createMemberCertificateUploaderRoute = () =>
       mimeType: file.type,
       fileSize: file.size,
     }));
+
+const createMemberServiceLicenseUploaderRoute = () =>
+  f({
+    image: {
+      maxFileSize: '8MB',
+      maxFileCount: 1,
+    },
+    pdf: {
+      maxFileSize: '16MB',
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authHeader = req.headers.authorization;
+      const bearerToken = authHeader?.startsWith('Bearer ')
+        ? authHeader.slice('Bearer '.length).trim()
+        : undefined;
+      const decoded = bearerToken
+        ? (verifyAccessToken(bearerToken) as { userId?: string } | null)
+        : null;
+
+      if (!decoded?.userId) {
+        throw new Error('Authentication required');
+      }
+
+      const member = await prisma.member.findFirst({
+        where: {
+          userId: decoded.userId,
+          isActive: true,
+          status: 'APPROVED',
+          memberType: 'CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR',
+        },
+        select: { id: true },
+      });
+
+      if (!member) {
+        throw new Error('Only eligible service chaplains may upload a license');
+      }
+
+      return { userId: decoded.userId, memberId: member.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      if (file.type !== 'image/png' && file.type !== 'application/pdf') {
+        throw new Error('Service licenses must be PNG or PDF files');
+      }
+
+      return {
+        userId: metadata.userId,
+        memberId: metadata.memberId,
+        fileUrl: file.ufsUrl,
+        fileName: file.name,
+        mimeType: file.type,
+        fileSize: file.size,
+      };
+    });
 
 const createMemberPublicRecordAttachmentUploaderRoute = (
   options: UploadLimitOptions = {},
@@ -536,12 +607,14 @@ export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
     requirementUploader: createMemberRequirementUploaderRoute(),
+    ordinationDocumentUploader: createOrdinationDocumentUploaderRoute(),
     seminaryRequirementUploader: createSeminaryDocumentUploaderRoute(),
     seminaryPaymentReceiptUploader: createSeminaryDocumentUploaderRoute(),
     seminaryStudyMaterialUploader: createSeminaryStudyMaterialUploaderRoute(),
     memberProfileBannerUploader:
       createMemberProfileBannerUploaderRoute(options),
     memberCertificateUploader: createMemberCertificateUploaderRoute(),
+    memberServiceLicenseUploader: createMemberServiceLicenseUploaderRoute(),
     memberPublicRecordAttachmentUploader:
       createMemberPublicRecordAttachmentUploaderRoute({
         maxFileSize: options.maxFileSize ?? '8MB',

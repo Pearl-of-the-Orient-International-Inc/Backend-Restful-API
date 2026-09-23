@@ -263,6 +263,8 @@ export type UserWhereInput = {
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   bulletinEntries?: Prisma.BulletinEntryListRelationFilter
   chaplainProductOrders?: Prisma.ChaplainProductOrderListRelationFilter
+  serviceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
+  ordinationReviews?: Prisma.OrdinationApplicationReviewListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -296,6 +298,8 @@ export type UserOrderByWithRelationInput = {
   memoRecipients?: Prisma.MemoRecipientOrderByRelationAggregateInput
   bulletinEntries?: Prisma.BulletinEntryOrderByRelationAggregateInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderOrderByRelationAggregateInput
+  serviceBookings?: Prisma.ChaplainServiceBookingOrderByRelationAggregateInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -332,6 +336,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   bulletinEntries?: Prisma.BulletinEntryListRelationFilter
   chaplainProductOrders?: Prisma.ChaplainProductOrderListRelationFilter
+  serviceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
+  ordinationReviews?: Prisma.OrdinationApplicationReviewListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -403,6 +409,8 @@ export type UserCreateInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -436,6 +444,8 @@ export type UserUncheckedCreateInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUpdateInput = {
@@ -469,6 +479,8 @@ export type UserUpdateInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -502,6 +514,8 @@ export type UserUncheckedUpdateInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -784,6 +798,20 @@ export type UserUpdateOneWithoutAssignedTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedTasksInput, Prisma.UserUpdateWithoutAssignedTasksInput>, Prisma.UserUncheckedUpdateWithoutAssignedTasksInput>
 }
 
+export type UserCreateNestedOneWithoutOrdinationReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrdinationReviewsInput, Prisma.UserUncheckedCreateWithoutOrdinationReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdinationReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutOrdinationReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrdinationReviewsInput, Prisma.UserUncheckedCreateWithoutOrdinationReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdinationReviewsInput
+  upsert?: Prisma.UserUpsertWithoutOrdinationReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdinationReviewsInput, Prisma.UserUpdateWithoutOrdinationReviewsInput>, Prisma.UserUncheckedUpdateWithoutOrdinationReviewsInput>
+}
+
 export type UserCreateNestedOneWithoutBulletinEntriesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBulletinEntriesInput, Prisma.UserUncheckedCreateWithoutBulletinEntriesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBulletinEntriesInput
@@ -798,6 +826,22 @@ export type UserUpdateOneWithoutBulletinEntriesNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBulletinEntriesInput, Prisma.UserUpdateWithoutBulletinEntriesInput>, Prisma.UserUncheckedUpdateWithoutBulletinEntriesInput>
+}
+
+export type UserCreateNestedOneWithoutServiceBookingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServiceBookingsInput, Prisma.UserUncheckedCreateWithoutServiceBookingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServiceBookingsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutServiceBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServiceBookingsInput, Prisma.UserUncheckedCreateWithoutServiceBookingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServiceBookingsInput
+  upsert?: Prisma.UserUpsertWithoutServiceBookingsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServiceBookingsInput, Prisma.UserUpdateWithoutServiceBookingsInput>, Prisma.UserUncheckedUpdateWithoutServiceBookingsInput>
 }
 
 export type UserCreateNestedOneWithoutChaplainProductOrdersInput = {
@@ -926,6 +970,8 @@ export type UserCreateWithoutUserTokensInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutUserTokensInput = {
@@ -958,6 +1004,8 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutUserTokensInput = {
@@ -1006,6 +1054,8 @@ export type UserUpdateWithoutUserTokensInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTokensInput = {
@@ -1038,6 +1088,8 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1070,6 +1122,8 @@ export type UserCreateWithoutSessionsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1102,6 +1156,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1150,6 +1206,8 @@ export type UserUpdateWithoutSessionsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1182,6 +1240,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutActivityLogsInput = {
@@ -1214,6 +1274,8 @@ export type UserCreateWithoutActivityLogsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutActivityLogsInput = {
@@ -1246,6 +1308,8 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutActivityLogsInput = {
@@ -1294,6 +1358,8 @@ export type UserUpdateWithoutActivityLogsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivityLogsInput = {
@@ -1326,6 +1392,8 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
@@ -1358,6 +1426,8 @@ export type UserCreateWithoutVerificationCodesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -1390,6 +1460,8 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -1438,6 +1510,8 @@ export type UserUpdateWithoutVerificationCodesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -1470,6 +1544,8 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutPasskeyCredentialsInput = {
@@ -1502,6 +1578,8 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
@@ -1534,6 +1612,8 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyCredentialsInput = {
@@ -1582,6 +1662,8 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
@@ -1614,6 +1696,8 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutPasskeyChallengeInput = {
@@ -1646,6 +1730,8 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
@@ -1678,6 +1764,8 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyChallengeInput = {
@@ -1726,6 +1814,8 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
@@ -1758,6 +1848,8 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutMemberProfileInput = {
@@ -1790,6 +1882,8 @@ export type UserCreateWithoutMemberProfileInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutMemberProfileInput = {
@@ -1822,6 +1916,8 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutMemberProfileInput = {
@@ -1870,6 +1966,8 @@ export type UserUpdateWithoutMemberProfileInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberProfileInput = {
@@ -1902,6 +2000,8 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutFollowedMembersInput = {
@@ -1934,6 +2034,8 @@ export type UserCreateWithoutFollowedMembersInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutFollowedMembersInput = {
@@ -1966,6 +2068,8 @@ export type UserUncheckedCreateWithoutFollowedMembersInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutFollowedMembersInput = {
@@ -2014,6 +2118,8 @@ export type UserUpdateWithoutFollowedMembersInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowedMembersInput = {
@@ -2046,6 +2152,8 @@ export type UserUncheckedUpdateWithoutFollowedMembersInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutSeminaryInstructorInput = {
@@ -2078,6 +2186,8 @@ export type UserCreateWithoutSeminaryInstructorInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
@@ -2110,6 +2220,8 @@ export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutSeminaryInstructorInput = {
@@ -2158,6 +2270,8 @@ export type UserUpdateWithoutSeminaryInstructorInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
@@ -2190,6 +2304,8 @@ export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -2222,6 +2338,8 @@ export type UserCreateWithoutAssignedTasksInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -2254,6 +2372,8 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -2302,6 +2422,8 @@ export type UserUpdateWithoutAssignedTasksInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -2334,6 +2456,160 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+}
+
+export type UserCreateWithoutOrdinationReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+}
+
+export type UserUncheckedCreateWithoutOrdinationReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+}
+
+export type UserCreateOrConnectWithoutOrdinationReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrdinationReviewsInput, Prisma.UserUncheckedCreateWithoutOrdinationReviewsInput>
+}
+
+export type UserUpsertWithoutOrdinationReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrdinationReviewsInput, Prisma.UserUncheckedUpdateWithoutOrdinationReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrdinationReviewsInput, Prisma.UserUncheckedCreateWithoutOrdinationReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOrdinationReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrdinationReviewsInput, Prisma.UserUncheckedUpdateWithoutOrdinationReviewsInput>
+}
+
+export type UserUpdateWithoutOrdinationReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrdinationReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
 }
 
 export type UserCreateWithoutBulletinEntriesInput = {
@@ -2366,6 +2642,8 @@ export type UserCreateWithoutBulletinEntriesInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutBulletinEntriesInput = {
@@ -2398,6 +2676,8 @@ export type UserUncheckedCreateWithoutBulletinEntriesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutBulletinEntriesInput = {
@@ -2446,6 +2726,8 @@ export type UserUpdateWithoutBulletinEntriesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBulletinEntriesInput = {
@@ -2478,6 +2760,160 @@ export type UserUncheckedUpdateWithoutBulletinEntriesInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+}
+
+export type UserCreateWithoutServiceBookingsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
+}
+
+export type UserUncheckedCreateWithoutServiceBookingsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+}
+
+export type UserCreateOrConnectWithoutServiceBookingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutServiceBookingsInput, Prisma.UserUncheckedCreateWithoutServiceBookingsInput>
+}
+
+export type UserUpsertWithoutServiceBookingsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutServiceBookingsInput, Prisma.UserUncheckedUpdateWithoutServiceBookingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutServiceBookingsInput, Prisma.UserUncheckedCreateWithoutServiceBookingsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutServiceBookingsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutServiceBookingsInput, Prisma.UserUncheckedUpdateWithoutServiceBookingsInput>
+}
+
+export type UserUpdateWithoutServiceBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutServiceBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutChaplainProductOrdersInput = {
@@ -2510,6 +2946,8 @@ export type UserCreateWithoutChaplainProductOrdersInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutChaplainProductOrdersInput = {
@@ -2542,6 +2980,8 @@ export type UserUncheckedCreateWithoutChaplainProductOrdersInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutChaplainProductOrdersInput = {
@@ -2590,6 +3030,8 @@ export type UserUpdateWithoutChaplainProductOrdersInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChaplainProductOrdersInput = {
@@ -2622,6 +3064,8 @@ export type UserUncheckedUpdateWithoutChaplainProductOrdersInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutAuthoredMemosInput = {
@@ -2654,6 +3098,8 @@ export type UserCreateWithoutAuthoredMemosInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutAuthoredMemosInput = {
@@ -2686,6 +3132,8 @@ export type UserUncheckedCreateWithoutAuthoredMemosInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutAuthoredMemosInput = {
@@ -2734,6 +3182,8 @@ export type UserUpdateWithoutAuthoredMemosInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
@@ -2766,6 +3216,8 @@ export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutMemoRecipientsInput = {
@@ -2798,6 +3250,8 @@ export type UserCreateWithoutMemoRecipientsInput = {
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutMemoRecipientsInput = {
@@ -2830,6 +3284,8 @@ export type UserUncheckedCreateWithoutMemoRecipientsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutMemoRecipientsInput = {
@@ -2878,6 +3334,8 @@ export type UserUpdateWithoutMemoRecipientsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
@@ -2910,6 +3368,8 @@ export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutBackupSettingUpdatesInput = {
@@ -2942,6 +3402,8 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
@@ -2974,6 +3436,8 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutBackupSettingUpdatesInput = {
@@ -3022,6 +3486,8 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
@@ -3054,6 +3520,8 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutCreatedBackupsInput = {
@@ -3086,6 +3554,8 @@ export type UserCreateWithoutCreatedBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutCreatedBackupsInput = {
@@ -3118,6 +3588,8 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutCreatedBackupsInput = {
@@ -3155,6 +3627,8 @@ export type UserCreateWithoutRestoredBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutRestoredBackupsInput = {
@@ -3187,6 +3661,8 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutRestoredBackupsInput = {
@@ -3235,6 +3711,8 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
@@ -3267,6 +3745,8 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUpsertWithoutRestoredBackupsInput = {
@@ -3310,6 +3790,8 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
@@ -3342,6 +3824,8 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 
@@ -3364,6 +3848,8 @@ export type UserCountOutputType = {
   memoRecipients: number
   bulletinEntries: number
   chaplainProductOrders: number
+  serviceBookings: number
+  ordinationReviews: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3381,6 +3867,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   memoRecipients?: boolean | UserCountOutputTypeCountMemoRecipientsArgs
   bulletinEntries?: boolean | UserCountOutputTypeCountBulletinEntriesArgs
   chaplainProductOrders?: boolean | UserCountOutputTypeCountChaplainProductOrdersArgs
+  serviceBookings?: boolean | UserCountOutputTypeCountServiceBookingsArgs
+  ordinationReviews?: boolean | UserCountOutputTypeCountOrdinationReviewsArgs
 }
 
 /**
@@ -3491,6 +3979,20 @@ export type UserCountOutputTypeCountChaplainProductOrdersArgs<ExtArgs extends ru
   where?: Prisma.ChaplainProductOrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountServiceBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChaplainServiceBookingWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrdinationReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrdinationApplicationReviewWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3523,6 +4025,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   bulletinEntries?: boolean | Prisma.User$bulletinEntriesArgs<ExtArgs>
   chaplainProductOrders?: boolean | Prisma.User$chaplainProductOrdersArgs<ExtArgs>
+  serviceBookings?: boolean | Prisma.User$serviceBookingsArgs<ExtArgs>
+  ordinationReviews?: boolean | Prisma.User$ordinationReviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3593,6 +4097,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   bulletinEntries?: boolean | Prisma.User$bulletinEntriesArgs<ExtArgs>
   chaplainProductOrders?: boolean | Prisma.User$chaplainProductOrdersArgs<ExtArgs>
+  serviceBookings?: boolean | Prisma.User$serviceBookingsArgs<ExtArgs>
+  ordinationReviews?: boolean | Prisma.User$ordinationReviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3618,6 +4124,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     memoRecipients: Prisma.$MemoRecipientPayload<ExtArgs>[]
     bulletinEntries: Prisma.$BulletinEntryPayload<ExtArgs>[]
     chaplainProductOrders: Prisma.$ChaplainProductOrderPayload<ExtArgs>[]
+    serviceBookings: Prisma.$ChaplainServiceBookingPayload<ExtArgs>[]
+    ordinationReviews: Prisma.$OrdinationApplicationReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4044,6 +4552,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   memoRecipients<T extends Prisma.User$memoRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memoRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bulletinEntries<T extends Prisma.User$bulletinEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bulletinEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BulletinEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chaplainProductOrders<T extends Prisma.User$chaplainProductOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chaplainProductOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainProductOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceBookings<T extends Prisma.User$serviceBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceBookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ordinationReviews<T extends Prisma.User$ordinationReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordinationReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrdinationApplicationReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4864,6 +5374,54 @@ export type User$chaplainProductOrdersArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ChaplainProductOrderScalarFieldEnum | Prisma.ChaplainProductOrderScalarFieldEnum[]
+}
+
+/**
+ * User.serviceBookings
+ */
+export type User$serviceBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChaplainServiceBooking
+   */
+  select?: Prisma.ChaplainServiceBookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChaplainServiceBooking
+   */
+  omit?: Prisma.ChaplainServiceBookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChaplainServiceBookingInclude<ExtArgs> | null
+  where?: Prisma.ChaplainServiceBookingWhereInput
+  orderBy?: Prisma.ChaplainServiceBookingOrderByWithRelationInput | Prisma.ChaplainServiceBookingOrderByWithRelationInput[]
+  cursor?: Prisma.ChaplainServiceBookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChaplainServiceBookingScalarFieldEnum | Prisma.ChaplainServiceBookingScalarFieldEnum[]
+}
+
+/**
+ * User.ordinationReviews
+ */
+export type User$ordinationReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrdinationApplicationReview
+   */
+  select?: Prisma.OrdinationApplicationReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrdinationApplicationReview
+   */
+  omit?: Prisma.OrdinationApplicationReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrdinationApplicationReviewInclude<ExtArgs> | null
+  where?: Prisma.OrdinationApplicationReviewWhereInput
+  orderBy?: Prisma.OrdinationApplicationReviewOrderByWithRelationInput | Prisma.OrdinationApplicationReviewOrderByWithRelationInput[]
+  cursor?: Prisma.OrdinationApplicationReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrdinationApplicationReviewScalarFieldEnum | Prisma.OrdinationApplicationReviewScalarFieldEnum[]
 }
 
 /**

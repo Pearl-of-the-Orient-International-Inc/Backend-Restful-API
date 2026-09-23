@@ -40,7 +40,7 @@ const createCurrentMemberCertificate = (req, res) => __awaiter(void 0, void 0, v
             });
             return;
         }
-        const { title, certificateUrl, issuedAt } = req.body;
+        const { type, title, issuer, referenceNumber, certificateUrl, issuedAt, expiresAt, } = req.body;
         const credentialId = yield (0, member_certificate_credential_id_1.generateNextMemberCertificateCredentialId)({
             firstName: member.firstName,
             middleInitial: member.middleInitial,
@@ -50,16 +50,24 @@ const createCurrentMemberCertificate = (req, res) => __awaiter(void 0, void 0, v
             data: {
                 memberId: member.id,
                 credentialId,
+                type,
                 title,
+                issuer,
+                referenceNumber,
                 certificateUrl,
                 dateReceived: new Date(issuedAt),
+                expiresAt: expiresAt ? new Date(expiresAt) : null,
             },
             select: {
                 id: true,
                 credentialId: true,
+                type: true,
                 title: true,
+                issuer: true,
+                referenceNumber: true,
                 certificateUrl: true,
                 dateReceived: true,
+                expiresAt: true,
                 createdAt: true,
             },
         });

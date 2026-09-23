@@ -35,15 +35,17 @@ model User {
   passkeyChallenge      PasskeyChallenge?
   memberProfile         Member?
   followedMembers       MemberFollow[]
-  createdBackups        DatabaseBackupSnapshot[] @relation("CreatedDatabaseBackups")
-  restoredBackups       DatabaseBackupSnapshot[] @relation("RestoredDatabaseBackups")
-  backupSettingUpdates  DatabaseBackupSettings[] @relation("BackupSettingsUpdatedBy")
-  assignedTasks         TaskItem[]               @relation("TaskAssignee")
+  createdBackups        DatabaseBackupSnapshot[]      @relation("CreatedDatabaseBackups")
+  restoredBackups       DatabaseBackupSnapshot[]      @relation("RestoredDatabaseBackups")
+  backupSettingUpdates  DatabaseBackupSettings[]      @relation("BackupSettingsUpdatedBy")
+  assignedTasks         TaskItem[]                    @relation("TaskAssignee")
   seminaryInstructor    SeminaryInstructor?
-  authoredMemos         MemoAnnouncement[]       @relation("MemoAnnouncementAuthor")
-  memoRecipients        MemoRecipient[]          @relation("MemoRecipientUser")
-  bulletinEntries       BulletinEntry[]          @relation("BulletinEntryAuthor")
-  chaplainProductOrders ChaplainProductOrder[]   @relation("ChaplainProductOrderCustomer")
+  authoredMemos         MemoAnnouncement[]            @relation("MemoAnnouncementAuthor")
+  memoRecipients        MemoRecipient[]               @relation("MemoRecipientUser")
+  bulletinEntries       BulletinEntry[]               @relation("BulletinEntryAuthor")
+  chaplainProductOrders ChaplainProductOrder[]        @relation("ChaplainProductOrderCustomer")
+  serviceBookings       ChaplainServiceBooking[]      @relation("ChaplainServiceBookingRequester")
+  ordinationReviews     OrdinationApplicationReview[] @relation("OrdinationApplicationReviewer")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -175,6 +177,9 @@ model Member {
   badgeNumber            String?
   profileBannerUrl       String?
   profileBannerPositionY Int     @default(50)
+  serviceLicenseUrl      String?
+  serviceLicenseFileName String?
+  serviceLicenseMimeType String?
 
   // Contact Information
   firstName         String
@@ -243,6 +248,9 @@ model Member {
   taggedNewsBlogs            NewsBlogTaggedMember[]
   memoRecipients             MemoRecipient[]                   @relation("MemoRecipientMember")
   followers                  MemberFollow[]
+  ordinationApplication      OrdinationApplication?
+  providedServiceBookings    ChaplainServiceBooking[]          @relation("ChaplainServiceBookingProvider")
+  serviceAvailabilitySlots   ChaplainServiceAvailability[]
 
   isActive Boolean @default(true)
 
@@ -389,10 +397,14 @@ model MemberIdGenerationAsset {
 model MemberCertificate {
   id String @id @default(uuid())
 
-  credentialId   String   @unique
-  title          String
-  certificateUrl String
-  dateReceived   DateTime
+  credentialId    String                @unique
+  type            MemberCertificateType @default(CERTIFICATE)
+  title           String
+  issuer          String
+  referenceNumber String
+  certificateUrl  String
+  dateReceived    DateTime
+  expiresAt       DateTime?
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -1187,13 +1199,13 @@ model OfficeTitle {
   description String?
   maxSlots    Int? // null = unlimited, 1 = Chief Chaplain only
 
-  sections Json
+  sections  Json
   isActive  Boolean @default(true)
   isPublic  Boolean @default(false)
   sortOrder Int     @default(0)
 
-  reportsToId  String?
-  reportsTo    OfficeTitle?  @relation("OfficeTitleHierarchy", fields: [reportsToId], references: [id], onDelete: SetNull)
+  reportsToId   String?
+  reportsTo     OfficeTitle?  @relation("OfficeTitleHierarchy", fields: [reportsToId], references: [id], onDelete: SetNull)
   directReports OfficeTitle[] @relation("OfficeTitleHierarchy")
 
   assignments OfficerAssignment[]
@@ -1233,6 +1245,51 @@ model OfficerAssignment {
   @@index([memberId])
   @@index([officeTitleId])
   @@index([isActive, isPublic])
+}
+
+model OrdinationApplication {
+  id String @id @default(uuid())
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  status                 OrdinationApplicationStatus @default(DRAFT)
+  eligibilityBasis       OrdinationEligibilityBasis  @default(PROFESSIONAL_CHAPLAIN)
+  eligibilityMemberType  MemberType
+  ministryBackground     String
+  callingStatement       String
+  proposedMinistry       String
+  additionalInformation  String?
+  documents              Json
+  informationAccurate    Boolean                     @default(false)
+  codeOfConductAccepted  Boolean                     @default(false)
+  backgroundCheckConsent Boolean                     @default(false)
+  requestedInformation   String?
+  adminNotes             String?
+  submittedAt            DateTime?
+  reviewedAt             DateTime?
+  decidedAt              DateTime?
+
+  reviews   OrdinationApplicationReview[]
+  createdAt DateTime                      @default(now())
+  updatedAt DateTime                      @updatedAt
+
+  @@index([status])
+  @@index([submittedAt])
+}
+
+model OrdinationApplicationReview {
+  id            String                 @id @default(uuid())
+  applicationId String
+  application   OrdinationApplication  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  reviewerId    String
+  reviewer      User                   @relation("OrdinationApplicationReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  action        OrdinationReviewAction
+  notes         String?
+  createdAt     DateTime               @default(now())
+
+  @@index([applicationId])
+  @@index([reviewerId])
 }
 
 model Event {
@@ -1428,6 +1485,117 @@ model ChaplainProduct {
   @@index([isActive])
   @@index([sortOrder])
   @@index([stockQuantity])
+}
+
+model ChaplainService {
+  id String @id @default(uuid())
+
+  name                   String   @unique
+  description            String
+  availability           String?
+  commissionPercent      Decimal? @db.Decimal(5, 2)
+  maxConcurrentBookings  Int      @default(1)
+  sharedResourceName     String?
+  sharedResourceKey      String?
+  sharedResourceCapacity Int?
+  isActive               Boolean  @default(true)
+  sortOrder              Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings ChaplainServiceBooking[]
+
+  @@index([isActive])
+  @@index([sortOrder])
+}
+
+model ChaplainServiceBooking {
+  id String @id @default(uuid())
+
+  serviceId        String
+  service          ChaplainService @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  providerMemberId String
+  providerMember   Member          @relation("ChaplainServiceBookingProvider", fields: [providerMemberId], references: [id], onDelete: Restrict)
+  requesterUserId  String?
+  requesterUser    User?           @relation("ChaplainServiceBookingRequester", fields: [requesterUserId], references: [id], onDelete: SetNull)
+
+  requesterName   String
+  requesterEmail  String
+  requesterPhone  String
+  preferredAt     DateTime
+  deliveryMethod  ChaplainServiceDeliveryMethod
+  locationDetails String
+  notes           String?
+
+  status                   ChaplainServiceBookingStatus    @default(PENDING)
+  statusReason             String?
+  providerServiceFee       Decimal?                        @db.Decimal(12, 2)
+  providerCommissionAmount Decimal?                        @db.Decimal(12, 2)
+  providerCommissionStatus ChaplainServiceCommissionStatus @default(NOT_APPLICABLE)
+  requesterPaymentStatus   ChaplainServicePaymentStatus    @default(NOT_REQUIRED)
+
+  history   ChaplainServiceBookingStatusHistory[]
+  createdAt DateTime                              @default(now())
+  updatedAt DateTime                              @updatedAt
+
+  @@index([serviceId])
+  @@index([providerMemberId, preferredAt])
+  @@index([requesterUserId])
+  @@index([status])
+}
+
+model ChaplainServiceBookingStatusHistory {
+  id              String                       @id @default(uuid())
+  bookingId       String
+  booking         ChaplainServiceBooking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  status          ChaplainServiceBookingStatus
+  reason          String?
+  changedByUserId String?
+  createdAt       DateTime                     @default(now())
+
+  @@index([bookingId, createdAt])
+}
+
+model ChaplainServiceAvailability {
+  id String @id @default(uuid())
+
+  memberId String
+  member   Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  startsAt DateTime
+  endsAt   DateTime
+  note     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([memberId, startsAt, endsAt])
+  @@index([memberId, startsAt])
+  @@index([startsAt, endsAt])
+}
+
+model SurveyFeedbackResponse {
+  id String @id @default(uuid())
+
+  respondentName      String?
+  respondentType      String
+  discoverySource     String
+  improvementAreas    String[]
+  welcomeRating       Int
+  accessibilityRating Int
+  satisfactionRating  Int
+  feedback            String
+
+  hasIssue         Boolean @default(false)
+  issueCategory    String?
+  issueDescription String?
+  contactEmail     String?
+
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([hasIssue])
+  @@index([respondentType])
 }
 
 model ChaplainProductOrder {
@@ -1713,6 +1881,29 @@ enum MemberType {
   CERTIFIED_SPECIALIST_TRAINING_OFFICER_INSTRUCTOR
 }
 
+enum OrdinationApplicationStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  ADDITIONAL_INFORMATION_REQUIRED
+  RETURNED_FOR_CORRECTION
+  APPROVED
+  REJECTED
+}
+
+enum OrdinationEligibilityBasis {
+  PROFESSIONAL_CHAPLAIN
+  SEMINARY_GRADUATE
+}
+
+enum OrdinationReviewAction {
+  START_REVIEW
+  REQUEST_ADDITIONAL_INFORMATION
+  RETURN_FOR_CORRECTION
+  APPROVE
+  REJECT
+}
+
 enum MemberPublicRecordType {
   REPORT_ACTIVITY
   COMMUNITY_SERVICE
@@ -1734,6 +1925,11 @@ enum MemberCredentialDocumentType {
 enum MemberCredentialDocumentStatus {
   ACTIVE
   REVOKED
+}
+
+enum MemberCertificateType {
+  CERTIFICATE
+  RECOGNITION
 }
 
 enum VerificationType {
@@ -2153,6 +2349,37 @@ enum ChaplainOrderStatus {
   COMPLETED
   CANCELLED
   REFUNDED
+}
+
+enum ChaplainServiceDeliveryMethod {
+  ON_SITE
+  ONLINE
+  PHONE
+}
+
+enum ChaplainServiceBookingStatus {
+  PENDING
+  AWAITING_CHAPLAIN_APPROVAL
+  CONFIRMED
+  RESCHEDULED
+  REJECTED
+  COMPLETED
+  CANCELLED
+}
+
+enum ChaplainServicePaymentStatus {
+  NOT_REQUIRED
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum ChaplainServiceCommissionStatus {
+  NOT_APPLICABLE
+  PENDING
+  SETTLED
+  WAIVED
 }
 
 enum BulletinEntryStatus {

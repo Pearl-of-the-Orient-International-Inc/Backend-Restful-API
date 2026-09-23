@@ -33,7 +33,10 @@ import ownerAccessRoutes from '@/routes/v1/owner-access';
 import bulletinEntryRoutes from '@/routes/v1/bulletin-entry';
 import chaplainProductRoutes from '@/routes/v1/chaplain-product';
 import chaplainProductOrderRoutes from '@/routes/v1/chaplain-product-order';
+import chaplainServiceRoutes from '@/routes/v1/chaplain-service';
 import paymentRoutes from '@/routes/v1/payment';
+import ordinationApplicationRoutes from '@/routes/v1/ordination-application';
+import surveyFeedbackRoutes from '@/routes/v1/survey-feedback';
 
 const router = Router();
 
@@ -77,6 +80,9 @@ router.use('/owner', ownerAccessRoutes);
 router.use('/bulletins', bulletinEntryRoutes);
 router.use('/chaplain-products', chaplainProductRoutes);
 router.use('/chaplain-product-orders', chaplainProductOrderRoutes);
+router.use('/chaplain-services', chaplainServiceRoutes);
 router.use('/payments', paymentRoutes);
+router.use('/ordination-applications', ordinationApplicationRoutes);
+router.use('/survey-feedback', surveyFeedbackRoutes);
 
 export default router;

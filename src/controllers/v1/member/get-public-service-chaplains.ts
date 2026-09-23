@@ -31,6 +31,9 @@ export const getPublicServiceChaplains = async (
         municipalityCity: true,
         barangay: true,
         preferredBranchOther: true,
+        serviceLicenseUrl: true,
+        serviceLicenseFileName: true,
+        serviceLicenseMimeType: true,
         createdAt: true,
         user: {
           select: {

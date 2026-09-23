@@ -42,6 +42,7 @@ const getCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, function*
                         id: true,
                         uniqueId: true,
                         status: true,
+                        memberType: true,
                         createdAt: true,
                         onboardingProgress: {
                             select: {

@@ -101,6 +101,8 @@ export const ModelName = {
   BranchOfService: 'BranchOfService',
   OfficeTitle: 'OfficeTitle',
   OfficerAssignment: 'OfficerAssignment',
+  OrdinationApplication: 'OrdinationApplication',
+  OrdinationApplicationReview: 'OrdinationApplicationReview',
   Event: 'Event',
   EventAttendee: 'EventAttendee',
   EventTaggedMember: 'EventTaggedMember',
@@ -109,6 +111,11 @@ export const ModelName = {
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   BulletinEntry: 'BulletinEntry',
   ChaplainProduct: 'ChaplainProduct',
+  ChaplainService: 'ChaplainService',
+  ChaplainServiceBooking: 'ChaplainServiceBooking',
+  ChaplainServiceBookingStatusHistory: 'ChaplainServiceBookingStatusHistory',
+  ChaplainServiceAvailability: 'ChaplainServiceAvailability',
+  SurveyFeedbackResponse: 'SurveyFeedbackResponse',
   ChaplainProductOrder: 'ChaplainProductOrder',
   PaymentTransaction: 'PaymentTransaction',
   MemoAnnouncement: 'MemoAnnouncement',
@@ -251,6 +258,9 @@ export const MemberScalarFieldEnum = {
   badgeNumber: 'badgeNumber',
   profileBannerUrl: 'profileBannerUrl',
   profileBannerPositionY: 'profileBannerPositionY',
+  serviceLicenseUrl: 'serviceLicenseUrl',
+  serviceLicenseFileName: 'serviceLicenseFileName',
+  serviceLicenseMimeType: 'serviceLicenseMimeType',
   firstName: 'firstName',
   middleInitial: 'middleInitial',
   lastName: 'lastName',
@@ -418,9 +428,13 @@ export type MemberIdGenerationAssetScalarFieldEnum = (typeof MemberIdGenerationA
 export const MemberCertificateScalarFieldEnum = {
   id: 'id',
   credentialId: 'credentialId',
+  type: 'type',
   title: 'title',
+  issuer: 'issuer',
+  referenceNumber: 'referenceNumber',
   certificateUrl: 'certificateUrl',
   dateReceived: 'dateReceived',
+  expiresAt: 'expiresAt',
   memberId: 'memberId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1075,6 +1089,44 @@ export const OfficerAssignmentScalarFieldEnum = {
 export type OfficerAssignmentScalarFieldEnum = (typeof OfficerAssignmentScalarFieldEnum)[keyof typeof OfficerAssignmentScalarFieldEnum]
 
 
+export const OrdinationApplicationScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  status: 'status',
+  eligibilityBasis: 'eligibilityBasis',
+  eligibilityMemberType: 'eligibilityMemberType',
+  ministryBackground: 'ministryBackground',
+  callingStatement: 'callingStatement',
+  proposedMinistry: 'proposedMinistry',
+  additionalInformation: 'additionalInformation',
+  documents: 'documents',
+  informationAccurate: 'informationAccurate',
+  codeOfConductAccepted: 'codeOfConductAccepted',
+  backgroundCheckConsent: 'backgroundCheckConsent',
+  requestedInformation: 'requestedInformation',
+  adminNotes: 'adminNotes',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrdinationApplicationScalarFieldEnum = (typeof OrdinationApplicationScalarFieldEnum)[keyof typeof OrdinationApplicationScalarFieldEnum]
+
+
+export const OrdinationApplicationReviewScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  reviewerId: 'reviewerId',
+  action: 'action',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type OrdinationApplicationReviewScalarFieldEnum = (typeof OrdinationApplicationReviewScalarFieldEnum)[keyof typeof OrdinationApplicationReviewScalarFieldEnum]
+
+
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1204,6 +1256,95 @@ export const ChaplainProductScalarFieldEnum = {
 } as const
 
 export type ChaplainProductScalarFieldEnum = (typeof ChaplainProductScalarFieldEnum)[keyof typeof ChaplainProductScalarFieldEnum]
+
+
+export const ChaplainServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  availability: 'availability',
+  commissionPercent: 'commissionPercent',
+  maxConcurrentBookings: 'maxConcurrentBookings',
+  sharedResourceName: 'sharedResourceName',
+  sharedResourceKey: 'sharedResourceKey',
+  sharedResourceCapacity: 'sharedResourceCapacity',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainServiceScalarFieldEnum = (typeof ChaplainServiceScalarFieldEnum)[keyof typeof ChaplainServiceScalarFieldEnum]
+
+
+export const ChaplainServiceBookingScalarFieldEnum = {
+  id: 'id',
+  serviceId: 'serviceId',
+  providerMemberId: 'providerMemberId',
+  requesterUserId: 'requesterUserId',
+  requesterName: 'requesterName',
+  requesterEmail: 'requesterEmail',
+  requesterPhone: 'requesterPhone',
+  preferredAt: 'preferredAt',
+  deliveryMethod: 'deliveryMethod',
+  locationDetails: 'locationDetails',
+  notes: 'notes',
+  status: 'status',
+  statusReason: 'statusReason',
+  providerServiceFee: 'providerServiceFee',
+  providerCommissionAmount: 'providerCommissionAmount',
+  providerCommissionStatus: 'providerCommissionStatus',
+  requesterPaymentStatus: 'requesterPaymentStatus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainServiceBookingScalarFieldEnum = (typeof ChaplainServiceBookingScalarFieldEnum)[keyof typeof ChaplainServiceBookingScalarFieldEnum]
+
+
+export const ChaplainServiceBookingStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  status: 'status',
+  reason: 'reason',
+  changedByUserId: 'changedByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type ChaplainServiceBookingStatusHistoryScalarFieldEnum = (typeof ChaplainServiceBookingStatusHistoryScalarFieldEnum)[keyof typeof ChaplainServiceBookingStatusHistoryScalarFieldEnum]
+
+
+export const ChaplainServiceAvailabilityScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChaplainServiceAvailabilityScalarFieldEnum = (typeof ChaplainServiceAvailabilityScalarFieldEnum)[keyof typeof ChaplainServiceAvailabilityScalarFieldEnum]
+
+
+export const SurveyFeedbackResponseScalarFieldEnum = {
+  id: 'id',
+  respondentName: 'respondentName',
+  respondentType: 'respondentType',
+  discoverySource: 'discoverySource',
+  improvementAreas: 'improvementAreas',
+  welcomeRating: 'welcomeRating',
+  accessibilityRating: 'accessibilityRating',
+  satisfactionRating: 'satisfactionRating',
+  feedback: 'feedback',
+  hasIssue: 'hasIssue',
+  issueCategory: 'issueCategory',
+  issueDescription: 'issueDescription',
+  contactEmail: 'contactEmail',
+  createdAt: 'createdAt'
+} as const
+
+export type SurveyFeedbackResponseScalarFieldEnum = (typeof SurveyFeedbackResponseScalarFieldEnum)[keyof typeof SurveyFeedbackResponseScalarFieldEnum]
 
 
 export const ChaplainProductOrderScalarFieldEnum = {

@@ -38,10 +38,22 @@ export const createCurrentMemberCertificate = async (
       return;
     }
 
-    const { title, certificateUrl, issuedAt } = req.body as {
+    const {
+      type,
+      title,
+      issuer,
+      referenceNumber,
+      certificateUrl,
+      issuedAt,
+      expiresAt,
+    } = req.body as {
+      type: 'CERTIFICATE' | 'RECOGNITION';
       title: string;
+      issuer: string;
+      referenceNumber: string;
       certificateUrl: string;
       issuedAt: string;
+      expiresAt?: string | null;
     };
 
     const credentialId =
@@ -55,16 +67,24 @@ export const createCurrentMemberCertificate = async (
       data: {
         memberId: member.id,
         credentialId,
+        type,
         title,
+        issuer,
+        referenceNumber,
         certificateUrl,
         dateReceived: new Date(issuedAt),
+        expiresAt: expiresAt ? new Date(expiresAt) : null,
       },
       select: {
         id: true,
-        credentialId: true,
-        title: true,
-        certificateUrl: true,
-        dateReceived: true,
+          credentialId: true,
+          type: true,
+          title: true,
+          issuer: true,
+          referenceNumber: true,
+          certificateUrl: true,
+          dateReceived: true,
+          expiresAt: true,
         createdAt: true,
       },
     });

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isValidPhoneNumber } from 'libphonenumber-js/max';
 import {
   ApplicantRequirementType,
   CivilStatus,
@@ -7,6 +8,7 @@ import {
   MemberOnboardingStep,
   MemberPaymentMethod,
   MemberCredentialDocumentType,
+  MemberCertificateType,
   MemberPublicRecordStatus,
   MemberPublicRecordType,
   MemberStatus,
@@ -55,13 +57,23 @@ const signatureSchema = z.object({
     .min(1, { message: 'signatureData is required' }),
 });
 
+const internationalPhoneSchema = z
+  .string()
+  .trim()
+  .regex(/^\+[1-9]\d{7,14}$/, {
+    message: 'Phone number must include a valid international country code',
+  })
+  .refine((value) => isValidPhoneNumber(value), {
+    message: 'Phone number is not valid for its selected country',
+  });
+
 export const applyMemberSchema = z.object({
   email: emailSchema,
   firstName: z.string().trim().min(1).max(100),
   middleInitial: z.string().trim().max(1).optional(),
   lastName: z.string().trim().min(1).max(100),
   extensionName: z.string().trim().max(30).optional(),
-  mobilePhoneNumber: z.string().trim().min(1).max(30),
+  mobilePhoneNumber: internationalPhoneSchema,
   homeAddress: z.string().trim().min(1).max(255),
   civilStatus: z.enum(CivilStatus),
   gender: z.enum(Gender),
@@ -72,7 +84,7 @@ export const applyMemberSchema = z.object({
   municipalityCity: z.string().trim().min(1).max(100),
   barangay: z.string().trim().min(1).max(100),
   emergencyContactName: z.string().trim().min(1).max(100),
-  emergencyContactMobile: z.string().trim().min(1).max(30),
+  emergencyContactMobile: internationalPhoneSchema,
   churchAffiliation: z.string().trim().max(150).optional(),
   churchAddress: z.string().trim().max(255).optional(),
   currentPositionRole: z.string().trim().min(1).max(150),
@@ -177,6 +189,12 @@ export const updateCurrentProfileBannerSchema = z.object({
   },
 );
 
+export const updateCurrentServiceLicenseSchema = z.object({
+  fileUrl: z.url(),
+  fileName: z.string().trim().min(1).max(255),
+  mimeType: z.enum(['image/png', 'application/pdf']),
+});
+
 export const updateCurrentChurchAffiliationSchema = z.object({
   churchAffiliation: z.string().trim().max(150).optional(),
   churchAddress: z.string().trim().max(255).optional(),
@@ -198,11 +216,47 @@ export const updateCurrentBranchServicesSchema = z.object({
   preferredBranchOther: z.string().trim().max(255).optional(),
 });
 
-export const createCurrentMemberCertificateSchema = z.object({
-  title: z.string().trim().min(1).max(150),
-  certificateUrl: z.url(),
-  issuedAt: z.iso.datetime(),
+export const createCurrentServiceAvailabilitySchema = z
+  .object({
+    startsAt: z.iso.datetime(),
+    endsAt: z.iso.datetime(),
+    note: z.string().trim().max(500).optional(),
+  })
+  .refine((value) => new Date(value.endsAt) > new Date(value.startsAt), {
+    message: 'Availability end time must be after its start time',
+    path: ['endsAt'],
+  });
+
+export const deleteCurrentServiceAvailabilitySchema = z.object({
+  params: z.object({
+    slotId: z.uuid(),
+  }),
 });
+
+export const getPublicServiceAvailabilitySchema = z.object({
+  params: z.object({
+    memberId: z.string().trim().min(1).max(50),
+  }),
+});
+
+export const createCurrentMemberCertificateSchema = z
+  .object({
+    type: z.enum(MemberCertificateType),
+    title: z.string().trim().min(1).max(150),
+    issuer: z.string().trim().min(1).max(150),
+    referenceNumber: z.string().trim().min(1).max(100),
+    certificateUrl: z.url(),
+    issuedAt: z.iso.datetime(),
+    expiresAt: z.iso.datetime().nullable().optional(),
+  })
+  .refine(
+    ({ issuedAt, expiresAt }) =>
+      !expiresAt || new Date(expiresAt) >= new Date(issuedAt),
+    {
+      message: 'Expiration date must be on or after the issue date',
+      path: ['expiresAt'],
+    },
+  );
 
 export const createCurrentMemberPublicRecordSchema = z.object({
   title: z.string().trim().min(1).max(150),

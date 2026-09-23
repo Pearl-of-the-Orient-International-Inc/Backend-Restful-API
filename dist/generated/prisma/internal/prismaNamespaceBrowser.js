@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingAcknowledgementReceiptItemScalarFieldEnum = exports.AccountingAcknowledgementReceiptScalarFieldEnum = exports.AccountingReceivableItemScalarFieldEnum = exports.AccountingReceivableScalarFieldEnum = exports.AccountingPayableItemScalarFieldEnum = exports.AccountingPayableScalarFieldEnum = exports.SeminaryFeeCollectionAccountScalarFieldEnum = exports.SeminaryFeeConfigurationScalarFieldEnum = exports.SeminaryGradeConfigurationScalarFieldEnum = exports.SeminaryInstructorScalarFieldEnum = exports.SeminaryAcademicYearScalarFieldEnum = exports.SeminaryStudentNotificationScalarFieldEnum = exports.SeminaryGradeRecordScalarFieldEnum = exports.SeminaryExaminationScalarFieldEnum = exports.SeminaryAssignmentScalarFieldEnum = exports.SeminaryStudyMaterialScalarFieldEnum = exports.SeminaryCourseScalarFieldEnum = exports.SeminaryPaymentScalarFieldEnum = exports.SeminaryRequirementsScalarFieldEnum = exports.SeminaryCredentialDocumentScalarFieldEnum = exports.SeminaryApplicationScalarFieldEnum = exports.MemberChaplaincyTrainingProgressScalarFieldEnum = exports.MemberPublicRecordAttachmentScalarFieldEnum = exports.MemberPublicRecordScalarFieldEnum = exports.MemberCredentialDocumentScalarFieldEnum = exports.MemberCertificateScalarFieldEnum = exports.MemberIdGenerationAssetScalarFieldEnum = exports.MemberOnlineInterviewAppointmentScalarFieldEnum = exports.MemberPaymentCheckoutScalarFieldEnum = exports.MemberOnboardingProgressScalarFieldEnum = exports.ApplicantRequirementScalarFieldEnum = exports.ApplicantSignatureScalarFieldEnum = exports.CharacterReferenceScalarFieldEnum = exports.MinisterialExperienceScalarFieldEnum = exports.MemberFollowScalarFieldEnum = exports.MemberScalarFieldEnum = exports.PasskeyChallengeScalarFieldEnum = exports.PasskeyCredentialScalarFieldEnum = exports.VerificationCodeScalarFieldEnum = exports.ActivityLogScalarFieldEnum = exports.SessionScalarFieldEnum = exports.UserTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
-exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.MemoDeliveryLogScalarFieldEnum = exports.MemoAttachmentScalarFieldEnum = exports.MemoRecipientScalarFieldEnum = exports.MemoAnnouncementScalarFieldEnum = exports.PaymentTransactionScalarFieldEnum = exports.ChaplainProductOrderScalarFieldEnum = exports.ChaplainProductScalarFieldEnum = exports.BulletinEntryScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.OwnerAccessCredentialScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = void 0;
+exports.JsonNullValueFilter = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueInput = exports.NullableJsonNullValueInput = exports.SortOrder = exports.DatabaseBackupSnapshotScalarFieldEnum = exports.DatabaseBackupSettingsScalarFieldEnum = exports.MemoDeliveryLogScalarFieldEnum = exports.MemoAttachmentScalarFieldEnum = exports.MemoRecipientScalarFieldEnum = exports.MemoAnnouncementScalarFieldEnum = exports.PaymentTransactionScalarFieldEnum = exports.ChaplainProductOrderScalarFieldEnum = exports.SurveyFeedbackResponseScalarFieldEnum = exports.ChaplainServiceAvailabilityScalarFieldEnum = exports.ChaplainServiceBookingStatusHistoryScalarFieldEnum = exports.ChaplainServiceBookingScalarFieldEnum = exports.ChaplainServiceScalarFieldEnum = exports.ChaplainProductScalarFieldEnum = exports.BulletinEntryScalarFieldEnum = exports.NewsBlogTaggedMemberScalarFieldEnum = exports.NewsBlogMediaScalarFieldEnum = exports.NewsBlogScalarFieldEnum = exports.EventTaggedMemberScalarFieldEnum = exports.EventAttendeeScalarFieldEnum = exports.EventScalarFieldEnum = exports.OrdinationApplicationReviewScalarFieldEnum = exports.OrdinationApplicationScalarFieldEnum = exports.OfficerAssignmentScalarFieldEnum = exports.OfficeTitleScalarFieldEnum = exports.BranchOfServiceScalarFieldEnum = exports.TaskItemScalarFieldEnum = exports.TaskBoardScalarFieldEnum = exports.OwnerAccessCredentialScalarFieldEnum = exports.AccountingLedgerTransactionScalarFieldEnum = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -96,6 +96,8 @@ exports.ModelName = {
     BranchOfService: 'BranchOfService',
     OfficeTitle: 'OfficeTitle',
     OfficerAssignment: 'OfficerAssignment',
+    OrdinationApplication: 'OrdinationApplication',
+    OrdinationApplicationReview: 'OrdinationApplicationReview',
     Event: 'Event',
     EventAttendee: 'EventAttendee',
     EventTaggedMember: 'EventTaggedMember',
@@ -104,6 +106,11 @@ exports.ModelName = {
     NewsBlogTaggedMember: 'NewsBlogTaggedMember',
     BulletinEntry: 'BulletinEntry',
     ChaplainProduct: 'ChaplainProduct',
+    ChaplainService: 'ChaplainService',
+    ChaplainServiceBooking: 'ChaplainServiceBooking',
+    ChaplainServiceBookingStatusHistory: 'ChaplainServiceBookingStatusHistory',
+    ChaplainServiceAvailability: 'ChaplainServiceAvailability',
+    SurveyFeedbackResponse: 'SurveyFeedbackResponse',
     ChaplainProductOrder: 'ChaplainProductOrder',
     PaymentTransaction: 'PaymentTransaction',
     MemoAnnouncement: 'MemoAnnouncement',
@@ -207,6 +214,9 @@ exports.MemberScalarFieldEnum = {
     badgeNumber: 'badgeNumber',
     profileBannerUrl: 'profileBannerUrl',
     profileBannerPositionY: 'profileBannerPositionY',
+    serviceLicenseUrl: 'serviceLicenseUrl',
+    serviceLicenseFileName: 'serviceLicenseFileName',
+    serviceLicenseMimeType: 'serviceLicenseMimeType',
     firstName: 'firstName',
     middleInitial: 'middleInitial',
     lastName: 'lastName',
@@ -334,9 +344,13 @@ exports.MemberIdGenerationAssetScalarFieldEnum = {
 exports.MemberCertificateScalarFieldEnum = {
     id: 'id',
     credentialId: 'credentialId',
+    type: 'type',
     title: 'title',
+    issuer: 'issuer',
+    referenceNumber: 'referenceNumber',
     certificateUrl: 'certificateUrl',
     dateReceived: 'dateReceived',
+    expiresAt: 'expiresAt',
     memberId: 'memberId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -859,6 +873,36 @@ exports.OfficerAssignmentScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.OrdinationApplicationScalarFieldEnum = {
+    id: 'id',
+    memberId: 'memberId',
+    status: 'status',
+    eligibilityBasis: 'eligibilityBasis',
+    eligibilityMemberType: 'eligibilityMemberType',
+    ministryBackground: 'ministryBackground',
+    callingStatement: 'callingStatement',
+    proposedMinistry: 'proposedMinistry',
+    additionalInformation: 'additionalInformation',
+    documents: 'documents',
+    informationAccurate: 'informationAccurate',
+    codeOfConductAccepted: 'codeOfConductAccepted',
+    backgroundCheckConsent: 'backgroundCheckConsent',
+    requestedInformation: 'requestedInformation',
+    adminNotes: 'adminNotes',
+    submittedAt: 'submittedAt',
+    reviewedAt: 'reviewedAt',
+    decidedAt: 'decidedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.OrdinationApplicationReviewScalarFieldEnum = {
+    id: 'id',
+    applicationId: 'applicationId',
+    reviewerId: 'reviewerId',
+    action: 'action',
+    notes: 'notes',
+    createdAt: 'createdAt'
+};
 exports.EventScalarFieldEnum = {
     id: 'id',
     name: 'name',
@@ -957,6 +1001,75 @@ exports.ChaplainProductScalarFieldEnum = {
     sortOrder: 'sortOrder',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+exports.ChaplainServiceScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    availability: 'availability',
+    commissionPercent: 'commissionPercent',
+    maxConcurrentBookings: 'maxConcurrentBookings',
+    sharedResourceName: 'sharedResourceName',
+    sharedResourceKey: 'sharedResourceKey',
+    sharedResourceCapacity: 'sharedResourceCapacity',
+    isActive: 'isActive',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.ChaplainServiceBookingScalarFieldEnum = {
+    id: 'id',
+    serviceId: 'serviceId',
+    providerMemberId: 'providerMemberId',
+    requesterUserId: 'requesterUserId',
+    requesterName: 'requesterName',
+    requesterEmail: 'requesterEmail',
+    requesterPhone: 'requesterPhone',
+    preferredAt: 'preferredAt',
+    deliveryMethod: 'deliveryMethod',
+    locationDetails: 'locationDetails',
+    notes: 'notes',
+    status: 'status',
+    statusReason: 'statusReason',
+    providerServiceFee: 'providerServiceFee',
+    providerCommissionAmount: 'providerCommissionAmount',
+    providerCommissionStatus: 'providerCommissionStatus',
+    requesterPaymentStatus: 'requesterPaymentStatus',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.ChaplainServiceBookingStatusHistoryScalarFieldEnum = {
+    id: 'id',
+    bookingId: 'bookingId',
+    status: 'status',
+    reason: 'reason',
+    changedByUserId: 'changedByUserId',
+    createdAt: 'createdAt'
+};
+exports.ChaplainServiceAvailabilityScalarFieldEnum = {
+    id: 'id',
+    memberId: 'memberId',
+    startsAt: 'startsAt',
+    endsAt: 'endsAt',
+    note: 'note',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SurveyFeedbackResponseScalarFieldEnum = {
+    id: 'id',
+    respondentName: 'respondentName',
+    respondentType: 'respondentType',
+    discoverySource: 'discoverySource',
+    improvementAreas: 'improvementAreas',
+    welcomeRating: 'welcomeRating',
+    accessibilityRating: 'accessibilityRating',
+    satisfactionRating: 'satisfactionRating',
+    feedback: 'feedback',
+    hasIssue: 'hasIssue',
+    issueCategory: 'issueCategory',
+    issueDescription: 'issueDescription',
+    contactEmail: 'contactEmail',
+    createdAt: 'createdAt'
 };
 exports.ChaplainProductOrderScalarFieldEnum = {
     id: 'id',

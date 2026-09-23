@@ -50,8 +50,8 @@ const createXenditCheckout = (input) => __awaiter(void 0, void 0, void 0, functi
                 email: input.customerEmail,
                 individual_detail: { given_names: input.customerName },
             },
-            success_return_url: `${config_1.default.APP_URL}/shop?payment=processing&reference=${encodeURIComponent(input.reference)}`,
-            cancel_return_url: `${config_1.default.APP_URL}/shop?payment=cancelled&reference=${encodeURIComponent(input.reference)}`,
+            success_return_url: `${config_1.default.APP_URL}/payment/success?reference=${encodeURIComponent(input.reference)}`,
+            cancel_return_url: `${config_1.default.APP_URL}/payment/error?reason=cancelled&reference=${encodeURIComponent(input.reference)}`,
             metadata: { payment_reference: input.reference },
         }),
     });
@@ -118,8 +118,8 @@ const createPayPalCheckout = (input) => __awaiter(void 0, void 0, void 0, functi
                 paypal: {
                     experience_context: {
                         user_action: 'PAY_NOW',
-                        return_url: `${config_1.default.APP_URL}/shop?payment=processing&reference=${encodeURIComponent(input.reference)}`,
-                        cancel_url: `${config_1.default.APP_URL}/shop?payment=cancelled&reference=${encodeURIComponent(input.reference)}`,
+                        return_url: `${config_1.default.APP_URL}/payment/success?reference=${encodeURIComponent(input.reference)}`,
+                        cancel_url: `${config_1.default.APP_URL}/payment/error?reason=cancelled&reference=${encodeURIComponent(input.reference)}`,
                     },
                 },
             },

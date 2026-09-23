@@ -29,6 +29,9 @@ export const getPublicMemberProfile = async (
         badgeNumber: true,
         profileBannerUrl: true,
         profileBannerPositionY: true,
+        serviceLicenseUrl: true,
+        serviceLicenseFileName: true,
+        serviceLicenseMimeType: true,
         status: true,
         memberType: true,
         isActive: true,
@@ -144,9 +147,13 @@ export const getPublicMemberProfile = async (
           orderBy: [{ dateReceived: 'desc' }, { createdAt: 'desc' }],
           select: {
             credentialId: true,
+            type: true,
             title: true,
+            issuer: true,
+            referenceNumber: true,
             certificateUrl: true,
             dateReceived: true,
+            expiresAt: true,
           },
         },
         publicRecords: {
