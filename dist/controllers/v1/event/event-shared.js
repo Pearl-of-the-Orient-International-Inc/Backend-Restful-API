@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildEventWriteInput = exports.serializeEvent = exports.serializeTaggedMember = exports.eventTaggedMemberInclude = exports.resolveEventStatus = exports.inferMeetingPlatform = exports.normalizeOptionalText = exports.sanitizeText = void 0;
 const dompurify_1 = __importDefault(require("dompurify"));
 const jsdom_1 = require("jsdom");
-const client_1 = require("../../../generated/prisma/client");
+const client_1 = require("@/generated/prisma/client");
 const window = new jsdom_1.JSDOM('').window;
 const DOMPurify = (0, dompurify_1.default)(window);
 const sanitizeText = (text) => DOMPurify.sanitize(text, { ALLOWED_TAGS: [], KEEP_CONTENT: true });

@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateChaplainService = exports.createChaplainService = exports.getEligibleServiceChaplains = exports.getPublicChaplainServices = exports.getChaplainServices = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const client_1 = require("../../../generated/prisma/client");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const enums_1 = require("../../../generated/prisma/enums");
+const http_codes_1 = require("@/common/http-codes");
+const client_1 = require("@/generated/prisma/client");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const enums_1 = require("@/generated/prisma/enums");
 const serialize = (service) => (Object.assign(Object.assign({}, service), { commissionPercent: service.commissionPercent === null ? null : Number(service.commissionPercent) }));
 const toWriteData = (body) => {
     var _a, _b, _c, _d, _e, _f;

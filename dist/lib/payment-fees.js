@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculatePlatformFee = exports.paymentFeePolicies = void 0;
-const config_1 = __importDefault(require("../config"));
+const config_1 = __importDefault(require("@/config"));
 exports.paymentFeePolicies = {
     XENDIT: {
         percent: config_1.default.XENDIT_PLATFORM_FEE_PERCENT,

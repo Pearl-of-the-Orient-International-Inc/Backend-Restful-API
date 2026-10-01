@@ -46,6 +46,7 @@ model User {
   chaplainProductOrders ChaplainProductOrder[]        @relation("ChaplainProductOrderCustomer")
   serviceBookings       ChaplainServiceBooking[]      @relation("ChaplainServiceBookingRequester")
   ordinationReviews     OrdinationApplicationReview[] @relation("OrdinationApplicationReviewer")
+  crasmReviews          CrasmApplicationReview[]      @relation("CrasmApplicationReviewer")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -249,6 +250,7 @@ model Member {
   memoRecipients             MemoRecipient[]                   @relation("MemoRecipientMember")
   followers                  MemberFollow[]
   ordinationApplication      OrdinationApplication?
+  crasmApplication           CrasmApplication?
   providedServiceBookings    ChaplainServiceBooking[]          @relation("ChaplainServiceBookingProvider")
   serviceAvailabilitySlots   ChaplainServiceAvailability[]
 
@@ -1284,6 +1286,49 @@ model OrdinationApplicationReview {
   application   OrdinationApplication  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
   reviewerId    String
   reviewer      User                   @relation("OrdinationApplicationReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  action        OrdinationReviewAction
+  notes         String?
+  createdAt     DateTime               @default(now())
+
+  @@index([applicationId])
+  @@index([reviewerId])
+}
+
+model CrasmApplication {
+  id String @id @default(uuid())
+
+  memberId String @unique
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  status                  OrdinationApplicationStatus @default(DRAFT)
+  appointmentTitle        String
+  appointingOfficer       String
+  recommendingOfficer     String
+  territorialJurisdiction String
+  churchName              String
+  churchAddress           String
+  documents               Json
+  informationAccurate     Boolean @default(false)
+  backgroundCheckConsent  Boolean @default(false)
+  requestedInformation    String?
+  adminNotes              String?
+  submittedAt             DateTime?
+  reviewedAt              DateTime?
+  decidedAt               DateTime?
+  reviews                 CrasmApplicationReview[]
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@index([status])
+  @@index([submittedAt])
+}
+
+model CrasmApplicationReview {
+  id            String                 @id @default(uuid())
+  applicationId String
+  application   CrasmApplication       @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  reviewerId    String
+  reviewer      User                   @relation("CrasmApplicationReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
   action        OrdinationReviewAction
   notes         String?
   createdAt     DateTime               @default(now())

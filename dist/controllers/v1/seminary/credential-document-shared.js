@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findActiveCredentialDocument = exports.buildVerificationToken = exports.buildNextBarcodeNumber = exports.buildNextDocumentNumber = exports.seminaryCredentialDocumentInclude = void 0;
 const node_crypto_1 = require("node:crypto");
-const enums_1 = require("../../../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 const documentPrefixMap = {
     [enums_1.SeminaryCredentialDocumentType.DIPLOMA]: 'DIP',
     [enums_1.SeminaryCredentialDocumentType.CERTIFICATE]: 'CERT',

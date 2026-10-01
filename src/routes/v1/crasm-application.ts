@@ -1,0 +1,17 @@
+import { Router } from 'express';
+import { authenticate } from '@/middlewares/authentication';
+import authorize from '@/middlewares/authorization';
+import { expressRateLimit } from '@/middlewares/express-rate-limiter';
+import { validate } from '@/common/sanitation';
+import { UserType } from '@/generated/prisma/enums';
+import { createUploadthingExpressHandler } from '@/lib/uploadthing';
+import { getAllCrasmApplications, getCurrentCrasmApplication, reviewCrasmApplication, saveCurrentCrasmApplication, submitCurrentCrasmApplication } from '@/controllers/v1/crasm-application/crasm-application.controller';
+import { reviewCrasmApplicationSchema, saveCrasmApplicationSchema, submitCrasmApplicationSchema } from '@/validators/crasm-application';
+const router = Router();
+router.use('/current/documents/upload', expressRateLimit('basic'), createUploadthingExpressHandler({ maxFileSize: '16MB', maxFileCount: 1 }));
+router.get('/current', expressRateLimit('basic'), authenticate, authorize([UserType.MEMBER, UserType.OFFICER]), getCurrentCrasmApplication);
+router.put('/current', expressRateLimit('basic'), authenticate, authorize([UserType.MEMBER, UserType.OFFICER]), validate(saveCrasmApplicationSchema), saveCurrentCrasmApplication);
+router.post('/current/submit', expressRateLimit('basic'), authenticate, authorize([UserType.MEMBER, UserType.OFFICER]), validate(submitCrasmApplicationSchema), submitCurrentCrasmApplication);
+router.get('/', expressRateLimit('basic'), authenticate, authorize([UserType.ADMIN]), getAllCrasmApplications);
+router.patch('/:id/review', expressRateLimit('basic'), authenticate, authorize([UserType.ADMIN]), validate(reviewCrasmApplicationSchema), reviewCrasmApplication);
+export default router;

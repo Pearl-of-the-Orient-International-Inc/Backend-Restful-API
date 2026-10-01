@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bulkImportSeminaryStudents = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const client_1 = require("../../../generated/prisma/client");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const client_1 = require("@/generated/prisma/client");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
 const student_shared_1 = require("./student-shared");
 class DuplicateStudentsError extends Error {
 }

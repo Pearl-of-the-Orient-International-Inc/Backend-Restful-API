@@ -13,18 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const jwt_1 = require("../../../lib/jwt");
-const password_hash_1 = require("../../../lib/password-hash");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const helpers_1 = require("../../../lib/helpers");
-const config_1 = __importDefault(require("../../../config"));
-const mailers_1 = require("../../../mailers");
-const login_notification_1 = require("../../../mailers/templates/login-notification");
-const enums_1 = require("../../../generated/prisma/enums");
-const client_1 = require("../../../generated/prisma/client");
-const activity_log_1 = require("../../../lib/activity-log");
+const http_codes_1 = require("@/common/http-codes");
+const jwt_1 = require("@/lib/jwt");
+const password_hash_1 = require("@/lib/password-hash");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const helpers_1 = require("@/lib/helpers");
+const config_1 = __importDefault(require("@/config"));
+const mailers_1 = require("@/mailers");
+const login_notification_1 = require("@/mailers/templates/login-notification");
+const enums_1 = require("@/generated/prisma/enums");
+const client_1 = require("@/generated/prisma/client");
+const activity_log_1 = require("@/lib/activity-log");
 const formatDateOfBirthPassword = (dateOfBirth) => {
     if (!dateOfBirth)
         return null;

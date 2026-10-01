@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPublicChaplainServiceBooking = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const enums_1 = require("../../../generated/prisma/enums");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const mailers_1 = require("../../../mailers");
-const chaplain_service_booking_status_1 = require("../../../mailers/templates/chaplain-service-booking-status");
+const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const mailers_1 = require("@/mailers");
+const chaplain_service_booking_status_1 = require("@/mailers/templates/chaplain-service-booking-status");
 const createPublicChaplainServiceBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;

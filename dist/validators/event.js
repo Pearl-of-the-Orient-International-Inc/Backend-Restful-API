@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllEventsSchema = exports.inviteEventAttendeesSchema = exports.updateEventSchema = exports.createEventSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 const optionalTrimmedString = (maxLength) => zod_1.z
     .string()
     .trim()

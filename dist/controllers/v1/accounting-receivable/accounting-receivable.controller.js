@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.recordAccountingReceivablePayment = exports.updateAccountingReceivableStatus = exports.deleteAccountingReceivable = exports.updateAccountingReceivable = exports.createAccountingReceivable = exports.getAccountingReceivableById = exports.getAccountingReceivables = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const client_1 = require("../../../generated/prisma/client");
-const enums_1 = require("../../../generated/prisma/enums");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const client_1 = require("@/generated/prisma/client");
+const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
 const accounting_receivable_shared_1 = require("./accounting-receivable-shared");
 const toNumber = (value) => Number(value !== null && value !== void 0 ? value : 0);
 const balanceOf = ({ paidAmount, totalAmount }) => Math.max(toNumber(totalAmount) - toNumber(paidAmount), 0);

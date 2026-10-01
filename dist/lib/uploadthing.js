@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.utapi = exports.createUploadthingExpressHandler = exports.uploadRouter = exports.createUploadRouter = void 0;
 const express_1 = require("uploadthing/express");
 const server_1 = require("uploadthing/server");
-const prisma_1 = require("../lib/prisma");
-const jwt_1 = require("../lib/jwt");
-const enums_1 = require("../generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
+const jwt_1 = require("@/lib/jwt");
+const enums_1 = require("@/generated/prisma/enums");
 const f = (0, express_1.createUploadthing)();
 const utapi = new server_1.UTApi();
 exports.utapi = utapi;
@@ -151,6 +151,19 @@ const createOrdinationDocumentUploaderRoute = () => f({
     if (!member || !member.isActive || member.status !== 'APPROVED' || member.memberType !== 'PROFESSIONAL_CHAPLAIN')
         throw new Error('Only eligible Professional Chaplains may upload ordination documents');
     return { userId: decoded.userId, memberId: member.id };
+}))
+    .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) { return ({ memberId: metadata.memberId, fileUrl: file.ufsUrl, fileName: file.name, mimeType: file.type, fileSize: file.size }); }));
+const createCrasmDocumentUploaderRoute = () => f({ image: { maxFileSize: '8MB', maxFileCount: 1 }, pdf: { maxFileSize: '16MB', maxFileCount: 1 } })
+    .middleware((_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
+    var _b;
+    const bearerToken = ((_b = req.headers.authorization) === null || _b === void 0 ? void 0 : _b.startsWith('Bearer ')) ? req.headers.authorization.slice(7).trim() : undefined;
+    const decoded = bearerToken ? (0, jwt_1.verifyAccessToken)(bearerToken) : null;
+    if (!(decoded === null || decoded === void 0 ? void 0 : decoded.userId))
+        throw new Error('Authentication required');
+    const member = yield prisma_1.prisma.member.findUnique({ where: { userId: decoded.userId }, select: { id: true, memberType: true, status: true, isActive: true } });
+    if (!member || !member.isActive || member.status !== 'APPROVED' || member.memberType !== 'ORDAINED_AND_COMMISSIONED_PRACTITIONER')
+        throw new Error('Only eligible ordained and commissioned practitioners may upload CRASM documents');
+    return { memberId: member.id };
 }))
     .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) { return ({ memberId: metadata.memberId, fileUrl: file.ufsUrl, fileName: file.name, mimeType: file.type, fileSize: file.size }); }));
 const createSeminaryStudyMaterialUploaderRoute = () => f({
@@ -518,6 +531,7 @@ const createUploadRouter = (options = {}) => {
         avatarUploader: createAvatarUploaderRoute(options),
         requirementUploader: createMemberRequirementUploaderRoute(),
         ordinationDocumentUploader: createOrdinationDocumentUploaderRoute(),
+        crasmDocumentUploader: createCrasmDocumentUploaderRoute(),
         seminaryRequirementUploader: createSeminaryDocumentUploaderRoute(),
         seminaryPaymentReceiptUploader: createSeminaryDocumentUploaderRoute(),
         seminaryStudyMaterialUploader: createSeminaryStudyMaterialUploaderRoute(),

@@ -72,7 +72,11 @@ export const getPublicMemberProfile = async (
           },
         },
         officerAssignments: {
-          where: { isActive: true },
+          where: {
+            isActive: true,
+            OR: [{ endDate: null }, { endDate: { gt: new Date() } }],
+            officeTitle: { isActive: true },
+          },
           orderBy: { createdAt: 'asc' },
           select: {
             id: true,

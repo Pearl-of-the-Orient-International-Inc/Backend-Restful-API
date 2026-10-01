@@ -181,6 +181,18 @@ const createOrdinationDocumentUploaderRoute = () =>
     })
     .onUploadComplete(async ({ metadata, file }) => ({ memberId: metadata.memberId, fileUrl: file.ufsUrl, fileName: file.name, mimeType: file.type, fileSize: file.size }));
 
+const createCrasmDocumentUploaderRoute = () =>
+  f({ image: { maxFileSize: '8MB', maxFileCount: 1 }, pdf: { maxFileSize: '16MB', maxFileCount: 1 } })
+    .middleware(async ({ req }) => {
+      const bearerToken = req.headers.authorization?.startsWith('Bearer ') ? req.headers.authorization.slice(7).trim() : undefined;
+      const decoded = bearerToken ? verifyAccessToken(bearerToken) as { userId?: string } | null : null;
+      if (!decoded?.userId) throw new Error('Authentication required');
+      const member = await prisma.member.findUnique({ where: { userId: decoded.userId }, select: { id: true, memberType: true, status: true, isActive: true } });
+      if (!member || !member.isActive || member.status !== 'APPROVED' || member.memberType !== 'ORDAINED_AND_COMMISSIONED_PRACTITIONER') throw new Error('Only eligible ordained and commissioned practitioners may upload CRASM documents');
+      return { memberId: member.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => ({ memberId: metadata.memberId, fileUrl: file.ufsUrl, fileName: file.name, mimeType: file.type, fileSize: file.size }));
+
 const createSeminaryStudyMaterialUploaderRoute = () =>
   f({
     blob: {
@@ -608,6 +620,7 @@ export const createUploadRouter = (options: UploadLimitOptions = {}) =>
     avatarUploader: createAvatarUploaderRoute(options),
     requirementUploader: createMemberRequirementUploaderRoute(),
     ordinationDocumentUploader: createOrdinationDocumentUploaderRoute(),
+    crasmDocumentUploader: createCrasmDocumentUploaderRoute(),
     seminaryRequirementUploader: createSeminaryDocumentUploaderRoute(),
     seminaryPaymentReceiptUploader: createSeminaryDocumentUploaderRoute(),
     seminaryStudyMaterialUploader: createSeminaryStudyMaterialUploaderRoute(),

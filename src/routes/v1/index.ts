@@ -36,6 +36,7 @@ import chaplainProductOrderRoutes from '@/routes/v1/chaplain-product-order';
 import chaplainServiceRoutes from '@/routes/v1/chaplain-service';
 import paymentRoutes from '@/routes/v1/payment';
 import ordinationApplicationRoutes from '@/routes/v1/ordination-application';
+import crasmApplicationRoutes from '@/routes/v1/crasm-application';
 import surveyFeedbackRoutes from '@/routes/v1/survey-feedback';
 
 const router = Router();
@@ -83,6 +84,7 @@ router.use('/chaplain-product-orders', chaplainProductOrderRoutes);
 router.use('/chaplain-services', chaplainServiceRoutes);
 router.use('/payments', paymentRoutes);
 router.use('/ordination-applications', ordinationApplicationRoutes);
+router.use('/crasm-applications', crasmApplicationRoutes);
 router.use('/survey-feedback', surveyFeedbackRoutes);
 
 export default router;

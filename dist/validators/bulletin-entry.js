@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBulletinEntriesSchema = exports.updateBulletinEntrySchema = exports.createBulletinEntrySchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 const optionalText = (max) => zod_1.z.string().trim().max(max).nullable().optional();
 const bulletinEntryBodySchema = zod_1.z
     .object({

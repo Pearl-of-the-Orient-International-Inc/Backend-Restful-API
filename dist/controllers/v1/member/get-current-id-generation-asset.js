@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCurrentIdGenerationAsset = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const member_unique_id_1 = require("../../../lib/member-unique-id");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const member_unique_id_1 = require("@/lib/member-unique-id");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
 const getCurrentIdGenerationAsset = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userId = req.userId;

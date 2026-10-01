@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.publishMemoAnnouncement = void 0;
 const promises_1 = require("node:fs/promises");
 const node_path_1 = __importDefault(require("node:path"));
-const http_codes_1 = require("../../../common/http-codes");
-const client_1 = require("../../../generated/prisma/client");
-const mailers_1 = require("../../../mailers");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const client_1 = require("@/generated/prisma/client");
+const mailers_1 = require("@/mailers");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
 const memo_announcement_shared_1 = require("./memo-announcement-shared");
 const buildMemoEmail = ({ referenceNumber, title, }) => ({
     subject: `Ref. No. ${referenceNumber} - ${title}`,

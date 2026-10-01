@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSeminaryInstructor = void 0;
-const http_codes_1 = require("../../../common/http-codes");
+const http_codes_1 = require("@/common/http-codes");
 const crypto_1 = require("crypto");
-const client_1 = require("../../../generated/prisma/client");
-const enums_1 = require("../../../generated/prisma/enums");
-const password_hash_1 = require("../../../lib/password-hash");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const config_1 = __importDefault(require("../../../config"));
+const client_1 = require("@/generated/prisma/client");
+const enums_1 = require("@/generated/prisma/enums");
+const password_hash_1 = require("@/lib/password-hash");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const config_1 = __importDefault(require("@/config"));
 const instructor_shared_1 = require("./instructor-shared");
 const instructor_invitation_1 = require("./instructor-invitation");
 const createSeminaryInstructor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

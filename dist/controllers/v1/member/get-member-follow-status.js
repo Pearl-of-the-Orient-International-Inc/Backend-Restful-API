@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMemberFollowStatus = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const winston_1 = require("@/lib/winston");
 const member_follow_shared_1 = require("./member-follow-shared");
 const getMemberFollowStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

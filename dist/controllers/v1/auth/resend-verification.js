@@ -13,16 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resendVerification = void 0;
-const winston_1 = require("../../../lib/winston");
-const helpers_1 = require("../../../lib/helpers");
-const prisma_1 = require("../../../lib/prisma");
-const jwt_1 = require("../../../lib/jwt");
-const http_codes_1 = require("../../../common/http-codes");
-const config_1 = __importDefault(require("../../../config"));
-const verification_redirect_1 = require("../../../lib/verification-redirect");
-const mailers_1 = require("../../../mailers");
-const verify_email_1 = require("../../../mailers/templates/verify-email");
-const enums_1 = require("../../../generated/prisma/enums");
+const winston_1 = require("@/lib/winston");
+const helpers_1 = require("@/lib/helpers");
+const prisma_1 = require("@/lib/prisma");
+const jwt_1 = require("@/lib/jwt");
+const http_codes_1 = require("@/common/http-codes");
+const config_1 = __importDefault(require("@/config"));
+const verification_redirect_1 = require("@/lib/verification-redirect");
+const mailers_1 = require("@/mailers");
+const verify_email_1 = require("@/mailers/templates/verify-email");
+const enums_1 = require("@/generated/prisma/enums");
 const resendVerification = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {

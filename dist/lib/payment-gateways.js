@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.capturePayPalOrder = exports.createPayPalCheckout = exports.getPayPalAccessToken = exports.createXenditCheckout = void 0;
-const config_1 = __importDefault(require("../config"));
+const config_1 = __importDefault(require("@/config"));
 const requireValue = (value, name) => {
     if (!value)
         throw new Error(`${name} is not configured`);

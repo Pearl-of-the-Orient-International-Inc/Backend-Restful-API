@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSessionFromCookie = void 0;
-const jwt_1 = require("../lib/jwt");
+const jwt_1 = require("@/lib/jwt");
 const getSessionFromCookie = (req, _res, next) => {
     var _a;
     try {

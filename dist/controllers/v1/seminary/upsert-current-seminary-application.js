@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.upsertCurrentSeminaryApplication = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const enums_1 = require("../../../generated/prisma/enums");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const mailers_1 = require("../../../mailers");
-const seminary_admission_submitted_1 = require("../../../mailers/templates/seminary-admission-submitted");
+const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const mailers_1 = require("@/mailers");
+const seminary_admission_submitted_1 = require("@/mailers/templates/seminary-admission-submitted");
 const seminary_shared_1 = require("./seminary-shared");
 const upsertCurrentSeminaryApplication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;

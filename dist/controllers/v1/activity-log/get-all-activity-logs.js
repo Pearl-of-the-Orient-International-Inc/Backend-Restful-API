@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllActivityLogs = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
 const activity_log_shared_1 = require("./activity-log-shared");
 const getAllActivityLogs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

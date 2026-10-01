@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTask = exports.moveTask = exports.updateTask = exports.createTask = exports.deleteTaskBoard = exports.updateTaskBoard = exports.createTaskBoard = exports.getTaskManagement = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const client_1 = require("../../../generated/prisma/client");
-const enums_1 = require("../../../generated/prisma/enums");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const client_1 = require("@/generated/prisma/client");
+const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
 const taskInclude = {
     assignee: {
         select: {

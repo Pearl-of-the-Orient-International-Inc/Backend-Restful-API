@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllNewsBlogsSchema = exports.updateNewsBlogSchema = exports.createNewsBlogSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 const mediaItemSchema = zod_1.z.object({
     kind: zod_1.z.enum(enums_1.NewsBlogMediaKind),
     fileUrl: zod_1.z.url({ message: 'Media URL must be a valid URL' }),

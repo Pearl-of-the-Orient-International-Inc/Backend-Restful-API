@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAdminChaplainServiceBookingFinancials = exports.cancelCurrentRequesterChaplainServiceBooking = exports.getCurrentRequesterChaplainServiceBookings = exports.updateCurrentProviderChaplainServiceBookingStatus = exports.updateAdminChaplainServiceBookingStatus = exports.getCurrentProviderChaplainServiceBookings = exports.getAdminChaplainServiceBookings = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const enums_1 = require("../../../generated/prisma/enums");
-const client_1 = require("../../../generated/prisma/client");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const mailers_1 = require("../../../mailers");
-const chaplain_service_booking_status_1 = require("../../../mailers/templates/chaplain-service-booking-status");
+const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
+const client_1 = require("@/generated/prisma/client");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const mailers_1 = require("@/mailers");
+const chaplain_service_booking_status_1 = require("@/mailers/templates/chaplain-service-booking-status");
 const bookingInclude = {
     service: { select: { id: true, name: true, commissionPercent: true } },
     providerMember: {

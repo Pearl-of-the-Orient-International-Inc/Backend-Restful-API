@@ -454,6 +454,12 @@ export const getSeminaryStudentByIdSchema = z.object({
   }),
 });
 
+export const getPublicSeminaryStudentSchema = z.object({
+  params: z.object({
+    studentId: seminaryStudentIdSchema,
+  }),
+});
+
 export const deleteSeminaryStudentSchema = z.object({
   params: z.object({
     studentId: seminaryStudentIdSchema,

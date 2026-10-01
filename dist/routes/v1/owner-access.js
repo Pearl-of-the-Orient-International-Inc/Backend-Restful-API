@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const sanitation_1 = require("../../common/sanitation");
-const owner_access_controller_1 = require("../../controllers/v1/owner-access/owner-access.controller");
-const owner_access_1 = require("../../middlewares/owner-access");
-const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
-const owner_access_2 = require("../../validators/owner-access");
+const sanitation_1 = require("@/common/sanitation");
+const owner_access_controller_1 = require("@/controllers/v1/owner-access/owner-access.controller");
+const owner_access_1 = require("@/middlewares/owner-access");
+const express_rate_limiter_1 = require("@/middlewares/express-rate-limiter");
+const owner_access_2 = require("@/validators/owner-access");
 const router = (0, express_1.Router)();
 router.post('/login', (0, express_rate_limiter_1.expressRateLimit)('auth'), (0, sanitation_1.validate)(owner_access_2.ownerLoginSchema), owner_access_controller_1.loginOwner);
 router.post('/logout', (0, express_rate_limiter_1.expressRateLimit)('basic'), owner_access_controller_1.logoutOwner);

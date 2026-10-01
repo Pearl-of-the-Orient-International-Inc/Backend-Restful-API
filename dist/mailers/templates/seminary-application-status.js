@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.seminaryApplicationStatusTemplate = void 0;
-const enums_1 = require("../../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 const statusCopy = {
     [enums_1.SeminaryApplicationStatus.UNDER_REVIEW]: {
         subject: 'Your Seminary Application Is Under Review',

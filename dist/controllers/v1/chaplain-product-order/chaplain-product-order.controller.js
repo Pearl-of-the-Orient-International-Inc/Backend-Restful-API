@@ -11,11 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateChaplainProductOrderStatus = exports.getChaplainProductOrders = exports.attachOrderPaymentSession = exports.getOrderCheckoutContext = exports.createChaplainProductOrder = void 0;
 const node_crypto_1 = require("node:crypto");
-const http_codes_1 = require("../../../common/http-codes");
-const enums_1 = require("../../../generated/prisma/enums");
-const prisma_1 = require("../../../lib/prisma");
-const payment_fees_1 = require("../../../lib/payment-fees");
-const winston_1 = require("../../../lib/winston");
+const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
+const payment_fees_1 = require("@/lib/payment-fees");
+const winston_1 = require("@/lib/winston");
 const orderInclude = {
     product: true,
     customerUser: {

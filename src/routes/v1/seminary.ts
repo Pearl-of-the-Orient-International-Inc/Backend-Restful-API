@@ -53,6 +53,7 @@ import {
   inviteSeminaryInstructor,
 } from '@/controllers/v1/seminary/instructor-invitation';
 import { getSeminaryStudentById } from '@/controllers/v1/seminary/get-seminary-student-by-id';
+import { getPublicSeminaryStudent } from '@/controllers/v1/seminary/get-public-seminary-student';
 import { updateSeminaryAcademicYear } from '@/controllers/v1/seminary/update-seminary-academic-year';
 import { updateSeminaryAcademicYearSession } from '@/controllers/v1/seminary/update-seminary-academic-year-session';
 import { updateSeminaryAcademicYearStatus } from '@/controllers/v1/seminary/update-seminary-academic-year-status';
@@ -124,6 +125,7 @@ import {
   inviteSeminaryInstructorSchema,
   getSeminaryApplicationByIdSchema,
   getSeminaryStudentByIdSchema,
+  getPublicSeminaryStudentSchema,
   updateSeminaryApplicationStatusSchema,
   updateSeminaryAcademicYearSchema,
   updateSeminaryAcademicYearSessionSchema,
@@ -342,6 +344,13 @@ router.get(
   ...seminaryStudentReadAccess,
   validate(getAllSeminaryStudentsSchema),
   getAllSeminaryStudents,
+);
+
+router.get(
+  '/public/students/:studentId',
+  expressRateLimit('basic'),
+  validate(getPublicSeminaryStudentSchema),
+  getPublicSeminaryStudent,
 );
 
 router.post(

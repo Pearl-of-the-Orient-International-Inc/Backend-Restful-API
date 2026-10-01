@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildSeminaryPaymentData = exports.buildSeminaryRequirementsData = exports.buildSeminaryApplicationData = exports.parseDate = exports.parseAge = exports.trimToNull = exports.seminaryApplicationInclude = void 0;
-const enums_1 = require("../../../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 exports.seminaryApplicationInclude = {
     member: {
         select: {

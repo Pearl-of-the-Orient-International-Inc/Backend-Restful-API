@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateNextMemberCertificateCredentialId = generateNextMemberCertificateCredentialId;
-const prisma_1 = require("../lib/prisma");
+const prisma_1 = require("@/lib/prisma");
 const SERIES_WIDTH = 5;
 const buildInitials = (firstName, middleInitial, lastName) => {
     const first = firstName.trim().charAt(0) || 'X';

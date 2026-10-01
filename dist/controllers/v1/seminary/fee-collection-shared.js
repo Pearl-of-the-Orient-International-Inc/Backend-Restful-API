@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toFeeCollectionResponse = exports.normalizeFeeCollectionStatus = exports.feeCollectionProgramLabels = exports.feeCollectionStatusLabels = void 0;
-const enums_1 = require("../../../generated/prisma/enums");
+const enums_1 = require("@/generated/prisma/enums");
 const decimalToNumber = (value) => Number(value.toString());
 exports.feeCollectionStatusLabels = {
     [enums_1.SeminaryFeeCollectionStatus.PENDING]: 'Pending',

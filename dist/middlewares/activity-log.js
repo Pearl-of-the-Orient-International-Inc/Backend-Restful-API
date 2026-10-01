@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activityLogMiddleware = void 0;
-const client_1 = require("../generated/prisma/client");
-const activity_log_1 = require("../lib/activity-log");
-const prisma_1 = require("../lib/prisma");
+const client_1 = require("@/generated/prisma/client");
+const activity_log_1 = require("@/lib/activity-log");
+const prisma_1 = require("@/lib/prisma");
 const MUTATION_METHODS = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 const EXCLUDED_PATHS = [
     '/api/v1/auth/login',

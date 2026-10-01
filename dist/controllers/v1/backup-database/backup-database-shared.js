@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildBackupOverviewResponse = exports.maybeRunAutomaticBackup = exports.restoreDatabaseBackupSnapshot = exports.createDatabaseBackupSnapshot = exports.buildBackupFileName = exports.pruneExpiredBackups = exports.getOrCreateBackupSettings = exports.calculateNextBackupRun = exports.serializeBackupSnapshot = void 0;
-const client_1 = require("../../../generated/prisma/client");
-const prisma_1 = require("../../../lib/prisma");
-const uploadthing_1 = require("../../../lib/uploadthing");
-const winston_1 = require("../../../lib/winston");
-const activity_log_1 = require("../../../lib/activity-log");
-const client_2 = require("../../../generated/prisma/client");
+const client_1 = require("@/generated/prisma/client");
+const prisma_1 = require("@/lib/prisma");
+const uploadthing_1 = require("@/lib/uploadthing");
+const winston_1 = require("@/lib/winston");
+const activity_log_1 = require("@/lib/activity-log");
+const client_2 = require("@/generated/prisma/client");
 const AUTOMATIC_BACKUP_LOCK_KEY = BigInt('20260324');
 const BACKUP_TABLE_NAMES = [
     'User',

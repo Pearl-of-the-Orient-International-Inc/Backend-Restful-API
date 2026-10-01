@@ -10,14 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.forgotPassword = void 0;
-const http_codes_1 = require("../../../common/http-codes");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const helpers_1 = require("../../../lib/helpers");
-const enums_1 = require("../../../generated/prisma/enums");
-const mailers_1 = require("../../../mailers");
-const forgot_password_1 = require("../../../mailers/templates/forgot-password");
-const verification_redirect_1 = require("../../../lib/verification-redirect");
+const http_codes_1 = require("@/common/http-codes");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const helpers_1 = require("@/lib/helpers");
+const enums_1 = require("@/generated/prisma/enums");
+const mailers_1 = require("@/mailers");
+const forgot_password_1 = require("@/mailers/templates/forgot-password");
+const verification_redirect_1 = require("@/lib/verification-redirect");
 const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.body;
     try {

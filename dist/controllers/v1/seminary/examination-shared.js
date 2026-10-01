@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getExaminationWhereForUser = exports.toExaminationResponse = void 0;
-const enums_1 = require("../../../generated/prisma/enums");
-const prisma_1 = require("../../../lib/prisma");
+const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("@/lib/prisma");
 const toExaminationResponse = (examination) => (Object.assign(Object.assign({}, examination), { durationMinutes: String(examination.durationMinutes), passingScore: String(examination.passingScore), questions: Array.isArray(examination.questions) ? examination.questions : [], totalPoints: String(examination.totalPoints) }));
 exports.toExaminationResponse = toExaminationResponse;
 const getExaminationWhereForUser = (userId) => __awaiter(void 0, void 0, void 0, function* () {

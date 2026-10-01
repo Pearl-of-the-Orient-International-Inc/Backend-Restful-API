@@ -14,17 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyPasskeyAuthentication = exports.getPasskeyAuthenticationOptions = exports.verifyPasskeyRegistration = exports.getPasskeyRegistrationOptions = exports.getPasskeyStatus = void 0;
 const server_1 = require("@simplewebauthn/server");
-const http_codes_1 = require("../../../common/http-codes");
-const enums_1 = require("../../../generated/prisma/enums");
-const helpers_1 = require("../../../lib/helpers");
-const jwt_1 = require("../../../lib/jwt");
-const prisma_1 = require("../../../lib/prisma");
-const winston_1 = require("../../../lib/winston");
-const config_1 = __importDefault(require("../../../config"));
-const mailers_1 = require("../../../mailers");
-const login_notification_1 = require("../../../mailers/templates/login-notification");
-const client_1 = require("../../../generated/prisma/client");
-const activity_log_1 = require("../../../lib/activity-log");
+const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
+const helpers_1 = require("@/lib/helpers");
+const jwt_1 = require("@/lib/jwt");
+const prisma_1 = require("@/lib/prisma");
+const winston_1 = require("@/lib/winston");
+const config_1 = __importDefault(require("@/config"));
+const mailers_1 = require("@/mailers");
+const login_notification_1 = require("@/mailers/templates/login-notification");
+const client_1 = require("@/generated/prisma/client");
+const activity_log_1 = require("@/lib/activity-log");
 const normalizeOrigin = (origin) => origin.replace(/\/+$/, '');
 const getRpID = () => {
     if (config_1.default.PASSKEY_RP_ID) {

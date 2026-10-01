@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authentication_1 = require("@/middlewares/authentication");
+const authorization_1 = __importDefault(require("@/middlewares/authorization"));
+const express_rate_limiter_1 = require("@/middlewares/express-rate-limiter");
+const sanitation_1 = require("@/common/sanitation");
+const enums_1 = require("@/generated/prisma/enums");
+const uploadthing_1 = require("@/lib/uploadthing");
+const crasm_application_controller_1 = require("@/controllers/v1/crasm-application/crasm-application.controller");
+const crasm_application_1 = require("@/validators/crasm-application");
+const router = (0, express_1.Router)();
+router.use('/current/documents/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({ maxFileSize: '16MB', maxFileCount: 1 }));
+router.get('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER]), crasm_application_controller_1.getCurrentCrasmApplication);
+router.put('/current', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER]), (0, sanitation_1.validate)(crasm_application_1.saveCrasmApplicationSchema), crasm_application_controller_1.saveCurrentCrasmApplication);
+router.post('/current/submit', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER, enums_1.UserType.OFFICER]), (0, sanitation_1.validate)(crasm_application_1.submitCrasmApplicationSchema), crasm_application_controller_1.submitCurrentCrasmApplication);
+exports.default = router;
