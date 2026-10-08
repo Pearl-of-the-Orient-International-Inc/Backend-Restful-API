@@ -8,6 +8,7 @@ import { Router } from 'express';
  */
 import { getCurrentSeminaryApplication } from '@/controllers/v1/seminary/get-current-seminary-application';
 import { getCurrentSeminaryStudentNotifications } from '@/controllers/v1/seminary/get-current-seminary-student-notifications';
+import { getCurrentStudentPortal } from '@/controllers/v1/seminary/get-current-student-portal';
 import { upsertCurrentSeminaryApplication } from '@/controllers/v1/seminary/upsert-current-seminary-application';
 import { getAllSeminaryApplications } from '@/controllers/v1/seminary/get-all-seminary-applications';
 import { getSeminaryApplicationById } from '@/controllers/v1/seminary/get-seminary-application-by-id';
@@ -20,9 +21,11 @@ import { createSeminaryAssignment } from '@/controllers/v1/seminary/create-semin
 import { createSeminaryCourse } from '@/controllers/v1/seminary/create-seminary-course';
 import { createSeminaryExamination } from '@/controllers/v1/seminary/create-seminary-examination';
 import { createSeminaryGradeRecord } from '@/controllers/v1/seminary/create-seminary-grade-record';
+import { bulkEncodeSeminaryGrades } from '@/controllers/v1/seminary/bulk-encode-seminary-grades';
 import { createSeminaryInstructor } from '@/controllers/v1/seminary/create-seminary-instructor';
 import { createSeminaryStudyMaterial } from '@/controllers/v1/seminary/create-seminary-study-material';
 import { createSeminaryStudent } from '@/controllers/v1/seminary/create-seminary-student';
+import { changeSeminaryStudentPassword } from '@/controllers/v1/seminary/change-seminary-student-password';
 import { deleteSeminaryAcademicYear } from '@/controllers/v1/seminary/delete-seminary-academic-year';
 import { deleteSeminaryAssignment } from '@/controllers/v1/seminary/delete-seminary-assignment';
 import { deleteSeminaryCourse } from '@/controllers/v1/seminary/delete-seminary-course';
@@ -93,11 +96,13 @@ import {
   createSeminaryCourseSchema,
   createSeminaryExaminationSchema,
   createSeminaryGradeRecordSchema,
+  bulkEncodeSeminaryGradesSchema,
   createSeminaryInstructorSchema,
   createSeminaryStudyMaterialSchema,
   acceptSeminaryInstructorInviteSchema,
   bulkDeleteSeminaryStudentsSchema,
   createSeminaryStudentSchema,
+  changeSeminaryStudentPasswordSchema,
   deleteSeminaryAcademicYearSchema,
   deleteSeminaryAssignmentSchema,
   deleteSeminaryCourseSchema,
@@ -187,6 +192,14 @@ router.get(
   expressRateLimit('basic'),
   authenticate,
   getCurrentSeminaryStudentNotifications,
+);
+
+router.get(
+  '/current/student-portal',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  getCurrentStudentPortal,
 );
 
 router.put(
@@ -359,6 +372,14 @@ router.post(
   ...seminaryStudentAdminAccess,
   validate(createSeminaryStudentSchema),
   createSeminaryStudent,
+);
+
+router.patch(
+  '/students/:studentId/password',
+  expressRateLimit('passwordReset'),
+  ...seminaryStudentAdminAccess,
+  validate(changeSeminaryStudentPasswordSchema),
+  changeSeminaryStudentPassword,
 );
 
 router.post(
@@ -606,6 +627,14 @@ router.get(
   ...seminaryGradeRecordAccess,
   validate(getAllSeminaryGradeRecordsSchema),
   getAllSeminaryGradeRecords,
+);
+
+router.post(
+  '/grade-records/encode',
+  expressRateLimit('basic'),
+  ...seminaryGradeRecordAccess,
+  validate(bulkEncodeSeminaryGradesSchema),
+  bulkEncodeSeminaryGrades,
 );
 
 router.post(

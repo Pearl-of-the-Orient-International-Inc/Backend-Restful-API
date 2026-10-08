@@ -10,9 +10,11 @@ import type {
   createSeminaryCourseSchema,
   createSeminaryExaminationSchema,
   createSeminaryGradeRecordSchema,
+  bulkEncodeSeminaryGradesSchema,
   createSeminaryInstructorSchema,
   createSeminaryStudyMaterialSchema,
   createSeminaryStudentSchema,
+  changeSeminaryStudentPasswordSchema,
   deleteSeminaryAcademicYearSchema,
   deleteSeminaryAssignmentSchema,
   deleteSeminaryCourseSchema,
@@ -77,6 +79,10 @@ export type UpdateSeminaryApplicationStatusBody = z.infer<
 
 export type CreateSeminaryStudentBody = z.infer<
   typeof createSeminaryStudentSchema
+>['body'];
+
+export type ChangeSeminaryStudentPasswordBody = z.infer<
+  typeof changeSeminaryStudentPasswordSchema
 >['body'];
 
 export type UpdateSeminaryStudentBody = z.infer<
@@ -229,6 +235,10 @@ export type GetSeminaryGradeRecordParams = z.infer<
 
 export type CreateSeminaryGradeRecordBody = z.infer<
   typeof createSeminaryGradeRecordSchema
+>['body'];
+
+export type BulkEncodeSeminaryGradesBody = z.infer<
+  typeof bulkEncodeSeminaryGradesSchema
 >['body'];
 
 export type UpdateSeminaryGradeRecordBody = z.infer<

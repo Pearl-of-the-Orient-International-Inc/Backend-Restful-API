@@ -777,8 +777,17 @@ model SeminaryGradeRecord {
   courseCode           String
   instructorUserId     String?
   instructorName       String
-  term                 String
-  finalGrade           String
+    term                 String
+    attendanceEarned     Float?
+    attendanceTotal      Float?
+    courseworkEarned     Float?
+    courseworkTotal      Float?
+    characterEarned      Float?
+    characterTotal       Float?
+    examEarned           Float?
+    examTotal            Float?
+    weightedPercentage   Float?
+    finalGrade           String
   remarks              SeminaryGradeRecordRemark @default(ONGOING)
   status               SeminaryGradeRecordStatus @default(IN_PROGRESS)
   notes                String?
@@ -905,7 +914,7 @@ model SeminaryGradeConfiguration {
   autoPublishApproved   Boolean @default(false)
   showConditionalRemark Boolean @default(true)
   gradeScale            Json
-  criteriaWeights       Json    @default("{\"attendance\":20,\"coursework\":40,\"exam\":40}")
+  criteriaWeights       Json    @default("{\"attendance\":20,\"coursework\":25,\"character\":30,\"exam\":25}")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

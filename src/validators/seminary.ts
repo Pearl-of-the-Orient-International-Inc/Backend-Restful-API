@@ -466,6 +466,16 @@ export const deleteSeminaryStudentSchema = z.object({
   }),
 });
 
+export const changeSeminaryStudentPasswordSchema = z.object({
+  params: z.object({ studentId: z.string().trim().min(1).max(100) }),
+  body: z
+    .object({ password: passwordSchema, confirmPassword: passwordSchema })
+    .refine((value) => value.password === value.confirmPassword, {
+      message: 'Password does not match',
+      path: ['confirmPassword'],
+    }),
+});
+
 export const getAllSeminaryStudentsSchema = z.object({
   query: z.object({
     page: z
@@ -801,6 +811,25 @@ export const createSeminaryGradeRecordSchema = z.object({
   body: seminaryGradeRecordBodySchema,
 });
 
+const encodedScoreSchema = z.object({
+  studentApplicationId: z.uuid(),
+  attendanceEarned: z.coerce.number().min(0),
+  attendanceTotal: z.coerce.number().positive(),
+  courseworkEarned: z.coerce.number().min(0),
+  courseworkTotal: z.coerce.number().positive(),
+  characterEarned: z.coerce.number().min(0),
+  characterTotal: z.coerce.number().positive(),
+  examEarned: z.coerce.number().min(0),
+  examTotal: z.coerce.number().positive(),
+});
+
+export const bulkEncodeSeminaryGradesSchema = z.object({
+  body: z.object({
+    subject: z.string().trim().min(1).max(200),
+    entries: z.array(encodedScoreSchema).min(1).max(500),
+  }),
+});
+
 export const getSeminaryGradeRecordSchema = z.object({
   params: z.object({
     id: seminaryGradeRecordIdSchema,
@@ -1032,10 +1061,13 @@ const gradeCriteriaWeightsSchema = z
   .object({
     attendance: z.coerce.number().min(0).max(100),
     coursework: z.coerce.number().min(0).max(100),
+    character: z.coerce.number().min(0).max(100),
     exam: z.coerce.number().min(0).max(100),
   })
   .refine(
-    (value) => value.attendance + value.coursework + value.exam === 100,
+    (value) =>
+      value.attendance + value.coursework + value.character + value.exam ===
+      100,
     {
       message: 'criteria weights must total 100',
     },
