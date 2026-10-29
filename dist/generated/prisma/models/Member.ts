@@ -574,6 +574,7 @@ export type MemberWhereInput = {
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   followers?: Prisma.MemberFollowListRelationFilter
   ordinationApplication?: Prisma.XOR<Prisma.OrdinationApplicationNullableScalarRelationFilter, Prisma.OrdinationApplicationWhereInput> | null
+  crasmApplication?: Prisma.XOR<Prisma.CrasmApplicationNullableScalarRelationFilter, Prisma.CrasmApplicationWhereInput> | null
   providedServiceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityListRelationFilter
 }
@@ -648,6 +649,7 @@ export type MemberOrderByWithRelationInput = {
   memoRecipients?: Prisma.MemoRecipientOrderByRelationAggregateInput
   followers?: Prisma.MemberFollowOrderByRelationAggregateInput
   ordinationApplication?: Prisma.OrdinationApplicationOrderByWithRelationInput
+  crasmApplication?: Prisma.CrasmApplicationOrderByWithRelationInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingOrderByRelationAggregateInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityOrderByRelationAggregateInput
 }
@@ -725,6 +727,7 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   followers?: Prisma.MemberFollowListRelationFilter
   ordinationApplication?: Prisma.XOR<Prisma.OrdinationApplicationNullableScalarRelationFilter, Prisma.OrdinationApplicationWhereInput> | null
+  crasmApplication?: Prisma.XOR<Prisma.CrasmApplicationNullableScalarRelationFilter, Prisma.CrasmApplicationWhereInput> | null
   providedServiceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityListRelationFilter
 }, "id" | "uniqueId" | "userId">
@@ -906,6 +909,7 @@ export type MemberCreateInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -979,6 +983,7 @@ export type MemberUncheckedCreateInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -1052,6 +1057,7 @@ export type MemberUpdateInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -1125,6 +1131,7 @@ export type MemberUncheckedUpdateInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -1736,6 +1743,20 @@ export type MemberUpdateOneRequiredWithoutOrdinationApplicationNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutOrdinationApplicationInput, Prisma.MemberUpdateWithoutOrdinationApplicationInput>, Prisma.MemberUncheckedUpdateWithoutOrdinationApplicationInput>
 }
 
+export type MemberCreateNestedOneWithoutCrasmApplicationInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutCrasmApplicationInput, Prisma.MemberUncheckedCreateWithoutCrasmApplicationInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutCrasmApplicationInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutCrasmApplicationNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutCrasmApplicationInput, Prisma.MemberUncheckedCreateWithoutCrasmApplicationInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutCrasmApplicationInput
+  upsert?: Prisma.MemberUpsertWithoutCrasmApplicationInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutCrasmApplicationInput, Prisma.MemberUpdateWithoutCrasmApplicationInput>, Prisma.MemberUncheckedUpdateWithoutCrasmApplicationInput>
+}
+
 export type MemberCreateNestedOneWithoutEventAttendancesInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutEventAttendancesInput, Prisma.MemberUncheckedCreateWithoutEventAttendancesInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutEventAttendancesInput
@@ -1890,6 +1911,7 @@ export type MemberCreateWithoutUserInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -1962,6 +1984,7 @@ export type MemberUncheckedCreateWithoutUserInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -2050,6 +2073,7 @@ export type MemberUpdateWithoutUserInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -2122,6 +2146,7 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -2194,6 +2219,7 @@ export type MemberCreateWithoutFollowersInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -2266,6 +2292,7 @@ export type MemberUncheckedCreateWithoutFollowersInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -2354,6 +2381,7 @@ export type MemberUpdateWithoutFollowersInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -2426,6 +2454,7 @@ export type MemberUncheckedUpdateWithoutFollowersInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -2498,6 +2527,7 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -2570,6 +2600,7 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -2658,6 +2689,7 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -2730,6 +2762,7 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -2802,6 +2835,7 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -2874,6 +2908,7 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -2962,6 +2997,7 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -3034,6 +3070,7 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -3106,6 +3143,7 @@ export type MemberCreateWithoutSignatureInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -3178,6 +3216,7 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -3266,6 +3305,7 @@ export type MemberUpdateWithoutSignatureInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -3338,6 +3378,7 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -3410,6 +3451,7 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -3482,6 +3524,7 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -3570,6 +3613,7 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -3642,6 +3686,7 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -3714,6 +3759,7 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -3786,6 +3832,7 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -3874,6 +3921,7 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -3946,6 +3994,7 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -4018,6 +4067,7 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -4090,6 +4140,7 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -4178,6 +4229,7 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -4250,6 +4302,7 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -4322,6 +4375,7 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -4394,6 +4448,7 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -4482,6 +4537,7 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -4554,6 +4610,7 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -4626,6 +4683,7 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -4698,6 +4756,7 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -4786,6 +4845,7 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -4858,6 +4918,7 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -4930,6 +4991,7 @@ export type MemberCreateWithoutCertificatesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -5002,6 +5064,7 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -5090,6 +5153,7 @@ export type MemberUpdateWithoutCertificatesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -5162,6 +5226,7 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -5234,6 +5299,7 @@ export type MemberCreateWithoutCredentialDocumentsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -5306,6 +5372,7 @@ export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -5394,6 +5461,7 @@ export type MemberUpdateWithoutCredentialDocumentsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -5466,6 +5534,7 @@ export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -5538,6 +5607,7 @@ export type MemberCreateWithoutPublicRecordsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -5610,6 +5680,7 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -5698,6 +5769,7 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -5770,6 +5842,7 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -5842,6 +5915,7 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -5914,6 +5988,7 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -6002,6 +6077,7 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -6074,6 +6150,7 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -6146,6 +6223,7 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -6218,6 +6296,7 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -6306,6 +6385,7 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -6378,6 +6458,7 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -6450,6 +6531,7 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -6522,6 +6604,7 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -6610,6 +6693,7 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -6682,6 +6766,7 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -6754,6 +6839,7 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -6826,6 +6912,7 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -6914,6 +7001,7 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -6986,6 +7074,7 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -7058,6 +7147,7 @@ export type MemberCreateWithoutOrdinationApplicationInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -7130,6 +7220,7 @@ export type MemberUncheckedCreateWithoutOrdinationApplicationInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -7218,6 +7309,7 @@ export type MemberUpdateWithoutOrdinationApplicationInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -7290,6 +7382,315 @@ export type MemberUncheckedUpdateWithoutOrdinationApplicationInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutCrasmApplicationInput = {
+  id?: string
+  uniqueId?: string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutCrasmApplicationInput = {
+  id?: string
+  uniqueId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutCrasmApplicationInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutCrasmApplicationInput, Prisma.MemberUncheckedCreateWithoutCrasmApplicationInput>
+}
+
+export type MemberUpsertWithoutCrasmApplicationInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutCrasmApplicationInput, Prisma.MemberUncheckedUpdateWithoutCrasmApplicationInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutCrasmApplicationInput, Prisma.MemberUncheckedCreateWithoutCrasmApplicationInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutCrasmApplicationInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutCrasmApplicationInput, Prisma.MemberUncheckedUpdateWithoutCrasmApplicationInput>
+}
+
+export type MemberUpdateWithoutCrasmApplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutCrasmApplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -7362,6 +7763,7 @@ export type MemberCreateWithoutEventAttendancesInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -7434,6 +7836,7 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -7522,6 +7925,7 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -7594,6 +7998,7 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -7666,6 +8071,7 @@ export type MemberCreateWithoutTaggedEventsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -7738,6 +8144,7 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -7826,6 +8233,7 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -7898,6 +8306,7 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -7970,6 +8379,7 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -8042,6 +8452,7 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -8130,6 +8541,7 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -8202,6 +8614,7 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -8275,6 +8688,7 @@ export type MemberCreateWithoutProvidedServiceBookingsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
 
@@ -8347,6 +8761,7 @@ export type MemberUncheckedCreateWithoutProvidedServiceBookingsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
 
@@ -8435,6 +8850,7 @@ export type MemberUpdateWithoutProvidedServiceBookingsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
 
@@ -8507,6 +8923,7 @@ export type MemberUncheckedUpdateWithoutProvidedServiceBookingsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
 
@@ -8579,6 +8996,7 @@ export type MemberCreateWithoutServiceAvailabilitySlotsInput = {
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
 }
 
@@ -8651,6 +9069,7 @@ export type MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
 }
 
@@ -8739,6 +9158,7 @@ export type MemberUpdateWithoutServiceAvailabilitySlotsInput = {
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
 }
 
@@ -8811,6 +9231,7 @@ export type MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput = {
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
 }
 
@@ -8882,6 +9303,7 @@ export type MemberCreateWithoutMemoRecipientsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
 }
@@ -8954,6 +9376,7 @@ export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
   followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
 }
@@ -9042,6 +9465,7 @@ export type MemberUpdateWithoutMemoRecipientsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
 }
@@ -9114,6 +9538,7 @@ export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
   followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
 }
@@ -9354,6 +9779,7 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   memoRecipients?: boolean | Prisma.Member$memoRecipientsArgs<ExtArgs>
   followers?: boolean | Prisma.Member$followersArgs<ExtArgs>
   ordinationApplication?: boolean | Prisma.Member$ordinationApplicationArgs<ExtArgs>
+  crasmApplication?: boolean | Prisma.Member$crasmApplicationArgs<ExtArgs>
   providedServiceBookings?: boolean | Prisma.Member$providedServiceBookingsArgs<ExtArgs>
   serviceAvailabilitySlots?: boolean | Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
@@ -9535,6 +9961,7 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   memoRecipients?: boolean | Prisma.Member$memoRecipientsArgs<ExtArgs>
   followers?: boolean | Prisma.Member$followersArgs<ExtArgs>
   ordinationApplication?: boolean | Prisma.Member$ordinationApplicationArgs<ExtArgs>
+  crasmApplication?: boolean | Prisma.Member$crasmApplicationArgs<ExtArgs>
   providedServiceBookings?: boolean | Prisma.Member$providedServiceBookingsArgs<ExtArgs>
   serviceAvailabilitySlots?: boolean | Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
@@ -9571,6 +9998,7 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     memoRecipients: Prisma.$MemoRecipientPayload<ExtArgs>[]
     followers: Prisma.$MemberFollowPayload<ExtArgs>[]
     ordinationApplication: Prisma.$OrdinationApplicationPayload<ExtArgs> | null
+    crasmApplication: Prisma.$CrasmApplicationPayload<ExtArgs> | null
     providedServiceBookings: Prisma.$ChaplainServiceBookingPayload<ExtArgs>[]
     serviceAvailabilitySlots: Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>[]
   }
@@ -10038,6 +10466,7 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   memoRecipients<T extends Prisma.Member$memoRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$memoRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followers<T extends Prisma.Member$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ordinationApplication<T extends Prisma.Member$ordinationApplicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$ordinationApplicationArgs<ExtArgs>>): Prisma.Prisma__OrdinationApplicationClient<runtime.Types.Result.GetResult<Prisma.$OrdinationApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  crasmApplication<T extends Prisma.Member$crasmApplicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$crasmApplicationArgs<ExtArgs>>): Prisma.Prisma__CrasmApplicationClient<runtime.Types.Result.GetResult<Prisma.$CrasmApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   providedServiceBookings<T extends Prisma.Member$providedServiceBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$providedServiceBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceBookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceAvailabilitySlots<T extends Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -10978,6 +11407,25 @@ export type Member$ordinationApplicationArgs<ExtArgs extends runtime.Types.Exten
    */
   include?: Prisma.OrdinationApplicationInclude<ExtArgs> | null
   where?: Prisma.OrdinationApplicationWhereInput
+}
+
+/**
+ * Member.crasmApplication
+ */
+export type Member$crasmApplicationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CrasmApplication
+   */
+  select?: Prisma.CrasmApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CrasmApplication
+   */
+  omit?: Prisma.CrasmApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CrasmApplicationInclude<ExtArgs> | null
+  where?: Prisma.CrasmApplicationWhereInput
 }
 
 /**

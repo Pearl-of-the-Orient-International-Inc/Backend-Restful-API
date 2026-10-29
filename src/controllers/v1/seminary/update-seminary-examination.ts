@@ -2,7 +2,7 @@ import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import { getAssignedCourseForSubject } from './assignment-shared';
-import { toExaminationResponse } from './examination-shared';
+import { canManageExamination, toExaminationResponse } from './examination-shared';
 
 import type { Request, Response } from 'express';
 import type { UpdateSeminaryExaminationBody } from './types';
@@ -14,18 +14,7 @@ export const updateSeminaryExamination = async (
   try {
     const id = req.params.id as string;
     const body = req.body as UpdateSeminaryExaminationBody;
-    const existingExamination = await prisma.seminaryExamination.findUnique({
-      where: { id },
-      select: { id: true },
-    });
-
-    if (!existingExamination) {
-      res.status(HTTPSTATUS.NOT_FOUND).json({
-        code: 'NOT_FOUND',
-        message: 'Examination not found',
-      });
-      return;
-    }
+    if (!(await canManageExamination({ examinationId: id, userId: req.userId, res }))) return;
 
     const examinationContext = await getAssignedCourseForSubject({
       subject: body.subject,

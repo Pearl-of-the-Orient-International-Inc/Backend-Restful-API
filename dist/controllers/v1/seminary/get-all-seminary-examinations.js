@@ -23,7 +23,7 @@ const getAllSeminaryExaminations = (req, res) => __awaiter(void 0, void 0, void 
         const skip = (page - 1) * limit;
         const search = (_c = query.search) === null || _c === void 0 ? void 0 : _c.trim();
         const userWhere = yield (0, examination_shared_1.getExaminationWhereForUser)(req.userId);
-        const where = Object.assign(Object.assign(Object.assign(Object.assign({}, userWhere), (query.subject ? { subject: query.subject } : {})), (query.status ? { status: query.status } : {})), (search
+        const where = Object.assign(Object.assign(Object.assign(Object.assign({}, (query.subject ? { subject: query.subject } : {})), (query.status ? { status: query.status } : {})), (search
             ? {
                 OR: [
                     { title: { contains: search, mode: 'insensitive' } },
@@ -31,7 +31,7 @@ const getAllSeminaryExaminations = (req, res) => __awaiter(void 0, void 0, void 
                     { subject: { contains: search, mode: 'insensitive' } },
                 ],
             }
-            : {}));
+            : {})), userWhere);
         const [examinations, total] = yield prisma_1.prisma.$transaction([
             prisma_1.prisma.seminaryExamination.findMany({
                 where,

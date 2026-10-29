@@ -54,19 +54,35 @@ export const updateSeminaryFeeConfiguration = async (
       );
 
       const accounts = await tx.seminaryFeeCollectionAccount.findMany({
-        select: { amountPaid: true, id: true, totalCharges: true },
+        select: {
+          amountPaid: true,
+          dueDate: true,
+          id: true,
+          totalCharges: true,
+        },
       });
 
       await Promise.all(
         accounts.map((account) =>
           tx.seminaryFeeCollectionAccount.update({
             where: { id: account.id },
-            data: {
-              balance: Math.max(
+            data: (() => {
+              const balance = Math.max(
                 Number(account.totalCharges) - Number(account.amountPaid),
                 0,
-              ),
-            },
+              );
+              return {
+                balance,
+                status:
+                  balance <= 0
+                    ? 'PAID'
+                    : Number(account.amountPaid) > 0
+                      ? 'PARTIALLY_PAID'
+                      : account.dueDate < new Date()
+                        ? 'OVERDUE'
+                        : 'PENDING',
+              };
+            })(),
           }),
         ),
       );

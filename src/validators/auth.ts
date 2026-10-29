@@ -23,18 +23,22 @@ export const passwordSchema = z
 export const loginIdentifierSchema = z
   .string()
   .trim()
-  .min(1, { error: 'Email or instructor ID is required' })
-  .max(255, { error: 'Email or instructor ID must not exceed 255 characters' })
+  .min(1, { error: 'Email, student number, or instructor ID is required' })
+  .max(255, { error: 'Email, student number, or instructor ID must not exceed 255 characters' })
   .refine(
     (value) =>
       z.email().safeParse(value).success ||
-      /^POTSCI-\d{2}-\d{4}-INS$/i.test(value),
+      /^POTSCI-\d{2}-\d{4}-INS$/i.test(value) ||
+      /^POTSC-\d{2}-\d{4}$/i.test(value) ||
+      /^POTSCI-\d{2}-\d{4}-(?!INS$)[A-Z0-9]+$/i.test(value),
     {
-      error: 'Enter a valid email address or instructor ID',
+      error: 'Enter a valid email address, student number (for example, POTSC-26-0001), or instructor ID',
     },
   )
   .transform((value) =>
-    /^POTSCI-\d{2}-\d{4}-INS$/i.test(value)
+    /^POTSCI-\d{2}-\d{4}-INS$/i.test(value) ||
+    /^POTSC-\d{2}-\d{4}$/i.test(value) ||
+    /^POTSCI-\d{2}-\d{4}-(?!INS$)[A-Z0-9]+$/i.test(value)
       ? value.toUpperCase()
       : value.toLowerCase(),
   );

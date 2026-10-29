@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { validate } from '@/common/sanitation';
 import { archiveMemoAnnouncement } from '@/controllers/v1/memo-announcement/archive-memo-announcement';
-import { createMemoAnnouncement } from '@/controllers/v1/memo-announcement/create-memo-announcement';
 import { deleteMemoAnnouncement } from '@/controllers/v1/memo-announcement/delete-memo-announcement';
 import { getMemoAnnouncementById } from '@/controllers/v1/memo-announcement/get-memo-announcement-by-id';
 import { getMemoAnnouncements } from '@/controllers/v1/memo-announcement/get-memo-announcements';
@@ -9,11 +8,16 @@ import { publishMemoAnnouncement } from '@/controllers/v1/memo-announcement/publ
 import { restoreMemoAnnouncement } from '@/controllers/v1/memo-announcement/restore-memo-announcement';
 import { searchMemoRecipients } from '@/controllers/v1/memo-announcement/search-memo-recipients';
 import { updateMemoAnnouncement } from '@/controllers/v1/memo-announcement/update-memo-announcement';
+import { createOfficerMemoAnnouncement } from '@/controllers/v1/memo-announcement/create-officer-memo-announcement';
+import { getOfficerMemoAnnouncements } from '@/controllers/v1/memo-announcement/get-officer-memo-announcements';
+import { createMemoAnnouncement } from '@/controllers/v1/memo-announcement/create-memo-announcement';
+import { rejectMemoAnnouncement } from '@/controllers/v1/memo-announcement/reject-memo-announcement';
 import { UserType } from '@/generated/prisma/enums';
 import { authenticate } from '@/middlewares/authentication';
 import authorize from '@/middlewares/authorization';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import {
+  createOfficerMemoAnnouncementSchema,
   createMemoAnnouncementSchema,
   getMemoAnnouncementsSchema,
   publishMemoAnnouncementSchema,
@@ -22,6 +26,40 @@ import {
 } from '@/validators/memo-announcement';
 
 const router = Router();
+
+router.get(
+  '/officer',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.OFFICER]),
+  getOfficerMemoAnnouncements,
+);
+
+router.post(
+  '/',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(createMemoAnnouncementSchema),
+  createMemoAnnouncement,
+);
+
+router.post(
+  '/officer',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.OFFICER]),
+  validate(createOfficerMemoAnnouncementSchema),
+  createOfficerMemoAnnouncement,
+);
+
+router.post(
+  '/:id/reject',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  rejectMemoAnnouncement,
+);
 
 router.get(
   '/recipients/search',
@@ -41,14 +79,6 @@ router.get(
   getMemoAnnouncements,
 );
 
-router.post(
-  '/',
-  expressRateLimit('basic'),
-  authenticate,
-  authorize([UserType.ADMIN]),
-  validate(createMemoAnnouncementSchema),
-  createMemoAnnouncement,
-);
 
 router.get(
   '/:id',

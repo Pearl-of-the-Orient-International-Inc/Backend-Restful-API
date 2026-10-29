@@ -2,6 +2,7 @@ import { HTTPSTATUS } from '@/common/http-codes';
 import { hashValue } from '@/lib/password-hash';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { createSeminaryStudentPortalAccount } from './student-portal-account';
 
 import type { Request, Response } from 'express';
 import type { ChangeSeminaryStudentPasswordBody } from './types';
@@ -15,25 +16,58 @@ export const changeSeminaryStudentPassword = async (
     const { password } = req.body as ChangeSeminaryStudentPasswordBody;
     const student = await prisma.seminaryApplication.findUnique({
       where: { studentId },
-      select: { member: { select: { userId: true } } },
+      select: {
+        id: true,
+        studentId: true,
+        portalUserId: true,
+        givenName: true,
+        middleName: true,
+        surname: true,
+      },
     });
 
-    if (!student?.member?.userId) {
+    if (!student) {
       res.status(HTTPSTATUS.NOT_FOUND).json({
         code: 'NOT_FOUND',
-        message: 'This student does not have a linked portal account',
+        message: `No Seminary student record was found for student ID ${studentId}.`,
       });
       return;
     }
 
-    await prisma.user.update({
-      where: { id: student.member.userId },
-      data: { password: await hashValue(password) },
+    const createdPortalAccount = !student.portalUserId;
+
+    await prisma.$transaction(async (tx) => {
+      const portalAccount = student.portalUserId
+        ? { id: student.portalUserId }
+        : await createSeminaryStudentPortalAccount(
+            tx,
+            {
+              studentId: student.studentId ?? studentId,
+              givenName: student.givenName,
+              middleName: student.middleName,
+              surname: student.surname,
+            },
+            password,
+          );
+
+      if (!student.portalUserId) {
+        await tx.seminaryApplication.update({
+          where: { id: student.id },
+          data: { portalUserId: portalAccount.id },
+        });
+      } else {
+        await tx.user.update({
+          where: { id: portalAccount.id },
+          data: { password: await hashValue(password) },
+        });
+      }
     });
 
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
-      message: 'Student password changed successfully',
+      message: createdPortalAccount
+        ? 'Student portal account created and password saved successfully.'
+        : 'Student password changed successfully.',
     });
   } catch (err) {
     logger.error('Error while changing seminary student password', { err });

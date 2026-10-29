@@ -24,33 +24,33 @@ export const getAllMembers = async (
     const includeArchived = (req.query.includeArchived as string) === 'true';
     const skip = limit ? (page - 1) * limit : undefined;
 
+    const searchTerms = search
+      ?.trim()
+      .split(/\s+/)
+      .filter(Boolean) ?? [];
+
     const where = {
       ...(status ? { status } : {}),
       ...(includeArchived ? {} : { isActive: true }),
-      ...(search
+      ...(searchTerms.length
         ? {
-            OR: [
-              {
-                firstName: {
-                  contains: search,
-                  mode: 'insensitive' as const,
-                },
-              },
-              {
-                lastName: {
-                  contains: search,
-                  mode: 'insensitive' as const,
-                },
-              },
-              {
-                user: {
-                  email: {
-                    contains: search,
-                    mode: 'insensitive' as const,
+            AND: searchTerms.map((term) => ({
+              OR: [
+                { firstName: { contains: term, mode: 'insensitive' as const } },
+                { middleInitial: { contains: term, mode: 'insensitive' as const } },
+                { lastName: { contains: term, mode: 'insensitive' as const } },
+                { extensionName: { contains: term, mode: 'insensitive' as const } },
+                { uniqueId: { contains: term, mode: 'insensitive' as const } },
+                {
+                  user: {
+                    OR: [
+                      { name: { contains: term, mode: 'insensitive' as const } },
+                      { email: { contains: term, mode: 'insensitive' as const } },
+                    ],
                   },
                 },
-              },
-            ],
+              ],
+            })),
           }
         : {}),
     };

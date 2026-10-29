@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MemoStatus = exports.markMemoDelivery = exports.upsertMemoAttachments = exports.convertDocxToPdf = exports.writeMemoDocx = exports.resolveMemoRecipients = exports.resolveRecipientTargets = exports.generateReferenceNumber = exports.serializeMemoAnnouncement = exports.memoInclude = void 0;
+exports.MemoStatus = exports.markMemoDelivery = exports.upsertMemoAttachments = exports.convertDocxToPdf = exports.writeOfficerMemoDocument = exports.writeMemoDocx = exports.resolveMemoRecipientsByMemberWhere = exports.resolveMemoRecipients = exports.resolveRecipientTargets = exports.generateReferenceNumber = exports.serializeMemoAnnouncement = exports.memoInclude = void 0;
 const node_child_process_1 = require("node:child_process");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = __importDefault(require("node:path"));
 const node_util_1 = require("node:util");
+const docx_1 = require("docx");
 const client_1 = require("@/generated/prisma/client");
 Object.defineProperty(exports, "MemoStatus", { enumerable: true, get: function () { return client_1.MemoStatus; } });
 const prisma_1 = require("@/lib/prisma");
@@ -29,6 +30,7 @@ exports.memoInclude = {
             name: true,
             email: true,
             avatar: true,
+            role: true,
         },
     },
     recipients: {
@@ -55,6 +57,9 @@ const serializeMemoAnnouncement = (memo) => ({
     pdfFilePath: memo.pdfFilePath,
     pages: memo.pages,
     author: memo.authorUser,
+    reviewedAt: memo.reviewedAt,
+    reviewedByUserId: memo.reviewedByUserId,
+    reviewNotes: memo.reviewNotes,
     publishedAt: memo.publishedAt,
     createdAt: memo.createdAt,
     updatedAt: memo.updatedAt,
@@ -248,6 +253,29 @@ const resolveMemoRecipients = (_a) => __awaiter(void 0, [_a], void 0, function* 
     return (0, exports.resolveRecipientTargets)(targets);
 });
 exports.resolveMemoRecipients = resolveMemoRecipients;
+const resolveMemoRecipientsByMemberWhere = (where) => __awaiter(void 0, void 0, void 0, function* () {
+    const members = yield prisma_1.prisma.member.findMany({
+        where,
+        select: {
+            id: true,
+            firstName: true,
+            middleInitial: true,
+            lastName: true,
+            extensionName: true,
+            user: { select: { id: true, name: true, email: true } },
+        },
+    });
+    return members.map((member) => ({
+        type: client_1.MemoRecipientType.MEMBER,
+        userId: member.user.id,
+        memberId: member.id,
+        name: [member.firstName, member.middleInitial ? `${member.middleInitial.replace(/\.$/, '')}.` : null, member.lastName, member.extensionName]
+            .filter(Boolean)
+            .join(' ') || member.user.name,
+        email: member.user.email,
+    }));
+});
+exports.resolveMemoRecipientsByMemberWhere = resolveMemoRecipientsByMemberWhere;
 const writeMemoDocx = (_a) => __awaiter(void 0, [_a], void 0, function* ({ memoId, documentName, docxBase64, }) {
     const memoDir = node_path_1.default.join(storageRoot, memoId);
     yield (0, promises_1.mkdir)(memoDir, { recursive: true });
@@ -265,6 +293,44 @@ const writeMemoDocx = (_a) => __awaiter(void 0, [_a], void 0, function* ({ memoI
     };
 });
 exports.writeMemoDocx = writeMemoDocx;
+const writeOfficerMemoDocument = (_a) => __awaiter(void 0, [_a], void 0, function* ({ memoId, documentName, title, content, }) {
+    const toPlainText = (value) => value
+        .replace(/<\/(p|div|h[1-6]|li|blockquote)>/gi, '\n')
+        .replace(/<br\s*\/?>(?:\r?\n)?/gi, '\n')
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&amp;/gi, '&')
+        .replace(/&lt;/gi, '<')
+        .replace(/&gt;/gi, '>')
+        .trim();
+    const bodyLines = toPlainText(content)
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+    const document = new docx_1.Document({
+        sections: [
+            {
+                children: [
+                    new docx_1.Paragraph({
+                        children: [new docx_1.TextRun({ text: title, bold: true, size: 28 })],
+                        spacing: { after: 280 },
+                    }),
+                    ...bodyLines.map((line) => new docx_1.Paragraph({
+                        children: [new docx_1.TextRun({ text: line, size: 22 })],
+                        spacing: { after: 160 },
+                    })),
+                ],
+            },
+        ],
+    });
+    const docxBuffer = yield docx_1.Packer.toBuffer(document);
+    return (0, exports.writeMemoDocx)({
+        memoId,
+        documentName,
+        docxBase64: docxBuffer.toString('base64'),
+    });
+});
+exports.writeOfficerMemoDocument = writeOfficerMemoDocument;
 const convertDocxToPdf = (docxPath) => __awaiter(void 0, void 0, void 0, function* () {
     const outputDir = node_path_1.default.dirname(docxPath);
     const baseName = node_path_1.default.basename(docxPath, node_path_1.default.extname(docxPath));

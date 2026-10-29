@@ -20,17 +20,8 @@ const updateSeminaryExamination = (req, res) => __awaiter(void 0, void 0, void 0
     try {
         const id = req.params.id;
         const body = req.body;
-        const existingExamination = yield prisma_1.prisma.seminaryExamination.findUnique({
-            where: { id },
-            select: { id: true },
-        });
-        if (!existingExamination) {
-            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
-                code: 'NOT_FOUND',
-                message: 'Examination not found',
-            });
+        if (!(yield (0, examination_shared_1.canManageExamination)({ examinationId: id, userId: req.userId, res })))
             return;
-        }
         const examinationContext = yield (0, assignment_shared_1.getAssignedCourseForSubject)({
             subject: body.subject,
             userId: req.userId,

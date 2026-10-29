@@ -17,13 +17,20 @@ const bulkDeleteSeminaryStudents = (req, res) => __awaiter(void 0, void 0, void 
     try {
         const { studentIds } = req.body;
         const uniqueStudentIds = Array.from(new Set(studentIds));
-        const result = yield prisma_1.prisma.seminaryApplication.deleteMany({
-            where: {
-                studentId: {
-                    in: uniqueStudentIds,
-                },
-            },
+        const students = yield prisma_1.prisma.seminaryApplication.findMany({
+            where: { studentId: { in: uniqueStudentIds } },
+            select: { id: true, portalUserId: true },
         });
+        const result = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            const deleted = yield tx.seminaryApplication.deleteMany({
+                where: { id: { in: students.map((student) => student.id) } },
+            });
+            const portalUserIds = students.flatMap((student) => student.portalUserId ? [student.portalUserId] : []);
+            if (portalUserIds.length) {
+                yield tx.user.deleteMany({ where: { id: { in: portalUserIds } } });
+            }
+            return deleted;
+        }));
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',
             message: `${result.count} seminary students deleted successfully`,

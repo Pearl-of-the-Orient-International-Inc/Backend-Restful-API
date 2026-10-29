@@ -1,8 +1,13 @@
 import { HTTPSTATUS } from '@/common/http-codes';
 import { Prisma } from '@/generated/prisma/client';
-import { SeminaryCourseStatus, UserType } from '@/generated/prisma/enums';
+import {
+  SeminaryCourseStatus,
+  SeminaryStudyMaterialStatus,
+  UserType,
+} from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { getSeminaryStudentLmsScope } from './lms-student-scope';
 
 import type { Request, Response } from 'express';
 import type { GetAllSeminaryStudyMaterialsQuery } from './types';
@@ -60,9 +65,19 @@ export const getAllSeminaryStudyMaterials = async (
             .filter((subject): subject is string => Boolean(subject))
         : null;
 
+    const studentScope =
+      user?.role === UserType.MEMBER && req.userId
+        ? await getSeminaryStudentLmsScope(req.userId)
+        : null;
+
     const where: Prisma.SeminaryStudyMaterialWhereInput = {
       ...(instructorSubjects
         ? { subject: { in: instructorSubjects } }
+        : studentScope
+          ? {
+              subject: { in: studentScope.subjectNames },
+              status: SeminaryStudyMaterialStatus.PUBLISHED,
+            }
         : query.subject
           ? { subject: query.subject }
           : {}),
@@ -70,7 +85,7 @@ export const getAllSeminaryStudyMaterials = async (
         ? { AND: [{ subject: query.subject }] }
         : {}),
       ...(query.type ? { type: query.type } : {}),
-      ...(query.status ? { status: query.status } : {}),
+      ...(!studentScope && query.status ? { status: query.status } : {}),
       ...(search
         ? {
             OR: [

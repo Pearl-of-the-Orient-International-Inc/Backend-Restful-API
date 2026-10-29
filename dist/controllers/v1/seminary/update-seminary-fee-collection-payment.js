@@ -39,10 +39,15 @@ const updateSeminaryFeeCollectionPayment = (req, res) => __awaiter(void 0, void 
         }
         const amountPaid = body.amountPaid;
         const totalCharges = Number(existingAccount.totalCharges);
+        if (amountPaid > totalCharges) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                code: 'INVALID_PAYMENT_AMOUNT',
+                message: `Amount paid cannot exceed the total charge of ${totalCharges.toFixed(2)}.`,
+            });
+            return;
+        }
         const balance = Math.max(totalCharges - amountPaid, 0);
-        const status = body.status
-            ? (0, fee_collection_shared_1.normalizeFeeCollectionStatus)(body.status)
-            : getAutoStatus({ amountPaid, balance });
+        const status = getAutoStatus({ amountPaid, balance });
         const account = yield prisma_1.prisma.seminaryFeeCollectionAccount.update({
             where: { id },
             data: {

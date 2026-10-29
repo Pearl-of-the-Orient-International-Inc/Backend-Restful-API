@@ -18,6 +18,8 @@ const updateSeminaryExaminationStatus = (req, res) => __awaiter(void 0, void 0, 
     try {
         const id = req.params.id;
         const body = req.body;
+        if (!(yield (0, examination_shared_1.canManageExamination)({ examinationId: id, userId: req.userId, res })))
+            return;
         const examination = yield prisma_1.prisma.seminaryExamination.update({
             where: { id },
             data: { status: body.status },

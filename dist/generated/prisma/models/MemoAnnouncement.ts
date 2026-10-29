@@ -47,6 +47,9 @@ export type MemoAnnouncementMinAggregateOutputType = {
   pdfFilePath: string | null
   pages: number | null
   authorUserId: string | null
+  reviewedAt: Date | null
+  reviewedByUserId: string | null
+  reviewNotes: string | null
   publishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -65,6 +68,9 @@ export type MemoAnnouncementMaxAggregateOutputType = {
   pdfFilePath: string | null
   pages: number | null
   authorUserId: string | null
+  reviewedAt: Date | null
+  reviewedByUserId: string | null
+  reviewNotes: string | null
   publishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -83,6 +89,9 @@ export type MemoAnnouncementCountAggregateOutputType = {
   pdfFilePath: number
   pages: number
   authorUserId: number
+  reviewedAt: number
+  reviewedByUserId: number
+  reviewNotes: number
   publishedAt: number
   createdAt: number
   updatedAt: number
@@ -111,6 +120,9 @@ export type MemoAnnouncementMinAggregateInputType = {
   pdfFilePath?: true
   pages?: true
   authorUserId?: true
+  reviewedAt?: true
+  reviewedByUserId?: true
+  reviewNotes?: true
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -129,6 +141,9 @@ export type MemoAnnouncementMaxAggregateInputType = {
   pdfFilePath?: true
   pages?: true
   authorUserId?: true
+  reviewedAt?: true
+  reviewedByUserId?: true
+  reviewNotes?: true
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -147,6 +162,9 @@ export type MemoAnnouncementCountAggregateInputType = {
   pdfFilePath?: true
   pages?: true
   authorUserId?: true
+  reviewedAt?: true
+  reviewedByUserId?: true
+  reviewNotes?: true
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -252,6 +270,9 @@ export type MemoAnnouncementGroupByOutputType = {
   pdfFilePath: string | null
   pages: number | null
   authorUserId: string | null
+  reviewedAt: Date | null
+  reviewedByUserId: string | null
+  reviewNotes: string | null
   publishedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -293,6 +314,9 @@ export type MemoAnnouncementWhereInput = {
   pdfFilePath?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
   pages?: Prisma.IntNullableFilter<"MemoAnnouncement"> | number | null
   authorUserId?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"MemoAnnouncement"> | Date | string | null
+  reviewedByUserId?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
+  reviewNotes?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"MemoAnnouncement"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"MemoAnnouncement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemoAnnouncement"> | Date | string
@@ -315,6 +339,9 @@ export type MemoAnnouncementOrderByWithRelationInput = {
   pdfFilePath?: Prisma.SortOrderInput | Prisma.SortOrder
   pages?: Prisma.SortOrderInput | Prisma.SortOrder
   authorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -340,6 +367,9 @@ export type MemoAnnouncementWhereUniqueInput = Prisma.AtLeast<{
   pdfFilePath?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
   pages?: Prisma.IntNullableFilter<"MemoAnnouncement"> | number | null
   authorUserId?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"MemoAnnouncement"> | Date | string | null
+  reviewedByUserId?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
+  reviewNotes?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"MemoAnnouncement"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"MemoAnnouncement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemoAnnouncement"> | Date | string
@@ -362,6 +392,9 @@ export type MemoAnnouncementOrderByWithAggregationInput = {
   pdfFilePath?: Prisma.SortOrderInput | Prisma.SortOrder
   pages?: Prisma.SortOrderInput | Prisma.SortOrder
   authorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -388,6 +421,9 @@ export type MemoAnnouncementScalarWhereWithAggregatesInput = {
   pdfFilePath?: Prisma.StringNullableWithAggregatesFilter<"MemoAnnouncement"> | string | null
   pages?: Prisma.IntNullableWithAggregatesFilter<"MemoAnnouncement"> | number | null
   authorUserId?: Prisma.StringNullableWithAggregatesFilter<"MemoAnnouncement"> | string | null
+  reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MemoAnnouncement"> | Date | string | null
+  reviewedByUserId?: Prisma.StringNullableWithAggregatesFilter<"MemoAnnouncement"> | string | null
+  reviewNotes?: Prisma.StringNullableWithAggregatesFilter<"MemoAnnouncement"> | string | null
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MemoAnnouncement"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MemoAnnouncement"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MemoAnnouncement"> | Date | string
@@ -405,6 +441,9 @@ export type MemoAnnouncementCreateInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -427,6 +466,9 @@ export type MemoAnnouncementUncheckedCreateInput = {
   pdfFilePath?: string | null
   pages?: number | null
   authorUserId?: string | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -447,6 +489,9 @@ export type MemoAnnouncementUpdateInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -469,6 +514,9 @@ export type MemoAnnouncementUncheckedUpdateInput = {
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -490,6 +538,9 @@ export type MemoAnnouncementCreateManyInput = {
   pdfFilePath?: string | null
   pages?: number | null
   authorUserId?: string | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -507,6 +558,9 @@ export type MemoAnnouncementUpdateManyMutationInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -525,6 +579,9 @@ export type MemoAnnouncementUncheckedUpdateManyInput = {
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -553,6 +610,9 @@ export type MemoAnnouncementCountOrderByAggregateInput = {
   pdfFilePath?: Prisma.SortOrder
   pages?: Prisma.SortOrder
   authorUserId?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
+  reviewedByUserId?: Prisma.SortOrder
+  reviewNotes?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -575,6 +635,9 @@ export type MemoAnnouncementMaxOrderByAggregateInput = {
   pdfFilePath?: Prisma.SortOrder
   pages?: Prisma.SortOrder
   authorUserId?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
+  reviewedByUserId?: Prisma.SortOrder
+  reviewNotes?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -593,6 +656,9 @@ export type MemoAnnouncementMinOrderByAggregateInput = {
   pdfFilePath?: Prisma.SortOrder
   pages?: Prisma.SortOrder
   authorUserId?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
+  reviewedByUserId?: Prisma.SortOrder
+  reviewNotes?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -711,6 +777,9 @@ export type MemoAnnouncementCreateWithoutAuthorUserInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -731,6 +800,9 @@ export type MemoAnnouncementUncheckedCreateWithoutAuthorUserInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -781,6 +853,9 @@ export type MemoAnnouncementScalarWhereInput = {
   pdfFilePath?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
   pages?: Prisma.IntNullableFilter<"MemoAnnouncement"> | number | null
   authorUserId?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"MemoAnnouncement"> | Date | string | null
+  reviewedByUserId?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
+  reviewNotes?: Prisma.StringNullableFilter<"MemoAnnouncement"> | string | null
   publishedAt?: Prisma.DateTimeNullableFilter<"MemoAnnouncement"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"MemoAnnouncement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MemoAnnouncement"> | Date | string
@@ -798,6 +873,9 @@ export type MemoAnnouncementCreateWithoutRecipientsInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -819,6 +897,9 @@ export type MemoAnnouncementUncheckedCreateWithoutRecipientsInput = {
   pdfFilePath?: string | null
   pages?: number | null
   authorUserId?: string | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -854,6 +935,9 @@ export type MemoAnnouncementUpdateWithoutRecipientsInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -875,6 +959,9 @@ export type MemoAnnouncementUncheckedUpdateWithoutRecipientsInput = {
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -894,6 +981,9 @@ export type MemoAnnouncementCreateWithoutAttachmentsInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -915,6 +1005,9 @@ export type MemoAnnouncementUncheckedCreateWithoutAttachmentsInput = {
   pdfFilePath?: string | null
   pages?: number | null
   authorUserId?: string | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -950,6 +1043,9 @@ export type MemoAnnouncementUpdateWithoutAttachmentsInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -971,6 +1067,9 @@ export type MemoAnnouncementUncheckedUpdateWithoutAttachmentsInput = {
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -990,6 +1089,9 @@ export type MemoAnnouncementCreateWithoutDeliveryLogsInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1011,6 +1113,9 @@ export type MemoAnnouncementUncheckedCreateWithoutDeliveryLogsInput = {
   pdfFilePath?: string | null
   pages?: number | null
   authorUserId?: string | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1046,6 +1151,9 @@ export type MemoAnnouncementUpdateWithoutDeliveryLogsInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1067,6 +1175,9 @@ export type MemoAnnouncementUncheckedUpdateWithoutDeliveryLogsInput = {
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1086,6 +1197,9 @@ export type MemoAnnouncementCreateManyAuthorUserInput = {
   docxFilePath?: string | null
   pdfFilePath?: string | null
   pages?: number | null
+  reviewedAt?: Date | string | null
+  reviewedByUserId?: string | null
+  reviewNotes?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1103,6 +1217,9 @@ export type MemoAnnouncementUpdateWithoutAuthorUserInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1123,6 +1240,9 @@ export type MemoAnnouncementUncheckedUpdateWithoutAuthorUserInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1143,6 +1263,9 @@ export type MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserInput = {
   docxFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pdfFilePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1210,6 +1333,9 @@ export type MemoAnnouncementSelect<ExtArgs extends runtime.Types.Extensions.Inte
   pdfFilePath?: boolean
   pages?: boolean
   authorUserId?: boolean
+  reviewedAt?: boolean
+  reviewedByUserId?: boolean
+  reviewNotes?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1233,6 +1359,9 @@ export type MemoAnnouncementSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   pdfFilePath?: boolean
   pages?: boolean
   authorUserId?: boolean
+  reviewedAt?: boolean
+  reviewedByUserId?: boolean
+  reviewNotes?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1252,6 +1381,9 @@ export type MemoAnnouncementSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   pdfFilePath?: boolean
   pages?: boolean
   authorUserId?: boolean
+  reviewedAt?: boolean
+  reviewedByUserId?: boolean
+  reviewNotes?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1271,12 +1403,15 @@ export type MemoAnnouncementSelectScalar = {
   pdfFilePath?: boolean
   pages?: boolean
   authorUserId?: boolean
+  reviewedAt?: boolean
+  reviewedByUserId?: boolean
+  reviewNotes?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MemoAnnouncementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "referenceNumber" | "title" | "category" | "customCategory" | "status" | "summary" | "documentName" | "docxFilePath" | "pdfFilePath" | "pages" | "authorUserId" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["memoAnnouncement"]>
+export type MemoAnnouncementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "referenceNumber" | "title" | "category" | "customCategory" | "status" | "summary" | "documentName" | "docxFilePath" | "pdfFilePath" | "pages" | "authorUserId" | "reviewedAt" | "reviewedByUserId" | "reviewNotes" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["memoAnnouncement"]>
 export type MemoAnnouncementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authorUser?: boolean | Prisma.MemoAnnouncement$authorUserArgs<ExtArgs>
   recipients?: boolean | Prisma.MemoAnnouncement$recipientsArgs<ExtArgs>
@@ -1312,6 +1447,9 @@ export type $MemoAnnouncementPayload<ExtArgs extends runtime.Types.Extensions.In
     pdfFilePath: string | null
     pages: number | null
     authorUserId: string | null
+    reviewedAt: Date | null
+    reviewedByUserId: string | null
+    reviewNotes: string | null
     publishedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1754,6 +1892,9 @@ export interface MemoAnnouncementFieldRefs {
   readonly pdfFilePath: Prisma.FieldRef<"MemoAnnouncement", 'String'>
   readonly pages: Prisma.FieldRef<"MemoAnnouncement", 'Int'>
   readonly authorUserId: Prisma.FieldRef<"MemoAnnouncement", 'String'>
+  readonly reviewedAt: Prisma.FieldRef<"MemoAnnouncement", 'DateTime'>
+  readonly reviewedByUserId: Prisma.FieldRef<"MemoAnnouncement", 'String'>
+  readonly reviewNotes: Prisma.FieldRef<"MemoAnnouncement", 'String'>
   readonly publishedAt: Prisma.FieldRef<"MemoAnnouncement", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"MemoAnnouncement", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MemoAnnouncement", 'DateTime'>

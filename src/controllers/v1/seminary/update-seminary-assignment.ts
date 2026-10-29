@@ -3,10 +3,13 @@ import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import {
   createAssignmentStudentNotifications,
+  canManageAssignment,
   defaultAssignmentStatus,
   getAssignedCourseForSubject,
+  removeAssignmentStudentNotifications,
   toAssignmentResponse,
 } from './assignment-shared';
+import { SeminaryAssignmentStatus } from '@/generated/prisma/enums';
 
 import type { Request, Response } from 'express';
 import type { UpdateSeminaryAssignmentBody } from './types';
@@ -18,18 +21,7 @@ export const updateSeminaryAssignment = async (
   try {
     const id = req.params.id as string;
     const body = req.body as UpdateSeminaryAssignmentBody;
-    const existingAssignment = await prisma.seminaryAssignment.findUnique({
-      where: { id },
-      select: { id: true },
-    });
-
-    if (!existingAssignment) {
-      res.status(HTTPSTATUS.NOT_FOUND).json({
-        code: 'NOT_FOUND',
-        message: 'Assignment not found',
-      });
-      return;
-    }
+    if (!(await canManageAssignment({ assignmentId: id, userId: req.userId, res }))) return;
 
     const assignmentContext = await getAssignedCourseForSubject({
       subject: body.subject,
@@ -66,7 +58,10 @@ export const updateSeminaryAssignment = async (
       },
     });
 
-    if (assignment.notifyStudents) {
+    if (
+      assignment.notifyStudents &&
+      assignment.status === SeminaryAssignmentStatus.PUBLISHED
+    ) {
       try {
         await createAssignmentStudentNotifications({
           assignmentId: assignment.id,
@@ -80,6 +75,8 @@ export const updateSeminaryAssignment = async (
           err,
         });
       }
+    } else {
+      await removeAssignmentStudentNotifications(assignment.id);
     }
 
     res.status(HTTPSTATUS.OK).json({

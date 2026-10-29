@@ -15,6 +15,7 @@ const http_codes_1 = require("@/common/http-codes");
 const enums_1 = require("@/generated/prisma/enums");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
+const referrals_1 = require("./referrals");
 const password_hash_1 = require("@/lib/password-hash");
 const member_unique_id_1 = require("@/lib/member-unique-id");
 const helpers_1 = require("@/lib/helpers");
@@ -40,11 +41,30 @@ const isRetryableCreateConflict = (error) => {
     return code === 'P2002' || code === 'P2034';
 };
 const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
+    var _a, _b, _c;
     try {
         const body = req.body;
         const normalizedEmail = body.email.trim().toLowerCase();
         const preferredBranchIds = (_a = body.preferredBranchIds) !== null && _a !== void 0 ? _a : [];
+        const normalizedReferralCode = (_b = body.referralCode) === null || _b === void 0 ? void 0 : _b.trim().toUpperCase();
+        const referralReferrer = normalizedReferralCode
+            ? yield prisma_1.prisma.member.findFirst({
+                where: {
+                    referralCode: normalizedReferralCode,
+                    status: 'APPROVED',
+                    isActive: true,
+                    user: { email: { not: normalizedEmail } },
+                },
+                select: { id: true },
+            })
+            : null;
+        if (normalizedReferralCode && !referralReferrer) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                code: 'INVALID_REFERRAL',
+                message: 'This referral link is invalid, inactive, or cannot be used for the same email address.',
+            });
+            return;
+        }
         if (preferredBranchIds.length > 0) {
             const branchCount = yield prisma_1.prisma.branchOfService.count({
                 where: { id: { in: preferredBranchIds } },
@@ -190,6 +210,9 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                             }))) !== null && _e !== void 0 ? _e : [],
                         },
                     };
+                    if (referralReferrer) {
+                        createData.referredByMember = { connect: { id: referralReferrer.id } };
+                    }
                     if (preferredBranchIds.length > 0) {
                         createData.preferredBranches = {
                             connect: preferredBranchIds.map((id) => ({ id })),
@@ -223,6 +246,12 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                             },
                         },
                     });
+                    yield (0, referrals_1.awardReferralPoints)(tx, {
+                        referredMemberId: member.id,
+                        criterionKey: 'APPLICATION_SUBMITTED',
+                        sourceType: 'MEMBER_APPLICATION',
+                        sourceId: member.id,
+                    });
                     return {
                         member,
                         verificationUrl: verificationCode
@@ -250,7 +279,7 @@ const applyMember = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             throw new Error('Unable to create member application after retrying');
         }
         if (result.createdUser && temporaryPassword) {
-            const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, welcome_member_1.welcomeMemberTemplate)(displayName, normalizedEmail, temporaryPassword, (_b = result.verificationUrl) !== null && _b !== void 0 ? _b : undefined)));
+            const emailResult = yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, welcome_member_1.welcomeMemberTemplate)(displayName, normalizedEmail, temporaryPassword, (_c = result.verificationUrl) !== null && _c !== void 0 ? _c : undefined)));
             if (!emailResult.success && result.verificationUrl) {
                 yield (0, mailers_1.sendMail)(Object.assign({ sendTo: normalizedEmail }, (0, verify_email_1.verifyEmailTemplate)(result.verificationUrl, displayName)));
             }

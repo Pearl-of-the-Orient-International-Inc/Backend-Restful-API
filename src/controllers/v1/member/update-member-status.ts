@@ -13,6 +13,7 @@ import { MemberStatus, UserAccountStatus } from '@/generated/prisma/enums';
 import type { Request, Response } from 'express';
 import { Prisma } from '@/generated/prisma/client';
 import type { UpdateMemberStatusBody } from './types';
+import { awardReferralPoints } from './referrals';
 
 export const updateMemberStatus = async (
   req: Request,
@@ -61,7 +62,7 @@ export const updateMemberStatus = async (
           nextUniqueId = await generateNextMemberUniqueId(existingMember.user.role, tx);
         }
 
-        return tx.member.update({
+        const updated = await tx.member.update({
           where: { id: memberId },
           data: {
             status,
@@ -85,6 +86,16 @@ export const updateMemberStatus = async (
             },
           },
         });
+        if (status === MemberStatus.APPROVED && existingMember.status !== MemberStatus.APPROVED) {
+          await awardReferralPoints(tx, {
+            referredMemberId: memberId,
+            criterionKey: 'MEMBER_APPROVED',
+            sourceType: 'MEMBER_STATUS',
+            sourceId: memberId,
+            createdByUserId: req.userId,
+          });
+        }
+        return updated;
       },
       {
         isolationLevel: Prisma.TransactionIsolationLevel.Serializable,

@@ -278,6 +278,16 @@ export type OrdinationApplication = Prisma.OrdinationApplicationModel
  */
 export type OrdinationApplicationReview = Prisma.OrdinationApplicationReviewModel
 /**
+ * Model CrasmApplication
+ * 
+ */
+export type CrasmApplication = Prisma.CrasmApplicationModel
+/**
+ * Model CrasmApplicationReview
+ * 
+ */
+export type CrasmApplicationReview = Prisma.CrasmApplicationReviewModel
+/**
  * Model Event
  * 
  */

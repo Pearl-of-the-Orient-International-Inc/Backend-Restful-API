@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateSeminaryFeeCollectionStatus = void 0;
 const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
 const fee_collection_shared_1 = require("./fee-collection-shared");
@@ -18,9 +19,37 @@ const updateSeminaryFeeCollectionStatus = (req, res) => __awaiter(void 0, void 0
     try {
         const id = req.params.id;
         const body = req.body;
+        const existingAccount = yield prisma_1.prisma.seminaryFeeCollectionAccount.findUnique({
+            where: { id },
+            select: { amountPaid: true, balance: true, id: true },
+        });
+        if (!existingAccount) {
+            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
+                code: 'NOT_FOUND',
+                message: 'Seminary fee collection account not found',
+            });
+            return;
+        }
+        const status = (0, fee_collection_shared_1.normalizeFeeCollectionStatus)(body.status);
+        if (status === enums_1.SeminaryFeeCollectionStatus.PAID &&
+            Number(existingAccount.balance) > 0) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                code: 'UNSETTLED_ACCOUNT',
+                message: 'An account cannot be marked paid while it still has a balance.',
+            });
+            return;
+        }
+        if (status === enums_1.SeminaryFeeCollectionStatus.PARTIALLY_PAID &&
+            Number(existingAccount.amountPaid) <= 0) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                code: 'NO_PAYMENT_RECORDED',
+                message: 'Record a payment amount before marking an account partially paid.',
+            });
+            return;
+        }
         const account = yield prisma_1.prisma.seminaryFeeCollectionAccount.update({
             where: { id },
-            data: { status: (0, fee_collection_shared_1.normalizeFeeCollectionStatus)(body.status) },
+            data: { status },
         });
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

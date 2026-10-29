@@ -6,6 +6,7 @@ import { MemoStatus } from '@/generated/prisma/client';
 import { sendMail } from '@/mailers';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { getOfficerScope } from '@/lib/officer-scope';
 import type { PublishMemoAnnouncementSchema } from '@/validators/memo-announcement';
 import {
   convertDocxToPdf,
@@ -14,6 +15,7 @@ import {
   serializeMemoAnnouncement,
   upsertMemoAttachments,
   writeMemoDocx,
+  resolveMemoRecipientsByMemberWhere,
 } from './memo-announcement-shared';
 
 const buildMemoEmail = ({
@@ -47,7 +49,7 @@ export const publishMemoAnnouncement = async (
 
   try {
     const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-    const memo = await prisma.memoAnnouncement.findUnique({
+    let memo = await prisma.memoAnnouncement.findUnique({
       where: { id },
       include: memoInclude,
     }) as any;
@@ -68,6 +70,53 @@ export const publishMemoAnnouncement = async (
       return;
     }
 
+    if (memo.status === MemoStatus.REJECTED) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({
+        code: 'BAD_REQUEST',
+        message: 'A rejected memo must be revised and submitted again before publication',
+      });
+      return;
+    }
+
+    // Officer-authored memos are always delivered to the author's *current*
+    // scope. This prevents a reassigned or deactivated officer's old draft
+    // from being published to an outdated recipient list.
+    if (memo.authorUserId) {
+      const author = await prisma.user.findUnique({
+        where: { id: memo.authorUserId },
+        select: { role: true },
+      });
+      if (author?.role !== 'ADMIN') {
+        const scope = await getOfficerScope(memo.authorUserId);
+        if (!scope) {
+          res.status(HTTPSTATUS.CONFLICT).json({
+            code: 'CONFLICT',
+            message: 'This officer no longer has an active assignment; the memo cannot be published',
+          });
+          return;
+        }
+        const recipients = await resolveMemoRecipientsByMemberWhere(scope.memberWhere);
+        if (!recipients.length) {
+          res.status(HTTPSTATUS.BAD_REQUEST).json({
+            code: 'BAD_REQUEST',
+            message: 'There are no active approved members in the officer’s current scope',
+          });
+          return;
+        }
+        await prisma.$transaction([
+          prisma.memoRecipient.deleteMany({ where: { memoId: memo.id } }),
+          prisma.memoAnnouncement.update({
+            where: { id: memo.id },
+            data: { recipients: { create: recipients } },
+          }),
+        ]);
+        memo = await prisma.memoAnnouncement.findUniqueOrThrow({
+          where: { id: memo.id },
+          include: memoInclude,
+        }) as any;
+      }
+    }
+
     if (!memo.recipients.length) {
       res.status(HTTPSTATUS.BAD_REQUEST).json({
         code: 'BAD_REQUEST',
@@ -78,7 +127,16 @@ export const publishMemoAnnouncement = async (
 
     await prisma.memoAnnouncement.update({
       where: { id: memo.id },
-      data: { status: MemoStatus.PUBLISHING },
+      data: {
+        status: MemoStatus.PUBLISHING,
+        ...(memo.authorUserId
+          ? {
+              reviewedAt: new Date(),
+              reviewedByUserId: req.userId ?? null,
+              reviewNotes: null,
+            }
+          : {}),
+      },
     });
 
     let docxPath = memo.docxFilePath;

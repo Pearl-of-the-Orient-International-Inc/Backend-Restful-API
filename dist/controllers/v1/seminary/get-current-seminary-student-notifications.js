@@ -23,16 +23,13 @@ const getCurrentSeminaryStudentNotifications = (req, res) => __awaiter(void 0, v
             });
             return;
         }
-        const member = yield prisma_1.prisma.member.findUnique({
-            where: { userId },
+        const student = yield prisma_1.prisma.seminaryApplication.findFirst({
+            where: {
+                studentId: { not: null },
+                OR: [{ portalUserId: userId }, { member: { userId } }],
+            },
             select: { id: true },
         });
-        const student = member
-            ? yield prisma_1.prisma.seminaryApplication.findFirst({
-                where: { memberId: member.id, studentId: { not: null } },
-                select: { id: true },
-            })
-            : null;
         if (!student) {
             res.status(http_codes_1.HTTPSTATUS.OK).json({
                 code: 'OK',

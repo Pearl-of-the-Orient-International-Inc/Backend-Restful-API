@@ -103,6 +103,8 @@ export const ModelName = {
   OfficerAssignment: 'OfficerAssignment',
   OrdinationApplication: 'OrdinationApplication',
   OrdinationApplicationReview: 'OrdinationApplicationReview',
+  CrasmApplication: 'CrasmApplication',
+  CrasmApplicationReview: 'CrasmApplicationReview',
   Event: 'Event',
   EventAttendee: 'EventAttendee',
   EventTaggedMember: 'EventTaggedMember',
@@ -728,6 +730,15 @@ export const SeminaryGradeRecordScalarFieldEnum = {
   instructorUserId: 'instructorUserId',
   instructorName: 'instructorName',
   term: 'term',
+  attendanceEarned: 'attendanceEarned',
+  attendanceTotal: 'attendanceTotal',
+  courseworkEarned: 'courseworkEarned',
+  courseworkTotal: 'courseworkTotal',
+  characterEarned: 'characterEarned',
+  characterTotal: 'characterTotal',
+  examEarned: 'examEarned',
+  examTotal: 'examTotal',
+  weightedPercentage: 'weightedPercentage',
   finalGrade: 'finalGrade',
   remarks: 'remarks',
   status: 'status',
@@ -1127,6 +1138,43 @@ export const OrdinationApplicationReviewScalarFieldEnum = {
 export type OrdinationApplicationReviewScalarFieldEnum = (typeof OrdinationApplicationReviewScalarFieldEnum)[keyof typeof OrdinationApplicationReviewScalarFieldEnum]
 
 
+export const CrasmApplicationScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  status: 'status',
+  appointmentTitle: 'appointmentTitle',
+  appointingOfficer: 'appointingOfficer',
+  recommendingOfficer: 'recommendingOfficer',
+  territorialJurisdiction: 'territorialJurisdiction',
+  churchName: 'churchName',
+  churchAddress: 'churchAddress',
+  documents: 'documents',
+  informationAccurate: 'informationAccurate',
+  backgroundCheckConsent: 'backgroundCheckConsent',
+  requestedInformation: 'requestedInformation',
+  adminNotes: 'adminNotes',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CrasmApplicationScalarFieldEnum = (typeof CrasmApplicationScalarFieldEnum)[keyof typeof CrasmApplicationScalarFieldEnum]
+
+
+export const CrasmApplicationReviewScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  reviewerId: 'reviewerId',
+  action: 'action',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type CrasmApplicationReviewScalarFieldEnum = (typeof CrasmApplicationReviewScalarFieldEnum)[keyof typeof CrasmApplicationReviewScalarFieldEnum]
+
+
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1416,6 +1464,9 @@ export const MemoAnnouncementScalarFieldEnum = {
   pdfFilePath: 'pdfFilePath',
   pages: 'pages',
   authorUserId: 'authorUserId',
+  reviewedAt: 'reviewedAt',
+  reviewedByUserId: 'reviewedByUserId',
+  reviewNotes: 'reviewNotes',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

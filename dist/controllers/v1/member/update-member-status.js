@@ -16,6 +16,7 @@ const winston_1 = require("@/lib/winston");
 const member_unique_id_1 = require("@/lib/member-unique-id");
 const enums_1 = require("@/generated/prisma/enums");
 const client_1 = require("@/generated/prisma/client");
+const referrals_1 = require("./referrals");
 const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const memberId = req.params.id;
@@ -53,7 +54,7 @@ const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, funct
             if (status === enums_1.MemberStatus.APPROVED && !existingMember.uniqueId) {
                 nextUniqueId = yield (0, member_unique_id_1.generateNextMemberUniqueId)(existingMember.user.role, tx);
             }
-            return tx.member.update({
+            const updated = yield tx.member.update({
                 where: { id: memberId },
                 data: {
                     status,
@@ -76,6 +77,16 @@ const updateMemberStatus = (req, res) => __awaiter(void 0, void 0, void 0, funct
                     },
                 },
             });
+            if (status === enums_1.MemberStatus.APPROVED && existingMember.status !== enums_1.MemberStatus.APPROVED) {
+                yield (0, referrals_1.awardReferralPoints)(tx, {
+                    referredMemberId: memberId,
+                    criterionKey: 'MEMBER_APPROVED',
+                    sourceType: 'MEMBER_STATUS',
+                    sourceId: memberId,
+                    createdByUserId: req.userId,
+                });
+            }
+            return updated;
         }), {
             isolationLevel: client_1.Prisma.TransactionIsolationLevel.Serializable,
         });

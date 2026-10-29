@@ -10,6 +10,11 @@ import { sendMail } from '@/mailers';
 import { seminaryApplicationStatusTemplate } from '@/mailers/templates/seminary-application-status';
 import { seminaryApplicationInclude } from './seminary-shared';
 import { buildNextStudentId } from './student-shared';
+import {
+  createSeminaryStudentPortalAccount,
+  getSeminaryStudentPortalEmail,
+} from './student-portal-account';
+import { ensureSeminaryFeeCollectionAccount } from './fee-collection-account';
 
 import type { Request, Response } from 'express';
 import type { UpdateSeminaryApplicationStatusBody } from './types';
@@ -42,11 +47,13 @@ export const updateSeminaryApplicationStatus = async (
         id: true,
         memberId: true,
         studentId: true,
+        portalUserId: true,
         givenName: true,
         middleName: true,
         surname: true,
         emailAddress: true,
         programCourse: true,
+        programLevel: true,
       },
     });
 
@@ -70,6 +77,28 @@ export const updateSeminaryApplicationStatus = async (
         !existingApplication.studentId
           ? await buildNextStudentId(tx)
           : undefined;
+      const effectiveStudentId = studentId ?? existingApplication.studentId;
+      let portalUserId: string | undefined;
+
+      if (
+        (body.status === SeminaryApplicationStatus.APPROVED ||
+          body.status === SeminaryApplicationStatus.ENROLLED) &&
+        !existingApplication.portalUserId &&
+        effectiveStudentId
+      ) {
+        const existingPortalAccount = await tx.user.findUnique({
+          where: { email: getSeminaryStudentPortalEmail(effectiveStudentId) },
+          select: { id: true },
+        });
+        portalUserId = existingPortalAccount?.id ?? (
+          await createSeminaryStudentPortalAccount(tx, {
+            studentId: effectiveStudentId,
+            givenName: existingApplication.givenName,
+            middleName: existingApplication.middleName,
+            surname: existingApplication.surname,
+          })
+        ).id;
+      }
 
       const reviewedApplication = await tx.seminaryApplication.update({
         where: { id: existingApplication.id },
@@ -81,6 +110,7 @@ export const updateSeminaryApplicationStatus = async (
               ? null
               : new Date(),
           studentId,
+          ...(portalUserId ? { portalUserId } : {}),
         },
         select: {
           id: true,
@@ -118,6 +148,22 @@ export const updateSeminaryApplicationStatus = async (
           data: {
             memberType: MemberType.PROFESSIONAL_CHAPLAIN,
           },
+        });
+      }
+
+      if (
+        (body.status === SeminaryApplicationStatus.APPROVED ||
+          body.status === SeminaryApplicationStatus.ENROLLED) &&
+        effectiveStudentId &&
+        existingApplication.programLevel
+      ) {
+        await ensureSeminaryFeeCollectionAccount(tx, {
+          studentId: effectiveStudentId,
+          givenName: existingApplication.givenName,
+          middleName: existingApplication.middleName,
+          surname: existingApplication.surname,
+          programCourse: existingApplication.programCourse,
+          programLevel: existingApplication.programLevel,
         });
       }
 

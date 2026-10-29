@@ -20,21 +20,10 @@ export const getCurrentSeminaryApplication = async (
       return;
     }
 
-    const member = await prisma.member.findUnique({
-      where: { userId },
-      select: { id: true },
-    });
-
-    if (!member) {
-      res.status(HTTPSTATUS.NOT_FOUND).json({
-        code: 'NOT_FOUND',
-        message: 'Member profile not found',
-      });
-      return;
-    }
-
     const application = await prisma.seminaryApplication.findFirst({
-      where: { memberId: member.id },
+      where: {
+        OR: [{ portalUserId: userId }, { member: { userId } }],
+      },
       include: seminaryApplicationInclude,
       orderBy: { createdAt: 'desc' },
     });

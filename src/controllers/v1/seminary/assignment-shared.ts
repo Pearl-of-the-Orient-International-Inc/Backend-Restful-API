@@ -7,6 +7,7 @@ import {
   UserType,
 } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
+import { getSeminaryStudentLmsScope } from './lms-student-scope';
 
 import type { Prisma } from '@/generated/prisma/client';
 import type { Response } from 'express';
@@ -103,6 +104,10 @@ export const createAssignmentStudentNotifications = async ({
   title: string;
   subject: string;
 }) => {
+  await prisma.seminaryStudentNotification.deleteMany({
+    where: { assignmentId },
+  });
+
   const students = await prisma.seminaryApplication.findMany({
     where: {
       studentId: { not: null },
@@ -142,6 +147,9 @@ export const createAssignmentStudentNotifications = async ({
   });
 };
 
+export const removeAssignmentStudentNotifications = async (assignmentId: string) =>
+  prisma.seminaryStudentNotification.deleteMany({ where: { assignmentId } });
+
 export const getAssignmentWhereForUser = async (
   userId: string | undefined,
 ): Promise<Prisma.SeminaryAssignmentWhereInput> => {
@@ -152,9 +160,61 @@ export const getAssignmentWhereForUser = async (
     select: { role: true },
   });
 
+  if (user?.role === UserType.MEMBER) {
+    const scope = await getSeminaryStudentLmsScope(userId);
+    return {
+      status: SeminaryAssignmentStatus.PUBLISHED,
+      courseId: { in: scope.courseIds },
+    };
+  }
+
   if (user?.role !== UserType.INSTRUCTOR) return {};
 
   return { instructorUserId: userId };
+};
+
+export const canManageAssignment = async ({
+  assignmentId,
+  userId,
+  res,
+}: {
+  assignmentId: string;
+  userId: string | undefined;
+  res: Response;
+}) => {
+  if (!userId) {
+    res.status(HTTPSTATUS.UNAUTHORIZED).json({
+      code: 'UNAUTHORIZED',
+      message: 'Authentication required',
+    });
+    return false;
+  }
+
+  const [user, assignment] = await prisma.$transaction([
+    prisma.user.findUnique({ where: { id: userId }, select: { role: true } }),
+    prisma.seminaryAssignment.findUnique({
+      where: { id: assignmentId },
+      select: { instructorUserId: true },
+    }),
+  ]);
+
+  if (!assignment) {
+    res.status(HTTPSTATUS.NOT_FOUND).json({
+      code: 'NOT_FOUND',
+      message: 'Assignment not found',
+    });
+    return false;
+  }
+
+  if (!user || (user.role === UserType.INSTRUCTOR && assignment.instructorUserId !== userId)) {
+    res.status(HTTPSTATUS.FORBIDDEN).json({
+      code: 'FORBIDDEN',
+      message: 'You can manage only assignments assigned to you',
+    });
+    return false;
+  }
+
+  return true;
 };
 
 export const defaultAssignmentStatus = SeminaryAssignmentStatus.DRAFT;

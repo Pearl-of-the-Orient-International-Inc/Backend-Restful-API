@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchMemoRecipientsSchema = exports.getMemoAnnouncementsSchema = exports.publishMemoAnnouncementSchema = exports.updateMemoAnnouncementSchema = exports.createMemoAnnouncementSchema = void 0;
+exports.searchMemoRecipientsSchema = exports.getMemoAnnouncementsSchema = exports.publishMemoAnnouncementSchema = exports.updateMemoAnnouncementSchema = exports.createOfficerMemoAnnouncementSchema = exports.createMemoAnnouncementSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("@/generated/prisma/enums");
 const recipientSchema = zod_1.z.object({
@@ -19,6 +19,16 @@ const baseMemoBodySchema = zod_1.z.object({
     recipientTargets: zod_1.z.array(recipientSchema).max(500).default([]),
 });
 exports.createMemoAnnouncementSchema = baseMemoBodySchema;
+exports.createOfficerMemoAnnouncementSchema = baseMemoBodySchema.omit({
+    recipientScope: true,
+    recipientTargets: true,
+}).extend({
+    content: zod_1.z.string().trim().max(20000).optional(),
+    documentName: zod_1.z.string().trim().min(1).max(255).optional(),
+    docxBase64: zod_1.z.string().trim().min(1).optional(),
+}).refine((value) => Boolean(value.content || (value.documentName && value.docxBase64)), {
+    message: 'Write memo content or save a memo document before submitting.',
+});
 exports.updateMemoAnnouncementSchema = baseMemoBodySchema.partial().extend({
     recipientTargets: zod_1.z.array(recipientSchema).max(500).optional(),
 });
@@ -32,7 +42,7 @@ exports.getMemoAnnouncementsSchema = zod_1.z.object({
         limit: zod_1.z.string().optional(),
         search: zod_1.z.string().trim().min(1).max(150).optional(),
         category: zod_1.z.enum(enums_1.MemoTemplateType).optional(),
-        status: zod_1.z.enum(['DRAFT', 'PUBLISHING', 'PUBLISHED', 'FAILED', 'ARCHIVED']).optional(),
+        status: zod_1.z.enum(['DRAFT', 'REJECTED', 'PUBLISHING', 'PUBLISHED', 'FAILED', 'ARCHIVED']).optional(),
         sortBy: zod_1.z.enum(['createdAt', 'updatedAt', 'publishedAt', 'referenceNumber', 'title']).optional(),
         sortOrder: zod_1.z.enum(['asc', 'desc']).optional(),
     }),

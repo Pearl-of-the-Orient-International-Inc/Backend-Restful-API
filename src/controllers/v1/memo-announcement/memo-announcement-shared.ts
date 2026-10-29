@@ -2,6 +2,7 @@ import { execFile } from 'node:child_process';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { promisify } from 'node:util';
+import { Document, Packer, Paragraph, TextRun } from 'docx';
 import type { Prisma } from '@/generated/prisma/client';
 import {
   MemoAttachmentKind,
@@ -21,6 +22,7 @@ export const memoInclude = {
       name: true,
       email: true,
       avatar: true,
+      role: true,
     },
   },
   recipients: {
@@ -60,6 +62,9 @@ export const serializeMemoAnnouncement = (memo: MemoWithRelations | any) => ({
   pdfFilePath: memo.pdfFilePath,
   pages: memo.pages,
   author: memo.authorUser,
+  reviewedAt: memo.reviewedAt,
+  reviewedByUserId: memo.reviewedByUserId,
+  reviewNotes: memo.reviewNotes,
   publishedAt: memo.publishedAt,
   createdAt: memo.createdAt,
   updatedAt: memo.updatedAt,
@@ -275,6 +280,32 @@ export const resolveMemoRecipients = async ({
   return resolveRecipientTargets(targets);
 };
 
+export const resolveMemoRecipientsByMemberWhere = async (
+  where: Prisma.MemberWhereInput,
+) => {
+  const members = await prisma.member.findMany({
+    where,
+    select: {
+      id: true,
+      firstName: true,
+      middleInitial: true,
+      lastName: true,
+      extensionName: true,
+      user: { select: { id: true, name: true, email: true } },
+    },
+  });
+
+  return members.map((member) => ({
+    type: MemoRecipientType.MEMBER,
+    userId: member.user.id,
+    memberId: member.id,
+    name: [member.firstName, member.middleInitial ? `${member.middleInitial.replace(/\.$/, '')}.` : null, member.lastName, member.extensionName]
+      .filter(Boolean)
+      .join(' ') || member.user.name,
+    email: member.user.email,
+  }));
+};
+
 export const writeMemoDocx = async ({
   memoId,
   documentName,
@@ -301,6 +332,59 @@ export const writeMemoDocx = async ({
     filePath,
     fileSize: buffer.byteLength,
   };
+};
+
+export const writeOfficerMemoDocument = async ({
+  memoId,
+  documentName,
+  title,
+  content,
+}: {
+  memoId: string;
+  documentName: string;
+  title: string;
+  content: string;
+}) => {
+  const toPlainText = (value: string) =>
+    value
+      .replace(/<\/(p|div|h[1-6]|li|blockquote)>/gi, '\n')
+      .replace(/<br\s*\/?>(?:\r?\n)?/gi, '\n')
+      .replace(/<[^>]*>/g, '')
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/&lt;/gi, '<')
+      .replace(/&gt;/gi, '>')
+      .trim();
+
+  const bodyLines = toPlainText(content)
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const document = new Document({
+    sections: [
+      {
+        children: [
+          new Paragraph({
+            children: [new TextRun({ text: title, bold: true, size: 28 })],
+            spacing: { after: 280 },
+          }),
+          ...bodyLines.map(
+            (line) =>
+              new Paragraph({
+                children: [new TextRun({ text: line, size: 22 })],
+                spacing: { after: 160 },
+              }),
+          ),
+        ],
+      },
+    ],
+  });
+  const docxBuffer = await Packer.toBuffer(document);
+  return writeMemoDocx({
+    memoId,
+    documentName,
+    docxBase64: docxBuffer.toString('base64'),
+  });
 };
 
 export const convertDocxToPdf = async (docxPath: string) => {

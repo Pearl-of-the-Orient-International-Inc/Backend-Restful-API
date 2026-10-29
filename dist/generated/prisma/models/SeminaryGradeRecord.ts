@@ -20,8 +20,34 @@ export type SeminaryGradeRecordModel = runtime.Types.Result.DefaultSelection<Pri
 
 export type AggregateSeminaryGradeRecord = {
   _count: SeminaryGradeRecordCountAggregateOutputType | null
+  _avg: SeminaryGradeRecordAvgAggregateOutputType | null
+  _sum: SeminaryGradeRecordSumAggregateOutputType | null
   _min: SeminaryGradeRecordMinAggregateOutputType | null
   _max: SeminaryGradeRecordMaxAggregateOutputType | null
+}
+
+export type SeminaryGradeRecordAvgAggregateOutputType = {
+  attendanceEarned: number | null
+  attendanceTotal: number | null
+  courseworkEarned: number | null
+  courseworkTotal: number | null
+  characterEarned: number | null
+  characterTotal: number | null
+  examEarned: number | null
+  examTotal: number | null
+  weightedPercentage: number | null
+}
+
+export type SeminaryGradeRecordSumAggregateOutputType = {
+  attendanceEarned: number | null
+  attendanceTotal: number | null
+  courseworkEarned: number | null
+  courseworkTotal: number | null
+  characterEarned: number | null
+  characterTotal: number | null
+  examEarned: number | null
+  examTotal: number | null
+  weightedPercentage: number | null
 }
 
 export type SeminaryGradeRecordMinAggregateOutputType = {
@@ -39,6 +65,15 @@ export type SeminaryGradeRecordMinAggregateOutputType = {
   instructorUserId: string | null
   instructorName: string | null
   term: string | null
+  attendanceEarned: number | null
+  attendanceTotal: number | null
+  courseworkEarned: number | null
+  courseworkTotal: number | null
+  characterEarned: number | null
+  characterTotal: number | null
+  examEarned: number | null
+  examTotal: number | null
+  weightedPercentage: number | null
   finalGrade: string | null
   remarks: $Enums.SeminaryGradeRecordRemark | null
   status: $Enums.SeminaryGradeRecordStatus | null
@@ -62,6 +97,15 @@ export type SeminaryGradeRecordMaxAggregateOutputType = {
   instructorUserId: string | null
   instructorName: string | null
   term: string | null
+  attendanceEarned: number | null
+  attendanceTotal: number | null
+  courseworkEarned: number | null
+  courseworkTotal: number | null
+  characterEarned: number | null
+  characterTotal: number | null
+  examEarned: number | null
+  examTotal: number | null
+  weightedPercentage: number | null
   finalGrade: string | null
   remarks: $Enums.SeminaryGradeRecordRemark | null
   status: $Enums.SeminaryGradeRecordStatus | null
@@ -85,6 +129,15 @@ export type SeminaryGradeRecordCountAggregateOutputType = {
   instructorUserId: number
   instructorName: number
   term: number
+  attendanceEarned: number
+  attendanceTotal: number
+  courseworkEarned: number
+  courseworkTotal: number
+  characterEarned: number
+  characterTotal: number
+  examEarned: number
+  examTotal: number
+  weightedPercentage: number
   finalGrade: number
   remarks: number
   status: number
@@ -94,6 +147,30 @@ export type SeminaryGradeRecordCountAggregateOutputType = {
   _all: number
 }
 
+
+export type SeminaryGradeRecordAvgAggregateInputType = {
+  attendanceEarned?: true
+  attendanceTotal?: true
+  courseworkEarned?: true
+  courseworkTotal?: true
+  characterEarned?: true
+  characterTotal?: true
+  examEarned?: true
+  examTotal?: true
+  weightedPercentage?: true
+}
+
+export type SeminaryGradeRecordSumAggregateInputType = {
+  attendanceEarned?: true
+  attendanceTotal?: true
+  courseworkEarned?: true
+  courseworkTotal?: true
+  characterEarned?: true
+  characterTotal?: true
+  examEarned?: true
+  examTotal?: true
+  weightedPercentage?: true
+}
 
 export type SeminaryGradeRecordMinAggregateInputType = {
   id?: true
@@ -110,6 +187,15 @@ export type SeminaryGradeRecordMinAggregateInputType = {
   instructorUserId?: true
   instructorName?: true
   term?: true
+  attendanceEarned?: true
+  attendanceTotal?: true
+  courseworkEarned?: true
+  courseworkTotal?: true
+  characterEarned?: true
+  characterTotal?: true
+  examEarned?: true
+  examTotal?: true
+  weightedPercentage?: true
   finalGrade?: true
   remarks?: true
   status?: true
@@ -133,6 +219,15 @@ export type SeminaryGradeRecordMaxAggregateInputType = {
   instructorUserId?: true
   instructorName?: true
   term?: true
+  attendanceEarned?: true
+  attendanceTotal?: true
+  courseworkEarned?: true
+  courseworkTotal?: true
+  characterEarned?: true
+  characterTotal?: true
+  examEarned?: true
+  examTotal?: true
+  weightedPercentage?: true
   finalGrade?: true
   remarks?: true
   status?: true
@@ -156,6 +251,15 @@ export type SeminaryGradeRecordCountAggregateInputType = {
   instructorUserId?: true
   instructorName?: true
   term?: true
+  attendanceEarned?: true
+  attendanceTotal?: true
+  courseworkEarned?: true
+  courseworkTotal?: true
+  characterEarned?: true
+  characterTotal?: true
+  examEarned?: true
+  examTotal?: true
+  weightedPercentage?: true
   finalGrade?: true
   remarks?: true
   status?: true
@@ -203,6 +307,18 @@ export type SeminaryGradeRecordAggregateArgs<ExtArgs extends runtime.Types.Exten
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SeminaryGradeRecordAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SeminaryGradeRecordSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SeminaryGradeRecordMinAggregateInputType
@@ -233,6 +349,8 @@ export type SeminaryGradeRecordGroupByArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   _count?: SeminaryGradeRecordCountAggregateInputType | true
+  _avg?: SeminaryGradeRecordAvgAggregateInputType
+  _sum?: SeminaryGradeRecordSumAggregateInputType
   _min?: SeminaryGradeRecordMinAggregateInputType
   _max?: SeminaryGradeRecordMaxAggregateInputType
 }
@@ -252,6 +370,15 @@ export type SeminaryGradeRecordGroupByOutputType = {
   instructorUserId: string | null
   instructorName: string
   term: string
+  attendanceEarned: number | null
+  attendanceTotal: number | null
+  courseworkEarned: number | null
+  courseworkTotal: number | null
+  characterEarned: number | null
+  characterTotal: number | null
+  examEarned: number | null
+  examTotal: number | null
+  weightedPercentage: number | null
   finalGrade: string
   remarks: $Enums.SeminaryGradeRecordRemark
   status: $Enums.SeminaryGradeRecordStatus
@@ -259,6 +386,8 @@ export type SeminaryGradeRecordGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: SeminaryGradeRecordCountAggregateOutputType | null
+  _avg: SeminaryGradeRecordAvgAggregateOutputType | null
+  _sum: SeminaryGradeRecordSumAggregateOutputType | null
   _min: SeminaryGradeRecordMinAggregateOutputType | null
   _max: SeminaryGradeRecordMaxAggregateOutputType | null
 }
@@ -296,6 +425,15 @@ export type SeminaryGradeRecordWhereInput = {
   instructorUserId?: Prisma.StringNullableFilter<"SeminaryGradeRecord"> | string | null
   instructorName?: Prisma.StringFilter<"SeminaryGradeRecord"> | string
   term?: Prisma.StringFilter<"SeminaryGradeRecord"> | string
+  attendanceEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  attendanceTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  courseworkEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  courseworkTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  characterEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  characterTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  examEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  examTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  weightedPercentage?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
   finalGrade?: Prisma.StringFilter<"SeminaryGradeRecord"> | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkFilter<"SeminaryGradeRecord"> | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusFilter<"SeminaryGradeRecord"> | $Enums.SeminaryGradeRecordStatus
@@ -319,6 +457,15 @@ export type SeminaryGradeRecordOrderByWithRelationInput = {
   instructorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   instructorName?: Prisma.SortOrder
   term?: Prisma.SortOrder
+  attendanceEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  characterEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  characterTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  examEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  examTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
   finalGrade?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -345,6 +492,15 @@ export type SeminaryGradeRecordWhereUniqueInput = Prisma.AtLeast<{
   instructorUserId?: Prisma.StringNullableFilter<"SeminaryGradeRecord"> | string | null
   instructorName?: Prisma.StringFilter<"SeminaryGradeRecord"> | string
   term?: Prisma.StringFilter<"SeminaryGradeRecord"> | string
+  attendanceEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  attendanceTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  courseworkEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  courseworkTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  characterEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  characterTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  examEarned?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  examTotal?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
+  weightedPercentage?: Prisma.FloatNullableFilter<"SeminaryGradeRecord"> | number | null
   finalGrade?: Prisma.StringFilter<"SeminaryGradeRecord"> | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkFilter<"SeminaryGradeRecord"> | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusFilter<"SeminaryGradeRecord"> | $Enums.SeminaryGradeRecordStatus
@@ -368,6 +524,15 @@ export type SeminaryGradeRecordOrderByWithAggregationInput = {
   instructorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   instructorName?: Prisma.SortOrder
   term?: Prisma.SortOrder
+  attendanceEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  characterEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  characterTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  examEarned?: Prisma.SortOrderInput | Prisma.SortOrder
+  examTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
   finalGrade?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -375,8 +540,10 @@ export type SeminaryGradeRecordOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SeminaryGradeRecordCountOrderByAggregateInput
+  _avg?: Prisma.SeminaryGradeRecordAvgOrderByAggregateInput
   _max?: Prisma.SeminaryGradeRecordMaxOrderByAggregateInput
   _min?: Prisma.SeminaryGradeRecordMinOrderByAggregateInput
+  _sum?: Prisma.SeminaryGradeRecordSumOrderByAggregateInput
 }
 
 export type SeminaryGradeRecordScalarWhereWithAggregatesInput = {
@@ -397,6 +564,15 @@ export type SeminaryGradeRecordScalarWhereWithAggregatesInput = {
   instructorUserId?: Prisma.StringNullableWithAggregatesFilter<"SeminaryGradeRecord"> | string | null
   instructorName?: Prisma.StringWithAggregatesFilter<"SeminaryGradeRecord"> | string
   term?: Prisma.StringWithAggregatesFilter<"SeminaryGradeRecord"> | string
+  attendanceEarned?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  attendanceTotal?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  courseworkEarned?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  courseworkTotal?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  characterEarned?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  characterTotal?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  examEarned?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  examTotal?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
+  weightedPercentage?: Prisma.FloatNullableWithAggregatesFilter<"SeminaryGradeRecord"> | number | null
   finalGrade?: Prisma.StringWithAggregatesFilter<"SeminaryGradeRecord"> | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkWithAggregatesFilter<"SeminaryGradeRecord"> | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusWithAggregatesFilter<"SeminaryGradeRecord"> | $Enums.SeminaryGradeRecordStatus
@@ -420,6 +596,15 @@ export type SeminaryGradeRecordCreateInput = {
   instructorUserId?: string | null
   instructorName: string
   term: string
+  attendanceEarned?: number | null
+  attendanceTotal?: number | null
+  courseworkEarned?: number | null
+  courseworkTotal?: number | null
+  characterEarned?: number | null
+  characterTotal?: number | null
+  examEarned?: number | null
+  examTotal?: number | null
+  weightedPercentage?: number | null
   finalGrade: string
   remarks?: $Enums.SeminaryGradeRecordRemark
   status?: $Enums.SeminaryGradeRecordStatus
@@ -443,6 +628,15 @@ export type SeminaryGradeRecordUncheckedCreateInput = {
   instructorUserId?: string | null
   instructorName: string
   term: string
+  attendanceEarned?: number | null
+  attendanceTotal?: number | null
+  courseworkEarned?: number | null
+  courseworkTotal?: number | null
+  characterEarned?: number | null
+  characterTotal?: number | null
+  examEarned?: number | null
+  examTotal?: number | null
+  weightedPercentage?: number | null
   finalGrade: string
   remarks?: $Enums.SeminaryGradeRecordRemark
   status?: $Enums.SeminaryGradeRecordStatus
@@ -466,6 +660,15 @@ export type SeminaryGradeRecordUpdateInput = {
   instructorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instructorName?: Prisma.StringFieldUpdateOperationsInput | string
   term?: Prisma.StringFieldUpdateOperationsInput | string
+  attendanceEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  attendanceTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weightedPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   finalGrade?: Prisma.StringFieldUpdateOperationsInput | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordStatus
@@ -489,6 +692,15 @@ export type SeminaryGradeRecordUncheckedUpdateInput = {
   instructorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instructorName?: Prisma.StringFieldUpdateOperationsInput | string
   term?: Prisma.StringFieldUpdateOperationsInput | string
+  attendanceEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  attendanceTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weightedPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   finalGrade?: Prisma.StringFieldUpdateOperationsInput | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordStatus
@@ -512,6 +724,15 @@ export type SeminaryGradeRecordCreateManyInput = {
   instructorUserId?: string | null
   instructorName: string
   term: string
+  attendanceEarned?: number | null
+  attendanceTotal?: number | null
+  courseworkEarned?: number | null
+  courseworkTotal?: number | null
+  characterEarned?: number | null
+  characterTotal?: number | null
+  examEarned?: number | null
+  examTotal?: number | null
+  weightedPercentage?: number | null
   finalGrade: string
   remarks?: $Enums.SeminaryGradeRecordRemark
   status?: $Enums.SeminaryGradeRecordStatus
@@ -535,6 +756,15 @@ export type SeminaryGradeRecordUpdateManyMutationInput = {
   instructorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instructorName?: Prisma.StringFieldUpdateOperationsInput | string
   term?: Prisma.StringFieldUpdateOperationsInput | string
+  attendanceEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  attendanceTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weightedPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   finalGrade?: Prisma.StringFieldUpdateOperationsInput | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordStatus
@@ -558,6 +788,15 @@ export type SeminaryGradeRecordUncheckedUpdateManyInput = {
   instructorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instructorName?: Prisma.StringFieldUpdateOperationsInput | string
   term?: Prisma.StringFieldUpdateOperationsInput | string
+  attendanceEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  attendanceTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  courseworkTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  characterTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examEarned?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  examTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weightedPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   finalGrade?: Prisma.StringFieldUpdateOperationsInput | string
   remarks?: Prisma.EnumSeminaryGradeRecordRemarkFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordRemark
   status?: Prisma.EnumSeminaryGradeRecordStatusFieldUpdateOperationsInput | $Enums.SeminaryGradeRecordStatus
@@ -581,12 +820,33 @@ export type SeminaryGradeRecordCountOrderByAggregateInput = {
   instructorUserId?: Prisma.SortOrder
   instructorName?: Prisma.SortOrder
   term?: Prisma.SortOrder
+  attendanceEarned?: Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrder
+  characterEarned?: Prisma.SortOrder
+  characterTotal?: Prisma.SortOrder
+  examEarned?: Prisma.SortOrder
+  examTotal?: Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrder
   finalGrade?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type SeminaryGradeRecordAvgOrderByAggregateInput = {
+  attendanceEarned?: Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrder
+  characterEarned?: Prisma.SortOrder
+  characterTotal?: Prisma.SortOrder
+  examEarned?: Prisma.SortOrder
+  examTotal?: Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrder
 }
 
 export type SeminaryGradeRecordMaxOrderByAggregateInput = {
@@ -604,6 +864,15 @@ export type SeminaryGradeRecordMaxOrderByAggregateInput = {
   instructorUserId?: Prisma.SortOrder
   instructorName?: Prisma.SortOrder
   term?: Prisma.SortOrder
+  attendanceEarned?: Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrder
+  characterEarned?: Prisma.SortOrder
+  characterTotal?: Prisma.SortOrder
+  examEarned?: Prisma.SortOrder
+  examTotal?: Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrder
   finalGrade?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -627,12 +896,41 @@ export type SeminaryGradeRecordMinOrderByAggregateInput = {
   instructorUserId?: Prisma.SortOrder
   instructorName?: Prisma.SortOrder
   term?: Prisma.SortOrder
+  attendanceEarned?: Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrder
+  characterEarned?: Prisma.SortOrder
+  characterTotal?: Prisma.SortOrder
+  examEarned?: Prisma.SortOrder
+  examTotal?: Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrder
   finalGrade?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type SeminaryGradeRecordSumOrderByAggregateInput = {
+  attendanceEarned?: Prisma.SortOrder
+  attendanceTotal?: Prisma.SortOrder
+  courseworkEarned?: Prisma.SortOrder
+  courseworkTotal?: Prisma.SortOrder
+  characterEarned?: Prisma.SortOrder
+  characterTotal?: Prisma.SortOrder
+  examEarned?: Prisma.SortOrder
+  examTotal?: Prisma.SortOrder
+  weightedPercentage?: Prisma.SortOrder
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type EnumSeminaryGradeRecordRemarkFieldUpdateOperationsInput = {
@@ -660,6 +958,15 @@ export type SeminaryGradeRecordSelect<ExtArgs extends runtime.Types.Extensions.I
   instructorUserId?: boolean
   instructorName?: boolean
   term?: boolean
+  attendanceEarned?: boolean
+  attendanceTotal?: boolean
+  courseworkEarned?: boolean
+  courseworkTotal?: boolean
+  characterEarned?: boolean
+  characterTotal?: boolean
+  examEarned?: boolean
+  examTotal?: boolean
+  weightedPercentage?: boolean
   finalGrade?: boolean
   remarks?: boolean
   status?: boolean
@@ -683,6 +990,15 @@ export type SeminaryGradeRecordSelectCreateManyAndReturn<ExtArgs extends runtime
   instructorUserId?: boolean
   instructorName?: boolean
   term?: boolean
+  attendanceEarned?: boolean
+  attendanceTotal?: boolean
+  courseworkEarned?: boolean
+  courseworkTotal?: boolean
+  characterEarned?: boolean
+  characterTotal?: boolean
+  examEarned?: boolean
+  examTotal?: boolean
+  weightedPercentage?: boolean
   finalGrade?: boolean
   remarks?: boolean
   status?: boolean
@@ -706,6 +1022,15 @@ export type SeminaryGradeRecordSelectUpdateManyAndReturn<ExtArgs extends runtime
   instructorUserId?: boolean
   instructorName?: boolean
   term?: boolean
+  attendanceEarned?: boolean
+  attendanceTotal?: boolean
+  courseworkEarned?: boolean
+  courseworkTotal?: boolean
+  characterEarned?: boolean
+  characterTotal?: boolean
+  examEarned?: boolean
+  examTotal?: boolean
+  weightedPercentage?: boolean
   finalGrade?: boolean
   remarks?: boolean
   status?: boolean
@@ -729,6 +1054,15 @@ export type SeminaryGradeRecordSelectScalar = {
   instructorUserId?: boolean
   instructorName?: boolean
   term?: boolean
+  attendanceEarned?: boolean
+  attendanceTotal?: boolean
+  courseworkEarned?: boolean
+  courseworkTotal?: boolean
+  characterEarned?: boolean
+  characterTotal?: boolean
+  examEarned?: boolean
+  examTotal?: boolean
+  weightedPercentage?: boolean
   finalGrade?: boolean
   remarks?: boolean
   status?: boolean
@@ -737,7 +1071,7 @@ export type SeminaryGradeRecordSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SeminaryGradeRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recordNumber" | "studentApplicationId" | "studentId" | "studentName" | "program" | "programLevel" | "subject" | "courseId" | "courseTitle" | "courseCode" | "instructorUserId" | "instructorName" | "term" | "finalGrade" | "remarks" | "status" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryGradeRecord"]>
+export type SeminaryGradeRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recordNumber" | "studentApplicationId" | "studentId" | "studentName" | "program" | "programLevel" | "subject" | "courseId" | "courseTitle" | "courseCode" | "instructorUserId" | "instructorName" | "term" | "attendanceEarned" | "attendanceTotal" | "courseworkEarned" | "courseworkTotal" | "characterEarned" | "characterTotal" | "examEarned" | "examTotal" | "weightedPercentage" | "finalGrade" | "remarks" | "status" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryGradeRecord"]>
 
 export type $SeminaryGradeRecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SeminaryGradeRecord"
@@ -757,6 +1091,15 @@ export type $SeminaryGradeRecordPayload<ExtArgs extends runtime.Types.Extensions
     instructorUserId: string | null
     instructorName: string
     term: string
+    attendanceEarned: number | null
+    attendanceTotal: number | null
+    courseworkEarned: number | null
+    courseworkTotal: number | null
+    characterEarned: number | null
+    characterTotal: number | null
+    examEarned: number | null
+    examTotal: number | null
+    weightedPercentage: number | null
     finalGrade: string
     remarks: $Enums.SeminaryGradeRecordRemark
     status: $Enums.SeminaryGradeRecordStatus
@@ -1200,6 +1543,15 @@ export interface SeminaryGradeRecordFieldRefs {
   readonly instructorUserId: Prisma.FieldRef<"SeminaryGradeRecord", 'String'>
   readonly instructorName: Prisma.FieldRef<"SeminaryGradeRecord", 'String'>
   readonly term: Prisma.FieldRef<"SeminaryGradeRecord", 'String'>
+  readonly attendanceEarned: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly attendanceTotal: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly courseworkEarned: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly courseworkTotal: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly characterEarned: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly characterTotal: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly examEarned: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly examTotal: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
+  readonly weightedPercentage: Prisma.FieldRef<"SeminaryGradeRecord", 'Float'>
   readonly finalGrade: Prisma.FieldRef<"SeminaryGradeRecord", 'String'>
   readonly remarks: Prisma.FieldRef<"SeminaryGradeRecord", 'SeminaryGradeRecordRemark'>
   readonly status: Prisma.FieldRef<"SeminaryGradeRecord", 'SeminaryGradeRecordStatus'>

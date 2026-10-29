@@ -20,6 +20,7 @@ const client_1 = require("@/generated/prisma/client");
 const mailers_1 = require("@/mailers");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
+const officer_scope_1 = require("@/lib/officer-scope");
 const memo_announcement_shared_1 = require("./memo-announcement-shared");
 const buildMemoEmail = ({ referenceNumber, title, }) => ({
     subject: `Ref. No. ${referenceNumber} - ${title}`,
@@ -38,11 +39,11 @@ const buildMemoEmail = ({ referenceNumber, title, }) => ({
   `,
 });
 const publishMemoAnnouncement = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
+    var _a, _b, _c;
     const body = req.body;
     try {
         const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-        const memo = yield prisma_1.prisma.memoAnnouncement.findUnique({
+        let memo = yield prisma_1.prisma.memoAnnouncement.findUnique({
             where: { id },
             include: memo_announcement_shared_1.memoInclude,
         });
@@ -60,6 +61,48 @@ const publishMemoAnnouncement = (req, res) => __awaiter(void 0, void 0, void 0, 
             });
             return;
         }
+        if (memo.status === client_1.MemoStatus.REJECTED) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                code: 'BAD_REQUEST',
+                message: 'A rejected memo must be revised and submitted again before publication',
+            });
+            return;
+        }
+        if (memo.authorUserId) {
+            const author = yield prisma_1.prisma.user.findUnique({
+                where: { id: memo.authorUserId },
+                select: { role: true },
+            });
+            if ((author === null || author === void 0 ? void 0 : author.role) !== 'ADMIN') {
+                const scope = yield (0, officer_scope_1.getOfficerScope)(memo.authorUserId);
+                if (!scope) {
+                    res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({
+                        code: 'CONFLICT',
+                        message: 'This officer no longer has an active assignment; the memo cannot be published',
+                    });
+                    return;
+                }
+                const recipients = yield (0, memo_announcement_shared_1.resolveMemoRecipientsByMemberWhere)(scope.memberWhere);
+                if (!recipients.length) {
+                    res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
+                        code: 'BAD_REQUEST',
+                        message: 'There are no active approved members in the officer’s current scope',
+                    });
+                    return;
+                }
+                yield prisma_1.prisma.$transaction([
+                    prisma_1.prisma.memoRecipient.deleteMany({ where: { memoId: memo.id } }),
+                    prisma_1.prisma.memoAnnouncement.update({
+                        where: { id: memo.id },
+                        data: { recipients: { create: recipients } },
+                    }),
+                ]);
+                memo = (yield prisma_1.prisma.memoAnnouncement.findUniqueOrThrow({
+                    where: { id: memo.id },
+                    include: memo_announcement_shared_1.memoInclude,
+                }));
+            }
+        }
         if (!memo.recipients.length) {
             res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
                 code: 'BAD_REQUEST',
@@ -69,7 +112,13 @@ const publishMemoAnnouncement = (req, res) => __awaiter(void 0, void 0, void 0, 
         }
         yield prisma_1.prisma.memoAnnouncement.update({
             where: { id: memo.id },
-            data: { status: client_1.MemoStatus.PUBLISHING },
+            data: Object.assign({ status: client_1.MemoStatus.PUBLISHING }, (memo.authorUserId
+                ? {
+                    reviewedAt: new Date(),
+                    reviewedByUserId: (_a = req.userId) !== null && _a !== void 0 ? _a : null,
+                    reviewNotes: null,
+                }
+                : {})),
         });
         let docxPath = memo.docxFilePath;
         let docxFileName = memo.documentName;
@@ -101,8 +150,8 @@ const publishMemoAnnouncement = (req, res) => __awaiter(void 0, void 0, void 0, 
                 data: { pdfFilePath: pdf.filePath },
             });
         }
-        const attachmentPath = (_a = pdf === null || pdf === void 0 ? void 0 : pdf.filePath) !== null && _a !== void 0 ? _a : docxPath;
-        const attachmentFileName = (_b = pdf === null || pdf === void 0 ? void 0 : pdf.fileName) !== null && _b !== void 0 ? _b : docxFileName;
+        const attachmentPath = (_b = pdf === null || pdf === void 0 ? void 0 : pdf.filePath) !== null && _b !== void 0 ? _b : docxPath;
+        const attachmentFileName = (_c = pdf === null || pdf === void 0 ? void 0 : pdf.fileName) !== null && _c !== void 0 ? _c : docxFileName;
         const attachmentMimeType = pdf
             ? 'application/pdf'
             : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';

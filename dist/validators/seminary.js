@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.acceptSeminaryInstructorInviteSchema = exports.inviteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryGradeRecordSchema = exports.updateSeminaryGradeRecordStatusSchema = exports.updateSeminaryGradeRecordSchema = exports.getSeminaryGradeRecordSchema = exports.createSeminaryGradeRecordSchema = exports.getAllSeminaryGradeRecordsSchema = exports.deleteSeminaryExaminationSchema = exports.updateSeminaryExaminationStatusSchema = exports.updateSeminaryExaminationSchema = exports.createSeminaryExaminationSchema = exports.getSeminaryExaminationByIdSchema = exports.getAllSeminaryExaminationsSchema = exports.deleteSeminaryAssignmentSchema = exports.updateSeminaryAssignmentStatusSchema = exports.updateSeminaryAssignmentSchema = exports.createSeminaryAssignmentSchema = exports.getAllSeminaryAssignmentsSchema = exports.deleteSeminaryStudyMaterialSchema = exports.updateSeminaryStudyMaterialSchema = exports.createSeminaryStudyMaterialSchema = exports.getAllSeminaryStudyMaterialsSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.deleteSeminaryStudentSchema = exports.getPublicSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
-exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryInstructorSchema = void 0;
+exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryGradeRecordSchema = exports.updateSeminaryGradeRecordStatusSchema = exports.updateSeminaryGradeRecordSchema = exports.getSeminaryGradeRecordSchema = exports.bulkEncodeSeminaryGradesSchema = exports.createSeminaryGradeRecordSchema = exports.getAllSeminaryGradeRecordsSchema = exports.deleteSeminaryExaminationSchema = exports.updateSeminaryExaminationStatusSchema = exports.updateSeminaryExaminationSchema = exports.createSeminaryExaminationSchema = exports.getSeminaryExaminationByIdSchema = exports.getAllSeminaryExaminationsSchema = exports.deleteSeminaryAssignmentSchema = exports.updateSeminaryAssignmentStatusSchema = exports.updateSeminaryAssignmentSchema = exports.createSeminaryAssignmentSchema = exports.getAllSeminaryAssignmentsSchema = exports.deleteSeminaryStudyMaterialSchema = exports.updateSeminaryStudyMaterialSchema = exports.createSeminaryStudyMaterialSchema = exports.getAllSeminaryStudyMaterialsSchema = exports.updateSeminaryDocumentRequestStatusSchema = exports.createSeminaryDocumentRequestSchema = exports.getSeminaryDocumentRequestsSchema = exports.updateSeminaryDocumentRequestTypeSchema = exports.createSeminaryDocumentRequestTypeSchema = exports.getSeminaryDocumentRequestTypesSchema = exports.deleteSeminaryCourseScheduleSchema = exports.updateSeminaryCourseScheduleSchema = exports.createSeminaryCourseScheduleSchema = exports.getAllSeminaryCourseSchedulesSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.changeSeminaryStudentPasswordSchema = exports.deleteSeminaryStudentSchema = exports.getPublicSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
+exports.deleteSeminaryAnnouncementSchema = exports.updateSeminaryAnnouncementSchema = exports.createSeminaryAnnouncementSchema = exports.getSeminaryReportsSchema = exports.getSeminaryDashboardSchema = exports.getSeminaryAnnouncementsSchema = exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryInstructorSchema = exports.acceptSeminaryInstructorInviteSchema = exports.inviteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("@/generated/prisma/enums");
 const auth_1 = require("./auth");
 const optionalText = (max = 255) => zod_1.z.string().trim().max(max).optional();
+const optionalNullableText = (max = 255) => zod_1.z.preprocess((value) => (typeof value === 'string' && !value.trim() ? null : value), zod_1.z.string().trim().max(max).nullable().optional());
 const seminaryStudentIdSchema = zod_1.z
     .string()
     .trim()
@@ -64,6 +65,12 @@ const courseModalitySchema = normalizeEnumValue(enums_1.SeminaryCourseModality, 
 const courseStatusSchema = normalizeEnumValue(enums_1.SeminaryCourseStatus, {
     Active: enums_1.SeminaryCourseStatus.ACTIVE,
     Inactive: enums_1.SeminaryCourseStatus.INACTIVE,
+});
+const courseScheduleStatusSchema = normalizeEnumValue(enums_1.SeminaryCourseScheduleStatus, {
+    Draft: enums_1.SeminaryCourseScheduleStatus.DRAFT,
+    Scheduled: enums_1.SeminaryCourseScheduleStatus.SCHEDULED,
+    Cancelled: enums_1.SeminaryCourseScheduleStatus.CANCELLED,
+    Completed: enums_1.SeminaryCourseScheduleStatus.COMPLETED,
 });
 const studyMaterialTypeSchema = normalizeEnumValue(enums_1.SeminaryStudyMaterialType, {
     Notes: enums_1.SeminaryStudyMaterialType.NOTES,
@@ -386,6 +393,15 @@ exports.deleteSeminaryStudentSchema = zod_1.z.object({
         studentId: seminaryStudentIdSchema,
     }),
 });
+exports.changeSeminaryStudentPasswordSchema = zod_1.z.object({
+    params: zod_1.z.object({ studentId: zod_1.z.string().trim().min(1).max(100) }),
+    body: zod_1.z
+        .object({ password: auth_1.passwordSchema, confirmPassword: auth_1.passwordSchema })
+        .refine((value) => value.password === value.confirmPassword, {
+        message: 'Password does not match',
+        path: ['confirmPassword'],
+    }),
+});
 exports.getAllSeminaryStudentsSchema = zod_1.z.object({
     query: zod_1.z.object({
         page: zod_1.z
@@ -475,6 +491,112 @@ exports.updateSeminaryCourseStatusSchema = zod_1.z.object({
 exports.deleteSeminaryCourseSchema = zod_1.z.object({
     params: zod_1.z.object({
         id: seminaryCourseIdSchema,
+    }),
+});
+const scheduleWeekdaySchema = zod_1.z.enum([
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+    'SUNDAY',
+]);
+const scheduleTimeSchema = zod_1.z.string().trim().regex(/^([01]\d|2[0-3]):[0-5]\d$/, {
+    message: 'time must use 24-hour HH:mm format',
+});
+const scheduleDateSchema = zod_1.z.coerce.date();
+const seminaryCourseScheduleBodySchema = zod_1.z
+    .object({
+    academicYear: zod_1.z.string().trim().min(1).max(80),
+    period: zod_1.z.string().trim().min(1).max(80),
+    className: zod_1.z.string().trim().min(1).max(120),
+    courseId: zod_1.z.uuid(),
+    instructorId: zod_1.z.uuid(),
+    subjectName: zod_1.z.string().trim().min(1).max(200),
+    units: zod_1.z.coerce.number().int().min(1).max(12),
+    scheduledDate: scheduleDateSchema,
+    recurrenceDays: zod_1.z.array(scheduleWeekdaySchema).max(7).optional(),
+    recurrenceEndDate: scheduleDateSchema.optional(),
+    startTime: scheduleTimeSchema,
+    endTime: scheduleTimeSchema,
+    deliveryMode: courseModalitySchema,
+    location: optionalText(255),
+    meetingLink: optionalUrl,
+    status: courseScheduleStatusSchema.optional(),
+})
+    .refine((body) => body.startTime < body.endTime, {
+    message: 'endTime must be after startTime',
+    path: ['endTime'],
+});
+exports.getAllSeminaryCourseSchedulesSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        academicYear: optionalText(20),
+        period: optionalText(80),
+        className: optionalText(120),
+        status: courseScheduleStatusSchema.optional(),
+    }),
+});
+exports.createSeminaryCourseScheduleSchema = zod_1.z.object({
+    body: seminaryCourseScheduleBodySchema,
+});
+exports.updateSeminaryCourseScheduleSchema = zod_1.z.object({
+    params: zod_1.z.object({ id: zod_1.z.uuid() }),
+    body: seminaryCourseScheduleBodySchema,
+});
+exports.deleteSeminaryCourseScheduleSchema = zod_1.z.object({
+    params: zod_1.z.object({ id: zod_1.z.uuid() }),
+});
+const documentDeliveryMethodSchema = zod_1.z.enum(enums_1.SeminaryDocumentDeliveryMethod);
+const documentRequestStatusSchema = zod_1.z.enum(enums_1.SeminaryDocumentRequestStatus);
+const documentPaymentStatusSchema = zod_1.z.enum(enums_1.SeminaryDocumentPaymentStatus);
+const documentRequestTypeIdSchema = zod_1.z.uuid();
+exports.getSeminaryDocumentRequestTypesSchema = zod_1.z.object({
+    query: zod_1.z.object({ includeInactive: zod_1.z.enum(['true', 'false']).optional() }),
+});
+exports.createSeminaryDocumentRequestTypeSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        name: zod_1.z.string().trim().min(1).max(120),
+        description: optionalText(500),
+        fee: zod_1.z.coerce.number().min(0).max(100000).nullable().optional(),
+        requiresSupportingDetails: zod_1.z.boolean().optional(),
+        isActive: zod_1.z.boolean().optional(),
+        sortOrder: zod_1.z.coerce.number().int().min(0).max(999).optional(),
+    }),
+});
+exports.updateSeminaryDocumentRequestTypeSchema = zod_1.z.object({
+    params: zod_1.z.object({ id: documentRequestTypeIdSchema }),
+    body: zod_1.z.object({
+        name: zod_1.z.string().trim().min(1).max(120).optional(),
+        description: optionalText(500),
+        fee: zod_1.z.coerce.number().min(0).max(100000).nullable().optional(),
+        requiresSupportingDetails: zod_1.z.boolean().optional(),
+        isActive: zod_1.z.boolean().optional(),
+        sortOrder: zod_1.z.coerce.number().int().min(0).max(999).optional(),
+    }),
+});
+exports.getSeminaryDocumentRequestsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        status: documentRequestStatusSchema.optional(),
+        documentTypeId: documentRequestTypeIdSchema.optional(),
+    }),
+});
+exports.createSeminaryDocumentRequestSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        documentTypeId: documentRequestTypeIdSchema,
+        purpose: zod_1.z.string().trim().min(3).max(500),
+        deliveryMethod: documentDeliveryMethodSchema,
+        supportingDetails: optionalText(2000),
+    }),
+});
+exports.updateSeminaryDocumentRequestStatusSchema = zod_1.z.object({
+    params: zod_1.z.object({ id: zod_1.z.uuid() }),
+    body: zod_1.z.object({
+        status: documentRequestStatusSchema,
+        reviewRemarks: optionalText(1000),
+        paymentStatus: documentPaymentStatusSchema.optional(),
+        releaseReference: optionalText(255),
+        receivedBy: optionalText(255),
     }),
 });
 const seminaryStudyMaterialIdSchema = zod_1.z.uuid();
@@ -687,6 +809,23 @@ exports.getAllSeminaryGradeRecordsSchema = zod_1.z.object({
 exports.createSeminaryGradeRecordSchema = zod_1.z.object({
     body: seminaryGradeRecordBodySchema,
 });
+const encodedScoreSchema = zod_1.z.object({
+    studentApplicationId: zod_1.z.uuid(),
+    attendanceEarned: zod_1.z.coerce.number().min(0),
+    attendanceTotal: zod_1.z.coerce.number().positive(),
+    courseworkEarned: zod_1.z.coerce.number().min(0),
+    courseworkTotal: zod_1.z.coerce.number().positive(),
+    characterEarned: zod_1.z.coerce.number().min(0),
+    characterTotal: zod_1.z.coerce.number().positive(),
+    examEarned: zod_1.z.coerce.number().min(0),
+    examTotal: zod_1.z.coerce.number().positive(),
+});
+exports.bulkEncodeSeminaryGradesSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        subject: zod_1.z.string().trim().min(1).max(200),
+        entries: zod_1.z.array(encodedScoreSchema).min(1).max(500),
+    }),
+});
 exports.getSeminaryGradeRecordSchema = zod_1.z.object({
     params: zod_1.z.object({
         id: seminaryGradeRecordIdSchema,
@@ -893,9 +1032,11 @@ const gradeCriteriaWeightsSchema = zod_1.z
     .object({
     attendance: zod_1.z.coerce.number().min(0).max(100),
     coursework: zod_1.z.coerce.number().min(0).max(100),
+    character: zod_1.z.coerce.number().min(0).max(100),
     exam: zod_1.z.coerce.number().min(0).max(100),
 })
-    .refine((value) => value.attendance + value.coursework + value.exam === 100, {
+    .refine((value) => value.attendance + value.coursework + value.character + value.exam ===
+    100, {
     message: 'criteria weights must total 100',
 });
 exports.updateSeminaryGradeConfigurationSchema = zod_1.z.object({
@@ -1004,4 +1145,49 @@ exports.verifySeminaryCredentialDocumentSchema = zod_1.z.object({
     params: zod_1.z.object({
         token: zod_1.z.string().trim().min(16).max(128),
     }),
+});
+const seminaryAnnouncementBodySchema = zod_1.z
+    .object({
+    title: zod_1.z.string().trim().min(1, 'Title is required').max(180),
+    summary: optionalNullableText(2000),
+    kind: zod_1.z.enum(enums_1.SeminaryAnnouncementKind),
+    category: zod_1.z.enum(enums_1.SeminaryAnnouncementCategory),
+    audience: zod_1.z.enum(enums_1.SeminaryAnnouncementAudience),
+    location: optionalNullableText(255),
+    allDay: zod_1.z.boolean().optional().default(false),
+    startsAt: zod_1.z.string().datetime({ message: 'Start date and time must be a valid ISO date' }),
+    endsAt: zod_1.z.string().datetime({ message: 'End date and time must be a valid ISO date' }).nullable().optional(),
+    status: zod_1.z.enum(enums_1.SeminaryAnnouncementStatus).optional().default(enums_1.SeminaryAnnouncementStatus.PUBLISHED),
+})
+    .refine((value) => !value.endsAt || new Date(value.endsAt).getTime() > new Date(value.startsAt).getTime(), { message: 'End date and time must be after the start date and time', path: ['endsAt'] });
+exports.getSeminaryAnnouncementsSchema = zod_1.z.object({
+    query: zod_1.z.object({}),
+});
+exports.getSeminaryDashboardSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        startDate: zod_1.z.string().date().optional(),
+        endDate: zod_1.z.string().date().optional(),
+    }).refine((value) => !value.startDate || !value.endDate || value.startDate <= value.endDate, {
+        message: 'startDate must be before or on endDate',
+    }),
+});
+exports.getSeminaryReportsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        startDate: zod_1.z.string().date().optional(),
+        endDate: zod_1.z.string().date().optional(),
+        programLevel: programLevelSchema.optional(),
+        scope: zod_1.z.enum(['INSTITUTIONAL', 'ACADEMIC', 'FINANCE', 'REGISTRAR']).optional(),
+    }).refine((value) => !value.startDate || !value.endDate || value.startDate <= value.endDate, {
+        message: 'startDate must be before or on endDate',
+    }),
+});
+exports.createSeminaryAnnouncementSchema = zod_1.z.object({
+    body: seminaryAnnouncementBodySchema,
+});
+exports.updateSeminaryAnnouncementSchema = zod_1.z.object({
+    params: zod_1.z.object({ id: zod_1.z.uuid() }),
+    body: seminaryAnnouncementBodySchema,
+});
+exports.deleteSeminaryAnnouncementSchema = zod_1.z.object({
+    params: zod_1.z.object({ id: zod_1.z.uuid() }),
 });

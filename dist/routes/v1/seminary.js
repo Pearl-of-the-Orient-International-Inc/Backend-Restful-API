@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const get_current_seminary_application_1 = require("@/controllers/v1/seminary/get-current-seminary-application");
 const get_current_seminary_student_notifications_1 = require("@/controllers/v1/seminary/get-current-seminary-student-notifications");
+const get_current_student_portal_1 = require("@/controllers/v1/seminary/get-current-student-portal");
 const upsert_current_seminary_application_1 = require("@/controllers/v1/seminary/upsert-current-seminary-application");
 const get_all_seminary_applications_1 = require("@/controllers/v1/seminary/get-all-seminary-applications");
 const get_seminary_application_by_id_1 = require("@/controllers/v1/seminary/get-seminary-application-by-id");
@@ -18,9 +19,11 @@ const create_seminary_assignment_1 = require("@/controllers/v1/seminary/create-s
 const create_seminary_course_1 = require("@/controllers/v1/seminary/create-seminary-course");
 const create_seminary_examination_1 = require("@/controllers/v1/seminary/create-seminary-examination");
 const create_seminary_grade_record_1 = require("@/controllers/v1/seminary/create-seminary-grade-record");
+const bulk_encode_seminary_grades_1 = require("@/controllers/v1/seminary/bulk-encode-seminary-grades");
 const create_seminary_instructor_1 = require("@/controllers/v1/seminary/create-seminary-instructor");
 const create_seminary_study_material_1 = require("@/controllers/v1/seminary/create-seminary-study-material");
 const create_seminary_student_1 = require("@/controllers/v1/seminary/create-seminary-student");
+const change_seminary_student_password_1 = require("@/controllers/v1/seminary/change-seminary-student-password");
 const delete_seminary_academic_year_1 = require("@/controllers/v1/seminary/delete-seminary-academic-year");
 const delete_seminary_assignment_1 = require("@/controllers/v1/seminary/delete-seminary-assignment");
 const delete_seminary_course_1 = require("@/controllers/v1/seminary/delete-seminary-course");
@@ -69,11 +72,17 @@ const update_seminary_instructor_status_1 = require("@/controllers/v1/seminary/u
 const update_seminary_study_material_1 = require("@/controllers/v1/seminary/update-seminary-study-material");
 const update_seminary_student_1 = require("@/controllers/v1/seminary/update-seminary-student");
 const verify_seminary_credential_document_1 = require("@/controllers/v1/seminary/verify-seminary-credential-document");
+const course_schedules_1 = require("@/controllers/v1/seminary/course-schedules");
+const document_requests_1 = require("@/controllers/v1/seminary/document-requests");
+const announcements_1 = require("@/controllers/v1/seminary/announcements");
+const dashboard_1 = require("@/controllers/v1/seminary/dashboard");
+const reports_1 = require("@/controllers/v1/seminary/reports");
 const sanitation_1 = require("@/common/sanitation");
 const config_1 = __importDefault(require("@/config"));
 const uploadthing_1 = require("@/lib/uploadthing");
 const authentication_1 = require("@/middlewares/authentication");
 const authorization_1 = __importDefault(require("@/middlewares/authorization"));
+const seminary_schedule_manager_1 = require("@/middlewares/seminary-schedule-manager");
 const express_rate_limiter_1 = require("@/middlewares/express-rate-limiter");
 const enums_1 = require("@/generated/prisma/enums");
 const seminary_1 = require("@/validators/seminary");
@@ -96,12 +105,17 @@ const seminaryExaminationAccess = [
     authentication_1.authenticate,
     (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.INSTRUCTOR]),
 ];
+const seminaryLmsReadAccess = [
+    authentication_1.authenticate,
+    (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.INSTRUCTOR, enums_1.UserType.MEMBER]),
+];
 const seminaryGradeRecordAccess = [
     authentication_1.authenticate,
     (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.INSTRUCTOR]),
 ];
 router.get('/current/application', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_seminary_application_1.getCurrentSeminaryApplication);
 router.get('/current/student-notifications', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, get_current_seminary_student_notifications_1.getCurrentSeminaryStudentNotifications);
+router.get('/current/student-portal', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_student_portal_1.getCurrentStudentPortal);
 router.put('/current/application', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(seminary_1.upsertCurrentSeminaryApplicationSchema), upsert_current_seminary_application_1.upsertCurrentSeminaryApplication);
 router.use('/requirements/upload', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, uploadthing_1.createUploadthingExpressHandler)({
     maxFileSize: '16MB',
@@ -116,6 +130,8 @@ router.use('/study-materials/upload', (0, express_rate_limiter_1.expressRateLimi
     maxFileCount: 1,
 }));
 router.get('/applications', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getAllSeminaryApplicationsSchema), get_all_seminary_applications_1.getAllSeminaryApplications);
+router.get('/dashboard', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getSeminaryDashboardSchema), dashboard_1.getSeminaryDashboard);
+router.get('/reports', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getSeminaryReportsSchema), reports_1.getSeminaryReports);
 router.post('/applications', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.createSeminaryApplicationSchema), create_seminary_application_1.createSeminaryApplication);
 router.get('/applications/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getSeminaryApplicationByIdSchema), get_seminary_application_by_id_1.getSeminaryApplicationById);
 router.patch('/applications/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.updateSeminaryApplicationStatusSchema), update_seminary_application_status_1.updateSeminaryApplicationStatus);
@@ -132,6 +148,7 @@ router.delete('/instructors/:id', (0, express_rate_limiter_1.expressRateLimit)('
 router.get('/students', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryStudentsSchema), get_all_seminary_students_1.getAllSeminaryStudents);
 router.get('/public/students/:studentId', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(seminary_1.getPublicSeminaryStudentSchema), get_public_seminary_student_1.getPublicSeminaryStudent);
 router.post('/students', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryStudentSchema), create_seminary_student_1.createSeminaryStudent);
+router.patch('/students/:studentId/password', (0, express_rate_limiter_1.expressRateLimit)('passwordReset'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.changeSeminaryStudentPasswordSchema), change_seminary_student_password_1.changeSeminaryStudentPassword);
 router.post('/students/bulk-import', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.bulkImportSeminaryStudentsSchema), bulk_import_seminary_students_1.bulkImportSeminaryStudents);
 router.delete('/students/bulk-delete', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.bulkDeleteSeminaryStudentsSchema), bulk_delete_seminary_students_1.bulkDeleteSeminaryStudents);
 router.get('/courses', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryCoursesSchema), get_all_seminary_courses_1.getAllSeminaryCourses);
@@ -139,18 +156,32 @@ router.post('/courses', (0, express_rate_limiter_1.expressRateLimit)('basic'), .
 router.put('/courses/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryCourseSchema), update_seminary_course_1.updateSeminaryCourse);
 router.patch('/courses/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryCourseStatusSchema), update_seminary_course_status_1.updateSeminaryCourseStatus);
 router.delete('/courses/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.deleteSeminaryCourseSchema), delete_seminary_course_1.deleteSeminaryCourse);
-router.get('/study-materials', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudyMaterialAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryStudyMaterialsSchema), get_all_seminary_study_materials_1.getAllSeminaryStudyMaterials);
+router.get('/announcements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.INSTRUCTOR, enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(seminary_1.getSeminaryAnnouncementsSchema), announcements_1.getSeminaryAnnouncements);
+router.post('/announcements', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.createSeminaryAnnouncementSchema), announcements_1.createSeminaryAnnouncement);
+router.put('/announcements/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.updateSeminaryAnnouncementSchema), announcements_1.updateSeminaryAnnouncement);
+router.delete('/announcements/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.deleteSeminaryAnnouncementSchema), announcements_1.deleteSeminaryAnnouncement);
+router.get('/course-schedules', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.INSTRUCTOR, enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(seminary_1.getAllSeminaryCourseSchedulesSchema), course_schedules_1.getSeminaryCourseSchedules);
+router.post('/course-schedules', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, seminary_schedule_manager_1.authorizeSeminaryScheduleManager, (0, sanitation_1.validate)(seminary_1.createSeminaryCourseScheduleSchema), course_schedules_1.createSeminaryCourseSchedule);
+router.put('/course-schedules/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, seminary_schedule_manager_1.authorizeSeminaryScheduleManager, (0, sanitation_1.validate)(seminary_1.updateSeminaryCourseScheduleSchema), course_schedules_1.updateSeminaryCourseSchedule);
+router.delete('/course-schedules/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, seminary_schedule_manager_1.authorizeSeminaryScheduleManager, (0, sanitation_1.validate)(seminary_1.deleteSeminaryCourseScheduleSchema), course_schedules_1.deleteSeminaryCourseSchedule);
+router.get('/document-request-types', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(seminary_1.getSeminaryDocumentRequestTypesSchema), document_requests_1.getSeminaryDocumentRequestTypes);
+router.post('/document-request-types', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryDocumentRequestTypeSchema), document_requests_1.createSeminaryDocumentRequestType);
+router.put('/document-request-types/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryDocumentRequestTypeSchema), document_requests_1.updateSeminaryDocumentRequestType);
+router.get('/document-requests', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(seminary_1.getSeminaryDocumentRequestsSchema), document_requests_1.getSeminaryDocumentRequests);
+router.post('/document-requests', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), (0, sanitation_1.validate)(seminary_1.createSeminaryDocumentRequestSchema), document_requests_1.createSeminaryDocumentRequest);
+router.patch('/document-requests/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryDocumentRequestStatusSchema), document_requests_1.updateSeminaryDocumentRequestStatus);
+router.get('/study-materials', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryLmsReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryStudyMaterialsSchema), get_all_seminary_study_materials_1.getAllSeminaryStudyMaterials);
 router.post('/study-materials', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudyMaterialAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryStudyMaterialSchema), create_seminary_study_material_1.createSeminaryStudyMaterial);
 router.put('/study-materials/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudyMaterialAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryStudyMaterialSchema), update_seminary_study_material_1.updateSeminaryStudyMaterial);
 router.delete('/study-materials/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudyMaterialAccess, (0, sanitation_1.validate)(seminary_1.deleteSeminaryStudyMaterialSchema), delete_seminary_study_material_1.deleteSeminaryStudyMaterial);
-router.get('/assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryAssignmentAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryAssignmentsSchema), get_all_seminary_assignments_1.getAllSeminaryAssignments);
+router.get('/assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryLmsReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryAssignmentsSchema), get_all_seminary_assignments_1.getAllSeminaryAssignments);
 router.post('/assignments', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryAssignmentAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryAssignmentSchema), create_seminary_assignment_1.createSeminaryAssignment);
 router.put('/assignments/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryAssignmentAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryAssignmentSchema), update_seminary_assignment_1.updateSeminaryAssignment);
 router.patch('/assignments/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryAssignmentAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryAssignmentStatusSchema), update_seminary_assignment_status_1.updateSeminaryAssignmentStatus);
 router.delete('/assignments/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryAssignmentAccess, (0, sanitation_1.validate)(seminary_1.deleteSeminaryAssignmentSchema), delete_seminary_assignment_1.deleteSeminaryAssignment);
-router.get('/examinations', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryExaminationAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryExaminationsSchema), get_all_seminary_examinations_1.getAllSeminaryExaminations);
+router.get('/examinations', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryLmsReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryExaminationsSchema), get_all_seminary_examinations_1.getAllSeminaryExaminations);
 router.post('/examinations', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryExaminationAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryExaminationSchema), create_seminary_examination_1.createSeminaryExamination);
-router.get('/examinations/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryExaminationAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryExaminationByIdSchema), get_seminary_examination_by_id_1.getSeminaryExaminationById);
+router.get('/examinations/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryLmsReadAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryExaminationByIdSchema), get_seminary_examination_by_id_1.getSeminaryExaminationById);
 router.put('/examinations/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryExaminationAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryExaminationSchema), update_seminary_examination_1.updateSeminaryExamination);
 router.patch('/examinations/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryExaminationAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryExaminationStatusSchema), update_seminary_examination_status_1.updateSeminaryExaminationStatus);
 router.delete('/examinations/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryExaminationAccess, (0, sanitation_1.validate)(seminary_1.deleteSeminaryExaminationSchema), delete_seminary_examination_1.deleteSeminaryExamination);
@@ -163,6 +194,7 @@ router.delete('/academic-years/:id', (0, express_rate_limiter_1.expressRateLimit
 router.get('/grade-configuration', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, get_seminary_grade_configuration_1.getSeminaryGradeConfiguration);
 router.put('/grade-configuration', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryGradeConfigurationSchema), update_seminary_grade_configuration_1.updateSeminaryGradeConfiguration);
 router.get('/grade-records', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryGradeRecordAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryGradeRecordsSchema), get_all_seminary_grade_records_1.getAllSeminaryGradeRecords);
+router.post('/grade-records/encode', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryGradeRecordAccess, (0, sanitation_1.validate)(seminary_1.bulkEncodeSeminaryGradesSchema), bulk_encode_seminary_grades_1.bulkEncodeSeminaryGrades);
 router.post('/grade-records', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryGradeRecordAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryGradeRecordSchema), create_seminary_grade_record_1.createSeminaryGradeRecord);
 router.get('/grade-records/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryGradeRecordAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryGradeRecordSchema), get_seminary_grade_record_1.getSeminaryGradeRecord);
 router.put('/grade-records/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryGradeRecordAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryGradeRecordSchema), update_seminary_grade_record_1.updateSeminaryGradeRecord);

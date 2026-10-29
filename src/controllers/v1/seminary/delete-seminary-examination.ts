@@ -1,6 +1,7 @@
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { canManageExamination } from './examination-shared';
 
 import type { Request, Response } from 'express';
 
@@ -10,6 +11,7 @@ export const deleteSeminaryExamination = async (
 ): Promise<void> => {
   try {
     const id = req.params.id as string;
+    if (!(await canManageExamination({ examinationId: id, userId: req.userId, res }))) return;
     await prisma.seminaryExamination.delete({ where: { id } });
 
     res.status(HTTPSTATUS.OK).json({

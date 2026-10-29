@@ -1,4 +1,5 @@
 import { HTTPSTATUS } from '@/common/http-codes';
+import { SeminaryFeeCollectionStatus } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import {
@@ -17,9 +18,44 @@ export const updateSeminaryFeeCollectionStatus = async (
     const id = req.params.id as string;
     const body = req.body as UpdateSeminaryFeeCollectionStatusBody;
 
+    const existingAccount = await prisma.seminaryFeeCollectionAccount.findUnique({
+      where: { id },
+      select: { amountPaid: true, balance: true, id: true },
+    });
+
+    if (!existingAccount) {
+      res.status(HTTPSTATUS.NOT_FOUND).json({
+        code: 'NOT_FOUND',
+        message: 'Seminary fee collection account not found',
+      });
+      return;
+    }
+
+    const status = normalizeFeeCollectionStatus(body.status);
+    if (
+      status === SeminaryFeeCollectionStatus.PAID &&
+      Number(existingAccount.balance) > 0
+    ) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({
+        code: 'UNSETTLED_ACCOUNT',
+        message: 'An account cannot be marked paid while it still has a balance.',
+      });
+      return;
+    }
+    if (
+      status === SeminaryFeeCollectionStatus.PARTIALLY_PAID &&
+      Number(existingAccount.amountPaid) <= 0
+    ) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({
+        code: 'NO_PAYMENT_RECORDED',
+        message: 'Record a payment amount before marking an account partially paid.',
+      });
+      return;
+    }
+
     const account = await prisma.seminaryFeeCollectionAccount.update({
       where: { id },
-      data: { status: normalizeFeeCollectionStatus(body.status) },
+      data: { status },
     });
 
     res.status(HTTPSTATUS.OK).json({

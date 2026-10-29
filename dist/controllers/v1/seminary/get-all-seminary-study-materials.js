@@ -14,6 +14,7 @@ const http_codes_1 = require("@/common/http-codes");
 const enums_1 = require("@/generated/prisma/enums");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
+const lms_student_scope_1 = require("./lms-student-scope");
 const toCourseSubjects = (value) => Array.isArray(value) ? value : [];
 const getAllSeminaryStudyMaterials = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
@@ -51,13 +52,21 @@ const getAllSeminaryStudyMaterials = (req, res) => __awaiter(void 0, void 0, voi
                 .map((subject) => subject.subjectName)
                 .filter((subject) => Boolean(subject))
             : null;
+        const studentScope = (user === null || user === void 0 ? void 0 : user.role) === enums_1.UserType.MEMBER && req.userId
+            ? yield (0, lms_student_scope_1.getSeminaryStudentLmsScope)(req.userId)
+            : null;
         const where = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, (instructorSubjects
             ? { subject: { in: instructorSubjects } }
-            : query.subject
-                ? { subject: query.subject }
-                : {})), (instructorSubjects && query.subject
+            : studentScope
+                ? {
+                    subject: { in: studentScope.subjectNames },
+                    status: enums_1.SeminaryStudyMaterialStatus.PUBLISHED,
+                }
+                : query.subject
+                    ? { subject: query.subject }
+                    : {})), (instructorSubjects && query.subject
             ? { AND: [{ subject: query.subject }] }
-            : {})), (query.type ? { type: query.type } : {})), (query.status ? { status: query.status } : {})), (search
+            : {})), (query.type ? { type: query.type } : {})), (!studentScope && query.status ? { status: query.status } : {})), (search
             ? {
                 OR: [
                     { title: { contains: search, mode: 'insensitive' } },

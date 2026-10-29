@@ -15,8 +15,9 @@ exports.defaultGradeScale = [
 ];
 exports.defaultCriteriaWeights = {
     attendance: 20,
-    coursework: 40,
-    exam: 40,
+    coursework: 25,
+    character: 30,
+    exam: 25,
 };
 exports.defaultGradeConfiguration = {
     id: 'default',

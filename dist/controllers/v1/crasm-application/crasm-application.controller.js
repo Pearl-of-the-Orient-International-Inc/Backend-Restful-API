@@ -9,12 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.submitCurrentCrasmApplication = exports.saveCurrentCrasmApplication = exports.getCurrentCrasmApplication = void 0;
+exports.reviewCrasmApplication = exports.getAllCrasmApplications = exports.submitCurrentCrasmApplication = exports.saveCurrentCrasmApplication = exports.getCurrentCrasmApplication = void 0;
 const http_codes_1 = require("@/common/http-codes");
 const enums_1 = require("@/generated/prisma/enums");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
-const member = (userId) => prisma_1.prisma.member.findUnique({ where: { userId: userId !== null && userId !== void 0 ? userId : '' }, select: { id: true, memberType: true, status: true, isActive: true } });
+const memberSelect = { id: true, memberType: true, status: true, isActive: true, firstName: true, middleInitial: true, lastName: true, user: { select: { email: true, avatar: true } } };
+const applicationInclude = { member: { select: memberSelect }, reviews: { orderBy: { createdAt: 'desc' }, include: { reviewer: { select: { id: true, name: true, email: true } } } } };
+const member = (userId) => prisma_1.prisma.member.findUnique({ where: { userId: userId !== null && userId !== void 0 ? userId : '' }, select: memberSelect });
 const eligible = (profile) => Boolean((profile === null || profile === void 0 ? void 0 : profile.isActive) && profile.status === enums_1.MemberStatus.APPROVED && profile.memberType === enums_1.MemberType.ORDAINED_AND_COMMISSIONED_PRACTITIONER);
 const editable = [enums_1.OrdinationApplicationStatus.DRAFT, enums_1.OrdinationApplicationStatus.ADDITIONAL_INFORMATION_REQUIRED, enums_1.OrdinationApplicationStatus.RETURNED_FOR_CORRECTION];
 const getCurrentCrasmApplication = (req, res) => __awaiter(void 0, void 0, void 0, function* () { try {
@@ -55,3 +57,51 @@ const saveCurrentCrasmApplication = (req, res) => persist(req, res, false);
 exports.saveCurrentCrasmApplication = saveCurrentCrasmApplication;
 const submitCurrentCrasmApplication = (req, res) => persist(req, res, true);
 exports.submitCurrentCrasmApplication = submitCurrentCrasmApplication;
+const getAllCrasmApplications = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield prisma_1.prisma.crasmApplication.findMany({ orderBy: [{ submittedAt: 'desc' }, { updatedAt: 'desc' }], include: applicationInclude });
+        res.status(http_codes_1.HTTPSTATUS.OK).json({ code: 'OK', message: 'CRASM applications retrieved', data });
+    }
+    catch (err) {
+        winston_1.logger.error('Error fetching CRASM applications', { err });
+        res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({ code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+    }
+});
+exports.getAllCrasmApplications = getAllCrasmApplications;
+const reviewCrasmApplication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    try {
+        const id = String(req.params.id);
+        const { action, notes } = req.body;
+        const current = yield prisma_1.prisma.crasmApplication.findUnique({ where: { id }, include: { member: { select: { memberType: true, status: true, isActive: true } } } });
+        if (!current) {
+            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({ code: 'NOT_FOUND', message: 'CRASM application not found' });
+            return;
+        }
+        const allowedActions = {
+            SUBMITTED: [enums_1.OrdinationReviewAction.START_REVIEW, enums_1.OrdinationReviewAction.REQUEST_ADDITIONAL_INFORMATION, enums_1.OrdinationReviewAction.RETURN_FOR_CORRECTION, enums_1.OrdinationReviewAction.APPROVE, enums_1.OrdinationReviewAction.REJECT],
+            UNDER_REVIEW: [enums_1.OrdinationReviewAction.REQUEST_ADDITIONAL_INFORMATION, enums_1.OrdinationReviewAction.RETURN_FOR_CORRECTION, enums_1.OrdinationReviewAction.APPROVE, enums_1.OrdinationReviewAction.REJECT],
+        };
+        if (!((_a = allowedActions[current.status]) === null || _a === void 0 ? void 0 : _a.includes(action))) {
+            res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({ code: 'INVALID_TRANSITION', message: `The ${action.toLowerCase().split('_').join(' ')} action is not allowed while the application is ${current.status.toLowerCase().split('_').join(' ')}` });
+            return;
+        }
+        if (action === enums_1.OrdinationReviewAction.APPROVE && (!current.member.isActive || current.member.status !== enums_1.MemberStatus.APPROVED || current.member.memberType !== enums_1.MemberType.ORDAINED_AND_COMMISSIONED_PRACTITIONER)) {
+            res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({ code: 'ELIGIBILITY_CHANGED', message: 'The applicant is no longer an active, approved Ordained and Commissioned Practitioner' });
+            return;
+        }
+        const statusMap = { START_REVIEW: enums_1.OrdinationApplicationStatus.UNDER_REVIEW, REQUEST_ADDITIONAL_INFORMATION: enums_1.OrdinationApplicationStatus.ADDITIONAL_INFORMATION_REQUIRED, RETURN_FOR_CORRECTION: enums_1.OrdinationApplicationStatus.RETURNED_FOR_CORRECTION, APPROVE: enums_1.OrdinationApplicationStatus.APPROVED, REJECT: enums_1.OrdinationApplicationStatus.REJECTED };
+        const status = statusMap[action];
+        const now = new Date();
+        const application = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            yield tx.crasmApplicationReview.create({ data: { applicationId: id, reviewerId: req.userId, action, notes: notes || null } });
+            return tx.crasmApplication.update({ where: { id }, data: { status, adminNotes: notes !== null && notes !== void 0 ? notes : current.adminNotes, requestedInformation: ['REQUEST_ADDITIONAL_INFORMATION', 'RETURN_FOR_CORRECTION'].includes(action) ? notes : null, reviewedAt: now, decidedAt: ['APPROVE', 'REJECT'].includes(action) ? now : null }, include: applicationInclude });
+        }));
+        res.status(http_codes_1.HTTPSTATUS.OK).json({ code: 'OK', message: 'CRASM application review updated', data: application });
+    }
+    catch (err) {
+        winston_1.logger.error('Error reviewing CRASM application', { err });
+        res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({ code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+    }
+});
+exports.reviewCrasmApplication = reviewCrasmApplication;

@@ -49,6 +49,8 @@ import { getMemberOfficerAssignments } from '@/controllers/v1/member/get-member-
 import { deactivateOfficerAssignmentByAdmin } from '@/controllers/v1/member/deactivate-officer-assignment-by-admin';
 import { replaceOfficerAssignmentByAdmin } from '@/controllers/v1/member/replace-officer-assignment-by-admin';
 import { updateOfficerAssignmentPublication } from '@/controllers/v1/member/update-officer-assignment-publication';
+import { getCurrentOfficerScope } from '@/controllers/v1/member/get-current-officer-scope';
+import { getCurrentOfficerMembers } from '@/controllers/v1/member/get-current-officer-members';
 import { getPublicMemberProfile } from '@/controllers/v1/member/get-public-member-profile';
 import { getPublicDirectoryLocations } from '@/controllers/v1/member/get-public-directory-locations';
 import { getPublicServiceChaplains } from '@/controllers/v1/member/get-public-service-chaplains';
@@ -56,6 +58,7 @@ import { getPublicMemberSearch } from '@/controllers/v1/member/get-public-member
 import { getMemberFollowStatus } from '@/controllers/v1/member/get-member-follow-status';
 import { followMember } from '@/controllers/v1/member/follow-member';
 import { unfollowMember } from '@/controllers/v1/member/unfollow-member';
+import { createReferralCriterion, getCurrentReferral, getPublicHonorRoll, resolvePublicReferral, rotateCurrentReferral, getReferralCriteria, getPublicReferralCriteria, updateReferralCriterion, lockHonorRoll } from '@/controllers/v1/member/referrals';
 import {
   createCurrentServiceAvailability,
   deleteCurrentServiceAvailability,
@@ -123,6 +126,29 @@ router.post(
   expressRateLimit('basic'),
   validate(applyMemberSchema),
   applyMember,
+);
+
+router.get('/referrals/resolve/:code', expressRateLimit('basic'), resolvePublicReferral);
+router.get('/honor-roll', expressRateLimit('basic'), getPublicHonorRoll);
+router.get('/referral-criteria/public', expressRateLimit('basic'), getPublicReferralCriteria);
+router.get('/referral-criteria', expressRateLimit('basic'), authenticate, authorize([UserType.ADMIN]), getReferralCriteria);
+router.post('/referral-criteria', expressRateLimit('basic'), authenticate, authorize([UserType.ADMIN]), createReferralCriterion);
+router.put('/referral-criteria/:key', expressRateLimit('basic'), authenticate, authorize([UserType.ADMIN]), updateReferralCriterion);
+router.post('/honor-roll/:period/lock', expressRateLimit('basic'), authenticate, authorize([UserType.ADMIN]), lockHonorRoll);
+
+router.get(
+  '/current/referral',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  getCurrentReferral,
+);
+router.post(
+  '/current/referral/rotate',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER, UserType.ADMIN]),
+  rotateCurrentReferral,
 );
 
 router.get(
@@ -484,6 +510,22 @@ router.get(
   authorize([UserType.ADMIN]),
   validate(getAllOfficerAssignmentsSchema),
   getAllOfficerAssignments,
+);
+
+router.get(
+  '/officer-scope',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.OFFICER]),
+  getCurrentOfficerScope,
+);
+
+router.get(
+  '/officer-scope/members',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.OFFICER]),
+  getCurrentOfficerMembers,
 );
 
 router.get(

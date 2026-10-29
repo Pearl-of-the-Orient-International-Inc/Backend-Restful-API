@@ -19,17 +19,13 @@ export const getCurrentSeminaryStudentNotifications = async (
       return;
     }
 
-    const member = await prisma.member.findUnique({
-      where: { userId },
+    const student = await prisma.seminaryApplication.findFirst({
+      where: {
+        studentId: { not: null },
+        OR: [{ portalUserId: userId }, { member: { userId } }],
+      },
       select: { id: true },
     });
-
-    const student = member
-      ? await prisma.seminaryApplication.findFirst({
-          where: { memberId: member.id, studentId: { not: null } },
-          select: { id: true },
-        })
-      : null;
 
     if (!student) {
       res.status(HTTPSTATUS.OK).json({

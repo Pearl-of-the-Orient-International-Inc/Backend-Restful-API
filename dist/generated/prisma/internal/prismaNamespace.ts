@@ -436,6 +436,8 @@ export const ModelName = {
   OfficerAssignment: 'OfficerAssignment',
   OrdinationApplication: 'OrdinationApplication',
   OrdinationApplicationReview: 'OrdinationApplicationReview',
+  CrasmApplication: 'CrasmApplication',
+  CrasmApplicationReview: 'CrasmApplicationReview',
   Event: 'Event',
   EventAttendee: 'EventAttendee',
   EventTaggedMember: 'EventTaggedMember',
@@ -472,7 +474,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "crasmApplication" | "crasmApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4324,6 +4326,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CrasmApplication: {
+      payload: Prisma.$CrasmApplicationPayload<ExtArgs>
+      fields: Prisma.CrasmApplicationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrasmApplicationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrasmApplicationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>
+        }
+        findFirst: {
+          args: Prisma.CrasmApplicationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrasmApplicationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>
+        }
+        findMany: {
+          args: Prisma.CrasmApplicationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>[]
+        }
+        create: {
+          args: Prisma.CrasmApplicationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>
+        }
+        createMany: {
+          args: Prisma.CrasmApplicationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CrasmApplicationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>[]
+        }
+        delete: {
+          args: Prisma.CrasmApplicationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>
+        }
+        update: {
+          args: Prisma.CrasmApplicationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrasmApplicationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrasmApplicationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CrasmApplicationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>[]
+        }
+        upsert: {
+          args: Prisma.CrasmApplicationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationPayload>
+        }
+        aggregate: {
+          args: Prisma.CrasmApplicationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrasmApplication>
+        }
+        groupBy: {
+          args: Prisma.CrasmApplicationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrasmApplicationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrasmApplicationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrasmApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
+    CrasmApplicationReview: {
+      payload: Prisma.$CrasmApplicationReviewPayload<ExtArgs>
+      fields: Prisma.CrasmApplicationReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrasmApplicationReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrasmApplicationReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.CrasmApplicationReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrasmApplicationReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>
+        }
+        findMany: {
+          args: Prisma.CrasmApplicationReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>[]
+        }
+        create: {
+          args: Prisma.CrasmApplicationReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>
+        }
+        createMany: {
+          args: Prisma.CrasmApplicationReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CrasmApplicationReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>[]
+        }
+        delete: {
+          args: Prisma.CrasmApplicationReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>
+        }
+        update: {
+          args: Prisma.CrasmApplicationReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrasmApplicationReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrasmApplicationReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CrasmApplicationReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>[]
+        }
+        upsert: {
+          args: Prisma.CrasmApplicationReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrasmApplicationReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.CrasmApplicationReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrasmApplicationReview>
+        }
+        groupBy: {
+          args: Prisma.CrasmApplicationReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrasmApplicationReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrasmApplicationReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrasmApplicationReviewCountAggregateOutputType> | number
+        }
+      }
+    }
     Event: {
       payload: Prisma.$EventPayload<ExtArgs>
       fields: Prisma.EventFieldRefs
@@ -6503,6 +6653,15 @@ export const SeminaryGradeRecordScalarFieldEnum = {
   instructorUserId: 'instructorUserId',
   instructorName: 'instructorName',
   term: 'term',
+  attendanceEarned: 'attendanceEarned',
+  attendanceTotal: 'attendanceTotal',
+  courseworkEarned: 'courseworkEarned',
+  courseworkTotal: 'courseworkTotal',
+  characterEarned: 'characterEarned',
+  characterTotal: 'characterTotal',
+  examEarned: 'examEarned',
+  examTotal: 'examTotal',
+  weightedPercentage: 'weightedPercentage',
   finalGrade: 'finalGrade',
   remarks: 'remarks',
   status: 'status',
@@ -6902,6 +7061,43 @@ export const OrdinationApplicationReviewScalarFieldEnum = {
 export type OrdinationApplicationReviewScalarFieldEnum = (typeof OrdinationApplicationReviewScalarFieldEnum)[keyof typeof OrdinationApplicationReviewScalarFieldEnum]
 
 
+export const CrasmApplicationScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  status: 'status',
+  appointmentTitle: 'appointmentTitle',
+  appointingOfficer: 'appointingOfficer',
+  recommendingOfficer: 'recommendingOfficer',
+  territorialJurisdiction: 'territorialJurisdiction',
+  churchName: 'churchName',
+  churchAddress: 'churchAddress',
+  documents: 'documents',
+  informationAccurate: 'informationAccurate',
+  backgroundCheckConsent: 'backgroundCheckConsent',
+  requestedInformation: 'requestedInformation',
+  adminNotes: 'adminNotes',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CrasmApplicationScalarFieldEnum = (typeof CrasmApplicationScalarFieldEnum)[keyof typeof CrasmApplicationScalarFieldEnum]
+
+
+export const CrasmApplicationReviewScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  reviewerId: 'reviewerId',
+  action: 'action',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type CrasmApplicationReviewScalarFieldEnum = (typeof CrasmApplicationReviewScalarFieldEnum)[keyof typeof CrasmApplicationReviewScalarFieldEnum]
+
+
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -7191,6 +7387,9 @@ export const MemoAnnouncementScalarFieldEnum = {
   pdfFilePath: 'pdfFilePath',
   pages: 'pages',
   authorUserId: 'authorUserId',
+  reviewedAt: 'reviewedAt',
+  reviewedByUserId: 'reviewedByUserId',
+  reviewNotes: 'reviewNotes',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -7956,6 +8155,20 @@ export type ListEnumSeminaryExaminationStatusFieldRefInput<$PrismaModel> = Field
 
 
 /**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
  * Reference to a field of type 'SeminaryGradeRecordRemark'
  */
 export type EnumSeminaryGradeRecordRemarkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryGradeRecordRemark'>
@@ -8050,20 +8263,6 @@ export type EnumSeminaryInstructorStatusFieldRefInput<$PrismaModel> = FieldRefIn
  * Reference to a field of type 'SeminaryInstructorStatus[]'
  */
 export type ListEnumSeminaryInstructorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryInstructorStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -8829,6 +9028,8 @@ export type GlobalOmitConfig = {
   officerAssignment?: Prisma.OfficerAssignmentOmit
   ordinationApplication?: Prisma.OrdinationApplicationOmit
   ordinationApplicationReview?: Prisma.OrdinationApplicationReviewOmit
+  crasmApplication?: Prisma.CrasmApplicationOmit
+  crasmApplicationReview?: Prisma.CrasmApplicationReviewOmit
   event?: Prisma.EventOmit
   eventAttendee?: Prisma.EventAttendeeOmit
   eventTaggedMember?: Prisma.EventTaggedMemberOmit

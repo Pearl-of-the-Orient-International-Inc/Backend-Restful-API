@@ -8,6 +8,7 @@ import type {
   createSeminaryApplicationSchema,
   createSeminaryAssignmentSchema,
   createSeminaryCourseSchema,
+  createSeminaryCourseScheduleSchema,
   createSeminaryExaminationSchema,
   createSeminaryGradeRecordSchema,
   bulkEncodeSeminaryGradesSchema,
@@ -26,6 +27,7 @@ import type {
   getAllSeminaryAcademicYearsSchema,
   getAllSeminaryAssignmentsSchema,
   getAllSeminaryCoursesSchema,
+  getAllSeminaryCourseSchedulesSchema,
   getAllSeminaryExaminationsSchema,
   getAllSeminaryGradeRecordsSchema,
   getAllSeminaryFeeCollectionsSchema,
@@ -44,6 +46,7 @@ import type {
   updateSeminaryAssignmentSchema,
   updateSeminaryAssignmentStatusSchema,
   updateSeminaryCourseSchema,
+  updateSeminaryCourseScheduleSchema,
   updateSeminaryCourseStatusSchema,
   updateSeminaryExaminationSchema,
   updateSeminaryExaminationStatusSchema,
@@ -151,6 +154,18 @@ export type GetAllSeminaryCoursesQuery = z.infer<
 
 export type CreateSeminaryCourseBody = z.infer<
   typeof createSeminaryCourseSchema
+>['body'];
+
+export type GetAllSeminaryCourseSchedulesQuery = z.infer<
+  typeof getAllSeminaryCourseSchedulesSchema
+>['query'];
+
+export type CreateSeminaryCourseScheduleBody = z.infer<
+  typeof createSeminaryCourseScheduleSchema
+>['body'];
+
+export type UpdateSeminaryCourseScheduleBody = z.infer<
+  typeof updateSeminaryCourseScheduleSchema
 >['body'];
 
 export type UpdateSeminaryCourseBody = z.infer<

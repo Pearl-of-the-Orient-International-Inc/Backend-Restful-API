@@ -13,7 +13,7 @@ export const deleteSeminaryStudent = async (
 
     const student = await prisma.seminaryApplication.findUnique({
       where: { studentId },
-      select: { id: true },
+      select: { id: true, portalUserId: true },
     });
 
     if (!student) {
@@ -24,8 +24,11 @@ export const deleteSeminaryStudent = async (
       return;
     }
 
-    await prisma.seminaryApplication.delete({
-      where: { studentId },
+    await prisma.$transaction(async (tx) => {
+      await tx.seminaryApplication.delete({ where: { studentId } });
+      if (student.portalUserId) {
+        await tx.user.delete({ where: { id: student.portalUserId } });
+      }
     });
 
     res.status(HTTPSTATUS.OK).json({

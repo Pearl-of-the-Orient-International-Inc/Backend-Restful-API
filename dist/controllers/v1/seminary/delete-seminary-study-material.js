@@ -11,19 +11,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSeminaryStudyMaterial = void 0;
 const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("@/generated/prisma/enums");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
 const deleteSeminaryStudyMaterial = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const material = yield prisma_1.prisma.seminaryStudyMaterial.findUnique({
-            where: { id },
-            select: { id: true },
-        });
+        if (!req.userId) {
+            res.status(http_codes_1.HTTPSTATUS.UNAUTHORIZED).json({
+                code: 'UNAUTHORIZED',
+                message: 'Authentication required',
+            });
+            return;
+        }
+        const [material, user] = yield Promise.all([
+            prisma_1.prisma.seminaryStudyMaterial.findUnique({
+                where: { id },
+                select: { id: true, uploadedByUserId: true },
+            }),
+            prisma_1.prisma.user.findUnique({
+                where: { id: req.userId },
+                select: { role: true },
+            }),
+        ]);
         if (!material) {
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
                 code: 'NOT_FOUND',
                 message: 'Study material not found',
+            });
+            return;
+        }
+        if (!user ||
+            (user.role === enums_1.UserType.INSTRUCTOR && material.uploadedByUserId !== req.userId)) {
+            res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
+                code: 'FORBIDDEN',
+                message: 'You can manage only study materials you uploaded',
             });
             return;
         }

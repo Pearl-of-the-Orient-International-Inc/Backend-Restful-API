@@ -829,6 +829,7 @@ export type MemoTemplateType = (typeof MemoTemplateType)[keyof typeof MemoTempla
 
 export const MemoStatus = {
   DRAFT: 'DRAFT',
+  REJECTED: 'REJECTED',
   PUBLISHING: 'PUBLISHING',
   PUBLISHED: 'PUBLISHED',
   FAILED: 'FAILED',

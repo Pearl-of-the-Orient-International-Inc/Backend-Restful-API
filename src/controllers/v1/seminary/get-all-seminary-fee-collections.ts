@@ -5,6 +5,7 @@ import {
   normalizeFeeCollectionStatus,
   toFeeCollectionResponse,
 } from './fee-collection-shared';
+import { ensureSeminaryFeeCollectionAccount } from './fee-collection-account';
 
 import type { Request, Response } from 'express';
 import type { GetAllSeminaryFeeCollectionsQuery } from './types';
@@ -15,6 +16,37 @@ export const getAllSeminaryFeeCollections = async (
   res: Response,
 ): Promise<void> => {
   try {
+    // Backfill accounts for students registered before Fee Collection was added.
+    // The helper uses an upsert, so existing payment history is never changed.
+    const studentsWithoutGuaranteedAccounts =
+      await prisma.seminaryApplication.findMany({
+        where: {
+          studentId: { not: null },
+          programLevel: { not: null },
+        },
+        select: {
+          studentId: true,
+          givenName: true,
+          middleName: true,
+          surname: true,
+          programCourse: true,
+          programLevel: true,
+        },
+      });
+    await prisma.$transaction(async (tx) => {
+      for (const student of studentsWithoutGuaranteedAccounts) {
+        if (!student.studentId || !student.programLevel) continue;
+        await ensureSeminaryFeeCollectionAccount(tx, {
+          studentId: student.studentId,
+          givenName: student.givenName,
+          middleName: student.middleName,
+          surname: student.surname,
+          programCourse: student.programCourse,
+          programLevel: student.programLevel,
+        });
+      }
+    });
+
     const query = req.query as GetAllSeminaryFeeCollectionsQuery;
     const page = query.page ? Number(query.page) : 1;
     const limit = query.limit ? Number(query.limit) : undefined;

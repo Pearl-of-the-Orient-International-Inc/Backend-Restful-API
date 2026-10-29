@@ -44,10 +44,17 @@ export const updateSeminaryFeeCollectionPayment = async (
 
     const amountPaid = body.amountPaid;
     const totalCharges = Number(existingAccount.totalCharges);
+
+    if (amountPaid > totalCharges) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({
+        code: 'INVALID_PAYMENT_AMOUNT',
+        message: `Amount paid cannot exceed the total charge of ${totalCharges.toFixed(2)}.`,
+      });
+      return;
+    }
+
     const balance = Math.max(totalCharges - amountPaid, 0);
-    const status = body.status
-      ? normalizeFeeCollectionStatus(body.status)
-      : getAutoStatus({ amountPaid, balance });
+    const status = getAutoStatus({ amountPaid, balance });
 
     const account = await prisma.seminaryFeeCollectionAccount.update({
       where: { id },

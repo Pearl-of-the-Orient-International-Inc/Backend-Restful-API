@@ -18,26 +18,26 @@ const getOptional = (value) => {
     const normalized = value === null || value === void 0 ? void 0 : value.trim();
     return normalized ? normalized : null;
 };
-const getRequiredJurisdictionField = (level) => {
+const getRequiredJurisdictionFields = (level) => {
     switch (level) {
         case enums_1.OfficeTitleLevel.NATIONAL_CHAPLAIN_DIRECTOR:
-            return 'department';
+            return [];
         case enums_1.OfficeTitleLevel.REGIONAL_CHAPLAIN_DIRECTOR:
         case enums_1.OfficeTitleLevel.REGIONAL_DEPUTY_CHAPLAIN_DIRECTOR:
-            return 'region';
+            return ['region'];
         case enums_1.OfficeTitleLevel.PROVINCIAL_CHAPLAIN_DIRECTOR:
         case enums_1.OfficeTitleLevel.PROVINCIAL_DEPUTY_CHAPLAIN_DIRECTOR:
-            return 'province';
+            return ['region', 'province'];
         case enums_1.OfficeTitleLevel.CITY_CHAPLAIN:
         case enums_1.OfficeTitleLevel.MUNICIPAL_CHAPLAIN:
         case enums_1.OfficeTitleLevel.CITY_MUNICIPAL_DEPUTY_CHAPLAIN:
-            return 'cityMunicipality';
+            return ['region', 'province', 'cityMunicipality'];
         case enums_1.OfficeTitleLevel.BARANGAY_CHAPLAIN:
         case enums_1.OfficeTitleLevel.BARANGAY_DEPUTY_CHAPLAIN:
-            return 'barangay';
+            return ['region', 'province', 'cityMunicipality', 'barangay'];
         case enums_1.OfficeTitleLevel.CHIEF_CHAPLAIN:
         default:
-            return null;
+            return [];
     }
 };
 const getJurisdictionLabel = (field) => {
@@ -127,8 +127,9 @@ const createOfficerAssignmentByAdmin = (req, res) => __awaiter(void 0, void 0, v
             cityMunicipality: getOptional(body.cityMunicipality),
             barangay: getOptional(body.barangay),
         };
-        const requiredField = getRequiredJurisdictionField(officeTitle.level);
-        if (requiredField && !assignmentData[requiredField]) {
+        const requiredFields = getRequiredJurisdictionFields(officeTitle.level);
+        const requiredField = requiredFields.find((field) => !assignmentData[field]);
+        if (requiredField) {
             res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({
                 code: 'BAD_REQUEST',
                 message: `${getJurisdictionLabel(requiredField)} is required for ${officeTitle.name}`,

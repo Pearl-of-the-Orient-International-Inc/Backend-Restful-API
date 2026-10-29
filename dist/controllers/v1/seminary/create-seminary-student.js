@@ -15,19 +15,39 @@ const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
 const seminary_shared_1 = require("./seminary-shared");
 const student_shared_1 = require("./student-shared");
+const student_portal_account_1 = require("./student-portal-account");
+const fee_collection_account_1 = require("./fee-collection-account");
 const createSeminaryStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
         const student = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
             const studentId = yield (0, student_shared_1.buildNextStudentId)(tx);
-            return tx.seminaryApplication.create({
-                data: Object.assign(Object.assign({}, (0, student_shared_1.buildSeminaryStudentData)(body)), { studentId }),
+            const studentData = (0, student_shared_1.buildSeminaryStudentData)(body);
+            const portalAccount = yield (0, student_portal_account_1.createSeminaryStudentPortalAccount)(tx, {
+                studentId,
+                givenName: studentData.givenName,
+                middleName: studentData.middleName,
+                surname: studentData.surname,
+            });
+            const createdStudent = yield tx.seminaryApplication.create({
+                data: Object.assign(Object.assign({}, studentData), { studentId, portalUserId: portalAccount.id }),
                 include: seminary_shared_1.seminaryApplicationInclude,
             });
+            if (createdStudent.studentId && createdStudent.programLevel) {
+                yield (0, fee_collection_account_1.ensureSeminaryFeeCollectionAccount)(tx, {
+                    studentId: createdStudent.studentId,
+                    givenName: createdStudent.givenName,
+                    middleName: createdStudent.middleName,
+                    surname: createdStudent.surname,
+                    programCourse: createdStudent.programCourse,
+                    programLevel: createdStudent.programLevel,
+                });
+            }
+            return createdStudent;
         }));
         res.status(http_codes_1.HTTPSTATUS.CREATED).json({
             code: 'CREATED',
-            message: 'Seminary student created successfully',
+            message: 'Seminary student created successfully. The student can sign in with their student number and the default password Student123@.',
             data: student,
         });
     }

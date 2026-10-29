@@ -24,19 +24,10 @@ const getCurrentSeminaryApplication = (req, res) => __awaiter(void 0, void 0, vo
             });
             return;
         }
-        const member = yield prisma_1.prisma.member.findUnique({
-            where: { userId },
-            select: { id: true },
-        });
-        if (!member) {
-            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
-                code: 'NOT_FOUND',
-                message: 'Member profile not found',
-            });
-            return;
-        }
         const application = yield prisma_1.prisma.seminaryApplication.findFirst({
-            where: { memberId: member.id },
+            where: {
+                OR: [{ portalUserId: userId }, { member: { userId } }],
+            },
             include: seminary_shared_1.seminaryApplicationInclude,
             orderBy: { createdAt: 'desc' },
         });

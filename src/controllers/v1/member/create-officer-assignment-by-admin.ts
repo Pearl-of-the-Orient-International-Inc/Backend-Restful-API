@@ -11,31 +11,31 @@ const getOptional = (value?: string | null): string | null => {
   return normalized ? normalized : null;
 };
 
-const getRequiredJurisdictionField = (
+const getRequiredJurisdictionFields = (
   level: OfficeTitleLevel,
-): keyof Pick<
+): Array<keyof Pick<
   CreateOfficerAssignmentByAdminSchema,
   'department' | 'region' | 'province' | 'cityMunicipality' | 'barangay'
-> | null => {
+>> => {
   switch (level) {
     case OfficeTitleLevel.NATIONAL_CHAPLAIN_DIRECTOR:
-      return 'department';
+      return [];
     case OfficeTitleLevel.REGIONAL_CHAPLAIN_DIRECTOR:
     case OfficeTitleLevel.REGIONAL_DEPUTY_CHAPLAIN_DIRECTOR:
-      return 'region';
+      return ['region'];
     case OfficeTitleLevel.PROVINCIAL_CHAPLAIN_DIRECTOR:
     case OfficeTitleLevel.PROVINCIAL_DEPUTY_CHAPLAIN_DIRECTOR:
-      return 'province';
+      return ['region', 'province'];
     case OfficeTitleLevel.CITY_CHAPLAIN:
     case OfficeTitleLevel.MUNICIPAL_CHAPLAIN:
     case OfficeTitleLevel.CITY_MUNICIPAL_DEPUTY_CHAPLAIN:
-      return 'cityMunicipality';
+      return ['region', 'province', 'cityMunicipality'];
     case OfficeTitleLevel.BARANGAY_CHAPLAIN:
     case OfficeTitleLevel.BARANGAY_DEPUTY_CHAPLAIN:
-      return 'barangay';
+      return ['region', 'province', 'cityMunicipality', 'barangay'];
     case OfficeTitleLevel.CHIEF_CHAPLAIN:
     default:
-      return null;
+      return [];
   }
 };
 
@@ -140,8 +140,9 @@ export const createOfficerAssignmentByAdmin = async (
       barangay: getOptional(body.barangay),
     };
 
-    const requiredField = getRequiredJurisdictionField(officeTitle.level);
-    if (requiredField && !assignmentData[requiredField]) {
+    const requiredFields = getRequiredJurisdictionFields(officeTitle.level);
+    const requiredField = requiredFields.find((field) => !assignmentData[field]);
+    if (requiredField) {
       res.status(HTTPSTATUS.BAD_REQUEST).json({
         code: 'BAD_REQUEST',
         message: `${getJurisdictionLabel(requiredField)} is required for ${officeTitle.name}`,

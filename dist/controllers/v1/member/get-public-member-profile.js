@@ -76,7 +76,11 @@ const getPublicMemberProfile = (req, res) => __awaiter(void 0, void 0, void 0, f
                     },
                 },
                 officerAssignments: {
-                    where: { isActive: true },
+                    where: {
+                        isActive: true,
+                        OR: [{ endDate: null }, { endDate: { gt: new Date() } }],
+                        officeTitle: { isActive: true },
+                    },
                     orderBy: { createdAt: 'asc' },
                     select: {
                         id: true,

@@ -18,7 +18,7 @@ const deleteSeminaryStudent = (req, res) => __awaiter(void 0, void 0, void 0, fu
         const studentId = String(req.params.studentId);
         const student = yield prisma_1.prisma.seminaryApplication.findUnique({
             where: { studentId },
-            select: { id: true },
+            select: { id: true, portalUserId: true },
         });
         if (!student) {
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
@@ -27,9 +27,12 @@ const deleteSeminaryStudent = (req, res) => __awaiter(void 0, void 0, void 0, fu
             });
             return;
         }
-        yield prisma_1.prisma.seminaryApplication.delete({
-            where: { studentId },
-        });
+        yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            yield tx.seminaryApplication.delete({ where: { studentId } });
+            if (student.portalUserId) {
+                yield tx.user.delete({ where: { id: student.portalUserId } });
+            }
+        }));
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',
             message: 'Seminary student deleted successfully',

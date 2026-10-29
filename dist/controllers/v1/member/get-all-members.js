@@ -14,6 +14,7 @@ const http_codes_1 = require("@/common/http-codes");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
 const getAllMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const all = req.query.all === 'true';
         const page = all ? 1 : parseInt(req.query.page) || 1;
@@ -22,30 +23,26 @@ const getAllMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const status = req.query.status;
         const includeArchived = req.query.includeArchived === 'true';
         const skip = limit ? (page - 1) * limit : undefined;
-        const where = Object.assign(Object.assign(Object.assign({}, (status ? { status } : {})), (includeArchived ? {} : { isActive: true })), (search
+        const searchTerms = (_a = search === null || search === void 0 ? void 0 : search.trim().split(/\s+/).filter(Boolean)) !== null && _a !== void 0 ? _a : [];
+        const where = Object.assign(Object.assign(Object.assign({}, (status ? { status } : {})), (includeArchived ? {} : { isActive: true })), (searchTerms.length
             ? {
-                OR: [
-                    {
-                        firstName: {
-                            contains: search,
-                            mode: 'insensitive',
-                        },
-                    },
-                    {
-                        lastName: {
-                            contains: search,
-                            mode: 'insensitive',
-                        },
-                    },
-                    {
-                        user: {
-                            email: {
-                                contains: search,
-                                mode: 'insensitive',
+                AND: searchTerms.map((term) => ({
+                    OR: [
+                        { firstName: { contains: term, mode: 'insensitive' } },
+                        { middleInitial: { contains: term, mode: 'insensitive' } },
+                        { lastName: { contains: term, mode: 'insensitive' } },
+                        { extensionName: { contains: term, mode: 'insensitive' } },
+                        { uniqueId: { contains: term, mode: 'insensitive' } },
+                        {
+                            user: {
+                                OR: [
+                                    { name: { contains: term, mode: 'insensitive' } },
+                                    { email: { contains: term, mode: 'insensitive' } },
+                                ],
                             },
                         },
-                    },
-                ],
+                    ],
+                })),
             }
             : {}));
         const totalCount = yield prisma_1.prisma.member.count({ where });

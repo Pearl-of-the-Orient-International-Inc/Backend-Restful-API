@@ -6,6 +6,7 @@ import {
 } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { getSeminaryStudentLmsScope } from './lms-student-scope';
 
 import type { Request, Response } from 'express';
 
@@ -22,16 +23,16 @@ export const getCurrentStudentPortal = async (
       return;
     }
 
-    const member = await prisma.member.findUnique({
-      where: { userId: req.userId },
-      select: { id: true },
+    const student = await prisma.seminaryApplication.findFirst({
+      where: {
+        studentId: { not: null },
+        OR: [
+          { portalUserId: req.userId },
+          { member: { userId: req.userId } },
+        ],
+      },
+      orderBy: { createdAt: 'desc' },
     });
-    const student = member
-      ? await prisma.seminaryApplication.findFirst({
-          where: { memberId: member.id, studentId: { not: null } },
-          orderBy: { createdAt: 'desc' },
-        })
-      : null;
 
     if (!student) {
       res.status(HTTPSTATUS.NOT_FOUND).json({
@@ -41,17 +42,24 @@ export const getCurrentStudentPortal = async (
       return;
     }
 
+    const lmsScope = await getSeminaryStudentLmsScope(req.userId);
     const [grades, materials, assignments, examinations] = await Promise.all([
       prisma.seminaryGradeRecord.findMany({
         where: { studentApplicationId: student.id },
         orderBy: { updatedAt: 'desc' },
       }),
       prisma.seminaryStudyMaterial.findMany({
-        where: { status: SeminaryStudyMaterialStatus.PUBLISHED },
+        where: {
+          status: SeminaryStudyMaterialStatus.PUBLISHED,
+          subject: { in: lmsScope.subjectNames },
+        },
         orderBy: { createdAt: 'desc' },
       }),
       prisma.seminaryAssignment.findMany({
-        where: { status: SeminaryAssignmentStatus.PUBLISHED },
+        where: {
+          status: SeminaryAssignmentStatus.PUBLISHED,
+          courseId: { in: lmsScope.courseIds },
+        },
         orderBy: { dueAt: 'asc' },
       }),
       prisma.seminaryExamination.findMany({
@@ -63,6 +71,7 @@ export const getCurrentStudentPortal = async (
               SeminaryExaminationStatus.COMPLETED,
             ],
           },
+          courseId: { in: lmsScope.courseIds },
         },
         orderBy: { scheduledAt: 'asc' },
       }),

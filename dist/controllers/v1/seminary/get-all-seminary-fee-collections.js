@@ -14,9 +14,38 @@ const http_codes_1 = require("@/common/http-codes");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
 const fee_collection_shared_1 = require("./fee-collection-shared");
+const fee_collection_account_1 = require("./fee-collection-account");
 const getAllSeminaryFeeCollections = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
+        const studentsWithoutGuaranteedAccounts = yield prisma_1.prisma.seminaryApplication.findMany({
+            where: {
+                studentId: { not: null },
+                programLevel: { not: null },
+            },
+            select: {
+                studentId: true,
+                givenName: true,
+                middleName: true,
+                surname: true,
+                programCourse: true,
+                programLevel: true,
+            },
+        });
+        yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            for (const student of studentsWithoutGuaranteedAccounts) {
+                if (!student.studentId || !student.programLevel)
+                    continue;
+                yield (0, fee_collection_account_1.ensureSeminaryFeeCollectionAccount)(tx, {
+                    studentId: student.studentId,
+                    givenName: student.givenName,
+                    middleName: student.middleName,
+                    surname: student.surname,
+                    programCourse: student.programCourse,
+                    programLevel: student.programLevel,
+                });
+            }
+        }));
         const query = req.query;
         const page = query.page ? Number(query.page) : 1;
         const limit = query.limit ? Number(query.limit) : undefined;

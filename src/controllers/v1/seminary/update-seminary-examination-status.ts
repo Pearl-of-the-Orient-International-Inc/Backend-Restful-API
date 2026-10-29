@@ -1,7 +1,7 @@
 import { HTTPSTATUS } from '@/common/http-codes';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { toExaminationResponse } from './examination-shared';
+import { canManageExamination, toExaminationResponse } from './examination-shared';
 
 import type { Request, Response } from 'express';
 import type { UpdateSeminaryExaminationStatusBody } from './types';
@@ -13,6 +13,7 @@ export const updateSeminaryExaminationStatus = async (
   try {
     const id = req.params.id as string;
     const body = req.body as UpdateSeminaryExaminationStatusBody;
+    if (!(await canManageExamination({ examinationId: id, userId: req.userId, res }))) return;
     const examination = await prisma.seminaryExamination.update({
       where: { id },
       data: { status: body.status },

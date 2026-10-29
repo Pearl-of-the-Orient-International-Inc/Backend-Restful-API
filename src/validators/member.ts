@@ -106,6 +106,7 @@ export const applyMemberSchema = z.object({
   ministerialExperiences: z.array(ministerialExperienceSchema).max(20).optional(),
   characterReferences: z.array(characterReferenceSchema).max(20).optional(),
   signature: signatureSchema.optional(),
+  referralCode: z.string().trim().min(8).max(40).optional(),
 });
 
 const requirementAttachmentSchema = z.object({

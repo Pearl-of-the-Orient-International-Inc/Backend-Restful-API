@@ -7,6 +7,7 @@ import {
   getAssignedCourseForSubject,
   toAssignmentResponse,
 } from './assignment-shared';
+import { SeminaryAssignmentStatus } from '@/generated/prisma/enums';
 
 import type { Request, Response } from 'express';
 import type { CreateSeminaryAssignmentBody } from './types';
@@ -51,7 +52,10 @@ export const createSeminaryAssignment = async (
       },
     });
 
-    if (assignment.notifyStudents) {
+    if (
+      assignment.notifyStudents &&
+      assignment.status === SeminaryAssignmentStatus.PUBLISHED
+    ) {
       try {
         await createAssignmentStudentNotifications({
           assignmentId: assignment.id,

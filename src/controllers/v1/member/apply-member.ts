@@ -3,6 +3,7 @@ import { HTTPSTATUS } from '@/common/http-codes';
 import { VerificationType } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
+import { awardReferralPoints } from './referrals';
 import { hashValue } from '@/lib/password-hash';
 import { generateNextMemberUniqueId } from '@/lib/member-unique-id';
 import { calculateExpirationDate } from '@/lib/helpers';
@@ -49,6 +50,27 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
     const body = req.body as ApplyMemberBody;
     const normalizedEmail = body.email.trim().toLowerCase();
     const preferredBranchIds = body.preferredBranchIds ?? [];
+    const normalizedReferralCode = body.referralCode?.trim().toUpperCase();
+
+    const referralReferrer = normalizedReferralCode
+      ? await prisma.member.findFirst({
+          where: {
+            referralCode: normalizedReferralCode,
+            status: 'APPROVED',
+            isActive: true,
+            user: { email: { not: normalizedEmail } },
+          },
+          select: { id: true },
+        })
+      : null;
+
+    if (normalizedReferralCode && !referralReferrer) {
+      res.status(HTTPSTATUS.BAD_REQUEST).json({
+        code: 'INVALID_REFERRAL',
+        message: 'This referral link is invalid, inactive, or cannot be used for the same email address.',
+      });
+      return;
+    }
 
     if (preferredBranchIds.length > 0) {
       const branchCount = await prisma.branchOfService.count({
@@ -236,6 +258,10 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
               },
             };
 
+            if (referralReferrer) {
+              createData.referredByMember = { connect: { id: referralReferrer.id } };
+            }
+
             if (preferredBranchIds.length > 0) {
               createData.preferredBranches = {
                 connect: preferredBranchIds.map((id) => ({ id })),
@@ -270,6 +296,13 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
                   },
                 },
               },
+            });
+
+            await awardReferralPoints(tx, {
+              referredMemberId: member.id,
+              criterionKey: 'APPLICATION_SUBMITTED',
+              sourceType: 'MEMBER_APPLICATION',
+              sourceId: member.id,
             });
 
             return {

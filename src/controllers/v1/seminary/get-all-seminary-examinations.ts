@@ -26,7 +26,6 @@ export const getAllSeminaryExaminations = async (
     const userWhere = await getExaminationWhereForUser(req.userId);
 
     const where: Prisma.SeminaryExaminationWhereInput = {
-      ...userWhere,
       ...(query.subject ? { subject: query.subject } : {}),
       ...(query.status ? { status: query.status } : {}),
       ...(search
@@ -38,6 +37,7 @@ export const getAllSeminaryExaminations = async (
             ],
           }
         : {}),
+      ...userWhere,
     };
 
     const [examinations, total] = await prisma.$transaction([

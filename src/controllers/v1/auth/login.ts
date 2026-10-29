@@ -60,7 +60,11 @@ const getAccountAccessDeniedMessage = (
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password, userAgent } = req.body as LoginSchema;
-  const loginIdentifier = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email)
+  const isInstructorId = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email);
+  const isSeminaryStudentId =
+    /^POTSC-\d{2}-\d{4}$/i.test(email) ||
+    /^POTSCI-\d{2}-\d{4}-(?!INS$)[A-Z0-9]+$/i.test(email);
+  const loginIdentifier = isInstructorId || isSeminaryStudentId
     ? email.trim().toUpperCase()
     : email.trim().toLowerCase();
   const ipAddress = getClientIp(req);
@@ -75,10 +79,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
   try {
     // Check existing user
-    const user = await prisma.user.findUnique({
-      where: {
-        email: loginIdentifier,
-      },
+    const user = await prisma.user.findFirst({
+      where: isSeminaryStudentId
+        ? { seminaryStudentPortal: { is: { studentId: loginIdentifier } } }
+        : { email: loginIdentifier },
       select: {
         id: true,
         name: true,

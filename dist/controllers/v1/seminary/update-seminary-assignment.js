@@ -14,22 +14,14 @@ const http_codes_1 = require("@/common/http-codes");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
 const assignment_shared_1 = require("./assignment-shared");
+const enums_1 = require("@/generated/prisma/enums");
 const updateSeminaryAssignment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {
         const id = req.params.id;
         const body = req.body;
-        const existingAssignment = yield prisma_1.prisma.seminaryAssignment.findUnique({
-            where: { id },
-            select: { id: true },
-        });
-        if (!existingAssignment) {
-            res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
-                code: 'NOT_FOUND',
-                message: 'Assignment not found',
-            });
+        if (!(yield (0, assignment_shared_1.canManageAssignment)({ assignmentId: id, userId: req.userId, res })))
             return;
-        }
         const assignmentContext = yield (0, assignment_shared_1.getAssignedCourseForSubject)({
             subject: body.subject,
             userId: req.userId,
@@ -63,7 +55,8 @@ const updateSeminaryAssignment = (req, res) => __awaiter(void 0, void 0, void 0,
                 attachmentLabel: body.attachmentLabel,
             },
         });
-        if (assignment.notifyStudents) {
+        if (assignment.notifyStudents &&
+            assignment.status === enums_1.SeminaryAssignmentStatus.PUBLISHED) {
             try {
                 yield (0, assignment_shared_1.createAssignmentStudentNotifications)({
                     assignmentId: assignment.id,
@@ -78,6 +71,9 @@ const updateSeminaryAssignment = (req, res) => __awaiter(void 0, void 0, void 0,
                     err,
                 });
             }
+        }
+        else {
+            yield (0, assignment_shared_1.removeAssignmentStudentNotifications)(assignment.id);
         }
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

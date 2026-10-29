@@ -89,6 +89,7 @@ exports.applyMemberSchema = zod_1.z.object({
     ministerialExperiences: zod_1.z.array(ministerialExperienceSchema).max(20).optional(),
     characterReferences: zod_1.z.array(characterReferenceSchema).max(20).optional(),
     signature: signatureSchema.optional(),
+    referralCode: zod_1.z.string().trim().min(8).max(40).optional(),
 });
 const requirementAttachmentSchema = zod_1.z.object({
     type: zod_1.z.enum(enums_1.ApplicantRequirementType),

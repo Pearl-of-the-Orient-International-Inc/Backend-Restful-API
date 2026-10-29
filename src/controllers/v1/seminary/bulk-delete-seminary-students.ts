@@ -13,12 +13,22 @@ export const bulkDeleteSeminaryStudents = async (
     const { studentIds } = req.body as BulkDeleteSeminaryStudentsBody;
     const uniqueStudentIds = Array.from(new Set(studentIds));
 
-    const result = await prisma.seminaryApplication.deleteMany({
-      where: {
-        studentId: {
-          in: uniqueStudentIds,
-        },
-      },
+    const students = await prisma.seminaryApplication.findMany({
+      where: { studentId: { in: uniqueStudentIds } },
+      select: { id: true, portalUserId: true },
+    });
+
+    const result = await prisma.$transaction(async (tx) => {
+      const deleted = await tx.seminaryApplication.deleteMany({
+        where: { id: { in: students.map((student) => student.id) } },
+      });
+      const portalUserIds = students.flatMap((student) =>
+        student.portalUserId ? [student.portalUserId] : [],
+      );
+      if (portalUserIds.length) {
+        await tx.user.deleteMany({ where: { id: { in: portalUserIds } } });
+      }
+      return deleted;
     });
 
     res.status(HTTPSTATUS.OK).json({

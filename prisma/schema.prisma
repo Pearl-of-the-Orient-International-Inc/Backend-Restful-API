@@ -27,26 +27,30 @@ model User {
   twoFactorSecret    String?
   role               UserType @default(MEMBER)
 
-  userTokens            UserToken[]
-  sessions              Session[]
-  activityLogs          ActivityLog[]
-  verificationCodes     VerificationCode[]
-  passkeyCredentials    PasskeyCredential[]
-  passkeyChallenge      PasskeyChallenge?
-  memberProfile         Member?
-  followedMembers       MemberFollow[]
-  createdBackups        DatabaseBackupSnapshot[]      @relation("CreatedDatabaseBackups")
-  restoredBackups       DatabaseBackupSnapshot[]      @relation("RestoredDatabaseBackups")
-  backupSettingUpdates  DatabaseBackupSettings[]      @relation("BackupSettingsUpdatedBy")
-  assignedTasks         TaskItem[]                    @relation("TaskAssignee")
-  seminaryInstructor    SeminaryInstructor?
-  authoredMemos         MemoAnnouncement[]            @relation("MemoAnnouncementAuthor")
-  memoRecipients        MemoRecipient[]               @relation("MemoRecipientUser")
-  bulletinEntries       BulletinEntry[]               @relation("BulletinEntryAuthor")
-  chaplainProductOrders ChaplainProductOrder[]        @relation("ChaplainProductOrderCustomer")
-  serviceBookings       ChaplainServiceBooking[]      @relation("ChaplainServiceBookingRequester")
-  ordinationReviews     OrdinationApplicationReview[] @relation("OrdinationApplicationReviewer")
-  crasmReviews          CrasmApplicationReview[]      @relation("CrasmApplicationReviewer")
+  userTokens               UserToken[]
+  sessions                 Session[]
+  activityLogs             ActivityLog[]
+  verificationCodes        VerificationCode[]
+  passkeyCredentials       PasskeyCredential[]
+  passkeyChallenge         PasskeyChallenge?
+  memberProfile            Member?
+  followedMembers          MemberFollow[]
+  createdBackups           DatabaseBackupSnapshot[]      @relation("CreatedDatabaseBackups")
+  restoredBackups          DatabaseBackupSnapshot[]      @relation("RestoredDatabaseBackups")
+  backupSettingUpdates     DatabaseBackupSettings[]      @relation("BackupSettingsUpdatedBy")
+  assignedTasks            TaskItem[]                    @relation("TaskAssignee")
+  seminaryInstructor       SeminaryInstructor?
+  seminaryStudentPortal    SeminaryApplication?          @relation("SeminaryStudentPortalAccount")
+  seminaryAnnouncements    SeminaryAnnouncement[]        @relation("SeminaryAnnouncementCreator")
+  authoredMemos            MemoAnnouncement[]            @relation("MemoAnnouncementAuthor")
+  memoRecipients           MemoRecipient[]               @relation("MemoRecipientUser")
+  bulletinEntries          BulletinEntry[]               @relation("BulletinEntryAuthor")
+  chaplainProductOrders    ChaplainProductOrder[]        @relation("ChaplainProductOrderCustomer")
+  serviceBookings          ChaplainServiceBooking[]      @relation("ChaplainServiceBookingRequester")
+  ordinationReviews        OrdinationApplicationReview[] @relation("OrdinationApplicationReviewer")
+  crasmReviews             CrasmApplicationReview[]      @relation("CrasmApplicationReviewer")
+  reviewedDocumentRequests SeminaryDocumentRequest[]     @relation("SeminaryDocumentRequestReviewer")
+  releasedDocumentRequests SeminaryDocumentRequest[]     @relation("SeminaryDocumentRequestReleaser")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -167,10 +171,15 @@ model PasskeyChallenge {
 // ─────────────────────────────────────────────
 
 model Member {
-  id       String  @id @default(uuid())
-  uniqueId String? @unique // FORMAT: 262-00037 (Recent) = [YR][CODE if officer (1), if member (2)]-[SERIES (incremental)]
-  userId   String  @unique
-  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                    String    @id @default(uuid())
+  uniqueId              String?   @unique // FORMAT: 262-00037 (Recent) = [YR][CODE if officer (1), if member (2)]-[SERIES (incremental)]
+  referralCode          String?   @unique
+  referralCodeCreatedAt DateTime?
+  referredByMemberId    String?
+  referredByMember      Member?   @relation("MemberReferralSource", fields: [referredByMemberId], references: [id], onDelete: SetNull)
+  referredMembers       Member[]  @relation("MemberReferralSource")
+  userId                String    @unique
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   status     MemberStatus @default(PENDING)
   memberType MemberType   @default(ASSOCIATE_CHAPLAIN)
@@ -253,11 +262,69 @@ model Member {
   crasmApplication           CrasmApplication?
   providedServiceBookings    ChaplainServiceBooking[]          @relation("ChaplainServiceBookingProvider")
   serviceAvailabilitySlots   ChaplainServiceAvailability[]
+  referralPointEntries       ReferralPointLedgerEntry[]        @relation("ReferralPointReferrer")
+  referralMilestoneEntries   ReferralPointLedgerEntry[]        @relation("ReferralPointReferred")
 
   isActive Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([referredByMemberId])
+}
+
+model ReferralPointCriterion {
+  id              String                     @id @default(uuid())
+  key             String                     @unique
+  label           String
+  description     String?
+  points          Int
+  isActive        Boolean                    @default(true)
+  oncePerReferred Boolean                    @default(true)
+  monthlyCap      Int?
+  sortOrder       Int                        @default(0)
+  entries         ReferralPointLedgerEntry[]
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @updatedAt
+
+  @@index([isActive, sortOrder])
+}
+
+model ReferralPointLedgerEntry {
+  id               String                   @id @default(uuid())
+  referrerMemberId String
+  referrerMember   Member                   @relation("ReferralPointReferrer", fields: [referrerMemberId], references: [id], onDelete: Cascade)
+  referredMemberId String
+  referredMember   Member                   @relation("ReferralPointReferred", fields: [referredMemberId], references: [id], onDelete: Cascade)
+  criterionId      String
+  criterion        ReferralPointCriterion   @relation(fields: [criterionId], references: [id], onDelete: Restrict)
+  points           Int
+  occurredAt       DateTime
+  periodKey        String
+  sourceType       String
+  sourceId         String
+  status           ReferralPointEntryStatus @default(EARNED)
+  note             String?
+  createdByUserId  String?
+  createdAt        DateTime                 @default(now())
+
+  @@unique([criterionId, referredMemberId, sourceType, sourceId])
+  @@index([referrerMemberId, periodKey, status])
+  @@index([referredMemberId])
+  @@index([periodKey, status])
+}
+
+model ReferralRecognitionPeriod {
+  id             String    @id @default(uuid())
+  periodKey      String    @unique
+  startsAt       DateTime
+  endsAt         DateTime
+  isLocked       Boolean   @default(false)
+  lockedAt       DateTime?
+  lockedByUserId String?
+  winners        Json      @default("[]")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
 
 model MemberFollow {
@@ -559,14 +626,22 @@ model SeminaryApplication {
   memberId String?
   member   Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
+  // A Seminary student account is separate from the public Member portal.
+  // Its username is the generated student ID and it is created automatically
+  // when a registrar creates the student record.
+  portalUserId String? @unique
+  portalUser   User?   @relation("SeminaryStudentPortalAccount", fields: [portalUserId], references: [id], onDelete: SetNull)
+
   requirements        SeminaryRequirements?
   payment             SeminaryPayment?
   credentialDocuments SeminaryCredentialDocument[]
+  documentRequests    SeminaryDocumentRequest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([memberId])
+  @@index([portalUserId])
   @@index([status])
   @@index([targetMemberType])
   @@index([admissionNumber])
@@ -655,13 +730,14 @@ model SeminaryCourse {
   id String @id @default(uuid())
 
   courseName String
-  courseCode String                 @unique
+  courseCode String                   @unique
   program    SeminaryProgramLevel
   units      Int
   modality   SeminaryCourseModality
-  subjects   Json                   @default("[]")
-  status     SeminaryCourseStatus   @default(ACTIVE)
-  sortOrder  Int                    @default(0)
+  subjects   Json                     @default("[]")
+  status     SeminaryCourseStatus     @default(ACTIVE)
+  sortOrder  Int                      @default(0)
+  schedules  SeminaryCourseSchedule[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -670,6 +746,127 @@ model SeminaryCourse {
   @@index([modality])
   @@index([status])
   @@index([sortOrder])
+}
+
+model SeminaryCourseSchedule {
+  id String @id @default(uuid())
+
+  period       String
+  academicYear String
+  className    String
+  courseId     String
+  instructorId String
+  subjectName  String
+  units        Int
+
+  // A schedule can be a one-time meeting (scheduledDate) or recur on one or
+  // more weekdays within the academic year.
+  scheduledDate     DateTime?
+  recurrenceDays    String[]                     @default([])
+  recurrenceEndDate DateTime?
+  startTime         String
+  endTime           String
+  deliveryMode      SeminaryCourseModality
+  location          String?
+  meetingLink       String?
+  status            SeminaryCourseScheduleStatus @default(SCHEDULED)
+
+  course     SeminaryCourse     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  instructor SeminaryInstructor @relation(fields: [instructorId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([period, className])
+  @@index([academicYear, className])
+  @@index([courseId])
+  @@index([instructorId])
+  @@index([status])
+}
+
+model SeminaryAnnouncement {
+  id String @id @default(uuid())
+
+  title    String
+  summary  String?
+  kind     SeminaryAnnouncementKind     @default(ANNOUNCEMENT)
+  category SeminaryAnnouncementCategory @default(ADMINISTRATION)
+  audience SeminaryAnnouncementAudience @default(ALL)
+  location String?
+  allDay   Boolean                      @default(false)
+  startsAt DateTime
+  endsAt   DateTime?
+  status   SeminaryAnnouncementStatus   @default(PUBLISHED)
+
+  createdByUserId String
+  createdByUser   User   @relation("SeminaryAnnouncementCreator", fields: [createdByUserId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([startsAt])
+  @@index([status])
+  @@index([audience])
+  @@index([createdByUserId])
+}
+
+model SeminaryDocumentRequestType {
+  id String @id @default(uuid())
+
+  name                      String   @unique
+  description               String?
+  fee                       Decimal? @db.Decimal(12, 2)
+  requiresSupportingDetails Boolean  @default(false)
+  isActive                  Boolean  @default(true)
+  sortOrder                 Int      @default(0)
+
+  requests SeminaryDocumentRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([sortOrder])
+}
+
+model SeminaryDocumentRequest {
+  id String @id @default(uuid())
+
+  referenceNumber   String                         @unique
+  purpose           String
+  deliveryMethod    SeminaryDocumentDeliveryMethod
+  supportingDetails String?
+  fee               Decimal?                       @db.Decimal(12, 2)
+  paymentStatus     SeminaryDocumentPaymentStatus  @default(NOT_APPLICABLE)
+  status            SeminaryDocumentRequestStatus  @default(PENDING)
+
+  reviewedAt       DateTime?
+  reviewRemarks    String?
+  processedAt      DateTime?
+  readyAt          DateTime?
+  releasedAt       DateTime?
+  releaseReference String?
+  receivedBy       String?
+
+  documentTypeId String
+  documentType   SeminaryDocumentRequestType @relation(fields: [documentTypeId], references: [id], onDelete: Restrict)
+
+  studentApplicationId String
+  studentApplication   SeminaryApplication @relation(fields: [studentApplicationId], references: [id], onDelete: Cascade)
+
+  reviewedByUserId String?
+  reviewedByUser   User?   @relation("SeminaryDocumentRequestReviewer", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+  releasedByUserId String?
+  releasedByUser   User?   @relation("SeminaryDocumentRequestReleaser", fields: [releasedByUserId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentApplicationId])
+  @@index([documentTypeId])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([createdAt])
 }
 
 model SeminaryStudyMaterial {
@@ -777,17 +974,17 @@ model SeminaryGradeRecord {
   courseCode           String
   instructorUserId     String?
   instructorName       String
-    term                 String
-    attendanceEarned     Float?
-    attendanceTotal      Float?
-    courseworkEarned     Float?
-    courseworkTotal      Float?
-    characterEarned      Float?
-    characterTotal       Float?
-    examEarned           Float?
-    examTotal            Float?
-    weightedPercentage   Float?
-    finalGrade           String
+  term                 String
+  attendanceEarned     Float?
+  attendanceTotal      Float?
+  courseworkEarned     Float?
+  courseworkTotal      Float?
+  characterEarned      Float?
+  characterTotal       Float?
+  examEarned           Float?
+  examTotal            Float?
+  weightedPercentage   Float?
+  finalGrade           String
   remarks              SeminaryGradeRecordRemark @default(ONGOING)
   status               SeminaryGradeRecordStatus @default(IN_PROGRESS)
   notes                String?
@@ -886,6 +1083,7 @@ model SeminaryInstructor {
 
   inviteTokenSentAt DateTime?
   inviteAcceptedAt  DateTime?
+  schedules         SeminaryCourseSchedule[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1317,16 +1515,16 @@ model CrasmApplication {
   churchName              String
   churchAddress           String
   documents               Json
-  informationAccurate     Boolean @default(false)
-  backgroundCheckConsent  Boolean @default(false)
+  informationAccurate     Boolean                     @default(false)
+  backgroundCheckConsent  Boolean                     @default(false)
   requestedInformation    String?
   adminNotes              String?
   submittedAt             DateTime?
   reviewedAt              DateTime?
   decidedAt               DateTime?
   reviews                 CrasmApplicationReview[]
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
+  createdAt               DateTime                    @default(now())
+  updatedAt               DateTime                    @updatedAt
 
   @@index([status])
   @@index([submittedAt])
@@ -1746,6 +1944,10 @@ model MemoAnnouncement {
   authorUserId String?
   authorUser   User?   @relation("MemoAnnouncementAuthor", fields: [authorUserId], references: [id], onDelete: SetNull)
 
+  reviewedAt       DateTime?
+  reviewedByUserId String?
+  reviewNotes      String?
+
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -2049,6 +2251,12 @@ enum MemberOnboardingStep {
   OATH_TAKING
 }
 
+enum ReferralPointEntryStatus {
+  EARNED
+  REVERSED
+  VOID
+}
+
 enum MemberPaymentMethod {
   E_WALLET
   DIRECT_DEBIT
@@ -2099,6 +2307,59 @@ enum SeminaryCourseModality {
 enum SeminaryCourseStatus {
   ACTIVE
   INACTIVE
+}
+
+enum SeminaryCourseScheduleStatus {
+  DRAFT
+  SCHEDULED
+  CANCELLED
+  COMPLETED
+}
+
+enum SeminaryAnnouncementKind {
+  ANNOUNCEMENT
+  EVENT
+}
+
+enum SeminaryAnnouncementCategory {
+  ACADEMIC
+  ADMINISTRATION
+  FORMATION
+  ADMISSIONS
+}
+
+enum SeminaryAnnouncementAudience {
+  ALL
+  STUDENTS
+  INSTRUCTORS
+  STUDENTS_AND_INSTRUCTORS
+}
+
+enum SeminaryAnnouncementStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum SeminaryDocumentDeliveryMethod {
+  PICKUP
+  EMAIL
+  COURIER
+}
+
+enum SeminaryDocumentRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PROCESSING
+  READY_FOR_RELEASE
+  RELEASED
+}
+
+enum SeminaryDocumentPaymentStatus {
+  NOT_APPLICABLE
+  PENDING
+  PAID
+  WAIVED
 }
 
 enum SeminaryStudyMaterialType {
@@ -2455,6 +2716,7 @@ enum MemoTemplateType {
 
 enum MemoStatus {
   DRAFT
+  REJECTED
   PUBLISHING
   PUBLISHED
   FAILED

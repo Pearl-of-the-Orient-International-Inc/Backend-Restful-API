@@ -42,7 +42,7 @@ const updateSeminaryStudyMaterial = (req, res) => __awaiter(void 0, void 0, void
             }),
             prisma_1.prisma.seminaryStudyMaterial.findUnique({
                 where: { id },
-                select: { id: true },
+                select: { id: true, uploadedByUserId: true },
             }),
         ]);
         if (!user) {
@@ -56,6 +56,14 @@ const updateSeminaryStudyMaterial = (req, res) => __awaiter(void 0, void 0, void
             res.status(http_codes_1.HTTPSTATUS.NOT_FOUND).json({
                 code: 'NOT_FOUND',
                 message: 'Study material not found',
+            });
+            return;
+        }
+        if (user.role === enums_1.UserType.INSTRUCTOR &&
+            existingMaterial.uploadedByUserId !== userId) {
+            res.status(http_codes_1.HTTPSTATUS.FORBIDDEN).json({
+                code: 'FORBIDDEN',
+                message: 'You can manage only study materials you uploaded',
             });
             return;
         }

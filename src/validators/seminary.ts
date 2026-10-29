@@ -8,7 +8,15 @@ import {
   SeminaryAssignmentStatus,
   SeminaryCredentialDocumentType,
   SeminaryCourseModality,
+  SeminaryAnnouncementAudience,
+  SeminaryAnnouncementCategory,
+  SeminaryAnnouncementKind,
+  SeminaryAnnouncementStatus,
+  SeminaryCourseScheduleStatus,
   SeminaryCourseStatus,
+  SeminaryDocumentDeliveryMethod,
+  SeminaryDocumentPaymentStatus,
+  SeminaryDocumentRequestStatus,
   SeminaryFeeCollectionStatus,
   SeminaryEnrollmentType,
   SeminaryExaminationStatus,
@@ -27,6 +35,11 @@ import {
 import { passwordSchema } from './auth';
 
 const optionalText = (max = 255) => z.string().trim().max(max).optional();
+const optionalNullableText = (max = 255) =>
+  z.preprocess(
+    (value) => (typeof value === 'string' && !value.trim() ? null : value),
+    z.string().trim().max(max).nullable().optional(),
+  );
 const seminaryStudentIdSchema = z
   .string()
   .trim()
@@ -101,6 +114,16 @@ const courseStatusSchema = normalizeEnumValue(SeminaryCourseStatus, {
   Active: SeminaryCourseStatus.ACTIVE,
   Inactive: SeminaryCourseStatus.INACTIVE,
 });
+
+const courseScheduleStatusSchema = normalizeEnumValue(
+  SeminaryCourseScheduleStatus,
+  {
+    Draft: SeminaryCourseScheduleStatus.DRAFT,
+    Scheduled: SeminaryCourseScheduleStatus.SCHEDULED,
+    Cancelled: SeminaryCourseScheduleStatus.CANCELLED,
+    Completed: SeminaryCourseScheduleStatus.COMPLETED,
+  },
+);
 
 const studyMaterialTypeSchema = normalizeEnumValue(SeminaryStudyMaterialType, {
   Notes: SeminaryStudyMaterialType.NOTES,
@@ -573,6 +596,126 @@ export const updateSeminaryCourseStatusSchema = z.object({
 export const deleteSeminaryCourseSchema = z.object({
   params: z.object({
     id: seminaryCourseIdSchema,
+  }),
+});
+
+const scheduleWeekdaySchema = z.enum([
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY',
+  'FRIDAY',
+  'SATURDAY',
+  'SUNDAY',
+]);
+const scheduleTimeSchema = z.string().trim().regex(/^([01]\d|2[0-3]):[0-5]\d$/, {
+  message: 'time must use 24-hour HH:mm format',
+});
+const scheduleDateSchema = z.coerce.date();
+const seminaryCourseScheduleBodySchema = z
+  .object({
+    // Kept for older records. New schedules use the seminary intake period.
+    academicYear: z.string().trim().min(1).max(80),
+    period: z.string().trim().min(1).max(80),
+    className: z.string().trim().min(1).max(120),
+    courseId: z.uuid(),
+    instructorId: z.uuid(),
+    subjectName: z.string().trim().min(1).max(200),
+    units: z.coerce.number().int().min(1).max(12),
+    scheduledDate: scheduleDateSchema,
+    recurrenceDays: z.array(scheduleWeekdaySchema).max(7).optional(),
+    recurrenceEndDate: scheduleDateSchema.optional(),
+    startTime: scheduleTimeSchema,
+    endTime: scheduleTimeSchema,
+    deliveryMode: courseModalitySchema,
+    location: optionalText(255),
+    meetingLink: optionalUrl,
+    status: courseScheduleStatusSchema.optional(),
+  })
+  .refine((body) => body.startTime < body.endTime, {
+    message: 'endTime must be after startTime',
+    path: ['endTime'],
+  })
+;
+
+export const getAllSeminaryCourseSchedulesSchema = z.object({
+  query: z.object({
+    academicYear: optionalText(20),
+    period: optionalText(80),
+    className: optionalText(120),
+    status: courseScheduleStatusSchema.optional(),
+  }),
+});
+
+export const createSeminaryCourseScheduleSchema = z.object({
+  body: seminaryCourseScheduleBodySchema,
+});
+
+export const updateSeminaryCourseScheduleSchema = z.object({
+  params: z.object({ id: z.uuid() }),
+  body: seminaryCourseScheduleBodySchema,
+});
+
+export const deleteSeminaryCourseScheduleSchema = z.object({
+  params: z.object({ id: z.uuid() }),
+});
+
+const documentDeliveryMethodSchema = z.enum(SeminaryDocumentDeliveryMethod);
+const documentRequestStatusSchema = z.enum(SeminaryDocumentRequestStatus);
+const documentPaymentStatusSchema = z.enum(SeminaryDocumentPaymentStatus);
+const documentRequestTypeIdSchema = z.uuid();
+
+export const getSeminaryDocumentRequestTypesSchema = z.object({
+  query: z.object({ includeInactive: z.enum(['true', 'false']).optional() }),
+});
+
+export const createSeminaryDocumentRequestTypeSchema = z.object({
+  body: z.object({
+    name: z.string().trim().min(1).max(120),
+    description: optionalText(500),
+    fee: z.coerce.number().min(0).max(100000).nullable().optional(),
+    requiresSupportingDetails: z.boolean().optional(),
+    isActive: z.boolean().optional(),
+    sortOrder: z.coerce.number().int().min(0).max(999).optional(),
+  }),
+});
+
+export const updateSeminaryDocumentRequestTypeSchema = z.object({
+  params: z.object({ id: documentRequestTypeIdSchema }),
+  body: z.object({
+    name: z.string().trim().min(1).max(120).optional(),
+    description: optionalText(500),
+    fee: z.coerce.number().min(0).max(100000).nullable().optional(),
+    requiresSupportingDetails: z.boolean().optional(),
+    isActive: z.boolean().optional(),
+    sortOrder: z.coerce.number().int().min(0).max(999).optional(),
+  }),
+});
+
+export const getSeminaryDocumentRequestsSchema = z.object({
+  query: z.object({
+    status: documentRequestStatusSchema.optional(),
+    documentTypeId: documentRequestTypeIdSchema.optional(),
+  }),
+});
+
+export const createSeminaryDocumentRequestSchema = z.object({
+  body: z.object({
+    documentTypeId: documentRequestTypeIdSchema,
+    purpose: z.string().trim().min(3).max(500),
+    deliveryMethod: documentDeliveryMethodSchema,
+    supportingDetails: optionalText(2000),
+  }),
+});
+
+export const updateSeminaryDocumentRequestStatusSchema = z.object({
+  params: z.object({ id: z.uuid() }),
+  body: z.object({
+    status: documentRequestStatusSchema,
+    reviewRemarks: optionalText(1000),
+    paymentStatus: documentPaymentStatusSchema.optional(),
+    releaseReference: optionalText(255),
+    receivedBy: optionalText(255),
   }),
 });
 
@@ -1190,4 +1333,59 @@ export const verifySeminaryCredentialDocumentSchema = z.object({
   params: z.object({
     token: z.string().trim().min(16).max(128),
   }),
+});
+
+const seminaryAnnouncementBodySchema = z
+  .object({
+    title: z.string().trim().min(1, 'Title is required').max(180),
+    summary: optionalNullableText(2000),
+    kind: z.enum(SeminaryAnnouncementKind),
+    category: z.enum(SeminaryAnnouncementCategory),
+    audience: z.enum(SeminaryAnnouncementAudience),
+    location: optionalNullableText(255),
+    allDay: z.boolean().optional().default(false),
+    startsAt: z.string().datetime({ message: 'Start date and time must be a valid ISO date' }),
+    endsAt: z.string().datetime({ message: 'End date and time must be a valid ISO date' }).nullable().optional(),
+    status: z.enum(SeminaryAnnouncementStatus).optional().default(SeminaryAnnouncementStatus.PUBLISHED),
+  })
+  .refine(
+    (value) => !value.endsAt || new Date(value.endsAt).getTime() > new Date(value.startsAt).getTime(),
+    { message: 'End date and time must be after the start date and time', path: ['endsAt'] },
+  );
+
+export const getSeminaryAnnouncementsSchema = z.object({
+  query: z.object({}),
+});
+
+export const getSeminaryDashboardSchema = z.object({
+  query: z.object({
+    startDate: z.string().date().optional(),
+    endDate: z.string().date().optional(),
+  }).refine((value) => !value.startDate || !value.endDate || value.startDate <= value.endDate, {
+    message: 'startDate must be before or on endDate',
+  }),
+});
+
+export const getSeminaryReportsSchema = z.object({
+  query: z.object({
+    startDate: z.string().date().optional(),
+    endDate: z.string().date().optional(),
+    programLevel: programLevelSchema.optional(),
+    scope: z.enum(['INSTITUTIONAL', 'ACADEMIC', 'FINANCE', 'REGISTRAR']).optional(),
+  }).refine((value) => !value.startDate || !value.endDate || value.startDate <= value.endDate, {
+    message: 'startDate must be before or on endDate',
+  }),
+});
+
+export const createSeminaryAnnouncementSchema = z.object({
+  body: seminaryAnnouncementBodySchema,
+});
+
+export const updateSeminaryAnnouncementSchema = z.object({
+  params: z.object({ id: z.uuid() }),
+  body: seminaryAnnouncementBodySchema,
+});
+
+export const deleteSeminaryAnnouncementSchema = z.object({
+  params: z.object({ id: z.uuid() }),
 });

@@ -18,6 +18,8 @@ const mailers_1 = require("@/mailers");
 const seminary_application_status_1 = require("@/mailers/templates/seminary-application-status");
 const seminary_shared_1 = require("./seminary-shared");
 const student_shared_1 = require("./student-shared");
+const student_portal_account_1 = require("./student-portal-account");
+const fee_collection_account_1 = require("./fee-collection-account");
 const getApplicantName = ({ givenName, middleName, surname, }) => [givenName, middleName, surname]
     .filter(Boolean)
     .join(' ')
@@ -33,11 +35,13 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
                 id: true,
                 memberId: true,
                 studentId: true,
+                portalUserId: true,
                 givenName: true,
                 middleName: true,
                 surname: true,
                 emailAddress: true,
                 programCourse: true,
+                programLevel: true,
             },
         });
         if (!existingApplication) {
@@ -52,22 +56,34 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
             select: { id: true },
         });
         const application = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
-            var _a, _b;
+            var _a, _b, _c;
             const studentId = (body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
                 body.status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
                 !existingApplication.studentId
                 ? yield (0, student_shared_1.buildNextStudentId)(tx)
                 : undefined;
+            const effectiveStudentId = studentId !== null && studentId !== void 0 ? studentId : existingApplication.studentId;
+            let portalUserId;
+            if ((body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
+                body.status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
+                !existingApplication.portalUserId &&
+                effectiveStudentId) {
+                const existingPortalAccount = yield tx.user.findUnique({
+                    where: { email: (0, student_portal_account_1.getSeminaryStudentPortalEmail)(effectiveStudentId) },
+                    select: { id: true },
+                });
+                portalUserId = (_a = existingPortalAccount === null || existingPortalAccount === void 0 ? void 0 : existingPortalAccount.id) !== null && _a !== void 0 ? _a : (yield (0, student_portal_account_1.createSeminaryStudentPortalAccount)(tx, {
+                    studentId: effectiveStudentId,
+                    givenName: existingApplication.givenName,
+                    middleName: existingApplication.middleName,
+                    surname: existingApplication.surname,
+                })).id;
+            }
             const reviewedApplication = yield tx.seminaryApplication.update({
                 where: { id: existingApplication.id },
-                data: {
-                    status: body.status,
-                    reviewRemarks: (_a = body.reviewRemarks) !== null && _a !== void 0 ? _a : null,
-                    reviewedAt: body.status === enums_1.SeminaryApplicationStatus.UNDER_REVIEW
+                data: Object.assign({ status: body.status, reviewRemarks: (_b = body.reviewRemarks) !== null && _b !== void 0 ? _b : null, reviewedAt: body.status === enums_1.SeminaryApplicationStatus.UNDER_REVIEW
                         ? null
-                        : new Date(),
-                    studentId,
-                },
+                        : new Date(), studentId }, (portalUserId ? { portalUserId } : {})),
                 select: {
                     id: true,
                 },
@@ -86,7 +102,7 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
                             body.status === enums_1.SeminaryApplicationStatus.ENROLLED
                             ? new Date()
                             : null,
-                        reviewRemarks: (_b = body.reviewRemarks) !== null && _b !== void 0 ? _b : null,
+                        reviewRemarks: (_c = body.reviewRemarks) !== null && _c !== void 0 ? _c : null,
                     },
                 });
             }
@@ -98,6 +114,19 @@ const updateSeminaryApplicationStatus = (req, res) => __awaiter(void 0, void 0, 
                     data: {
                         memberType: enums_1.MemberType.PROFESSIONAL_CHAPLAIN,
                     },
+                });
+            }
+            if ((body.status === enums_1.SeminaryApplicationStatus.APPROVED ||
+                body.status === enums_1.SeminaryApplicationStatus.ENROLLED) &&
+                effectiveStudentId &&
+                existingApplication.programLevel) {
+                yield (0, fee_collection_account_1.ensureSeminaryFeeCollectionAccount)(tx, {
+                    studentId: effectiveStudentId,
+                    givenName: existingApplication.givenName,
+                    middleName: existingApplication.middleName,
+                    surname: existingApplication.surname,
+                    programCourse: existingApplication.programCourse,
+                    programLevel: existingApplication.programLevel,
                 });
             }
             return tx.seminaryApplication.findUnique({

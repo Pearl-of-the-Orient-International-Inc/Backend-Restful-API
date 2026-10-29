@@ -49,7 +49,7 @@ export const updateSeminaryStudyMaterial = async (
       }),
       prisma.seminaryStudyMaterial.findUnique({
         where: { id },
-        select: { id: true },
+        select: { id: true, uploadedByUserId: true },
       }),
     ]);
 
@@ -65,6 +65,17 @@ export const updateSeminaryStudyMaterial = async (
       res.status(HTTPSTATUS.NOT_FOUND).json({
         code: 'NOT_FOUND',
         message: 'Study material not found',
+      });
+      return;
+    }
+
+    if (
+      user.role === UserType.INSTRUCTOR &&
+      existingMaterial.uploadedByUserId !== userId
+    ) {
+      res.status(HTTPSTATUS.FORBIDDEN).json({
+        code: 'FORBIDDEN',
+        message: 'You can manage only study materials you uploaded',
       });
       return;
     }

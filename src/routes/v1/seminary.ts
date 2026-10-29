@@ -77,6 +77,28 @@ import { updateSeminaryInstructorStatus } from '@/controllers/v1/seminary/update
 import { updateSeminaryStudyMaterial } from '@/controllers/v1/seminary/update-seminary-study-material';
 import { updateSeminaryStudent } from '@/controllers/v1/seminary/update-seminary-student';
 import { verifySeminaryCredentialDocument } from '@/controllers/v1/seminary/verify-seminary-credential-document';
+import {
+  createSeminaryCourseSchedule,
+  deleteSeminaryCourseSchedule,
+  getSeminaryCourseSchedules,
+  updateSeminaryCourseSchedule,
+} from '@/controllers/v1/seminary/course-schedules';
+import {
+  createSeminaryDocumentRequest,
+  createSeminaryDocumentRequestType,
+  getSeminaryDocumentRequests,
+  getSeminaryDocumentRequestTypes,
+  updateSeminaryDocumentRequestStatus,
+  updateSeminaryDocumentRequestType,
+} from '@/controllers/v1/seminary/document-requests';
+import {
+  createSeminaryAnnouncement,
+  deleteSeminaryAnnouncement,
+  getSeminaryAnnouncements,
+  updateSeminaryAnnouncement,
+} from '@/controllers/v1/seminary/announcements';
+import { getSeminaryDashboard } from '@/controllers/v1/seminary/dashboard';
+import { getSeminaryReports } from '@/controllers/v1/seminary/reports';
 
 /**
  * Helpers, Validators and Middlewares
@@ -86,14 +108,19 @@ import config from '@/config';
 import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 import { authenticate } from '@/middlewares/authentication';
 import authorize from '@/middlewares/authorization';
+import { authorizeSeminaryScheduleManager } from '@/middlewares/seminary-schedule-manager';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { UserType } from '@/generated/prisma/enums';
 import {
   bulkImportSeminaryStudentsSchema,
   createSeminaryAcademicYearSchema,
+  createSeminaryAnnouncementSchema,
   createSeminaryApplicationSchema,
   createSeminaryAssignmentSchema,
   createSeminaryCourseSchema,
+  createSeminaryCourseScheduleSchema,
+  createSeminaryDocumentRequestSchema,
+  createSeminaryDocumentRequestTypeSchema,
   createSeminaryExaminationSchema,
   createSeminaryGradeRecordSchema,
   bulkEncodeSeminaryGradesSchema,
@@ -104,8 +131,10 @@ import {
   createSeminaryStudentSchema,
   changeSeminaryStudentPasswordSchema,
   deleteSeminaryAcademicYearSchema,
+  deleteSeminaryAnnouncementSchema,
   deleteSeminaryAssignmentSchema,
   deleteSeminaryCourseSchema,
+  deleteSeminaryCourseScheduleSchema,
   deleteSeminaryExaminationSchema,
   deleteSeminaryGradeRecordSchema,
   deleteSeminaryInstructorSchema,
@@ -113,9 +142,15 @@ import {
   deleteSeminaryStudentSchema,
   generateSeminaryCredentialDocumentSchema,
   getAllSeminaryAcademicYearsSchema,
+  getSeminaryDashboardSchema,
+  getSeminaryReportsSchema,
+  getSeminaryAnnouncementsSchema,
   getAllSeminaryAssignmentsSchema,
   getAllSeminaryApplicationsSchema,
   getAllSeminaryCoursesSchema,
+  getAllSeminaryCourseSchedulesSchema,
+  getSeminaryDocumentRequestsSchema,
+  getSeminaryDocumentRequestTypesSchema,
   getAllSeminaryExaminationsSchema,
   getAllSeminaryGradeRecordsSchema,
   getAllSeminaryFeeCollectionsSchema,
@@ -133,11 +168,15 @@ import {
   getPublicSeminaryStudentSchema,
   updateSeminaryApplicationStatusSchema,
   updateSeminaryAcademicYearSchema,
+  updateSeminaryAnnouncementSchema,
   updateSeminaryAcademicYearSessionSchema,
   updateSeminaryAcademicYearStatusSchema,
   updateSeminaryAssignmentSchema,
   updateSeminaryAssignmentStatusSchema,
   updateSeminaryCourseSchema,
+  updateSeminaryCourseScheduleSchema,
+  updateSeminaryDocumentRequestStatusSchema,
+  updateSeminaryDocumentRequestTypeSchema,
   updateSeminaryCourseStatusSchema,
   updateSeminaryExaminationSchema,
   updateSeminaryExaminationStatusSchema,
@@ -173,6 +212,10 @@ const seminaryAssignmentAccess = [
 const seminaryExaminationAccess = [
   authenticate,
   authorize([UserType.ADMIN, UserType.INSTRUCTOR]),
+];
+const seminaryLmsReadAccess = [
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR, UserType.MEMBER]),
 ];
 const seminaryGradeRecordAccess = [
   authenticate,
@@ -243,6 +286,24 @@ router.get(
   authorize([UserType.ADMIN]),
   validate(getAllSeminaryApplicationsSchema),
   getAllSeminaryApplications,
+);
+
+router.get(
+  '/dashboard',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(getSeminaryDashboardSchema),
+  getSeminaryDashboard,
+);
+
+router.get(
+  '/reports',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(getSeminaryReportsSchema),
+  getSeminaryReports,
 );
 
 router.post(
@@ -439,9 +500,132 @@ router.delete(
 );
 
 router.get(
+  '/announcements',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR, UserType.MEMBER]),
+  validate(getSeminaryAnnouncementsSchema),
+  getSeminaryAnnouncements,
+);
+
+router.post(
+  '/announcements',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(createSeminaryAnnouncementSchema),
+  createSeminaryAnnouncement,
+);
+
+router.put(
+  '/announcements/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateSeminaryAnnouncementSchema),
+  updateSeminaryAnnouncement,
+);
+
+router.delete(
+  '/announcements/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(deleteSeminaryAnnouncementSchema),
+  deleteSeminaryAnnouncement,
+);
+
+router.get(
+  '/course-schedules',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN, UserType.INSTRUCTOR, UserType.MEMBER]),
+  validate(getAllSeminaryCourseSchedulesSchema),
+  getSeminaryCourseSchedules,
+);
+
+router.post(
+  '/course-schedules',
+  expressRateLimit('basic'),
+  authenticate,
+  authorizeSeminaryScheduleManager,
+  validate(createSeminaryCourseScheduleSchema),
+  createSeminaryCourseSchedule,
+);
+
+router.put(
+  '/course-schedules/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorizeSeminaryScheduleManager,
+  validate(updateSeminaryCourseScheduleSchema),
+  updateSeminaryCourseSchedule,
+);
+
+router.delete(
+  '/course-schedules/:id',
+  expressRateLimit('basic'),
+  authenticate,
+  authorizeSeminaryScheduleManager,
+  validate(deleteSeminaryCourseScheduleSchema),
+  deleteSeminaryCourseSchedule,
+);
+
+router.get(
+  '/document-request-types',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN, UserType.MEMBER]),
+  validate(getSeminaryDocumentRequestTypesSchema),
+  getSeminaryDocumentRequestTypes,
+);
+
+router.post(
+  '/document-request-types',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(createSeminaryDocumentRequestTypeSchema),
+  createSeminaryDocumentRequestType,
+);
+
+router.put(
+  '/document-request-types/:id',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryDocumentRequestTypeSchema),
+  updateSeminaryDocumentRequestType,
+);
+
+router.get(
+  '/document-requests',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN, UserType.MEMBER]),
+  validate(getSeminaryDocumentRequestsSchema),
+  getSeminaryDocumentRequests,
+);
+
+router.post(
+  '/document-requests',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER]),
+  validate(createSeminaryDocumentRequestSchema),
+  createSeminaryDocumentRequest,
+);
+
+router.patch(
+  '/document-requests/:id/status',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(updateSeminaryDocumentRequestStatusSchema),
+  updateSeminaryDocumentRequestStatus,
+);
+
+router.get(
   '/study-materials',
   expressRateLimit('basic'),
-  ...seminaryStudyMaterialAccess,
+  ...seminaryLmsReadAccess,
   validate(getAllSeminaryStudyMaterialsSchema),
   getAllSeminaryStudyMaterials,
 );
@@ -473,7 +657,7 @@ router.delete(
 router.get(
   '/assignments',
   expressRateLimit('basic'),
-  ...seminaryAssignmentAccess,
+  ...seminaryLmsReadAccess,
   validate(getAllSeminaryAssignmentsSchema),
   getAllSeminaryAssignments,
 );
@@ -513,7 +697,7 @@ router.delete(
 router.get(
   '/examinations',
   expressRateLimit('basic'),
-  ...seminaryExaminationAccess,
+  ...seminaryLmsReadAccess,
   validate(getAllSeminaryExaminationsSchema),
   getAllSeminaryExaminations,
 );
@@ -529,7 +713,7 @@ router.post(
 router.get(
   '/examinations/:id',
   expressRateLimit('basic'),
-  ...seminaryExaminationAccess,
+  ...seminaryLmsReadAccess,
   validate(getSeminaryExaminationByIdSchema),
   getSeminaryExaminationById,
 );

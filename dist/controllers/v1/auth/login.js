@@ -48,7 +48,10 @@ const getAccountAccessDeniedMessage = (accountStatus, memberStatus) => {
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const { email, password, userAgent } = req.body;
-    const loginIdentifier = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email)
+    const isInstructorId = /^POTSCI-\d{2}-\d{4}-INS$/i.test(email);
+    const isSeminaryStudentId = /^POTSC-\d{2}-\d{4}$/i.test(email) ||
+        /^POTSCI-\d{2}-\d{4}-(?!INS$)[A-Z0-9]+$/i.test(email);
+    const loginIdentifier = isInstructorId || isSeminaryStudentId
         ? email.trim().toUpperCase()
         : email.trim().toLowerCase();
     const ipAddress = (0, helpers_1.getClientIp)(req);
@@ -58,10 +61,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         : headerUserAgent;
     const finalUserAgent = (0, helpers_1.parseUserAgent)(userAgent || userAgentString || null);
     try {
-        const user = yield prisma_1.prisma.user.findUnique({
-            where: {
-                email: loginIdentifier,
-            },
+        const user = yield prisma_1.prisma.user.findFirst({
+            where: isSeminaryStudentId
+                ? { seminaryStudentPortal: { is: { studentId: loginIdentifier } } }
+                : { email: loginIdentifier },
             select: {
                 id: true,
                 name: true,

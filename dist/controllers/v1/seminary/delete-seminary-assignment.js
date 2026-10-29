@@ -13,9 +13,12 @@ exports.deleteSeminaryAssignment = void 0;
 const http_codes_1 = require("@/common/http-codes");
 const prisma_1 = require("@/lib/prisma");
 const winston_1 = require("@/lib/winston");
+const assignment_shared_1 = require("./assignment-shared");
 const deleteSeminaryAssignment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
+        if (!(yield (0, assignment_shared_1.canManageAssignment)({ assignmentId: id, userId: req.userId, res })))
+            return;
         yield prisma_1.prisma.seminaryAssignment.delete({ where: { id } });
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

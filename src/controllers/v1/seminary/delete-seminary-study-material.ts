@@ -1,4 +1,5 @@
 import { HTTPSTATUS } from '@/common/http-codes';
+import { UserType } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 
@@ -10,15 +11,40 @@ export const deleteSeminaryStudyMaterial = async (
 ): Promise<void> => {
   try {
     const id = req.params.id as string;
-    const material = await prisma.seminaryStudyMaterial.findUnique({
-      where: { id },
-      select: { id: true },
-    });
+    if (!req.userId) {
+      res.status(HTTPSTATUS.UNAUTHORIZED).json({
+        code: 'UNAUTHORIZED',
+        message: 'Authentication required',
+      });
+      return;
+    }
+
+    const [material, user] = await Promise.all([
+      prisma.seminaryStudyMaterial.findUnique({
+        where: { id },
+        select: { id: true, uploadedByUserId: true },
+      }),
+      prisma.user.findUnique({
+        where: { id: req.userId },
+        select: { role: true },
+      }),
+    ]);
 
     if (!material) {
       res.status(HTTPSTATUS.NOT_FOUND).json({
         code: 'NOT_FOUND',
         message: 'Study material not found',
+      });
+      return;
+    }
+
+    if (
+      !user ||
+      (user.role === UserType.INSTRUCTOR && material.uploadedByUserId !== req.userId)
+    ) {
+      res.status(HTTPSTATUS.FORBIDDEN).json({
+        code: 'FORBIDDEN',
+        message: 'You can manage only study materials you uploaded',
       });
       return;
     }
