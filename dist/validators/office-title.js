@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllOfficeTitlesSchema = exports.updateOfficeTitleSchema = exports.createOfficeTitleSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 const sectionItemSchema = zod_1.z.object({
     id: zod_1.z.uuid().optional(),
     content: zod_1.z.string().trim().min(1, { message: 'Item content cannot be empty' }),

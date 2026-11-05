@@ -18,10 +18,10 @@ const promises_1 = require("node:fs/promises");
 const node_path_1 = __importDefault(require("node:path"));
 const node_util_1 = require("node:util");
 const docx_1 = require("docx");
-const client_1 = require("@/generated/prisma/client");
+const client_1 = require("../../../generated/prisma/client");
 Object.defineProperty(exports, "MemoStatus", { enumerable: true, get: function () { return client_1.MemoStatus; } });
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const execFileAsync = (0, node_util_1.promisify)(node_child_process_1.execFile);
 exports.memoInclude = {
     authorUser: {

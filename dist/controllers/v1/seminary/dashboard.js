@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSeminaryDashboard = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const dayStart = (value) => new Date(`${value}T00:00:00.000Z`);
 const dayEnd = (value) => new Date(`${value}T23:59:59.999Z`);
 const dateKey = (date) => date.toISOString().slice(0, 10);

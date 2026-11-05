@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateGradeRecordNumber = exports.defaultGradeStatus = exports.buildGradeRemark = exports.getProgramLabel = exports.getStudentName = exports.toGradeRecordResponse = exports.getGradeRecordWhereForUser = void 0;
 const node_crypto_1 = require("node:crypto");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
 const programLabels = {
     BACHELOR: 'Bachelor',
     CERTIFICATE: 'Certificate',

@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.refreshToken = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const jwt_1 = require("@/lib/jwt");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const jwt_1 = require("../../../lib/jwt");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const jsonwebtoken_1 = require("jsonwebtoken");
 const refreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

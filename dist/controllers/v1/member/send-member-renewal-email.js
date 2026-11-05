@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMemberRenewalEmail = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const member_renewal_email_1 = require("@/lib/member-renewal-email");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const member_renewal_email_1 = require("../../../lib/member-renewal-email");
+const winston_1 = require("../../../lib/winston");
 const sendMemberRenewalEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const memberId = req.params.id;

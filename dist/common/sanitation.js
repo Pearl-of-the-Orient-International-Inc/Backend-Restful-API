@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validate = void 0;
-const http_codes_1 = require("@/common/http-codes");
+const http_codes_1 = require("../common/http-codes");
 const zod_1 = require("zod");
 const validate = (schema) => {
     return (req, res, next) => {

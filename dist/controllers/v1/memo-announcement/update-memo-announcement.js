@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateMemoAnnouncement = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const client_1 = require("@/generated/prisma/client");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const client_1 = require("../../../generated/prisma/client");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const memo_announcement_shared_1 = require("./memo-announcement-shared");
 const updateMemoAnnouncement = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;

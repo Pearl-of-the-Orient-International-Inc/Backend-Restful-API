@@ -457,6 +457,7 @@ export type SeminaryInstructorWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  schedules?: Prisma.SeminaryCourseScheduleListRelationFilter
 }
 
 export type SeminaryInstructorOrderByWithRelationInput = {
@@ -494,6 +495,7 @@ export type SeminaryInstructorOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  schedules?: Prisma.SeminaryCourseScheduleOrderByRelationAggregateInput
 }
 
 export type SeminaryInstructorWhereUniqueInput = Prisma.AtLeast<{
@@ -534,6 +536,7 @@ export type SeminaryInstructorWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryInstructor"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  schedules?: Prisma.SeminaryCourseScheduleListRelationFilter
 }, "id" | "userId" | "facultyId" | "email">
 
 export type SeminaryInstructorOrderByWithAggregationInput = {
@@ -650,6 +653,7 @@ export type SeminaryInstructorCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutSeminaryInstructorInput
+  schedules?: Prisma.SeminaryCourseScheduleCreateNestedManyWithoutInstructorInput
 }
 
 export type SeminaryInstructorUncheckedCreateInput = {
@@ -686,6 +690,7 @@ export type SeminaryInstructorUncheckedCreateInput = {
   inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUncheckedCreateNestedManyWithoutInstructorInput
 }
 
 export type SeminaryInstructorUpdateInput = {
@@ -722,6 +727,7 @@ export type SeminaryInstructorUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutSeminaryInstructorNestedInput
+  schedules?: Prisma.SeminaryCourseScheduleUpdateManyWithoutInstructorNestedInput
 }
 
 export type SeminaryInstructorUncheckedUpdateInput = {
@@ -758,6 +764,7 @@ export type SeminaryInstructorUncheckedUpdateInput = {
   inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUncheckedUpdateManyWithoutInstructorNestedInput
 }
 
 export type SeminaryInstructorCreateManyInput = {
@@ -870,6 +877,11 @@ export type SeminaryInstructorUncheckedUpdateManyInput = {
 export type SeminaryInstructorNullableScalarRelationFilter = {
   is?: Prisma.SeminaryInstructorWhereInput | null
   isNot?: Prisma.SeminaryInstructorWhereInput | null
+}
+
+export type SeminaryInstructorScalarRelationFilter = {
+  is?: Prisma.SeminaryInstructorWhereInput
+  isNot?: Prisma.SeminaryInstructorWhereInput
 }
 
 export type EnumSeminaryProgramLevelNullableListFilter<$PrismaModel = never> = {
@@ -1036,6 +1048,20 @@ export type SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryInstructorUpdateToOneWithWhereWithoutUserInput, Prisma.SeminaryInstructorUpdateWithoutUserInput>, Prisma.SeminaryInstructorUncheckedUpdateWithoutUserInput>
 }
 
+export type SeminaryInstructorCreateNestedOneWithoutSchedulesInput = {
+  create?: Prisma.XOR<Prisma.SeminaryInstructorCreateWithoutSchedulesInput, Prisma.SeminaryInstructorUncheckedCreateWithoutSchedulesInput>
+  connectOrCreate?: Prisma.SeminaryInstructorCreateOrConnectWithoutSchedulesInput
+  connect?: Prisma.SeminaryInstructorWhereUniqueInput
+}
+
+export type SeminaryInstructorUpdateOneRequiredWithoutSchedulesNestedInput = {
+  create?: Prisma.XOR<Prisma.SeminaryInstructorCreateWithoutSchedulesInput, Prisma.SeminaryInstructorUncheckedCreateWithoutSchedulesInput>
+  connectOrCreate?: Prisma.SeminaryInstructorCreateOrConnectWithoutSchedulesInput
+  upsert?: Prisma.SeminaryInstructorUpsertWithoutSchedulesInput
+  connect?: Prisma.SeminaryInstructorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryInstructorUpdateToOneWithWhereWithoutSchedulesInput, Prisma.SeminaryInstructorUpdateWithoutSchedulesInput>, Prisma.SeminaryInstructorUncheckedUpdateWithoutSchedulesInput>
+}
+
 export type SeminaryInstructorCreateteachingProgramsInput = {
   set: $Enums.SeminaryProgramLevel[]
 }
@@ -1112,6 +1138,7 @@ export type SeminaryInstructorCreateWithoutUserInput = {
   inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  schedules?: Prisma.SeminaryCourseScheduleCreateNestedManyWithoutInstructorInput
 }
 
 export type SeminaryInstructorUncheckedCreateWithoutUserInput = {
@@ -1147,6 +1174,7 @@ export type SeminaryInstructorUncheckedCreateWithoutUserInput = {
   inviteAcceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUncheckedCreateNestedManyWithoutInstructorInput
 }
 
 export type SeminaryInstructorCreateOrConnectWithoutUserInput = {
@@ -1198,6 +1226,7 @@ export type SeminaryInstructorUpdateWithoutUserInput = {
   inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUpdateManyWithoutInstructorNestedInput
 }
 
 export type SeminaryInstructorUncheckedUpdateWithoutUserInput = {
@@ -1233,8 +1262,198 @@ export type SeminaryInstructorUncheckedUpdateWithoutUserInput = {
   inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUncheckedUpdateManyWithoutInstructorNestedInput
 }
 
+export type SeminaryInstructorCreateWithoutSchedulesInput = {
+  id?: string
+  facultyId: string
+  name: string
+  professionalTitle: string
+  email: string
+  contactNumber: string
+  teachingPrograms?: Prisma.SeminaryInstructorCreateteachingProgramsInput | $Enums.SeminaryProgramLevel[]
+  rank: $Enums.SeminaryInstructorRank
+  status?: $Enums.SeminaryInstructorStatus
+  loadUnits?: number
+  biography: string
+  educationalBackground: string
+  areasOfExpertise?: Prisma.SeminaryInstructorCreateareasOfExpertiseInput | string[]
+  credentials?: Prisma.SeminaryInstructorCreatecredentialsInput | string[]
+  formalPhotoUrl: string
+  isFilipinoCitizen?: boolean
+  highSchoolGraduateOrEquivalent?: boolean
+  ministerialExperienceYears: number
+  submissionDeadline: Date | string
+  attendanceParticipation: number
+  leadershipCharacter: number
+  ministryCommunityEngagement: number
+  knowledgeSkillsAssessment: number
+  professionalConductEthics: number
+  totalScore: number
+  rating: string
+  rankingClassification: string
+  award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutSeminaryInstructorInput
+}
+
+export type SeminaryInstructorUncheckedCreateWithoutSchedulesInput = {
+  id?: string
+  userId?: string | null
+  facultyId: string
+  name: string
+  professionalTitle: string
+  email: string
+  contactNumber: string
+  teachingPrograms?: Prisma.SeminaryInstructorCreateteachingProgramsInput | $Enums.SeminaryProgramLevel[]
+  rank: $Enums.SeminaryInstructorRank
+  status?: $Enums.SeminaryInstructorStatus
+  loadUnits?: number
+  biography: string
+  educationalBackground: string
+  areasOfExpertise?: Prisma.SeminaryInstructorCreateareasOfExpertiseInput | string[]
+  credentials?: Prisma.SeminaryInstructorCreatecredentialsInput | string[]
+  formalPhotoUrl: string
+  isFilipinoCitizen?: boolean
+  highSchoolGraduateOrEquivalent?: boolean
+  ministerialExperienceYears: number
+  submissionDeadline: Date | string
+  attendanceParticipation: number
+  leadershipCharacter: number
+  ministryCommunityEngagement: number
+  knowledgeSkillsAssessment: number
+  professionalConductEthics: number
+  totalScore: number
+  rating: string
+  rankingClassification: string
+  award: string
+  inviteTokenSentAt?: Date | string | null
+  inviteAcceptedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SeminaryInstructorCreateOrConnectWithoutSchedulesInput = {
+  where: Prisma.SeminaryInstructorWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeminaryInstructorCreateWithoutSchedulesInput, Prisma.SeminaryInstructorUncheckedCreateWithoutSchedulesInput>
+}
+
+export type SeminaryInstructorUpsertWithoutSchedulesInput = {
+  update: Prisma.XOR<Prisma.SeminaryInstructorUpdateWithoutSchedulesInput, Prisma.SeminaryInstructorUncheckedUpdateWithoutSchedulesInput>
+  create: Prisma.XOR<Prisma.SeminaryInstructorCreateWithoutSchedulesInput, Prisma.SeminaryInstructorUncheckedCreateWithoutSchedulesInput>
+  where?: Prisma.SeminaryInstructorWhereInput
+}
+
+export type SeminaryInstructorUpdateToOneWithWhereWithoutSchedulesInput = {
+  where?: Prisma.SeminaryInstructorWhereInput
+  data: Prisma.XOR<Prisma.SeminaryInstructorUpdateWithoutSchedulesInput, Prisma.SeminaryInstructorUncheckedUpdateWithoutSchedulesInput>
+}
+
+export type SeminaryInstructorUpdateWithoutSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  professionalTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  teachingPrograms?: Prisma.SeminaryInstructorUpdateteachingProgramsInput | $Enums.SeminaryProgramLevel[]
+  rank?: Prisma.EnumSeminaryInstructorRankFieldUpdateOperationsInput | $Enums.SeminaryInstructorRank
+  status?: Prisma.EnumSeminaryInstructorStatusFieldUpdateOperationsInput | $Enums.SeminaryInstructorStatus
+  loadUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  biography?: Prisma.StringFieldUpdateOperationsInput | string
+  educationalBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  areasOfExpertise?: Prisma.SeminaryInstructorUpdateareasOfExpertiseInput | string[]
+  credentials?: Prisma.SeminaryInstructorUpdatecredentialsInput | string[]
+  formalPhotoUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  isFilipinoCitizen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  highSchoolGraduateOrEquivalent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ministerialExperienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  submissionDeadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attendanceParticipation?: Prisma.FloatFieldUpdateOperationsInput | number
+  leadershipCharacter?: Prisma.FloatFieldUpdateOperationsInput | number
+  ministryCommunityEngagement?: Prisma.FloatFieldUpdateOperationsInput | number
+  knowledgeSkillsAssessment?: Prisma.FloatFieldUpdateOperationsInput | number
+  professionalConductEthics?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  rating?: Prisma.StringFieldUpdateOperationsInput | string
+  rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
+  award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutSeminaryInstructorNestedInput
+}
+
+export type SeminaryInstructorUncheckedUpdateWithoutSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  professionalTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  teachingPrograms?: Prisma.SeminaryInstructorUpdateteachingProgramsInput | $Enums.SeminaryProgramLevel[]
+  rank?: Prisma.EnumSeminaryInstructorRankFieldUpdateOperationsInput | $Enums.SeminaryInstructorRank
+  status?: Prisma.EnumSeminaryInstructorStatusFieldUpdateOperationsInput | $Enums.SeminaryInstructorStatus
+  loadUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  biography?: Prisma.StringFieldUpdateOperationsInput | string
+  educationalBackground?: Prisma.StringFieldUpdateOperationsInput | string
+  areasOfExpertise?: Prisma.SeminaryInstructorUpdateareasOfExpertiseInput | string[]
+  credentials?: Prisma.SeminaryInstructorUpdatecredentialsInput | string[]
+  formalPhotoUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  isFilipinoCitizen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  highSchoolGraduateOrEquivalent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ministerialExperienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  submissionDeadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attendanceParticipation?: Prisma.FloatFieldUpdateOperationsInput | number
+  leadershipCharacter?: Prisma.FloatFieldUpdateOperationsInput | number
+  ministryCommunityEngagement?: Prisma.FloatFieldUpdateOperationsInput | number
+  knowledgeSkillsAssessment?: Prisma.FloatFieldUpdateOperationsInput | number
+  professionalConductEthics?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  rating?: Prisma.StringFieldUpdateOperationsInput | string
+  rankingClassification?: Prisma.StringFieldUpdateOperationsInput | string
+  award?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteTokenSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inviteAcceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type SeminaryInstructorCountOutputType
+ */
+
+export type SeminaryInstructorCountOutputType = {
+  schedules: number
+}
+
+export type SeminaryInstructorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedules?: boolean | SeminaryInstructorCountOutputTypeCountSchedulesArgs
+}
+
+/**
+ * SeminaryInstructorCountOutputType without action
+ */
+export type SeminaryInstructorCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryInstructorCountOutputType
+   */
+  select?: Prisma.SeminaryInstructorCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SeminaryInstructorCountOutputType without action
+ */
+export type SeminaryInstructorCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeminaryCourseScheduleWhereInput
+}
 
 
 export type SeminaryInstructorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1272,6 +1491,8 @@ export type SeminaryInstructorSelect<ExtArgs extends runtime.Types.Extensions.In
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
+  schedules?: boolean | Prisma.SeminaryInstructor$schedulesArgs<ExtArgs>
+  _count?: boolean | Prisma.SeminaryInstructorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["seminaryInstructor"]>
 
 export type SeminaryInstructorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1387,6 +1608,8 @@ export type SeminaryInstructorSelectScalar = {
 export type SeminaryInstructorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "facultyId" | "name" | "professionalTitle" | "email" | "contactNumber" | "teachingPrograms" | "rank" | "status" | "loadUnits" | "biography" | "educationalBackground" | "areasOfExpertise" | "credentials" | "formalPhotoUrl" | "isFilipinoCitizen" | "highSchoolGraduateOrEquivalent" | "ministerialExperienceYears" | "submissionDeadline" | "attendanceParticipation" | "leadershipCharacter" | "ministryCommunityEngagement" | "knowledgeSkillsAssessment" | "professionalConductEthics" | "totalScore" | "rating" | "rankingClassification" | "award" | "inviteTokenSentAt" | "inviteAcceptedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryInstructor"]>
 export type SeminaryInstructorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
+  schedules?: boolean | Prisma.SeminaryInstructor$schedulesArgs<ExtArgs>
+  _count?: boolean | Prisma.SeminaryInstructorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SeminaryInstructorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.SeminaryInstructor$userArgs<ExtArgs>
@@ -1399,6 +1622,7 @@ export type $SeminaryInstructorPayload<ExtArgs extends runtime.Types.Extensions.
   name: "SeminaryInstructor"
   objects: {
     user: Prisma.$UserPayload<ExtArgs> | null
+    schedules: Prisma.$SeminaryCourseSchedulePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1829,6 +2053,7 @@ readonly fields: SeminaryInstructorFieldRefs;
 export interface Prisma__SeminaryInstructorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.SeminaryInstructor$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryInstructor$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  schedules<T extends Prisma.SeminaryInstructor$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryInstructor$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryCourseSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2303,6 +2528,30 @@ export type SeminaryInstructor$userArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * SeminaryInstructor.schedules
+ */
+export type SeminaryInstructor$schedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryCourseSchedule
+   */
+  select?: Prisma.SeminaryCourseScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryCourseSchedule
+   */
+  omit?: Prisma.SeminaryCourseScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseScheduleInclude<ExtArgs> | null
+  where?: Prisma.SeminaryCourseScheduleWhereInput
+  orderBy?: Prisma.SeminaryCourseScheduleOrderByWithRelationInput | Prisma.SeminaryCourseScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.SeminaryCourseScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeminaryCourseScheduleScalarFieldEnum | Prisma.SeminaryCourseScheduleScalarFieldEnum[]
 }
 
 /**

@@ -21,10 +21,10 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyEmail = void 0;
-const winston_1 = require("@/lib/winston");
-const prisma_1 = require("@/lib/prisma");
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
+const winston_1 = require("../../../lib/winston");
+const prisma_1 = require("../../../lib/prisma");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
 const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { code } = req.body;

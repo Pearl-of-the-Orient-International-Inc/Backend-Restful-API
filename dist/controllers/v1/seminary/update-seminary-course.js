@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateSeminaryCourse = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const client_1 = require("@/generated/prisma/client");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const client_1 = require("../../../generated/prisma/client");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const getCourseSummary = (subjects) => ({
     units: subjects.reduce((total, subject) => total + subject.units, 0),
     modality: subjects[0].modality,

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toInstructorResponse = exports.normalizeInstructorProgram = exports.normalizeInstructorRank = exports.normalizeInstructorStatus = exports.instructorProgramLabels = exports.instructorRankLabels = exports.instructorStatusLabels = exports.getNextFacultyId = exports.calculateInstructorEvaluation = void 0;
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../../../generated/prisma/enums");
 const calculateInstructorEvaluation = ({ attendanceParticipation, leadershipCharacter, ministryCommunityEngagement, knowledgeSkillsAssessment, professionalConductEthics, }) => {
     const totalScore = Number((attendanceParticipation * 0.2 +
         leadershipCharacter * 0.2 +

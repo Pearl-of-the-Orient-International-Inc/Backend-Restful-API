@@ -10,14 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resendUserEmailVerificationByAdmin = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const helpers_1 = require("@/lib/helpers");
-const prisma_1 = require("@/lib/prisma");
-const verification_redirect_1 = require("@/lib/verification-redirect");
-const winston_1 = require("@/lib/winston");
-const mailers_1 = require("@/mailers");
-const verify_email_1 = require("@/mailers/templates/verify-email");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const helpers_1 = require("../../../lib/helpers");
+const prisma_1 = require("../../../lib/prisma");
+const verification_redirect_1 = require("../../../lib/verification-redirect");
+const winston_1 = require("../../../lib/winston");
+const mailers_1 = require("../../../mailers");
+const verify_email_1 = require("../../../mailers/templates/verify-email");
 const user_admin_guards_1 = require("./user-admin-guards");
 const resendUserEmailVerificationByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

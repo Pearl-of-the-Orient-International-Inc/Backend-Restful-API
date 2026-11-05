@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOwnerReport = exports.changeOwnerPin = exports.logoutOwner = exports.touchOwnerSession = exports.getOwnerSession = exports.loginOwner = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const config_1 = __importDefault(require("@/config"));
-const enums_1 = require("@/generated/prisma/enums");
-const password_hash_1 = require("@/lib/password-hash");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const owner_access_1 = require("@/middlewares/owner-access");
+const http_codes_1 = require("../../../common/http-codes");
+const config_1 = __importDefault(require("../../../config"));
+const enums_1 = require("../../../generated/prisma/enums");
+const password_hash_1 = require("../../../lib/password-hash");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const owner_access_1 = require("../../../middlewares/owner-access");
 const OWNER_CREDENTIAL_ID = 'owner';
 const toNumber = (value) => Number(value !== null && value !== void 0 ? value : 0);
 const onboardingStageConfig = [

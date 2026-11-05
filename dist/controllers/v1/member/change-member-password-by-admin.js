@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changeMemberPasswordByAdmin = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const prisma_1 = require("@/lib/prisma");
-const password_hash_1 = require("@/lib/password-hash");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const prisma_1 = require("../../../lib/prisma");
+const password_hash_1 = require("../../../lib/password-hash");
+const winston_1 = require("../../../lib/winston");
 const member_admin_guards_1 = require("./member-admin-guards");
 const changeMemberPasswordByAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

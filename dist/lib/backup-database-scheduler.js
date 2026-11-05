@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stopBackupDatabaseScheduler = exports.startBackupDatabaseScheduler = void 0;
-const config_1 = __importDefault(require("@/config"));
-const winston_1 = require("@/lib/winston");
-const backup_database_shared_1 = require("@/controllers/v1/backup-database/backup-database-shared");
+const config_1 = __importDefault(require("../config"));
+const winston_1 = require("../lib/winston");
+const backup_database_shared_1 = require("../controllers/v1/backup-database/backup-database-shared");
 const MIN_INTERVAL_MS = 15000;
 let backupSchedulerTimer = null;
 const resolveIntervalMs = () => {

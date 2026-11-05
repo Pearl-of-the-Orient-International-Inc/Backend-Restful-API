@@ -20,6 +20,7 @@ import { revokeOtherUserSessions } from '@/controllers/v1/user/revoke-other-user
 import { changeUserPasswordByAdmin } from '@/controllers/v1/user/change-user-password-by-admin';
 import { resendUserEmailVerificationByAdmin } from '@/controllers/v1/user/resend-user-email-verification-by-admin';
 import { verifyUserEmailByAdmin } from '@/controllers/v1/user/verify-user-email-by-admin';
+import { getPublicAdministrationStaff } from '@/controllers/v1/user/get-public-administration-staff';
 
 /**
  * Helpers, Validators and Middlewares
@@ -80,6 +81,12 @@ router.use(
     maxFileSize: '4MB',
     maxFileCount: 1,
   }),
+);
+
+router.get(
+  '/public/administration',
+  expressRateLimit('basic'),
+  getPublicAdministrationStaff,
 );
 
 router.get(

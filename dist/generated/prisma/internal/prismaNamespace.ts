@@ -392,6 +392,9 @@ export const ModelName = {
   PasskeyCredential: 'PasskeyCredential',
   PasskeyChallenge: 'PasskeyChallenge',
   Member: 'Member',
+  ReferralPointCriterion: 'ReferralPointCriterion',
+  ReferralPointLedgerEntry: 'ReferralPointLedgerEntry',
+  ReferralRecognitionPeriod: 'ReferralRecognitionPeriod',
   MemberFollow: 'MemberFollow',
   MinisterialExperience: 'MinisterialExperience',
   CharacterReference: 'CharacterReference',
@@ -411,6 +414,10 @@ export const ModelName = {
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
   SeminaryCourse: 'SeminaryCourse',
+  SeminaryCourseSchedule: 'SeminaryCourseSchedule',
+  SeminaryAnnouncement: 'SeminaryAnnouncement',
+  SeminaryDocumentRequestType: 'SeminaryDocumentRequestType',
+  SeminaryDocumentRequest: 'SeminaryDocumentRequest',
   SeminaryStudyMaterial: 'SeminaryStudyMaterial',
   SeminaryAssignment: 'SeminaryAssignment',
   SeminaryExamination: 'SeminaryExamination',
@@ -442,6 +449,7 @@ export const ModelName = {
   EventAttendee: 'EventAttendee',
   EventTaggedMember: 'EventTaggedMember',
   NewsBlog: 'NewsBlog',
+  FacebookPageConfiguration: 'FacebookPageConfiguration',
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   BulletinEntry: 'BulletinEntry',
@@ -474,7 +482,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "crasmApplication" | "crasmApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "referralPointCriterion" | "referralPointLedgerEntry" | "referralRecognitionPeriod" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryCourseSchedule" | "seminaryAnnouncement" | "seminaryDocumentRequestType" | "seminaryDocumentRequest" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "crasmApplication" | "crasmApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "facebookPageConfiguration" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1067,6 +1075,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MemberCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReferralPointCriterion: {
+      payload: Prisma.$ReferralPointCriterionPayload<ExtArgs>
+      fields: Prisma.ReferralPointCriterionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReferralPointCriterionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReferralPointCriterionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>
+        }
+        findFirst: {
+          args: Prisma.ReferralPointCriterionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReferralPointCriterionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>
+        }
+        findMany: {
+          args: Prisma.ReferralPointCriterionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>[]
+        }
+        create: {
+          args: Prisma.ReferralPointCriterionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>
+        }
+        createMany: {
+          args: Prisma.ReferralPointCriterionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReferralPointCriterionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>[]
+        }
+        delete: {
+          args: Prisma.ReferralPointCriterionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>
+        }
+        update: {
+          args: Prisma.ReferralPointCriterionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReferralPointCriterionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReferralPointCriterionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReferralPointCriterionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReferralPointCriterionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointCriterionPayload>
+        }
+        aggregate: {
+          args: Prisma.ReferralPointCriterionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReferralPointCriterion>
+        }
+        groupBy: {
+          args: Prisma.ReferralPointCriterionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferralPointCriterionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReferralPointCriterionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferralPointCriterionCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReferralPointLedgerEntry: {
+      payload: Prisma.$ReferralPointLedgerEntryPayload<ExtArgs>
+      fields: Prisma.ReferralPointLedgerEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReferralPointLedgerEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReferralPointLedgerEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.ReferralPointLedgerEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReferralPointLedgerEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>
+        }
+        findMany: {
+          args: Prisma.ReferralPointLedgerEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>[]
+        }
+        create: {
+          args: Prisma.ReferralPointLedgerEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>
+        }
+        createMany: {
+          args: Prisma.ReferralPointLedgerEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReferralPointLedgerEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.ReferralPointLedgerEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>
+        }
+        update: {
+          args: Prisma.ReferralPointLedgerEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReferralPointLedgerEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReferralPointLedgerEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReferralPointLedgerEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReferralPointLedgerEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralPointLedgerEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.ReferralPointLedgerEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReferralPointLedgerEntry>
+        }
+        groupBy: {
+          args: Prisma.ReferralPointLedgerEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferralPointLedgerEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReferralPointLedgerEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferralPointLedgerEntryCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReferralRecognitionPeriod: {
+      payload: Prisma.$ReferralRecognitionPeriodPayload<ExtArgs>
+      fields: Prisma.ReferralRecognitionPeriodFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReferralRecognitionPeriodFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReferralRecognitionPeriodFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>
+        }
+        findFirst: {
+          args: Prisma.ReferralRecognitionPeriodFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReferralRecognitionPeriodFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>
+        }
+        findMany: {
+          args: Prisma.ReferralRecognitionPeriodFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>[]
+        }
+        create: {
+          args: Prisma.ReferralRecognitionPeriodCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>
+        }
+        createMany: {
+          args: Prisma.ReferralRecognitionPeriodCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReferralRecognitionPeriodCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>[]
+        }
+        delete: {
+          args: Prisma.ReferralRecognitionPeriodDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>
+        }
+        update: {
+          args: Prisma.ReferralRecognitionPeriodUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReferralRecognitionPeriodDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReferralRecognitionPeriodUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReferralRecognitionPeriodUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReferralRecognitionPeriodUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferralRecognitionPeriodPayload>
+        }
+        aggregate: {
+          args: Prisma.ReferralRecognitionPeriodAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReferralRecognitionPeriod>
+        }
+        groupBy: {
+          args: Prisma.ReferralRecognitionPeriodGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferralRecognitionPeriodGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReferralRecognitionPeriodCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferralRecognitionPeriodCountAggregateOutputType> | number
         }
       }
     }
@@ -2473,6 +2703,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SeminaryCourseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SeminaryCourseCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryCourseSchedule: {
+      payload: Prisma.$SeminaryCourseSchedulePayload<ExtArgs>
+      fields: Prisma.SeminaryCourseScheduleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryCourseScheduleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryCourseScheduleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryCourseScheduleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryCourseScheduleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryCourseScheduleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryCourseScheduleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryCourseScheduleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryCourseScheduleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryCourseScheduleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>
+        }
+        update: {
+          args: Prisma.SeminaryCourseScheduleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryCourseScheduleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryCourseScheduleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryCourseScheduleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryCourseScheduleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryCourseSchedulePayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryCourseScheduleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryCourseSchedule>
+        }
+        groupBy: {
+          args: Prisma.SeminaryCourseScheduleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryCourseScheduleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryCourseScheduleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryCourseScheduleCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryAnnouncement: {
+      payload: Prisma.$SeminaryAnnouncementPayload<ExtArgs>
+      fields: Prisma.SeminaryAnnouncementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryAnnouncementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryAnnouncementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryAnnouncementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryAnnouncementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryAnnouncementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryAnnouncementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryAnnouncementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryAnnouncementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryAnnouncementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>
+        }
+        update: {
+          args: Prisma.SeminaryAnnouncementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryAnnouncementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryAnnouncementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryAnnouncementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryAnnouncementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAnnouncementPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryAnnouncementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryAnnouncement>
+        }
+        groupBy: {
+          args: Prisma.SeminaryAnnouncementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAnnouncementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryAnnouncementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAnnouncementCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryDocumentRequestType: {
+      payload: Prisma.$SeminaryDocumentRequestTypePayload<ExtArgs>
+      fields: Prisma.SeminaryDocumentRequestTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryDocumentRequestTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryDocumentRequestTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryDocumentRequestTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryDocumentRequestTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryDocumentRequestTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryDocumentRequestTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryDocumentRequestTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryDocumentRequestTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryDocumentRequestTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>
+        }
+        update: {
+          args: Prisma.SeminaryDocumentRequestTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryDocumentRequestTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryDocumentRequestTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryDocumentRequestTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryDocumentRequestTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestTypePayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryDocumentRequestTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryDocumentRequestType>
+        }
+        groupBy: {
+          args: Prisma.SeminaryDocumentRequestTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryDocumentRequestTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryDocumentRequestTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryDocumentRequestTypeCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryDocumentRequest: {
+      payload: Prisma.$SeminaryDocumentRequestPayload<ExtArgs>
+      fields: Prisma.SeminaryDocumentRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryDocumentRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryDocumentRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryDocumentRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryDocumentRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryDocumentRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryDocumentRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryDocumentRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryDocumentRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryDocumentRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>
+        }
+        update: {
+          args: Prisma.SeminaryDocumentRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryDocumentRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryDocumentRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryDocumentRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryDocumentRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryDocumentRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryDocumentRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryDocumentRequest>
+        }
+        groupBy: {
+          args: Prisma.SeminaryDocumentRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryDocumentRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryDocumentRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryDocumentRequestCountAggregateOutputType> | number
         }
       }
     }
@@ -4770,6 +5296,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FacebookPageConfiguration: {
+      payload: Prisma.$FacebookPageConfigurationPayload<ExtArgs>
+      fields: Prisma.FacebookPageConfigurationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FacebookPageConfigurationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FacebookPageConfigurationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>
+        }
+        findFirst: {
+          args: Prisma.FacebookPageConfigurationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FacebookPageConfigurationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>
+        }
+        findMany: {
+          args: Prisma.FacebookPageConfigurationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>[]
+        }
+        create: {
+          args: Prisma.FacebookPageConfigurationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>
+        }
+        createMany: {
+          args: Prisma.FacebookPageConfigurationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FacebookPageConfigurationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>[]
+        }
+        delete: {
+          args: Prisma.FacebookPageConfigurationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>
+        }
+        update: {
+          args: Prisma.FacebookPageConfigurationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>
+        }
+        deleteMany: {
+          args: Prisma.FacebookPageConfigurationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FacebookPageConfigurationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FacebookPageConfigurationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>[]
+        }
+        upsert: {
+          args: Prisma.FacebookPageConfigurationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPageConfigurationPayload>
+        }
+        aggregate: {
+          args: Prisma.FacebookPageConfigurationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFacebookPageConfiguration>
+        }
+        groupBy: {
+          args: Prisma.FacebookPageConfigurationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPageConfigurationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FacebookPageConfigurationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPageConfigurationCountAggregateOutputType> | number
+        }
+      }
+    }
     NewsBlogMedia: {
       payload: Prisma.$NewsBlogMediaPayload<ExtArgs>
       fields: Prisma.NewsBlogMediaFieldRefs
@@ -6177,6 +6777,9 @@ export type PasskeyChallengeScalarFieldEnum = (typeof PasskeyChallengeScalarFiel
 export const MemberScalarFieldEnum = {
   id: 'id',
   uniqueId: 'uniqueId',
+  referralCode: 'referralCode',
+  referralCodeCreatedAt: 'referralCodeCreatedAt',
+  referredByMemberId: 'referredByMemberId',
   userId: 'userId',
   status: 'status',
   memberType: 'memberType',
@@ -6225,6 +6828,58 @@ export const MemberScalarFieldEnum = {
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const ReferralPointCriterionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  description: 'description',
+  points: 'points',
+  isActive: 'isActive',
+  oncePerReferred: 'oncePerReferred',
+  monthlyCap: 'monthlyCap',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferralPointCriterionScalarFieldEnum = (typeof ReferralPointCriterionScalarFieldEnum)[keyof typeof ReferralPointCriterionScalarFieldEnum]
+
+
+export const ReferralPointLedgerEntryScalarFieldEnum = {
+  id: 'id',
+  referrerMemberId: 'referrerMemberId',
+  referredMemberId: 'referredMemberId',
+  criterionId: 'criterionId',
+  points: 'points',
+  occurredAt: 'occurredAt',
+  periodKey: 'periodKey',
+  sourceType: 'sourceType',
+  sourceId: 'sourceId',
+  status: 'status',
+  note: 'note',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type ReferralPointLedgerEntryScalarFieldEnum = (typeof ReferralPointLedgerEntryScalarFieldEnum)[keyof typeof ReferralPointLedgerEntryScalarFieldEnum]
+
+
+export const ReferralRecognitionPeriodScalarFieldEnum = {
+  id: 'id',
+  periodKey: 'periodKey',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  isLocked: 'isLocked',
+  lockedAt: 'lockedAt',
+  lockedByUserId: 'lockedByUserId',
+  winners: 'winners',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferralRecognitionPeriodScalarFieldEnum = (typeof ReferralRecognitionPeriodScalarFieldEnum)[keyof typeof ReferralRecognitionPeriodScalarFieldEnum]
 
 
 export const MemberFollowScalarFieldEnum = {
@@ -6475,6 +7130,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   reviewedAt: 'reviewedAt',
   reviewRemarks: 'reviewRemarks',
   memberId: 'memberId',
+  portalUserId: 'portalUserId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -6561,6 +7217,93 @@ export const SeminaryCourseScalarFieldEnum = {
 } as const
 
 export type SeminaryCourseScalarFieldEnum = (typeof SeminaryCourseScalarFieldEnum)[keyof typeof SeminaryCourseScalarFieldEnum]
+
+
+export const SeminaryCourseScheduleScalarFieldEnum = {
+  id: 'id',
+  period: 'period',
+  academicYear: 'academicYear',
+  className: 'className',
+  courseId: 'courseId',
+  instructorId: 'instructorId',
+  subjectName: 'subjectName',
+  units: 'units',
+  scheduledDate: 'scheduledDate',
+  recurrenceDays: 'recurrenceDays',
+  recurrenceEndDate: 'recurrenceEndDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  deliveryMode: 'deliveryMode',
+  location: 'location',
+  meetingLink: 'meetingLink',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryCourseScheduleScalarFieldEnum = (typeof SeminaryCourseScheduleScalarFieldEnum)[keyof typeof SeminaryCourseScheduleScalarFieldEnum]
+
+
+export const SeminaryAnnouncementScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  summary: 'summary',
+  kind: 'kind',
+  category: 'category',
+  audience: 'audience',
+  location: 'location',
+  allDay: 'allDay',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  status: 'status',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAnnouncementScalarFieldEnum = (typeof SeminaryAnnouncementScalarFieldEnum)[keyof typeof SeminaryAnnouncementScalarFieldEnum]
+
+
+export const SeminaryDocumentRequestTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  fee: 'fee',
+  requiresSupportingDetails: 'requiresSupportingDetails',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryDocumentRequestTypeScalarFieldEnum = (typeof SeminaryDocumentRequestTypeScalarFieldEnum)[keyof typeof SeminaryDocumentRequestTypeScalarFieldEnum]
+
+
+export const SeminaryDocumentRequestScalarFieldEnum = {
+  id: 'id',
+  referenceNumber: 'referenceNumber',
+  purpose: 'purpose',
+  deliveryMethod: 'deliveryMethod',
+  supportingDetails: 'supportingDetails',
+  fee: 'fee',
+  paymentStatus: 'paymentStatus',
+  status: 'status',
+  reviewedAt: 'reviewedAt',
+  reviewRemarks: 'reviewRemarks',
+  processedAt: 'processedAt',
+  readyAt: 'readyAt',
+  releasedAt: 'releasedAt',
+  releaseReference: 'releaseReference',
+  receivedBy: 'receivedBy',
+  documentTypeId: 'documentTypeId',
+  studentApplicationId: 'studentApplicationId',
+  reviewedByUserId: 'reviewedByUserId',
+  releasedByUserId: 'releasedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryDocumentRequestScalarFieldEnum = (typeof SeminaryDocumentRequestScalarFieldEnum)[keyof typeof SeminaryDocumentRequestScalarFieldEnum]
 
 
 export const SeminaryStudyMaterialScalarFieldEnum = {
@@ -7163,6 +7906,19 @@ export const NewsBlogScalarFieldEnum = {
 export type NewsBlogScalarFieldEnum = (typeof NewsBlogScalarFieldEnum)[keyof typeof NewsBlogScalarFieldEnum]
 
 
+export const FacebookPageConfigurationScalarFieldEnum = {
+  id: 'id',
+  pageId: 'pageId',
+  accessToken: 'accessToken',
+  expiresAt: 'expiresAt',
+  updatedByUserId: 'updatedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FacebookPageConfigurationScalarFieldEnum = (typeof FacebookPageConfigurationScalarFieldEnum)[keyof typeof FacebookPageConfigurationScalarFieldEnum]
+
+
 export const NewsBlogMediaScalarFieldEnum = {
   id: 'id',
   newsBlogId: 'newsBlogId',
@@ -7763,6 +8519,20 @@ export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
 
 
 /**
+ * Reference to a field of type 'ReferralPointEntryStatus'
+ */
+export type EnumReferralPointEntryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReferralPointEntryStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ReferralPointEntryStatus[]'
+ */
+export type ListEnumReferralPointEntryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReferralPointEntryStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'SignatureType'
  */
 export type EnumSignatureTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SignatureType'>
@@ -8095,6 +8865,118 @@ export type EnumSeminaryCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputT
  * Reference to a field of type 'SeminaryCourseStatus[]'
  */
 export type ListEnumSeminaryCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCourseScheduleStatus'
+ */
+export type EnumSeminaryCourseScheduleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseScheduleStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryCourseScheduleStatus[]'
+ */
+export type ListEnumSeminaryCourseScheduleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCourseScheduleStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementKind'
+ */
+export type EnumSeminaryAnnouncementKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementKind'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementKind[]'
+ */
+export type ListEnumSeminaryAnnouncementKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementCategory'
+ */
+export type EnumSeminaryAnnouncementCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementCategory[]'
+ */
+export type ListEnumSeminaryAnnouncementCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementAudience'
+ */
+export type EnumSeminaryAnnouncementAudienceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementAudience'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementAudience[]'
+ */
+export type ListEnumSeminaryAnnouncementAudienceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementAudience[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementStatus'
+ */
+export type EnumSeminaryAnnouncementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAnnouncementStatus[]'
+ */
+export type ListEnumSeminaryAnnouncementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAnnouncementStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryDocumentDeliveryMethod'
+ */
+export type EnumSeminaryDocumentDeliveryMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryDocumentDeliveryMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryDocumentDeliveryMethod[]'
+ */
+export type ListEnumSeminaryDocumentDeliveryMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryDocumentDeliveryMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryDocumentPaymentStatus'
+ */
+export type EnumSeminaryDocumentPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryDocumentPaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryDocumentPaymentStatus[]'
+ */
+export type ListEnumSeminaryDocumentPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryDocumentPaymentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryDocumentRequestStatus'
+ */
+export type EnumSeminaryDocumentRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryDocumentRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryDocumentRequestStatus[]'
+ */
+export type ListEnumSeminaryDocumentRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryDocumentRequestStatus[]'>
     
 
 
@@ -8984,6 +9866,9 @@ export type GlobalOmitConfig = {
   passkeyCredential?: Prisma.PasskeyCredentialOmit
   passkeyChallenge?: Prisma.PasskeyChallengeOmit
   member?: Prisma.MemberOmit
+  referralPointCriterion?: Prisma.ReferralPointCriterionOmit
+  referralPointLedgerEntry?: Prisma.ReferralPointLedgerEntryOmit
+  referralRecognitionPeriod?: Prisma.ReferralRecognitionPeriodOmit
   memberFollow?: Prisma.MemberFollowOmit
   ministerialExperience?: Prisma.MinisterialExperienceOmit
   characterReference?: Prisma.CharacterReferenceOmit
@@ -9003,6 +9888,10 @@ export type GlobalOmitConfig = {
   seminaryRequirements?: Prisma.SeminaryRequirementsOmit
   seminaryPayment?: Prisma.SeminaryPaymentOmit
   seminaryCourse?: Prisma.SeminaryCourseOmit
+  seminaryCourseSchedule?: Prisma.SeminaryCourseScheduleOmit
+  seminaryAnnouncement?: Prisma.SeminaryAnnouncementOmit
+  seminaryDocumentRequestType?: Prisma.SeminaryDocumentRequestTypeOmit
+  seminaryDocumentRequest?: Prisma.SeminaryDocumentRequestOmit
   seminaryStudyMaterial?: Prisma.SeminaryStudyMaterialOmit
   seminaryAssignment?: Prisma.SeminaryAssignmentOmit
   seminaryExamination?: Prisma.SeminaryExaminationOmit
@@ -9034,6 +9923,7 @@ export type GlobalOmitConfig = {
   eventAttendee?: Prisma.EventAttendeeOmit
   eventTaggedMember?: Prisma.EventTaggedMemberOmit
   newsBlog?: Prisma.NewsBlogOmit
+  facebookPageConfiguration?: Prisma.FacebookPageConfigurationOmit
   newsBlogMedia?: Prisma.NewsBlogMediaOmit
   newsBlogTaggedMember?: Prisma.NewsBlogTaggedMemberOmit
   bulletinEntry?: Prisma.BulletinEntryOmit

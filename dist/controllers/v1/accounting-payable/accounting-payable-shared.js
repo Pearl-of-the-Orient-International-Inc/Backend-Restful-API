@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildNextBillNo = exports.buildAccountingPayableItemsData = exports.buildAccountingPayableData = exports.resolvePayableStatus = exports.calculateTotalAmount = exports.calculateItemAmount = exports.accountingPayableInclude = void 0;
-const client_1 = require("@/generated/prisma/client");
-const enums_1 = require("@/generated/prisma/enums");
+const client_1 = require("../../../generated/prisma/client");
+const enums_1 = require("../../../generated/prisma/enums");
 exports.accountingPayableInclude = {
     items: {
         orderBy: { sortOrder: 'asc' },

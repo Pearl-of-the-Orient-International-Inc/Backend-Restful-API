@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCurrentMemberCertificate = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const member_certificate_credential_id_1 = require("@/lib/member-certificate-credential-id");
+const http_codes_1 = require("../../../common/http-codes");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const member_certificate_credential_id_1 = require("../../../lib/member-certificate-credential-id");
 const createCurrentMemberCertificate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userId = req.userId;

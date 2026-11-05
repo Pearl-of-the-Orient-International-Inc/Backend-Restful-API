@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import {
   EventCategory,
+  EventAttendeeInviteStatus,
   EventType,
   EventVisibility,
 } from '@/generated/prisma/enums';
@@ -85,6 +86,20 @@ export const inviteEventAttendeesSchema = z.object({
   memberIds: z.array(z.uuid()).min(1, { message: 'Select at least one member' }).max(200),
 });
 
+export const reviewEventAttendeeSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+    attendeeId: z.uuid(),
+  }),
+  body: z.object({
+    status: z.enum([
+      EventAttendeeInviteStatus.APPROVED,
+      EventAttendeeInviteStatus.REJECTED,
+      EventAttendeeInviteStatus.ATTENDED,
+    ]),
+  }),
+});
+
 export const getAllEventsSchema = z.object({
   query: z.object({
     page: z
@@ -117,3 +132,4 @@ export const getAllEventsSchema = z.object({
 export type CreateEventSchema = z.infer<typeof createEventSchema>;
 export type UpdateEventSchema = z.infer<typeof updateEventSchema>;
 export type InviteEventAttendeesSchema = z.infer<typeof inviteEventAttendeesSchema>;
+export type ReviewEventAttendeeSchema = z.infer<typeof reviewEventAttendeeSchema>;

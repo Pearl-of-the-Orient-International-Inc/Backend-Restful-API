@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requirementTypeToKey = void 0;
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 exports.requirementTypeToKey = {
     [enums_1.ApplicantRequirementType.PHOTO_2X2]: 'photo_2x2',
     [enums_1.ApplicantRequirementType.HS_BACCALAUREATE_DIPLOMA]: 'hs_baccalaureate_diploma',

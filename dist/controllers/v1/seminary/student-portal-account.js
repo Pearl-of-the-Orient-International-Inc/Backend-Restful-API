@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSeminaryStudentPortalAccount = exports.getSeminaryStudentName = exports.getSeminaryStudentPortalEmail = exports.DEFAULT_SEMINARY_STUDENT_PASSWORD = void 0;
-const enums_1 = require("@/generated/prisma/enums");
-const password_hash_1 = require("@/lib/password-hash");
+const enums_1 = require("../../../generated/prisma/enums");
+const password_hash_1 = require("../../../lib/password-hash");
 exports.DEFAULT_SEMINARY_STUDENT_PASSWORD = 'Student123@';
 const getSeminaryStudentPortalEmail = (studentId) => `${studentId.trim().toLowerCase()}@students.pearlchaplaincy.local`;
 exports.getSeminaryStudentPortalEmail = getSeminaryStudentPortalEmail;

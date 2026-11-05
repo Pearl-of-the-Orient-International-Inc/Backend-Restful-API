@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const sanitation_1 = require("@/common/sanitation");
-const payment_controller_1 = require("@/controllers/v1/payment/payment.controller");
-const express_rate_limiter_1 = require("@/middlewares/express-rate-limiter");
-const chaplain_product_order_1 = require("@/validators/chaplain-product-order");
+const sanitation_1 = require("../../common/sanitation");
+const payment_controller_1 = require("../../controllers/v1/payment/payment.controller");
+const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
+const chaplain_product_order_1 = require("../../validators/chaplain-product-order");
 const router = (0, express_1.Router)();
 router.get('/public/fees', (0, express_rate_limiter_1.expressRateLimit)('basic'), payment_controller_1.getPublicPaymentFeePolicies);
 router.get('/public/config', (0, express_rate_limiter_1.expressRateLimit)('basic'), payment_controller_1.getPublicPaymentConfiguration);

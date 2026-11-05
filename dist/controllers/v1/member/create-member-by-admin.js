@@ -11,14 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createMemberByAdmin = void 0;
 const crypto_1 = require("crypto");
-const http_codes_1 = require("@/common/http-codes");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const password_hash_1 = require("@/lib/password-hash");
-const member_unique_id_1 = require("@/lib/member-unique-id");
-const mailers_1 = require("@/mailers");
-const welcome_member_1 = require("@/mailers/templates/welcome-member");
-const enums_1 = require("@/generated/prisma/enums");
+const http_codes_1 = require("../../../common/http-codes");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const password_hash_1 = require("../../../lib/password-hash");
+const member_unique_id_1 = require("../../../lib/member-unique-id");
+const mailers_1 = require("../../../mailers");
+const welcome_member_1 = require("../../../mailers/templates/welcome-member");
+const enums_1 = require("../../../generated/prisma/enums");
 const getOptional = (value) => {
     const normalized = value === null || value === void 0 ? void 0 : value.trim();
     return normalized ? normalized : null;

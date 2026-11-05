@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setActivityLogContext = exports.createActivityLog = exports.buildActivityLogContextFromRequest = void 0;
-const client_1 = require("@/generated/prisma/client");
-const prisma_1 = require("@/lib/prisma");
-const helpers_1 = require("@/lib/helpers");
-const winston_1 = require("@/lib/winston");
+const client_1 = require("../generated/prisma/client");
+const prisma_1 = require("../lib/prisma");
+const helpers_1 = require("../lib/helpers");
+const winston_1 = require("../lib/winston");
 const MODULE_LABEL_MAP = {
     auth: 'Authentication',
     users: 'Admin Accounts',

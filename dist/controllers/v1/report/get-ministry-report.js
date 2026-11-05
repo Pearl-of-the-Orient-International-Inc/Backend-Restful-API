@@ -11,10 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMinistryReport = void 0;
 const date_fns_1 = require("date-fns");
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const eventCategoryLabels = {
     [enums_1.EventCategory.CONFERENCE]: 'Conference',
     [enums_1.EventCategory.OUTREACH]: 'Outreach',

@@ -296,14 +296,18 @@ const createMemberCertificateUploaderRoute = () =>
 
       const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: { id: true, memberProfile: { select: { id: true } } },
+        select: {
+          id: true,
+          role: true,
+          memberProfile: { select: { id: true } },
+        },
       });
 
-      if (!user || !user.memberProfile) {
-        throw new Error('Member profile not found');
+      if (!user || (user.role !== UserType.ADMIN && !user.memberProfile)) {
+        throw new Error('Only members or administrators can upload certificates');
       }
 
-      return { userId, memberId: user.memberProfile.id };
+      return { userId, memberId: user.memberProfile?.id ?? null };
     })
     .onUploadComplete(async ({ metadata, file }) => ({
       userId: metadata.userId,

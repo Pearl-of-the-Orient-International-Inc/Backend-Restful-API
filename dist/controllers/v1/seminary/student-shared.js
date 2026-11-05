@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildNextStudentId = exports.buildSeminaryStudentData = void 0;
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../../../generated/prisma/enums");
 const trimToNull = (value) => {
     const normalized = value === null || value === void 0 ? void 0 : value.trim();
     return normalized ? normalized : null;

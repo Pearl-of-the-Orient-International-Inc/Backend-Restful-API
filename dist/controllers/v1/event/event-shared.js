@@ -1,12 +1,23 @@
 "use strict";
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildEventWriteInput = exports.serializeEvent = exports.serializeTaggedMember = exports.eventTaggedMemberInclude = exports.resolveEventStatus = exports.inferMeetingPlatform = exports.normalizeOptionalText = exports.sanitizeText = void 0;
+exports.buildEventWriteInput = exports.serializePublicEvent = exports.serializeEvent = exports.serializeTaggedMember = exports.eventTaggedMemberInclude = exports.resolveEventStatus = exports.inferMeetingPlatform = exports.normalizeOptionalText = exports.sanitizeText = void 0;
 const dompurify_1 = __importDefault(require("dompurify"));
 const jsdom_1 = require("jsdom");
-const client_1 = require("@/generated/prisma/client");
+const client_1 = require("../../../generated/prisma/client");
 const window = new jsdom_1.JSDOM('').window;
 const DOMPurify = (0, dompurify_1.default)(window);
 const sanitizeText = (text) => DOMPurify.sanitize(text, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
@@ -101,6 +112,12 @@ const serializeEvent = (event) => (Object.assign(Object.assign({}, event), { sta
         ? event.taggedMembers.map(exports.serializeTaggedMember)
         : [] }));
 exports.serializeEvent = serializeEvent;
+const serializePublicEvent = (event) => {
+    const serialized = (0, exports.serializeEvent)(event);
+    const { onlineLink, meetingId, meetingPassword } = serialized, safeEvent = __rest(serialized, ["onlineLink", "meetingId", "meetingPassword"]);
+    return Object.assign(Object.assign({}, safeEvent), { onlineLink: null, meetingId: null, meetingPassword: null, accessDetailsAvailable: false });
+};
+exports.serializePublicEvent = serializePublicEvent;
 const buildEventWriteInput = ({ name, category, type, location, onlineLink, meetingId, meetingPassword, description, thumbnailUrl, organizer, startsAt, endsAt, visibility, }) => {
     const normalizedType = type;
     const normalizedOnlineLink = normalizedType === client_1.EventType.ONLINE ? (0, exports.normalizeOptionalText)(onlineLink) : null;

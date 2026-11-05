@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadBackup = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const client_1 = require("@/generated/prisma/client");
-const activity_log_1 = require("@/lib/activity-log");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const helpers_1 = require("@/lib/helpers");
+const http_codes_1 = require("../../../common/http-codes");
+const client_1 = require("../../../generated/prisma/client");
+const activity_log_1 = require("../../../lib/activity-log");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const helpers_1 = require("../../../lib/helpers");
 const downloadBackup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {

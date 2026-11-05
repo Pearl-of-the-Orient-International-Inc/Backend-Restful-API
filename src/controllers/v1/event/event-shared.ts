@@ -126,6 +126,21 @@ export const serializeEvent = (event: Event | EventWithTaggedMembers) => ({
       : [],
 });
 
+// Public event pages must never expose meeting links, IDs, or passwords. Those
+// details remain available only after an administrator approves registration.
+export const serializePublicEvent = (event: Event | EventWithTaggedMembers) => {
+  const serialized = serializeEvent(event);
+  const { onlineLink, meetingId, meetingPassword, ...safeEvent } = serialized;
+
+  return {
+    ...safeEvent,
+    onlineLink: null,
+    meetingId: null,
+    meetingPassword: null,
+    accessDetailsAvailable: false,
+  };
+};
+
 type BuildEventWriteInputArgs = {
   name: string;
   category: Event['category'];

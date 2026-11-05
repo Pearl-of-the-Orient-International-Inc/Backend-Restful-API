@@ -9,6 +9,11 @@ import { getPublicNewsBlogs } from '@/controllers/v1/news-blog/get-public-news-b
 import { publishNewsBlog } from '@/controllers/v1/news-blog/publish-news-blog';
 import { retrieveNewsBlog } from '@/controllers/v1/news-blog/retrieve-news-blog';
 import { updateNewsBlog } from '@/controllers/v1/news-blog/update-news-blog';
+import {
+  getFacebookPageConfiguration,
+  getFacebookPageSyncCredentials,
+  updateFacebookPageConfiguration,
+} from '@/controllers/v1/news-blog/facebook-page-configuration';
 import { validate } from '@/common/sanitation';
 import { UserType } from '@/generated/prisma/enums';
 import { createUploadthingExpressHandler } from '@/lib/uploadthing';
@@ -19,6 +24,7 @@ import {
   createNewsBlogSchema,
   getAllNewsBlogsSchema,
   updateNewsBlogSchema,
+  updateFacebookPageConfigurationSchema,
 } from '@/validators/news-blog';
 
 const router = Router();
@@ -32,16 +38,31 @@ router.use(
   }),
 );
 
-router.get(
-  '/public',
-  expressRateLimit('basic'),
-  getPublicNewsBlogs,
-);
+router.get('/public', expressRateLimit('basic'), getPublicNewsBlogs);
+
+router.get('/public/:id', expressRateLimit('basic'), getPublicNewsBlogById);
 
 router.get(
-  '/public/:id',
+  '/facebook-page-configuration',
   expressRateLimit('basic'),
-  getPublicNewsBlogById,
+  authenticate,
+  authorize([UserType.ADMIN]),
+  getFacebookPageConfiguration,
+);
+router.put(
+  '/facebook-page-configuration',
+  expressRateLimit('auth'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateFacebookPageConfigurationSchema),
+  updateFacebookPageConfiguration,
+);
+router.get(
+  '/facebook-page-configuration/sync-credentials',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  getFacebookPageSyncCredentials,
 );
 
 router.post(

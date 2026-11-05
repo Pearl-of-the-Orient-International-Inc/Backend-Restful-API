@@ -21,9 +21,9 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requireOfficerScope = exports.getOfficerScope = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const client_1 = require("@/generated/prisma/client");
-const prisma_1 = require("@/lib/prisma");
+const http_codes_1 = require("../common/http-codes");
+const client_1 = require("../generated/prisma/client");
+const prisma_1 = require("../lib/prisma");
 const nationwideLevels = new Set([
     client_1.OfficeTitleLevel.CHIEF_CHAPLAIN,
     client_1.OfficeTitleLevel.NATIONAL_CHAPLAIN_DIRECTOR,

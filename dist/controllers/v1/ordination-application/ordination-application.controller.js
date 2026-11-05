@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.reviewOrdinationApplication = exports.getAllOrdinationApplications = exports.submitCurrentOrdinationApplication = exports.saveCurrentOrdinationApplication = exports.getCurrentOrdinationApplication = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const memberSelect = { id: true, memberType: true, status: true, isActive: true, firstName: true, middleInitial: true, lastName: true, user: { select: { email: true, avatar: true } } };
 const applicationInclude = { member: { select: memberSelect }, reviews: { orderBy: { createdAt: 'desc' }, include: { reviewer: { select: { id: true, name: true, email: true } } } } };
 const currentMember = (userId) => prisma_1.prisma.member.findUnique({ where: { userId: userId !== null && userId !== void 0 ? userId : '' }, select: memberSelect });

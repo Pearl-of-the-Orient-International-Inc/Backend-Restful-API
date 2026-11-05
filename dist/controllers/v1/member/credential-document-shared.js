@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildMemberCredentialVerificationToken = exports.buildNextMemberCredentialBarcodeNumber = exports.buildNextMemberCredentialDocumentNumber = exports.memberCredentialDocumentInclude = void 0;
 const node_crypto_1 = require("node:crypto");
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../../../generated/prisma/enums");
 const documentPrefixMap = {
     [enums_1.MemberCredentialDocumentType.CERTIFICATE]: 'CHAP-CERT',
     [enums_1.MemberCredentialDocumentType.RECOGNITION]: 'CHAP-REC',

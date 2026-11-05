@@ -447,10 +447,6 @@ export type MemberOnboardingProgressUpdatepreOrientationCompletedLessonIdsInput 
   push?: number | number[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type MemberOnboardingProgressCreateWithoutMemberInput = {
   id?: string
   currentStep?: $Enums.MemberOnboardingStep

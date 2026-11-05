@@ -333,6 +333,31 @@ export const generateMemberCredentialDocumentSchema = z.object({
   }),
 });
 
+export const createMemberCertificateByAdminSchema = z
+  .object({
+    params: z.object({
+      id: z.uuid(),
+    }),
+    body: z
+      .object({
+        type: z.enum(MemberCertificateType),
+        title: z.string().trim().min(1).max(150),
+        issuer: z.string().trim().min(1).max(150),
+        referenceNumber: z.string().trim().min(1).max(100),
+        certificateUrl: z.url(),
+        issuedAt: z.iso.datetime(),
+        expiresAt: z.iso.datetime().nullable().optional(),
+      })
+      .refine(
+        ({ issuedAt, expiresAt }) =>
+          !expiresAt || new Date(expiresAt) >= new Date(issuedAt),
+        {
+          message: 'Expiration date must be on or after the issue date',
+          path: ['expiresAt'],
+        },
+      ),
+  });
+
 export const verifyMemberCredentialDocumentSchema = z.object({
   params: z.object({
     token: z.string().trim().min(16).max(128),
@@ -533,6 +558,26 @@ export const deactivateOfficerAssignmentByAdminSchema = z.object({
     assignmentId: z.uuid(),
   }),
 });
+
+export const updateOfficerAssignmentByAdminSchema = z.object({
+  params: z.object({
+    id: z.uuid(),
+    assignmentId: z.uuid(),
+  }),
+  body: z.object({
+    department: z.string().trim().max(150).nullable().optional(),
+    region: z.string().trim().max(100).nullable().optional(),
+    province: z.string().trim().max(100).nullable().optional(),
+    cityMunicipality: z.string().trim().max(150).nullable().optional(),
+    barangay: z.string().trim().max(150).nullable().optional(),
+    startDate: z.iso.datetime().optional(),
+    endDate: z.iso.datetime().nullable().optional(),
+  }),
+});
+
+export type UpdateOfficerAssignmentByAdminSchema = z.infer<
+  typeof updateOfficerAssignmentByAdminSchema
+>['body'];
 
 export const updateOfficerAssignmentPublicationSchema = z.object({
   params: z.object({

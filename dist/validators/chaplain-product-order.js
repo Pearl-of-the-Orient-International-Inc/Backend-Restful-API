@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getChaplainProductOrdersSchema = exports.updateChaplainProductOrderStatusSchema = exports.attachPaymentSessionSchema = exports.checkoutContextSchema = exports.initiateChaplainOrderPaymentSchema = exports.createChaplainProductOrderSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 exports.createChaplainProductOrderSchema = zod_1.z
     .object({
     productId: zod_1.z.string().trim().min(1).max(150),

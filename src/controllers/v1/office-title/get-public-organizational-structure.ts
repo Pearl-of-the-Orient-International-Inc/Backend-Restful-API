@@ -1,5 +1,5 @@
 import { HTTPSTATUS } from '@/common/http-codes';
-import { MemberStatus } from '@/generated/prisma/enums';
+import { MemberStatus, OfficeTitleLevel } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 import type { Request, Response } from 'express';
@@ -38,10 +38,13 @@ export const getPublicOrganizationalStructure = async (
             startDate: true,
             member: {
               select: {
+                uniqueId: true,
                 firstName: true,
                 middleInitial: true,
                 lastName: true,
                 extensionName: true,
+                memberType: true,
+                currentPositionRole: true,
                 user: { select: { avatar: true } },
               },
             },
@@ -61,6 +64,7 @@ export const getPublicOrganizationalStructure = async (
       officers: office.assignments.map((assignment) => ({
         id: assignment.id,
         memberId: assignment.memberId,
+        memberNumber: assignment.member.uniqueId,
         name: [
           assignment.member.firstName,
           assignment.member.middleInitial,
@@ -68,13 +72,31 @@ export const getPublicOrganizationalStructure = async (
           assignment.member.extensionName,
         ].filter(Boolean).join(' '),
         avatar: assignment.member.user.avatar,
-        jurisdiction: [
-          assignment.department,
-          assignment.region,
-          assignment.province,
-          assignment.cityMunicipality,
-          assignment.barangay,
-        ].filter(Boolean).join(' · ') || null,
+        memberType: assignment.member.memberType,
+        currentPositionRole: assignment.member.currentPositionRole,
+        scopeLabel: assignment.department
+          ?? assignment.region
+          ?? assignment.province
+          ?? assignment.cityMunicipality
+          ?? assignment.barangay
+          ?? null,
+        jurisdiction:
+          office.level === OfficeTitleLevel.NATIONAL_CHAPLAIN_DIRECTOR
+            ? [
+                'National jurisdiction',
+                assignment.department,
+                assignment.region,
+                assignment.province,
+                assignment.cityMunicipality,
+                assignment.barangay,
+              ].filter(Boolean).join(' · ')
+            : [
+                assignment.department,
+                assignment.region,
+                assignment.province,
+                assignment.cityMunicipality,
+                assignment.barangay,
+              ].filter(Boolean).join(' · ') || null,
         startDate: assignment.startDate,
       })),
     }));

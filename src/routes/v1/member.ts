@@ -42,6 +42,7 @@ import { updateCurrentChurchAffiliation } from '@/controllers/v1/member/update-c
 import { updateCurrentEducation } from '@/controllers/v1/member/update-current-education';
 import { updateCurrentBranchServices } from '@/controllers/v1/member/update-current-branch-services';
 import { createCurrentMemberCertificate } from '@/controllers/v1/member/create-current-member-certificate';
+import { createMemberCertificateByAdmin } from '@/controllers/v1/member/create-member-certificate-by-admin';
 import { createCurrentMemberPublicRecord } from '@/controllers/v1/member/create-current-member-public-record';
 import { createOfficerAssignmentByAdmin } from '@/controllers/v1/member/create-officer-assignment-by-admin';
 import { getAllOfficerAssignments } from '@/controllers/v1/member/get-all-officer-assignments';
@@ -49,6 +50,7 @@ import { getMemberOfficerAssignments } from '@/controllers/v1/member/get-member-
 import { deactivateOfficerAssignmentByAdmin } from '@/controllers/v1/member/deactivate-officer-assignment-by-admin';
 import { replaceOfficerAssignmentByAdmin } from '@/controllers/v1/member/replace-officer-assignment-by-admin';
 import { updateOfficerAssignmentPublication } from '@/controllers/v1/member/update-officer-assignment-publication';
+import { updateOfficerAssignmentByAdmin } from '@/controllers/v1/member/update-officer-assignment-by-admin';
 import { getCurrentOfficerScope } from '@/controllers/v1/member/get-current-officer-scope';
 import { getCurrentOfficerMembers } from '@/controllers/v1/member/get-current-officer-members';
 import { getPublicMemberProfile } from '@/controllers/v1/member/get-public-member-profile';
@@ -93,6 +95,7 @@ import {
   updateCurrentEducationSchema,
   updateCurrentBranchServicesSchema,
   createCurrentMemberCertificateSchema,
+  createMemberCertificateByAdminSchema,
   createCurrentMemberPublicRecordSchema,
   upsertMemberIdGenerationAssetSchema,
   upsertOnlineInterviewAppointmentSchema,
@@ -113,6 +116,7 @@ import {
   deactivateOfficerAssignmentByAdminSchema,
   replaceOfficerAssignmentByAdminSchema,
   updateOfficerAssignmentPublicationSchema,
+  updateOfficerAssignmentByAdminSchema,
   createCurrentServiceAvailabilitySchema,
   deleteCurrentServiceAvailabilitySchema,
   getPublicServiceAvailabilitySchema,
@@ -476,6 +480,15 @@ router.use(
   }),
 );
 
+router.put(
+  '/:id/officer-assignments/:assignmentId',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(updateOfficerAssignmentByAdminSchema),
+  updateOfficerAssignmentByAdmin,
+);
+
 router.patch(
   '/:id/status',
   expressRateLimit('basic'),
@@ -589,6 +602,15 @@ router.post(
   authorize([UserType.ADMIN]),
   validate(generateMemberCredentialDocumentSchema),
   generateMemberCredentialDocument,
+);
+
+router.post(
+  '/:id/certificates',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(createMemberCertificateByAdminSchema),
+  createMemberCertificateByAdmin,
 );
 
 router.post(

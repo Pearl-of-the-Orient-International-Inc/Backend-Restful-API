@@ -259,6 +259,8 @@ export type UserWhereInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
   assignedTasks?: Prisma.TaskItemListRelationFilter
   seminaryInstructor?: Prisma.XOR<Prisma.SeminaryInstructorNullableScalarRelationFilter, Prisma.SeminaryInstructorWhereInput> | null
+  seminaryStudentPortal?: Prisma.XOR<Prisma.SeminaryApplicationNullableScalarRelationFilter, Prisma.SeminaryApplicationWhereInput> | null
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementListRelationFilter
   authoredMemos?: Prisma.MemoAnnouncementListRelationFilter
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   bulletinEntries?: Prisma.BulletinEntryListRelationFilter
@@ -266,6 +268,8 @@ export type UserWhereInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
   ordinationReviews?: Prisma.OrdinationApplicationReviewListRelationFilter
   crasmReviews?: Prisma.CrasmApplicationReviewListRelationFilter
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestListRelationFilter
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -295,6 +299,8 @@ export type UserOrderByWithRelationInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsOrderByRelationAggregateInput
   assignedTasks?: Prisma.TaskItemOrderByRelationAggregateInput
   seminaryInstructor?: Prisma.SeminaryInstructorOrderByWithRelationInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationOrderByWithRelationInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementOrderByRelationAggregateInput
   authoredMemos?: Prisma.MemoAnnouncementOrderByRelationAggregateInput
   memoRecipients?: Prisma.MemoRecipientOrderByRelationAggregateInput
   bulletinEntries?: Prisma.BulletinEntryOrderByRelationAggregateInput
@@ -302,6 +308,8 @@ export type UserOrderByWithRelationInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingOrderByRelationAggregateInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewOrderByRelationAggregateInput
   crasmReviews?: Prisma.CrasmApplicationReviewOrderByRelationAggregateInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestOrderByRelationAggregateInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -334,6 +342,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsListRelationFilter
   assignedTasks?: Prisma.TaskItemListRelationFilter
   seminaryInstructor?: Prisma.XOR<Prisma.SeminaryInstructorNullableScalarRelationFilter, Prisma.SeminaryInstructorWhereInput> | null
+  seminaryStudentPortal?: Prisma.XOR<Prisma.SeminaryApplicationNullableScalarRelationFilter, Prisma.SeminaryApplicationWhereInput> | null
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementListRelationFilter
   authoredMemos?: Prisma.MemoAnnouncementListRelationFilter
   memoRecipients?: Prisma.MemoRecipientListRelationFilter
   bulletinEntries?: Prisma.BulletinEntryListRelationFilter
@@ -341,6 +351,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   serviceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
   ordinationReviews?: Prisma.OrdinationApplicationReviewListRelationFilter
   crasmReviews?: Prisma.CrasmApplicationReviewListRelationFilter
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestListRelationFilter
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -408,6 +420,8 @@ export type UserCreateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -415,6 +429,8 @@ export type UserCreateInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -444,6 +460,8 @@ export type UserUncheckedCreateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -451,6 +469,8 @@ export type UserUncheckedCreateInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUpdateInput = {
@@ -480,6 +500,8 @@ export type UserUpdateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -487,6 +509,8 @@ export type UserUpdateInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -516,6 +540,8 @@ export type UserUncheckedUpdateInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -523,6 +549,8 @@ export type UserUncheckedUpdateInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -773,6 +801,68 @@ export type UserUpdateOneRequiredWithoutFollowedMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowedMembersInput, Prisma.UserUpdateWithoutFollowedMembersInput>, Prisma.UserUncheckedUpdateWithoutFollowedMembersInput>
 }
 
+export type UserCreateNestedOneWithoutSeminaryStudentPortalInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSeminaryStudentPortalInput, Prisma.UserUncheckedCreateWithoutSeminaryStudentPortalInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeminaryStudentPortalInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutSeminaryStudentPortalNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSeminaryStudentPortalInput, Prisma.UserUncheckedCreateWithoutSeminaryStudentPortalInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeminaryStudentPortalInput
+  upsert?: Prisma.UserUpsertWithoutSeminaryStudentPortalInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSeminaryStudentPortalInput, Prisma.UserUpdateWithoutSeminaryStudentPortalInput>, Prisma.UserUncheckedUpdateWithoutSeminaryStudentPortalInput>
+}
+
+export type UserCreateNestedOneWithoutSeminaryAnnouncementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSeminaryAnnouncementsInput, Prisma.UserUncheckedCreateWithoutSeminaryAnnouncementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeminaryAnnouncementsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSeminaryAnnouncementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSeminaryAnnouncementsInput, Prisma.UserUncheckedCreateWithoutSeminaryAnnouncementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeminaryAnnouncementsInput
+  upsert?: Prisma.UserUpsertWithoutSeminaryAnnouncementsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSeminaryAnnouncementsInput, Prisma.UserUpdateWithoutSeminaryAnnouncementsInput>, Prisma.UserUncheckedUpdateWithoutSeminaryAnnouncementsInput>
+}
+
+export type UserCreateNestedOneWithoutReviewedDocumentRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedDocumentRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedDocumentRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReleasedDocumentRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReleasedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReleasedDocumentRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReleasedDocumentRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutReviewedDocumentRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedDocumentRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedDocumentRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedDocumentRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedDocumentRequestsInput, Prisma.UserUpdateWithoutReviewedDocumentRequestsInput>, Prisma.UserUncheckedUpdateWithoutReviewedDocumentRequestsInput>
+}
+
+export type UserUpdateOneWithoutReleasedDocumentRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReleasedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReleasedDocumentRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReleasedDocumentRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReleasedDocumentRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReleasedDocumentRequestsInput, Prisma.UserUpdateWithoutReleasedDocumentRequestsInput>, Prisma.UserUncheckedUpdateWithoutReleasedDocumentRequestsInput>
+}
+
 export type UserCreateNestedOneWithoutSeminaryInstructorInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSeminaryInstructorInput, Prisma.UserUncheckedCreateWithoutSeminaryInstructorInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeminaryInstructorInput
@@ -987,6 +1077,8 @@ export type UserCreateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -994,6 +1086,8 @@ export type UserCreateWithoutUserTokensInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutUserTokensInput = {
@@ -1022,6 +1116,8 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1029,6 +1125,8 @@ export type UserUncheckedCreateWithoutUserTokensInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutUserTokensInput = {
@@ -1073,6 +1171,8 @@ export type UserUpdateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -1080,6 +1180,8 @@ export type UserUpdateWithoutUserTokensInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTokensInput = {
@@ -1108,6 +1210,8 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -1115,6 +1219,8 @@ export type UserUncheckedUpdateWithoutUserTokensInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1143,6 +1249,8 @@ export type UserCreateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -1150,6 +1258,8 @@ export type UserCreateWithoutSessionsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1178,6 +1288,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1185,6 +1297,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1229,6 +1343,8 @@ export type UserUpdateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -1236,6 +1352,8 @@ export type UserUpdateWithoutSessionsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1264,6 +1382,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -1271,6 +1391,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutActivityLogsInput = {
@@ -1299,6 +1421,8 @@ export type UserCreateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -1306,6 +1430,8 @@ export type UserCreateWithoutActivityLogsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutActivityLogsInput = {
@@ -1334,6 +1460,8 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1341,6 +1469,8 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutActivityLogsInput = {
@@ -1385,6 +1515,8 @@ export type UserUpdateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -1392,6 +1524,8 @@ export type UserUpdateWithoutActivityLogsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivityLogsInput = {
@@ -1420,6 +1554,8 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -1427,6 +1563,8 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
@@ -1455,6 +1593,8 @@ export type UserCreateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -1462,6 +1602,8 @@ export type UserCreateWithoutVerificationCodesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -1490,6 +1632,8 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1497,6 +1641,8 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -1541,6 +1687,8 @@ export type UserUpdateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -1548,6 +1696,8 @@ export type UserUpdateWithoutVerificationCodesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -1576,6 +1726,8 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -1583,6 +1735,8 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutPasskeyCredentialsInput = {
@@ -1611,6 +1765,8 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -1618,6 +1774,8 @@ export type UserCreateWithoutPasskeyCredentialsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
@@ -1646,6 +1804,8 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1653,6 +1813,8 @@ export type UserUncheckedCreateWithoutPasskeyCredentialsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyCredentialsInput = {
@@ -1697,6 +1859,8 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -1704,6 +1868,8 @@ export type UserUpdateWithoutPasskeyCredentialsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
@@ -1732,6 +1898,8 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -1739,6 +1907,8 @@ export type UserUncheckedUpdateWithoutPasskeyCredentialsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutPasskeyChallengeInput = {
@@ -1767,6 +1937,8 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -1774,6 +1946,8 @@ export type UserCreateWithoutPasskeyChallengeInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
@@ -1802,6 +1976,8 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1809,6 +1985,8 @@ export type UserUncheckedCreateWithoutPasskeyChallengeInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutPasskeyChallengeInput = {
@@ -1853,6 +2031,8 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -1860,6 +2040,8 @@ export type UserUpdateWithoutPasskeyChallengeInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
@@ -1888,6 +2070,8 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -1895,6 +2079,8 @@ export type UserUncheckedUpdateWithoutPasskeyChallengeInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutMemberProfileInput = {
@@ -1923,6 +2109,8 @@ export type UserCreateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -1930,6 +2118,8 @@ export type UserCreateWithoutMemberProfileInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutMemberProfileInput = {
@@ -1958,6 +2148,8 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -1965,6 +2157,8 @@ export type UserUncheckedCreateWithoutMemberProfileInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutMemberProfileInput = {
@@ -2009,6 +2203,8 @@ export type UserUpdateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -2016,6 +2212,8 @@ export type UserUpdateWithoutMemberProfileInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberProfileInput = {
@@ -2044,6 +2242,8 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -2051,6 +2251,8 @@ export type UserUncheckedUpdateWithoutMemberProfileInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutFollowedMembersInput = {
@@ -2079,6 +2281,8 @@ export type UserCreateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -2086,6 +2290,8 @@ export type UserCreateWithoutFollowedMembersInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowedMembersInput = {
@@ -2114,6 +2320,8 @@ export type UserUncheckedCreateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -2121,6 +2329,8 @@ export type UserUncheckedCreateWithoutFollowedMembersInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowedMembersInput = {
@@ -2165,6 +2375,8 @@ export type UserUpdateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -2172,6 +2384,8 @@ export type UserUpdateWithoutFollowedMembersInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowedMembersInput = {
@@ -2200,6 +2414,8 @@ export type UserUncheckedUpdateWithoutFollowedMembersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -2207,6 +2423,696 @@ export type UserUncheckedUpdateWithoutFollowedMembersInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserCreateWithoutSeminaryStudentPortalInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
+}
+
+export type UserUncheckedCreateWithoutSeminaryStudentPortalInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
+}
+
+export type UserCreateOrConnectWithoutSeminaryStudentPortalInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSeminaryStudentPortalInput, Prisma.UserUncheckedCreateWithoutSeminaryStudentPortalInput>
+}
+
+export type UserUpsertWithoutSeminaryStudentPortalInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSeminaryStudentPortalInput, Prisma.UserUncheckedUpdateWithoutSeminaryStudentPortalInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSeminaryStudentPortalInput, Prisma.UserUncheckedCreateWithoutSeminaryStudentPortalInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSeminaryStudentPortalInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSeminaryStudentPortalInput, Prisma.UserUncheckedUpdateWithoutSeminaryStudentPortalInput>
+}
+
+export type UserUpdateWithoutSeminaryStudentPortalInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSeminaryStudentPortalInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserCreateWithoutSeminaryAnnouncementsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
+}
+
+export type UserUncheckedCreateWithoutSeminaryAnnouncementsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
+}
+
+export type UserCreateOrConnectWithoutSeminaryAnnouncementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSeminaryAnnouncementsInput, Prisma.UserUncheckedCreateWithoutSeminaryAnnouncementsInput>
+}
+
+export type UserUpsertWithoutSeminaryAnnouncementsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSeminaryAnnouncementsInput, Prisma.UserUncheckedUpdateWithoutSeminaryAnnouncementsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSeminaryAnnouncementsInput, Prisma.UserUncheckedCreateWithoutSeminaryAnnouncementsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSeminaryAnnouncementsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSeminaryAnnouncementsInput, Prisma.UserUncheckedUpdateWithoutSeminaryAnnouncementsInput>
+}
+
+export type UserUpdateWithoutSeminaryAnnouncementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSeminaryAnnouncementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserCreateWithoutReviewedDocumentRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
+}
+
+export type UserUncheckedCreateWithoutReviewedDocumentRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
+}
+
+export type UserCreateOrConnectWithoutReviewedDocumentRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedDocumentRequestsInput>
+}
+
+export type UserCreateWithoutReleasedDocumentRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
+  authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+}
+
+export type UserUncheckedCreateWithoutReleasedDocumentRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  avatar?: string | null
+  position?: $Enums.UserPosition | null
+  accountStatus?: $Enums.UserAccountStatus
+  isEmailVerified?: boolean
+  isTwoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  role?: $Enums.UserType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userTokens?: Prisma.UserTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedCreateNestedManyWithoutUserInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedCreateNestedOneWithoutUserInput
+  memberProfile?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  followedMembers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutUserInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutCreatedByUserInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
+  assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+}
+
+export type UserCreateOrConnectWithoutReleasedDocumentRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReleasedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReleasedDocumentRequestsInput>
+}
+
+export type UserUpsertWithoutReviewedDocumentRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedDocumentRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedDocumentRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedDocumentRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedDocumentRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedDocumentRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedDocumentRequestsInput>
+}
+
+export type UserUpdateWithoutReviewedDocumentRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedDocumentRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
+}
+
+export type UserUpsertWithoutReleasedDocumentRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReleasedDocumentRequestsInput, Prisma.UserUncheckedUpdateWithoutReleasedDocumentRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReleasedDocumentRequestsInput, Prisma.UserUncheckedCreateWithoutReleasedDocumentRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReleasedDocumentRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReleasedDocumentRequestsInput, Prisma.UserUncheckedUpdateWithoutReleasedDocumentRequestsInput>
+}
+
+export type UserUpdateWithoutReleasedDocumentRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReleasedDocumentRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.NullableEnumUserPositionFieldUpdateOperationsInput | $Enums.UserPosition | null
+  accountStatus?: Prisma.EnumUserAccountStatusFieldUpdateOperationsInput | $Enums.UserAccountStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTwoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userTokens?: Prisma.UserTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  passkeyCredentials?: Prisma.PasskeyCredentialUncheckedUpdateManyWithoutUserNestedInput
+  passkeyChallenge?: Prisma.PasskeyChallengeUncheckedUpdateOneWithoutUserNestedInput
+  memberProfile?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  followedMembers?: Prisma.MemberFollowUncheckedUpdateManyWithoutUserNestedInput
+  createdBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
+  backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
+  assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
+  bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
+  chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
+  serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
+  ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
 }
 
 export type UserCreateWithoutSeminaryInstructorInput = {
@@ -2235,6 +3141,8 @@ export type UserCreateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -2242,6 +3150,8 @@ export type UserCreateWithoutSeminaryInstructorInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
@@ -2270,6 +3180,8 @@ export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -2277,6 +3189,8 @@ export type UserUncheckedCreateWithoutSeminaryInstructorInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutSeminaryInstructorInput = {
@@ -2321,6 +3235,8 @@ export type UserUpdateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -2328,6 +3244,8 @@ export type UserUpdateWithoutSeminaryInstructorInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
@@ -2356,6 +3274,8 @@ export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -2363,6 +3283,8 @@ export type UserUncheckedUpdateWithoutSeminaryInstructorInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -2391,6 +3313,8 @@ export type UserCreateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -2398,6 +3322,8 @@ export type UserCreateWithoutAssignedTasksInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -2426,6 +3352,8 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -2433,6 +3361,8 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -2477,6 +3407,8 @@ export type UserUpdateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -2484,6 +3416,8 @@ export type UserUpdateWithoutAssignedTasksInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -2512,6 +3446,8 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -2519,6 +3455,8 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutOrdinationReviewsInput = {
@@ -2548,12 +3486,16 @@ export type UserCreateWithoutOrdinationReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdinationReviewsInput = {
@@ -2583,12 +3525,16 @@ export type UserUncheckedCreateWithoutOrdinationReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdinationReviewsInput = {
@@ -2634,12 +3580,16 @@ export type UserUpdateWithoutOrdinationReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdinationReviewsInput = {
@@ -2669,12 +3619,16 @@ export type UserUncheckedUpdateWithoutOrdinationReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutCrasmReviewsInput = {
@@ -2704,12 +3658,16 @@ export type UserCreateWithoutCrasmReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCrasmReviewsInput = {
@@ -2739,12 +3697,16 @@ export type UserUncheckedCreateWithoutCrasmReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCrasmReviewsInput = {
@@ -2790,12 +3752,16 @@ export type UserUpdateWithoutCrasmReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCrasmReviewsInput = {
@@ -2825,12 +3791,16 @@ export type UserUncheckedUpdateWithoutCrasmReviewsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutBulletinEntriesInput = {
@@ -2860,12 +3830,16 @@ export type UserCreateWithoutBulletinEntriesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutBulletinEntriesInput = {
@@ -2895,12 +3869,16 @@ export type UserUncheckedCreateWithoutBulletinEntriesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutBulletinEntriesInput = {
@@ -2946,12 +3924,16 @@ export type UserUpdateWithoutBulletinEntriesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBulletinEntriesInput = {
@@ -2981,12 +3963,16 @@ export type UserUncheckedUpdateWithoutBulletinEntriesInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutServiceBookingsInput = {
@@ -3016,12 +4002,16 @@ export type UserCreateWithoutServiceBookingsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutServiceBookingsInput = {
@@ -3051,12 +4041,16 @@ export type UserUncheckedCreateWithoutServiceBookingsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutServiceBookingsInput = {
@@ -3102,12 +4096,16 @@ export type UserUpdateWithoutServiceBookingsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServiceBookingsInput = {
@@ -3137,12 +4135,16 @@ export type UserUncheckedUpdateWithoutServiceBookingsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutChaplainProductOrdersInput = {
@@ -3172,12 +4174,16 @@ export type UserCreateWithoutChaplainProductOrdersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutChaplainProductOrdersInput = {
@@ -3207,12 +4213,16 @@ export type UserUncheckedCreateWithoutChaplainProductOrdersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutChaplainProductOrdersInput = {
@@ -3258,12 +4268,16 @@ export type UserUpdateWithoutChaplainProductOrdersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChaplainProductOrdersInput = {
@@ -3293,12 +4307,16 @@ export type UserUncheckedUpdateWithoutChaplainProductOrdersInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutAuthoredMemosInput = {
@@ -3328,12 +4346,16 @@ export type UserCreateWithoutAuthoredMemosInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthoredMemosInput = {
@@ -3363,12 +4385,16 @@ export type UserUncheckedCreateWithoutAuthoredMemosInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthoredMemosInput = {
@@ -3414,12 +4440,16 @@ export type UserUpdateWithoutAuthoredMemosInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
@@ -3449,12 +4479,16 @@ export type UserUncheckedUpdateWithoutAuthoredMemosInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutMemoRecipientsInput = {
@@ -3484,12 +4518,16 @@ export type UserCreateWithoutMemoRecipientsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutMemoRecipientsInput = {
@@ -3519,12 +4557,16 @@ export type UserUncheckedCreateWithoutMemoRecipientsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedCreateNestedManyWithoutCustomerUserInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutMemoRecipientsInput = {
@@ -3570,12 +4612,16 @@ export type UserUpdateWithoutMemoRecipientsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
@@ -3605,12 +4651,16 @@ export type UserUncheckedUpdateWithoutMemoRecipientsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
   chaplainProductOrders?: Prisma.ChaplainProductOrderUncheckedUpdateManyWithoutCustomerUserNestedInput
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutBackupSettingUpdatesInput = {
@@ -3639,6 +4689,8 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotCreateNestedManyWithoutRestoredByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -3646,6 +4698,8 @@ export type UserCreateWithoutBackupSettingUpdatesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
@@ -3674,6 +4728,8 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedCreateNestedManyWithoutRestoredByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -3681,6 +4737,8 @@ export type UserUncheckedCreateWithoutBackupSettingUpdatesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutBackupSettingUpdatesInput = {
@@ -3725,6 +4783,8 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUpdateManyWithoutRestoredByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -3732,6 +4792,8 @@ export type UserUpdateWithoutBackupSettingUpdatesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
@@ -3760,6 +4822,8 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   restoredBackups?: Prisma.DatabaseBackupSnapshotUncheckedUpdateManyWithoutRestoredByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -3767,6 +4831,8 @@ export type UserUncheckedUpdateWithoutBackupSettingUpdatesInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserCreateWithoutCreatedBackupsInput = {
@@ -3795,6 +4861,8 @@ export type UserCreateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -3802,6 +4870,8 @@ export type UserCreateWithoutCreatedBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedBackupsInput = {
@@ -3830,6 +4900,8 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -3837,6 +4909,8 @@ export type UserUncheckedCreateWithoutCreatedBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedBackupsInput = {
@@ -3870,6 +4944,8 @@ export type UserCreateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryCreateNestedManyWithoutAuthorUserInput
@@ -3877,6 +4953,8 @@ export type UserCreateWithoutRestoredBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserUncheckedCreateWithoutRestoredBackupsInput = {
@@ -3905,6 +4983,8 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedCreateNestedManyWithoutLastUpdatedByUserInput
   assignedTasks?: Prisma.TaskItemUncheckedCreateNestedManyWithoutAssigneeInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedCreateNestedOneWithoutUserInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedCreateNestedManyWithoutCreatedByUserInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedCreateNestedManyWithoutAuthorUserInput
   memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutUserInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedCreateNestedManyWithoutAuthorUserInput
@@ -3912,6 +4992,8 @@ export type UserUncheckedCreateWithoutRestoredBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutRequesterUserInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReviewedByUserInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutReleasedByUserInput
 }
 
 export type UserCreateOrConnectWithoutRestoredBackupsInput = {
@@ -3956,6 +5038,8 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -3963,6 +5047,8 @@ export type UserUpdateWithoutCreatedBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
@@ -3991,6 +5077,8 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -3998,6 +5086,8 @@ export type UserUncheckedUpdateWithoutCreatedBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUpsertWithoutRestoredBackupsInput = {
@@ -4037,6 +5127,8 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUpdateManyWithoutAuthorUserNestedInput
@@ -4044,6 +5136,8 @@ export type UserUpdateWithoutRestoredBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutReleasedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
@@ -4072,6 +5166,8 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   backupSettingUpdates?: Prisma.DatabaseBackupSettingsUncheckedUpdateManyWithoutLastUpdatedByUserNestedInput
   assignedTasks?: Prisma.TaskItemUncheckedUpdateManyWithoutAssigneeNestedInput
   seminaryInstructor?: Prisma.SeminaryInstructorUncheckedUpdateOneWithoutUserNestedInput
+  seminaryStudentPortal?: Prisma.SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput
+  seminaryAnnouncements?: Prisma.SeminaryAnnouncementUncheckedUpdateManyWithoutCreatedByUserNestedInput
   authoredMemos?: Prisma.MemoAnnouncementUncheckedUpdateManyWithoutAuthorUserNestedInput
   memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutUserNestedInput
   bulletinEntries?: Prisma.BulletinEntryUncheckedUpdateManyWithoutAuthorUserNestedInput
@@ -4079,6 +5175,8 @@ export type UserUncheckedUpdateWithoutRestoredBackupsInput = {
   serviceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutRequesterUserNestedInput
   ordinationReviews?: Prisma.OrdinationApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
   crasmReviews?: Prisma.CrasmApplicationReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReviewedByUserNestedInput
+  releasedDocumentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutReleasedByUserNestedInput
 }
 
 
@@ -4097,6 +5195,7 @@ export type UserCountOutputType = {
   restoredBackups: number
   backupSettingUpdates: number
   assignedTasks: number
+  seminaryAnnouncements: number
   authoredMemos: number
   memoRecipients: number
   bulletinEntries: number
@@ -4104,6 +5203,8 @@ export type UserCountOutputType = {
   serviceBookings: number
   ordinationReviews: number
   crasmReviews: number
+  reviewedDocumentRequests: number
+  releasedDocumentRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4117,6 +5218,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   restoredBackups?: boolean | UserCountOutputTypeCountRestoredBackupsArgs
   backupSettingUpdates?: boolean | UserCountOutputTypeCountBackupSettingUpdatesArgs
   assignedTasks?: boolean | UserCountOutputTypeCountAssignedTasksArgs
+  seminaryAnnouncements?: boolean | UserCountOutputTypeCountSeminaryAnnouncementsArgs
   authoredMemos?: boolean | UserCountOutputTypeCountAuthoredMemosArgs
   memoRecipients?: boolean | UserCountOutputTypeCountMemoRecipientsArgs
   bulletinEntries?: boolean | UserCountOutputTypeCountBulletinEntriesArgs
@@ -4124,6 +5226,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   serviceBookings?: boolean | UserCountOutputTypeCountServiceBookingsArgs
   ordinationReviews?: boolean | UserCountOutputTypeCountOrdinationReviewsArgs
   crasmReviews?: boolean | UserCountOutputTypeCountCrasmReviewsArgs
+  reviewedDocumentRequests?: boolean | UserCountOutputTypeCountReviewedDocumentRequestsArgs
+  releasedDocumentRequests?: boolean | UserCountOutputTypeCountReleasedDocumentRequestsArgs
 }
 
 /**
@@ -4209,6 +5313,13 @@ export type UserCountOutputTypeCountAssignedTasksArgs<ExtArgs extends runtime.Ty
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountSeminaryAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeminaryAnnouncementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountAuthoredMemosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MemoAnnouncementWhereInput
 }
@@ -4255,6 +5366,20 @@ export type UserCountOutputTypeCountCrasmReviewsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.CrasmApplicationReviewWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewedDocumentRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeminaryDocumentRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReleasedDocumentRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeminaryDocumentRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4283,6 +5408,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   seminaryInstructor?: boolean | Prisma.User$seminaryInstructorArgs<ExtArgs>
+  seminaryStudentPortal?: boolean | Prisma.User$seminaryStudentPortalArgs<ExtArgs>
+  seminaryAnnouncements?: boolean | Prisma.User$seminaryAnnouncementsArgs<ExtArgs>
   authoredMemos?: boolean | Prisma.User$authoredMemosArgs<ExtArgs>
   memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   bulletinEntries?: boolean | Prisma.User$bulletinEntriesArgs<ExtArgs>
@@ -4290,6 +5417,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   serviceBookings?: boolean | Prisma.User$serviceBookingsArgs<ExtArgs>
   ordinationReviews?: boolean | Prisma.User$ordinationReviewsArgs<ExtArgs>
   crasmReviews?: boolean | Prisma.User$crasmReviewsArgs<ExtArgs>
+  reviewedDocumentRequests?: boolean | Prisma.User$reviewedDocumentRequestsArgs<ExtArgs>
+  releasedDocumentRequests?: boolean | Prisma.User$releasedDocumentRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4356,6 +5485,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   backupSettingUpdates?: boolean | Prisma.User$backupSettingUpdatesArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   seminaryInstructor?: boolean | Prisma.User$seminaryInstructorArgs<ExtArgs>
+  seminaryStudentPortal?: boolean | Prisma.User$seminaryStudentPortalArgs<ExtArgs>
+  seminaryAnnouncements?: boolean | Prisma.User$seminaryAnnouncementsArgs<ExtArgs>
   authoredMemos?: boolean | Prisma.User$authoredMemosArgs<ExtArgs>
   memoRecipients?: boolean | Prisma.User$memoRecipientsArgs<ExtArgs>
   bulletinEntries?: boolean | Prisma.User$bulletinEntriesArgs<ExtArgs>
@@ -4363,6 +5494,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   serviceBookings?: boolean | Prisma.User$serviceBookingsArgs<ExtArgs>
   ordinationReviews?: boolean | Prisma.User$ordinationReviewsArgs<ExtArgs>
   crasmReviews?: boolean | Prisma.User$crasmReviewsArgs<ExtArgs>
+  reviewedDocumentRequests?: boolean | Prisma.User$reviewedDocumentRequestsArgs<ExtArgs>
+  releasedDocumentRequests?: boolean | Prisma.User$releasedDocumentRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4384,6 +5517,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     backupSettingUpdates: Prisma.$DatabaseBackupSettingsPayload<ExtArgs>[]
     assignedTasks: Prisma.$TaskItemPayload<ExtArgs>[]
     seminaryInstructor: Prisma.$SeminaryInstructorPayload<ExtArgs> | null
+    seminaryStudentPortal: Prisma.$SeminaryApplicationPayload<ExtArgs> | null
+    seminaryAnnouncements: Prisma.$SeminaryAnnouncementPayload<ExtArgs>[]
     authoredMemos: Prisma.$MemoAnnouncementPayload<ExtArgs>[]
     memoRecipients: Prisma.$MemoRecipientPayload<ExtArgs>[]
     bulletinEntries: Prisma.$BulletinEntryPayload<ExtArgs>[]
@@ -4391,6 +5526,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     serviceBookings: Prisma.$ChaplainServiceBookingPayload<ExtArgs>[]
     ordinationReviews: Prisma.$OrdinationApplicationReviewPayload<ExtArgs>[]
     crasmReviews: Prisma.$CrasmApplicationReviewPayload<ExtArgs>[]
+    reviewedDocumentRequests: Prisma.$SeminaryDocumentRequestPayload<ExtArgs>[]
+    releasedDocumentRequests: Prisma.$SeminaryDocumentRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4813,6 +5950,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   backupSettingUpdates<T extends Prisma.User$backupSettingUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$backupSettingUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatabaseBackupSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   seminaryInstructor<T extends Prisma.User$seminaryInstructorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seminaryInstructorArgs<ExtArgs>>): Prisma.Prisma__SeminaryInstructorClient<runtime.Types.Result.GetResult<Prisma.$SeminaryInstructorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  seminaryStudentPortal<T extends Prisma.User$seminaryStudentPortalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seminaryStudentPortalArgs<ExtArgs>>): Prisma.Prisma__SeminaryApplicationClient<runtime.Types.Result.GetResult<Prisma.$SeminaryApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  seminaryAnnouncements<T extends Prisma.User$seminaryAnnouncementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seminaryAnnouncementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryAnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   authoredMemos<T extends Prisma.User$authoredMemosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authoredMemosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoAnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memoRecipients<T extends Prisma.User$memoRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memoRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bulletinEntries<T extends Prisma.User$bulletinEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bulletinEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BulletinEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4820,6 +5959,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   serviceBookings<T extends Prisma.User$serviceBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceBookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ordinationReviews<T extends Prisma.User$ordinationReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordinationReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrdinationApplicationReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   crasmReviews<T extends Prisma.User$crasmReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$crasmReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrasmApplicationReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedDocumentRequests<T extends Prisma.User$reviewedDocumentRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedDocumentRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryDocumentRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  releasedDocumentRequests<T extends Prisma.User$releasedDocumentRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$releasedDocumentRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryDocumentRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5547,6 +6688,49 @@ export type User$seminaryInstructorArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * User.seminaryStudentPortal
+ */
+export type User$seminaryStudentPortalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryApplication
+   */
+  select?: Prisma.SeminaryApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryApplication
+   */
+  omit?: Prisma.SeminaryApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryApplicationInclude<ExtArgs> | null
+  where?: Prisma.SeminaryApplicationWhereInput
+}
+
+/**
+ * User.seminaryAnnouncements
+ */
+export type User$seminaryAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryAnnouncement
+   */
+  select?: Prisma.SeminaryAnnouncementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryAnnouncement
+   */
+  omit?: Prisma.SeminaryAnnouncementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryAnnouncementInclude<ExtArgs> | null
+  where?: Prisma.SeminaryAnnouncementWhereInput
+  orderBy?: Prisma.SeminaryAnnouncementOrderByWithRelationInput | Prisma.SeminaryAnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.SeminaryAnnouncementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeminaryAnnouncementScalarFieldEnum | Prisma.SeminaryAnnouncementScalarFieldEnum[]
+}
+
+/**
  * User.authoredMemos
  */
 export type User$authoredMemosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5712,6 +6896,54 @@ export type User$crasmReviewsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.CrasmApplicationReviewScalarFieldEnum | Prisma.CrasmApplicationReviewScalarFieldEnum[]
+}
+
+/**
+ * User.reviewedDocumentRequests
+ */
+export type User$reviewedDocumentRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryDocumentRequest
+   */
+  select?: Prisma.SeminaryDocumentRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryDocumentRequest
+   */
+  omit?: Prisma.SeminaryDocumentRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryDocumentRequestInclude<ExtArgs> | null
+  where?: Prisma.SeminaryDocumentRequestWhereInput
+  orderBy?: Prisma.SeminaryDocumentRequestOrderByWithRelationInput | Prisma.SeminaryDocumentRequestOrderByWithRelationInput[]
+  cursor?: Prisma.SeminaryDocumentRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeminaryDocumentRequestScalarFieldEnum | Prisma.SeminaryDocumentRequestScalarFieldEnum[]
+}
+
+/**
+ * User.releasedDocumentRequests
+ */
+export type User$releasedDocumentRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryDocumentRequest
+   */
+  select?: Prisma.SeminaryDocumentRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryDocumentRequest
+   */
+  omit?: Prisma.SeminaryDocumentRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryDocumentRequestInclude<ExtArgs> | null
+  where?: Prisma.SeminaryDocumentRequestWhereInput
+  orderBy?: Prisma.SeminaryDocumentRequestOrderByWithRelationInput | Prisma.SeminaryDocumentRequestOrderByWithRelationInput[]
+  cursor?: Prisma.SeminaryDocumentRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeminaryDocumentRequestScalarFieldEnum | Prisma.SeminaryDocumentRequestScalarFieldEnum[]
 }
 
 /**

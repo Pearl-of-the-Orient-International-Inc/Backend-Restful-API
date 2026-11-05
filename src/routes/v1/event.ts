@@ -3,10 +3,17 @@ import { cancelEvent } from '@/controllers/v1/event/cancel-event';
 import { createEvent } from '@/controllers/v1/event/create-event';
 import { deleteEvent } from '@/controllers/v1/event/delete-event';
 import { getEventAttendees } from '@/controllers/v1/event/get-event-attendees';
+import { getEventCertificateEligibleAttendees } from '@/controllers/v1/event/get-event-certificate-eligible-attendees';
 import { getAllEvents } from '@/controllers/v1/event/get-all-events';
 import { getEventById } from '@/controllers/v1/event/get-event-by-id';
 import { getPublicEvents } from '@/controllers/v1/event/get-public-events';
+import { getPublicEventById } from '@/controllers/v1/event/get-public-event-by-id';
 import { inviteEventAttendees } from '@/controllers/v1/event/invite-event-attendees';
+import {
+  getCurrentMemberEventRegistration,
+  registerCurrentMemberForEvent,
+  reviewEventAttendee,
+} from '@/controllers/v1/event/event-registration';
 import { updateEvent } from '@/controllers/v1/event/update-event';
 import { validate } from '@/common/sanitation';
 import { UserType } from '@/generated/prisma/enums';
@@ -18,6 +25,7 @@ import {
   createEventSchema,
   getAllEventsSchema,
   inviteEventAttendeesSchema,
+  reviewEventAttendeeSchema,
   updateEventSchema,
 } from '@/validators/event';
 
@@ -30,6 +38,12 @@ router.get(
   getPublicEvents,
 );
 
+router.get(
+  '/public/:id',
+  expressRateLimit('basic'),
+  getPublicEventById,
+);
+
 router.post(
   '/create',
   expressRateLimit('basic'),
@@ -37,6 +51,14 @@ router.post(
   authorize([UserType.ADMIN]),
   validate(createEventSchema),
   createEvent,
+);
+
+router.get(
+  '/:id/my-registration',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER]),
+  getCurrentMemberEventRegistration,
 );
 
 router.use(
@@ -65,6 +87,14 @@ router.get(
   getEventAttendees,
 );
 
+router.get(
+  '/:id/certificate-eligible-attendees',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  getEventCertificateEligibleAttendees,
+);
+
 router.post(
   '/:id/attendees',
   expressRateLimit('basic'),
@@ -72,6 +102,23 @@ router.post(
   authorize([UserType.ADMIN]),
   validate(inviteEventAttendeesSchema),
   inviteEventAttendees,
+);
+
+router.post(
+  '/:id/join',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.MEMBER, UserType.OFFICER]),
+  registerCurrentMemberForEvent,
+);
+
+router.patch(
+  '/:id/attendees/:attendeeId/status',
+  expressRateLimit('basic'),
+  authenticate,
+  authorize([UserType.ADMIN]),
+  validate(reviewEventAttendeeSchema),
+  reviewEventAttendee,
 );
 
 router.get(

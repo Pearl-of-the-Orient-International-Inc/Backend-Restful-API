@@ -9,7 +9,7 @@ import {
 import type { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
-import { eventTaggedMemberInclude, serializeEvent } from './event-shared';
+import { eventTaggedMemberInclude, serializePublicEvent } from './event-shared';
 
 export const getPublicEvents = async (
   req: Request,
@@ -79,7 +79,7 @@ export const getPublicEvents = async (
     res.status(HTTPSTATUS.OK).json({
       code: 'OK',
       message: 'Public events retrieved successfully',
-      data: events.map(serializeEvent),
+      data: events.map(serializePublicEvent),
       pagination: {
         currentPage: page,
         totalPages,

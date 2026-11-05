@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.utapi = exports.createUploadthingExpressHandler = exports.uploadRouter = exports.createUploadRouter = void 0;
 const express_1 = require("uploadthing/express");
 const server_1 = require("uploadthing/server");
-const prisma_1 = require("@/lib/prisma");
-const jwt_1 = require("@/lib/jwt");
-const enums_1 = require("@/generated/prisma/enums");
+const prisma_1 = require("../lib/prisma");
+const jwt_1 = require("../lib/jwt");
+const enums_1 = require("../generated/prisma/enums");
 const f = (0, express_1.createUploadthing)();
 const utapi = new server_1.UTApi();
 exports.utapi = utapi;
@@ -239,6 +239,7 @@ const createMemberCertificateUploaderRoute = () => f({
     },
 })
     .middleware((_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) {
+    var _b, _c;
     const authHeader = req.headers.authorization;
     const bearerToken = (authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer '))
         ? authHeader.slice('Bearer '.length).trim()
@@ -253,12 +254,16 @@ const createMemberCertificateUploaderRoute = () => f({
     }
     const user = yield prisma_1.prisma.user.findUnique({
         where: { id: userId },
-        select: { id: true, memberProfile: { select: { id: true } } },
+        select: {
+            id: true,
+            role: true,
+            memberProfile: { select: { id: true } },
+        },
     });
-    if (!user || !user.memberProfile) {
-        throw new Error('Member profile not found');
+    if (!user || (user.role !== enums_1.UserType.ADMIN && !user.memberProfile)) {
+        throw new Error('Only members or administrators can upload certificates');
     }
-    return { userId, memberId: user.memberProfile.id };
+    return { userId, memberId: (_c = (_b = user.memberProfile) === null || _b === void 0 ? void 0 : _b.id) !== null && _c !== void 0 ? _c : null };
 }))
     .onUploadComplete((_a) => __awaiter(void 0, [_a], void 0, function* ({ metadata, file }) {
     return ({

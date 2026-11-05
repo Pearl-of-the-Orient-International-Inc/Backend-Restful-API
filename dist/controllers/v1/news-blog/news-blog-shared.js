@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.serializeNewsBlog = exports.buildNewsBlogWriteInput = exports.serializeNewsBlogTaggedMember = exports.resolveNewsBlogStatus = exports.newsBlogInclude = exports.sanitizeCaptionHtml = exports.sanitizePlainText = void 0;
 const dompurify_1 = __importDefault(require("dompurify"));
 const jsdom_1 = require("jsdom");
-const client_1 = require("@/generated/prisma/client");
+const client_1 = require("../../../generated/prisma/client");
 const window = new jsdom_1.JSDOM('').window;
 const DOMPurify = (0, dompurify_1.default)(window);
 const ALLOWED_CAPTION_TAGS = [

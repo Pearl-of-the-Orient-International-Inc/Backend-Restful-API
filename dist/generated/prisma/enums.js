@@ -428,7 +428,11 @@ exports.EventAttendeeAccessLevel = {
 };
 exports.EventAttendeeInviteStatus = {
     INVITED: 'INVITED',
-    ACCEPTED: 'ACCEPTED'
+    ACCEPTED: 'ACCEPTED',
+    PENDING_APPROVAL: 'PENDING_APPROVAL',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED',
+    ATTENDED: 'ATTENDED'
 };
 exports.NewsBlogStatus = {
     DRAFT: 'DRAFT',

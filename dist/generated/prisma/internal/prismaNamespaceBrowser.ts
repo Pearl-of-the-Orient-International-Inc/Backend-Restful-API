@@ -59,6 +59,9 @@ export const ModelName = {
   PasskeyCredential: 'PasskeyCredential',
   PasskeyChallenge: 'PasskeyChallenge',
   Member: 'Member',
+  ReferralPointCriterion: 'ReferralPointCriterion',
+  ReferralPointLedgerEntry: 'ReferralPointLedgerEntry',
+  ReferralRecognitionPeriod: 'ReferralRecognitionPeriod',
   MemberFollow: 'MemberFollow',
   MinisterialExperience: 'MinisterialExperience',
   CharacterReference: 'CharacterReference',
@@ -78,6 +81,10 @@ export const ModelName = {
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
   SeminaryCourse: 'SeminaryCourse',
+  SeminaryCourseSchedule: 'SeminaryCourseSchedule',
+  SeminaryAnnouncement: 'SeminaryAnnouncement',
+  SeminaryDocumentRequestType: 'SeminaryDocumentRequestType',
+  SeminaryDocumentRequest: 'SeminaryDocumentRequest',
   SeminaryStudyMaterial: 'SeminaryStudyMaterial',
   SeminaryAssignment: 'SeminaryAssignment',
   SeminaryExamination: 'SeminaryExamination',
@@ -109,6 +116,7 @@ export const ModelName = {
   EventAttendee: 'EventAttendee',
   EventTaggedMember: 'EventTaggedMember',
   NewsBlog: 'NewsBlog',
+  FacebookPageConfiguration: 'FacebookPageConfiguration',
   NewsBlogMedia: 'NewsBlogMedia',
   NewsBlogTaggedMember: 'NewsBlogTaggedMember',
   BulletinEntry: 'BulletinEntry',
@@ -254,6 +262,9 @@ export type PasskeyChallengeScalarFieldEnum = (typeof PasskeyChallengeScalarFiel
 export const MemberScalarFieldEnum = {
   id: 'id',
   uniqueId: 'uniqueId',
+  referralCode: 'referralCode',
+  referralCodeCreatedAt: 'referralCodeCreatedAt',
+  referredByMemberId: 'referredByMemberId',
   userId: 'userId',
   status: 'status',
   memberType: 'memberType',
@@ -302,6 +313,58 @@ export const MemberScalarFieldEnum = {
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const ReferralPointCriterionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  description: 'description',
+  points: 'points',
+  isActive: 'isActive',
+  oncePerReferred: 'oncePerReferred',
+  monthlyCap: 'monthlyCap',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferralPointCriterionScalarFieldEnum = (typeof ReferralPointCriterionScalarFieldEnum)[keyof typeof ReferralPointCriterionScalarFieldEnum]
+
+
+export const ReferralPointLedgerEntryScalarFieldEnum = {
+  id: 'id',
+  referrerMemberId: 'referrerMemberId',
+  referredMemberId: 'referredMemberId',
+  criterionId: 'criterionId',
+  points: 'points',
+  occurredAt: 'occurredAt',
+  periodKey: 'periodKey',
+  sourceType: 'sourceType',
+  sourceId: 'sourceId',
+  status: 'status',
+  note: 'note',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type ReferralPointLedgerEntryScalarFieldEnum = (typeof ReferralPointLedgerEntryScalarFieldEnum)[keyof typeof ReferralPointLedgerEntryScalarFieldEnum]
+
+
+export const ReferralRecognitionPeriodScalarFieldEnum = {
+  id: 'id',
+  periodKey: 'periodKey',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  isLocked: 'isLocked',
+  lockedAt: 'lockedAt',
+  lockedByUserId: 'lockedByUserId',
+  winners: 'winners',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferralRecognitionPeriodScalarFieldEnum = (typeof ReferralRecognitionPeriodScalarFieldEnum)[keyof typeof ReferralRecognitionPeriodScalarFieldEnum]
 
 
 export const MemberFollowScalarFieldEnum = {
@@ -552,6 +615,7 @@ export const SeminaryApplicationScalarFieldEnum = {
   reviewedAt: 'reviewedAt',
   reviewRemarks: 'reviewRemarks',
   memberId: 'memberId',
+  portalUserId: 'portalUserId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -638,6 +702,93 @@ export const SeminaryCourseScalarFieldEnum = {
 } as const
 
 export type SeminaryCourseScalarFieldEnum = (typeof SeminaryCourseScalarFieldEnum)[keyof typeof SeminaryCourseScalarFieldEnum]
+
+
+export const SeminaryCourseScheduleScalarFieldEnum = {
+  id: 'id',
+  period: 'period',
+  academicYear: 'academicYear',
+  className: 'className',
+  courseId: 'courseId',
+  instructorId: 'instructorId',
+  subjectName: 'subjectName',
+  units: 'units',
+  scheduledDate: 'scheduledDate',
+  recurrenceDays: 'recurrenceDays',
+  recurrenceEndDate: 'recurrenceEndDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  deliveryMode: 'deliveryMode',
+  location: 'location',
+  meetingLink: 'meetingLink',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryCourseScheduleScalarFieldEnum = (typeof SeminaryCourseScheduleScalarFieldEnum)[keyof typeof SeminaryCourseScheduleScalarFieldEnum]
+
+
+export const SeminaryAnnouncementScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  summary: 'summary',
+  kind: 'kind',
+  category: 'category',
+  audience: 'audience',
+  location: 'location',
+  allDay: 'allDay',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  status: 'status',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAnnouncementScalarFieldEnum = (typeof SeminaryAnnouncementScalarFieldEnum)[keyof typeof SeminaryAnnouncementScalarFieldEnum]
+
+
+export const SeminaryDocumentRequestTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  fee: 'fee',
+  requiresSupportingDetails: 'requiresSupportingDetails',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryDocumentRequestTypeScalarFieldEnum = (typeof SeminaryDocumentRequestTypeScalarFieldEnum)[keyof typeof SeminaryDocumentRequestTypeScalarFieldEnum]
+
+
+export const SeminaryDocumentRequestScalarFieldEnum = {
+  id: 'id',
+  referenceNumber: 'referenceNumber',
+  purpose: 'purpose',
+  deliveryMethod: 'deliveryMethod',
+  supportingDetails: 'supportingDetails',
+  fee: 'fee',
+  paymentStatus: 'paymentStatus',
+  status: 'status',
+  reviewedAt: 'reviewedAt',
+  reviewRemarks: 'reviewRemarks',
+  processedAt: 'processedAt',
+  readyAt: 'readyAt',
+  releasedAt: 'releasedAt',
+  releaseReference: 'releaseReference',
+  receivedBy: 'receivedBy',
+  documentTypeId: 'documentTypeId',
+  studentApplicationId: 'studentApplicationId',
+  reviewedByUserId: 'reviewedByUserId',
+  releasedByUserId: 'releasedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryDocumentRequestScalarFieldEnum = (typeof SeminaryDocumentRequestScalarFieldEnum)[keyof typeof SeminaryDocumentRequestScalarFieldEnum]
 
 
 export const SeminaryStudyMaterialScalarFieldEnum = {
@@ -1238,6 +1389,19 @@ export const NewsBlogScalarFieldEnum = {
 } as const
 
 export type NewsBlogScalarFieldEnum = (typeof NewsBlogScalarFieldEnum)[keyof typeof NewsBlogScalarFieldEnum]
+
+
+export const FacebookPageConfigurationScalarFieldEnum = {
+  id: 'id',
+  pageId: 'pageId',
+  accessToken: 'accessToken',
+  expiresAt: 'expiresAt',
+  updatedByUserId: 'updatedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FacebookPageConfigurationScalarFieldEnum = (typeof FacebookPageConfigurationScalarFieldEnum)[keyof typeof FacebookPageConfigurationScalarFieldEnum]
 
 
 export const NewsBlogMediaScalarFieldEnum = {

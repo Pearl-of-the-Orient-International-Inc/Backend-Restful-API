@@ -11,10 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMembershipReport = void 0;
 const date_fns_1 = require("date-fns");
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const winston_1 = require("@/lib/winston");
-const prisma_1 = require("@/lib/prisma");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const winston_1 = require("../../../lib/winston");
+const prisma_1 = require("../../../lib/prisma");
 const memberTypeLabels = {
     [enums_1.MemberType.ASSOCIATE_CHAPLAIN]: 'Associate Chaplain',
     [enums_1.MemberType.PROFESSIONAL_CHAPLAIN]: 'Professional Chaplain',

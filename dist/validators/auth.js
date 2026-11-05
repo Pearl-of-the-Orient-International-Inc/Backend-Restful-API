@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.passkeyAuthenticationVerifySchema = exports.passkeyAuthenticationOptionsSchema = exports.passkeyRegistrationVerifySchema = exports.passkeyRegistrationOptionsSchema = exports.verifyTwoFactorSchema = exports.twoFactorEnableSchema = exports.changePasswordSchema = exports.verifyPasswordSchema = exports.verificationEmailSchema = exports.resendVerificationSchema = exports.resetPasswordSchema = exports.forgotPasswordSchema = exports.loginSchema = exports.registerSchema = exports.loginIdentifierSchema = exports.passwordSchema = exports.emailSchema = void 0;
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 const zod_1 = __importDefault(require("zod"));
 exports.emailSchema = zod_1.default
     .email({ error: 'Enter a valid email address from any email provider' })

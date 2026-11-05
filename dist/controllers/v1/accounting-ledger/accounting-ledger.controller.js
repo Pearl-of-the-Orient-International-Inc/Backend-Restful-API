@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteAccountingLedgerTransaction = exports.updateAccountingLedgerTransaction = exports.createAccountingLedgerTransaction = exports.getAccountingLedgerTransactions = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const client_1 = require("@/generated/prisma/client");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const client_1 = require("../../../generated/prisma/client");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const toDecimal = (value) => new client_1.Prisma.Decimal(value !== null && value !== void 0 ? value : 0).toDecimalPlaces(2);
 const toNumber = (value) => Number(value !== null && value !== void 0 ? value : 0);
 const trimToNull = (value) => {

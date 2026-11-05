@@ -1643,6 +1643,16 @@ model NewsBlog {
   @@index([updatedAt])
 }
 
+model FacebookPageConfiguration {
+  id              String   @id @default("default")
+  pageId          String
+  accessToken     String
+  expiresAt       DateTime?
+  updatedByUserId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model NewsBlogMedia {
   id String @id @default(uuid())
 
@@ -2582,6 +2592,10 @@ enum EventAttendeeAccessLevel {
 enum EventAttendeeInviteStatus {
   INVITED
   ACCEPTED
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+  ATTENDED
 }
 
 enum NewsBlogStatus {

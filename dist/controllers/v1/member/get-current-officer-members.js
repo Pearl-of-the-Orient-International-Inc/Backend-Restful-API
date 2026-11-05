@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCurrentOfficerMembers = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const officer_scope_1 = require("@/lib/officer-scope");
-const prisma_1 = require("@/lib/prisma");
+const http_codes_1 = require("../../../common/http-codes");
+const officer_scope_1 = require("../../../lib/officer-scope");
+const prisma_1 = require("../../../lib/prisma");
 const getCurrentOfficerMembers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {

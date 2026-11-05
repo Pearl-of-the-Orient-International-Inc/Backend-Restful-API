@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.receivePayPalWebhook = exports.receiveXenditWebhook = exports.capturePublicPayPalOrder = exports.initiateChaplainOrderPayment = exports.getPublicPaymentStatus = exports.getPublicPaymentConfiguration = exports.getPublicPaymentFeePolicies = void 0;
 const node_crypto_1 = require("node:crypto");
-const http_codes_1 = require("@/common/http-codes");
-const config_1 = __importDefault(require("@/config"));
-const enums_1 = require("@/generated/prisma/enums");
-const payment_gateways_1 = require("@/lib/payment-gateways");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const payment_fees_1 = require("@/lib/payment-fees");
+const http_codes_1 = require("../../../common/http-codes");
+const config_1 = __importDefault(require("../../../config"));
+const enums_1 = require("../../../generated/prisma/enums");
+const payment_gateways_1 = require("../../../lib/payment-gateways");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const payment_fees_1 = require("../../../lib/payment-fees");
 const getPublicPaymentFeePolicies = (_req, res) => {
     res.status(http_codes_1.HTTPSTATUS.OK).json({
         code: 'OK',

@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logout = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const config_1 = __importDefault(require("@/config"));
-const client_1 = require("@/generated/prisma/client");
-const activity_log_1 = require("@/lib/activity-log");
-const helpers_1 = require("@/lib/helpers");
+const http_codes_1 = require("../../../common/http-codes");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const config_1 = __importDefault(require("../../../config"));
+const client_1 = require("../../../generated/prisma/client");
+const activity_log_1 = require("../../../lib/activity-log");
+const helpers_1 = require("../../../lib/helpers");
 const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {

@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMembershipRenewalEmail = exports.getRenewalEmailMemberById = exports.getRenewalProfileUrl = exports.formatRenewalApplicationDate = exports.buildRenewalMemberFullName = void 0;
-const config_1 = __importDefault(require("@/config"));
-const prisma_1 = require("@/lib/prisma");
-const mailers_1 = require("@/mailers");
-const membership_renewal_reminder_1 = require("@/mailers/templates/membership-renewal-reminder");
+const config_1 = __importDefault(require("../config"));
+const prisma_1 = require("../lib/prisma");
+const mailers_1 = require("../mailers");
+const membership_renewal_reminder_1 = require("../mailers/templates/membership-renewal-reminder");
 const buildRenewalMemberFullName = (member) => [
     member.firstName,
     member.middleInitial,

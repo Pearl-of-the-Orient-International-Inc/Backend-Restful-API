@@ -37,6 +37,9 @@ export type MemberSumAggregateOutputType = {
 export type MemberMinAggregateOutputType = {
   id: string | null
   uniqueId: string | null
+  referralCode: string | null
+  referralCodeCreatedAt: Date | null
+  referredByMemberId: string | null
   userId: string | null
   status: $Enums.MemberStatus | null
   memberType: $Enums.MemberType | null
@@ -87,6 +90,9 @@ export type MemberMinAggregateOutputType = {
 export type MemberMaxAggregateOutputType = {
   id: string | null
   uniqueId: string | null
+  referralCode: string | null
+  referralCodeCreatedAt: Date | null
+  referredByMemberId: string | null
   userId: string | null
   status: $Enums.MemberStatus | null
   memberType: $Enums.MemberType | null
@@ -137,6 +143,9 @@ export type MemberMaxAggregateOutputType = {
 export type MemberCountAggregateOutputType = {
   id: number
   uniqueId: number
+  referralCode: number
+  referralCodeCreatedAt: number
+  referredByMemberId: number
   userId: number
   status: number
   memberType: number
@@ -197,6 +206,9 @@ export type MemberSumAggregateInputType = {
 export type MemberMinAggregateInputType = {
   id?: true
   uniqueId?: true
+  referralCode?: true
+  referralCodeCreatedAt?: true
+  referredByMemberId?: true
   userId?: true
   status?: true
   memberType?: true
@@ -247,6 +259,9 @@ export type MemberMinAggregateInputType = {
 export type MemberMaxAggregateInputType = {
   id?: true
   uniqueId?: true
+  referralCode?: true
+  referralCodeCreatedAt?: true
+  referredByMemberId?: true
   userId?: true
   status?: true
   memberType?: true
@@ -297,6 +312,9 @@ export type MemberMaxAggregateInputType = {
 export type MemberCountAggregateInputType = {
   id?: true
   uniqueId?: true
+  referralCode?: true
+  referralCodeCreatedAt?: true
+  referredByMemberId?: true
   userId?: true
   status?: true
   memberType?: true
@@ -434,6 +452,9 @@ export type MemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type MemberGroupByOutputType = {
   id: string
   uniqueId: string | null
+  referralCode: string | null
+  referralCodeCreatedAt: Date | null
+  referredByMemberId: string | null
   userId: string
   status: $Enums.MemberStatus
   memberType: $Enums.MemberType
@@ -507,6 +528,9 @@ export type MemberWhereInput = {
   NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
   id?: Prisma.StringFilter<"Member"> | string
   uniqueId?: Prisma.StringNullableFilter<"Member"> | string | null
+  referralCode?: Prisma.StringNullableFilter<"Member"> | string | null
+  referralCodeCreatedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  referredByMemberId?: Prisma.StringNullableFilter<"Member"> | string | null
   userId?: Prisma.StringFilter<"Member"> | string
   status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFilter<"Member"> | $Enums.MemberType
@@ -552,6 +576,8 @@ export type MemberWhereInput = {
   isActive?: Prisma.BoolFilter<"Member"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  referredByMember?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
+  referredMembers?: Prisma.MemberListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   preferredBranches?: Prisma.BranchOfServiceListRelationFilter
   ministerialExperiences?: Prisma.MinisterialExperienceListRelationFilter
@@ -577,11 +603,16 @@ export type MemberWhereInput = {
   crasmApplication?: Prisma.XOR<Prisma.CrasmApplicationNullableScalarRelationFilter, Prisma.CrasmApplicationWhereInput> | null
   providedServiceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityListRelationFilter
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryListRelationFilter
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   uniqueId?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralCodeCreatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredByMemberId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
@@ -627,6 +658,8 @@ export type MemberOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  referredByMember?: Prisma.MemberOrderByWithRelationInput
+  referredMembers?: Prisma.MemberOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
   preferredBranches?: Prisma.BranchOfServiceOrderByRelationAggregateInput
   ministerialExperiences?: Prisma.MinisterialExperienceOrderByRelationAggregateInput
@@ -652,15 +685,20 @@ export type MemberOrderByWithRelationInput = {
   crasmApplication?: Prisma.CrasmApplicationOrderByWithRelationInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingOrderByRelationAggregateInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityOrderByRelationAggregateInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryOrderByRelationAggregateInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   uniqueId?: string
+  referralCode?: string
   userId?: string
   AND?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
   OR?: Prisma.MemberWhereInput[]
   NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
+  referralCodeCreatedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  referredByMemberId?: Prisma.StringNullableFilter<"Member"> | string | null
   status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFilter<"Member"> | $Enums.MemberType
   badgeNumber?: Prisma.StringNullableFilter<"Member"> | string | null
@@ -705,6 +743,8 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"Member"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  referredByMember?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
+  referredMembers?: Prisma.MemberListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   preferredBranches?: Prisma.BranchOfServiceListRelationFilter
   ministerialExperiences?: Prisma.MinisterialExperienceListRelationFilter
@@ -730,11 +770,16 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   crasmApplication?: Prisma.XOR<Prisma.CrasmApplicationNullableScalarRelationFilter, Prisma.CrasmApplicationWhereInput> | null
   providedServiceBookings?: Prisma.ChaplainServiceBookingListRelationFilter
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityListRelationFilter
-}, "id" | "uniqueId" | "userId">
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryListRelationFilter
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryListRelationFilter
+}, "id" | "uniqueId" | "referralCode" | "userId">
 
 export type MemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   uniqueId?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralCodeCreatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredByMemberId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
@@ -793,6 +838,9 @@ export type MemberScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MemberScalarWhereWithAggregatesInput | Prisma.MemberScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Member"> | string
   uniqueId?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  referralCode?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  referralCodeCreatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+  referredByMemberId?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Member"> | string
   status?: Prisma.EnumMemberStatusWithAggregatesFilter<"Member"> | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeWithAggregatesFilter<"Member"> | $Enums.MemberType
@@ -843,6 +891,8 @@ export type MemberScalarWhereWithAggregatesInput = {
 export type MemberCreateInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -887,6 +937,8 @@ export type MemberCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -912,11 +964,16 @@ export type MemberCreateInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -962,6 +1019,7 @@ export type MemberUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -986,11 +1044,15 @@ export type MemberUncheckedCreateInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1035,6 +1097,8 @@ export type MemberUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -1060,11 +1124,16 @@ export type MemberUpdateInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -1110,6 +1179,7 @@ export type MemberUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -1134,11 +1204,16 @@ export type MemberUncheckedUpdateInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -1189,6 +1264,8 @@ export type MemberCreateManyInput = {
 export type MemberUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1238,6 +1315,9 @@ export type MemberUpdateManyMutationInput = {
 export type MemberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -1290,9 +1370,22 @@ export type MemberNullableScalarRelationFilter = {
   isNot?: Prisma.MemberWhereInput | null
 }
 
+export type MemberListRelationFilter = {
+  every?: Prisma.MemberWhereInput
+  some?: Prisma.MemberWhereInput
+  none?: Prisma.MemberWhereInput
+}
+
+export type MemberOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type MemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   uniqueId?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  referralCodeCreatedAt?: Prisma.SortOrder
+  referredByMemberId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
@@ -1347,6 +1440,9 @@ export type MemberAvgOrderByAggregateInput = {
 export type MemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   uniqueId?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  referralCodeCreatedAt?: Prisma.SortOrder
+  referredByMemberId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
@@ -1397,6 +1493,9 @@ export type MemberMaxOrderByAggregateInput = {
 export type MemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   uniqueId?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  referralCodeCreatedAt?: Prisma.SortOrder
+  referredByMemberId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   memberType?: Prisma.SortOrder
@@ -1485,6 +1584,30 @@ export type MemberUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutUserInput, Prisma.MemberUpdateWithoutUserInput>, Prisma.MemberUncheckedUpdateWithoutUserInput>
 }
 
+export type MemberCreateNestedOneWithoutReferredMembersInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferredMembersInput, Prisma.MemberUncheckedCreateWithoutReferredMembersInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferredMembersInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberCreateNestedManyWithoutReferredByMemberInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferredByMemberInput, Prisma.MemberUncheckedCreateWithoutReferredByMemberInput> | Prisma.MemberCreateWithoutReferredByMemberInput[] | Prisma.MemberUncheckedCreateWithoutReferredByMemberInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferredByMemberInput | Prisma.MemberCreateOrConnectWithoutReferredByMemberInput[]
+  createMany?: Prisma.MemberCreateManyReferredByMemberInputEnvelope
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUncheckedCreateNestedManyWithoutReferredByMemberInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferredByMemberInput, Prisma.MemberUncheckedCreateWithoutReferredByMemberInput> | Prisma.MemberCreateWithoutReferredByMemberInput[] | Prisma.MemberUncheckedCreateWithoutReferredByMemberInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferredByMemberInput | Prisma.MemberCreateOrConnectWithoutReferredByMemberInput[]
+  createMany?: Prisma.MemberCreateManyReferredByMemberInputEnvelope
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type EnumMemberStatusFieldUpdateOperationsInput = {
   set?: $Enums.MemberStatus
 }
@@ -1499,6 +1622,72 @@ export type NullableEnumCivilStatusFieldUpdateOperationsInput = {
 
 export type EnumGenderFieldUpdateOperationsInput = {
   set?: $Enums.Gender
+}
+
+export type MemberUpdateOneWithoutReferredMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferredMembersInput, Prisma.MemberUncheckedCreateWithoutReferredMembersInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferredMembersInput
+  upsert?: Prisma.MemberUpsertWithoutReferredMembersInput
+  disconnect?: Prisma.MemberWhereInput | boolean
+  delete?: Prisma.MemberWhereInput | boolean
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutReferredMembersInput, Prisma.MemberUpdateWithoutReferredMembersInput>, Prisma.MemberUncheckedUpdateWithoutReferredMembersInput>
+}
+
+export type MemberUpdateManyWithoutReferredByMemberNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferredByMemberInput, Prisma.MemberUncheckedCreateWithoutReferredByMemberInput> | Prisma.MemberCreateWithoutReferredByMemberInput[] | Prisma.MemberUncheckedCreateWithoutReferredByMemberInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferredByMemberInput | Prisma.MemberCreateOrConnectWithoutReferredByMemberInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutReferredByMemberInput | Prisma.MemberUpsertWithWhereUniqueWithoutReferredByMemberInput[]
+  createMany?: Prisma.MemberCreateManyReferredByMemberInputEnvelope
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutReferredByMemberInput | Prisma.MemberUpdateWithWhereUniqueWithoutReferredByMemberInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutReferredByMemberInput | Prisma.MemberUpdateManyWithWhereWithoutReferredByMemberInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferredByMemberInput, Prisma.MemberUncheckedCreateWithoutReferredByMemberInput> | Prisma.MemberCreateWithoutReferredByMemberInput[] | Prisma.MemberUncheckedCreateWithoutReferredByMemberInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferredByMemberInput | Prisma.MemberCreateOrConnectWithoutReferredByMemberInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutReferredByMemberInput | Prisma.MemberUpsertWithWhereUniqueWithoutReferredByMemberInput[]
+  createMany?: Prisma.MemberCreateManyReferredByMemberInputEnvelope
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutReferredByMemberInput | Prisma.MemberUpdateWithWhereUniqueWithoutReferredByMemberInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutReferredByMemberInput | Prisma.MemberUpdateManyWithWhereWithoutReferredByMemberInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberCreateNestedOneWithoutReferralPointEntriesInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferralPointEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralPointEntriesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferralPointEntriesInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberCreateNestedOneWithoutReferralMilestoneEntriesInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferralMilestoneEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralMilestoneEntriesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferralMilestoneEntriesInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutReferralPointEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferralPointEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralPointEntriesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferralPointEntriesInput
+  upsert?: Prisma.MemberUpsertWithoutReferralPointEntriesInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutReferralPointEntriesInput, Prisma.MemberUpdateWithoutReferralPointEntriesInput>, Prisma.MemberUncheckedUpdateWithoutReferralPointEntriesInput>
+}
+
+export type MemberUpdateOneRequiredWithoutReferralMilestoneEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutReferralMilestoneEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralMilestoneEntriesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutReferralMilestoneEntriesInput
+  upsert?: Prisma.MemberUpsertWithoutReferralMilestoneEntriesInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutReferralMilestoneEntriesInput, Prisma.MemberUpdateWithoutReferralMilestoneEntriesInput>, Prisma.MemberUncheckedUpdateWithoutReferralMilestoneEntriesInput>
 }
 
 export type MemberCreateNestedOneWithoutFollowersInput = {
@@ -1846,6 +2035,8 @@ export type MemberUpdateOneWithoutMemoRecipientsNestedInput = {
 export type MemberCreateWithoutUserInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -1890,6 +2081,8 @@ export type MemberCreateWithoutUserInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
@@ -1914,11 +2107,16 @@ export type MemberCreateWithoutUserInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutUserInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -1963,6 +2161,7 @@ export type MemberUncheckedCreateWithoutUserInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -1987,6 +2186,8 @@ export type MemberUncheckedCreateWithoutUserInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutUserInput = {
@@ -2008,6 +2209,8 @@ export type MemberUpdateToOneWithWhereWithoutUserInput = {
 export type MemberUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2052,6 +2255,8 @@ export type MemberUpdateWithoutUserInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
@@ -2076,11 +2281,517 @@ export type MemberUpdateWithoutUserInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberCreateWithoutReferredMembersInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
+}
+
+export type MemberUncheckedCreateWithoutReferredMembersInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
+}
+
+export type MemberCreateOrConnectWithoutReferredMembersInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferredMembersInput, Prisma.MemberUncheckedCreateWithoutReferredMembersInput>
+}
+
+export type MemberCreateWithoutReferredByMemberInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
+}
+
+export type MemberUncheckedCreateWithoutReferredByMemberInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
+}
+
+export type MemberCreateOrConnectWithoutReferredByMemberInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferredByMemberInput, Prisma.MemberUncheckedCreateWithoutReferredByMemberInput>
+}
+
+export type MemberCreateManyReferredByMemberInputEnvelope = {
+  data: Prisma.MemberCreateManyReferredByMemberInput | Prisma.MemberCreateManyReferredByMemberInput[]
+  skipDuplicates?: boolean
+}
+
+export type MemberUpsertWithoutReferredMembersInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutReferredMembersInput, Prisma.MemberUncheckedUpdateWithoutReferredMembersInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferredMembersInput, Prisma.MemberUncheckedCreateWithoutReferredMembersInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutReferredMembersInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutReferredMembersInput, Prisma.MemberUncheckedUpdateWithoutReferredMembersInput>
+}
+
+export type MemberUpdateWithoutReferredMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutReferredMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2149,11 +2860,87 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
-export type MemberCreateWithoutFollowersInput = {
+export type MemberUpsertWithWhereUniqueWithoutReferredByMemberInput = {
+  where: Prisma.MemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutReferredByMemberInput, Prisma.MemberUncheckedUpdateWithoutReferredByMemberInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferredByMemberInput, Prisma.MemberUncheckedCreateWithoutReferredByMemberInput>
+}
+
+export type MemberUpdateWithWhereUniqueWithoutReferredByMemberInput = {
+  where: Prisma.MemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutReferredByMemberInput, Prisma.MemberUncheckedUpdateWithoutReferredByMemberInput>
+}
+
+export type MemberUpdateManyWithWhereWithoutReferredByMemberInput = {
+  where: Prisma.MemberScalarWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateManyMutationInput, Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberInput>
+}
+
+export type MemberScalarWhereInput = {
+  AND?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+  OR?: Prisma.MemberScalarWhereInput[]
+  NOT?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+  id?: Prisma.StringFilter<"Member"> | string
+  uniqueId?: Prisma.StringNullableFilter<"Member"> | string | null
+  referralCode?: Prisma.StringNullableFilter<"Member"> | string | null
+  referralCodeCreatedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  referredByMemberId?: Prisma.StringNullableFilter<"Member"> | string | null
+  userId?: Prisma.StringFilter<"Member"> | string
+  status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFilter<"Member"> | $Enums.MemberType
+  badgeNumber?: Prisma.StringNullableFilter<"Member"> | string | null
+  profileBannerUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  profileBannerPositionY?: Prisma.IntFilter<"Member"> | number
+  serviceLicenseUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  serviceLicenseFileName?: Prisma.StringNullableFilter<"Member"> | string | null
+  serviceLicenseMimeType?: Prisma.StringNullableFilter<"Member"> | string | null
+  firstName?: Prisma.StringFilter<"Member"> | string
+  middleInitial?: Prisma.StringNullableFilter<"Member"> | string | null
+  lastName?: Prisma.StringFilter<"Member"> | string
+  extensionName?: Prisma.StringNullableFilter<"Member"> | string | null
+  mobilePhoneNumber?: Prisma.StringNullableFilter<"Member"> | string | null
+  homeAddress?: Prisma.StringNullableFilter<"Member"> | string | null
+  civilStatus?: Prisma.EnumCivilStatusNullableFilter<"Member"> | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFilter<"Member"> | $Enums.Gender
+  nationality?: Prisma.StringNullableFilter<"Member"> | string | null
+  dateOfBirth?: Prisma.DateTimeFilter<"Member"> | Date | string
+  region?: Prisma.StringNullableFilter<"Member"> | string | null
+  province?: Prisma.StringNullableFilter<"Member"> | string | null
+  municipalityCity?: Prisma.StringNullableFilter<"Member"> | string | null
+  barangay?: Prisma.StringNullableFilter<"Member"> | string | null
+  emergencyContactName?: Prisma.StringNullableFilter<"Member"> | string | null
+  emergencyContactMobile?: Prisma.StringNullableFilter<"Member"> | string | null
+  churchAffiliation?: Prisma.StringNullableFilter<"Member"> | string | null
+  churchAddress?: Prisma.StringNullableFilter<"Member"> | string | null
+  currentPositionRole?: Prisma.StringNullableFilter<"Member"> | string | null
+  currentPositionRoleOther?: Prisma.StringNullableFilter<"Member"> | string | null
+  height?: Prisma.StringNullableFilter<"Member"> | string | null
+  weight?: Prisma.StringNullableFilter<"Member"> | string | null
+  bloodType?: Prisma.StringNullableFilter<"Member"> | string | null
+  colorOfEyes?: Prisma.StringNullableFilter<"Member"> | string | null
+  colorOfSkin?: Prisma.StringNullableFilter<"Member"> | string | null
+  sssNumber?: Prisma.StringNullableFilter<"Member"> | string | null
+  tinNumber?: Prisma.StringNullableFilter<"Member"> | string | null
+  skillsTalents?: Prisma.StringNullableFilter<"Member"> | string | null
+  preferredBranchOther?: Prisma.StringNullableFilter<"Member"> | string | null
+  elementarySchool?: Prisma.StringNullableFilter<"Member"> | string | null
+  secondarySchool?: Prisma.StringNullableFilter<"Member"> | string | null
+  tertiaryCollege?: Prisma.StringNullableFilter<"Member"> | string | null
+  postGraduateStudies?: Prisma.StringNullableFilter<"Member"> | string | null
+  isActive?: Prisma.BoolFilter<"Member"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+}
+
+export type MemberCreateWithoutReferralPointEntriesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -2198,6 +2985,8 @@ export type MemberCreateWithoutFollowersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -2218,15 +3007,20 @@ export type MemberCreateWithoutFollowersInput = {
   taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
   taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
   memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
-export type MemberUncheckedCreateWithoutFollowersInput = {
+export type MemberUncheckedCreateWithoutReferralPointEntriesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -2272,6 +3066,671 @@ export type MemberUncheckedCreateWithoutFollowersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
+}
+
+export type MemberCreateOrConnectWithoutReferralPointEntriesInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferralPointEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralPointEntriesInput>
+}
+
+export type MemberCreateWithoutReferralMilestoneEntriesInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+}
+
+export type MemberUncheckedCreateWithoutReferralMilestoneEntriesInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateUncheckedCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureUncheckedCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedCreateNestedManyWithoutMemberInput
+  followers?: Prisma.MemberFollowUncheckedCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+}
+
+export type MemberCreateOrConnectWithoutReferralMilestoneEntriesInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferralMilestoneEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralMilestoneEntriesInput>
+}
+
+export type MemberUpsertWithoutReferralPointEntriesInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutReferralPointEntriesInput, Prisma.MemberUncheckedUpdateWithoutReferralPointEntriesInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferralPointEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralPointEntriesInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutReferralPointEntriesInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutReferralPointEntriesInput, Prisma.MemberUncheckedUpdateWithoutReferralPointEntriesInput>
+}
+
+export type MemberUpdateWithoutReferralPointEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutReferralPointEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberUpsertWithoutReferralMilestoneEntriesInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutReferralMilestoneEntriesInput, Prisma.MemberUncheckedUpdateWithoutReferralMilestoneEntriesInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutReferralMilestoneEntriesInput, Prisma.MemberUncheckedCreateWithoutReferralMilestoneEntriesInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutReferralMilestoneEntriesInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutReferralMilestoneEntriesInput, Prisma.MemberUncheckedUpdateWithoutReferralMilestoneEntriesInput>
+}
+
+export type MemberUpdateWithoutReferralMilestoneEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutReferralMilestoneEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+}
+
+export type MemberCreateWithoutFollowersInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
+  user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
+  preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
+  ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
+  characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
+  applicantRequirements?: Prisma.ApplicantRequirementCreateNestedManyWithoutMemberInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressCreateNestedOneWithoutMemberInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutCreateNestedOneWithoutMemberInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentCreateNestedOneWithoutMemberInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetCreateNestedOneWithoutMemberInput
+  certificates?: Prisma.MemberCertificateCreateNestedManyWithoutMemberInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentCreateNestedManyWithoutMemberInput
+  publicRecords?: Prisma.MemberPublicRecordCreateNestedManyWithoutMemberInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressCreateNestedOneWithoutMemberInput
+  signature?: Prisma.ApplicantSignatureCreateNestedOneWithoutMemberInput
+  seminaryApplications?: Prisma.SeminaryApplicationCreateNestedManyWithoutMemberInput
+  officerAssignments?: Prisma.OfficerAssignmentCreateNestedManyWithoutMemberInput
+  eventAttendances?: Prisma.EventAttendeeCreateNestedManyWithoutMemberInput
+  taggedEvents?: Prisma.EventTaggedMemberCreateNestedManyWithoutMemberInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberCreateNestedManyWithoutMemberInput
+  memoRecipients?: Prisma.MemoRecipientCreateNestedManyWithoutMemberInput
+  ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
+  crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
+}
+
+export type MemberUncheckedCreateWithoutFollowersInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -2295,6 +3754,8 @@ export type MemberUncheckedCreateWithoutFollowersInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutFollowersInput = {
@@ -2316,6 +3777,8 @@ export type MemberUpdateToOneWithWhereWithoutFollowersInput = {
 export type MemberUpdateWithoutFollowersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2360,6 +3823,8 @@ export type MemberUpdateWithoutFollowersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -2384,11 +3849,16 @@ export type MemberUpdateWithoutFollowersInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutFollowersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -2434,6 +3904,7 @@ export type MemberUncheckedUpdateWithoutFollowersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -2457,11 +3928,15 @@ export type MemberUncheckedUpdateWithoutFollowersInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutMinisterialExperiencesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -2506,6 +3981,8 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
@@ -2530,11 +4007,16 @@ export type MemberCreateWithoutMinisterialExperiencesInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -2580,6 +4062,7 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
   applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
@@ -2603,6 +4086,8 @@ export type MemberUncheckedCreateWithoutMinisterialExperiencesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutMinisterialExperiencesInput = {
@@ -2624,6 +4109,8 @@ export type MemberUpdateToOneWithWhereWithoutMinisterialExperiencesInput = {
 export type MemberUpdateWithoutMinisterialExperiencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2668,6 +4155,8 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
@@ -2692,11 +4181,16 @@ export type MemberUpdateWithoutMinisterialExperiencesInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -2742,6 +4236,7 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
   applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
@@ -2765,11 +4260,15 @@ export type MemberUncheckedUpdateWithoutMinisterialExperiencesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutCharacterReferencesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -2814,6 +4313,8 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -2838,11 +4339,16 @@ export type MemberCreateWithoutCharacterReferencesInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -2888,6 +4394,7 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
@@ -2911,6 +4418,8 @@ export type MemberUncheckedCreateWithoutCharacterReferencesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCharacterReferencesInput = {
@@ -2932,6 +4441,8 @@ export type MemberUpdateToOneWithWhereWithoutCharacterReferencesInput = {
 export type MemberUpdateWithoutCharacterReferencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2976,6 +4487,8 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -3000,11 +4513,16 @@ export type MemberUpdateWithoutCharacterReferencesInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -3050,6 +4568,7 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
@@ -3073,11 +4592,15 @@ export type MemberUncheckedUpdateWithoutCharacterReferencesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutSignatureInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -3122,6 +4645,8 @@ export type MemberCreateWithoutSignatureInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -3146,11 +4671,16 @@ export type MemberCreateWithoutSignatureInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSignatureInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -3196,6 +4726,7 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -3219,6 +4750,8 @@ export type MemberUncheckedCreateWithoutSignatureInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSignatureInput = {
@@ -3240,6 +4773,8 @@ export type MemberUpdateToOneWithWhereWithoutSignatureInput = {
 export type MemberUpdateWithoutSignatureInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3284,6 +4819,8 @@ export type MemberUpdateWithoutSignatureInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -3308,11 +4845,16 @@ export type MemberUpdateWithoutSignatureInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSignatureInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -3358,6 +4900,7 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -3381,11 +4924,15 @@ export type MemberUncheckedUpdateWithoutSignatureInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutApplicantRequirementsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -3430,6 +4977,8 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -3454,11 +5003,16 @@ export type MemberCreateWithoutApplicantRequirementsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -3504,6 +5058,7 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -3527,6 +5082,8 @@ export type MemberUncheckedCreateWithoutApplicantRequirementsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutApplicantRequirementsInput = {
@@ -3548,6 +5105,8 @@ export type MemberUpdateToOneWithWhereWithoutApplicantRequirementsInput = {
 export type MemberUpdateWithoutApplicantRequirementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3592,6 +5151,8 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -3616,11 +5177,16 @@ export type MemberUpdateWithoutApplicantRequirementsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -3666,6 +5232,7 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -3689,11 +5256,15 @@ export type MemberUncheckedUpdateWithoutApplicantRequirementsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutOnboardingProgressInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -3738,6 +5309,8 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -3762,11 +5335,16 @@ export type MemberCreateWithoutOnboardingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -3812,6 +5390,7 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -3835,6 +5414,8 @@ export type MemberUncheckedCreateWithoutOnboardingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOnboardingProgressInput = {
@@ -3856,6 +5437,8 @@ export type MemberUpdateToOneWithWhereWithoutOnboardingProgressInput = {
 export type MemberUpdateWithoutOnboardingProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3900,6 +5483,8 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -3924,11 +5509,16 @@ export type MemberUpdateWithoutOnboardingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -3974,6 +5564,7 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -3997,11 +5588,15 @@ export type MemberUncheckedUpdateWithoutOnboardingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutPaymentCheckoutInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -4046,6 +5641,8 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -4070,11 +5667,16 @@ export type MemberCreateWithoutPaymentCheckoutInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -4120,6 +5722,7 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -4143,6 +5746,8 @@ export type MemberUncheckedCreateWithoutPaymentCheckoutInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPaymentCheckoutInput = {
@@ -4164,6 +5769,8 @@ export type MemberUpdateToOneWithWhereWithoutPaymentCheckoutInput = {
 export type MemberUpdateWithoutPaymentCheckoutInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4208,6 +5815,8 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -4232,11 +5841,16 @@ export type MemberUpdateWithoutPaymentCheckoutInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -4282,6 +5896,7 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -4305,11 +5920,15 @@ export type MemberUncheckedUpdateWithoutPaymentCheckoutInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -4354,6 +5973,8 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -4378,11 +5999,16 @@ export type MemberCreateWithoutOnlineInterviewAppointmentInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -4428,6 +6054,7 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -4451,6 +6078,8 @@ export type MemberUncheckedCreateWithoutOnlineInterviewAppointmentInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOnlineInterviewAppointmentInput = {
@@ -4472,6 +6101,8 @@ export type MemberUpdateToOneWithWhereWithoutOnlineInterviewAppointmentInput = {
 export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4516,6 +6147,8 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -4540,11 +6173,16 @@ export type MemberUpdateWithoutOnlineInterviewAppointmentInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -4590,6 +6228,7 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -4613,11 +6252,15 @@ export type MemberUncheckedUpdateWithoutOnlineInterviewAppointmentInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutIdGenerationAssetInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -4662,6 +6305,8 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -4686,11 +6331,16 @@ export type MemberCreateWithoutIdGenerationAssetInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -4736,6 +6386,7 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -4759,6 +6410,8 @@ export type MemberUncheckedCreateWithoutIdGenerationAssetInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutIdGenerationAssetInput = {
@@ -4780,6 +6433,8 @@ export type MemberUpdateToOneWithWhereWithoutIdGenerationAssetInput = {
 export type MemberUpdateWithoutIdGenerationAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4824,6 +6479,8 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -4848,11 +6505,16 @@ export type MemberUpdateWithoutIdGenerationAssetInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -4898,6 +6560,7 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -4921,11 +6584,15 @@ export type MemberUncheckedUpdateWithoutIdGenerationAssetInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutCertificatesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -4970,6 +6637,8 @@ export type MemberCreateWithoutCertificatesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -4994,11 +6663,16 @@ export type MemberCreateWithoutCertificatesInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCertificatesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -5044,6 +6718,7 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -5067,6 +6742,8 @@ export type MemberUncheckedCreateWithoutCertificatesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCertificatesInput = {
@@ -5088,6 +6765,8 @@ export type MemberUpdateToOneWithWhereWithoutCertificatesInput = {
 export type MemberUpdateWithoutCertificatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5132,6 +6811,8 @@ export type MemberUpdateWithoutCertificatesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -5156,11 +6837,16 @@ export type MemberUpdateWithoutCertificatesInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCertificatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -5206,6 +6892,7 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -5229,11 +6916,15 @@ export type MemberUncheckedUpdateWithoutCertificatesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutCredentialDocumentsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -5278,6 +6969,8 @@ export type MemberCreateWithoutCredentialDocumentsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -5302,11 +6995,16 @@ export type MemberCreateWithoutCredentialDocumentsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -5352,6 +7050,7 @@ export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -5375,6 +7074,8 @@ export type MemberUncheckedCreateWithoutCredentialDocumentsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCredentialDocumentsInput = {
@@ -5396,6 +7097,8 @@ export type MemberUpdateToOneWithWhereWithoutCredentialDocumentsInput = {
 export type MemberUpdateWithoutCredentialDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5440,6 +7143,8 @@ export type MemberUpdateWithoutCredentialDocumentsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -5464,11 +7169,16 @@ export type MemberUpdateWithoutCredentialDocumentsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -5514,6 +7224,7 @@ export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -5537,11 +7248,15 @@ export type MemberUncheckedUpdateWithoutCredentialDocumentsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutPublicRecordsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -5586,6 +7301,8 @@ export type MemberCreateWithoutPublicRecordsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -5610,11 +7327,16 @@ export type MemberCreateWithoutPublicRecordsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -5660,6 +7382,7 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -5683,6 +7406,8 @@ export type MemberUncheckedCreateWithoutPublicRecordsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPublicRecordsInput = {
@@ -5704,6 +7429,8 @@ export type MemberUpdateToOneWithWhereWithoutPublicRecordsInput = {
 export type MemberUpdateWithoutPublicRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5748,6 +7475,8 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -5772,11 +7501,16 @@ export type MemberUpdateWithoutPublicRecordsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -5822,6 +7556,7 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -5845,11 +7580,15 @@ export type MemberUncheckedUpdateWithoutPublicRecordsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -5894,6 +7633,8 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -5918,11 +7659,16 @@ export type MemberCreateWithoutChaplaincyTrainingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -5968,6 +7714,7 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -5991,6 +7738,8 @@ export type MemberUncheckedCreateWithoutChaplaincyTrainingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutChaplaincyTrainingProgressInput = {
@@ -6012,6 +7761,8 @@ export type MemberUpdateToOneWithWhereWithoutChaplaincyTrainingProgressInput = {
 export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6056,6 +7807,8 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -6080,11 +7833,16 @@ export type MemberUpdateWithoutChaplaincyTrainingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -6130,6 +7888,7 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -6153,11 +7912,15 @@ export type MemberUncheckedUpdateWithoutChaplaincyTrainingProgressInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutSeminaryApplicationsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -6202,6 +7965,8 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -6226,11 +7991,16 @@ export type MemberCreateWithoutSeminaryApplicationsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -6276,6 +8046,7 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -6299,6 +8070,8 @@ export type MemberUncheckedCreateWithoutSeminaryApplicationsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSeminaryApplicationsInput = {
@@ -6320,6 +8093,8 @@ export type MemberUpdateToOneWithWhereWithoutSeminaryApplicationsInput = {
 export type MemberUpdateWithoutSeminaryApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6364,6 +8139,8 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -6388,11 +8165,16 @@ export type MemberUpdateWithoutSeminaryApplicationsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -6438,6 +8220,7 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -6461,11 +8244,15 @@ export type MemberUncheckedUpdateWithoutSeminaryApplicationsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutPreferredBranchesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -6510,6 +8297,8 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceCreateNestedManyWithoutMemberInput
@@ -6534,11 +8323,16 @@ export type MemberCreateWithoutPreferredBranchesInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -6584,6 +8378,7 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
   applicantRequirements?: Prisma.ApplicantRequirementUncheckedCreateNestedManyWithoutMemberInput
@@ -6607,6 +8402,8 @@ export type MemberUncheckedCreateWithoutPreferredBranchesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPreferredBranchesInput = {
@@ -6628,6 +8425,8 @@ export type MemberUpdateToOneWithWhereWithoutPreferredBranchesInput = {
 export type MemberUpdateWithoutPreferredBranchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6672,6 +8471,8 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
@@ -6696,11 +8497,16 @@ export type MemberUpdateWithoutPreferredBranchesInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -6746,6 +8552,7 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
   applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
@@ -6769,11 +8576,15 @@ export type MemberUncheckedUpdateWithoutPreferredBranchesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutOfficerAssignmentsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -6818,6 +8629,8 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -6842,11 +8655,16 @@ export type MemberCreateWithoutOfficerAssignmentsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -6892,6 +8710,7 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -6915,6 +8734,8 @@ export type MemberUncheckedCreateWithoutOfficerAssignmentsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOfficerAssignmentsInput = {
@@ -6936,6 +8757,8 @@ export type MemberUpdateToOneWithWhereWithoutOfficerAssignmentsInput = {
 export type MemberUpdateWithoutOfficerAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6980,6 +8803,8 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -7004,11 +8829,16 @@ export type MemberUpdateWithoutOfficerAssignmentsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -7054,6 +8884,7 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -7077,11 +8908,15 @@ export type MemberUncheckedUpdateWithoutOfficerAssignmentsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutOrdinationApplicationInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -7126,6 +8961,8 @@ export type MemberCreateWithoutOrdinationApplicationInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -7150,11 +8987,16 @@ export type MemberCreateWithoutOrdinationApplicationInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutOrdinationApplicationInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -7200,6 +9042,7 @@ export type MemberUncheckedCreateWithoutOrdinationApplicationInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -7223,6 +9066,8 @@ export type MemberUncheckedCreateWithoutOrdinationApplicationInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutOrdinationApplicationInput = {
@@ -7244,6 +9089,8 @@ export type MemberUpdateToOneWithWhereWithoutOrdinationApplicationInput = {
 export type MemberUpdateWithoutOrdinationApplicationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7288,6 +9135,8 @@ export type MemberUpdateWithoutOrdinationApplicationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -7312,11 +9161,16 @@ export type MemberUpdateWithoutOrdinationApplicationInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutOrdinationApplicationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -7362,6 +9216,7 @@ export type MemberUncheckedUpdateWithoutOrdinationApplicationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -7385,11 +9240,15 @@ export type MemberUncheckedUpdateWithoutOrdinationApplicationInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutCrasmApplicationInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -7434,6 +9293,8 @@ export type MemberCreateWithoutCrasmApplicationInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -7458,11 +9319,16 @@ export type MemberCreateWithoutCrasmApplicationInput = {
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutCrasmApplicationInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -7508,6 +9374,7 @@ export type MemberUncheckedCreateWithoutCrasmApplicationInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -7531,6 +9398,8 @@ export type MemberUncheckedCreateWithoutCrasmApplicationInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutCrasmApplicationInput = {
@@ -7552,6 +9421,8 @@ export type MemberUpdateToOneWithWhereWithoutCrasmApplicationInput = {
 export type MemberUpdateWithoutCrasmApplicationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7596,6 +9467,8 @@ export type MemberUpdateWithoutCrasmApplicationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -7620,11 +9493,16 @@ export type MemberUpdateWithoutCrasmApplicationInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutCrasmApplicationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -7670,6 +9548,7 @@ export type MemberUncheckedUpdateWithoutCrasmApplicationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -7693,11 +9572,15 @@ export type MemberUncheckedUpdateWithoutCrasmApplicationInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutEventAttendancesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -7742,6 +9625,8 @@ export type MemberCreateWithoutEventAttendancesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -7766,11 +9651,16 @@ export type MemberCreateWithoutEventAttendancesInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -7816,6 +9706,7 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -7839,6 +9730,8 @@ export type MemberUncheckedCreateWithoutEventAttendancesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutEventAttendancesInput = {
@@ -7860,6 +9753,8 @@ export type MemberUpdateToOneWithWhereWithoutEventAttendancesInput = {
 export type MemberUpdateWithoutEventAttendancesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7904,6 +9799,8 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -7928,11 +9825,16 @@ export type MemberUpdateWithoutEventAttendancesInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -7978,6 +9880,7 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -8001,11 +9904,15 @@ export type MemberUncheckedUpdateWithoutEventAttendancesInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutTaggedEventsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -8050,6 +9957,8 @@ export type MemberCreateWithoutTaggedEventsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -8074,11 +9983,16 @@ export type MemberCreateWithoutTaggedEventsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -8124,6 +10038,7 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -8147,6 +10062,8 @@ export type MemberUncheckedCreateWithoutTaggedEventsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTaggedEventsInput = {
@@ -8168,6 +10085,8 @@ export type MemberUpdateToOneWithWhereWithoutTaggedEventsInput = {
 export type MemberUpdateWithoutTaggedEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8212,6 +10131,8 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -8236,11 +10157,16 @@ export type MemberUpdateWithoutTaggedEventsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -8286,6 +10212,7 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -8309,11 +10236,15 @@ export type MemberUncheckedUpdateWithoutTaggedEventsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutTaggedNewsBlogsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -8358,6 +10289,8 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -8382,11 +10315,16 @@ export type MemberCreateWithoutTaggedNewsBlogsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -8432,6 +10370,7 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -8455,6 +10394,8 @@ export type MemberUncheckedCreateWithoutTaggedNewsBlogsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTaggedNewsBlogsInput = {
@@ -8476,6 +10417,8 @@ export type MemberUpdateToOneWithWhereWithoutTaggedNewsBlogsInput = {
 export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8520,6 +10463,8 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -8544,11 +10489,16 @@ export type MemberUpdateWithoutTaggedNewsBlogsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -8594,6 +10544,7 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -8617,11 +10568,15 @@ export type MemberUncheckedUpdateWithoutTaggedNewsBlogsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutProvidedServiceBookingsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -8666,6 +10621,8 @@ export type MemberCreateWithoutProvidedServiceBookingsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -8690,11 +10647,16 @@ export type MemberCreateWithoutProvidedServiceBookingsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutProvidedServiceBookingsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -8740,6 +10702,7 @@ export type MemberUncheckedCreateWithoutProvidedServiceBookingsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -8763,6 +10726,8 @@ export type MemberUncheckedCreateWithoutProvidedServiceBookingsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutProvidedServiceBookingsInput = {
@@ -8784,6 +10749,8 @@ export type MemberUpdateToOneWithWhereWithoutProvidedServiceBookingsInput = {
 export type MemberUpdateWithoutProvidedServiceBookingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8828,6 +10795,8 @@ export type MemberUpdateWithoutProvidedServiceBookingsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -8852,11 +10821,16 @@ export type MemberUpdateWithoutProvidedServiceBookingsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutProvidedServiceBookingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -8902,6 +10876,7 @@ export type MemberUncheckedUpdateWithoutProvidedServiceBookingsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -8925,11 +10900,15 @@ export type MemberUncheckedUpdateWithoutProvidedServiceBookingsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutServiceAvailabilitySlotsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -8974,6 +10953,8 @@ export type MemberCreateWithoutServiceAvailabilitySlotsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -8998,11 +10979,16 @@ export type MemberCreateWithoutServiceAvailabilitySlotsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationCreateNestedOneWithoutMemberInput
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -9048,6 +11034,7 @@ export type MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -9071,6 +11058,8 @@ export type MemberUncheckedCreateWithoutServiceAvailabilitySlotsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedCreateNestedOneWithoutMemberInput
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutServiceAvailabilitySlotsInput = {
@@ -9092,6 +11081,8 @@ export type MemberUpdateToOneWithWhereWithoutServiceAvailabilitySlotsInput = {
 export type MemberUpdateWithoutServiceAvailabilitySlotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9136,6 +11127,8 @@ export type MemberUpdateWithoutServiceAvailabilitySlotsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -9160,11 +11153,16 @@ export type MemberUpdateWithoutServiceAvailabilitySlotsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -9210,6 +11208,7 @@ export type MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -9233,11 +11232,15 @@ export type MemberUncheckedUpdateWithoutServiceAvailabilitySlotsInput = {
   ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberCreateWithoutMemoRecipientsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
   badgeNumber?: string | null
@@ -9282,6 +11285,8 @@ export type MemberCreateWithoutMemoRecipientsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredByMember?: Prisma.MemberCreateNestedOneWithoutReferredMembersInput
+  referredMembers?: Prisma.MemberCreateNestedManyWithoutReferredByMemberInput
   user: Prisma.UserCreateNestedOneWithoutMemberProfileInput
   preferredBranches?: Prisma.BranchOfServiceCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceCreateNestedManyWithoutMemberInput
@@ -9306,11 +11311,16 @@ export type MemberCreateWithoutMemoRecipientsInput = {
   crasmApplication?: Prisma.CrasmApplicationCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
   id?: string
   uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  referredByMemberId?: string | null
   userId: string
   status?: $Enums.MemberStatus
   memberType?: $Enums.MemberType
@@ -9356,6 +11366,7 @@ export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredMembers?: Prisma.MemberUncheckedCreateNestedManyWithoutReferredByMemberInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedCreateNestedManyWithoutMemberInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedCreateNestedManyWithoutMemberInput
   characterReferences?: Prisma.CharacterReferenceUncheckedCreateNestedManyWithoutMemberInput
@@ -9379,6 +11390,8 @@ export type MemberUncheckedCreateWithoutMemoRecipientsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedCreateNestedOneWithoutMemberInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedCreateNestedManyWithoutProviderMemberInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedCreateNestedManyWithoutMemberInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferrerMemberInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedCreateNestedManyWithoutReferredMemberInput
 }
 
 export type MemberCreateOrConnectWithoutMemoRecipientsInput = {
@@ -9400,6 +11413,8 @@ export type MemberUpdateToOneWithWhereWithoutMemoRecipientsInput = {
 export type MemberUpdateWithoutMemoRecipientsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
   badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9444,6 +11459,8 @@ export type MemberUpdateWithoutMemoRecipientsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredByMember?: Prisma.MemberUpdateOneWithoutReferredMembersNestedInput
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
   preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
@@ -9468,11 +11485,16 @@ export type MemberUpdateWithoutMemoRecipientsInput = {
   crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredByMemberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
@@ -9518,6 +11540,7 @@ export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
   preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
   ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
   characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
@@ -9541,6 +11564,270 @@ export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
   crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
   providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
   serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberCreateManyReferredByMemberInput = {
+  id?: string
+  uniqueId?: string | null
+  referralCode?: string | null
+  referralCodeCreatedAt?: Date | string | null
+  userId: string
+  status?: $Enums.MemberStatus
+  memberType?: $Enums.MemberType
+  badgeNumber?: string | null
+  profileBannerUrl?: string | null
+  profileBannerPositionY?: number
+  serviceLicenseUrl?: string | null
+  serviceLicenseFileName?: string | null
+  serviceLicenseMimeType?: string | null
+  firstName: string
+  middleInitial?: string | null
+  lastName: string
+  extensionName?: string | null
+  mobilePhoneNumber?: string | null
+  homeAddress?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  gender: $Enums.Gender
+  nationality?: string | null
+  dateOfBirth: Date | string
+  region?: string | null
+  province?: string | null
+  municipalityCity?: string | null
+  barangay?: string | null
+  emergencyContactName?: string | null
+  emergencyContactMobile?: string | null
+  churchAffiliation?: string | null
+  churchAddress?: string | null
+  currentPositionRole?: string | null
+  currentPositionRoleOther?: string | null
+  height?: string | null
+  weight?: string | null
+  bloodType?: string | null
+  colorOfEyes?: string | null
+  colorOfSkin?: string | null
+  sssNumber?: string | null
+  tinNumber?: string | null
+  skillsTalents?: string | null
+  preferredBranchOther?: string | null
+  elementarySchool?: string | null
+  secondarySchool?: string | null
+  tertiaryCollege?: string | null
+  postGraduateStudies?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MemberUpdateWithoutReferredByMemberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUpdateManyWithoutReferredByMemberNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberProfileNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutReferredByMemberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredMembers?: Prisma.MemberUncheckedUpdateManyWithoutReferredByMemberNestedInput
+  preferredBranches?: Prisma.BranchOfServiceUncheckedUpdateManyWithoutMemberNestedInput
+  ministerialExperiences?: Prisma.MinisterialExperienceUncheckedUpdateManyWithoutMemberNestedInput
+  characterReferences?: Prisma.CharacterReferenceUncheckedUpdateManyWithoutMemberNestedInput
+  applicantRequirements?: Prisma.ApplicantRequirementUncheckedUpdateManyWithoutMemberNestedInput
+  onboardingProgress?: Prisma.MemberOnboardingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  paymentCheckout?: Prisma.MemberPaymentCheckoutUncheckedUpdateOneWithoutMemberNestedInput
+  onlineInterviewAppointment?: Prisma.MemberOnlineInterviewAppointmentUncheckedUpdateOneWithoutMemberNestedInput
+  idGenerationAsset?: Prisma.MemberIdGenerationAssetUncheckedUpdateOneWithoutMemberNestedInput
+  certificates?: Prisma.MemberCertificateUncheckedUpdateManyWithoutMemberNestedInput
+  credentialDocuments?: Prisma.MemberCredentialDocumentUncheckedUpdateManyWithoutMemberNestedInput
+  publicRecords?: Prisma.MemberPublicRecordUncheckedUpdateManyWithoutMemberNestedInput
+  chaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressUncheckedUpdateOneWithoutMemberNestedInput
+  signature?: Prisma.ApplicantSignatureUncheckedUpdateOneWithoutMemberNestedInput
+  seminaryApplications?: Prisma.SeminaryApplicationUncheckedUpdateManyWithoutMemberNestedInput
+  officerAssignments?: Prisma.OfficerAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  eventAttendances?: Prisma.EventAttendeeUncheckedUpdateManyWithoutMemberNestedInput
+  taggedEvents?: Prisma.EventTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  taggedNewsBlogs?: Prisma.NewsBlogTaggedMemberUncheckedUpdateManyWithoutMemberNestedInput
+  memoRecipients?: Prisma.MemoRecipientUncheckedUpdateManyWithoutMemberNestedInput
+  followers?: Prisma.MemberFollowUncheckedUpdateManyWithoutMemberNestedInput
+  ordinationApplication?: Prisma.OrdinationApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  crasmApplication?: Prisma.CrasmApplicationUncheckedUpdateOneWithoutMemberNestedInput
+  providedServiceBookings?: Prisma.ChaplainServiceBookingUncheckedUpdateManyWithoutProviderMemberNestedInput
+  serviceAvailabilitySlots?: Prisma.ChaplainServiceAvailabilityUncheckedUpdateManyWithoutMemberNestedInput
+  referralPointEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferrerMemberNestedInput
+  referralMilestoneEntries?: Prisma.ReferralPointLedgerEntryUncheckedUpdateManyWithoutReferredMemberNestedInput
+}
+
+export type MemberUncheckedUpdateManyWithoutReferredByMemberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uniqueId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralCodeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  badgeNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileBannerPositionY?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceLicenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceLicenseMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  extensionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalityCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barangay?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactMobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAffiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPositionRoleOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfEyes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  colorOfSkin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sssNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skillsTalents?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredBranchOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elementarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondarySchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tertiaryCollege?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postGraduateStudies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -9549,6 +11836,7 @@ export type MemberUncheckedUpdateWithoutMemoRecipientsInput = {
  */
 
 export type MemberCountOutputType = {
+  referredMembers: number
   preferredBranches: number
   ministerialExperiences: number
   characterReferences: number
@@ -9565,9 +11853,12 @@ export type MemberCountOutputType = {
   followers: number
   providedServiceBookings: number
   serviceAvailabilitySlots: number
+  referralPointEntries: number
+  referralMilestoneEntries: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  referredMembers?: boolean | MemberCountOutputTypeCountReferredMembersArgs
   preferredBranches?: boolean | MemberCountOutputTypeCountPreferredBranchesArgs
   ministerialExperiences?: boolean | MemberCountOutputTypeCountMinisterialExperiencesArgs
   characterReferences?: boolean | MemberCountOutputTypeCountCharacterReferencesArgs
@@ -9584,6 +11875,8 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   followers?: boolean | MemberCountOutputTypeCountFollowersArgs
   providedServiceBookings?: boolean | MemberCountOutputTypeCountProvidedServiceBookingsArgs
   serviceAvailabilitySlots?: boolean | MemberCountOutputTypeCountServiceAvailabilitySlotsArgs
+  referralPointEntries?: boolean | MemberCountOutputTypeCountReferralPointEntriesArgs
+  referralMilestoneEntries?: boolean | MemberCountOutputTypeCountReferralMilestoneEntriesArgs
 }
 
 /**
@@ -9594,6 +11887,13 @@ export type MemberCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the MemberCountOutputType
    */
   select?: Prisma.MemberCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountReferredMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberWhereInput
 }
 
 /**
@@ -9708,10 +12008,27 @@ export type MemberCountOutputTypeCountServiceAvailabilitySlotsArgs<ExtArgs exten
   where?: Prisma.ChaplainServiceAvailabilityWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountReferralPointEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReferralPointLedgerEntryWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountReferralMilestoneEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReferralPointLedgerEntryWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   uniqueId?: boolean
+  referralCode?: boolean
+  referralCodeCreatedAt?: boolean
+  referredByMemberId?: boolean
   userId?: boolean
   status?: boolean
   memberType?: boolean
@@ -9757,6 +12074,8 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  referredByMember?: boolean | Prisma.Member$referredByMemberArgs<ExtArgs>
+  referredMembers?: boolean | Prisma.Member$referredMembersArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   preferredBranches?: boolean | Prisma.Member$preferredBranchesArgs<ExtArgs>
   ministerialExperiences?: boolean | Prisma.Member$ministerialExperiencesArgs<ExtArgs>
@@ -9782,12 +12101,17 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   crasmApplication?: boolean | Prisma.Member$crasmApplicationArgs<ExtArgs>
   providedServiceBookings?: boolean | Prisma.Member$providedServiceBookingsArgs<ExtArgs>
   serviceAvailabilitySlots?: boolean | Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>
+  referralPointEntries?: boolean | Prisma.Member$referralPointEntriesArgs<ExtArgs>
+  referralMilestoneEntries?: boolean | Prisma.Member$referralMilestoneEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   uniqueId?: boolean
+  referralCode?: boolean
+  referralCodeCreatedAt?: boolean
+  referredByMemberId?: boolean
   userId?: boolean
   status?: boolean
   memberType?: boolean
@@ -9833,12 +12157,16 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  referredByMember?: boolean | Prisma.Member$referredByMemberArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   uniqueId?: boolean
+  referralCode?: boolean
+  referralCodeCreatedAt?: boolean
+  referredByMemberId?: boolean
   userId?: boolean
   status?: boolean
   memberType?: boolean
@@ -9884,12 +12212,16 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  referredByMember?: boolean | Prisma.Member$referredByMemberArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectScalar = {
   id?: boolean
   uniqueId?: boolean
+  referralCode?: boolean
+  referralCodeCreatedAt?: boolean
+  referredByMemberId?: boolean
   userId?: boolean
   status?: boolean
   memberType?: boolean
@@ -9937,8 +12269,10 @@ export type MemberSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueId" | "userId" | "status" | "memberType" | "badgeNumber" | "profileBannerUrl" | "profileBannerPositionY" | "serviceLicenseUrl" | "serviceLicenseFileName" | "serviceLicenseMimeType" | "firstName" | "middleInitial" | "lastName" | "extensionName" | "mobilePhoneNumber" | "homeAddress" | "civilStatus" | "gender" | "nationality" | "dateOfBirth" | "region" | "province" | "municipalityCity" | "barangay" | "emergencyContactName" | "emergencyContactMobile" | "churchAffiliation" | "churchAddress" | "currentPositionRole" | "currentPositionRoleOther" | "height" | "weight" | "bloodType" | "colorOfEyes" | "colorOfSkin" | "sssNumber" | "tinNumber" | "skillsTalents" | "preferredBranchOther" | "elementarySchool" | "secondarySchool" | "tertiaryCollege" | "postGraduateStudies" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueId" | "referralCode" | "referralCodeCreatedAt" | "referredByMemberId" | "userId" | "status" | "memberType" | "badgeNumber" | "profileBannerUrl" | "profileBannerPositionY" | "serviceLicenseUrl" | "serviceLicenseFileName" | "serviceLicenseMimeType" | "firstName" | "middleInitial" | "lastName" | "extensionName" | "mobilePhoneNumber" | "homeAddress" | "civilStatus" | "gender" | "nationality" | "dateOfBirth" | "region" | "province" | "municipalityCity" | "barangay" | "emergencyContactName" | "emergencyContactMobile" | "churchAffiliation" | "churchAddress" | "currentPositionRole" | "currentPositionRoleOther" | "height" | "weight" | "bloodType" | "colorOfEyes" | "colorOfSkin" | "sssNumber" | "tinNumber" | "skillsTalents" | "preferredBranchOther" | "elementarySchool" | "secondarySchool" | "tertiaryCollege" | "postGraduateStudies" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  referredByMember?: boolean | Prisma.Member$referredByMemberArgs<ExtArgs>
+  referredMembers?: boolean | Prisma.Member$referredMembersArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   preferredBranches?: boolean | Prisma.Member$preferredBranchesArgs<ExtArgs>
   ministerialExperiences?: boolean | Prisma.Member$ministerialExperiencesArgs<ExtArgs>
@@ -9964,18 +12298,24 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   crasmApplication?: boolean | Prisma.Member$crasmApplicationArgs<ExtArgs>
   providedServiceBookings?: boolean | Prisma.Member$providedServiceBookingsArgs<ExtArgs>
   serviceAvailabilitySlots?: boolean | Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>
+  referralPointEntries?: boolean | Prisma.Member$referralPointEntriesArgs<ExtArgs>
+  referralMilestoneEntries?: boolean | Prisma.Member$referralMilestoneEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  referredByMember?: boolean | Prisma.Member$referredByMemberArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type MemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  referredByMember?: boolean | Prisma.Member$referredByMemberArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Member"
   objects: {
+    referredByMember: Prisma.$MemberPayload<ExtArgs> | null
+    referredMembers: Prisma.$MemberPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
     preferredBranches: Prisma.$BranchOfServicePayload<ExtArgs>[]
     ministerialExperiences: Prisma.$MinisterialExperiencePayload<ExtArgs>[]
@@ -10001,10 +12341,15 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     crasmApplication: Prisma.$CrasmApplicationPayload<ExtArgs> | null
     providedServiceBookings: Prisma.$ChaplainServiceBookingPayload<ExtArgs>[]
     serviceAvailabilitySlots: Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>[]
+    referralPointEntries: Prisma.$ReferralPointLedgerEntryPayload<ExtArgs>[]
+    referralMilestoneEntries: Prisma.$ReferralPointLedgerEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     uniqueId: string | null
+    referralCode: string | null
+    referralCodeCreatedAt: Date | null
+    referredByMemberId: string | null
     userId: string
     status: $Enums.MemberStatus
     memberType: $Enums.MemberType
@@ -10444,6 +12789,8 @@ readonly fields: MemberFieldRefs;
  */
 export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  referredByMember<T extends Prisma.Member$referredByMemberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$referredByMemberArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  referredMembers<T extends Prisma.Member$referredMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$referredMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   preferredBranches<T extends Prisma.Member$preferredBranchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$preferredBranchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchOfServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ministerialExperiences<T extends Prisma.Member$ministerialExperiencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$ministerialExperiencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MinisterialExperiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10469,6 +12816,8 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   crasmApplication<T extends Prisma.Member$crasmApplicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$crasmApplicationArgs<ExtArgs>>): Prisma.Prisma__CrasmApplicationClient<runtime.Types.Result.GetResult<Prisma.$CrasmApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   providedServiceBookings<T extends Prisma.Member$providedServiceBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$providedServiceBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceBookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceAvailabilitySlots<T extends Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$serviceAvailabilitySlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChaplainServiceAvailabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  referralPointEntries<T extends Prisma.Member$referralPointEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$referralPointEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPointLedgerEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  referralMilestoneEntries<T extends Prisma.Member$referralMilestoneEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$referralMilestoneEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPointLedgerEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10500,6 +12849,9 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
 export interface MemberFieldRefs {
   readonly id: Prisma.FieldRef<"Member", 'String'>
   readonly uniqueId: Prisma.FieldRef<"Member", 'String'>
+  readonly referralCode: Prisma.FieldRef<"Member", 'String'>
+  readonly referralCodeCreatedAt: Prisma.FieldRef<"Member", 'DateTime'>
+  readonly referredByMemberId: Prisma.FieldRef<"Member", 'String'>
   readonly userId: Prisma.FieldRef<"Member", 'String'>
   readonly status: Prisma.FieldRef<"Member", 'MemberStatus'>
   readonly memberType: Prisma.FieldRef<"Member", 'MemberType'>
@@ -10938,6 +13290,49 @@ export type MemberDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Members to delete.
    */
   limit?: number
+}
+
+/**
+ * Member.referredByMember
+ */
+export type Member$referredByMemberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Member
+   */
+  select?: Prisma.MemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Member
+   */
+  omit?: Prisma.MemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberInclude<ExtArgs> | null
+  where?: Prisma.MemberWhereInput
+}
+
+/**
+ * Member.referredMembers
+ */
+export type Member$referredMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Member
+   */
+  select?: Prisma.MemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Member
+   */
+  omit?: Prisma.MemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberInclude<ExtArgs> | null
+  where?: Prisma.MemberWhereInput
+  orderBy?: Prisma.MemberOrderByWithRelationInput | Prisma.MemberOrderByWithRelationInput[]
+  cursor?: Prisma.MemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberScalarFieldEnum | Prisma.MemberScalarFieldEnum[]
 }
 
 /**
@@ -11474,6 +13869,54 @@ export type Member$serviceAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.ChaplainServiceAvailabilityScalarFieldEnum | Prisma.ChaplainServiceAvailabilityScalarFieldEnum[]
+}
+
+/**
+ * Member.referralPointEntries
+ */
+export type Member$referralPointEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReferralPointLedgerEntry
+   */
+  select?: Prisma.ReferralPointLedgerEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReferralPointLedgerEntry
+   */
+  omit?: Prisma.ReferralPointLedgerEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReferralPointLedgerEntryInclude<ExtArgs> | null
+  where?: Prisma.ReferralPointLedgerEntryWhereInput
+  orderBy?: Prisma.ReferralPointLedgerEntryOrderByWithRelationInput | Prisma.ReferralPointLedgerEntryOrderByWithRelationInput[]
+  cursor?: Prisma.ReferralPointLedgerEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReferralPointLedgerEntryScalarFieldEnum | Prisma.ReferralPointLedgerEntryScalarFieldEnum[]
+}
+
+/**
+ * Member.referralMilestoneEntries
+ */
+export type Member$referralMilestoneEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReferralPointLedgerEntry
+   */
+  select?: Prisma.ReferralPointLedgerEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReferralPointLedgerEntry
+   */
+  omit?: Prisma.ReferralPointLedgerEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReferralPointLedgerEntryInclude<ExtArgs> | null
+  where?: Prisma.ReferralPointLedgerEntryWhereInput
+  orderBy?: Prisma.ReferralPointLedgerEntryOrderByWithRelationInput | Prisma.ReferralPointLedgerEntryOrderByWithRelationInput[]
+  cursor?: Prisma.ReferralPointLedgerEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReferralPointLedgerEntryScalarFieldEnum | Prisma.ReferralPointLedgerEntryScalarFieldEnum[]
 }
 
 /**

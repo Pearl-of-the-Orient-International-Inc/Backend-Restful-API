@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.optionalAuthenticate = exports.authenticate = void 0;
 const jsonwebtoken_1 = require("jsonwebtoken");
-const http_codes_1 = require("@/common/http-codes");
-const jwt_1 = require("@/lib/jwt");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../common/http-codes");
+const jwt_1 = require("../lib/jwt");
+const winston_1 = require("../lib/winston");
 const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer '))) {

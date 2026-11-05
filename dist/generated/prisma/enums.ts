@@ -246,6 +246,15 @@ export const MemberOnboardingStep = {
 export type MemberOnboardingStep = (typeof MemberOnboardingStep)[keyof typeof MemberOnboardingStep]
 
 
+export const ReferralPointEntryStatus = {
+  EARNED: 'EARNED',
+  REVERSED: 'REVERSED',
+  VOID: 'VOID'
+} as const
+
+export type ReferralPointEntryStatus = (typeof ReferralPointEntryStatus)[keyof typeof ReferralPointEntryStatus]
+
+
 export const MemberPaymentMethod = {
   E_WALLET: 'E_WALLET',
   DIRECT_DEBIT: 'DIRECT_DEBIT',
@@ -320,6 +329,83 @@ export const SeminaryCourseStatus = {
 } as const
 
 export type SeminaryCourseStatus = (typeof SeminaryCourseStatus)[keyof typeof SeminaryCourseStatus]
+
+
+export const SeminaryCourseScheduleStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type SeminaryCourseScheduleStatus = (typeof SeminaryCourseScheduleStatus)[keyof typeof SeminaryCourseScheduleStatus]
+
+
+export const SeminaryAnnouncementKind = {
+  ANNOUNCEMENT: 'ANNOUNCEMENT',
+  EVENT: 'EVENT'
+} as const
+
+export type SeminaryAnnouncementKind = (typeof SeminaryAnnouncementKind)[keyof typeof SeminaryAnnouncementKind]
+
+
+export const SeminaryAnnouncementCategory = {
+  ACADEMIC: 'ACADEMIC',
+  ADMINISTRATION: 'ADMINISTRATION',
+  FORMATION: 'FORMATION',
+  ADMISSIONS: 'ADMISSIONS'
+} as const
+
+export type SeminaryAnnouncementCategory = (typeof SeminaryAnnouncementCategory)[keyof typeof SeminaryAnnouncementCategory]
+
+
+export const SeminaryAnnouncementAudience = {
+  ALL: 'ALL',
+  STUDENTS: 'STUDENTS',
+  INSTRUCTORS: 'INSTRUCTORS',
+  STUDENTS_AND_INSTRUCTORS: 'STUDENTS_AND_INSTRUCTORS'
+} as const
+
+export type SeminaryAnnouncementAudience = (typeof SeminaryAnnouncementAudience)[keyof typeof SeminaryAnnouncementAudience]
+
+
+export const SeminaryAnnouncementStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type SeminaryAnnouncementStatus = (typeof SeminaryAnnouncementStatus)[keyof typeof SeminaryAnnouncementStatus]
+
+
+export const SeminaryDocumentDeliveryMethod = {
+  PICKUP: 'PICKUP',
+  EMAIL: 'EMAIL',
+  COURIER: 'COURIER'
+} as const
+
+export type SeminaryDocumentDeliveryMethod = (typeof SeminaryDocumentDeliveryMethod)[keyof typeof SeminaryDocumentDeliveryMethod]
+
+
+export const SeminaryDocumentRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  PROCESSING: 'PROCESSING',
+  READY_FOR_RELEASE: 'READY_FOR_RELEASE',
+  RELEASED: 'RELEASED'
+} as const
+
+export type SeminaryDocumentRequestStatus = (typeof SeminaryDocumentRequestStatus)[keyof typeof SeminaryDocumentRequestStatus]
+
+
+export const SeminaryDocumentPaymentStatus = {
+  NOT_APPLICABLE: 'NOT_APPLICABLE',
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  WAIVED: 'WAIVED'
+} as const
+
+export type SeminaryDocumentPaymentStatus = (typeof SeminaryDocumentPaymentStatus)[keyof typeof SeminaryDocumentPaymentStatus]
 
 
 export const SeminaryStudyMaterialType = {
@@ -637,7 +723,11 @@ export type EventAttendeeAccessLevel = (typeof EventAttendeeAccessLevel)[keyof t
 
 export const EventAttendeeInviteStatus = {
   INVITED: 'INVITED',
-  ACCEPTED: 'ACCEPTED'
+  ACCEPTED: 'ACCEPTED',
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ATTENDED: 'ATTENDED'
 } as const
 
 export type EventAttendeeInviteStatus = (typeof EventAttendeeInviteStatus)[keyof typeof EventAttendeeInviteStatus]

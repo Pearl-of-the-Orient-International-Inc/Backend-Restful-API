@@ -10,15 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.acceptSeminaryInstructorInvite = exports.inviteSeminaryInstructor = exports.sendInstructorInvitation = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const helpers_1 = require("@/lib/helpers");
-const password_hash_1 = require("@/lib/password-hash");
-const prisma_1 = require("@/lib/prisma");
-const verification_redirect_1 = require("@/lib/verification-redirect");
-const winston_1 = require("@/lib/winston");
-const mailers_1 = require("@/mailers");
-const seminary_instructor_account_1 = require("@/mailers/templates/seminary-instructor-account");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const helpers_1 = require("../../../lib/helpers");
+const password_hash_1 = require("../../../lib/password-hash");
+const prisma_1 = require("../../../lib/prisma");
+const verification_redirect_1 = require("../../../lib/verification-redirect");
+const winston_1 = require("../../../lib/winston");
+const mailers_1 = require("../../../mailers");
+const seminary_instructor_account_1 = require("../../../mailers/templates/seminary-instructor-account");
 const instructor_shared_1 = require("./instructor-shared");
 const INVITE_EXPIRES_IN = '30d';
 const sendInstructorInvitation = (instructor) => __awaiter(void 0, void 0, void 0, function* () {

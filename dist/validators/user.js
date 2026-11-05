@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changeUserPasswordByAdminSchema = exports.updateUserByIdSchema = exports.createUserAccountSchema = void 0;
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 const zod_1 = __importDefault(require("zod"));
 const auth_1 = require("./auth");
 exports.createUserAccountSchema = zod_1.default.object({

@@ -5,6 +5,12 @@ import {
   NewsBlogStatus,
 } from '@/generated/prisma/enums';
 
+export const updateFacebookPageConfigurationSchema = z.object({
+  pageId: z.string().trim().min(1).max(100),
+  accessToken: z.string().trim().min(20).max(2000),
+  expiresAt: z.iso.datetime().nullable().optional(),
+});
+
 const mediaItemSchema = z.object({
   kind: z.enum(NewsBlogMediaKind),
   fileUrl: z.url({ message: 'Media URL must be a valid URL' }),

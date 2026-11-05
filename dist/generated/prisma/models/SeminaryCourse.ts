@@ -264,6 +264,7 @@ export type SeminaryCourseWhereInput = {
   sortOrder?: Prisma.IntFilter<"SeminaryCourse"> | number
   createdAt?: Prisma.DateTimeFilter<"SeminaryCourse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryCourse"> | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleListRelationFilter
 }
 
 export type SeminaryCourseOrderByWithRelationInput = {
@@ -278,6 +279,7 @@ export type SeminaryCourseOrderByWithRelationInput = {
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  schedules?: Prisma.SeminaryCourseScheduleOrderByRelationAggregateInput
 }
 
 export type SeminaryCourseWhereUniqueInput = Prisma.AtLeast<{
@@ -295,6 +297,7 @@ export type SeminaryCourseWhereUniqueInput = Prisma.AtLeast<{
   sortOrder?: Prisma.IntFilter<"SeminaryCourse"> | number
   createdAt?: Prisma.DateTimeFilter<"SeminaryCourse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryCourse"> | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleListRelationFilter
 }, "id" | "courseCode">
 
 export type SeminaryCourseOrderByWithAggregationInput = {
@@ -345,6 +348,7 @@ export type SeminaryCourseCreateInput = {
   sortOrder?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  schedules?: Prisma.SeminaryCourseScheduleCreateNestedManyWithoutCourseInput
 }
 
 export type SeminaryCourseUncheckedCreateInput = {
@@ -359,6 +363,7 @@ export type SeminaryCourseUncheckedCreateInput = {
   sortOrder?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUncheckedCreateNestedManyWithoutCourseInput
 }
 
 export type SeminaryCourseUpdateInput = {
@@ -373,6 +378,7 @@ export type SeminaryCourseUpdateInput = {
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUpdateManyWithoutCourseNestedInput
 }
 
 export type SeminaryCourseUncheckedUpdateInput = {
@@ -387,6 +393,7 @@ export type SeminaryCourseUncheckedUpdateInput = {
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.SeminaryCourseScheduleUncheckedUpdateManyWithoutCourseNestedInput
 }
 
 export type SeminaryCourseCreateManyInput = {
@@ -481,6 +488,11 @@ export type SeminaryCourseSumOrderByAggregateInput = {
   sortOrder?: Prisma.SortOrder
 }
 
+export type SeminaryCourseScalarRelationFilter = {
+  is?: Prisma.SeminaryCourseWhereInput
+  isNot?: Prisma.SeminaryCourseWhereInput
+}
+
 export type EnumSeminaryProgramLevelFieldUpdateOperationsInput = {
   set?: $Enums.SeminaryProgramLevel
 }
@@ -493,6 +505,121 @@ export type EnumSeminaryCourseStatusFieldUpdateOperationsInput = {
   set?: $Enums.SeminaryCourseStatus
 }
 
+export type SeminaryCourseCreateNestedOneWithoutSchedulesInput = {
+  create?: Prisma.XOR<Prisma.SeminaryCourseCreateWithoutSchedulesInput, Prisma.SeminaryCourseUncheckedCreateWithoutSchedulesInput>
+  connectOrCreate?: Prisma.SeminaryCourseCreateOrConnectWithoutSchedulesInput
+  connect?: Prisma.SeminaryCourseWhereUniqueInput
+}
+
+export type SeminaryCourseUpdateOneRequiredWithoutSchedulesNestedInput = {
+  create?: Prisma.XOR<Prisma.SeminaryCourseCreateWithoutSchedulesInput, Prisma.SeminaryCourseUncheckedCreateWithoutSchedulesInput>
+  connectOrCreate?: Prisma.SeminaryCourseCreateOrConnectWithoutSchedulesInput
+  upsert?: Prisma.SeminaryCourseUpsertWithoutSchedulesInput
+  connect?: Prisma.SeminaryCourseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryCourseUpdateToOneWithWhereWithoutSchedulesInput, Prisma.SeminaryCourseUpdateWithoutSchedulesInput>, Prisma.SeminaryCourseUncheckedUpdateWithoutSchedulesInput>
+}
+
+export type SeminaryCourseCreateWithoutSchedulesInput = {
+  id?: string
+  courseName: string
+  courseCode: string
+  program: $Enums.SeminaryProgramLevel
+  units: number
+  modality: $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SeminaryCourseStatus
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SeminaryCourseUncheckedCreateWithoutSchedulesInput = {
+  id?: string
+  courseName: string
+  courseCode: string
+  program: $Enums.SeminaryProgramLevel
+  units: number
+  modality: $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SeminaryCourseStatus
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SeminaryCourseCreateOrConnectWithoutSchedulesInput = {
+  where: Prisma.SeminaryCourseWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeminaryCourseCreateWithoutSchedulesInput, Prisma.SeminaryCourseUncheckedCreateWithoutSchedulesInput>
+}
+
+export type SeminaryCourseUpsertWithoutSchedulesInput = {
+  update: Prisma.XOR<Prisma.SeminaryCourseUpdateWithoutSchedulesInput, Prisma.SeminaryCourseUncheckedUpdateWithoutSchedulesInput>
+  create: Prisma.XOR<Prisma.SeminaryCourseCreateWithoutSchedulesInput, Prisma.SeminaryCourseUncheckedCreateWithoutSchedulesInput>
+  where?: Prisma.SeminaryCourseWhereInput
+}
+
+export type SeminaryCourseUpdateToOneWithWhereWithoutSchedulesInput = {
+  where?: Prisma.SeminaryCourseWhereInput
+  data: Prisma.XOR<Prisma.SeminaryCourseUpdateWithoutSchedulesInput, Prisma.SeminaryCourseUncheckedUpdateWithoutSchedulesInput>
+}
+
+export type SeminaryCourseUpdateWithoutSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  courseName?: Prisma.StringFieldUpdateOperationsInput | string
+  courseCode?: Prisma.StringFieldUpdateOperationsInput | string
+  program?: Prisma.EnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel
+  units?: Prisma.IntFieldUpdateOperationsInput | number
+  modality?: Prisma.EnumSeminaryCourseModalityFieldUpdateOperationsInput | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSeminaryCourseStatusFieldUpdateOperationsInput | $Enums.SeminaryCourseStatus
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SeminaryCourseUncheckedUpdateWithoutSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  courseName?: Prisma.StringFieldUpdateOperationsInput | string
+  courseCode?: Prisma.StringFieldUpdateOperationsInput | string
+  program?: Prisma.EnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel
+  units?: Prisma.IntFieldUpdateOperationsInput | number
+  modality?: Prisma.EnumSeminaryCourseModalityFieldUpdateOperationsInput | $Enums.SeminaryCourseModality
+  subjects?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSeminaryCourseStatusFieldUpdateOperationsInput | $Enums.SeminaryCourseStatus
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type SeminaryCourseCountOutputType
+ */
+
+export type SeminaryCourseCountOutputType = {
+  schedules: number
+}
+
+export type SeminaryCourseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedules?: boolean | SeminaryCourseCountOutputTypeCountSchedulesArgs
+}
+
+/**
+ * SeminaryCourseCountOutputType without action
+ */
+export type SeminaryCourseCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryCourseCountOutputType
+   */
+  select?: Prisma.SeminaryCourseCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SeminaryCourseCountOutputType without action
+ */
+export type SeminaryCourseCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeminaryCourseScheduleWhereInput
+}
 
 
 export type SeminaryCourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -507,6 +634,8 @@ export type SeminaryCourseSelect<ExtArgs extends runtime.Types.Extensions.Intern
   sortOrder?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  schedules?: boolean | Prisma.SeminaryCourse$schedulesArgs<ExtArgs>
+  _count?: boolean | Prisma.SeminaryCourseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["seminaryCourse"]>
 
 export type SeminaryCourseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -552,10 +681,18 @@ export type SeminaryCourseSelectScalar = {
 }
 
 export type SeminaryCourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "courseName" | "courseCode" | "program" | "units" | "modality" | "subjects" | "status" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryCourse"]>
+export type SeminaryCourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedules?: boolean | Prisma.SeminaryCourse$schedulesArgs<ExtArgs>
+  _count?: boolean | Prisma.SeminaryCourseCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type SeminaryCourseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SeminaryCourseIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $SeminaryCoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SeminaryCourse"
-  objects: {}
+  objects: {
+    schedules: Prisma.$SeminaryCourseSchedulePayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     courseName: string
@@ -962,6 +1099,7 @@ readonly fields: SeminaryCourseFieldRefs;
  */
 export interface Prisma__SeminaryCourseClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  schedules<T extends Prisma.SeminaryCourse$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryCourse$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryCourseSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1019,6 +1157,10 @@ export type SeminaryCourseFindUniqueArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
+  /**
    * Filter, which SeminaryCourse to fetch.
    */
   where: Prisma.SeminaryCourseWhereUniqueInput
@@ -1037,6 +1179,10 @@ export type SeminaryCourseFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
+  /**
    * Filter, which SeminaryCourse to fetch.
    */
   where: Prisma.SeminaryCourseWhereUniqueInput
@@ -1054,6 +1200,10 @@ export type SeminaryCourseFindFirstArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the SeminaryCourse
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
   /**
    * Filter, which SeminaryCourse to fetch.
    */
@@ -1103,6 +1253,10 @@ export type SeminaryCourseFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ext
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
+  /**
    * Filter, which SeminaryCourse to fetch.
    */
   where?: Prisma.SeminaryCourseWhereInput
@@ -1151,6 +1305,10 @@ export type SeminaryCourseFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
+  /**
    * Filter, which SeminaryCourses to fetch.
    */
   where?: Prisma.SeminaryCourseWhereInput
@@ -1193,6 +1351,10 @@ export type SeminaryCourseCreateArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the SeminaryCourse
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
   /**
    * The data needed to create a SeminaryCourse.
    */
@@ -1241,6 +1403,10 @@ export type SeminaryCourseUpdateArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the SeminaryCourse
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
   /**
    * The data needed to update a SeminaryCourse.
    */
@@ -1308,6 +1474,10 @@ export type SeminaryCourseUpsertArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
+  /**
    * The filter to search for the SeminaryCourse to update in case it exists.
    */
   where: Prisma.SeminaryCourseWhereUniqueInput
@@ -1334,6 +1504,10 @@ export type SeminaryCourseDeleteArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
+  /**
    * Filter which SeminaryCourse to delete.
    */
   where: Prisma.SeminaryCourseWhereUniqueInput
@@ -1354,6 +1528,30 @@ export type SeminaryCourseDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
+ * SeminaryCourse.schedules
+ */
+export type SeminaryCourse$schedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryCourseSchedule
+   */
+  select?: Prisma.SeminaryCourseScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryCourseSchedule
+   */
+  omit?: Prisma.SeminaryCourseScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseScheduleInclude<ExtArgs> | null
+  where?: Prisma.SeminaryCourseScheduleWhereInput
+  orderBy?: Prisma.SeminaryCourseScheduleOrderByWithRelationInput | Prisma.SeminaryCourseScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.SeminaryCourseScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeminaryCourseScheduleScalarFieldEnum | Prisma.SeminaryCourseScheduleScalarFieldEnum[]
+}
+
+/**
  * SeminaryCourse without action
  */
 export type SeminaryCourseDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1365,4 +1563,8 @@ export type SeminaryCourseDefaultArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the SeminaryCourse
    */
   omit?: Prisma.SeminaryCourseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryCourseInclude<ExtArgs> | null
 }

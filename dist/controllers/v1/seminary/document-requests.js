@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateSeminaryDocumentRequestStatus = exports.createSeminaryDocumentRequest = exports.getSeminaryDocumentRequests = exports.updateSeminaryDocumentRequestType = exports.createSeminaryDocumentRequestType = exports.getSeminaryDocumentRequestTypes = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const requestInclude = {
     documentType: true,
     studentApplication: {

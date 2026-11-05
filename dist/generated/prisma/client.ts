@@ -78,6 +78,21 @@ export type PasskeyChallenge = Prisma.PasskeyChallengeModel
  */
 export type Member = Prisma.MemberModel
 /**
+ * Model ReferralPointCriterion
+ * 
+ */
+export type ReferralPointCriterion = Prisma.ReferralPointCriterionModel
+/**
+ * Model ReferralPointLedgerEntry
+ * 
+ */
+export type ReferralPointLedgerEntry = Prisma.ReferralPointLedgerEntryModel
+/**
+ * Model ReferralRecognitionPeriod
+ * 
+ */
+export type ReferralRecognitionPeriod = Prisma.ReferralRecognitionPeriodModel
+/**
  * Model MemberFollow
  * 
  */
@@ -172,6 +187,26 @@ export type SeminaryPayment = Prisma.SeminaryPaymentModel
  * 
  */
 export type SeminaryCourse = Prisma.SeminaryCourseModel
+/**
+ * Model SeminaryCourseSchedule
+ * 
+ */
+export type SeminaryCourseSchedule = Prisma.SeminaryCourseScheduleModel
+/**
+ * Model SeminaryAnnouncement
+ * 
+ */
+export type SeminaryAnnouncement = Prisma.SeminaryAnnouncementModel
+/**
+ * Model SeminaryDocumentRequestType
+ * 
+ */
+export type SeminaryDocumentRequestType = Prisma.SeminaryDocumentRequestTypeModel
+/**
+ * Model SeminaryDocumentRequest
+ * 
+ */
+export type SeminaryDocumentRequest = Prisma.SeminaryDocumentRequestModel
 /**
  * Model SeminaryStudyMaterial
  * 
@@ -327,6 +362,11 @@ export type EventTaggedMember = Prisma.EventTaggedMemberModel
  * 
  */
 export type NewsBlog = Prisma.NewsBlogModel
+/**
+ * Model FacebookPageConfiguration
+ * 
+ */
+export type FacebookPageConfiguration = Prisma.FacebookPageConfigurationModel
 /**
  * Model NewsBlogMedia
  * 

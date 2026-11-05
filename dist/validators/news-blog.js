@@ -1,8 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllNewsBlogsSchema = exports.updateNewsBlogSchema = exports.createNewsBlogSchema = void 0;
+exports.getAllNewsBlogsSchema = exports.updateNewsBlogSchema = exports.createNewsBlogSchema = exports.updateFacebookPageConfigurationSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
+exports.updateFacebookPageConfigurationSchema = zod_1.z.object({
+    pageId: zod_1.z.string().trim().min(1).max(100),
+    accessToken: zod_1.z.string().trim().min(20).max(2000),
+    expiresAt: zod_1.z.iso.datetime().nullable().optional(),
+});
 const mediaItemSchema = zod_1.z.object({
     kind: zod_1.z.enum(enums_1.NewsBlogMediaKind),
     fileUrl: zod_1.z.url({ message: 'Media URL must be a valid URL' }),

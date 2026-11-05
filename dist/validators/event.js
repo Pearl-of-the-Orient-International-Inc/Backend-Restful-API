@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllEventsSchema = exports.inviteEventAttendeesSchema = exports.updateEventSchema = exports.createEventSchema = void 0;
+exports.getAllEventsSchema = exports.reviewEventAttendeeSchema = exports.inviteEventAttendeesSchema = exports.updateEventSchema = exports.createEventSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 const optionalTrimmedString = (maxLength) => zod_1.z
     .string()
     .trim()
@@ -75,6 +75,19 @@ exports.createEventSchema = eventBodySchema;
 exports.updateEventSchema = eventBodySchema;
 exports.inviteEventAttendeesSchema = zod_1.z.object({
     memberIds: zod_1.z.array(zod_1.z.uuid()).min(1, { message: 'Select at least one member' }).max(200),
+});
+exports.reviewEventAttendeeSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: zod_1.z.uuid(),
+        attendeeId: zod_1.z.uuid(),
+    }),
+    body: zod_1.z.object({
+        status: zod_1.z.enum([
+            enums_1.EventAttendeeInviteStatus.APPROVED,
+            enums_1.EventAttendeeInviteStatus.REJECTED,
+            enums_1.EventAttendeeInviteStatus.ATTENDED,
+        ]),
+    }),
 });
 exports.getAllEventsSchema = zod_1.z.object({
     query: zod_1.z.object({

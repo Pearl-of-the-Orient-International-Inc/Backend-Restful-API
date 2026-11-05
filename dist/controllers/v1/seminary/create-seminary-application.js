@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSeminaryApplication = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const seminary_shared_1 = require("./seminary-shared");
 const ADMISSION_NUMBER_PREFIX = 'POTSC';
 const buildAdmissionNumber = (year, sequence) => `${ADMISSION_NUMBER_PREFIX}-${String(year).slice(-2)}-${String(sequence).padStart(4, '0')}`;

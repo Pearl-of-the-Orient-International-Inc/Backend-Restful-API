@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.canManageExamination = exports.getExaminationWhereForUser = exports.toExaminationResponse = void 0;
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const http_codes_1 = require("@/common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const http_codes_1 = require("../../../common/http-codes");
 const lms_student_scope_1 = require("./lms-student-scope");
 const toExaminationResponse = (examination) => (Object.assign(Object.assign({}, examination), { durationMinutes: String(examination.durationMinutes), passingScore: String(examination.passingScore), questions: Array.isArray(examination.questions) ? examination.questions : [], totalPoints: String(examination.totalPoints) }));
 exports.toExaminationResponse = toExaminationResponse;

@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPublicEvents = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const event_shared_1 = require("./event-shared");
 const getPublicEvents = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -66,7 +66,7 @@ const getPublicEvents = (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',
             message: 'Public events retrieved successfully',
-            data: events.map(event_shared_1.serializeEvent),
+            data: events.map(event_shared_1.serializePublicEvent),
             pagination: {
                 currentPage: page,
                 totalPages,

@@ -20,12 +20,12 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lockHonorRoll = exports.updateReferralCriterion = exports.getReferralCriteria = exports.getPublicHonorRoll = exports.rotateCurrentReferral = exports.getCurrentReferral = exports.resolvePublicReferral = exports.awardReferralPoints = exports.ensureReferralCode = void 0;
+exports.lockHonorRoll = exports.updateReferralCriterion = exports.createReferralCriterion = exports.getPublicReferralCriteria = exports.getReferralCriteria = exports.getPublicHonorRoll = exports.rotateCurrentReferral = exports.getCurrentReferral = exports.resolvePublicReferral = exports.awardReferralPoints = exports.ensureReferralCode = void 0;
 const node_crypto_1 = require("node:crypto");
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const DEFAULT_CRITERIA = [
     { key: 'APPLICATION_SUBMITTED', label: 'Membership application submitted', description: 'A referred applicant successfully submits a membership application.', points: 3, sortOrder: 1 },
     { key: 'MEMBER_APPROVED', label: 'Referred member approved', description: 'The referred applicant is approved as an active member.', points: 5, sortOrder: 2 },
@@ -80,6 +80,18 @@ const awardReferralPoints = (tx, input) => __awaiter(void 0, void 0, void 0, fun
     const criterion = yield tx.referralPointCriterion.findUnique({ where: { key: input.criterionKey } });
     if (!(criterion === null || criterion === void 0 ? void 0 : criterion.isActive))
         return null;
+    if (criterion.oncePerReferred) {
+        const existingAward = yield tx.referralPointLedgerEntry.findFirst({
+            where: {
+                referredMemberId: input.referredMemberId,
+                criterionId: criterion.id,
+                status: 'EARNED',
+            },
+            select: { id: true },
+        });
+        if (existingAward)
+            return null;
+    }
     const occurredAt = (_a = input.occurredAt) !== null && _a !== void 0 ? _a : new Date();
     const periodKey = periodKeyFor(occurredAt);
     if (criterion.monthlyCap) {
@@ -156,9 +168,10 @@ const rotateCurrentReferral = (req, res) => __awaiter(void 0, void 0, void 0, fu
 exports.rotateCurrentReferral = rotateCurrentReferral;
 const getPublicHonorRoll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const isAllTime = req.query.scope === 'all';
         const periodKey = typeof req.query.period === 'string' && /^\d{4}-\d{2}$/.test(req.query.period) ? req.query.period : periodKeyFor();
-        const lockedPeriod = yield prisma_1.prisma.referralRecognitionPeriod.findUnique({ where: { periodKey } });
-        const rows = yield prisma_1.prisma.referralPointLedgerEntry.groupBy({ by: ['referrerMemberId'], where: { periodKey, status: 'EARNED' }, _sum: { points: true }, _count: { _all: true }, orderBy: { _sum: { points: 'desc' } }, take: 3 });
+        const lockedPeriod = isAllTime ? null : yield prisma_1.prisma.referralRecognitionPeriod.findUnique({ where: { periodKey } });
+        const rows = yield prisma_1.prisma.referralPointLedgerEntry.groupBy({ by: ['referrerMemberId'], where: Object.assign(Object.assign({}, (isAllTime ? {} : { periodKey })), { status: 'EARNED' }), _sum: { points: true }, _count: { _all: true }, orderBy: { _sum: { points: 'desc' } }, take: 3 });
         const members = yield prisma_1.prisma.member.findMany({ where: { id: { in: rows.map((row) => row.referrerMemberId) }, status: enums_1.MemberStatus.APPROVED, isActive: true }, select: { id: true, uniqueId: true, firstName: true, middleInitial: true, lastName: true, extensionName: true, user: { select: { avatar: true } } } });
         const byId = new Map(members.map((member) => [member.id, member]));
         const provisionalRankings = rows.flatMap((row, index) => { var _a; const member = byId.get(row.referrerMemberId); return member ? [{ memberId: member.id, rank: index + 1, memberNumber: member.uniqueId, name: [member.firstName, member.middleInitial, member.lastName, member.extensionName].filter(Boolean).join(' '), avatar: member.user.avatar, points: (_a = row._sum.points) !== null && _a !== void 0 ? _a : 0, milestones: row._count._all }] : []; });
@@ -169,7 +182,7 @@ const getPublicHonorRoll = (req, res) => __awaiter(void 0, void 0, void 0, funct
             var { memberId: _memberId } = _a, ranking = __rest(_a, ["memberId"]);
             return ranking;
         });
-        res.status(http_codes_1.HTTPSTATUS.OK).json({ code: 'OK', message: 'Membership Builders Honor Roll retrieved', data: { periodKey, rankings, isProvisional: !(lockedPeriod === null || lockedPeriod === void 0 ? void 0 : lockedPeriod.isLocked) } });
+        res.status(http_codes_1.HTTPSTATUS.OK).json({ code: 'OK', message: 'Membership Builders Honor Roll retrieved', data: { periodKey: isAllTime ? 'all-time' : periodKey, rankings, isProvisional: isAllTime || !(lockedPeriod === null || lockedPeriod === void 0 ? void 0 : lockedPeriod.isLocked) } });
     }
     catch (err) {
         winston_1.logger.error('Error getting honor roll', { err });
@@ -189,6 +202,68 @@ const getReferralCriteria = (_req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.getReferralCriteria = getReferralCriteria;
+const getPublicReferralCriteria = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield prisma_1.prisma.$transaction((tx) => ensureCriteria(tx));
+        const criteria = yield prisma_1.prisma.referralPointCriterion.findMany({
+            where: { isActive: true },
+            select: { key: true, label: true, description: true, points: true, sortOrder: true },
+            orderBy: [{ sortOrder: 'asc' }, { label: 'asc' }],
+        });
+        res.status(http_codes_1.HTTPSTATUS.OK).json({ code: 'OK', message: 'Public referral criteria retrieved', data: criteria });
+    }
+    catch (err) {
+        winston_1.logger.error('Error getting public referral criteria', { err });
+        res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({ code: 'REFERRAL_CRITERIA_READ_FAILED', message: 'Unable to load referral point criteria.' });
+    }
+});
+exports.getPublicReferralCriteria = getPublicReferralCriteria;
+const createReferralCriterion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = req.body;
+        const label = typeof body.label === 'string' ? body.label.trim() : '';
+        const requestedKey = typeof body.key === 'string' ? body.key.trim().toUpperCase() : '';
+        const generatedKey = label.toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+        const key = (requestedKey || generatedKey).replace(/[^A-Z0-9_]/g, '');
+        const points = typeof body.points === 'number' ? body.points : Number(body.points);
+        const monthlyCap = body.monthlyCap === null || body.monthlyCap === undefined || body.monthlyCap === ''
+            ? null
+            : Number(body.monthlyCap);
+        if (!label || label.length > 120 || !key || key.length > 80 || !Number.isInteger(points) || points < 0 || (monthlyCap !== null && (!Number.isInteger(monthlyCap) || monthlyCap < 0))) {
+            res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({ code: 'BAD_REQUEST', message: 'Provide a title, a valid unique key, whole-number points, and an optional whole-number monthly cap.' });
+            return;
+        }
+        const criterion = yield prisma_1.prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            var _a;
+            yield ensureCriteria(tx);
+            const existing = yield tx.referralPointCriterion.findUnique({ where: { key }, select: { id: true } });
+            if (existing)
+                return null;
+            const last = yield tx.referralPointCriterion.aggregate({ _max: { sortOrder: true } });
+            return tx.referralPointCriterion.create({
+                data: {
+                    key,
+                    label,
+                    description: typeof body.description === 'string' ? body.description.trim() || null : null,
+                    points,
+                    monthlyCap,
+                    isActive: false,
+                    sortOrder: ((_a = last._max.sortOrder) !== null && _a !== void 0 ? _a : 0) + 1,
+                },
+            });
+        }));
+        if (!criterion) {
+            res.status(http_codes_1.HTTPSTATUS.CONFLICT).json({ code: 'REFERRAL_CRITERION_KEY_EXISTS', message: `A referral criterion with the key ${key} already exists.` });
+            return;
+        }
+        res.status(http_codes_1.HTTPSTATUS.CREATED).json({ code: 'CREATED', message: 'Referral criterion created. It is inactive until its verified milestone is connected.', data: criterion });
+    }
+    catch (err) {
+        winston_1.logger.error('Error creating referral criterion', { err });
+        res.status(http_codes_1.HTTPSTATUS.INTERNAL_SERVER_ERROR).json({ code: 'REFERRAL_CRITERION_CREATE_FAILED', message: 'Unable to create the referral criterion.' });
+    }
+});
+exports.createReferralCriterion = createReferralCriterion;
 const updateReferralCriterion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const key = typeof req.params.key === 'string' ? req.params.key : '';
@@ -218,10 +293,16 @@ const lockHonorRoll = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             res.status(http_codes_1.HTTPSTATUS.BAD_REQUEST).json({ code: 'BAD_REQUEST', message: 'Use a period in YYYY-MM format.' });
             return;
         }
-        const requestedIds = Array.isArray((_a = req.body) === null || _a === void 0 ? void 0 : _a.winnerMemberIds) ? req.body.winnerMemberIds.filter((id) => typeof id === 'string').slice(0, 3) : [];
+        const requestedIds = Array.isArray((_a = req.body) === null || _a === void 0 ? void 0 : _a.winnerMemberIds)
+            ? req.body.winnerMemberIds
+                .filter((id) => typeof id === 'string')
+                .slice(0, 3)
+            : [];
         const rows = yield prisma_1.prisma.referralPointLedgerEntry.groupBy({ by: ['referrerMemberId'], where: { periodKey, status: 'EARNED' }, _sum: { points: true }, _count: { _all: true }, orderBy: { _sum: { points: 'desc' } }, take: 25 });
         const rowByMember = new Map(rows.map((row) => [row.referrerMemberId, row]));
-        const winnerIds = requestedIds.length > 0 ? requestedIds.filter((id) => rowByMember.has(id)) : rows.slice(0, 3).map((row) => row.referrerMemberId);
+        const winnerIds = requestedIds.length > 0
+            ? requestedIds.filter((id) => rowByMember.has(id))
+            : rows.slice(0, 3).map((row) => row.referrerMemberId);
         const members = yield prisma_1.prisma.member.findMany({ where: { id: { in: winnerIds }, status: enums_1.MemberStatus.APPROVED, isActive: true }, select: { id: true, uniqueId: true, firstName: true, middleInitial: true, lastName: true, extensionName: true, user: { select: { avatar: true } } } });
         const byId = new Map(members.map((member) => [member.id, member]));
         const winners = winnerIds.flatMap((id, index) => { var _a; const member = byId.get(id); const row = rowByMember.get(id); return member && row ? [{ memberId: id, rank: index + 1, memberNumber: member.uniqueId, name: [member.firstName, member.middleInitial, member.lastName, member.extensionName].filter(Boolean).join(' '), avatar: member.user.avatar, points: (_a = row._sum.points) !== null && _a !== void 0 ? _a : 0, milestones: row._count._all }] : []; });

@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUserAccount = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
-const password_hash_1 = require("@/lib/password-hash");
-const mailers_1 = require("@/mailers");
-const welcome_user_1 = require("@/mailers/templates/welcome-user");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
+const password_hash_1 = require("../../../lib/password-hash");
+const mailers_1 = require("../../../mailers");
+const welcome_user_1 = require("../../../mailers/templates/welcome-user");
 const createUserAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, email, password, role, position, accountStatus, avatar, isTwoFactorEnabled, } = req.body;

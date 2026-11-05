@@ -7,7 +7,7 @@ exports.logtail = exports.logger = void 0;
 const winston_1 = __importDefault(require("winston"));
 const node_1 = require("@logtail/node");
 const winston_2 = require("@logtail/winston");
-const config_1 = __importDefault(require("@/config"));
+const config_1 = __importDefault(require("../config"));
 const transports = [];
 if (!config_1.default.LOGTAIL_SOURCE_TOKEN || !config_1.default.LOGTAIL_INGESTING_HOST) {
     throw new Error('Logtail source token or ingesting host is missing');

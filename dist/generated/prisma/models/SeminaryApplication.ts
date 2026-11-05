@@ -82,6 +82,7 @@ export type SeminaryApplicationMinAggregateOutputType = {
   reviewedAt: Date | null
   reviewRemarks: string | null
   memberId: string | null
+  portalUserId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -134,6 +135,7 @@ export type SeminaryApplicationMaxAggregateOutputType = {
   reviewedAt: Date | null
   reviewRemarks: string | null
   memberId: string | null
+  portalUserId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -186,6 +188,7 @@ export type SeminaryApplicationCountAggregateOutputType = {
   reviewedAt: number
   reviewRemarks: number
   memberId: number
+  portalUserId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -248,6 +251,7 @@ export type SeminaryApplicationMinAggregateInputType = {
   reviewedAt?: true
   reviewRemarks?: true
   memberId?: true
+  portalUserId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -300,6 +304,7 @@ export type SeminaryApplicationMaxAggregateInputType = {
   reviewedAt?: true
   reviewRemarks?: true
   memberId?: true
+  portalUserId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -352,6 +357,7 @@ export type SeminaryApplicationCountAggregateInputType = {
   reviewedAt?: true
   reviewRemarks?: true
   memberId?: true
+  portalUserId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -491,6 +497,7 @@ export type SeminaryApplicationGroupByOutputType = {
   reviewedAt: Date | null
   reviewRemarks: string | null
   memberId: string | null
+  portalUserId: string | null
   createdAt: Date
   updatedAt: Date
   _count: SeminaryApplicationCountAggregateOutputType | null
@@ -566,12 +573,15 @@ export type SeminaryApplicationWhereInput = {
   reviewedAt?: Prisma.DateTimeNullableFilter<"SeminaryApplication"> | Date | string | null
   reviewRemarks?: Prisma.StringNullableFilter<"SeminaryApplication"> | string | null
   memberId?: Prisma.StringNullableFilter<"SeminaryApplication"> | string | null
+  portalUserId?: Prisma.StringNullableFilter<"SeminaryApplication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SeminaryApplication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryApplication"> | Date | string
   member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
+  portalUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   requirements?: Prisma.XOR<Prisma.SeminaryRequirementsNullableScalarRelationFilter, Prisma.SeminaryRequirementsWhereInput> | null
   payment?: Prisma.XOR<Prisma.SeminaryPaymentNullableScalarRelationFilter, Prisma.SeminaryPaymentWhereInput> | null
   credentialDocuments?: Prisma.SeminaryCredentialDocumentListRelationFilter
+  documentRequests?: Prisma.SeminaryDocumentRequestListRelationFilter
 }
 
 export type SeminaryApplicationOrderByWithRelationInput = {
@@ -622,18 +632,22 @@ export type SeminaryApplicationOrderByWithRelationInput = {
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewRemarks?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
+  portalUser?: Prisma.UserOrderByWithRelationInput
   requirements?: Prisma.SeminaryRequirementsOrderByWithRelationInput
   payment?: Prisma.SeminaryPaymentOrderByWithRelationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentOrderByRelationAggregateInput
+  documentRequests?: Prisma.SeminaryDocumentRequestOrderByRelationAggregateInput
 }
 
 export type SeminaryApplicationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   admissionNumber?: string
   studentId?: string
+  portalUserId?: string
   AND?: Prisma.SeminaryApplicationWhereInput | Prisma.SeminaryApplicationWhereInput[]
   OR?: Prisma.SeminaryApplicationWhereInput[]
   NOT?: Prisma.SeminaryApplicationWhereInput | Prisma.SeminaryApplicationWhereInput[]
@@ -684,10 +698,12 @@ export type SeminaryApplicationWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"SeminaryApplication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryApplication"> | Date | string
   member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
+  portalUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   requirements?: Prisma.XOR<Prisma.SeminaryRequirementsNullableScalarRelationFilter, Prisma.SeminaryRequirementsWhereInput> | null
   payment?: Prisma.XOR<Prisma.SeminaryPaymentNullableScalarRelationFilter, Prisma.SeminaryPaymentWhereInput> | null
   credentialDocuments?: Prisma.SeminaryCredentialDocumentListRelationFilter
-}, "id" | "admissionNumber" | "studentId">
+  documentRequests?: Prisma.SeminaryDocumentRequestListRelationFilter
+}, "id" | "admissionNumber" | "studentId" | "portalUserId">
 
 export type SeminaryApplicationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -737,6 +753,7 @@ export type SeminaryApplicationOrderByWithAggregationInput = {
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewRemarks?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrderInput | Prisma.SortOrder
+  portalUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SeminaryApplicationCountOrderByAggregateInput
@@ -797,6 +814,7 @@ export type SeminaryApplicationScalarWhereWithAggregatesInput = {
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SeminaryApplication"> | Date | string | null
   reviewRemarks?: Prisma.StringNullableWithAggregatesFilter<"SeminaryApplication"> | string | null
   memberId?: Prisma.StringNullableWithAggregatesFilter<"SeminaryApplication"> | string | null
+  portalUserId?: Prisma.StringNullableWithAggregatesFilter<"SeminaryApplication"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryApplication"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SeminaryApplication"> | Date | string
 }
@@ -851,9 +869,11 @@ export type SeminaryApplicationCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   member?: Prisma.MemberCreateNestedOneWithoutSeminaryApplicationsInput
+  portalUser?: Prisma.UserCreateNestedOneWithoutSeminaryStudentPortalInput
   requirements?: Prisma.SeminaryRequirementsCreateNestedOneWithoutApplicationInput
   payment?: Prisma.SeminaryPaymentCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationUncheckedCreateInput = {
@@ -904,11 +924,13 @@ export type SeminaryApplicationUncheckedCreateInput = {
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
   memberId?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedCreateNestedOneWithoutApplicationInput
   payment?: Prisma.SeminaryPaymentUncheckedCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationUpdateInput = {
@@ -961,9 +983,11 @@ export type SeminaryApplicationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneWithoutSeminaryApplicationsNestedInput
+  portalUser?: Prisma.UserUpdateOneWithoutSeminaryStudentPortalNestedInput
   requirements?: Prisma.SeminaryRequirementsUpdateOneWithoutApplicationNestedInput
   payment?: Prisma.SeminaryPaymentUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationUncheckedUpdateInput = {
@@ -1014,11 +1038,13 @@ export type SeminaryApplicationUncheckedUpdateInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedUpdateOneWithoutApplicationNestedInput
   payment?: Prisma.SeminaryPaymentUncheckedUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationCreateManyInput = {
@@ -1069,6 +1095,7 @@ export type SeminaryApplicationCreateManyInput = {
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
   memberId?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1172,8 +1199,14 @@ export type SeminaryApplicationUncheckedUpdateManyInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SeminaryApplicationNullableScalarRelationFilter = {
+  is?: Prisma.SeminaryApplicationWhereInput | null
+  isNot?: Prisma.SeminaryApplicationWhereInput | null
 }
 
 export type SeminaryApplicationListRelationFilter = {
@@ -1234,6 +1267,7 @@ export type SeminaryApplicationCountOrderByAggregateInput = {
   reviewedAt?: Prisma.SortOrder
   reviewRemarks?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  portalUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1290,6 +1324,7 @@ export type SeminaryApplicationMaxOrderByAggregateInput = {
   reviewedAt?: Prisma.SortOrder
   reviewRemarks?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  portalUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1342,6 +1377,7 @@ export type SeminaryApplicationMinOrderByAggregateInput = {
   reviewedAt?: Prisma.SortOrder
   reviewRemarks?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  portalUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1353,6 +1389,38 @@ export type SeminaryApplicationSumOrderByAggregateInput = {
 export type SeminaryApplicationScalarRelationFilter = {
   is?: Prisma.SeminaryApplicationWhereInput
   isNot?: Prisma.SeminaryApplicationWhereInput
+}
+
+export type SeminaryApplicationCreateNestedOneWithoutPortalUserInput = {
+  create?: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedCreateWithoutPortalUserInput>
+  connectOrCreate?: Prisma.SeminaryApplicationCreateOrConnectWithoutPortalUserInput
+  connect?: Prisma.SeminaryApplicationWhereUniqueInput
+}
+
+export type SeminaryApplicationUncheckedCreateNestedOneWithoutPortalUserInput = {
+  create?: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedCreateWithoutPortalUserInput>
+  connectOrCreate?: Prisma.SeminaryApplicationCreateOrConnectWithoutPortalUserInput
+  connect?: Prisma.SeminaryApplicationWhereUniqueInput
+}
+
+export type SeminaryApplicationUpdateOneWithoutPortalUserNestedInput = {
+  create?: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedCreateWithoutPortalUserInput>
+  connectOrCreate?: Prisma.SeminaryApplicationCreateOrConnectWithoutPortalUserInput
+  upsert?: Prisma.SeminaryApplicationUpsertWithoutPortalUserInput
+  disconnect?: Prisma.SeminaryApplicationWhereInput | boolean
+  delete?: Prisma.SeminaryApplicationWhereInput | boolean
+  connect?: Prisma.SeminaryApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryApplicationUpdateToOneWithWhereWithoutPortalUserInput, Prisma.SeminaryApplicationUpdateWithoutPortalUserInput>, Prisma.SeminaryApplicationUncheckedUpdateWithoutPortalUserInput>
+}
+
+export type SeminaryApplicationUncheckedUpdateOneWithoutPortalUserNestedInput = {
+  create?: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedCreateWithoutPortalUserInput>
+  connectOrCreate?: Prisma.SeminaryApplicationCreateOrConnectWithoutPortalUserInput
+  upsert?: Prisma.SeminaryApplicationUpsertWithoutPortalUserInput
+  disconnect?: Prisma.SeminaryApplicationWhereInput | boolean
+  delete?: Prisma.SeminaryApplicationWhereInput | boolean
+  connect?: Prisma.SeminaryApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryApplicationUpdateToOneWithWhereWithoutPortalUserInput, Prisma.SeminaryApplicationUpdateWithoutPortalUserInput>, Prisma.SeminaryApplicationUncheckedUpdateWithoutPortalUserInput>
 }
 
 export type SeminaryApplicationCreateNestedManyWithoutMemberInput = {
@@ -1413,14 +1481,6 @@ export type EnumSeminarySchoolAffiliationFieldUpdateOperationsInput = {
   set?: $Enums.SeminarySchoolAffiliation
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type NullableEnumGenderFieldUpdateOperationsInput = {
   set?: $Enums.Gender | null
 }
@@ -1469,6 +1529,260 @@ export type SeminaryApplicationUpdateOneRequiredWithoutPaymentNestedInput = {
   upsert?: Prisma.SeminaryApplicationUpsertWithoutPaymentInput
   connect?: Prisma.SeminaryApplicationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryApplicationUpdateToOneWithWhereWithoutPaymentInput, Prisma.SeminaryApplicationUpdateWithoutPaymentInput>, Prisma.SeminaryApplicationUncheckedUpdateWithoutPaymentInput>
+}
+
+export type SeminaryApplicationCreateNestedOneWithoutDocumentRequestsInput = {
+  create?: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUncheckedCreateWithoutDocumentRequestsInput>
+  connectOrCreate?: Prisma.SeminaryApplicationCreateOrConnectWithoutDocumentRequestsInput
+  connect?: Prisma.SeminaryApplicationWhereUniqueInput
+}
+
+export type SeminaryApplicationUpdateOneRequiredWithoutDocumentRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUncheckedCreateWithoutDocumentRequestsInput>
+  connectOrCreate?: Prisma.SeminaryApplicationCreateOrConnectWithoutDocumentRequestsInput
+  upsert?: Prisma.SeminaryApplicationUpsertWithoutDocumentRequestsInput
+  connect?: Prisma.SeminaryApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeminaryApplicationUpdateToOneWithWhereWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUpdateWithoutDocumentRequestsInput>, Prisma.SeminaryApplicationUncheckedUpdateWithoutDocumentRequestsInput>
+}
+
+export type SeminaryApplicationCreateWithoutPortalUserInput = {
+  id?: string
+  status?: $Enums.SeminaryApplicationStatus
+  targetMemberType?: $Enums.MemberType
+  admissionNumber?: string | null
+  studentId?: string | null
+  studentStatus?: $Enums.SeminaryStudentStatus
+  enrollmentType?: $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: $Enums.SeminarySchoolAffiliation
+  yearLevel?: string | null
+  academicYear?: string | null
+  surname?: string | null
+  givenName?: string | null
+  middleName?: string | null
+  emailAddress?: string | null
+  mobilePhone?: string | null
+  mailingAddress?: string | null
+  homeAddress?: string | null
+  dateOfBirth?: Date | string | null
+  birthPlace?: string | null
+  age?: number | null
+  gender?: $Enums.Gender | null
+  height?: string | null
+  weight?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  officePhone?: string | null
+  churchAttended?: string | null
+  churchAddress?: string | null
+  pastorName?: string | null
+  contactNumber?: string | null
+  ministryInvolved?: string | null
+  programLevel?: $Enums.SeminaryProgramLevel | null
+  programCourse?: string | null
+  highSchool?: string | null
+  highSchoolYearGraduated?: string | null
+  collegeSchool?: string | null
+  collegeCourse?: string | null
+  collegeYearGraduated?: string | null
+  vocationalSchool?: string | null
+  vocationalCourse?: string | null
+  vocationalYearGraduated?: string | null
+  othersSchool?: string | null
+  othersCourse?: string | null
+  othersYearGraduated?: string | null
+  submittedAt?: Date | string
+  reviewedAt?: Date | string | null
+  reviewRemarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutSeminaryApplicationsInput
+  requirements?: Prisma.SeminaryRequirementsCreateNestedOneWithoutApplicationInput
+  payment?: Prisma.SeminaryPaymentCreateNestedOneWithoutApplicationInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutStudentApplicationInput
+}
+
+export type SeminaryApplicationUncheckedCreateWithoutPortalUserInput = {
+  id?: string
+  status?: $Enums.SeminaryApplicationStatus
+  targetMemberType?: $Enums.MemberType
+  admissionNumber?: string | null
+  studentId?: string | null
+  studentStatus?: $Enums.SeminaryStudentStatus
+  enrollmentType?: $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: $Enums.SeminarySchoolAffiliation
+  yearLevel?: string | null
+  academicYear?: string | null
+  surname?: string | null
+  givenName?: string | null
+  middleName?: string | null
+  emailAddress?: string | null
+  mobilePhone?: string | null
+  mailingAddress?: string | null
+  homeAddress?: string | null
+  dateOfBirth?: Date | string | null
+  birthPlace?: string | null
+  age?: number | null
+  gender?: $Enums.Gender | null
+  height?: string | null
+  weight?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  officePhone?: string | null
+  churchAttended?: string | null
+  churchAddress?: string | null
+  pastorName?: string | null
+  contactNumber?: string | null
+  ministryInvolved?: string | null
+  programLevel?: $Enums.SeminaryProgramLevel | null
+  programCourse?: string | null
+  highSchool?: string | null
+  highSchoolYearGraduated?: string | null
+  collegeSchool?: string | null
+  collegeCourse?: string | null
+  collegeYearGraduated?: string | null
+  vocationalSchool?: string | null
+  vocationalCourse?: string | null
+  vocationalYearGraduated?: string | null
+  othersSchool?: string | null
+  othersCourse?: string | null
+  othersYearGraduated?: string | null
+  submittedAt?: Date | string
+  reviewedAt?: Date | string | null
+  reviewRemarks?: string | null
+  memberId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requirements?: Prisma.SeminaryRequirementsUncheckedCreateNestedOneWithoutApplicationInput
+  payment?: Prisma.SeminaryPaymentUncheckedCreateNestedOneWithoutApplicationInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutStudentApplicationInput
+}
+
+export type SeminaryApplicationCreateOrConnectWithoutPortalUserInput = {
+  where: Prisma.SeminaryApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedCreateWithoutPortalUserInput>
+}
+
+export type SeminaryApplicationUpsertWithoutPortalUserInput = {
+  update: Prisma.XOR<Prisma.SeminaryApplicationUpdateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedUpdateWithoutPortalUserInput>
+  create: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedCreateWithoutPortalUserInput>
+  where?: Prisma.SeminaryApplicationWhereInput
+}
+
+export type SeminaryApplicationUpdateToOneWithWhereWithoutPortalUserInput = {
+  where?: Prisma.SeminaryApplicationWhereInput
+  data: Prisma.XOR<Prisma.SeminaryApplicationUpdateWithoutPortalUserInput, Prisma.SeminaryApplicationUncheckedUpdateWithoutPortalUserInput>
+}
+
+export type SeminaryApplicationUpdateWithoutPortalUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSeminaryApplicationStatusFieldUpdateOperationsInput | $Enums.SeminaryApplicationStatus
+  targetMemberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  admissionNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentStatus?: Prisma.EnumSeminaryStudentStatusFieldUpdateOperationsInput | $Enums.SeminaryStudentStatus
+  enrollmentType?: Prisma.EnumSeminaryEnrollmentTypeFieldUpdateOperationsInput | $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: Prisma.EnumSeminarySchoolAffiliationFieldUpdateOperationsInput | $Enums.SeminarySchoolAffiliation
+  yearLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  givenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mailingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  officePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAttended?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pastorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ministryInvolved?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  programLevel?: Prisma.NullableEnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel | null
+  programCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchoolYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutSeminaryApplicationsNestedInput
+  requirements?: Prisma.SeminaryRequirementsUpdateOneWithoutApplicationNestedInput
+  payment?: Prisma.SeminaryPaymentUpdateOneWithoutApplicationNestedInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutStudentApplicationNestedInput
+}
+
+export type SeminaryApplicationUncheckedUpdateWithoutPortalUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSeminaryApplicationStatusFieldUpdateOperationsInput | $Enums.SeminaryApplicationStatus
+  targetMemberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  admissionNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentStatus?: Prisma.EnumSeminaryStudentStatusFieldUpdateOperationsInput | $Enums.SeminaryStudentStatus
+  enrollmentType?: Prisma.EnumSeminaryEnrollmentTypeFieldUpdateOperationsInput | $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: Prisma.EnumSeminarySchoolAffiliationFieldUpdateOperationsInput | $Enums.SeminarySchoolAffiliation
+  yearLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  givenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mailingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  officePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAttended?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pastorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ministryInvolved?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  programLevel?: Prisma.NullableEnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel | null
+  programCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchoolYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requirements?: Prisma.SeminaryRequirementsUncheckedUpdateOneWithoutApplicationNestedInput
+  payment?: Prisma.SeminaryPaymentUncheckedUpdateOneWithoutApplicationNestedInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationCreateWithoutMemberInput = {
@@ -1520,9 +1834,11 @@ export type SeminaryApplicationCreateWithoutMemberInput = {
   reviewRemarks?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  portalUser?: Prisma.UserCreateNestedOneWithoutSeminaryStudentPortalInput
   requirements?: Prisma.SeminaryRequirementsCreateNestedOneWithoutApplicationInput
   payment?: Prisma.SeminaryPaymentCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationUncheckedCreateWithoutMemberInput = {
@@ -1572,11 +1888,13 @@ export type SeminaryApplicationUncheckedCreateWithoutMemberInput = {
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedCreateNestedOneWithoutApplicationInput
   payment?: Prisma.SeminaryPaymentUncheckedCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationCreateOrConnectWithoutMemberInput = {
@@ -1656,6 +1974,7 @@ export type SeminaryApplicationScalarWhereInput = {
   reviewedAt?: Prisma.DateTimeNullableFilter<"SeminaryApplication"> | Date | string | null
   reviewRemarks?: Prisma.StringNullableFilter<"SeminaryApplication"> | string | null
   memberId?: Prisma.StringNullableFilter<"SeminaryApplication"> | string | null
+  portalUserId?: Prisma.StringNullableFilter<"SeminaryApplication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SeminaryApplication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SeminaryApplication"> | Date | string
 }
@@ -1710,8 +2029,10 @@ export type SeminaryApplicationCreateWithoutCredentialDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   member?: Prisma.MemberCreateNestedOneWithoutSeminaryApplicationsInput
+  portalUser?: Prisma.UserCreateNestedOneWithoutSeminaryStudentPortalInput
   requirements?: Prisma.SeminaryRequirementsCreateNestedOneWithoutApplicationInput
   payment?: Prisma.SeminaryPaymentCreateNestedOneWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationUncheckedCreateWithoutCredentialDocumentsInput = {
@@ -1762,10 +2083,12 @@ export type SeminaryApplicationUncheckedCreateWithoutCredentialDocumentsInput = 
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
   memberId?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedCreateNestedOneWithoutApplicationInput
   payment?: Prisma.SeminaryPaymentUncheckedCreateNestedOneWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationCreateOrConnectWithoutCredentialDocumentsInput = {
@@ -1834,8 +2157,10 @@ export type SeminaryApplicationUpdateWithoutCredentialDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneWithoutSeminaryApplicationsNestedInput
+  portalUser?: Prisma.UserUpdateOneWithoutSeminaryStudentPortalNestedInput
   requirements?: Prisma.SeminaryRequirementsUpdateOneWithoutApplicationNestedInput
   payment?: Prisma.SeminaryPaymentUpdateOneWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationUncheckedUpdateWithoutCredentialDocumentsInput = {
@@ -1886,10 +2211,12 @@ export type SeminaryApplicationUncheckedUpdateWithoutCredentialDocumentsInput = 
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedUpdateOneWithoutApplicationNestedInput
   payment?: Prisma.SeminaryPaymentUncheckedUpdateOneWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationCreateWithoutRequirementsInput = {
@@ -1942,8 +2269,10 @@ export type SeminaryApplicationCreateWithoutRequirementsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   member?: Prisma.MemberCreateNestedOneWithoutSeminaryApplicationsInput
+  portalUser?: Prisma.UserCreateNestedOneWithoutSeminaryStudentPortalInput
   payment?: Prisma.SeminaryPaymentCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationUncheckedCreateWithoutRequirementsInput = {
@@ -1994,10 +2323,12 @@ export type SeminaryApplicationUncheckedCreateWithoutRequirementsInput = {
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
   memberId?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.SeminaryPaymentUncheckedCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationCreateOrConnectWithoutRequirementsInput = {
@@ -2066,8 +2397,10 @@ export type SeminaryApplicationUpdateWithoutRequirementsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneWithoutSeminaryApplicationsNestedInput
+  portalUser?: Prisma.UserUpdateOneWithoutSeminaryStudentPortalNestedInput
   payment?: Prisma.SeminaryPaymentUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationUncheckedUpdateWithoutRequirementsInput = {
@@ -2118,10 +2451,12 @@ export type SeminaryApplicationUncheckedUpdateWithoutRequirementsInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payment?: Prisma.SeminaryPaymentUncheckedUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationCreateWithoutPaymentInput = {
@@ -2174,8 +2509,10 @@ export type SeminaryApplicationCreateWithoutPaymentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   member?: Prisma.MemberCreateNestedOneWithoutSeminaryApplicationsInput
+  portalUser?: Prisma.UserCreateNestedOneWithoutSeminaryStudentPortalInput
   requirements?: Prisma.SeminaryRequirementsCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationUncheckedCreateWithoutPaymentInput = {
@@ -2226,10 +2563,12 @@ export type SeminaryApplicationUncheckedCreateWithoutPaymentInput = {
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
   memberId?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedCreateNestedOneWithoutApplicationInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedCreateNestedManyWithoutApplicationInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedCreateNestedManyWithoutStudentApplicationInput
 }
 
 export type SeminaryApplicationCreateOrConnectWithoutPaymentInput = {
@@ -2298,8 +2637,10 @@ export type SeminaryApplicationUpdateWithoutPaymentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneWithoutSeminaryApplicationsNestedInput
+  portalUser?: Prisma.UserUpdateOneWithoutSeminaryStudentPortalNestedInput
   requirements?: Prisma.SeminaryRequirementsUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationUncheckedUpdateWithoutPaymentInput = {
@@ -2350,9 +2691,251 @@ export type SeminaryApplicationUncheckedUpdateWithoutPaymentInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedUpdateOneWithoutApplicationNestedInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutStudentApplicationNestedInput
+}
+
+export type SeminaryApplicationCreateWithoutDocumentRequestsInput = {
+  id?: string
+  status?: $Enums.SeminaryApplicationStatus
+  targetMemberType?: $Enums.MemberType
+  admissionNumber?: string | null
+  studentId?: string | null
+  studentStatus?: $Enums.SeminaryStudentStatus
+  enrollmentType?: $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: $Enums.SeminarySchoolAffiliation
+  yearLevel?: string | null
+  academicYear?: string | null
+  surname?: string | null
+  givenName?: string | null
+  middleName?: string | null
+  emailAddress?: string | null
+  mobilePhone?: string | null
+  mailingAddress?: string | null
+  homeAddress?: string | null
+  dateOfBirth?: Date | string | null
+  birthPlace?: string | null
+  age?: number | null
+  gender?: $Enums.Gender | null
+  height?: string | null
+  weight?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  officePhone?: string | null
+  churchAttended?: string | null
+  churchAddress?: string | null
+  pastorName?: string | null
+  contactNumber?: string | null
+  ministryInvolved?: string | null
+  programLevel?: $Enums.SeminaryProgramLevel | null
+  programCourse?: string | null
+  highSchool?: string | null
+  highSchoolYearGraduated?: string | null
+  collegeSchool?: string | null
+  collegeCourse?: string | null
+  collegeYearGraduated?: string | null
+  vocationalSchool?: string | null
+  vocationalCourse?: string | null
+  vocationalYearGraduated?: string | null
+  othersSchool?: string | null
+  othersCourse?: string | null
+  othersYearGraduated?: string | null
+  submittedAt?: Date | string
+  reviewedAt?: Date | string | null
+  reviewRemarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutSeminaryApplicationsInput
+  portalUser?: Prisma.UserCreateNestedOneWithoutSeminaryStudentPortalInput
+  requirements?: Prisma.SeminaryRequirementsCreateNestedOneWithoutApplicationInput
+  payment?: Prisma.SeminaryPaymentCreateNestedOneWithoutApplicationInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentCreateNestedManyWithoutApplicationInput
+}
+
+export type SeminaryApplicationUncheckedCreateWithoutDocumentRequestsInput = {
+  id?: string
+  status?: $Enums.SeminaryApplicationStatus
+  targetMemberType?: $Enums.MemberType
+  admissionNumber?: string | null
+  studentId?: string | null
+  studentStatus?: $Enums.SeminaryStudentStatus
+  enrollmentType?: $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: $Enums.SeminarySchoolAffiliation
+  yearLevel?: string | null
+  academicYear?: string | null
+  surname?: string | null
+  givenName?: string | null
+  middleName?: string | null
+  emailAddress?: string | null
+  mobilePhone?: string | null
+  mailingAddress?: string | null
+  homeAddress?: string | null
+  dateOfBirth?: Date | string | null
+  birthPlace?: string | null
+  age?: number | null
+  gender?: $Enums.Gender | null
+  height?: string | null
+  weight?: string | null
+  civilStatus?: $Enums.CivilStatus | null
+  officePhone?: string | null
+  churchAttended?: string | null
+  churchAddress?: string | null
+  pastorName?: string | null
+  contactNumber?: string | null
+  ministryInvolved?: string | null
+  programLevel?: $Enums.SeminaryProgramLevel | null
+  programCourse?: string | null
+  highSchool?: string | null
+  highSchoolYearGraduated?: string | null
+  collegeSchool?: string | null
+  collegeCourse?: string | null
+  collegeYearGraduated?: string | null
+  vocationalSchool?: string | null
+  vocationalCourse?: string | null
+  vocationalYearGraduated?: string | null
+  othersSchool?: string | null
+  othersCourse?: string | null
+  othersYearGraduated?: string | null
+  submittedAt?: Date | string
+  reviewedAt?: Date | string | null
+  reviewRemarks?: string | null
+  memberId?: string | null
+  portalUserId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requirements?: Prisma.SeminaryRequirementsUncheckedCreateNestedOneWithoutApplicationInput
+  payment?: Prisma.SeminaryPaymentUncheckedCreateNestedOneWithoutApplicationInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type SeminaryApplicationCreateOrConnectWithoutDocumentRequestsInput = {
+  where: Prisma.SeminaryApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUncheckedCreateWithoutDocumentRequestsInput>
+}
+
+export type SeminaryApplicationUpsertWithoutDocumentRequestsInput = {
+  update: Prisma.XOR<Prisma.SeminaryApplicationUpdateWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUncheckedUpdateWithoutDocumentRequestsInput>
+  create: Prisma.XOR<Prisma.SeminaryApplicationCreateWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUncheckedCreateWithoutDocumentRequestsInput>
+  where?: Prisma.SeminaryApplicationWhereInput
+}
+
+export type SeminaryApplicationUpdateToOneWithWhereWithoutDocumentRequestsInput = {
+  where?: Prisma.SeminaryApplicationWhereInput
+  data: Prisma.XOR<Prisma.SeminaryApplicationUpdateWithoutDocumentRequestsInput, Prisma.SeminaryApplicationUncheckedUpdateWithoutDocumentRequestsInput>
+}
+
+export type SeminaryApplicationUpdateWithoutDocumentRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSeminaryApplicationStatusFieldUpdateOperationsInput | $Enums.SeminaryApplicationStatus
+  targetMemberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  admissionNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentStatus?: Prisma.EnumSeminaryStudentStatusFieldUpdateOperationsInput | $Enums.SeminaryStudentStatus
+  enrollmentType?: Prisma.EnumSeminaryEnrollmentTypeFieldUpdateOperationsInput | $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: Prisma.EnumSeminarySchoolAffiliationFieldUpdateOperationsInput | $Enums.SeminarySchoolAffiliation
+  yearLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  givenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mailingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  officePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAttended?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pastorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ministryInvolved?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  programLevel?: Prisma.NullableEnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel | null
+  programCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchoolYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutSeminaryApplicationsNestedInput
+  portalUser?: Prisma.UserUpdateOneWithoutSeminaryStudentPortalNestedInput
+  requirements?: Prisma.SeminaryRequirementsUpdateOneWithoutApplicationNestedInput
+  payment?: Prisma.SeminaryPaymentUpdateOneWithoutApplicationNestedInput
+  credentialDocuments?: Prisma.SeminaryCredentialDocumentUpdateManyWithoutApplicationNestedInput
+}
+
+export type SeminaryApplicationUncheckedUpdateWithoutDocumentRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSeminaryApplicationStatusFieldUpdateOperationsInput | $Enums.SeminaryApplicationStatus
+  targetMemberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
+  admissionNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  studentStatus?: Prisma.EnumSeminaryStudentStatusFieldUpdateOperationsInput | $Enums.SeminaryStudentStatus
+  enrollmentType?: Prisma.EnumSeminaryEnrollmentTypeFieldUpdateOperationsInput | $Enums.SeminaryEnrollmentType
+  schoolAffiliation?: Prisma.EnumSeminarySchoolAffiliationFieldUpdateOperationsInput | $Enums.SeminarySchoolAffiliation
+  yearLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  academicYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  givenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mailingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homeAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  height?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  civilStatus?: Prisma.NullableEnumCivilStatusFieldUpdateOperationsInput | $Enums.CivilStatus | null
+  officePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAttended?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  churchAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pastorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ministryInvolved?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  programLevel?: Prisma.NullableEnumSeminaryProgramLevelFieldUpdateOperationsInput | $Enums.SeminaryProgramLevel | null
+  programCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  highSchoolYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collegeYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vocationalYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersSchool?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  othersYearGraduated?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requirements?: Prisma.SeminaryRequirementsUncheckedUpdateOneWithoutApplicationNestedInput
+  payment?: Prisma.SeminaryPaymentUncheckedUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
@@ -2403,6 +2986,7 @@ export type SeminaryApplicationCreateManyMemberInput = {
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   reviewRemarks?: string | null
+  portalUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2456,9 +3040,11 @@ export type SeminaryApplicationUpdateWithoutMemberInput = {
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  portalUser?: Prisma.UserUpdateOneWithoutSeminaryStudentPortalNestedInput
   requirements?: Prisma.SeminaryRequirementsUpdateOneWithoutApplicationNestedInput
   payment?: Prisma.SeminaryPaymentUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationUncheckedUpdateWithoutMemberInput = {
@@ -2508,11 +3094,13 @@ export type SeminaryApplicationUncheckedUpdateWithoutMemberInput = {
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requirements?: Prisma.SeminaryRequirementsUncheckedUpdateOneWithoutApplicationNestedInput
   payment?: Prisma.SeminaryPaymentUncheckedUpdateOneWithoutApplicationNestedInput
   credentialDocuments?: Prisma.SeminaryCredentialDocumentUncheckedUpdateManyWithoutApplicationNestedInput
+  documentRequests?: Prisma.SeminaryDocumentRequestUncheckedUpdateManyWithoutStudentApplicationNestedInput
 }
 
 export type SeminaryApplicationUncheckedUpdateManyWithoutMemberInput = {
@@ -2562,6 +3150,7 @@ export type SeminaryApplicationUncheckedUpdateManyWithoutMemberInput = {
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewRemarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2573,10 +3162,12 @@ export type SeminaryApplicationUncheckedUpdateManyWithoutMemberInput = {
 
 export type SeminaryApplicationCountOutputType = {
   credentialDocuments: number
+  documentRequests: number
 }
 
 export type SeminaryApplicationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   credentialDocuments?: boolean | SeminaryApplicationCountOutputTypeCountCredentialDocumentsArgs
+  documentRequests?: boolean | SeminaryApplicationCountOutputTypeCountDocumentRequestsArgs
 }
 
 /**
@@ -2594,6 +3185,13 @@ export type SeminaryApplicationCountOutputTypeDefaultArgs<ExtArgs extends runtim
  */
 export type SeminaryApplicationCountOutputTypeCountCredentialDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SeminaryCredentialDocumentWhereInput
+}
+
+/**
+ * SeminaryApplicationCountOutputType without action
+ */
+export type SeminaryApplicationCountOutputTypeCountDocumentRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeminaryDocumentRequestWhereInput
 }
 
 
@@ -2645,12 +3243,15 @@ export type SeminaryApplicationSelect<ExtArgs extends runtime.Types.Extensions.I
   reviewedAt?: boolean
   reviewRemarks?: boolean
   memberId?: boolean
+  portalUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.SeminaryApplication$memberArgs<ExtArgs>
+  portalUser?: boolean | Prisma.SeminaryApplication$portalUserArgs<ExtArgs>
   requirements?: boolean | Prisma.SeminaryApplication$requirementsArgs<ExtArgs>
   payment?: boolean | Prisma.SeminaryApplication$paymentArgs<ExtArgs>
   credentialDocuments?: boolean | Prisma.SeminaryApplication$credentialDocumentsArgs<ExtArgs>
+  documentRequests?: boolean | Prisma.SeminaryApplication$documentRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.SeminaryApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["seminaryApplication"]>
 
@@ -2702,9 +3303,11 @@ export type SeminaryApplicationSelectCreateManyAndReturn<ExtArgs extends runtime
   reviewedAt?: boolean
   reviewRemarks?: boolean
   memberId?: boolean
+  portalUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.SeminaryApplication$memberArgs<ExtArgs>
+  portalUser?: boolean | Prisma.SeminaryApplication$portalUserArgs<ExtArgs>
 }, ExtArgs["result"]["seminaryApplication"]>
 
 export type SeminaryApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2755,9 +3358,11 @@ export type SeminaryApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime
   reviewedAt?: boolean
   reviewRemarks?: boolean
   memberId?: boolean
+  portalUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.SeminaryApplication$memberArgs<ExtArgs>
+  portalUser?: boolean | Prisma.SeminaryApplication$portalUserArgs<ExtArgs>
 }, ExtArgs["result"]["seminaryApplication"]>
 
 export type SeminaryApplicationSelectScalar = {
@@ -2808,32 +3413,39 @@ export type SeminaryApplicationSelectScalar = {
   reviewedAt?: boolean
   reviewRemarks?: boolean
   memberId?: boolean
+  portalUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SeminaryApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "targetMemberType" | "admissionNumber" | "studentId" | "studentStatus" | "enrollmentType" | "schoolAffiliation" | "yearLevel" | "academicYear" | "surname" | "givenName" | "middleName" | "emailAddress" | "mobilePhone" | "mailingAddress" | "homeAddress" | "dateOfBirth" | "birthPlace" | "age" | "gender" | "height" | "weight" | "civilStatus" | "officePhone" | "churchAttended" | "churchAddress" | "pastorName" | "contactNumber" | "ministryInvolved" | "programLevel" | "programCourse" | "highSchool" | "highSchoolYearGraduated" | "collegeSchool" | "collegeCourse" | "collegeYearGraduated" | "vocationalSchool" | "vocationalCourse" | "vocationalYearGraduated" | "othersSchool" | "othersCourse" | "othersYearGraduated" | "submittedAt" | "reviewedAt" | "reviewRemarks" | "memberId" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryApplication"]>
+export type SeminaryApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "targetMemberType" | "admissionNumber" | "studentId" | "studentStatus" | "enrollmentType" | "schoolAffiliation" | "yearLevel" | "academicYear" | "surname" | "givenName" | "middleName" | "emailAddress" | "mobilePhone" | "mailingAddress" | "homeAddress" | "dateOfBirth" | "birthPlace" | "age" | "gender" | "height" | "weight" | "civilStatus" | "officePhone" | "churchAttended" | "churchAddress" | "pastorName" | "contactNumber" | "ministryInvolved" | "programLevel" | "programCourse" | "highSchool" | "highSchoolYearGraduated" | "collegeSchool" | "collegeCourse" | "collegeYearGraduated" | "vocationalSchool" | "vocationalCourse" | "vocationalYearGraduated" | "othersSchool" | "othersCourse" | "othersYearGraduated" | "submittedAt" | "reviewedAt" | "reviewRemarks" | "memberId" | "portalUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["seminaryApplication"]>
 export type SeminaryApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.SeminaryApplication$memberArgs<ExtArgs>
+  portalUser?: boolean | Prisma.SeminaryApplication$portalUserArgs<ExtArgs>
   requirements?: boolean | Prisma.SeminaryApplication$requirementsArgs<ExtArgs>
   payment?: boolean | Prisma.SeminaryApplication$paymentArgs<ExtArgs>
   credentialDocuments?: boolean | Prisma.SeminaryApplication$credentialDocumentsArgs<ExtArgs>
+  documentRequests?: boolean | Prisma.SeminaryApplication$documentRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.SeminaryApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SeminaryApplicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.SeminaryApplication$memberArgs<ExtArgs>
+  portalUser?: boolean | Prisma.SeminaryApplication$portalUserArgs<ExtArgs>
 }
 export type SeminaryApplicationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.SeminaryApplication$memberArgs<ExtArgs>
+  portalUser?: boolean | Prisma.SeminaryApplication$portalUserArgs<ExtArgs>
 }
 
 export type $SeminaryApplicationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SeminaryApplication"
   objects: {
     member: Prisma.$MemberPayload<ExtArgs> | null
+    portalUser: Prisma.$UserPayload<ExtArgs> | null
     requirements: Prisma.$SeminaryRequirementsPayload<ExtArgs> | null
     payment: Prisma.$SeminaryPaymentPayload<ExtArgs> | null
     credentialDocuments: Prisma.$SeminaryCredentialDocumentPayload<ExtArgs>[]
+    documentRequests: Prisma.$SeminaryDocumentRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2883,6 +3495,7 @@ export type $SeminaryApplicationPayload<ExtArgs extends runtime.Types.Extensions
     reviewedAt: Date | null
     reviewRemarks: string | null
     memberId: string | null
+    portalUserId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["seminaryApplication"]>
@@ -3280,9 +3893,11 @@ readonly fields: SeminaryApplicationFieldRefs;
 export interface Prisma__SeminaryApplicationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   member<T extends Prisma.SeminaryApplication$memberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryApplication$memberArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  portalUser<T extends Prisma.SeminaryApplication$portalUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryApplication$portalUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   requirements<T extends Prisma.SeminaryApplication$requirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryApplication$requirementsArgs<ExtArgs>>): Prisma.Prisma__SeminaryRequirementsClient<runtime.Types.Result.GetResult<Prisma.$SeminaryRequirementsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payment<T extends Prisma.SeminaryApplication$paymentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryApplication$paymentArgs<ExtArgs>>): Prisma.Prisma__SeminaryPaymentClient<runtime.Types.Result.GetResult<Prisma.$SeminaryPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   credentialDocuments<T extends Prisma.SeminaryApplication$credentialDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryApplication$credentialDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryCredentialDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentRequests<T extends Prisma.SeminaryApplication$documentRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SeminaryApplication$documentRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeminaryDocumentRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3359,6 +3974,7 @@ export interface SeminaryApplicationFieldRefs {
   readonly reviewedAt: Prisma.FieldRef<"SeminaryApplication", 'DateTime'>
   readonly reviewRemarks: Prisma.FieldRef<"SeminaryApplication", 'String'>
   readonly memberId: Prisma.FieldRef<"SeminaryApplication", 'String'>
+  readonly portalUserId: Prisma.FieldRef<"SeminaryApplication", 'String'>
   readonly createdAt: Prisma.FieldRef<"SeminaryApplication", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SeminaryApplication", 'DateTime'>
 }
@@ -3776,6 +4392,25 @@ export type SeminaryApplication$memberArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
+ * SeminaryApplication.portalUser
+ */
+export type SeminaryApplication$portalUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * SeminaryApplication.requirements
  */
 export type SeminaryApplication$requirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3835,6 +4470,30 @@ export type SeminaryApplication$credentialDocumentsArgs<ExtArgs extends runtime.
   take?: number
   skip?: number
   distinct?: Prisma.SeminaryCredentialDocumentScalarFieldEnum | Prisma.SeminaryCredentialDocumentScalarFieldEnum[]
+}
+
+/**
+ * SeminaryApplication.documentRequests
+ */
+export type SeminaryApplication$documentRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SeminaryDocumentRequest
+   */
+  select?: Prisma.SeminaryDocumentRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SeminaryDocumentRequest
+   */
+  omit?: Prisma.SeminaryDocumentRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeminaryDocumentRequestInclude<ExtArgs> | null
+  where?: Prisma.SeminaryDocumentRequestWhereInput
+  orderBy?: Prisma.SeminaryDocumentRequestOrderByWithRelationInput | Prisma.SeminaryDocumentRequestOrderByWithRelationInput[]
+  cursor?: Prisma.SeminaryDocumentRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeminaryDocumentRequestScalarFieldEnum | Prisma.SeminaryDocumentRequestScalarFieldEnum[]
 }
 
 /**

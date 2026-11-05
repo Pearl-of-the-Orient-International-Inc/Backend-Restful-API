@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPublicOrganizationalStructure = void 0;
-const http_codes_1 = require("@/common/http-codes");
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
-const winston_1 = require("@/lib/winston");
+const http_codes_1 = require("../../../common/http-codes");
+const enums_1 = require("../../../generated/prisma/enums");
+const prisma_1 = require("../../../lib/prisma");
+const winston_1 = require("../../../lib/winston");
 const getPublicOrganizationalStructure = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const offices = yield prisma_1.prisma.officeTitle.findMany({
@@ -45,10 +45,13 @@ const getPublicOrganizationalStructure = (_req, res) => __awaiter(void 0, void 0
                         startDate: true,
                         member: {
                             select: {
+                                uniqueId: true,
                                 firstName: true,
                                 middleInitial: true,
                                 lastName: true,
                                 extensionName: true,
+                                memberType: true,
+                                currentPositionRole: true,
                                 user: { select: { avatar: true } },
                             },
                         },
@@ -64,25 +67,41 @@ const getPublicOrganizationalStructure = (_req, res) => __awaiter(void 0, void 0
             sections: office.sections,
             sortOrder: office.sortOrder,
             reportsToId: office.reportsToId,
-            officers: office.assignments.map((assignment) => ({
-                id: assignment.id,
-                memberId: assignment.memberId,
-                name: [
-                    assignment.member.firstName,
-                    assignment.member.middleInitial,
-                    assignment.member.lastName,
-                    assignment.member.extensionName,
-                ].filter(Boolean).join(' '),
-                avatar: assignment.member.user.avatar,
-                jurisdiction: [
-                    assignment.department,
-                    assignment.region,
-                    assignment.province,
-                    assignment.cityMunicipality,
-                    assignment.barangay,
-                ].filter(Boolean).join(' · ') || null,
-                startDate: assignment.startDate,
-            })),
+            officers: office.assignments.map((assignment) => {
+                var _a, _b, _c, _d, _e;
+                return ({
+                    id: assignment.id,
+                    memberId: assignment.memberId,
+                    memberNumber: assignment.member.uniqueId,
+                    name: [
+                        assignment.member.firstName,
+                        assignment.member.middleInitial,
+                        assignment.member.lastName,
+                        assignment.member.extensionName,
+                    ].filter(Boolean).join(' '),
+                    avatar: assignment.member.user.avatar,
+                    memberType: assignment.member.memberType,
+                    currentPositionRole: assignment.member.currentPositionRole,
+                    scopeLabel: (_e = (_d = (_c = (_b = (_a = assignment.department) !== null && _a !== void 0 ? _a : assignment.region) !== null && _b !== void 0 ? _b : assignment.province) !== null && _c !== void 0 ? _c : assignment.cityMunicipality) !== null && _d !== void 0 ? _d : assignment.barangay) !== null && _e !== void 0 ? _e : null,
+                    jurisdiction: office.level === enums_1.OfficeTitleLevel.NATIONAL_CHAPLAIN_DIRECTOR
+                        ? [
+                            'National jurisdiction',
+                            assignment.department,
+                            assignment.region,
+                            assignment.province,
+                            assignment.cityMunicipality,
+                            assignment.barangay,
+                        ].filter(Boolean).join(' · ')
+                        : [
+                            assignment.department,
+                            assignment.region,
+                            assignment.province,
+                            assignment.cityMunicipality,
+                            assignment.barangay,
+                        ].filter(Boolean).join(' · ') || null,
+                    startDate: assignment.startDate,
+                });
+            }),
         }));
         res.status(http_codes_1.HTTPSTATUS.OK).json({
             code: 'OK',

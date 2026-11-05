@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTaskSchema = exports.moveTaskSchema = exports.updateTaskSchema = exports.createTaskSchema = exports.deleteTaskBoardSchema = exports.updateTaskBoardSchema = exports.createTaskBoardSchema = exports.getTaskManagementSchema = void 0;
 const zod_1 = require("zod");
-const enums_1 = require("@/generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 const colorSchema = zod_1.z
     .string()
     .trim()

@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateNextMemberUniqueId = void 0;
-const enums_1 = require("@/generated/prisma/enums");
-const prisma_1 = require("@/lib/prisma");
+const enums_1 = require("../generated/prisma/enums");
+const prisma_1 = require("../lib/prisma");
 const MEMBER_ROLE_DIGIT = '2';
 const OFFICER_ROLE_DIGIT = '1';
 const RESERVED_MEMBER_PREFIX = '262';

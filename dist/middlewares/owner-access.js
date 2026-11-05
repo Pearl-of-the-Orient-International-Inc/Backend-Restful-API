@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticateOwnerAccess = exports.clearOwnerSessionCookie = exports.setOwnerSessionCookie = exports.verifyOwnerSessionToken = exports.createOwnerSessionToken = exports.getOwnerSessionCookieOptions = exports.getOwnerSessionCookieName = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const http_codes_1 = require("@/common/http-codes");
-const config_1 = __importDefault(require("@/config"));
+const http_codes_1 = require("../common/http-codes");
+const config_1 = __importDefault(require("../config"));
 const OWNER_SESSION_TTL_MS = 10 * 60 * 1000;
 const getOwnerSessionCookieName = () => config_1.default.OWNER_SESSION_COOKIE_NAME;
 exports.getOwnerSessionCookieName = getOwnerSessionCookieName;
