@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-backend-production
+      cancel-in-progress: false
 
     steps:
       - name: Deploy Backend to VPS
@@ -16,11 +19,18 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 30m
+          script_stop: true
           script: |
-            cd /var/www/pearl-of-the-orient-backend
-            git pull origin main
-            npm install
-            npx prisma migrate deploy
-            npx prisma generate
-            npm run build
+            sudo -u digipay -H bash -lc '
+              set -euo pipefail
+              cd /var/www/pearl-of-the-orient-backend
+              git config --global --add safe.directory /var/www/pearl-of-the-orient-backend
+              git fetch origin main
+              git reset --hard origin/main
+              npm ci
+              npx prisma generate
+              npx prisma migrate deploy
+              npm run build
+            '
             pm2 restart pearl-backend --update-env
