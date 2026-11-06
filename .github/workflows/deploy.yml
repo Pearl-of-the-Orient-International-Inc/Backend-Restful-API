@@ -8,20 +8,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     concurrency:
       group: deploy-backend-production
       cancel-in-progress: false
 
     steps:
+      - name: Validate deployment key
+        env:
+          DEPLOY_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          test -n "${DEPLOY_KEY:-}" || { echo "VPS_SSH_KEY is unavailable to this repository."; exit 1; }
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keygen -y -f ~/.ssh/id_ed25519 > /dev/null
+
       - name: Deploy Backend to VPS
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: root
-          key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 30m
-          script_stop: true
-          script: |
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        run: |
+          test -n "${VPS_HOST:-}" || { echo "VPS_HOST is unavailable to this repository."; exit 1; }
+          ssh -i ~/.ssh/id_ed25519 -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=30 "root@${VPS_HOST}" 'bash -se' <<'REMOTE_SCRIPT'
             sudo -u digipay -H bash -lc '
               set -euo pipefail
               cd /var/www/pearl-of-the-orient-backend
@@ -34,3 +42,4 @@ jobs:
               npm run build
             '
             pm2 restart pearl-backend --update-env
+          REMOTE_SCRIPT
