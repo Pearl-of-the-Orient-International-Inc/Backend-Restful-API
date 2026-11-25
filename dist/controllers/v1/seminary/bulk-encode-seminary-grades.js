@@ -58,7 +58,8 @@ const bulkEncodeSeminaryGrades = (req, res) => __awaiter(void 0, void 0, void 0,
                 var _a, _b;
                 const student = studentById.get(entry.studentApplicationId);
                 const weightedPercentage = (percentage(entry.attendanceEarned, entry.attendanceTotal) * weights.attendance + percentage(entry.courseworkEarned, entry.courseworkTotal) * weights.coursework + percentage(entry.characterEarned, entry.characterTotal) * weights.character + percentage(entry.examEarned, entry.examTotal) * weights.exam) / 100;
-                const finalGrade = (_b = (_a = scale.find((row) => { const range = rangeFor(row.percentageRange); return weightedPercentage >= range.min && weightedPercentage <= range.max; })) === null || _a === void 0 ? void 0 : _a.equivalent) !== null && _b !== void 0 ? _b : (weightedPercentage >= 75 ? '3.00' : '5.00');
+                const configuredPercentage = Math.round(weightedPercentage);
+                const finalGrade = (_b = (_a = scale.find((row) => { const range = rangeFor(row.percentageRange); return configuredPercentage >= range.min && configuredPercentage <= range.max; })) === null || _a === void 0 ? void 0 : _a.equivalent) !== null && _b !== void 0 ? _b : (configuredPercentage >= 75 ? '3.00' : '5.00');
                 const gradeNumber = Number(finalGrade);
                 const remarks = gradeNumber <= passingEquivalent ? enums_1.SeminaryGradeRecordRemark.PASSED : gradeNumber < 5 ? enums_1.SeminaryGradeRecordRemark.CONDITIONAL : enums_1.SeminaryGradeRecordRemark.FAILED;
                 const data = {

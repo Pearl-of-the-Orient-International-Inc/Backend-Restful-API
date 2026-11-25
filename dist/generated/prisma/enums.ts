@@ -566,6 +566,15 @@ export const SeminaryCredentialDocumentStatus = {
 export type SeminaryCredentialDocumentStatus = (typeof SeminaryCredentialDocumentStatus)[keyof typeof SeminaryCredentialDocumentStatus]
 
 
+export const SeminaryAttendanceStatus = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  LATE: 'LATE'
+} as const
+
+export type SeminaryAttendanceStatus = (typeof SeminaryAttendanceStatus)[keyof typeof SeminaryAttendanceStatus]
+
+
 export const AccountingPayableStatus = {
   DRAFT: 'DRAFT',
   OPEN: 'OPEN',

@@ -47,8 +47,11 @@ const get_seminary_grade_configuration_1 = require("../../controllers/v1/seminar
 const get_seminary_grade_record_1 = require("../../controllers/v1/seminary/get-seminary-grade-record");
 const get_seminary_credential_document_by_number_1 = require("../../controllers/v1/seminary/get-seminary-credential-document-by-number");
 const get_seminary_credential_documents_1 = require("../../controllers/v1/seminary/get-seminary-credential-documents");
+const get_all_seminary_credential_documents_1 = require("../../controllers/v1/seminary/get-all-seminary-credential-documents");
+const generate_seminary_transcript_batch_1 = require("../../controllers/v1/seminary/generate-seminary-transcript-batch");
 const get_seminary_examination_by_id_1 = require("../../controllers/v1/seminary/get-seminary-examination-by-id");
 const get_seminary_instructor_by_id_1 = require("../../controllers/v1/seminary/get-seminary-instructor-by-id");
+const get_public_seminary_instructors_1 = require("../../controllers/v1/seminary/get-public-seminary-instructors");
 const instructor_invitation_1 = require("../../controllers/v1/seminary/instructor-invitation");
 const get_seminary_student_by_id_1 = require("../../controllers/v1/seminary/get-seminary-student-by-id");
 const get_public_seminary_student_1 = require("../../controllers/v1/seminary/get-public-seminary-student");
@@ -77,12 +80,14 @@ const document_requests_1 = require("../../controllers/v1/seminary/document-requ
 const announcements_1 = require("../../controllers/v1/seminary/announcements");
 const dashboard_1 = require("../../controllers/v1/seminary/dashboard");
 const reports_1 = require("../../controllers/v1/seminary/reports");
+const attendance_1 = require("../../controllers/v1/seminary/attendance");
 const sanitation_1 = require("../../common/sanitation");
 const config_1 = __importDefault(require("../../config"));
 const uploadthing_1 = require("../../lib/uploadthing");
 const authentication_1 = require("../../middlewares/authentication");
 const authorization_1 = __importDefault(require("../../middlewares/authorization"));
 const seminary_schedule_manager_1 = require("../../middlewares/seminary-schedule-manager");
+const seminary_attendance_manager_1 = require("../../middlewares/seminary-attendance-manager");
 const express_rate_limiter_1 = require("../../middlewares/express-rate-limiter");
 const enums_1 = require("../../generated/prisma/enums");
 const seminary_1 = require("../../validators/seminary");
@@ -113,6 +118,7 @@ const seminaryGradeRecordAccess = [
     authentication_1.authenticate,
     (0, authorization_1.default)([enums_1.UserType.ADMIN, enums_1.UserType.INSTRUCTOR]),
 ];
+const seminaryAttendanceWriteAccess = [authentication_1.authenticate, seminary_attendance_manager_1.authorizeSeminaryAttendanceManager];
 router.get('/current/application', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_seminary_application_1.getCurrentSeminaryApplication);
 router.get('/current/student-notifications', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, get_current_seminary_student_notifications_1.getCurrentSeminaryStudentNotifications);
 router.get('/current/student-portal', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.MEMBER]), get_current_student_portal_1.getCurrentStudentPortal);
@@ -129,6 +135,9 @@ router.use('/study-materials/upload', (0, express_rate_limiter_1.expressRateLimi
     maxFileSize: '32MB',
     maxFileCount: 1,
 }));
+router.get('/attendance', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryAttendanceSchema), attendance_1.getSeminaryAttendance);
+router.get('/attendance/history/:applicationId', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryAttendanceHistorySchema), attendance_1.getSeminaryAttendanceHistory);
+router.put('/attendance', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryAttendanceWriteAccess, (0, sanitation_1.validate)(seminary_1.saveSeminaryAttendanceSchema), attendance_1.saveSeminaryAttendance);
 router.get('/applications', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getAllSeminaryApplicationsSchema), get_all_seminary_applications_1.getAllSeminaryApplications);
 router.get('/dashboard', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getSeminaryDashboardSchema), dashboard_1.getSeminaryDashboard);
 router.get('/reports', (0, express_rate_limiter_1.expressRateLimit)('basic'), authentication_1.authenticate, (0, authorization_1.default)([enums_1.UserType.ADMIN]), (0, sanitation_1.validate)(seminary_1.getSeminaryReportsSchema), reports_1.getSeminaryReports);
@@ -146,6 +155,7 @@ router.put('/instructors/:id', (0, express_rate_limiter_1.expressRateLimit)('bas
 router.patch('/instructors/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryInstructorStatusSchema), update_seminary_instructor_status_1.updateSeminaryInstructorStatus);
 router.delete('/instructors/:id', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.deleteSeminaryInstructorSchema), delete_seminary_instructor_1.deleteSeminaryInstructor);
 router.get('/students', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryStudentsSchema), get_all_seminary_students_1.getAllSeminaryStudents);
+router.get('/public/instructors', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(seminary_1.getPublicSeminaryInstructorsSchema), get_public_seminary_instructors_1.getPublicSeminaryInstructors);
 router.get('/public/students/:studentId', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(seminary_1.getPublicSeminaryStudentSchema), get_public_seminary_student_1.getPublicSeminaryStudent);
 router.post('/students', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.createSeminaryStudentSchema), create_seminary_student_1.createSeminaryStudent);
 router.patch('/students/:studentId/password', (0, express_rate_limiter_1.expressRateLimit)('passwordReset'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.changeSeminaryStudentPasswordSchema), change_seminary_student_password_1.changeSeminaryStudentPassword);
@@ -205,6 +215,8 @@ router.put('/fee-configuration', (0, express_rate_limiter_1.expressRateLimit)('b
 router.get('/fee-collections', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryFeeCollectionsSchema), get_all_seminary_fee_collections_1.getAllSeminaryFeeCollections);
 router.patch('/fee-collections/:id/status', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryFeeCollectionStatusSchema), update_seminary_fee_collection_status_1.updateSeminaryFeeCollectionStatus);
 router.patch('/fee-collections/:id/payment', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.updateSeminaryFeeCollectionPaymentSchema), update_seminary_fee_collection_payment_1.updateSeminaryFeeCollectionPayment);
+router.get('/credential-documents', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getAllSeminaryCredentialDocumentsSchema), get_all_seminary_credential_documents_1.getAllSeminaryCredentialDocuments);
+router.post('/credential-documents/transcripts/batch', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.generateSeminaryTranscriptBatchSchema), generate_seminary_transcript_batch_1.generateSeminaryTranscriptBatch);
 router.get('/credential-documents/verify/:token', (0, express_rate_limiter_1.expressRateLimit)('basic'), (0, sanitation_1.validate)(seminary_1.verifySeminaryCredentialDocumentSchema), verify_seminary_credential_document_1.verifySeminaryCredentialDocument);
 router.get('/credential-documents/:documentNumber', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentAdminAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryCredentialDocumentByNumberSchema), get_seminary_credential_document_by_number_1.getSeminaryCredentialDocumentByNumber);
 router.get('/students/:studentId/credential-documents', (0, express_rate_limiter_1.expressRateLimit)('basic'), ...seminaryStudentReadAccess, (0, sanitation_1.validate)(seminary_1.getSeminaryCredentialDocumentsSchema), get_seminary_credential_documents_1.getSeminaryCredentialDocuments);

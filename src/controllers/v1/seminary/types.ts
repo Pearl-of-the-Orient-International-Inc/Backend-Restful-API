@@ -36,6 +36,8 @@ import type {
   getAllSeminaryStudentsSchema,
   getSeminaryCredentialDocumentByNumberSchema,
   getSeminaryCredentialDocumentsSchema,
+  getAllSeminaryCredentialDocumentsSchema,
+  generateSeminaryTranscriptBatchSchema,
   getSeminaryExaminationByIdSchema,
   getSeminaryGradeRecordSchema,
   inviteSeminaryInstructorSchema,
@@ -303,6 +305,9 @@ export type GenerateSeminaryCredentialDocumentBody = z.infer<
 export type GetSeminaryCredentialDocumentsQuery = z.infer<
   typeof getSeminaryCredentialDocumentsSchema
 >['query'];
+
+export type GetAllSeminaryCredentialDocumentsQuery = z.infer<typeof getAllSeminaryCredentialDocumentsSchema>['query'];
+export type GenerateSeminaryTranscriptBatchBody = z.infer<typeof generateSeminaryTranscriptBatchSchema>['body'];
 
 export type GetSeminaryCredentialDocumentByNumberParams = z.infer<
   typeof getSeminaryCredentialDocumentByNumberSchema

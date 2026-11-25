@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryGradeRecordSchema = exports.updateSeminaryGradeRecordStatusSchema = exports.updateSeminaryGradeRecordSchema = exports.getSeminaryGradeRecordSchema = exports.bulkEncodeSeminaryGradesSchema = exports.createSeminaryGradeRecordSchema = exports.getAllSeminaryGradeRecordsSchema = exports.deleteSeminaryExaminationSchema = exports.updateSeminaryExaminationStatusSchema = exports.updateSeminaryExaminationSchema = exports.createSeminaryExaminationSchema = exports.getSeminaryExaminationByIdSchema = exports.getAllSeminaryExaminationsSchema = exports.deleteSeminaryAssignmentSchema = exports.updateSeminaryAssignmentStatusSchema = exports.updateSeminaryAssignmentSchema = exports.createSeminaryAssignmentSchema = exports.getAllSeminaryAssignmentsSchema = exports.deleteSeminaryStudyMaterialSchema = exports.updateSeminaryStudyMaterialSchema = exports.createSeminaryStudyMaterialSchema = exports.getAllSeminaryStudyMaterialsSchema = exports.updateSeminaryDocumentRequestStatusSchema = exports.createSeminaryDocumentRequestSchema = exports.getSeminaryDocumentRequestsSchema = exports.updateSeminaryDocumentRequestTypeSchema = exports.createSeminaryDocumentRequestTypeSchema = exports.getSeminaryDocumentRequestTypesSchema = exports.deleteSeminaryCourseScheduleSchema = exports.updateSeminaryCourseScheduleSchema = exports.createSeminaryCourseScheduleSchema = exports.getAllSeminaryCourseSchedulesSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.changeSeminaryStudentPasswordSchema = exports.deleteSeminaryStudentSchema = exports.getPublicSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = void 0;
-exports.deleteSeminaryAnnouncementSchema = exports.updateSeminaryAnnouncementSchema = exports.createSeminaryAnnouncementSchema = exports.getSeminaryReportsSchema = exports.getSeminaryDashboardSchema = exports.getSeminaryAnnouncementsSchema = exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryInstructorSchema = exports.acceptSeminaryInstructorInviteSchema = exports.inviteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = void 0;
+exports.getSeminaryGradeRecordSchema = exports.bulkEncodeSeminaryGradesSchema = exports.createSeminaryGradeRecordSchema = exports.getAllSeminaryGradeRecordsSchema = exports.deleteSeminaryExaminationSchema = exports.updateSeminaryExaminationStatusSchema = exports.updateSeminaryExaminationSchema = exports.createSeminaryExaminationSchema = exports.getSeminaryExaminationByIdSchema = exports.getAllSeminaryExaminationsSchema = exports.deleteSeminaryAssignmentSchema = exports.updateSeminaryAssignmentStatusSchema = exports.updateSeminaryAssignmentSchema = exports.createSeminaryAssignmentSchema = exports.getAllSeminaryAssignmentsSchema = exports.deleteSeminaryStudyMaterialSchema = exports.updateSeminaryStudyMaterialSchema = exports.createSeminaryStudyMaterialSchema = exports.getAllSeminaryStudyMaterialsSchema = exports.updateSeminaryDocumentRequestStatusSchema = exports.createSeminaryDocumentRequestSchema = exports.getSeminaryDocumentRequestsSchema = exports.updateSeminaryDocumentRequestTypeSchema = exports.createSeminaryDocumentRequestTypeSchema = exports.getSeminaryDocumentRequestTypesSchema = exports.deleteSeminaryCourseScheduleSchema = exports.updateSeminaryCourseScheduleSchema = exports.createSeminaryCourseScheduleSchema = exports.getAllSeminaryCourseSchedulesSchema = exports.deleteSeminaryCourseSchema = exports.updateSeminaryCourseStatusSchema = exports.updateSeminaryCourseSchema = exports.createSeminaryCourseSchema = exports.getAllSeminaryCoursesSchema = exports.getAllSeminaryStudentsSchema = exports.changeSeminaryStudentPasswordSchema = exports.deleteSeminaryStudentSchema = exports.getPublicSeminaryInstructorsSchema = exports.getPublicSeminaryStudentSchema = exports.getSeminaryStudentByIdSchema = exports.updateSeminaryStudentSchema = exports.createSeminaryStudentSchema = exports.updateSeminaryApplicationStatusSchema = exports.getAllSeminaryApplicationsSchema = exports.getSeminaryApplicationByIdSchema = exports.createSeminaryApplicationSchema = exports.upsertCurrentSeminaryApplicationSchema = exports.saveSeminaryAttendanceSchema = exports.getSeminaryAttendanceHistorySchema = exports.getSeminaryAttendanceSchema = void 0;
+exports.deleteSeminaryAnnouncementSchema = exports.updateSeminaryAnnouncementSchema = exports.createSeminaryAnnouncementSchema = exports.getSeminaryReportsSchema = exports.getSeminaryDashboardSchema = exports.getSeminaryAnnouncementsSchema = exports.verifySeminaryCredentialDocumentSchema = exports.getSeminaryCredentialDocumentByNumberSchema = exports.generateSeminaryTranscriptBatchSchema = exports.getAllSeminaryCredentialDocumentsSchema = exports.getSeminaryCredentialDocumentsSchema = exports.generateSeminaryCredentialDocumentSchema = exports.bulkDeleteSeminaryStudentsSchema = exports.bulkImportSeminaryStudentsSchema = exports.updateSeminaryFeeCollectionPaymentSchema = exports.updateSeminaryFeeCollectionStatusSchema = exports.getAllSeminaryFeeCollectionsSchema = exports.updateSeminaryFeeConfigurationSchema = exports.updateSeminaryGradeConfigurationSchema = exports.deleteSeminaryInstructorSchema = exports.acceptSeminaryInstructorInviteSchema = exports.inviteSeminaryInstructorSchema = exports.updateSeminaryInstructorStatusSchema = exports.updateSeminaryInstructorSchema = exports.createSeminaryInstructorSchema = exports.getSeminaryInstructorByIdSchema = exports.getAllSeminaryInstructorsSchema = exports.deleteSeminaryAcademicYearSchema = exports.updateSeminaryAcademicYearStatusSchema = exports.updateSeminaryAcademicYearSessionSchema = exports.updateSeminaryAcademicYearSchema = exports.createSeminaryAcademicYearSchema = exports.getAllSeminaryAcademicYearsSchema = exports.deleteSeminaryGradeRecordSchema = exports.updateSeminaryGradeRecordStatusSchema = exports.updateSeminaryGradeRecordSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../generated/prisma/enums");
 const auth_1 = require("./auth");
@@ -56,6 +56,32 @@ const credentialDocumentTypeSchema = normalizeEnumValue(enums_1.SeminaryCredenti
     Diploma: enums_1.SeminaryCredentialDocumentType.DIPLOMA,
     Certificate: enums_1.SeminaryCredentialDocumentType.CERTIFICATE,
     Transcript: enums_1.SeminaryCredentialDocumentType.TRANSCRIPT,
+});
+const attendanceStatusSchema = zod_1.z.enum(enums_1.SeminaryAttendanceStatus);
+exports.getSeminaryAttendanceSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        academicYear: zod_1.z.string().trim().min(1).max(30),
+        program: zod_1.z.string().trim().min(1).max(160),
+        courseId: zod_1.z.uuid(),
+        date: zod_1.z.iso.date(),
+    }),
+});
+exports.getSeminaryAttendanceHistorySchema = zod_1.z.object({
+    params: zod_1.z.object({ applicationId: zod_1.z.uuid() }),
+    query: zod_1.z.object({ month: zod_1.z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/) }),
+});
+exports.saveSeminaryAttendanceSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        academicYear: zod_1.z.string().trim().min(1).max(30),
+        program: zod_1.z.string().trim().min(1).max(160),
+        courseId: zod_1.z.uuid(),
+        date: zod_1.z.iso.date(),
+        entries: zod_1.z.array(zod_1.z.object({
+            applicationId: zod_1.z.uuid(),
+            status: attendanceStatusSchema,
+            remarks: zod_1.z.string().trim().max(500).optional(),
+        })).min(1),
+    }),
 });
 const courseModalitySchema = normalizeEnumValue(enums_1.SeminaryCourseModality, {
     'Face to Face': enums_1.SeminaryCourseModality.FACE_TO_FACE,
@@ -387,6 +413,9 @@ exports.getPublicSeminaryStudentSchema = zod_1.z.object({
     params: zod_1.z.object({
         studentId: seminaryStudentIdSchema,
     }),
+});
+exports.getPublicSeminaryInstructorsSchema = zod_1.z.object({
+    query: zod_1.z.object({}),
 });
 exports.deleteSeminaryStudentSchema = zod_1.z.object({
     params: zod_1.z.object({
@@ -1134,6 +1163,19 @@ exports.getSeminaryCredentialDocumentsSchema = zod_1.z.object({
     }),
     query: zod_1.z.object({
         type: credentialDocumentTypeSchema.optional(),
+    }),
+});
+exports.getAllSeminaryCredentialDocumentsSchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z.coerce.number().int().min(1).optional(),
+        limit: zod_1.z.coerce.number().int().min(1).max(100).optional(),
+        search: optionalText(120),
+        type: credentialDocumentTypeSchema.optional(),
+    }),
+});
+exports.generateSeminaryTranscriptBatchSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        studentIds: zod_1.z.array(seminaryStudentIdSchema).min(1).max(100),
     }),
 });
 exports.getSeminaryCredentialDocumentByNumberSchema = zod_1.z.object({

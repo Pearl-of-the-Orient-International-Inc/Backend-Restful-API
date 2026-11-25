@@ -48,7 +48,8 @@ export const bulkEncodeSeminaryGrades = async (req: Request, res: Response): Pro
     const records = await prisma.$transaction(async (tx) => Promise.all(body.entries.map(async (entry) => {
       const student = studentById.get(entry.studentApplicationId)!;
       const weightedPercentage = (percentage(entry.attendanceEarned, entry.attendanceTotal) * weights.attendance + percentage(entry.courseworkEarned, entry.courseworkTotal) * weights.coursework + percentage(entry.characterEarned, entry.characterTotal) * weights.character + percentage(entry.examEarned, entry.examTotal) * weights.exam) / 100;
-      const finalGrade = scale.find((row) => { const range = rangeFor(row.percentageRange); return weightedPercentage >= range.min && weightedPercentage <= range.max; })?.equivalent ?? (weightedPercentage >= 75 ? '3.00' : '5.00');
+      const configuredPercentage = Math.round(weightedPercentage);
+      const finalGrade = scale.find((row) => { const range = rangeFor(row.percentageRange); return configuredPercentage >= range.min && configuredPercentage <= range.max; })?.equivalent ?? (configuredPercentage >= 75 ? '3.00' : '5.00');
       const gradeNumber = Number(finalGrade);
       const remarks = gradeNumber <= passingEquivalent ? SeminaryGradeRecordRemark.PASSED : gradeNumber < 5 ? SeminaryGradeRecordRemark.CONDITIONAL : SeminaryGradeRecordRemark.FAILED;
       const data = {

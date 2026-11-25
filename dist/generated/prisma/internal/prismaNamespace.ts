@@ -410,6 +410,8 @@ export const ModelName = {
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
   SeminaryApplication: 'SeminaryApplication',
+  SeminaryAttendanceSession: 'SeminaryAttendanceSession',
+  SeminaryAttendanceEntry: 'SeminaryAttendanceEntry',
   SeminaryCredentialDocument: 'SeminaryCredentialDocument',
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
@@ -482,7 +484,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "referralPointCriterion" | "referralPointLedgerEntry" | "referralRecognitionPeriod" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryCourseSchedule" | "seminaryAnnouncement" | "seminaryDocumentRequestType" | "seminaryDocumentRequest" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "crasmApplication" | "crasmApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "facebookPageConfiguration" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
+    modelProps: "user" | "userToken" | "session" | "activityLog" | "verificationCode" | "passkeyCredential" | "passkeyChallenge" | "member" | "referralPointCriterion" | "referralPointLedgerEntry" | "referralRecognitionPeriod" | "memberFollow" | "ministerialExperience" | "characterReference" | "applicantSignature" | "applicantRequirement" | "memberOnboardingProgress" | "memberPaymentCheckout" | "memberOnlineInterviewAppointment" | "memberIdGenerationAsset" | "memberCertificate" | "memberCredentialDocument" | "memberPublicRecord" | "memberPublicRecordAttachment" | "memberChaplaincyTrainingProgress" | "seminaryApplication" | "seminaryAttendanceSession" | "seminaryAttendanceEntry" | "seminaryCredentialDocument" | "seminaryRequirements" | "seminaryPayment" | "seminaryCourse" | "seminaryCourseSchedule" | "seminaryAnnouncement" | "seminaryDocumentRequestType" | "seminaryDocumentRequest" | "seminaryStudyMaterial" | "seminaryAssignment" | "seminaryExamination" | "seminaryGradeRecord" | "seminaryStudentNotification" | "seminaryAcademicYear" | "seminaryInstructor" | "seminaryGradeConfiguration" | "seminaryFeeConfiguration" | "seminaryFeeCollectionAccount" | "accountingPayable" | "accountingPayableItem" | "accountingReceivable" | "accountingReceivableItem" | "accountingAcknowledgementReceipt" | "accountingAcknowledgementReceiptItem" | "accountingLedgerTransaction" | "ownerAccessCredential" | "taskBoard" | "taskItem" | "branchOfService" | "officeTitle" | "officerAssignment" | "ordinationApplication" | "ordinationApplicationReview" | "crasmApplication" | "crasmApplicationReview" | "event" | "eventAttendee" | "eventTaggedMember" | "newsBlog" | "facebookPageConfiguration" | "newsBlogMedia" | "newsBlogTaggedMember" | "bulletinEntry" | "chaplainProduct" | "chaplainService" | "chaplainServiceBooking" | "chaplainServiceBookingStatusHistory" | "chaplainServiceAvailability" | "surveyFeedbackResponse" | "chaplainProductOrder" | "paymentTransaction" | "memoAnnouncement" | "memoRecipient" | "memoAttachment" | "memoDeliveryLog" | "databaseBackupSettings" | "databaseBackupSnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2407,6 +2409,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SeminaryApplicationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SeminaryApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryAttendanceSession: {
+      payload: Prisma.$SeminaryAttendanceSessionPayload<ExtArgs>
+      fields: Prisma.SeminaryAttendanceSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryAttendanceSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryAttendanceSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryAttendanceSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryAttendanceSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryAttendanceSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryAttendanceSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryAttendanceSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryAttendanceSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryAttendanceSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>
+        }
+        update: {
+          args: Prisma.SeminaryAttendanceSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryAttendanceSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryAttendanceSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryAttendanceSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryAttendanceSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryAttendanceSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryAttendanceSession>
+        }
+        groupBy: {
+          args: Prisma.SeminaryAttendanceSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAttendanceSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryAttendanceSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAttendanceSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    SeminaryAttendanceEntry: {
+      payload: Prisma.$SeminaryAttendanceEntryPayload<ExtArgs>
+      fields: Prisma.SeminaryAttendanceEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SeminaryAttendanceEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SeminaryAttendanceEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.SeminaryAttendanceEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SeminaryAttendanceEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>
+        }
+        findMany: {
+          args: Prisma.SeminaryAttendanceEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>[]
+        }
+        create: {
+          args: Prisma.SeminaryAttendanceEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>
+        }
+        createMany: {
+          args: Prisma.SeminaryAttendanceEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SeminaryAttendanceEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.SeminaryAttendanceEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>
+        }
+        update: {
+          args: Prisma.SeminaryAttendanceEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.SeminaryAttendanceEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SeminaryAttendanceEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SeminaryAttendanceEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.SeminaryAttendanceEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SeminaryAttendanceEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.SeminaryAttendanceEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeminaryAttendanceEntry>
+        }
+        groupBy: {
+          args: Prisma.SeminaryAttendanceEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAttendanceEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SeminaryAttendanceEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SeminaryAttendanceEntryCountAggregateOutputType> | number
         }
       }
     }
@@ -7138,6 +7288,33 @@ export const SeminaryApplicationScalarFieldEnum = {
 export type SeminaryApplicationScalarFieldEnum = (typeof SeminaryApplicationScalarFieldEnum)[keyof typeof SeminaryApplicationScalarFieldEnum]
 
 
+export const SeminaryAttendanceSessionScalarFieldEnum = {
+  id: 'id',
+  academicYear: 'academicYear',
+  program: 'program',
+  courseId: 'courseId',
+  attendanceDate: 'attendanceDate',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAttendanceSessionScalarFieldEnum = (typeof SeminaryAttendanceSessionScalarFieldEnum)[keyof typeof SeminaryAttendanceSessionScalarFieldEnum]
+
+
+export const SeminaryAttendanceEntryScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  applicationId: 'applicationId',
+  status: 'status',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAttendanceEntryScalarFieldEnum = (typeof SeminaryAttendanceEntryScalarFieldEnum)[keyof typeof SeminaryAttendanceEntryScalarFieldEnum]
+
+
 export const SeminaryCredentialDocumentScalarFieldEnum = {
   id: 'id',
   documentNumber: 'documentNumber',
@@ -8757,6 +8934,20 @@ export type ListEnumSeminaryProgramLevelFieldRefInput<$PrismaModel> = FieldRefIn
 
 
 /**
+ * Reference to a field of type 'SeminaryAttendanceStatus'
+ */
+export type EnumSeminaryAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAttendanceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SeminaryAttendanceStatus[]'
+ */
+export type ListEnumSeminaryAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryAttendanceStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'SeminaryCredentialDocumentType'
  */
 export type EnumSeminaryCredentialDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeminaryCredentialDocumentType'>
@@ -9884,6 +10075,8 @@ export type GlobalOmitConfig = {
   memberPublicRecordAttachment?: Prisma.MemberPublicRecordAttachmentOmit
   memberChaplaincyTrainingProgress?: Prisma.MemberChaplaincyTrainingProgressOmit
   seminaryApplication?: Prisma.SeminaryApplicationOmit
+  seminaryAttendanceSession?: Prisma.SeminaryAttendanceSessionOmit
+  seminaryAttendanceEntry?: Prisma.SeminaryAttendanceEntryOmit
   seminaryCredentialDocument?: Prisma.SeminaryCredentialDocumentOmit
   seminaryRequirements?: Prisma.SeminaryRequirementsOmit
   seminaryPayment?: Prisma.SeminaryPaymentOmit

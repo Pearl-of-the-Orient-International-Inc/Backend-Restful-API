@@ -77,6 +77,8 @@ export const ModelName = {
   MemberPublicRecordAttachment: 'MemberPublicRecordAttachment',
   MemberChaplaincyTrainingProgress: 'MemberChaplaincyTrainingProgress',
   SeminaryApplication: 'SeminaryApplication',
+  SeminaryAttendanceSession: 'SeminaryAttendanceSession',
+  SeminaryAttendanceEntry: 'SeminaryAttendanceEntry',
   SeminaryCredentialDocument: 'SeminaryCredentialDocument',
   SeminaryRequirements: 'SeminaryRequirements',
   SeminaryPayment: 'SeminaryPayment',
@@ -621,6 +623,33 @@ export const SeminaryApplicationScalarFieldEnum = {
 } as const
 
 export type SeminaryApplicationScalarFieldEnum = (typeof SeminaryApplicationScalarFieldEnum)[keyof typeof SeminaryApplicationScalarFieldEnum]
+
+
+export const SeminaryAttendanceSessionScalarFieldEnum = {
+  id: 'id',
+  academicYear: 'academicYear',
+  program: 'program',
+  courseId: 'courseId',
+  attendanceDate: 'attendanceDate',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAttendanceSessionScalarFieldEnum = (typeof SeminaryAttendanceSessionScalarFieldEnum)[keyof typeof SeminaryAttendanceSessionScalarFieldEnum]
+
+
+export const SeminaryAttendanceEntryScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  applicationId: 'applicationId',
+  status: 'status',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeminaryAttendanceEntryScalarFieldEnum = (typeof SeminaryAttendanceEntryScalarFieldEnum)[keyof typeof SeminaryAttendanceEntryScalarFieldEnum]
 
 
 export const SeminaryCredentialDocumentScalarFieldEnum = {

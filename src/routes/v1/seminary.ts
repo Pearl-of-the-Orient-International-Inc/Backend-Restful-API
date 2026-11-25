@@ -49,8 +49,11 @@ import { getSeminaryGradeConfiguration } from '@/controllers/v1/seminary/get-sem
 import { getSeminaryGradeRecord } from '@/controllers/v1/seminary/get-seminary-grade-record';
 import { getSeminaryCredentialDocumentByNumber } from '@/controllers/v1/seminary/get-seminary-credential-document-by-number';
 import { getSeminaryCredentialDocuments } from '@/controllers/v1/seminary/get-seminary-credential-documents';
+import { getAllSeminaryCredentialDocuments } from '@/controllers/v1/seminary/get-all-seminary-credential-documents';
+import { generateSeminaryTranscriptBatch } from '@/controllers/v1/seminary/generate-seminary-transcript-batch';
 import { getSeminaryExaminationById } from '@/controllers/v1/seminary/get-seminary-examination-by-id';
 import { getSeminaryInstructorById } from '@/controllers/v1/seminary/get-seminary-instructor-by-id';
+import { getPublicSeminaryInstructors } from '@/controllers/v1/seminary/get-public-seminary-instructors';
 import {
   acceptSeminaryInstructorInvite,
   inviteSeminaryInstructor,
@@ -99,6 +102,7 @@ import {
 } from '@/controllers/v1/seminary/announcements';
 import { getSeminaryDashboard } from '@/controllers/v1/seminary/dashboard';
 import { getSeminaryReports } from '@/controllers/v1/seminary/reports';
+import { getSeminaryAttendance, getSeminaryAttendanceHistory, saveSeminaryAttendance } from '@/controllers/v1/seminary/attendance';
 
 /**
  * Helpers, Validators and Middlewares
@@ -109,6 +113,7 @@ import { createUploadthingExpressHandler } from '@/lib/uploadthing';
 import { authenticate } from '@/middlewares/authentication';
 import authorize from '@/middlewares/authorization';
 import { authorizeSeminaryScheduleManager } from '@/middlewares/seminary-schedule-manager';
+import { authorizeSeminaryAttendanceManager } from '@/middlewares/seminary-attendance-manager';
 import { expressRateLimit } from '@/middlewares/express-rate-limiter';
 import { UserType } from '@/generated/prisma/enums';
 import {
@@ -159,6 +164,10 @@ import {
   getAllSeminaryStudentsSchema,
   getSeminaryCredentialDocumentByNumberSchema,
   getSeminaryCredentialDocumentsSchema,
+  getAllSeminaryCredentialDocumentsSchema,
+  getSeminaryAttendanceSchema,
+  getSeminaryAttendanceHistorySchema,
+  generateSeminaryTranscriptBatchSchema,
   getSeminaryInstructorByIdSchema,
   getSeminaryExaminationByIdSchema,
   getSeminaryGradeRecordSchema,
@@ -166,6 +175,7 @@ import {
   getSeminaryApplicationByIdSchema,
   getSeminaryStudentByIdSchema,
   getPublicSeminaryStudentSchema,
+  getPublicSeminaryInstructorsSchema,
   updateSeminaryApplicationStatusSchema,
   updateSeminaryAcademicYearSchema,
   updateSeminaryAnnouncementSchema,
@@ -191,6 +201,7 @@ import {
   updateSeminaryStudyMaterialSchema,
   updateSeminaryStudentSchema,
   upsertCurrentSeminaryApplicationSchema,
+  saveSeminaryAttendanceSchema,
   verifySeminaryCredentialDocumentSchema,
 } from '@/validators/seminary';
 
@@ -221,6 +232,7 @@ const seminaryGradeRecordAccess = [
   authenticate,
   authorize([UserType.ADMIN, UserType.INSTRUCTOR]),
 ];
+const seminaryAttendanceWriteAccess = [authenticate, authorizeSeminaryAttendanceManager];
 
 router.get(
   '/current/application',
@@ -277,6 +289,16 @@ router.use(
     maxFileSize: '32MB',
     maxFileCount: 1,
   }),
+);
+
+router.get(
+  '/attendance', expressRateLimit('basic'), ...seminaryStudentReadAccess, validate(getSeminaryAttendanceSchema), getSeminaryAttendance,
+);
+router.get(
+  '/attendance/history/:applicationId', expressRateLimit('basic'), ...seminaryStudentReadAccess, validate(getSeminaryAttendanceHistorySchema), getSeminaryAttendanceHistory,
+);
+router.put(
+  '/attendance', expressRateLimit('basic'), ...seminaryAttendanceWriteAccess, validate(saveSeminaryAttendanceSchema), saveSeminaryAttendance,
 );
 
 router.get(
@@ -418,6 +440,13 @@ router.get(
   ...seminaryStudentReadAccess,
   validate(getAllSeminaryStudentsSchema),
   getAllSeminaryStudents,
+);
+
+router.get(
+  '/public/instructors',
+  expressRateLimit('basic'),
+  validate(getPublicSeminaryInstructorsSchema),
+  getPublicSeminaryInstructors,
 );
 
 router.get(
@@ -898,6 +927,22 @@ router.patch(
   ...seminaryStudentAdminAccess,
   validate(updateSeminaryFeeCollectionPaymentSchema),
   updateSeminaryFeeCollectionPayment,
+);
+
+router.get(
+  '/credential-documents',
+  expressRateLimit('basic'),
+  ...seminaryStudentReadAccess,
+  validate(getAllSeminaryCredentialDocumentsSchema),
+  getAllSeminaryCredentialDocuments,
+);
+
+router.post(
+  '/credential-documents/transcripts/batch',
+  expressRateLimit('basic'),
+  ...seminaryStudentAdminAccess,
+  validate(generateSeminaryTranscriptBatchSchema),
+  generateSeminaryTranscriptBatch,
 );
 
 router.get(

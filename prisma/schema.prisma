@@ -636,6 +636,7 @@ model SeminaryApplication {
   payment             SeminaryPayment?
   credentialDocuments SeminaryCredentialDocument[]
   documentRequests    SeminaryDocumentRequest[]
+  attendanceEntries   SeminaryAttendanceEntry[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -646,6 +647,36 @@ model SeminaryApplication {
   @@index([targetMemberType])
   @@index([admissionNumber])
   @@index([createdAt])
+}
+
+model SeminaryAttendanceSession {
+  id           String @id @default(uuid())
+  academicYear String
+  program      String
+  courseId     String
+  attendanceDate DateTime @db.Date
+  createdByUserId String?
+  entries      SeminaryAttendanceEntry[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([academicYear, program, courseId, attendanceDate])
+  @@index([attendanceDate])
+}
+
+model SeminaryAttendanceEntry {
+  id          String @id @default(uuid())
+  sessionId   String
+  applicationId String
+  status      SeminaryAttendanceStatus @default(PRESENT)
+  remarks     String?
+  session     SeminaryAttendanceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  application SeminaryApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([sessionId, applicationId])
+  @@index([applicationId])
 }
 
 model SeminaryCredentialDocument {
@@ -2477,6 +2508,12 @@ enum SeminaryCredentialDocumentStatus {
   ACTIVE
   REVOKED
   VOID
+}
+
+enum SeminaryAttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
 }
 
 enum AccountingPayableStatus {

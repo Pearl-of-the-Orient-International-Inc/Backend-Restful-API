@@ -4,6 +4,7 @@ import {
   Gender,
   SeminaryAcademicYearSession,
   SeminaryAcademicYearStatus,
+  SeminaryAttendanceStatus,
   SeminaryApplicationStatus,
   SeminaryAssignmentStatus,
   SeminaryCredentialDocumentType,
@@ -103,6 +104,36 @@ const credentialDocumentTypeSchema = normalizeEnumValue(
     Transcript: SeminaryCredentialDocumentType.TRANSCRIPT,
   },
 );
+
+const attendanceStatusSchema = z.enum(SeminaryAttendanceStatus);
+
+export const getSeminaryAttendanceSchema = z.object({
+  query: z.object({
+    academicYear: z.string().trim().min(1).max(30),
+    program: z.string().trim().min(1).max(160),
+    courseId: z.uuid(),
+    date: z.iso.date(),
+  }),
+});
+
+export const getSeminaryAttendanceHistorySchema = z.object({
+  params: z.object({ applicationId: z.uuid() }),
+  query: z.object({ month: z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/) }),
+});
+
+export const saveSeminaryAttendanceSchema = z.object({
+  body: z.object({
+    academicYear: z.string().trim().min(1).max(30),
+    program: z.string().trim().min(1).max(160),
+    courseId: z.uuid(),
+    date: z.iso.date(),
+    entries: z.array(z.object({
+      applicationId: z.uuid(),
+      status: attendanceStatusSchema,
+      remarks: z.string().trim().max(500).optional(),
+    })).min(1),
+  }),
+});
 
 const courseModalitySchema = normalizeEnumValue(SeminaryCourseModality, {
   'Face to Face': SeminaryCourseModality.FACE_TO_FACE,
@@ -481,6 +512,10 @@ export const getPublicSeminaryStudentSchema = z.object({
   params: z.object({
     studentId: seminaryStudentIdSchema,
   }),
+});
+
+export const getPublicSeminaryInstructorsSchema = z.object({
+  query: z.object({}),
 });
 
 export const deleteSeminaryStudentSchema = z.object({
@@ -1320,6 +1355,21 @@ export const getSeminaryCredentialDocumentsSchema = z.object({
   }),
   query: z.object({
     type: credentialDocumentTypeSchema.optional(),
+  }),
+});
+
+export const getAllSeminaryCredentialDocumentsSchema = z.object({
+  query: z.object({
+    page: z.coerce.number().int().min(1).optional(),
+    limit: z.coerce.number().int().min(1).max(100).optional(),
+    search: optionalText(120),
+    type: credentialDocumentTypeSchema.optional(),
+  }),
+});
+
+export const generateSeminaryTranscriptBatchSchema = z.object({
+  body: z.object({
+    studentIds: z.array(seminaryStudentIdSchema).min(1).max(100),
   }),
 });
 
