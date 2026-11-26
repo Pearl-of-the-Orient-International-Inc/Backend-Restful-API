@@ -134,8 +134,9 @@ export const createMemberByAdmin = async (
       try {
         result = await prisma.$transaction(async (tx) => {
           const user = existingUser
-            ? await tx.user.findUniqueOrThrow({
+            ? await tx.user.update({
                 where: { id: existingUser.id },
+                data: body.photoUrl ? { avatar: body.photoUrl } : {},
                 select: userSelect,
               })
             : await tx.user.create({
@@ -146,6 +147,7 @@ export const createMemberByAdmin = async (
                   role: UserType.MEMBER,
                   accountStatus: UserAccountStatus.ACTIVE,
                   isEmailVerified: true,
+                  avatar: body.photoUrl,
                 },
                 select: userSelect,
               });

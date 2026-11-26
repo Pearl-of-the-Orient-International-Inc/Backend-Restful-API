@@ -111,6 +111,7 @@ export const updateMemberByAdmin = async (
         data: {
           name: displayName,
           email: normalizedEmail,
+          ...(body.photoUrl ? { avatar: body.photoUrl } : {}),
         },
       });
 
