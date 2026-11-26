@@ -106,7 +106,7 @@ export const applyMemberSchema = z.object({
   ministerialExperiences: z.array(ministerialExperienceSchema).max(20).optional(),
   characterReferences: z.array(characterReferenceSchema).max(20).optional(),
   photoUrl: z.url({ message: 'A valid 2x2 ID picture URL is required' }),
-  signature: signatureSchema.optional(),
+  signature: signatureSchema,
   referralCode: z.string().trim().min(8).max(40).optional(),
 });
 

@@ -270,14 +270,12 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
               };
             }
 
-            if (body.signature) {
-              createData.signature = {
-                create: {
-                  type: body.signature.type,
-                  signatureData: body.signature.signatureData,
-                },
-              };
-            }
+            createData.signature = {
+              create: {
+                type: body.signature.type,
+                signatureData: body.signature.signatureData,
+              },
+            };
 
             const member = await tx.member.create({
               data: createData,
