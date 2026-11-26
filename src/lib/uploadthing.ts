@@ -92,6 +92,24 @@ const createAvatarUploaderRoute = (options: UploadLimitOptions = {}) => {
     });
 };
 
+// Membership applications can be submitted before an account exists. This
+// route accepts only the 2x2 portrait, and its returned URL is persisted by
+// the application submission transaction as the member's avatar.
+const createMembershipApplicationPhotoUploaderRoute = () =>
+  f({
+    image: {
+      maxFileSize: '4MB',
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async () => ({}))
+    .onUploadComplete(async ({ file }) => ({
+      fileUrl: file.ufsUrl,
+      fileName: file.name,
+      mimeType: file.type,
+      fileSize: file.size,
+    }));
+
 const createMemberRequirementUploaderRoute = () =>
   f({
     image: {
@@ -622,6 +640,7 @@ const createChaplainProductImageUploaderRoute = () =>
 export const createUploadRouter = (options: UploadLimitOptions = {}) =>
   ({
     avatarUploader: createAvatarUploaderRoute(options),
+    membershipApplicationPhotoUploader: createMembershipApplicationPhotoUploaderRoute(),
     requirementUploader: createMemberRequirementUploaderRoute(),
     ordinationDocumentUploader: createOrdinationDocumentUploaderRoute(),
     crasmDocumentUploader: createCrasmDocumentUploaderRoute(),

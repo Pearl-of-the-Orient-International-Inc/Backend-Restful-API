@@ -153,6 +153,7 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
                     name: displayName,
                     email: normalizedEmail,
                     accountStatus: 'PENDING',
+                    avatar: body.photoUrl,
                   },
                   select: {
                     id: true,
@@ -171,6 +172,7 @@ export const applyMember = async (req: Request, res: Response): Promise<void> =>
                     role: 'MEMBER',
                     accountStatus: 'PENDING',
                     isEmailVerified: false,
+                    avatar: body.photoUrl,
                   },
                   select: {
                     id: true,

@@ -132,6 +132,15 @@ router.post(
   applyMember,
 );
 
+router.use(
+  '/application-photo/upload',
+  expressRateLimit('basic'),
+  createUploadthingExpressHandler({
+    maxFileSize: '4MB',
+    maxFileCount: 1,
+  }),
+);
+
 router.get('/referrals/resolve/:code', expressRateLimit('basic'), resolvePublicReferral);
 router.get('/honor-roll', expressRateLimit('basic'), getPublicHonorRoll);
 router.get('/referral-criteria/public', expressRateLimit('basic'), getPublicReferralCriteria);
