@@ -559,18 +559,8 @@ export const getAllSeminaryStudentsSchema = z.object({
 const seminaryCourseIdSchema = z.uuid();
 
 const seminaryCourseSubjectSchema = z.object({
-  date: z
-    .string()
-    .trim()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, {
-      message: 'date must be in YYYY-MM-DD format',
-    }),
   subjectName: z.string().trim().min(1).max(200),
   units: z.coerce.number().int().min(1).max(12),
-  startTime: z.string().trim().min(1).max(20),
-  endTime: z.string().trim().min(1).max(20),
-  professor: z.string().trim().min(1).max(150),
-  modality: courseModalitySchema,
 });
 
 const seminaryCourseBodySchema = z.object({

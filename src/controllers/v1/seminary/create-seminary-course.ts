@@ -1,6 +1,6 @@
 import { HTTPSTATUS } from '@/common/http-codes';
 import { Prisma } from '@/generated/prisma/client';
-import { SeminaryCourseStatus } from '@/generated/prisma/enums';
+import { SeminaryCourseModality, SeminaryCourseStatus } from '@/generated/prisma/enums';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/winston';
 
@@ -9,7 +9,9 @@ import type { CreateSeminaryCourseBody } from './types';
 
 const getCourseSummary = (subjects: CreateSeminaryCourseBody['subjects']) => ({
   units: subjects.reduce((total, subject) => total + subject.units, 0),
-  modality: subjects[0].modality,
+  // Timetable delivery mode belongs to SeminaryCourseSchedule. Preserve a
+  // neutral legacy value until existing course-level modality is retired.
+  modality: SeminaryCourseModality.BOTH,
 });
 
 export const createSeminaryCourse = async (
